@@ -5,8 +5,6 @@ module.exports = () => {
 	console.log('Copying files...')
 	return Promise.all([
 			cpy([
-				'config/_redirects',
-				'config/_headers',
 				'config/netlify.toml'
 			], 'dist'),
 			cpy(['admin/**/*'], 'dist/admin'),
