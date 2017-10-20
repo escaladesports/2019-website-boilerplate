@@ -5,14 +5,16 @@ export default function (id) {
 	// Unpack product variants
 	let variants = product.variants
 	delete product.variants
-	for (let i in variants) {
-		let obj = Object.assign({}, product, variants[i])
-		variants[i] = obj
+	if (variants) {
+		for (let i in variants) {
+			let obj = Object.assign({}, product, variants[i])
+			variants[i] = obj
+		}
+		variants[product.id] = Object.assign({}, product)
 	}
-	variants[product.id] = Object.assign({}, product)
 
 	return {
 		product: product,
-		variants: variants
+		variants: variants || {}
 	}
 }
