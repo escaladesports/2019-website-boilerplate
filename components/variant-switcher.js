@@ -1,5 +1,4 @@
 import React from 'react'
-import Router from 'next/router'
 
 function checkMatch(obj, values){
 	console.log(obj, values)
@@ -17,7 +16,6 @@ export default class extends React.Component {
 		this.getInputEls = this.getInputEls.bind(this)
 		this.findProductMatch = this.findProductMatch.bind(this)
 		this.getValues = this.getValues.bind(this)
-		this.changeProduct = this.changeProduct.bind(this)
 	}
 	componentDidMount() {
 		this.getInputEls()
@@ -44,24 +42,16 @@ export default class extends React.Component {
 		return obj
 	}
 	findProductMatch(){
-		console.log('findProductMatch()')
 		let values = this.getValues()
-		if(checkMatch(this.props.product, values)){
-			return this.changeProduct(this.props.product.id)
-		}
-		if (this.props.product.variants){
-			for (let i in this.props.product.variants) {
-				let variant = this.props.product.variants[i]
+		if (this.props.variants){
+			for (let i in this.props.variants) {
+				let variant = this.props.variants[i]
 				if (checkMatch(variant, values)) {
-					return this.changeProduct(variant.id)
+					return this.props.onChange(variant)
 				}
 			}
 		}
 		return false
-	}
-	changeProduct(id){
-		console.log('Changing product...')
-		Router.replace(`/product?id=${id}`, `/product/${id}`)
 	}
 	render(){
 		return (

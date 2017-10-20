@@ -3,11 +3,16 @@ export default function (id) {
 	let product = require(`../../json/product/${id}`)
 
 	// Unpack product variants
-	for (let i in product.variants) {
-		let obj = Object.assign({}, product, product.variants[i])
-		delete obj.variants
-		product.variants[i] = obj
+	let variants = product.variants
+	delete product.variants
+	for (let i in variants) {
+		let obj = Object.assign({}, product, variants[i])
+		variants[i] = obj
 	}
+	variants[product.id] = Object.assign({}, product)
 
-	return product
+	return {
+		product: product,
+		variants: variants
+	}
 }
