@@ -15,6 +15,8 @@ export default class extends React.Component {
 		// Progress bar
 		this.clearTimeouts()
 		routerAdd('onRouteChangeStart', this.routerStart)
+		routerAdd('onRouteChangeComplete', this.routerDone)
+		routerAdd('onRouteChangeError', this.routerDone)
 	}
 	componentDidMount() {
 		this.clearTimeouts()
@@ -22,6 +24,8 @@ export default class extends React.Component {
 	componentWillUnmount() {
 		this.clearTimeouts()
 		routerRemove('onRouteChangeStart', this.routerStart)
+		routerRemove('onRouteChangeComplete', this.routerDone)
+		routerRemove('onRouteChangeError', this.routerDone)
 	}
 	clearTimeouts() {
 		clearTimeout(this.uiTimeout)

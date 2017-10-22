@@ -2,6 +2,7 @@
 const path = require('path')
 const fs = require('fs-extra')
 const glob = require('globby')
+const equal = require('deep-equal')
 const dirs = [
 	'./json/markdown/product',
 	'./json/salsify'
@@ -22,7 +23,7 @@ function getData(paths){
 			let obj = {}
 			paths.map((p, key) => {
 				obj[p] = data[key]
-				obj[p].id = path.parse(p).name.toLowerCase()
+				obj[p].id = path.parse(p).name
 			})
 			return obj
 		})
@@ -32,7 +33,7 @@ function mergeData(obj){
 	console.log('Merging product JSON data...')
 	let merged = {}
 	for(let i in obj){
-		let name = obj[i].id
+		let name = obj[i].id.toLowerCase()
 		if (!(name in merged)){
 			merged[name] = obj[i]
 		}
@@ -41,6 +42,31 @@ function mergeData(obj){
 		}
 	}
 	return merged
+}
+
+function createVariantData(obj){
+	console.log('Creating product variant data...')
+	for(let i in obj){
+		let prod = obj[i]
+		if(prod.variants){
+			let variants = {}
+			prod.variants.forEach(id => {
+				id = id.toLowerCase()
+				if(obj[id]){
+					let variant = Object.assign({}, obj[id])
+					delete variant.variants
+					for(let i in variant){
+						if(equal(variant[i], prod[i])){
+							delete variant[i]
+						}
+					}
+					variants[id] = variant
+				}
+			})
+			prod.variants = variants
+		}
+	}
+	return obj
 }
 
 function saveJson(obj){
@@ -77,5 +103,6 @@ function saveJson(obj){
 module.exports = () => getJsonPaths(dirs)
 	.then(getData)
 	.then(mergeData)
+	.then(createVariantData)
 	.then(saveJson)
 	.then(() => console.log('Product JSON merged!'))

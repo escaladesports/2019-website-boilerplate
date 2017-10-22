@@ -1,13 +1,14 @@
 ---
 title: "Super Kodiak"
 subtitle: "Classic Then and Now"
+id: "ASK156040R"
 category: "traditional"
 msrp: 899.99
-features: 
+features:
   - "60\" AMO length"
   - "64\" AMO length"
   - "Available in gloss or satin finish"
-construction: 
+construction:
   - "Black phenolic 3-piece riser with a brown Bolivian rosewood accent stripe and capped with Bolivian rosewood. Grip capped with  berglass accents."
   - "2 Brown and black hard-rock maple 2-piece riser"
 hand: "right"

@@ -13,7 +13,8 @@
 		"serve-static": "node utils/dev/serve-static",
 		"sync": "node -e \"require('./utils/build/sync')()\"",
 		"dev": "node utils/dev/server",
-		"update": "node utils/dev/update"
+		"update": "node utils/dev/update",
+		"test": "node -e \"require('./utils/product/markdown')()\""
 	},
 	"devDependencies": {
 		"babel-plugin-inline-react-svg": "^0.4.0",
@@ -28,6 +29,7 @@
 		"css-mqpacker": "^6.0.1",
 		"cssnano": "^3.10.0",
 		"datasets-us-states-names": "^1.0.0",
+		"deep-equal": "^1.0.1",
 		"dotenv": "^4.0.0",
 		"express": "^4.15.3",
 		"form-serialize": "^0.7.2",

@@ -3,7 +3,7 @@ const path = require('path')
 const glob = require('globby')
 
 module.exports = uppercase => new Promise((resolve, reject) => {
-   glob('./markdown/product/**/*.md')
+   glob('./json/markdown/product/**/*.json')
       .then(files => {
          const ids = []
          files.forEach(file => {
@@ -12,7 +12,7 @@ module.exports = uppercase => new Promise((resolve, reject) => {
                name = name.toUpperCase()
             }
             ids.push(name)
-         })
+			})
          return ids
       })
       .then(resolve)
