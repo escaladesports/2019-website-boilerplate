@@ -6,7 +6,7 @@ import titleCase from 'title-case'
 const property = 'finish'
 
 function variantSorter(a, b){
-	return a[property] < b[property]
+	return a[property] > b[property]
 }
 
 export default class extends React.Component {
