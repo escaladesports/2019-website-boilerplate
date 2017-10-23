@@ -4,6 +4,7 @@ import cloudinary from 'utils/images/cloudinary'
 import AddToCart from 'components/product/add-cart-button'
 import getProduct from 'utils/product/get-product'
 import VariantSwitcher from 'components/product/variant-switcher'
+import VariantFinishes from 'components/product/variant-finishes'
 import Router from 'next/router'
 import Price from 'components/product/price'
 
@@ -35,12 +36,15 @@ export default class extends React.Component {
 				{this.state.product.images && this.state.product.images.length &&
 					<img src={cloudinary(this.state.product.images[0], 'w_200', 'h_400', 'c_pad')} />
 				}
-				<VariantSwitcher product={this.state.product} variants={this.state.variants} onChange={this.changeProduct}>
-					<select name='finish'>
-						<option value='yellow'>Yellow</option>
-						<option value='orange'>Orange</option>
-						<option value='green'>Green</option>
-					</select>
+				<VariantSwitcher
+					product={this.state.product}
+					variants={this.state.variants}
+					onChange={this.changeProduct} >
+
+					<VariantFinishes
+						product={this.state.product}
+						variants={this.state.variants} />
+
 				</VariantSwitcher>
 				<div className='price'>
 					Price: $<Price product={this.state.product} />
