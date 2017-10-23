@@ -2,7 +2,8 @@
 import fetchPrice from 'utils/product/get-price'
 import env from 'json/env.json'
 
-const pollingInterval = 10 * 60 * 1000
+//const pollingInterval = 10 * 60 * 1000
+const pollingInterval = 20 * 1000
 const events = []
 let timeoutId
 
@@ -28,6 +29,7 @@ export function updatePrice() {
 			window.productPrices = prices
 			events.forEach(event => event(prices))
 			setPriceTimeout()
+			updateZygote(prices)
 			return prices
 		})
 		.catch(err => {
@@ -53,4 +55,19 @@ export function removePriceEvent(fn) {
 function setPriceTimeout() {
 	clearTimeout(timeoutId)
 	timeoutId = setTimeout(updatePrice, pollingInterval)
+}
+
+function updateZygote(prices){
+	if (window.zygote && Array.isArray(window.zygote.products)){
+		let changed = false
+		window.zygote.products.forEach(prod => {
+			if(prod.id in prices && prod.price != prices[prod.id]){
+				prod.price = prices[prod.id]
+				changed = true
+			}
+		})
+		if(changed){
+			zygote.render()
+		}
+	}
 }

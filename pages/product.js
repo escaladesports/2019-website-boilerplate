@@ -1,10 +1,11 @@
 import React from 'react'
 import Layout from 'components/_layout'
 import cloudinary from 'utils/images/cloudinary'
-import AddToCart from 'components/add-cart-button'
+import AddToCart from 'components/product/add-cart-button'
 import getProduct from 'utils/product/get-product'
-import VariantSwitcher from 'components/variant-switcher'
+import VariantSwitcher from 'components/product/variant-switcher'
 import Router from 'next/router'
+import Price from 'components/product/price'
 
 export default class extends React.Component {
 	constructor(props){
@@ -41,10 +42,13 @@ export default class extends React.Component {
 						<option value='green'>Green</option>
 					</select>
 				</VariantSwitcher>
+				<div className='price'>
+					Price: $<Price product={this.state.product} />
+				</div>
 				<AddToCart
 					name={this.state.product.title}
 					id={this.state.product.id}
-					price='1.99'
+					price={this.state.product.price}
 					/>
 			</Layout>
 		)

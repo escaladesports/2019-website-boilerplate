@@ -9,7 +9,7 @@ import zygoteRefresh from 'utils/next/zygote-refresh'
 import NoSSR from 'react-no-ssr'
 import PageLoadBar from 'components/page-load-animation'
 import { initStock } from 'utils/product/set-stock'
-import { initPricing } from 'utils/product/set-pricing'
+import { initPrice } from 'utils/product/set-price'
 
 fastclick()
 
@@ -21,6 +21,7 @@ export default class Layout extends React.Component {
 		initGA()
 		clientTimeoutError()
 		initStock()
+		initPrice()
 	}
 	render() {
 		return (
