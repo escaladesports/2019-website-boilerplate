@@ -33,7 +33,7 @@ export default class extends React.Component {
 			<Layout>
 				<h1>{this.state.product.title}</h1>
 				{this.state.product.images && this.state.product.images.length &&
-					<img src={cloudinary(this.state.product.images[0], 'w_200')} />
+					<img src={cloudinary(this.state.product.images[0], 'w_200', 'h_400', 'c_pad')} />
 				}
 				<VariantSwitcher product={this.state.product} variants={this.state.variants} onChange={this.changeProduct}>
 					<select name='finish'>
@@ -48,7 +48,10 @@ export default class extends React.Component {
 				<AddToCart
 					name={this.state.product.title}
 					id={this.state.product.id}
+					url={`/product/${this.state.product.id}`}
 					price={this.state.product.price}
+					img={cloudinary(this.state.product.images[0], 'w_150', 'h_150', 'c_pad')}
+					desc={`${this.state.product.finish} Finish`.toUpperCase()}
 					/>
 			</Layout>
 		)
