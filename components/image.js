@@ -36,23 +36,29 @@ export default class extends React.Component {
 	}
 	render(){
 		return (
-			<div className={`root ${this.state.loading}`} style={{
-				paddingBottom: `${(this.props.height / this.props.width) * 100}%`
+			<div className='root' style={{
+				maxWidth: this.props.width,
+				maxHeight: this.props.height
 			}}>
-				<img
-					src={this.props.src}
-					ref={img => this.img = img}
-					onLoad={this.hideLoader}
-					onError={this.hideLoader}
-					alt={this.props.alt}
+
+				<div className={`holder ${this.state.loading}`} style={{
+					paddingBottom: `${(this.props.height / this.props.width) * 100}%`
+				}}>
+					<img
+						src={this.props.src}
+						ref={img => this.img = img}
+						onLoad={this.hideLoader}
+						onError={this.hideLoader}
+						alt={this.props.alt}
 					/>
-				{this.state.loading &&
-					<div className='loader'>
-						<Loader />
-					</div>
-				}
+					{this.state.loading &&
+						<div className='loader'>
+							<Loader />
+						</div>
+					}
+				</div>
 				<style jsx>{`
-					.root{
+					.holder{
 						position: relative;
 					}
 					.loading{
