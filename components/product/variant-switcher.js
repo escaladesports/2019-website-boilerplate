@@ -1,7 +1,6 @@
 import React from 'react'
 
 function checkMatch(obj, values){
-	console.log(obj, values)
 	for(let i in values){
 		if(obj[i] != values[i]){
 			return false

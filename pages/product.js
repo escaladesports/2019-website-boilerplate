@@ -7,6 +7,7 @@ import VariantSwitcher from 'components/product/variant-switcher'
 import VariantFinishes from 'components/product/variant-finishes'
 import Router from 'next/router'
 import Price from 'components/product/price'
+import titleCase from 'title-case'
 
 export default class extends React.Component {
 	constructor(props){
@@ -55,7 +56,7 @@ export default class extends React.Component {
 					url={`/product/${this.state.product.id}`}
 					price={this.state.product.price}
 					img={cloudinary(this.state.product.images[0], 'w_150', 'h_150', 'c_pad')}
-					desc={`${this.state.product.finish} Finish`.toUpperCase()}
+					desc={titleCase(`${this.state.product.finish} Finish`)}
 					/>
 			</Layout>
 		)
