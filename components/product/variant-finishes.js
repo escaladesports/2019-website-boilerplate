@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
 import env from 'json/env.json'
+import titleCase from 'title-case'
 
 const property = 'finish'
 
@@ -37,7 +38,7 @@ export default class extends React.Component {
 						return <option
 							key={variant[property]}
 							value={variant[property]}>
-								{variant[property]}
+								{titleCase(variant[property])}
 						</option>
 					})}
 				</select>

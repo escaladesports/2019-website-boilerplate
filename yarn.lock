@@ -6231,6 +6231,13 @@ timers-browserify@^2.0.2:
   dependencies:
     setimmediate "^1.0.4"
 
+title-case@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/title-case/-/title-case-2.1.1.tgz#3e127216da58d2bc5becf137ab91dae3a7cd8faa"
+  dependencies:
+    no-case "^2.2.0"
+    upper-case "^1.0.3"
+
 to-arraybuffer@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/to-arraybuffer/-/to-arraybuffer-1.0.1.tgz#7d229b1fcc637e466ca081180836a7aabff83f43"
@@ -6401,7 +6408,7 @@ unyield@0.0.1:
   dependencies:
     co "~3.1.0"
 
-upper-case@^1.1.1:
+upper-case@^1.0.3, upper-case@^1.1.1:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/upper-case/-/upper-case-1.1.3.tgz#f6b4501c2ec4cdd26ba78be7222961de77621598"
 
