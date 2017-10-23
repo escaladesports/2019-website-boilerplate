@@ -8,6 +8,7 @@ import VariantFinishes from 'components/product/variant-finishes'
 import Router from 'next/router'
 import Price from 'components/product/price'
 import titleCase from 'title-case'
+import Img from 'components/image.js'
 
 export default class extends React.Component {
 	constructor(props){
@@ -19,7 +20,6 @@ export default class extends React.Component {
 		return getProduct(req.query.id)
 	}
 	componentWillMount(){
-		console.log(this.props)
 		this.setState({
 			product: this.props.product,
 			variants: this.props.variants
@@ -36,7 +36,11 @@ export default class extends React.Component {
 			<Layout>
 				<h1>{this.state.product.title}</h1>
 				{this.state.product.images && this.state.product.images.length &&
-					<img src={cloudinary(this.state.product.images[0], 'w_200', 'h_400', 'c_pad')} />
+					<Img
+						src={cloudinary(this.state.product.images[0], 'w_800', 'h_1200', 'c_pad')}
+						width={800}
+						height={1200}
+						/>
 				}
 				<VariantSwitcher
 					product={this.state.product}
