@@ -1,6 +1,5 @@
 'use strict'
 const fetch = require('isomorphic-fetch')
-const product = require('../../json/product/all.json')
 const lowerIds = require('../../json/product-ids.json')
 const upperIds = lowerIds.map(id => id.toUpperCase())
 

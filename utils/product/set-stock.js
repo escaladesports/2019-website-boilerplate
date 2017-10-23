@@ -2,9 +2,9 @@
 import fetchStock from 'utils/product/get-stock'
 import env from 'json/env.json'
 
-const updateStockInterval = 10 * 1000
+const pollingInterval = 20 * 60 * 1000
 const events = []
-let stockTimeout
+let timeoutId
 
 // Initiates stock update interval
 export function initStock() {
@@ -53,6 +53,6 @@ export function removeStockEvent(fn) {
 }
 
 function setStockTimeout() {
-	clearTimeout(stockTimeout)
-	stockTimeout = setTimeout(updateStock, updateStockInterval)
+	clearTimeout(timeoutId)
+	timeoutId = setTimeout(updateStock, pollingInterval)
 }

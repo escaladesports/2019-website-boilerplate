@@ -3,6 +3,7 @@ const path = require('path')
 const fs = require('fs-extra')
 const glob = require('globby')
 const equal = require('deep-equal')
+const getPrice = require('./get-price')
 const dirs = [
 	'./json/markdown/product',
 	'./json/salsify'
@@ -42,6 +43,16 @@ function mergeData(obj){
 		}
 	}
 	return merged
+}
+
+function addPricing(obj) {
+	return getPrice(Object.keys(obj))
+		.then(prices => {
+			for (let i in prices) {
+				obj[i].price = prices[i]
+			}
+			return obj
+		})
 }
 
 function createVariantData(obj){
@@ -103,6 +114,7 @@ function saveJson(obj){
 module.exports = () => getJsonPaths(dirs)
 	.then(getData)
 	.then(mergeData)
+	.then(addPricing)
 	.then(createVariantData)
 	.then(saveJson)
 	.then(() => console.log('Product JSON merged!'))
