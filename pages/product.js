@@ -19,6 +19,7 @@ export default class extends React.Component {
 		return getProduct(req.query.id)
 	}
 	componentWillMount(){
+		console.log(this.props)
 		this.setState({
 			product: this.props.product,
 			variants: this.props.variants

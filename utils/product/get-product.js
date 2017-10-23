@@ -1,6 +1,6 @@
 
 export default function (id) {
-	let product = require(`../../json/product/${id}`)
+	let product = Object.assign({}, require(`../../json/product/${id}`))
 
 	// Unpack product variants
 	let variants = product.variants
