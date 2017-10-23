@@ -46,6 +46,7 @@ function mergeData(obj){
 }
 
 function addPricing(obj) {
+	console.log('Getting product prices...')
 	return getPrice(Object.keys(obj))
 		.then(prices => {
 			for (let i in prices) {

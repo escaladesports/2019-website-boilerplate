@@ -2,7 +2,7 @@
 import fetchPrice from 'utils/product/get-price'
 import env from 'json/env.json'
 
-const pollingInterval = 10 * 1000
+const pollingInterval = 10 * 60 * 1000
 const events = []
 let timeoutId
 
@@ -10,12 +10,14 @@ let timeoutId
 export function initPrice() {
 	if (!window.initPriceInterval) {
 		window.initPriceInterval = true
-		updatePrice()
-			.then(setPriceTimeout)
-			.catch(err => {
-				console.error(err)
-				setPriceTimeout()
-			})
+		if (env.ENABLE_ECOMMERCE) {
+			updatePrice()
+				.then(setPriceTimeout)
+				.catch(err => {
+					console.error(err)
+					setPriceTimeout()
+				})
+		}
 	}
 }
 
@@ -36,7 +38,9 @@ export function updatePrice() {
 
 
 export function addPriceEvent(fn) {
-	events.push(fn)
+	if (env.ENABLE_ECOMMERCE) {
+		events.push(fn)
+	}
 }
 
 export function removePriceEvent(fn) {
