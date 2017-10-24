@@ -93,7 +93,7 @@ function saveJson(obj){
 		if(ids.indexOf(id) === -1){
 			ids.push(id)
 		}
-		if(prod.category){
+		if(prod.parent && prod.category){
 			if(!(prod.category in categories)){
 				categories[prod.category] = []
 			}

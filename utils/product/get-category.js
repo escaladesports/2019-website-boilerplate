@@ -3,7 +3,6 @@ export default function (id, opt ={}) {
 	let products = require(`../../json/category/${id}`).slice(0)
 	products = filterHidden(products)
 	products = sortProduct(products)
-	products = removeDuplicateTitles(products)
 	return products
 }
 
@@ -24,16 +23,4 @@ function sortProduct(products, prop = 'order') {
 		}
 		return 0
 	})
-}
-
-function removeDuplicateTitles(products) {
-	let res = []
-	let foundProps = []
-	products.forEach(product => {
-		if (product.title && foundProps.indexOf(product.title) === -1) {
-			res.push(product)
-			foundProps.push(product.title)
-		}
-	})
-	return res
 }
