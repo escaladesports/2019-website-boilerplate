@@ -13,8 +13,7 @@
 		"serve-static": "node utils/dev/serve-static",
 		"sync": "node -e \"require('./utils/build/sync')()\"",
 		"dev": "node utils/dev/server",
-		"update": "node utils/dev/update",
-		"test": "node -e \"require('./utils/product/markdown')()\""
+		"update": "node utils/dev/update"
 	},
 	"devDependencies": {
 		"babel-plugin-inline-react-svg": "^0.4.0",
@@ -39,7 +38,12 @@
 		"google-map-react": "^0.24.0",
 		"googleapis": "^21.3.0",
 		"gray-matter": "^3.0.2",
+		"gulp": "^3.9.1",
+		"gulp-imagemin": "^3.4.0",
+		"gulp-stream-to-promise": "^0.1.0",
 		"html-minifier": "^3.5.2",
+		"imagemin-pngquant": "^5.0.1",
+		"imagemin-zopfli": "^5.1.0",
 		"is-email": "^1.0.0",
 		"is-phone": "^2.0.0",
 		"is-valid-zip": "^0.0.3",

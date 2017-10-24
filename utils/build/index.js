@@ -5,6 +5,7 @@ const exec = require('child-process-promise').exec
 const sitemap = require('./sitemap')
 const copy = require('./copy')
 const replaceImages = require('../images/replace-images')
+const compressImages = require('../images/compress')
 
 console.log('Building static files...')
 sync()
@@ -17,7 +18,7 @@ sync()
 		return exec('next export -o dist')
 	})
 	.then(() => Promise.all([
-		replaceImages(),
+		replaceImages().then(compressImages),
 		sitemap(),
 		copy(),
 		exec('html-minifier --input-dir ./dist --output-dir ./dist --file-ext html --config-file ./config/.htmlmin')
