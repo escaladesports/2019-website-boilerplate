@@ -1,5 +1,7 @@
+const cache = {}
 
 export default function (id) {
+	if(cache[id]) return cache[id]
 	let product = Object.assign({}, require(`../../json/product/${id}`))
 
 	// Unpack product variants
@@ -13,8 +15,11 @@ export default function (id) {
 		variants[product.id] = Object.assign({}, product)
 	}
 
-	return {
+	let obj = {
 		product: product,
 		variants: variants || {}
 	}
+	cache[id] = obj
+
+	return obj
 }
