@@ -33,12 +33,13 @@ module.exports = () => {
 				if(Array.isArray(parent.variants)){
 					parent.variants.forEach(variant => {
 						variant = Object.assign({}, parent, variant)
+						variant.variant = 1
 						delete parent.variants
 						delete variant.variants
 						productSet[variant.id.toLowerCase()] = variant
 					})
 				}
-				delete parent.variant
+				parent.parent = 1
 				productSet[parent.id.toLowerCase()] = parent
 
 
