@@ -1,6 +1,7 @@
+const cache = {}
 export default function (product) {
-	let variants = product.variants
-	delete product.variants
+	if(cache[product.id]) return cache[product.id]
+	let variants = Object.assign({}, product.variants)
 	if (variants) {
 		for (let i in variants) {
 			let obj = Object.assign({}, product, variants[i])
@@ -8,5 +9,6 @@ export default function (product) {
 		}
 		variants[product.id] = Object.assign({}, product)
 	}
+	cache[product.id] = variants
 	return variants
 }
