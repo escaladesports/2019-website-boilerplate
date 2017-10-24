@@ -9,6 +9,7 @@ import Router from 'next/router'
 import Price from 'components/product/price'
 import titleCase from 'title-case'
 import Img from 'components/image.js'
+import unpackVariants from 'utils/product/unpack-variants'
 
 export default class extends React.Component {
 	constructor(props){
@@ -17,12 +18,13 @@ export default class extends React.Component {
 		this.changeProduct = this.changeProduct.bind(this)
 	}
 	static async getInitialProps(req) {
-		return getProduct(req.query.id)
+		let product = getProduct(req.query.id)
+		return { product: product }
 	}
 	componentWillMount(){
 		this.setState({
 			product: this.props.product,
-			variants: this.props.variants
+			variants: unpackVariants(this.props.product)
 		})
 	}
 	changeProduct(product){
