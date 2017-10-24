@@ -45,6 +45,7 @@ export default class extends React.Component {
 				}}>
 					<img
 						src={this.props.src}
+						srcSet={this.props.srcSet}
 						ref={img => this.img = img}
 						onLoad={this.hideLoader}
 						onError={this.hideLoader}
@@ -66,6 +67,7 @@ export default class extends React.Component {
 						}
 					}
 					img{
+						width: 100%;
 						max-width: 100%;
 						top: 0;
 						left: 0;

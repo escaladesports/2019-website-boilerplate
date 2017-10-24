@@ -37,9 +37,15 @@ export default class extends React.Component {
 				<h1>{this.state.product.title}</h1>
 				{this.state.product.images && this.state.product.images.length &&
 					<Img
-						src={cloudinary(this.state.product.images[0], 'w_400', 'h_600', 'c_pad')}
-						width={400}
-						height={600}
+						srcSet={`
+							${cloudinary(this.state.product.images[0], 'w_230', 'h_460', 'c_pad')} 230w,
+							${cloudinary(this.state.product.images[0], 'w_400', 'h_800', 'c_pad')} 400w,
+							${cloudinary(this.state.product.images[0], 'w_500', 'h_1000', 'c_pad')} 500w
+						`}
+						src={cloudinary(this.state.product.images[0], 'w_230', 'h_460', 'c_pad')}
+						width={500}
+						height={1000}
+						alt={this.state.product.title}
 						/>
 				}
 				<VariantSwitcher
