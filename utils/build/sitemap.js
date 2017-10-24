@@ -2,10 +2,11 @@
 const fs = require('fs-extra')
 const Sitemap = require('sitemap')
 const pkg = require('../../package.json')
-const router = require('../../next.config').exportPathMap(true)
 
 // Build sitemap from router
 module.exports = () => new Promise((resolve, reject) => {
+	// Keep this scoped to make sure .json files exist at this point
+	const router = require('../../next.config').exportPathMap(true)
 	if (process.env && process.env.URL) {
 		console.log('Creating sitemap...')
 		router.then(router => {

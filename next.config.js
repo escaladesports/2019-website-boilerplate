@@ -87,7 +87,7 @@ module.exports = {
 				})
 			})
 
-			.then(() => console.log('Routes:', pages))
+			//.then(() => console.log('Routes:', pages))
 			.then(() => pages)
 			.catch(console.error)
 	},
