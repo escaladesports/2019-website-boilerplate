@@ -40,7 +40,6 @@ export default class extends React.Component {
 				maxWidth: this.props.width,
 				maxHeight: this.props.height
 			}}>
-
 				<div className={`holder ${this.state.loading}`} style={{
 					paddingBottom: `${(this.props.height / this.props.width) * 100}%`
 				}}>

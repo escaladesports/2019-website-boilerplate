@@ -1,33 +1,15 @@
 'use strict'
 const fetch = require('isomorphic-fetch')
-const lowerIds = require('../../json/product-ids.json')
-const upperIds = lowerIds.map(id => id.toUpperCase())
+const env = require('../../json/env.json')
+const ids = require('../../json/product-ids.json')
 
 module.exports = () => {
-	return new Promise((resolve, reject) => {
-		fetch('https://kgft20mm4l.execute-api.us-east-1.amazonaws.com/production/post', {
-				method: 'POST',
-				body: JSON.stringify({
-					site: 'all',
-					path: 'v1/salsify/search',
-					sku: { value: upperIds },
-					'inventory-only': 1
-				})
+	return fetch('https://xinn7f22bj.execute-api.us-east-1.amazonaws.com/production/handler', {
+			method: 'POST',
+			body: JSON.stringify({
+				site: env.ECOMMERCE_API_SITE || 'all',
+				ids: ids
 			})
-			.then(res => res.json())
-			.then(res => {
-				let obj = {}
-				res.products.forEach((prod, key) => {
-					if (typeof prod.stock === 'number' && prod.stock > 0) {
-						obj[lowerIds[key]] = prod.stock
-					}
-					else {
-						obj[lowerIds[key]] = 0
-					}
-				})
-				return obj
-			})
-			.then(resolve)
-			.catch(reject)
-	})
+		})
+		.then(res => res.json())
 }

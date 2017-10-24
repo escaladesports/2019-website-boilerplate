@@ -14,7 +14,7 @@ export default class extends React.Component {
 					</Link>
 				</div>
 				<div>
-					<Link href='/category?id=traditional' as='/category/traditional' prefetch>
+					<Link href='/category?id=compound' as='/category/compound' prefetch>
 						<a>Category</a>
 					</Link>
 				</div>
