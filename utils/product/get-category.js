@@ -1,8 +1,11 @@
+const cache ={}
 
-export default function (id, opt ={}) {
+export default function (id, opt = {}) {
+	if (cache[id]) return cache[id]
 	let products = require(`../../json/category/${id}`).slice(0)
 	products = filterHidden(products)
 	products = sortProduct(products)
+	cache[id] = products
 	return products
 }
 
