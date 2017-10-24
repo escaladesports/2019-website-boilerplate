@@ -29,6 +29,7 @@ export default class Layout extends React.Component {
 				<Head>
 					<title>{createTitle('Website Title', 'Website description', this.props.title)}</title>
 					<meta content={createDescription('Website description', this.props.description)} name='description' />
+					<link rel='icon' type='image/png' href='/static/img/w_32/favicon.png' />
 				</Head>
 				{this.props.children}
 				<NoSSR>
