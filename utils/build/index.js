@@ -24,4 +24,7 @@ sync()
 	]))
 
 	.then(() => console.log('Done building!'))
-	.catch(err => { throw err })
+	.catch(err => {
+		throw err
+		process.exit(1)
+	})
