@@ -3,7 +3,6 @@ const path = require('path')
 const fs = require('fs-extra')
 const glob = require('globby')
 const equal = require('deep-equal')
-const getPrice = require('./get-price')
 const dirs = [
 	'./json/markdown/product',
 	'./json/salsify'
@@ -45,8 +44,21 @@ function mergeData(obj){
 	return merged
 }
 
+function productIdsJson(obj){
+	let ids = []
+	Object.keys(obj).forEach(id => {
+		if(ids.indexOf(id) === -1){
+			ids.push(id)
+		}
+	})
+	return fs.outputJson('./json/product-ids.json', ids, jsonOpt)
+		.then(() => obj)
+}
+
 function addPricing(obj) {
 	console.log('Getting product prices...')
+	// Keep scoped to make sure .env file exists at this point
+	const getPrice = require('./get-price')
 	return getPrice(Object.keys(obj))
 		.then(prices => {
 			for (let i in prices) {
@@ -85,14 +97,10 @@ function saveJson(obj){
 	console.log('Saving merged product JSON data...')
 	let promises = []
 	let all = []
-	let ids = []
 	let categories = {}
 	for(let id in obj){
 		let prod = obj[id]
 		all.push(prod)
-		if(ids.indexOf(id) === -1){
-			ids.push(id)
-		}
 		if(prod.parent && prod.category){
 			if(!(prod.category in categories)){
 				categories[prod.category] = []
@@ -107,14 +115,13 @@ function saveJson(obj){
 		promises.push(fs.outputJson(`./json/category/${id}.json`, categories[id], jsonOpt))
 	}
 
-	// Product IDs file
-	promises.push(fs.outputJson(`./json/product-ids.json`, ids, jsonOpt))
 	return Promise.all(promises)
 }
 
 module.exports = () => getJsonPaths(dirs)
 	.then(getData)
 	.then(mergeData)
+	.then(productIdsJson)
 	.then(addPricing)
 	.then(createVariantData)
 	.then(saveJson)

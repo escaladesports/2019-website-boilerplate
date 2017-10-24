@@ -10,14 +10,17 @@ const allJson = require('./all-json')
 const env = require('./env')
 
 // Sync data
-module.exports = () => clean()
-	.then(() => Promise.all([
-		markdown(),
-		productMarkdown(),
-		markdownModules('privacy-policy'),
-		markdownModules('terms-of-service'),
-		env()
-	]))
-	.then(salsify)
-	.then(mergeProduct)
-	.then(allJson)
+module.exports = () => {
+	console.log('Syncing data...')
+	return clean()
+		.then(() => env())
+		.then(() => Promise.all([
+			markdown(),
+			productMarkdown(),
+			markdownModules('privacy-policy'),
+			markdownModules('terms-of-service')
+		]))
+		.then(() => salsify())
+		.then(() => mergeProduct())
+		.then(() => allJson())
+}

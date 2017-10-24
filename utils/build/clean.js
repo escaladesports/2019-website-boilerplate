@@ -2,6 +2,10 @@
 const fs = require('fs-extra')
 module.exports = () => {
 	console.log('Cleaning JSON directory...')
-	return fs.remove('json')
+	return Promise.all([
+			fs.remove('json'),
+			fs.remove('static'),
+			fs.remove('dist')
+		])
 		.then(() => console.log('Cleaned JSON directory.'))
 }

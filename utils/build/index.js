@@ -6,10 +6,8 @@ const sitemap = require('./sitemap')
 const copy = require('./copy')
 const replaceImages = require('../images/replace-images')
 
-// Sync data from APIs & new files
+console.log('Building static files...')
 sync()
-
-	// Build
 	.then(() => {
 		console.log('Building Next.js app...')
 		return exec('next build')
@@ -18,8 +16,6 @@ sync()
 		console.log('Exporting Next.js static files...')
 		return exec('next export -o dist')
 	})
-
-	// Post build
 	.then(() => Promise.all([
 		replaceImages(),
 		sitemap(),

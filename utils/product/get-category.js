@@ -1,4 +1,4 @@
-const cache ={}
+const cache = {}
 
 export default function (id, opt = {}) {
 	if (cache[id]) return cache[id]
