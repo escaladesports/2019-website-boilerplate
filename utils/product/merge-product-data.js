@@ -56,10 +56,12 @@ function productIdsJson(obj){
 }
 
 function addPricing(obj) {
+	let keys = Object.keys(obj)
+	if(!keys.length) return Promise.resolve(obj)
 	console.log('Getting product prices...')
 	// Keep scoped to make sure .env file exists at this point
 	const getPrice = require('./get-price')
-	return getPrice(Object.keys(obj))
+	return getPrice(keys)
 		.then(prices => {
 			for (let i in prices) {
 				obj[i].price = prices[i]
