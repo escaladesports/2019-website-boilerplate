@@ -4580,14 +4580,6 @@ map-stream@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/map-stream/-/map-stream-0.1.0.tgz#e56aa94c4c8055a16404a0674b78f215f7c8e194"
 
-markdown-to-json-files@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/markdown-to-json-files/-/markdown-to-json-files-1.1.1.tgz#d5fafb201c20a15c94f450712a5da17d561baf14"
-  dependencies:
-    metalsmith "^2.3.0"
-    metalsmith-markdown "^0.2.1"
-    metalsmith-to-json "^1.0.0"
-
 marked@^0.3.6, marked@~0.3.1:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.6.tgz#b2c6c618fccece4ef86c4fc6cb8a7cbf5aeda8d7"

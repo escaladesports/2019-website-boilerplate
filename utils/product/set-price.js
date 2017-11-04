@@ -26,6 +26,7 @@ export function initPrice() {
 export function updatePrice() {
 	return fetchPrice()
 		.then(prices => {
+			console.log(prices)
 			window.productPrices = prices
 			events.forEach(event => event(prices))
 			setPriceTimeout()
