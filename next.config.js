@@ -1,3 +1,5 @@
+'use strict'
+require('dotenv').config({ silent: true })
 const fs = require('fs-extra')
 const glob = require('globby')
 const path = require('path')
@@ -86,6 +88,16 @@ module.exports = {
 					}
 				})
 			})
+
+			// Posts
+			/*
+			.then(() => {
+				if(!process.env.ENABLE_POSTS){
+					return Promise.resolve()
+				}
+				return glob('./json/')
+			})
+			*/
 
 			//.then(() => console.log('Routes:', pages))
 			.then(() => pages)

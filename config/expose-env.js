@@ -4,6 +4,7 @@ module.exports = [
 	'NODE_ENV',
 	'GOOGLE_ANALYTICS_ID',
 	'ENABLE_ECOMMERCE',
+	'ENABLE_POSTS',
 	'ZYGOTE_API',
 	'STOCK_API',
 	'PRICING_API',

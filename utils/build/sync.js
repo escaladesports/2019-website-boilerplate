@@ -8,6 +8,7 @@ const salsify = require('../salsify/salsify')
 const mergeProduct = require('../product/merge-product-data')
 const allJson = require('./all-json')
 const env = require('./env')
+const posts = require('../posts/posts')
 
 // Sync data
 module.exports = () => {
@@ -18,7 +19,8 @@ module.exports = () => {
 			markdown(),
 			productMarkdown(),
 			markdownModules('privacy-policy'),
-			markdownModules('terms-of-service')
+			markdownModules('terms-of-service'),
+			posts()
 		]))
 		.then(() => salsify())
 		.then(() => mergeProduct())
