@@ -62,7 +62,7 @@ export default class extends React.Component {
 
 				</VariantSwitcher>
 				<div className='price'>
-					Price: $<Price product={this.state.product} />
+					Price: <Price product={this.state.product} />
 				</div>
 				<IsAvailable id={this.state.product.id}>
 					<AddToCart

@@ -19,7 +19,7 @@ export default class extends React.Component {
 					/>
 				}
 				<div className='price'>
-					Price: $<Price product={this.props.product} />
+					Price: <Price product={this.props.product} />
 				</div>
 				<IsAvailable id={this.props.product.id}>
 					<AddToCart
