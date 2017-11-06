@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from 'components/_layout'
 import cloudinary from 'utils/images/cloudinary'
+import IsAvailable from 'components/util/product/is-available'
 import AddToCart from 'components/util/product/add-cart-button'
 import getProduct from 'utils/product/get-product'
 import VariantSwitcher from 'components/product/variant-switcher'
@@ -63,14 +64,16 @@ export default class extends React.Component {
 				<div className='price'>
 					Price: $<Price product={this.state.product} />
 				</div>
-				<AddToCart
-					name={this.state.product.title}
-					id={this.state.product.id}
-					url={`/product/${this.state.product.id}`}
-					price={this.state.product.price}
-					img={cloudinary(this.state.product.images[0], 'w_150', 'h_150', 'c_pad')}
-					desc={titleCase(`${this.state.product.finish} Finish`)}
+				<IsAvailable id={this.state.product.id}>
+					<AddToCart
+						name={this.state.product.title}
+						id={this.state.product.id}
+						url={`/product/${this.state.product.id}`}
+						price={this.state.product.price}
+						img={cloudinary(this.state.product.images[0], 'w_150', 'h_150', 'c_pad')}
+						desc={titleCase(`${this.state.product.finish} Finish`)}
 					/>
+				</IsAvailable>
 			</Layout>
 		)
 	}
