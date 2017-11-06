@@ -66,19 +66,8 @@ export default class extends React.Component {
 					<span>{this.props.outOfStock || 'Out of Stock'}</span>
 				}
 				<style jsx>{`
-					[role='button'] {
-						border: 0;
-						padding: 0.7rem 2rem;
-						font-size: 1.7rem;
-						text-transform: uppercase;
-						color: #fff;
-						cursor: pointer;
-					}
 					.loading{
 						visibility: hidden;
-					}
-					span{
-						text-transform: uppercase;
 					}
 				`}</style>
 			</div>
