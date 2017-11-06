@@ -47,7 +47,6 @@ export default class extends React.Component {
 				{this.state.stock[this.props.id] > 0 &&
 					<div
 						role='button'
-						className={this.state.stock === false && 'loading'}
 						style={this.props.style || {}}
 						onClick={this.props.handleClick}
 						data-id={this.props.id}
@@ -65,11 +64,6 @@ export default class extends React.Component {
 				{this.state.stock[this.props.id] === 0 &&
 					<span>{this.props.outOfStock || 'Out of Stock'}</span>
 				}
-				<style jsx>{`
-					.loading{
-						visibility: hidden;
-					}
-				`}</style>
 			</div>
 		)
 	}
