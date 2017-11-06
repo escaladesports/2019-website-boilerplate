@@ -22,7 +22,8 @@ fs.remove('temp-update')
 			'next.config.js',
 			'postcss.config.js',
 			'server.js',
-			'README.md'
+			'README.md',
+			'components/util/**/*'
 		], '../', {
 			cwd: 'temp-update',
 			parents: true

@@ -45,7 +45,8 @@ export default class extends React.Component {
 		return (
 			<div>
 				{this.state.stock[this.props.id] > 0 &&
-					<button
+					<div
+						role='button'
 						className={this.state.stock === false && 'loading'}
 						style={this.props.style || {}}
 						onClick={this.props.handleClick}
@@ -58,14 +59,14 @@ export default class extends React.Component {
 						data-qty={this.props.quantity}
 						data-open-cart
 					>
-						Add to Cart
-					</button>
+						{this.props.button || <button>Add to Cart</button>}
+					</div>
 				}
 				{this.state.stock[this.props.id] === 0 &&
-					<span>Out of Stock</span>
+					<span>{this.props.outOfStock || 'Out of Stock'}</span>
 				}
 				<style jsx>{`
-					button {
+					[role='button'] {
 						border: 0;
 						padding: 0.7rem 2rem;
 						font-size: 1.7rem;

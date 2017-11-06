@@ -1,8 +1,8 @@
 import React from 'react'
 import Img from 'components/image.js'
 import cloudinary from 'utils/images/cloudinary'
-import Price from 'components/product/price'
-import AddToCart from 'components/product/add-cart-button'
+import Price from 'components/util/product/price'
+import AddToCart from 'components/util/product/add-cart-button'
 import titleCase from 'title-case'
 
 export default class extends React.Component {

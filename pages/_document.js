@@ -1,7 +1,7 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import flush from 'styled-jsx/server'
 import Layout from 'components/_layout'
-import Zygote from 'components/product/zygote'
+import Zygote from 'components/util/product/zygote'
 import stylesheet from './_global.css'
 
 export default class MyDocument extends Document {
