@@ -9,12 +9,12 @@ export default class extends React.Component {
 		return(
 			<Layout>
 				<div>
-					<Link href='/product?id=a6czl1015r' as='/product/a6czl1015r' prefetch>
+					<Link href='/product?id=kz1500-red' as='/product/kz1500-red' prefetch>
 						<a>Product</a>
 					</Link>
 				</div>
 				<div>
-					<Link href='/category?id=compound' as='/category/compound' prefetch>
+					<Link href='/category?id=paddles' as='/category/paddles' prefetch>
 						<a>Category</a>
 					</Link>
 				</div>

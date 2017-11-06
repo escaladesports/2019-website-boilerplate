@@ -12,4 +12,8 @@ module.exports = () => {
 			})
 		})
 		.then(res => res.json())
+		.then(stock => {
+			console.log(stock)
+			return stock
+		})
 }

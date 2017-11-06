@@ -2,8 +2,7 @@
 import fetchPrice from 'utils/product/get-price'
 import env from 'json/env.json'
 
-//const pollingInterval = 10 * 60 * 1000
-const pollingInterval = 20 * 1000
+const pollingInterval = 10 * 60 * 1000
 const events = []
 let timeoutId
 
