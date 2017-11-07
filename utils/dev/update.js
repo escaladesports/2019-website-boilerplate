@@ -54,6 +54,19 @@ fs.remove('temp-update')
 		return Promise.all(promises)
 	})
 	.then(() => {
+		console.log('Adding new scripts...')
+		const newPkg = require('../temp-update-package.json')
+		const overwritePkg = Object.assign({}, curPkg)
+		if (!overwritePkg.scripts) overwritePkg.scripts = {}
+		if (!newPkg.scripts) newPkg.scripts = {}
+		for(let i in newPkg.scripts){
+			if (overwritePkg.scripts[i] !== newPkg.scripts[i]){
+				overwritePkg.scripts[i] = newPkg.scripts[i]
+			}
+		}
+		return fs.outputJson('../package.json', overwritePkg, { spaces: 2 })
+	})
+	.then(() => {
 		console.log('Removing temporary files...')
 		return Promise.all([
 			fs.remove('temp-update')
