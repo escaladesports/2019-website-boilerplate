@@ -23,7 +23,7 @@ fs.remove('temp-update')
 			'postcss.config.js',
 			'server.js',
 			'README.md',
-			'components/util/**/*'
+			'components/utils/**/*'
 		], '../', {
 			cwd: 'temp-update',
 			parents: true

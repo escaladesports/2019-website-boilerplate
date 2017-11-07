@@ -1,6 +1,6 @@
 import React from 'react'
 import settings from 'components/_settings'
-import PageIsLoading from 'components/util/page-is-loading'
+import PageIsLoading from 'components/utils/page-is-loading'
 
 export default class extends React.Component {
 	render(){

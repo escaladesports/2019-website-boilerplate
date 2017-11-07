@@ -18,8 +18,8 @@ export default class extends React.Component {
 		return(
 			<Layout>
 				<h1>{this.props.id}</h1>
-				{this.props.product.map(prod => {
-					return <ProductBlock product={prod} />
+				{this.props.product.map((prod, key) => {
+					return <ProductBlock key={key} product={prod} />
 				})}
 			</Layout>
 		)
