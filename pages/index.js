@@ -4,6 +4,8 @@ import Link from 'next/link'
 import DealerLocator from 'components/dealer-locator/index'
 import Loader from 'components/loader'
 
+const fontColor = 'red'
+
 export default class extends React.Component {
 	render(){
 		return(
@@ -29,8 +31,8 @@ export default class extends React.Component {
 					</Link>
 				</div>
 				<style jsx>{`
-					section{
-						lost-utility: clearfix;
+					a{
+						color: ${fontColor};
 					}
 				`}</style>
 			</Layout>
