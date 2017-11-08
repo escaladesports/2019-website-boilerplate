@@ -10,12 +10,12 @@ export default class extends React.Component {
 		this.setPrice = this.setPrice.bind(this)
 	}
 	componentDidMount() {
-		if(window.productPrice){
+		if (window.productPrice) {
 			this.setPrice(window.productPrice)
 		}
 		addPriceEvent(this.setPrice)
 	}
-	componentWillUnmount(){
+	componentWillUnmount() {
 		removePriceEvent(this.setPrice)
 	}
 	setPrice(price) {
@@ -41,6 +41,11 @@ export default class extends React.Component {
 				data-open-cart
 			>
 				{this.props.children || <button>Add to Cart</button>}
+				<style jsx>{`
+					div{
+						display: inline-block;
+					}
+				`}</style>
 			</div>
 		)
 	}
