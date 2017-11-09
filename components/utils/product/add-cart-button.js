@@ -44,6 +44,7 @@ export default class extends React.Component {
 				<style jsx>{`
 					div{
 						display: inline-block;
+						cursor: pointer;
 					}
 				`}</style>
 			</div>

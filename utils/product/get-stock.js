@@ -13,6 +13,7 @@ module.exports = () => {
 				})
 			})
 			.then(res => res.json())
+			.then(populateDebug)
 	}
 	console.log('Warning: STOCK_API variable not found in environment')
 	let obj = {}
@@ -20,4 +21,16 @@ module.exports = () => {
 		obj[id] = 0
 	})
 	return Promise.resolve(obj)
+		.then(populateDebug)
+}
+
+
+function populateDebug(obj) {
+	if (!env.DEBUG_ECOMMERCE) return obj
+	for (let i in obj) {
+		if (!obj[i]) {
+			obj[i] = 1
+		}
+	}
+	return obj
 }
