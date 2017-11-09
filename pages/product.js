@@ -9,8 +9,9 @@ import VariantFinishes from 'components/product/variant-finishes'
 import Router from 'next/router'
 import Price from 'components/utils/product/price'
 import titleCase from 'title-case'
-import Img from 'components/image.js'
+import Img from 'components/utils/image'
 import unpackVariants from 'utils/product/unpack-variants'
+import Loader from 'components/loader'
 
 export default class extends React.Component {
 	constructor(props){
@@ -49,6 +50,7 @@ export default class extends React.Component {
 						width={500}
 						height={1000}
 						alt={this.state.product.title}
+						loading={<Loader />}
 						/>
 				}
 				<VariantSwitcher

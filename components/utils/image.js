@@ -1,6 +1,4 @@
 import React from 'react'
-import settings from 'components/_settings'
-import Loader from 'components/loader'
 
 export default class extends React.Component {
 	constructor(props){
@@ -51,9 +49,9 @@ export default class extends React.Component {
 						onError={this.hideLoader}
 						alt={this.props.alt}
 					/>
-					{this.state.loading &&
+					{this.state.loading && this.props.loading &&
 						<div className='loader'>
-							<Loader />
+							{this.props.loading}
 						</div>
 					}
 				</div>
