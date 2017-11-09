@@ -36,7 +36,8 @@ export default class extends React.Component {
 		return (
 			<div className='root' style={{
 				maxWidth: this.props.width,
-				maxHeight: this.props.height
+				maxHeight: this.props.height,
+				margin: this.props.center ? 'auto' : ''
 			}}>
 				<div className={`holder ${this.state.loading}`} style={{
 					paddingBottom: `${(this.props.height / this.props.width) * 100}%`

@@ -64,7 +64,7 @@ module.exports = (src, options) => {
 						console.log('Copying file', fullDest)
 						fs.copy(srcPath, fullDest)
 							.then(() => resolve(src))
-							.catch(reject)
+							.catch(() => resolve(src))
 					}
 				}
 			})

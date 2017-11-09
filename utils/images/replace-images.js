@@ -5,8 +5,8 @@ const transform = require('./transform-image')
 
 let paths
 let contents
-let regLinks = /\/static\/(.*?)('|"|\)| )/gi
-let regRemove = /('|"|\)| )/g
+let regLinks = /\/static\/(.*?)('|"|\)| |\&)/gi
+let regRemove = /('|"|\)| |\&)/g
 
 module.exports = () => {
 	console.log('Transforming found images...')
