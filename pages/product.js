@@ -42,11 +42,11 @@ export default class extends React.Component {
 				{this.state.product.images && this.state.product.images.length &&
 					<Img
 						srcSet={`
-							${cloudinary(this.state.product.images[0], 'w_230', 'h_460', 'c_pad')} 230w,
-							${cloudinary(this.state.product.images[0], 'w_400', 'h_800', 'c_pad')} 400w,
-							${cloudinary(this.state.product.images[0], 'w_500', 'h_1000', 'c_pad')} 500w
+							${cloudinary(this.state.product.images[0], 'e_trim', 'w_230, h_460, c_pad')} 230w,
+							${cloudinary(this.state.product.images[0], 'e_trim', 'w_400, h_800, c_pad')} 400w,
+							${cloudinary(this.state.product.images[0], 'e_trim', 'w_500, h_1000, c_pad')} 500w
 						`}
-						src={cloudinary(this.state.product.images[0], 'w_230', 'h_460', 'c_pad')}
+						src={cloudinary(this.state.product.images[0], 'e_trim', 'w_230, h_460, c_pad')}
 						width={500}
 						height={1000}
 						alt={this.state.product.title}
@@ -72,7 +72,7 @@ export default class extends React.Component {
 						id={this.state.product.id}
 						url={`/product/${this.state.product.id}`}
 						price={this.state.product.price}
-						img={cloudinary(this.state.product.images[0], 'w_150', 'h_150', 'c_pad')}
+						img={cloudinary(this.state.product.images[0], 'w_150, h_150, c_pad')}
 						desc={titleCase(`${this.state.product.finish} Finish`)}
 					/>
 				</IsAvailable>
