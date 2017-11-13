@@ -14,6 +14,7 @@ export default class extends React.Component {
 			this.setPrice(window.productPrice)
 		}
 		addPriceEvent(this.setPrice)
+		zygoteRefresh()
 	}
 	componentWillUnmount() {
 		removePriceEvent(this.setPrice)
@@ -36,7 +37,7 @@ export default class extends React.Component {
 				data-price={(this.state.price && this.state.price[this.props.id]) ? this.state.price[this.props.id] : this.props.price}
 				data-img={this.props.img}
 				data-url={this.props.url}
-				data-desc={this.props.desc}
+				data-desc={this.props.desc ? this.props.desc : ' '}
 				data-qty={this.props.qty}
 				data-open-cart
 			>
