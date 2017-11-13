@@ -90,14 +90,33 @@ module.exports = {
 			})
 
 			// Posts
-			/*
 			.then(() => {
 				if(!process.env.ENABLE_POSTS){
 					return Promise.resolve()
 				}
-				return glob('./json/')
+				return glob('./json/markdown/posts/*.json')
+					.then(markdown => {
+						markdown.forEach(file => {
+							const obj = require(file)
+							const id = path.parse(file).name
+							let permalink = obj.permalink || `/${id}`
+							if (permalink[0] !== '/') {
+								permalink = `/${permalink}`
+							}
+							let template = '/post'
+							if (obj.template) template = `/${obj.template}`
+							if(templatePages.indexOf(template) === -1){
+								templatePages.push(template)
+							}
+							pages[permalink] = {
+								page: template,
+								query: {
+									id: id
+								}
+							}
+						})
+					})
 			})
-			*/
 
 			//.then(() => console.log('Routes:', pages))
 			.then(() => pages)
