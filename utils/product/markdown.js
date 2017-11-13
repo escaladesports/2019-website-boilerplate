@@ -1,7 +1,11 @@
 'use strict'
 const matter = require('gray-matter')
+const showdown = require('showdown')
 const fs = require('fs-extra')
 const glob = require('globby')
+
+const converter = new showdown.Converter()
+converter.setOption('noHeaderId', true)
 
 module.exports = () => {
 	console.log('Reading product markdown files...')
@@ -16,6 +20,7 @@ module.exports = () => {
 			contents = contents.map(prod => {
 				prod = prod.toString()
 				prod = matter(prod)
+				prod.content = converter.makeHtml(prod.content)
 				delete prod.excerpt
 				prod = Object.assign({}, prod, prod.data)
 				delete prod.data

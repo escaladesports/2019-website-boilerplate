@@ -73,6 +73,7 @@
 		"react-no-ssr": "^1.1.0",
 		"reviews-to-json": "escaladesports/reviews-to-json.git#1.2.0",
 		"sharp": "^0.18.2",
+		"showdown": "^1.8.2",
 		"sitemap": "^1.13.0",
 		"styled-jsx-plugin-postcss": "0.1.0",
 		"terms-of-service": "escaladesports/terms-of-service#v1.0.4",
