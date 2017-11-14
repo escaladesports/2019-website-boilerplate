@@ -2,6 +2,7 @@
 const glob = require('globby')
 const fs = require('fs-extra')
 const transform = require('./transform-image')
+const additionalImages = require('../../config/process-images')
 
 let paths
 let contents
@@ -32,11 +33,15 @@ module.exports = () => {
 				let matches = str.match(regLinks) || []
 				matches = matches.forEach(match => {
 					match = match.replace(regRemove, '')
-					if (found.indexOf(match) === -1) {
+					if (
+						found.indexOf(match) === -1 &&
+						match.split('/').pop().indexOf('.') > -1
+					) {
 						found.push(match)
 					}
 				})
 			})
+			found = found.concat(additionalImages)
 			return found
 		})
 
