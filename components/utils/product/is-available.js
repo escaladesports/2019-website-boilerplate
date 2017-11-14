@@ -25,16 +25,17 @@ export default class extends React.Component {
 	render() {
 		return (
 			<div>
-				{env.ENABLE_ECOMMERCE &&
-					<div>
-						{this.state.stock[this.props.id] > 0 &&
-							this.props.children
-						}
-						{this.state.stock[this.props.id] === 0 &&
-							(this.props.outOfStock || 'Out of Stock')
-						}
-					</div>
+				<div className={(!env.ENABLE_ECOMMERCE || !this.state.stock[this.props.id]) ? 'hide' : ''}>
+					{this.props.children}
+				</div>
+				{env.ENABLE_ECOMMERCE && this.state.stock[this.props.id] === 0 &&
+					(this.props.outOfStock || 'Out of Stock')
 				}
+				<style jsx>{`
+					.hide{
+						display: none
+					}
+				`}</style>
 			</div>
 		)
 	}
