@@ -35,6 +35,11 @@ export default class extends React.Component {
 						<a>Post</a>
 					</Link>
 				</div>
+				<div>
+					<Link href='/tag?id=meta' as='/tag/meta'>
+						<a>Tag</a>
+					</Link>
+				</div>
 				<style jsx>{`
 					a{
 						color: ${fontColor};

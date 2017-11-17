@@ -94,8 +94,9 @@ module.exports = {
 				if(!process.env.ENABLE_POSTS){
 					return Promise.resolve()
 				}
-				return glob('./json/markdown/posts/*.json')
+				return glob('./json/posts/*.json')
 					.then(markdown => {
+						const tags = []
 						markdown.forEach(file => {
 							const obj = require(file)
 							const id = path.parse(file).name
@@ -110,12 +111,29 @@ module.exports = {
 							}
 							pages[permalink] = {
 								page: template,
-								query: {
-									id: id
-								}
+								query: { id: id }
+							}
+							if(obj.tags){
+								obj.tags.forEach(tag => {
+									if(tags.indexOf(tag) === -1){
+										tags.push(tag)
+									}
+								})
 							}
 						})
+						return tags
 					})
+			})
+			// Tags
+			.then(tags => {
+				if(tags){
+					tags.forEach(tag => {
+						pages[`/tag/${tag}`] = {
+							page: '/tag',
+							query: { id: tag }
+						}
+					})
+				}
 			})
 
 			//.then(() => console.log('Routes:', pages))
