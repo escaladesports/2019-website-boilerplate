@@ -1,6 +1,8 @@
 'use strict'
 const glob = require('globby')
 const fs = require('fs-extra')
+const config = require('../../config/posts')
+const trunc = require('trunc-html')
 
 module.exports = () => {
 	console.log('Creating tag JSON files...')
@@ -14,6 +16,8 @@ module.exports = () => {
 		.then(files => {
 			const tags = {}
 			files.forEach(file => {
+				file.excerpt = trunc(file.contents, config.excerptLength).text
+				delete file.contents
 				if(file.tags){
 					file.tags.forEach(tag => {
 						if(!(tag in tags)){

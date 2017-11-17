@@ -77,7 +77,8 @@
 		"sitemap": "^1.13.0",
 		"styled-jsx-plugin-postcss": "0.1.0",
 		"terms-of-service": "escaladesports/terms-of-service#v1.0.4",
-		"title-case": "^2.1.1"
+		"title-case": "^2.1.1",
+		"trunc-html": "^1.1.2"
 	},
 	"dependencies": {}
 }
