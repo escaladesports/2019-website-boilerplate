@@ -16,7 +16,9 @@ function removeAllJson(arr){
 }
 module.exports = () => {
 	console.log('Writing all.json files...')
-	return glob(['json/**/*.json', '!json/markdown/**/*.json'])
+	return glob([
+			'json/product/**/*.json'
+		])
 
 		// Get all file contents
 		.then(list => {

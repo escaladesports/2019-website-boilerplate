@@ -21,20 +21,6 @@ export default class extends React.Component {
 					<div className='content' dangerouslySetInnerHTML={{ __html: this.props.contents }} />
 					<TagLinks tags={this.props.tags} />
 				</article>
-				<style jsx>{`
-					small{
-						font-family: 'IM Fell Double Pica SC', serif;
-						display: block;
-						font-size: .9em;
-					}
-					h2{
-						margin-top: 0;
-						margin-bottom: 2px;
-					}
-					.content{
-						margin: 20px 0;
-					}
-				`}</style>
 			</Layout>
 		)
 	}
