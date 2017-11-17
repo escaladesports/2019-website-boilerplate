@@ -30,6 +30,11 @@ export default class extends React.Component {
 						<a>Contact</a>
 					</Link>
 				</div>
+				<div>
+					<Link href='/post?id=hello-world' as='/post/hello-world'>
+						<a>Post</a>
+					</Link>
+				</div>
 				<style jsx>{`
 					a{
 						color: ${fontColor};

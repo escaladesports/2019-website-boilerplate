@@ -5,16 +5,15 @@ export default class Error extends React.Component {
 	render () {
 		return (
 			<Layout>
-				<div className="errorPage">
-					<p className="errorPage__error">404: Page Not Found</p>
+				<div>
+					<p>404: Page Not Found</p>
 				</div>
 				<style jsx>{`
-					.errorPage {
+					div {
 						text-align: center;
 						padding: 30vh 30px 40vh 30px;
 					}
-
-					.errorPage__error {
+					p {
 						font-weight: bold;
 						font-size: 1.5rem;
 					}

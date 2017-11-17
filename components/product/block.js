@@ -1,5 +1,5 @@
 import React from 'react'
-import Img from 'components/image.js'
+import Img from 'components/utils/image'
 import cloudinary from 'utils/images/cloudinary'
 import Price from 'components/utils/product/price'
 import IsAvailable from 'components/utils/product/is-available'

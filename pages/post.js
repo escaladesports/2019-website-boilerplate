@@ -2,16 +2,13 @@
 import React from 'react'
 import Head from 'next/head'
 import Layout from 'components/_layout'
-import queryPosts from 'utils/posts/query-posts'
 import moment from 'moment'
 import TagLinks from 'components/posts/tag-links'
+import getPost from 'utils/posts/get-post'
 
 export default class extends React.Component {
 	static async getInitialProps(req) {
-		const data = queryPosts({
-			permalink: req.query.id
-		})[0]
-		return data
+		return getPost(req.query.id)
 	}
 	render(){
 		return(

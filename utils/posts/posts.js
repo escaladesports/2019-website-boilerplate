@@ -13,7 +13,7 @@ module.exports = () => {
 	console.log('Converting markdown posts to JSON...')
 	return Metalsmith('./')
 		.source('markdown/posts')
-		.destination('./json/markdown/posts')
+		.destination('./json/posts')
 		.use(markdown())
 		.use((files, metalsmith, done) => {
 			const keys = Object.keys(files)
@@ -44,7 +44,15 @@ module.exports = () => {
 				key = path.format(key)
 				keys[i] = key
 			}
-			fs.outputJson('./json/markdown/posts.json', keys, {spaces: '\t'})
+			let newObj = {}
+			for(let i in files){
+				newObj[files[i].permalink + '.html'] = files[i]
+				delete files[i]
+			}
+			for(let i in newObj){
+				files[i] = newObj[i]
+			}
+			fs.outputJson('./json/posts.json', keys, {spaces: '\t'})
 				.then(done)
 				.catch(console.error)
 		})
