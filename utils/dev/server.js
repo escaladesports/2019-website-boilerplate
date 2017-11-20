@@ -26,7 +26,8 @@ fs.pathExists('./json')
 	})
 	.then(port => {
 		const app = next({
-			dev: process.env.NODE_ENV !== 'production',
+			//dev: process.env.NODE_ENV !== 'production',
+			dev: true,
 			config: config
 		})
 		const handle = app.getRequestHandler()

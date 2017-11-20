@@ -3,32 +3,34 @@ const fetch = require('isomorphic-fetch')
 const env = require('../../json/env.json')
 const ids = require('../../json/product-ids.json')
 
+let api
+if (env.STOCK_API) {
+	api = env.STOCK_API
+}
+else if (env.NODE_ENV === 'production') {
+	api = 'https://xinn7f22bj.execute-api.us-east-1.amazonaws.com/production/handler'
+}
+else {
+	api = 'https://t9w63tqdfk.execute-api.us-east-1.amazonaws.com/staging/handler'
+}
+
 module.exports = () => {
-	if (env.STOCK_API) {
-		return new Promise((resolve, reject) => {
-			fetch(env.STOCK_API, {
-					method: 'POST',
-					body: JSON.stringify({
-						site: env.ECOMMERCE_API_SITE || 'all',
-						ids: ids
-					})
+	return new Promise((resolve, reject) => {
+		fetch(api, {
+				method: 'POST',
+				body: JSON.stringify({
+					site: env.ECOMMERCE_API_SITE || 'all',
+					ids: ids
 				})
-				.then(res => res.json())
-				.then(populateDebug)
-				.then(resolve)
-				.catch(err => {
-					console.error(err)
-					resolve(populateMissing({}))
-				})
-		})
-	}
-	console.log('Warning: STOCK_API variable not found in environment')
-	let obj = {}
-	ids.map(id => {
-		obj[id] = 0
+			})
+			.then(res => res.json())
+			.then(populateDebug)
+			.then(resolve)
+			.catch(err => {
+				console.error(err)
+				resolve(populateMissing({}))
+			})
 	})
-	return Promise.resolve(obj)
-		.then(populateDebug)
 }
 
 function populateMissing(obj){

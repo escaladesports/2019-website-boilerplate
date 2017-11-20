@@ -6,10 +6,8 @@ import TagLinks from 'components/posts/tag-links'
 
 export default class extends React.Component {
 	static async getInitialProps(req) {
-		const posts = getTag(req.query.id)
-		console.log(posts)
 		return {
-			posts: posts
+			posts: getTag(req.query.id)
 		}
 	}
 	render(){
