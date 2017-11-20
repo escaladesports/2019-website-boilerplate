@@ -1,6 +1,5 @@
 import Document, { Head, Main, NextScript } from 'next/document'
 import flush from 'styled-jsx/server'
-import Layout from 'components/_layout'
 import Zygote from 'components/utils/product/zygote'
 import stylesheet from './_global.css'
 

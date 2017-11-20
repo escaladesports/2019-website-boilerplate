@@ -3,7 +3,7 @@ import React from 'react'
 export default class extends React.Component {
 	constructor(props){
 		super(props)
-		this.state = { loading: '' }
+		this.state = { loading: false }
 		this.hideLoader = this.hideLoader.bind(this)
 		this.showLoader = this.showLoader.bind(this)
 		this.startTimeout = this.startTimeout.bind(this)
@@ -25,12 +25,12 @@ export default class extends React.Component {
 	}
 	showLoader() {
 		if (!this.img.complete) {
-			this.setState({ loading: 'loading' })
+			this.setState({ loading: true })
 		}
 	}
 	hideLoader() {
 		clearTimeout(this.timeout)
-		this.setState({ loading: '' })
+		this.setState({ loading: false })
 	}
 	render(){
 		return (
@@ -39,7 +39,8 @@ export default class extends React.Component {
 				maxHeight: this.props.height,
 				margin: this.props.center ? 'auto' : ''
 			}}>
-				<div className={`holder ${this.state.loading}`} style={{
+				<div style={{
+					position: 'relative',
 					paddingBottom: `${(this.props.height / this.props.width) * 100}%`
 				}}>
 					<img
@@ -49,37 +50,26 @@ export default class extends React.Component {
 						onLoad={this.hideLoader}
 						onError={this.hideLoader}
 						alt={this.props.alt}
+						style={{
+							position: 'absolute',
+							width: '100%',
+							maxWidth: '100%',
+							top: '0',
+							left: '0',
+							display: this.state.loading ? 'none' : ''
+						}}
 					/>
 					{this.state.loading && this.props.loading &&
-						<div className='loader'>
+						<div className='loader' style={{
+								position: 'absolute',
+								top: '50%',
+								left: '50%',
+								transform: 'translate(-50%, -50%)'
+							}}>
 							{this.props.loading}
 						</div>
 					}
 				</div>
-				<style jsx>{`
-					.holder{
-						position: relative;
-					}
-					.loading{
-						img{
-							display: none;
-						}
-					}
-					img{
-						width: 100%;
-						max-width: 100%;
-						top: 0;
-						left: 0;
-					}
-					.loader, img{
-						position: absolute;
-					}
-					.loader{
-						top: 50%;
-						left: 50%;
-						transform: translate(-50%, -50%);
-					}
-				`}</style>
 			</div>
 		)
 	}

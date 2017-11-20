@@ -18,11 +18,11 @@ export default class Layout extends React.Component {
 		super(props)
 	}
 	componentDidMount() {
+		jsonToEnv()
 		initGA()
 		clientTimeoutError()
 		initStock()
 		initPrice()
-		jsonToEnv()
 	}
 	render() {
 		return (
