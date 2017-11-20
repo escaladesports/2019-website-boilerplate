@@ -34,7 +34,7 @@ export default class extends React.Component {
 	}
 	render(){
 		return (
-			<div className='root' style={{
+			<div style={{
 				maxWidth: this.props.width,
 				maxHeight: this.props.height,
 				margin: this.props.center ? 'auto' : ''
@@ -60,7 +60,7 @@ export default class extends React.Component {
 						}}
 					/>
 					{this.state.loading && this.props.loading &&
-						<div className='loader' style={{
+						<div style={{
 								position: 'absolute',
 								top: '50%',
 								left: '50%',
