@@ -13,7 +13,8 @@ module.exports = {
 			'/index',
 			'/category',
 			'/product',
-			'/post'
+			'/post',
+			'/tag'
 		]
 
 		return Promise.resolve()
@@ -126,7 +127,8 @@ module.exports = {
 			})
 			// Tags
 			.then(tags => {
-				if(tags){
+				if (tags) {
+					console.log(tags)
 					tags.forEach(tag => {
 						pages[`/tag/${tag}`] = {
 							page: '/tag',

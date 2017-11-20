@@ -1,8 +1,6 @@
 import React from 'react'
 import Layout from 'components/_layout'
 import Link from 'next/link'
-import DealerLocator from 'components/dealer-locator/index'
-import Loader from 'components/loader'
 
 const fontColor = 'red'
 
@@ -30,6 +28,7 @@ export default class extends React.Component {
 						<a>Contact</a>
 					</Link>
 				</div>
+				{/*
 				<div>
 					<Link href='/post?id=hello-world' as='/post/hello-world'>
 						<a>Post</a>
@@ -40,6 +39,7 @@ export default class extends React.Component {
 						<a>Tag</a>
 					</Link>
 				</div>
+				*/}
 				<style jsx>{`
 					a{
 						color: ${fontColor};

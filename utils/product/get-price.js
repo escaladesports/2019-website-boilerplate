@@ -1,13 +1,12 @@
 'use strict'
 const fetch = require('isomorphic-fetch')
-const env = require('../../json/env.json')
 const ids = require('../../json/product-ids.json')
 
 let api
-if (env.PRICING_API){
-	api = env.PRICING_API
+if (process.env.PRICING_API){
+	api = process.env.PRICING_API
 }
-else if (env.NODE_ENV === 'production'){
+else if (process.env.NODE_ENV === 'production'){
 	api = 'https://cojn6cbcd7.execute-api.us-east-1.amazonaws.com/production/handler'
 }
 else{
@@ -18,7 +17,7 @@ module.exports = () => {
 	return fetch(api, {
 			method: 'POST',
 			body: JSON.stringify({
-				site: env.ECOMMERCE_API_SITE || 'all',
+				site: process.env.ECOMMERCE_API_SITE || 'all',
 				ids: ids
 			})
 		})
@@ -27,7 +26,7 @@ module.exports = () => {
 }
 
 function populateDebug(obj){
-	if (!env.DEBUG_ECOMMERCE) return obj
+	if (!process.env.DEBUG_ECOMMERCE) return obj
 	for(let i in obj){
 		if(!obj[i]){
 			obj[i] = 8.26

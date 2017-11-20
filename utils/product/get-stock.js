@@ -1,13 +1,12 @@
 'use strict'
 const fetch = require('isomorphic-fetch')
-const env = require('../../json/env.json')
 const ids = require('../../json/product-ids.json')
 
 let api
-if (env.STOCK_API) {
-	api = env.STOCK_API
+if (process.env.STOCK_API) {
+	api = process.env.STOCK_API
 }
-else if (env.NODE_ENV === 'production') {
+else if (process.env.NODE_ENV === 'production') {
 	api = 'https://xinn7f22bj.execute-api.us-east-1.amazonaws.com/production/handler'
 }
 else {
@@ -19,7 +18,7 @@ module.exports = () => {
 		fetch(api, {
 				method: 'POST',
 				body: JSON.stringify({
-					site: env.ECOMMERCE_API_SITE || 'all',
+					site: process.env.ECOMMERCE_API_SITE || 'all',
 					ids: ids
 				})
 			})
@@ -43,7 +42,8 @@ function populateMissing(obj){
 }
 
 function populateDebug(obj) {
-	if (!env.DEBUG_ECOMMERCE) return obj
+	console.log(process.env)
+	if (!process.env.DEBUG_ECOMMERCE) return obj
 	for (let i in obj) {
 		if (!obj[i]) {
 			obj[i] = 1

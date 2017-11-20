@@ -8,7 +8,6 @@ const portScanner = require('portscanner')
 const exec = require('child-process-promise').exec
 const fs = require('fs-extra')
 const open = require('open')
-const sharp = require('sharp')
 const transform = require('../images/transform-image')
 const ports = require('./ports')
 let baseDir = __dirname.replace(/\/utils\/dev$/, '')
