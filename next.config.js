@@ -3,6 +3,7 @@ require('dotenv').config({ silent: true })
 const fs = require('fs-extra')
 const glob = require('globby')
 const path = require('path')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
 	poweredByHeader: false,
@@ -160,6 +161,13 @@ module.exports = {
 				]
 			}
 		)
+		if (process.env.ANALYZE) {
+			config.plugins.push(new BundleAnalyzerPlugin({
+				analyzerMode: 'server',
+				analyzerPort: 8888,
+				openAnalyzer: true
+			}))
+		}
 		return config
 	}
 }

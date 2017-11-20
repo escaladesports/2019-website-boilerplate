@@ -9,7 +9,7 @@ import VariantFinishes from 'components/product/variant-finishes'
 import Router from 'next/router'
 import Price from 'components/utils/product/price'
 import titleCase from 'title-case'
-import Img from 'components/utils/image'
+import Img from 'react-responsive-img'
 import unpackVariants from 'utils/product/unpack-variants'
 import Loader from 'components/loader'
 

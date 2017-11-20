@@ -13,6 +13,7 @@
 		"serve-static": "node utils/dev/serve-static",
 		"sync": "node -e \"require('./utils/build/sync')()\"",
 		"dev": "node utils/dev/server",
+		"analyze": "cross-env ANALYZE=1 node utils/dev/server",
 		"update": "node utils/dev/update"
 	},
 	"devDependencies": {
@@ -25,6 +26,7 @@
 		"chokidar": "^1.7.0",
 		"country-list": "^1.1.0",
 		"cpy": "^5.0.0",
+		"cross-env": "^5.1.1",
 		"css-mqpacker": "^6.0.1",
 		"cssnano": "^3.10.0",
 		"datasets-us-states-names": "^1.0.0",
@@ -71,6 +73,7 @@
 		"react-fastclick": "^3.0.2",
 		"react-ga": "^2.2.0",
 		"react-no-ssr": "^1.1.0",
+		"react-responsive-img": "^2.0.1",
 		"reviews-to-json": "escaladesports/reviews-to-json.git#1.2.0",
 		"sharp": "^0.18.2",
 		"showdown": "^1.8.2",
@@ -78,7 +81,8 @@
 		"styled-jsx-plugin-postcss": "0.1.0",
 		"terms-of-service": "escaladesports/terms-of-service#v1.0.4",
 		"title-case": "^2.1.1",
-		"trunc-html": "^1.1.2"
+		"trunc-html": "^1.1.2",
+		"webpack-bundle-analyzer": "^2.9.1"
 	},
 	"dependencies": {}
 }
