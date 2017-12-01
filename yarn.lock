@@ -6194,10 +6194,6 @@ postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.13, postcss@^6.0.6, postcss@^6.0.9:
     source-map "^0.6.1"
     supports-color "^4.4.0"
 
-postinstall-build@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/postinstall-build/-/postinstall-build-5.0.1.tgz#b917a9079b26178d9a24af5a5cd8cb4a991d11b9"
-
 preact-compat@^3.17.0:
   version "3.17.0"
   resolved "https://registry.yarnpkg.com/preact-compat/-/preact-compat-3.17.0.tgz#528cfdfc301190c1a0f47567336be1f4be0266b3"
@@ -6462,11 +6458,9 @@ react-proxy@^3.0.0-alpha.0:
   dependencies:
     lodash "^4.6.1"
 
-react-responsive-img@2.0.9:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/react-responsive-img/-/react-responsive-img-2.0.9.tgz#73494dc3bd8787f5cc005dce95d152eca2c583a3"
-  dependencies:
-    postinstall-build "^5.0.1"
+react-responsive-img@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-responsive-img/-/react-responsive-img-3.0.0.tgz#8ff16719e5bc934db6107c27676038ffd47ccfcb"
 
 react@^16.0.0:
   version "16.0.0"

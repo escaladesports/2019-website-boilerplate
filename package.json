@@ -76,7 +76,7 @@
 		"react-fastclick": "^3.0.2",
 		"react-ga": "^2.2.0",
 		"react-no-ssr": "^1.1.0",
-		"react-responsive-img": "2.0.9",
+		"react-responsive-img": "^3.0.0",
 		"reviews-to-json": "escaladesports/reviews-to-json.git#1.2.0",
 		"sharp": "^0.18.2",
 		"showdown": "^1.8.2",

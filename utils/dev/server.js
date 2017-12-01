@@ -18,8 +18,10 @@ const baseDir = __dirname.replace(/\/utils\/dev$/, '')
 
 
 if (dev) {
+	/*
 	moduleAlias.addAlias('react', 'preact-compat')
 	moduleAlias.addAlias('react-dom', 'preact-compat')
+	*/
 }
 
 console.log('Checking for sync files...')

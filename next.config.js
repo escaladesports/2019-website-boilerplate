@@ -5,8 +5,6 @@ const glob = require('globby')
 const path = require('path')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
-console.log('NEXT.CONFIG.JS')
-
 module.exports = {
 	poweredByHeader: false,
 	exportPathMap: () => {
@@ -164,10 +162,12 @@ module.exports = {
 			}
 		)
 		if(!dev){
+			/*
 			config.resolve.alias = {
 				'react': 'preact-compat/dist/preact-compat',
 				'react-dom': 'preact-compat/dist/preact-compat'
 			}
+			*/
 		}
 		if (process.env.ANALYZE) {
 			config.plugins.push(new BundleAnalyzerPlugin({
