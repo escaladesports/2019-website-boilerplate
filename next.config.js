@@ -3,7 +3,9 @@ require('dotenv').config({ silent: true })
 const fs = require('fs-extra')
 const glob = require('globby')
 const path = require('path')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+
+console.log('NEXT.CONFIG.JS')
 
 module.exports = {
 	poweredByHeader: false,
@@ -139,11 +141,11 @@ module.exports = {
 				}
 			})
 
-			//.then(() => console.log('Routes:', pages))
+			.then(() => console.log('Routes:', pages))
 			.then(() => pages)
 			.catch(console.error)
 	},
-	webpack: (config, obj) => {
+	webpack: (config, { dev }) => {
 		config.module.rules.push(
 			{
 				test: /\.css$/,
@@ -161,6 +163,12 @@ module.exports = {
 				]
 			}
 		)
+		if(!dev){
+			config.resolve.alias = {
+				'react': 'preact-compat/dist/preact-compat',
+				'react-dom': 'preact-compat/dist/preact-compat'
+			}
+		}
 		if (process.env.ANALYZE) {
 			config.plugins.push(new BundleAnalyzerPlugin({
 				analyzerMode: 'server',

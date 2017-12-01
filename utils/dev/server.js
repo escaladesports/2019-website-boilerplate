@@ -2,15 +2,25 @@
 require('dotenv').config({ silent: true })
 const express = require('express')
 const next = require('next')
-const config = require('../../next.config')
-const router = config.exportPathMap
 const portScanner = require('portscanner')
 const exec = require('child-process-promise').exec
 const fs = require('fs-extra')
 const open = require('open')
+const moduleAlias = require('module-alias')
+
+
+const dev = process.env.NODE_ENV !== 'production'
+const config = require('../../next.config')
+const router = config.exportPathMap
 const transform = require('../images/transform-image')
 const ports = require('./ports')
-let baseDir = __dirname.replace(/\/utils\/dev$/, '')
+const baseDir = __dirname.replace(/\/utils\/dev$/, '')
+
+
+if (dev) {
+	moduleAlias.addAlias('react', 'preact-compat')
+	moduleAlias.addAlias('react-dom', 'preact-compat')
+}
 
 console.log('Checking for sync files...')
 fs.pathExists('./json')
@@ -25,8 +35,7 @@ fs.pathExists('./json')
 	})
 	.then(port => {
 		const app = next({
-			//dev: process.env.NODE_ENV !== 'production',
-			dev: true,
+			dev: dev,
 			config: config
 		})
 		const handle = app.getRequestHandler()
