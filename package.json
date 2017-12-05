@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "bluebird": "^3.5.1",
     "css-mqpacker": "^6.0.1",
     "cssnano": "^3.10.0",
     "gatsby": "latest",
