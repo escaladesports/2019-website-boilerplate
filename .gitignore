@@ -14,7 +14,8 @@ node_modules/
 dist
 .next
 json
-static
+public
+.cache
 
 # Temporary
 temp
