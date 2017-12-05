@@ -1,24 +1,24 @@
-import React from "react"
+import React from 'react'
 
-class Index extends React.Component {
+export default class Index extends React.Component {
 	render() {
+		console.log(this.props.data)
 		return (
 			<section>
-				<div className='row'>
-					<div>1</div>
-					<div>2</div>
-				</div>
-				<style jsx>{`
-					.row{
-						lost-utility: clearfix;
-						div{
-							lost-column: 1/2;
-						}
-					}
-				`}</style>
+				<div>Image:</div>
+				<img src={this.props.data.cropCenter.resize.src} />
 			</section>
 		)
 	}
 }
 
-export default Index
+export const pageQuery = graphql`
+	query GatsbyImageSampleQuery {
+		cropCenter: imageSharp(id: { regex: "/test.jpg/" }) {
+			resize(width: 180, height: 180, cropFocus: CENTER) {
+				src
+			}
+		}
+	}
+`
+
