@@ -1,4 +1,5 @@
 import React from 'react'
+import Img from 'gatsby-image'
 
 export default class Index extends React.Component {
 	render() {
@@ -6,19 +7,28 @@ export default class Index extends React.Component {
 		return (
 			<section>
 				<div>Image:</div>
-				<img src={this.props.data.cropCenter.resize.src} />
+				<div className='container'>
+					<Img sizes={this.props.data.file.childImageSharp.sizes} />
+				</div>
+				<style jsx>{`
+					.container{
+						max-width: 300px;
+					}
+				`}</style>
 			</section>
 		)
 	}
 }
 
 export const pageQuery = graphql`
-	query GatsbyImageSampleQuery {
-		cropCenter: imageSharp(id: { regex: "/test.jpg/" }) {
-			resize(width: 180, height: 180, cropFocus: CENTER) {
-				src
+  query GatsbyImageSampleQuery {
+    file(relativePath: { eq: "test.jpg" }) {
+      childImageSharp {
+			sizes(maxWidth: 300) {
+				...GatsbyImageSharpSizes_noBase64
 			}
-		}
-	}
+      }
+    }
+  }
 `
 
