@@ -22,7 +22,17 @@ export default class Index extends React.Component {
 }
 
 export const pageQuery = graphql`
-	query GatsbyImageQueries {
+	query HomepageQueries {
+		productData: allMarkdownRemark {
+			edges {
+				node {
+					html
+					frontmatter {
+						title
+					}
+				}
+			}
+		}
 		testFile: imageSharp(id: { regex: "/test.jpg/" }) {
 			sizes(maxWidth: 300) {
 				...GatsbyImageSharpSizes_noBase64

@@ -5,12 +5,12 @@
   "author": "Kennedy Rose <kennedy@escaladesports.com>",
   "license": "MIT",
   "scripts": {
-	"dev": "gatsby develop",
-	"build": "npm run clean && gatsby build",
-	"clean": "run-p clean:cache clean:public",
-	"clean:cache": "rimraf .cache",
-	"clean:public": "rimraf public",
-	"serve": "npm run build && gatsby serve -o"
+    "dev": "gatsby develop",
+    "build": "npm run clean && gatsby build",
+    "clean": "run-p clean:cache clean:public",
+    "clean:cache": "rimraf .cache",
+    "clean:public": "rimraf public",
+    "serve": "npm run build && gatsby serve -o"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
@@ -23,6 +23,7 @@
     "gatsby-plugin-offline": "^1.0.11",
     "gatsby-plugin-sharp": "^1.6.22",
     "gatsby-source-filesystem": "^1.5.9",
+    "gatsby-transformer-remark": "^1.7.23",
     "gatsby-transformer-sharp": "^1.6.15",
     "lost": "^8.2.0",
     "npm-run-all": "^4.1.2",
