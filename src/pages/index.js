@@ -4,7 +4,7 @@ import Img from 'gatsby-image'
 export default class Index extends React.Component {
 	render() {
 		console.log(this.props.data)
-		const img = this.props.data.testFile.childImageSharp
+		const img = this.props.data.testFile
 		return (
 			<section>
 				<div>Image:</div>
@@ -22,12 +22,10 @@ export default class Index extends React.Component {
 }
 
 export const pageQuery = graphql`
-	query GatsbyImageSampleQuery {
-		testFile: file(relativePath: { eq: "test.jpg" }) {
-			childImageSharp {
-				sizes(maxWidth: 300) {
-					...GatsbyImageSharpSizes_noBase64
-				}
+	query GatsbyImageQueries {
+		testFile: imageSharp(id: { regex: "/test.jpg/" }) {
+			sizes(maxWidth: 300) {
+				...GatsbyImageSharpSizes_noBase64
 			}
 		}
 	}
