@@ -5,7 +5,9 @@
   "author": "Kennedy Rose <kennedy@escaladesports.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "gatsby develop",
+    "dev": "run-p dev:gatsby dev:open",
+    "dev:gatsby": "gatsby develop",
+    "dev:open": "node utils/open-browser",
     "build": "npm run clean && gatsby build",
     "clean": "run-p clean:cache clean:public",
     "clean:cache": "rimraf .cache",
@@ -27,6 +29,7 @@
     "gatsby-transformer-sharp": "^1.6.15",
     "lost": "^8.2.0",
     "npm-run-all": "^4.1.2",
+    "opn": "^5.1.0",
     "postcss-cssnext": "^3.0.2",
     "postcss-easy-import": "^3.0.0",
     "postcss-nested": "^2.1.2",
@@ -34,6 +37,7 @@
     "rimraf": "^2.6.2",
     "styled-jsx": "^2.2.1",
     "styled-jsx-plugin-postcss": "^0.1.1",
-    "typography": "^0.15.10"
+    "typography": "^0.15.10",
+    "url-status-code": "^1.1.0"
   }
 }

@@ -10051,6 +10051,12 @@ url-regex@^3.0.0:
   dependencies:
     ip-regex "^1.0.1"
 
+url-status-code@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/url-status-code/-/url-status-code-1.1.0.tgz#3f789dce99b3b0c9aca35c2cfac3dc7ea3a7c84d"
+  dependencies:
+    valid-url "1.0.9"
+
 url-to-options@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/url-to-options/-/url-to-options-1.0.1.tgz#1505a03a289a48cbd7a434efbaeec5055f5633a9"
@@ -10118,7 +10124,7 @@ vali-date@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/vali-date/-/vali-date-1.0.0.tgz#1b904a59609fb328ef078138420934f6b86709a6"
 
-valid-url@^1.0.9:
+valid-url@1.0.9, valid-url@^1.0.9:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/valid-url/-/valid-url-1.0.9.tgz#1c14479b40f1397a75782f115e4086447433a200"
 
