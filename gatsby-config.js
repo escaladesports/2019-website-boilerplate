@@ -16,6 +16,12 @@ module.exports = {
 				path: `${__dirname}/src/products`
 			},
 		},
+		{
+			resolve: 'gatsby-source-salsify',
+			options: {
+				ids: ['U2508', 'U2000']
+			},
+		},
 		'gatsby-plugin-sharp',
 		'gatsby-transformer-sharp',
 		'gatsby-transformer-remark',

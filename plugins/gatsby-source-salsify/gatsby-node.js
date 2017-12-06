@@ -1,12 +1,48 @@
-exports.sourceNodes = async ({ boundActionCreators }) => {
+const fetch = require('isomorphic-fetch')
+const crypto = require('crypto')
+
+const url = 'https://ynwagjvee2.execute-api.us-east-1.amazonaws.com/production/handler'
+const regStart = /[_a-zA-Z]/
+
+exports.sourceNodes = async ({ boundActionCreators }, { ids }) => {
 	const { createNode } = boundActionCreators
-	// Create nodes here, generally by downloading data
-	// from a remote API.
-	const data = await fetch('https://ynwagjvee2.execute-api.us-east-1.amazonaws.com/production/handler')
 
-	// Process data into nodes.
-	data.forEach(datum => createNode(processDatum(datum)))
+	const data = await Promise.all(ids.map(id => {
+		return fetch(`${url}?id=${id}`)
+			.then(res => res.json())
+			.then(res => {
+				res = formatSalsifyObject(res)
+				console.log(res)
+				return {
+					id: `${id} >>> SalsifyContent`,
+					parent: null,
+					children: [],
+					... res,
+					internal: {
+						type: 'SalsifyContent',
+						contentDigest: crypto
+							.createHash('md5')
+							.update(JSON.stringify(res))
+							.digest('hex')
+					}
+				}
+			})
+	}))
 
-	// We're done, return.
+	data.forEach(datum => createNode(datum))
+
 	return
+}
+
+function formatSalsifyObject(obj) {
+	const newObj = {}
+	for(let i in obj){
+		if(i.charAt(0).match(regStart)){
+			newObj[i] = obj[i]
+		}
+		else{
+			newObj[`_${i}`] = obj[i]
+		}
+	}
+	return newObj
 }
