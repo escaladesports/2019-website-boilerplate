@@ -1,18 +1,32 @@
 const fetch = require('isomorphic-fetch')
 const crypto = require('crypto')
 
-const url = 'https://ynwagjvee2.execute-api.us-east-1.amazonaws.com/production/handler'
+const url = 'https://app.salsify.com/api/v1/products/'
 const regStart = /[_a-zA-Z]/
 
-exports.sourceNodes = async ({ boundActionCreators }, { ids }) => {
+exports.sourceNodes = async ({ boundActionCreators }, { ids, markdownPath, apiKey }) => {
+
+	if (!apiKey){
+		console.log('No API key provided')
+		return
+	}
+
 	const { createNode } = boundActionCreators
 
+	if(markdownPath){
+		ids = await getIdsFromMarkdown(markdownPath)
+	}
+
 	const data = await Promise.all(ids.map(id => {
-		return fetch(`${url}?id=${id}`)
+		return fetch(`${url}${id}`, {
+				method: 'GET',
+				headers: {
+					Authorization: `Bearer ${apiKey}`
+				}
+			})
 			.then(res => res.json())
 			.then(res => {
 				res = formatSalsifyObject(res)
-				console.log(res)
 				return {
 					id: `${id} >>> SalsifyContent`,
 					parent: null,
@@ -45,4 +59,10 @@ function formatSalsifyObject(obj) {
 		}
 	}
 	return newObj
+}
+
+function getIdsFromMarkdown(path){
+	return new Promise((resolve, reject) => {
+
+	})
 }

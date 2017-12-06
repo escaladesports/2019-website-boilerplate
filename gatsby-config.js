@@ -1,3 +1,4 @@
+require('dotenv').config({ silent: true })
 module.exports = {
 	plugins: [
 		'gatsby-plugin-styled-jsx-postcss',
@@ -19,7 +20,8 @@ module.exports = {
 		{
 			resolve: 'gatsby-source-salsify',
 			options: {
-				ids: ['U2508', 'U2000']
+				ids: ['U2508', 'U2000'],
+				apiKey: process.env.SALSIFY_API_KEY
 			},
 		},
 		'gatsby-plugin-sharp',

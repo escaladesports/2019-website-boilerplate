@@ -3,7 +3,7 @@ import Img from 'gatsby-image'
 
 export default class Index extends React.Component {
 	render() {
-		console.log(this.props.data)
+		console.log(this.props)
 		const img = this.props.data.testFile
 		return (
 			<section>
@@ -26,7 +26,7 @@ export default class Index extends React.Component {
 export const pageQuery = graphql`
 	query HomepageQueries {
 		salsify: allSalsifyContent {
-			salsify: edges {
+			edges {
 				node {
 					price: MSRP
 				}
