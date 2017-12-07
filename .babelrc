@@ -1,0 +1,13 @@
+{
+	"plugins": [
+		["module-resolver", {
+			"root": ["."],
+			"alias": {
+				"components": "./src/components",
+				"templates": "./src/templates",
+				"pages": "./src/pages"
+			},
+			"cwd": "babelrc"
+		}]
+	]
+}

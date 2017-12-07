@@ -1,5 +1,6 @@
 const fetch = require('isomorphic-fetch')
 const crypto = require('crypto')
+const glob = require('globby')
 
 const url = 'https://app.salsify.com/api/v1/products/'
 const regStart = /[_a-zA-Z]/
@@ -62,7 +63,10 @@ function formatSalsifyObject(obj) {
 }
 
 function getIdsFromMarkdown(path){
-	return new Promise((resolve, reject) => {
-
-	})
+	path = `${path}/**/*.md`
+	console.log('getIdsFromMarkdown()', path)
+	return glob(path)
+		.then(paths => console.log('paths: ', paths))
+		.then(() => [])
+		.catch(console.error)
 }

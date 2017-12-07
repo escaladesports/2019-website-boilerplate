@@ -7,25 +7,27 @@ module.exports = {
 			resolve: 'gatsby-source-filesystem',
 			options: {
 				name: 'img',
-				path: `${__dirname}/src/img`
+				path: `${__dirname}/src/img`,
 			},
 		},
 		{
 			resolve: 'gatsby-source-filesystem',
 			options: {
 				name: 'products',
-				path: `${__dirname}/src/products`
+				path: `${__dirname}/src/products`,
 			},
 		},
 		{
 			resolve: 'gatsby-source-salsify',
 			options: {
 				ids: ['U2508', 'U2000'],
-				apiKey: process.env.SALSIFY_API_KEY
+				//markdownPath: `${__dirname}/src/products`,
+				apiKey: process.env.SALSIFY_API_KEY,
 			},
 		},
 		'gatsby-plugin-sharp',
 		'gatsby-transformer-sharp',
 		'gatsby-transformer-remark',
+		'gatsby-plugin-react-helmet',
 	],
 }

@@ -1,22 +1,24 @@
 import React from 'react'
 import Img from 'gatsby-image'
+import Template from 'templates/main'
 
 export default class Index extends React.Component {
 	render() {
 		console.log(this.props)
 		const img = this.props.data.testFile
 		return (
-			<section>
+
+			<Template>
 				<div>Image:</div>
 				<div className='container'>
 					<Img sizes={img.sizes} />
 				</div>
 				<style jsx>{`
 					.container{
-						max-width: 300px;
+						width: 300px;
 					}
 				`}</style>
-			</section>
+			</Template>
 		)
 	}
 }
@@ -49,4 +51,3 @@ export const pageQuery = graphql`
 		}
 	}
 `
-
