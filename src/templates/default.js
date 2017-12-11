@@ -2,6 +2,7 @@ import React from 'react'
 
 export default class MainTemplate extends React.Component {
 	render() {
+		console.log(this.props)
 		return (
 			<main>
 				<div>Template:</div>

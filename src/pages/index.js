@@ -1,18 +1,18 @@
 import React from 'react'
 import Img from 'gatsby-image'
-import Template from 'templates/main'
+import Template from 'templates/default'
+import Link from 'gatsby-link'
 
 export default class Index extends React.Component {
 	render() {
-		console.log(this.props)
 		const img = this.props.data.testFile
 		return (
-
 			<Template>
 				<div>Image:</div>
 				<div className='container'>
 					<Img sizes={img.sizes} />
 				</div>
+				<Link to='/test'>Another page</Link>
 				<style jsx>{`
 					.container{
 						width: 300px;

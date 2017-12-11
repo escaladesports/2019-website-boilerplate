@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import * as PropTypes from 'prop-types'
 
-console.log(process.env)
-
 const propTypes = {
 	headComponents: PropTypes.node.isRequired,
 	body: PropTypes.node.isRequired,
