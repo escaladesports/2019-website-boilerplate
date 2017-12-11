@@ -62,8 +62,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 						reject(result.errors)
 					}
 
-					console.log(JSON.stringify(result.data.allMarkdownRemark.edges, null, 3))
-
 					// Create markdown pages
 					result.data.allMarkdownRemark.edges.forEach(edge => {
 						const fields = edge.node.fields
@@ -79,10 +77,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 							slug = `/product/${fields.id.toLowerCase()}/`
 							if(!template) template = 'product'
 						}
-
-						console.log('__dirname: ', __dirname)
-						console.log('filePath: ', filePath)
-						console.log('slug: ', slug)
 
 						createPage({
 							path: slug,
@@ -106,7 +100,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
 function isPath(dir, path){
 	const checkPath = `${__dirname}/src/${dir}`
-	console.log('Checking path: ', checkPath)
 	return path.indexOf(checkPath) === 0
 }
 
