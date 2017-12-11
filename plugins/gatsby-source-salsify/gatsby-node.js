@@ -1,6 +1,7 @@
 const fetch = require('isomorphic-fetch')
 const crypto = require('crypto')
 const glob = require('globby')
+const camelCase = require('camelcase')
 
 const url = 'https://app.salsify.com/api/v1/products/'
 const regStart = /[_a-zA-Z]/
@@ -29,7 +30,7 @@ exports.sourceNodes = async ({ boundActionCreators }, { ids, markdownPath, apiKe
 			.then(res => {
 				res = formatSalsifyObject(res)
 				return {
-					id: `${id} >>> SalsifyContent`,
+					id: id,
 					parent: null,
 					children: [],
 					... res,
@@ -52,13 +53,15 @@ exports.sourceNodes = async ({ boundActionCreators }, { ids, markdownPath, apiKe
 function formatSalsifyObject(obj) {
 	const newObj = {}
 	for(let i in obj){
-		if(i.charAt(0).match(regStart)){
-			newObj[i] = obj[i]
+		let camelKey = camelCase(i)
+		if (camelKey.charAt(0).match(regStart)){
+			newObj[camelKey] = obj[i]
 		}
 		else{
-			newObj[`_${i}`] = obj[i]
+			newObj[`_${camelKey}`] = obj[i]
 		}
 	}
+	console.log(newObj)
 	return newObj
 }
 

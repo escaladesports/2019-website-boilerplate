@@ -79,7 +79,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 						else if (isPath('products', filePath)){
 							console.log('PRODUCT')
 							ctx.type = 'product'
-							ctx.id = fields.id.toLowerCase()
+							ctx.id = fields.id
 							ctx.slug = `/product/${ctx.id}/`
 							if(!template) template = 'product'
 						}
@@ -134,7 +134,6 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
 		// Create template
 		for(let i in requiredFields){
 			let val = node.frontmatter[i]
-			if(i === 'id' && val) val = val.toLowerCase()
 			createNodeField({
 				name: i,
 				node,

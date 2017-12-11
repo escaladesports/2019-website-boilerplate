@@ -28,13 +28,6 @@ export default class Index extends React.Component {
 // MSRP
 export const pageQuery = graphql`
 	query HomepageQueries {
-		salsify: allSalsifyContent {
-			edges {
-				node {
-					price: MSRP
-				}
-			}
-		}
 		productData: allMarkdownRemark {
 			edges {
 				node {
