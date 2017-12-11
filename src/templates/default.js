@@ -1,10 +1,11 @@
 import React from 'react'
+import Head from 'components/head'
 
 export default class MainTemplate extends React.Component {
 	render() {
-		console.log(this.props)
 		return (
 			<main>
+				<Head title={this.props.title} description={this.props.description} />
 				<div>Template:</div>
 				{this.props.children}
 				<style jsx global>{`

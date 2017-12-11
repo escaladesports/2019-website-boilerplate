@@ -1,5 +1,7 @@
 require('dotenv').config({ silent: true })
+const meta = require('./src/meta')
 module.exports = {
+	siteMetadata: meta,
 	plugins: [
 		'gatsby-plugin-styled-jsx-postcss',
 		{
