@@ -2,8 +2,6 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import meta from '../meta'
 
-console.log(meta)
-
 export default class extends React.Component {
 	render(){
 		let title = []

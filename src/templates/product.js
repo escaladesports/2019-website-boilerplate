@@ -1,29 +1,32 @@
 import React from 'react'
-import Default from 'templates/default'
 
-export default class MainTemplate extends React.Component {
+class ProductTemplate extends React.Component {
 	render() {
-		const post = this.props.data.markdownRemark
+		const fm = this.props.data.markdown.frontmatter
+		const salsify = this.props.data.salsify
 		return (
-			<Default>
-				<h1>{post.frontmatter.title}</h1>
-				<p>{post.frontmatter.date}</p>
-				<div dangerouslySetInnerHTML={{ __html: post.html }} />
-			</Default>
+			<div>
+				<h1>{fm.title}</h1>
+			</div>
 		)
 	}
 }
 
+export default ProductTemplate
 
 
 export const pageQuery = graphql`
-	query ProductBySlug($slug: String!) {
-		markdownRemark(fields: { slug: { eq: $slug } }) {
-			id
-			html
+	query ProductById($id: String!) {
+		salsify: allSalsifyContent {
+			edges {
+				node {
+					price: MSRP
+				}
+			}
+		}
+		markdown: markdownRemark(fields: { id: { eq: $id } }){
 			frontmatter {
 				title
-				date(formatString: "MMMM DD, YYYY")
 			}
 		}
 	}

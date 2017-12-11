@@ -4,7 +4,7 @@ const path = require('path')
 const { createFilePath } = require('gatsby-source-filesystem')
 
 function templatePath(id){
-	return `./src/templates/${id}.js`
+	return path.resolve(`./src/templates/${id}.js`)
 }
 
 // Removes trailing slash
@@ -66,25 +66,33 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 					result.data.allMarkdownRemark.edges.forEach(edge => {
 						const fields = edge.node.fields
 						const filePath = path.dirname(edge.node.fileAbsolutePath)
-						let slug = fields.slug
-						let template = fields.template || 'default'
+						let template = fields.template
+						const ctx = {
+							slug: fields.slug
+						}
 
 
 						if (isPath('pages', filePath)){
+							ctx.type = 'page'
 							if(!template) template = 'page'
 						}
 						else if (isPath('products', filePath)){
-							slug = `/product/${fields.id.toLowerCase()}/`
+							console.log('PRODUCT')
+							ctx.type = 'product'
+							ctx.id = fields.id.toLowerCase()
+							ctx.slug = `/product/${ctx.id}/`
 							if(!template) template = 'product'
 						}
 
-						createPage({
-							path: slug,
-							component: `./src/templates/${template}.js`,
-							context: {
-								slug: slug,
-							},
-						})
+						const pageObj = {
+							path: ctx.slug,
+							component: path.resolve(`./src/templates/${template || 'default'}.js`),
+							context: ctx,
+						}
+
+						console.log(pageObj)
+
+						createPage(pageObj)
 					})
 				})
 			)
@@ -114,21 +122,26 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
 
 	if (node.internal.type === `MarkdownRemark`) {
 
+
 		// Create slug
+		let filePath = createFilePath({ node, getNode })
 		createNodeField({
 			name: 'slug',
 			node,
-			value: createFilePath({ node, getNode }),
+			value: filePath,
 		})
 
 		// Create template
 		for(let i in requiredFields){
+			let val = node.frontmatter[i]
+			if(i === 'id' && val) val = val.toLowerCase()
 			createNodeField({
 				name: i,
 				node,
-				value: node.frontmatter[i] || requiredFields[i]
+				value: val || requiredFields[i]
 			})
 		}
+
 
 
 	}

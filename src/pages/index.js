@@ -13,6 +13,7 @@ export default class Index extends React.Component {
 					<Img sizes={img.sizes} />
 				</div>
 				<Link to='/test'>Another page</Link>
+				<Link to='/product/u2508'>Product page</Link>
 				<style jsx>{`
 					.container{
 						width: 300px;
