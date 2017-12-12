@@ -61,13 +61,11 @@ function formatSalsifyObject(obj) {
 			newObj[`_${camelKey}`] = obj[i]
 		}
 	}
-	console.log(newObj)
 	return newObj
 }
 
 function getIdsFromMarkdown(path){
 	path = `${path}/**/*.md`
-	console.log('getIdsFromMarkdown()', path)
 	return glob(path)
 		.then(paths => console.log('paths: ', paths))
 		.then(() => [])

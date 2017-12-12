@@ -77,10 +77,9 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 							if(!template) template = 'page'
 						}
 						else if (isPath('products', filePath)){
-							console.log('PRODUCT')
 							ctx.type = 'product'
 							ctx.id = fields.id
-							ctx.slug = `/product/${ctx.id}/`
+							ctx.slug = `/product/${ctx.id.toLowerCase()}`
 							if(!template) template = 'product'
 						}
 
@@ -89,8 +88,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 							component: path.resolve(`./src/templates/${template || 'default'}.js`),
 							context: ctx,
 						}
-
-						console.log(pageObj)
 
 						createPage(pageObj)
 					})
@@ -125,6 +122,10 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
 
 		// Create slug
 		let filePath = createFilePath({ node, getNode })
+		filePath.split('/')
+		if(!filePath[filePath.length - 1]){
+			filePath.pop()
+		}
 		createNodeField({
 			name: 'slug',
 			node,

@@ -59,6 +59,28 @@ module.exports = {
 		'gatsby-transformer-sharp',
 		'gatsby-plugin-offline',
 		'gatsby-plugin-react-helmet',
+		{
+			resolve: 'gatsby-plugin-sitemap',
+			options: {
+				serialize: ({ site, allSitePage }) => {
+					allSitePage.edges = allSitePage.edges.filter((edge) => {
+						if ([
+							// Excluded pages from sitemap
+							'/404',
+							'/offline-plugin-app-shell-fallback',
+						].indexOf(edge.node.path) === -1) return true
+						return false
+					})
+					return allSitePage.edges.map(edge => {
+						return {
+							url: site.siteMetadata.siteUrl + edge.node.path,
+							changefreq: `daily`,
+							priority: 0.7,
+						}
+					})
+				}
+			}
+		},
 		// Always keep as last
 		{
 			resolve: `gatsby-plugin-netlify`,
