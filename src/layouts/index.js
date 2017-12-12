@@ -1,12 +1,14 @@
 import React from 'react'
+import Header from 'components/header'
+import Footer from 'components/footer'
 
 export default class Template extends React.Component {
 	render() {
 		return (
 			<div>
-				<header>Header</header>
+				<Header />
 				{this.props.children()}
-				<footer>Footer</footer>
+				<Footer />
 				<style jsx global>{`
 					html{
 						height: 100%;
