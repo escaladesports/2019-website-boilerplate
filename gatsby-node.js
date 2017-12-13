@@ -72,15 +72,15 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 						}
 
 
-						if (isPath('pages', filePath)){
-							ctx.type = 'page'
-							if(!template) template = 'page'
-						}
-						else if (isPath('products', filePath)){
+						if (isPath('/product', filePath)){
 							ctx.type = 'product'
 							ctx.id = fields.id
 							ctx.slug = `/product/${ctx.id.toLowerCase()}`
 							if(!template) template = 'product'
+						}
+						else if (isPath('', filePath)) {
+							ctx.type = 'page'
+							if (!template) template = 'page'
 						}
 
 						const pageObj = {
@@ -104,7 +104,10 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 }
 
 function isPath(dir, path){
-	const checkPath = `${__dirname}/src/markdown/${dir}`
+	console.log('dir: ', dir)
+	console.log('path: ', path)
+	console.log('')
+	let checkPath = `${__dirname}/src/markdown${dir}`
 	return path.indexOf(checkPath) === 0
 }
 
