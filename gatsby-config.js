@@ -44,6 +44,33 @@ const plugins = [
 		},
 	},
 	{
+		resolve: '@andrew-codes/gatsby-plugin-elasticlunr-search',
+		options: {
+			fields: [
+				'title',
+				'id',
+				'pageId',
+				'type',
+				'html',
+				'slug',
+				'splitSlug',
+			],
+			resolvers: {
+				MarkdownRemark: {
+					title: node => node.frontmatter.title,
+					id: node => node.fields.slug,
+					splitSlug: node => node.fields.slug.split('/'),
+					pageId: node => node.frontmatter.id,
+					type: node => node.frontmatter.type,
+					html: node => {
+						console.log(node.html)
+						return node.html
+					},
+				}
+			}
+		}
+	},
+	{
 		resolve: 'gatsby-plugin-sitemap',
 		options: {
 			serialize: ({ site, allSitePage }) => {
