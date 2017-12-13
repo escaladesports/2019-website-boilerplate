@@ -126,16 +126,22 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
 
 
 		// Create slug
-		let filePath = createFilePath({ node, getNode })
-		filePath.split('/')
-		if(!filePath[filePath.length - 1]){
-			filePath.pop()
+		let slug
+		if(node.frontmatter && node.frontmatter.slug){
+			slug = node.frontmatter.slug
 		}
-		console.log('filePath: ', filePath)
+		else {
+			slug = createFilePath({ node, getNode })
+		}
+		slug = slug.split('/')
+		slug = slug.filter(val => val)
+		slug = slug.join('/')
+		slug = '/' + slug
+		console.log('slug: ', slug)
 		createNodeField({
 			name: 'slug',
 			node,
-			value: filePath,
+			value: slug,
 		})
 
 		// Create template
