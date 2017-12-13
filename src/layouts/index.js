@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'components/head'
 import Header from 'components/header'
 import Footer from 'components/footer'
 import PageIsLoading from 'components/page-is-loading'
@@ -9,6 +10,7 @@ export default class Template extends React.Component {
 	render() {
 		return (
 			<div>
+				<Head />
 				<Header />
 				{this.props.children()}
 				<Footer />

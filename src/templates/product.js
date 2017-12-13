@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'components/head'
 
 class ProductTemplate extends React.Component {
 	render() {
@@ -6,6 +7,7 @@ class ProductTemplate extends React.Component {
 		const salsify = this.props.data.salsify
 		return (
 			<div>
+				<Head title={salsify.itemName} />
 				<h1>{salsify.itemName}</h1>
 			</div>
 		)

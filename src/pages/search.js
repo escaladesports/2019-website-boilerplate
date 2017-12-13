@@ -1,6 +1,7 @@
 import React from 'react'
 import { Index } from 'elasticlunr'
 import Link from 'gatsby-link'
+import Head from 'components/head'
 
 export const query = graphql`
 	query SearchIndexExampleQuery {
@@ -43,6 +44,7 @@ export default class Search extends React.Component {
 	render() {
 		return (
 			<div>
+				<Head title='Search' />
 				<input type="text" value={this.state.query} onChange={this.search} />
 				<ul>
 					{this.state.results.map((page, key) => (

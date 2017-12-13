@@ -6,7 +6,7 @@ export default class MainTemplate extends React.Component {
 		const page = this.props.data.markdown
 		return (
 			<main>
-				<Head title={this.props.title} description={this.props.description} />
+				<Head title={page.frontmatter.title} />
 				<div>Page template:</div>
 				<div dangerouslySetInnerHTML={{ __html: page.html }} />
 
