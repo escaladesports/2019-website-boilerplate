@@ -1,5 +1,6 @@
 require('dotenv').config({ silent: true })
 const meta = require('./src/meta')
+const matter = require('gray-matter')
 
 const plugins = [
 	'gatsby-plugin-styled-jsx-postcss',
@@ -63,8 +64,9 @@ const plugins = [
 					pageId: node => node.frontmatter.id,
 					type: node => node.frontmatter.type,
 					html: node => {
-						console.log(node.html)
-						return node.html
+						let data = matter(node.internal.content)
+						console.log(data.content)
+						return data.content
 					},
 				}
 			}
