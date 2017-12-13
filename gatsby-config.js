@@ -8,27 +8,6 @@ const plugins = [
 	'gatsby-plugin-offline',
 	'gatsby-plugin-react-helmet',
 	{
-		resolve: 'gatsby-source-filesystem',
-		options: {
-			name: 'pages',
-			path: `${__dirname}/src/pages`,
-		},
-	},
-	{
-		resolve: 'gatsby-source-filesystem',
-		options: {
-			name: 'img',
-			path: `${__dirname}/src/img`,
-		},
-	},
-	{
-		resolve: 'gatsby-source-filesystem',
-		options: {
-			name: 'products',
-			path: `${__dirname}/src/products`,
-		},
-	},
-	{
 		resolve: 'gatsby-transformer-remark',
 		options: {
 			plugins: [
@@ -48,6 +27,20 @@ const plugins = [
 				'gatsby-remark-copy-linked-files',
 				'gatsby-remark-smartypants',
 			],
+		},
+	},
+	{
+		resolve: 'gatsby-source-filesystem',
+		options: {
+			name: 'markdown',
+			path: `${__dirname}/src/markdown`,
+		},
+	},
+	{
+		resolve: 'gatsby-source-filesystem',
+		options: {
+			name: 'img',
+			path: `${__dirname}/src/img`,
 		},
 	},
 	{

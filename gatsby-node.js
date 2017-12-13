@@ -104,7 +104,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 }
 
 function isPath(dir, path){
-	const checkPath = `${__dirname}/src/${dir}`
+	const checkPath = `${__dirname}/src/markdown/${dir}`
 	return path.indexOf(checkPath) === 0
 }
 

@@ -1,6 +1,9 @@
 import React from 'react'
 import Header from 'components/header'
 import Footer from 'components/footer'
+import PageIsLoading from 'components/page-is-loading'
+import PageProgress from 'components/page-progress'
+import NoSSR from 'react-no-ssr'
 
 export default class Template extends React.Component {
 	render() {
@@ -9,6 +12,11 @@ export default class Template extends React.Component {
 				<Header />
 				{this.props.children()}
 				<Footer />
+				<NoSSR>
+					<PageIsLoading>
+						<PageProgress />
+					</PageIsLoading>
+				</NoSSR>
 				<style jsx global>{`
 					html{
 						height: 100%;
