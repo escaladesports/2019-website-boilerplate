@@ -72,15 +72,18 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 						}
 
 
-						if (isPath('/product', filePath)){
+						if (isPath('pages', filePath)) {
+							console.log('Found page')
+							ctx.type = 'page'
+							ctx.slug = ctx.slug.replace('/pages', '')
+							if (!template) template = 'page'
+						}
+						else if (isPath('products', filePath)){
+							console.log('Found product')
 							ctx.type = 'product'
 							ctx.id = fields.id
 							ctx.slug = `/product/${ctx.id.toLowerCase()}`
 							if(!template) template = 'product'
-						}
-						else if (isPath('', filePath)) {
-							ctx.type = 'page'
-							if (!template) template = 'page'
 						}
 
 						const pageObj = {
@@ -88,6 +91,8 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 							component: path.resolve(`./src/templates/${template || 'default'}.js`),
 							context: ctx,
 						}
+
+						console.log(pageObj)
 
 						createPage(pageObj)
 					})
@@ -104,10 +109,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 }
 
 function isPath(dir, path){
-	console.log('dir: ', dir)
-	console.log('path: ', path)
-	console.log('')
-	let checkPath = `${__dirname}/src/markdown${dir}`
+	let checkPath = `${__dirname}/src/markdown/${dir}`
 	return path.indexOf(checkPath) === 0
 }
 
@@ -129,6 +131,7 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
 		if(!filePath[filePath.length - 1]){
 			filePath.pop()
 		}
+		console.log('filePath: ', filePath)
 		createNodeField({
 			name: 'slug',
 			node,
