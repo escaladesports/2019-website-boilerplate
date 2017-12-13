@@ -133,9 +133,9 @@ exports.onCreateNode = ({ node, boundActionCreators, getNode }) => {
 		}
 		slug = slug.split('/')
 		slug = slug.filter(val => val)
+		if(slug[0] === 'pages') slug.shift()
 		slug = slug.join('/')
 		slug = '/' + slug
-		console.log('slug: ', slug)
 		createNodeField({
 			name: 'slug',
 			node,

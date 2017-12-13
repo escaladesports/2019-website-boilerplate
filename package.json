@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "gatsby-boilerplate",
   "version": "0.5.1",
-  "repository": "git@github.com:escaladesports/boilerplate.git",
+  "repository": "git@github.com:escaladesports/gatsby-boilerplate.git",
   "author": "Kennedy Rose <kennedy@escaladesports.com>",
   "license": "MIT",
   "scripts": {

@@ -3,7 +3,7 @@ backend:
   repo: escaladesports/next-boilerplate # Path to your Github repository
   branch: master # Branch to update (master by default)
 
-media_folder: "uploads" # Folder where user uploaded files should go
+media_folder: "src/uploads" # Folder where user uploaded files should go
 
 collections: # A list of collections the CMS should be able to edit
   - name: "page" # Used in routes, ie.: /admin/collections/:slug/edit

@@ -4,7 +4,6 @@ class ProductTemplate extends React.Component {
 	render() {
 		const fm = this.props.data.markdown.frontmatter
 		const salsify = this.props.data.salsify
-		console.log(salsify)
 		return (
 			<div>
 				<h1>{salsify.itemName}</h1>
