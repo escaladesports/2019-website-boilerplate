@@ -12,13 +12,6 @@ const plugins = [
 		options: {
 			plugins: [
 				{
-					resolve: 'gatsby-remark-images',
-					options: {
-						maxWidth: 590,
-						linkImagesToOriginal: false,
-					},
-				},
-				{
 					resolve: 'gatsby-remark-responsive-iframe',
 					options: {
 						wrapperStyle: 'margin-bottom: 1.0725rem',
@@ -42,13 +35,6 @@ const plugins = [
 		options: {
 			name: 'img',
 			path: `${__dirname}/src/img`,
-		},
-	},
-	{
-		resolve: 'gatsby-source-filesystem',
-		options: {
-			name: 'uploads',
-			path: `${__dirname}/src/uploads`,
 		},
 	},
 	{
