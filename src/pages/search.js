@@ -1,5 +1,5 @@
 import React from 'react'
-import {Index} from 'elasticlunr'
+import { Index } from 'elasticlunr'
 import Link from 'gatsby-link'
 
 export const query = graphql`

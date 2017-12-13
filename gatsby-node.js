@@ -92,8 +92,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 							context: ctx,
 						}
 
-						console.log(pageObj)
-
 						createPage(pageObj)
 					})
 				})
