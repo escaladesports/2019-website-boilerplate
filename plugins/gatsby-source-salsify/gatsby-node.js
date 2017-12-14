@@ -2,15 +2,23 @@ const fetch = require('isomorphic-fetch')
 const crypto = require('crypto')
 const glob = require('globby')
 const camelCase = require('camelcase')
+const matter = require('front-matter')
+const fs = require('fs-extra')
 
 const url = 'https://app.salsify.com/api/v1/products/'
 const regStart = /[_a-zA-Z]/
 
 exports.sourceNodes = async ({ boundActionCreators }, { ids, markdownPath, apiKey }) => {
 
+
 	if (!apiKey){
-		console.log('No API key provided')
-		return
+		if (process.env.SALSIFY_API_KEY){
+			apiKey = process.env.SALSIFY_API_KEY
+		}
+		else {
+			console.log('No API key provided')
+			return
+		}
 	}
 
 	const { createNode } = boundActionCreators
@@ -18,6 +26,7 @@ exports.sourceNodes = async ({ boundActionCreators }, { ids, markdownPath, apiKe
 	if(markdownPath){
 		ids = await getIdsFromMarkdown(markdownPath)
 	}
+	console.log('IDs: ', ids)
 
 	const data = await Promise.all(ids.map(id => {
 		return fetch(`${url}${id}`, {
@@ -67,7 +76,16 @@ function formatSalsifyObject(obj) {
 function getIdsFromMarkdown(path){
 	path = `${path}/**/*.md`
 	return glob(path)
-		.then(paths => console.log('paths: ', paths))
-		.then(() => [])
+		.then(paths => {
+			console.log(paths)
+			return Promise.all(paths.map(path => {
+				return fs.readFile(path)
+					.then(data => {
+						data = data.toString()
+						data = matter(data)
+						return data.attributes.id.toUpperCase() || ''
+					})
+			}))
+		})
 		.catch(console.error)
 }

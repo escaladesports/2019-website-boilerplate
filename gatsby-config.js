@@ -122,8 +122,8 @@ if (process.env.SALSIFY_API_KEY){
 	plugins.push({
 		resolve: 'gatsby-source-salsify',
 		options: {
-			ids: ['U2508', 'U2000'],
-			//markdownPath: `${__dirname}/src/products`,
+			//ids: ['U2508', 'U2000'],
+			markdownPath: `${__dirname}/src/markdown/products`,
 			apiKey: process.env.SALSIFY_API_KEY,
 		},
 	})
