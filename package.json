@@ -5,9 +5,7 @@
   "author": "Kennedy Rose <kennedy@escaladesports.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "run-p dev:gatsby dev:open",
-    "dev:gatsby": "gatsby develop",
-    "dev:open": "node utils/open-browser",
+    "dev": "gatsby develop --open",
     "build": "npm run clean && gatsby build",
     "clean": "run-p clean:cache clean:public",
     "clean:cache": "rimraf .cache",
