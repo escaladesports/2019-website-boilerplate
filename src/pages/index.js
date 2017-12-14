@@ -1,11 +1,14 @@
 import React from 'react'
 import Img from 'gatsby-image'
 
+import { OpenCart } from 'utils/react-snipcart'
+
 export default class Index extends React.Component {
 	render() {
 		const img = this.props.data.testFile
 		return (
 			<div>
+				<OpenCart>Open Cart</OpenCart>
 				<div>Image:</div>
 				<div className='container'>
 					<Img sizes={img.sizes} />
