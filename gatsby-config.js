@@ -61,12 +61,17 @@ const plugins = [
 			}
 		}
 	},
+	/*
 	{
 		resolve: 'gatsby-plugin-google-fonts',
 		options: {
-			fonts: []
+			fonts: [
+          'limelight',
+          'source sans pro\:300,400,400i,700',
+			]
 		}
 	},
+	*/
 	{
 		resolve: 'gatsby-plugin-sitemap',
 		options: {
