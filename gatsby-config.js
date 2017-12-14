@@ -8,6 +8,7 @@ const plugins = [
 	'gatsby-plugin-offline',
 	'gatsby-plugin-react-helmet',
 	'gatsby-plugin-fastclick',
+	'gatsby-plugin-snipcart',
 	{
 		resolve: 'gatsby-transformer-remark',
 		options: {
