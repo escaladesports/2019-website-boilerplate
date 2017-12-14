@@ -25,6 +25,8 @@
     "dotenv": "^4.0.0",
     "elasticlunr": "^0.9.5",
     "form-serialize": "^0.7.2",
+    "front-matter": "^2.3.0",
+    "fs-extra": "^5.0.0",
     "gatsby": "^1.9.128",
     "gatsby-image": "^1.0.27",
     "gatsby-link": "^1.6.30",
