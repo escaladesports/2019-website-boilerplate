@@ -1,31 +1,28 @@
 import React from 'react'
 import raf from 'raf'
+import dirtyCheck from './dirty-check-cart-qty'
 
 export default class CartQty extends React.Component{
 	constructor(props){
 		super(props)
-		this.state = { qty: 0 }
-		this.dirtyCheck = this.dirtyCheck.bind(this)
-	}
-	// Have to dirty check since SC's APIs don't yet support all actions that can change total
-	// Check when supported
-	dirtyCheck() {
-		if(this.mounted) {
-			if(window.Snipcart){
-				let qty = window.Snipcart.api.items.count()
-				if(this.state.qty !== qty) {
-					this.setState({ qty: qty })
-				}
-			}
-			raf(this.dirtyCheck)
+		this.state = {
+			qty: 0
 		}
+		this.onChange = this.onChange.bind(this)
+	}
+	onChange(qty){
+		this.setState({
+			qty: qty
+		})
 	}
 	componentDidMount(){
-		this.mounted = true
-		raf(this.dirtyCheck)
+		this.setState({
+			qty: dirtyCheck.getQty()
+		})
+		dirtyCheck.addChangeEvent(this.onChange)
 	}
-	componentWillUnmount(){
-		this.mounted = false
+	componentWillUnmount() {
+		dirtyCheck.removeChangeEvent(this.onChange)
 	}
 	render(){
 		return(

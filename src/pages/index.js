@@ -1,7 +1,7 @@
 import React from 'react'
 import Img from 'gatsby-image'
 
-import { OpenCart, AddToCart, CartQty } from 'utils/react-snipcart'
+import { OpenCart, AddToCart, CartQty, CartHasQty } from 'utils/react-snipcart'
 
 export default class Index extends React.Component {
 	render() {
@@ -9,7 +9,9 @@ export default class Index extends React.Component {
 		return (
 			<div>
 				<OpenCart>
-					<CartQty />
+					<CartHasQty>
+						<CartQty />
+					</CartHasQty>
 				</OpenCart>
 				<AddToCart data={{
 					id: 'ABC123',
