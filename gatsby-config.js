@@ -45,9 +45,9 @@ const plugins = [
 				'id',
 				'pageId',
 				'type',
-				//'html',
 				'slug',
 				'splitSlug',
+				//'html',
 			],
 			resolvers: {
 				MarkdownRemark: {
@@ -59,6 +59,12 @@ const plugins = [
 					//html: node => matter(node.internal.content).content,
 				}
 			}
+		}
+	},
+	{
+		resolve: 'gatsby-plugin-google-fonts',
+		options: {
+			fonts: []
 		}
 	},
 	{

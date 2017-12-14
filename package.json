@@ -6,11 +6,12 @@
   "license": "MIT",
   "scripts": {
     "dev": "gatsby develop --open",
-    "build": "npm run clean && gatsby build",
+    "build": "gatsby build",
     "clean": "run-p clean:cache clean:public",
     "clean:cache": "rimraf .cache",
     "clean:public": "rimraf public",
-    "serve": "npm run build && gatsby serve -o"
+    "serve": "gatsby serve --open",
+    "test": "run-s build serve"
   },
   "dependencies": {
     "@andrew-codes/gatsby-plugin-elasticlunr-search": "^1.0.3",
@@ -28,6 +29,7 @@
     "gatsby-image": "^1.0.27",
     "gatsby-link": "^1.6.30",
     "gatsby-plugin-google-analytics": "^1.0.14",
+    "gatsby-plugin-google-fonts": "^0.0.3",
     "gatsby-plugin-netlify": "^1.0.11",
     "gatsby-plugin-offline": "^1.0.11",
     "gatsby-plugin-react-helmet": "^2.0.2",

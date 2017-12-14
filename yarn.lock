@@ -3815,6 +3815,10 @@ gatsby-plugin-google-analytics@^1.0.14:
   dependencies:
     babel-runtime "^6.26.0"
 
+gatsby-plugin-google-fonts@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-google-fonts/-/gatsby-plugin-google-fonts-0.0.3.tgz#36a09e7ed3b795b0a81e9404b4c487e0fdfa46ab"
+
 gatsby-plugin-netlify@^1.0.11:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify/-/gatsby-plugin-netlify-1.0.11.tgz#2e02177e44f70374623654aeb19c4fb42260227b"
