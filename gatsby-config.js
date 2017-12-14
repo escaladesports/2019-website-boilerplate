@@ -38,6 +38,24 @@ const plugins = [
 		},
 	},
 	{
+		resolve: 'gatsby-plugin-favicon',
+		options: {
+			logo: './src/img/icon.png',
+			injectHTML: true,
+			icons: {
+				android: false,
+				appleIcon: false,
+				appleStartup: false,
+				coast: false,
+				favicons: true,
+				firefox: false,
+				twitter: false,
+				yandex: false,
+				windows: false
+			}
+		}
+	},
+	{
 		resolve: '@andrew-codes/gatsby-plugin-elasticlunr-search',
 		options: {
 			fields: [
