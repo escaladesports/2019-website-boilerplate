@@ -1,14 +1,16 @@
 import React from 'react'
 import Img from 'gatsby-image'
 
-import { OpenCart, AddToCart } from 'utils/react-snipcart'
+import { OpenCart, AddToCart, CartQty } from 'utils/react-snipcart'
 
 export default class Index extends React.Component {
 	render() {
 		const img = this.props.data.testFile
 		return (
 			<div>
-				<OpenCart>Open Cart</OpenCart>
+				<OpenCart>
+					<CartQty />
+				</OpenCart>
 				<AddToCart data={{
 					id: 'ABC123',
 					name: 'Test Product',

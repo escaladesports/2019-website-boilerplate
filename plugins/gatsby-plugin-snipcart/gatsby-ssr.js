@@ -17,13 +17,13 @@ exports.onRenderBody = ({ setPostBodyComponents }, options = {}) => {
 	}
 
 	const components = [
-		<script src={options.js} id="snipcart" data-api-key={options.apiKey}></script>
+		<script key='snipcartJs' src={options.js} id="snipcart" data-api-key={options.apiKey}></script>
 	]
 	if(options.jquery){
-		components.unshift(<script src={options.jquery}></script>)
+		components.unshift(<script key='snipcartJquery' src={options.jquery}></script>)
 	}
 	if(options.defaultStyles){
-		components.push(<link href={options.styles} type="text/css" rel="stylesheet" />)
+		components.push(<link key='snipcartStyle' href={options.styles} type="text/css" rel="stylesheet" />)
 	}
 
 	return setPostBodyComponents(components)

@@ -12,7 +12,7 @@ export default class OpenCart extends React.Component{
 	}
 	render(){
 		return(
-			<div style={{ position: 'inline' }} onClick={this.openCart}>
+			<div onClick={this.openCart}>
 				{this.props.children}
 			</div>
 		)

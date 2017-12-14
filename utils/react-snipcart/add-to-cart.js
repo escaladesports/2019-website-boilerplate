@@ -12,7 +12,7 @@ export default class addToCart extends React.Component{
 	}
 	render(){
 		return(
-			<div style={{ position: 'inline' }} onClick={this.addToCart}>
+			<div onClick={this.addToCart}>
 				{this.props.children}
 			</div>
 		)
