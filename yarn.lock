@@ -4086,7 +4086,7 @@ gatsby-transformer-sharp@^1.6.15:
     fs-extra "^4.0.2"
     image-size "^0.6.0"
 
-gatsby@^1.9.128:
+gatsby@^1.9.134:
   version "1.9.134"
   resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-1.9.134.tgz#fe6c088151f3442e089d3b81238a5c56827fa578"
   dependencies:

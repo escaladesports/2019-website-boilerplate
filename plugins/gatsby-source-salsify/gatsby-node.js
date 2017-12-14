@@ -8,36 +8,57 @@ const fs = require('fs-extra')
 const url = 'https://app.salsify.com/api/v1/products/'
 const regStart = /[_a-zA-Z]/
 
-exports.sourceNodes = async ({ boundActionCreators }, { ids, markdownPath, apiKey }) => {
+exports.sourceNodes = async ({ boundActionCreators }, options) => {
 
+	options = Object.assign({
+		ids: [],
+		markdownPath: false,
+		apiKey: process.env.SALSIFY_API_KEY,
+		types: [],
+		media: [],
+	}, options)
 
-	if (!apiKey){
-		if (process.env.SALSIFY_API_KEY){
-			apiKey = process.env.SALSIFY_API_KEY
-		}
-		else {
-			console.log('No API key provided')
-			return
-		}
+	if (!options.apiKey){
+		console.log('No API key provided')
+		return
 	}
 
 	const { createNode } = boundActionCreators
 
-	if(markdownPath){
-		ids = await getIdsFromMarkdown(markdownPath)
+	if (options.markdownPath){
+		options.ids = await getIdsFromMarkdown(options.markdownPath)
 	}
-	console.log('IDs: ', ids)
 
-	const data = await Promise.all(ids.map(id => {
+	const data = await Promise.all(options.ids.map(id => {
 		return fetch(`${url}${id}`, {
 				method: 'GET',
 				headers: {
-					Authorization: `Bearer ${apiKey}`
+					Authorization: `Bearer ${options.apiKey}`
 				}
 			})
 			.then(res => res.json())
 			.then(res => {
 				res = formatSalsifyObject(res)
+				for (let i in options.types){
+					if(res[i]){
+						if (options.types[i] == 'array' && typeof res[i] === 'string'){
+							res[i] = [ res[i] ]
+						}
+					}
+				}
+				options.media.forEach(key => {
+					if(res[key]){
+						if(typeof res[key] === 'string'){
+							res[key] = findDigitalAsset(res[key], res)
+						}
+						else{
+							res[key] = res[key].map(id => {
+								return findDigitalAsset(id, res)
+							})
+						}
+					}
+				})
+
 				return {
 					id: id,
 					parent: null,
@@ -59,6 +80,20 @@ exports.sourceNodes = async ({ boundActionCreators }, { ids, markdownPath, apiKe
 	return
 }
 
+function findDigitalAsset(id, res){
+	const arr = res['salsify:digitalAssets'] || []
+	for(let i = 0; i < arr.length; i++){
+		if(arr[i]['salsify:id'] === id){
+			let obj = arr[i]
+			let newObj = {}
+			for(let i in obj){
+				newObj[i.replace('salsify:', '')] = obj[i]
+			}
+			return newObj
+		}
+	}
+}
+
 function formatSalsifyObject(obj) {
 	const newObj = {}
 	for(let i in obj){
@@ -77,7 +112,6 @@ function getIdsFromMarkdown(path){
 	path = `${path}/**/*.md`
 	return glob(path)
 		.then(paths => {
-			console.log(paths)
 			return Promise.all(paths.map(path => {
 				return fs.readFile(path)
 					.then(data => {

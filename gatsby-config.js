@@ -126,6 +126,12 @@ if (process.env.SALSIFY_API_KEY){
 			//ids: ['U2508', 'U2000'],
 			markdownPath: `${__dirname}/src/markdown/products`,
 			apiKey: process.env.SALSIFY_API_KEY,
+			types: {
+				webImages: 'array'
+			},
+			media: [
+				'webImages'
+			],
 		},
 	})
 }
