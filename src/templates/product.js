@@ -1,5 +1,7 @@
 import React from 'react'
+
 import Head from 'components/head'
+import cloudinary from 'utils/cloudinary'
 
 class ProductTemplate extends React.Component {
 	render() {
@@ -9,6 +11,7 @@ class ProductTemplate extends React.Component {
 			<div>
 				<Head title={salsify.itemName} />
 				<h1>{salsify.itemName}</h1>
+				<img src={cloudinary(salsify.webImages[0].url, 'w_400', 'h_600', 'c_pad')} />
 			</div>
 		)
 	}

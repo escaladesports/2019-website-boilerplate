@@ -5,7 +5,8 @@
 			"alias": {
 				"components": "./src/components",
 				"templates": "./src/templates",
-				"pages": "./src/pages"
+				"pages": "./src/pages",
+				"utils": "./utils"
 			},
 			"cwd": "babelrc"
 		}]
