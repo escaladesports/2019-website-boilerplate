@@ -7,6 +7,7 @@ const plugins = [
 	'gatsby-transformer-sharp',
 	'gatsby-plugin-offline',
 	'gatsby-plugin-react-helmet',
+	'gatsby-plugin-fastclick',
 	{
 		resolve: 'gatsby-transformer-remark',
 		options: {
