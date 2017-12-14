@@ -50,6 +50,7 @@
     "postcss-cssnext": "^3.0.2",
     "postcss-easy-import": "^3.0.0",
     "postcss-nested": "^2.1.2",
+    "react-fastclick": "^3.0.2",
     "react-helmet": "^5.2.0",
     "react-no-ssr": "^1.1.0",
     "react-typography": "^0.15.10",

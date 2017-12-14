@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import * as PropTypes from 'prop-types'
+import fastclick from 'react-fastclick'
+
+fastclick()
 
 const propTypes = {
 	headComponents: PropTypes.node.isRequired,
