@@ -1,7 +1,7 @@
 import React from 'react'
 import Img from 'gatsby-image'
 
-import { OpenCart } from 'utils/react-snipcart'
+import { OpenCart, AddToCart } from 'utils/react-snipcart'
 
 export default class Index extends React.Component {
 	render() {
@@ -9,6 +9,14 @@ export default class Index extends React.Component {
 		return (
 			<div>
 				<OpenCart>Open Cart</OpenCart>
+				<AddToCart data={{
+					id: 'ABC123',
+					name: 'Test Product',
+					url: '/',
+					price: '499.99'
+				}}>
+					<div>Add to Cart</div>
+				</AddToCart>
 				<div>Image:</div>
 				<div className='container'>
 					<Img sizes={img.sizes} />
