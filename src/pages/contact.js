@@ -8,9 +8,9 @@ export default class Index extends React.Component {
 	render() {
 		return (
 			<div>
-				<Form netlify name='Contact'>
-					<Input name='email' label='Your email:' />
-					<Textarea name='message' label='Your message:' />
+				<Form netlify="true" name='contact'>
+					<Input name='email' label='Your email:' required />
+					<Textarea name='message' label='Your message:' required />
 					<Submit />
 				</Form>
 				<style jsx>{`
