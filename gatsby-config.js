@@ -9,7 +9,7 @@ const plugins = [
 	'gatsby-plugin-fastclick',
 	'gatsby-plugin-remove-trailing-slashes',
 	'gatsby-plugin-hide-trailing-slashes',
-	//'gatsby-plugin-snipcart',
+	'gatsby-plugin-snipcart',
 	{
 		resolve: 'gatsby-transformer-remark',
 		options: {

@@ -1,7 +1,7 @@
 import React from 'react'
 import Img from 'gatsby-image'
 
-import { OpenCart, AddToCart, CartQty, CartHasQty } from 'utils/react-snipcart'
+import { OpenCart, AddToCart, CartQty, CartHasQty } from 'react-snipcart'
 
 export default class Index extends React.Component {
 	render() {
