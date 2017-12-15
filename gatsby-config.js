@@ -150,6 +150,7 @@ else{
 }
 
 // Always keep as last
+/*
 plugins.push({
 	resolve: 'gatsby-plugin-netlify',
 	options: {
@@ -160,7 +161,7 @@ plugins.push({
 		mergeCachingHeaders: true, // boolean to turn off the default caching headers
 		transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
 	}
-})
+})*/
 
 module.exports = {
 	siteMetadata: meta,
