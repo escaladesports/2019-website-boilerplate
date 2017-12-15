@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "gatsby develop --open",
-    "build": "run-s build:gatsby build:rewrites build:empty",
+    "build": "run-s build:gatsby build:rewrites",
     "build:gatsby": "gatsby build",
 	 "build:rewrites": "node utils/clean-url-rewrites",
 	 "build:empty": "node utils/rm-empty-dirs",

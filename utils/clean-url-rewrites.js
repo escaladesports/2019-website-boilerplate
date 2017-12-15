@@ -14,7 +14,7 @@ glob([
 			newPath.pop()
 			newPath = newPath.join('/') + '.html'
 			return fs.copy(path, newPath)
-				.then(() => fs.remove(path))
+				//.then(() => fs.remove(path))
 		}))
 	})
 	.catch(console.error)
