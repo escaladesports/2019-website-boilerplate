@@ -3885,6 +3885,16 @@ gatsby-module-loader@^1.0.9:
     babel-runtime "^6.26.0"
     loader-utils "^0.2.16"
 
+gatsby-plugin-fastclick@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-fastclick/-/gatsby-plugin-fastclick-1.0.0.tgz#19e5bc14afa1313276bf678ed61986251a64afe0"
+  dependencies:
+    es6-error "^4.0.2"
+    json-stringify-safe "^5.0.1"
+    lodash "^4.17.4"
+    react-fastclick "^3.0.2"
+    read-pkg-up "^2.0.0"
+
 gatsby-plugin-favicon@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-favicon/-/gatsby-plugin-favicon-2.1.1.tgz#da3cf0c8d9ea50e13b09916aac57ef9fdbfe428b"
