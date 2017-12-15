@@ -118,7 +118,7 @@ const plugins = [
 		}
 	},
 	'gatsby-plugin-manifest',
-	'gatsby-plugin-offline',
+	//'gatsby-plugin-offline',
 ]
 
 if (process.env.SALSIFY_API_KEY){
