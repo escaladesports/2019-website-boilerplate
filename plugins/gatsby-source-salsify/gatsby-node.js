@@ -89,6 +89,10 @@ function findDigitalAsset(id, res){
 			for(let i in obj){
 				newObj[i.replace('salsify:', '')] = obj[i]
 			}
+			// Force HTTPS
+			if(newObj.url && newObj.url.indexOf('http:') === 0){
+				newObj.url = newObj.url.replace('http:', 'https:')
+			}
 			return newObj
 		}
 	}
