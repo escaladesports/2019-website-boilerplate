@@ -10,6 +10,7 @@ export default class extends React.Component {
 					<div><Link to='/test'>Page</Link></div>
 					<div><Link to='/search'>Search</Link></div>
 					<div><Link to='/product/u2508'>Product page</Link></div>
+					<div><Link to='/contact'>Contact</Link></div>
 				</nav>
 				<style jsx>{`
 					div{

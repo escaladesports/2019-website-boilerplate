@@ -66,6 +66,7 @@ export default class extends React.Component {
 			<form
 				name={ this.props.name }
 				action={ this.props.action || 'thank-you' }
+				method={ this.props.method || 'post' }
 				data-netlify={ this.props.netlify }
 				className={ this.state.className }
 				onSubmit={ this.props.onSubmit }
