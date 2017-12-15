@@ -8,7 +8,7 @@ const plugins = [
 	'gatsby-plugin-react-helmet',
 	'gatsby-plugin-fastclick',
 	'gatsby-plugin-remove-trailing-slashes',
-	'gatsby-plugin-replace-trailing-slashes',
+	'gatsby-plugin-hide-trailing-slashes',
 	//'gatsby-plugin-snipcart',
 	{
 		resolve: 'gatsby-transformer-remark',
