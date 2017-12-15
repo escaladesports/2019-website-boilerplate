@@ -7,7 +7,7 @@ const plugins = [
 	'gatsby-transformer-sharp',
 	'gatsby-plugin-react-helmet',
 	'gatsby-plugin-fastclick',
-	'gatsby-plugin-snipcart',
+	//'gatsby-plugin-snipcart',
 	{
 		resolve: 'gatsby-transformer-remark',
 		options: {
@@ -118,7 +118,6 @@ const plugins = [
 		}
 	},
 	'gatsby-plugin-manifest',
-	//'gatsby-plugin-offline',
 ]
 
 if (process.env.SALSIFY_API_KEY){
@@ -149,21 +148,6 @@ if (process.env.GOOGLE_ANALYTICS_ID){
 else{
 	console.log('No Google Analytics ID found')
 }
-
-// Always keep as last
-/*
-plugins.push({
-	resolve: 'gatsby-plugin-netlify',
-	options: {
-		headers: {},
-		allPageHeaders: [],
-		mergeSecurityHeaders: true,
-		mergeLinkHeaders: false,
-		mergeCachingHeaders: true,
-		transformHeaders: (headers, path) => headers,
-	}
-})
-*/
 
 module.exports = {
 	siteMetadata: meta,

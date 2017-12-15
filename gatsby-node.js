@@ -11,19 +11,12 @@ function templatePath(id){
 exports.onCreatePage = ({ page, boundActionCreators }) => {
 	const { createPage, deletePage, createRedirect } = boundActionCreators
 	return new Promise((resolve, reject) => {
-		console.log(page.path)
 		const newPage = Object.assign({}, page, {
 			path: page.path === `/` ? page.path : page.path.replace(/\/$/, ``),
 		})
 		if (newPage.path !== page.path) {
 			deletePage(page)
 			createPage(newPage)
-			/*
-			createRedirect({
-				fromPath: page.path,
-				toPath: newPage.path
-			})
-			*/
 		}
 		resolve()
 	})
@@ -97,7 +90,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 							context: ctx,
 						}
 
-						console.log(`Creating page: `, ctx.slug)
 						createPage(pageObj)
 					})
 				})

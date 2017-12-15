@@ -6,12 +6,15 @@
   "license": "MIT",
   "scripts": {
     "dev": "gatsby develop --open",
-    "build": "npm run clean && gatsby build",
+    "build": "run-s build:gatsby build:rewrites build:empty",
+    "build:gatsby": "gatsby build",
+	 "build:rewrites": "node utils/clean-url-rewrites",
+	 "build:empty": "node utils/rm-empty-dirs",
     "clean": "run-p clean:cache clean:public",
     "clean:cache": "rimraf .cache",
     "clean:public": "rimraf public",
     "serve": "gatsby serve --open",
-    "test": "run-s build serve"
+    "test": "npm run build:rewrites"
   },
   "dependencies": {
     "@andrew-codes/gatsby-plugin-elasticlunr-search": "^1.0.3",
@@ -22,6 +25,7 @@
     "crypto": "^1.0.1",
     "css-mqpacker": "^6.0.1",
     "cssnano": "^3.10.0",
+    "delete-empty": "^1.0.1",
     "dotenv": "^4.0.0",
     "elasticlunr": "^0.9.5",
     "form-serialize": "^0.7.2",
@@ -34,8 +38,6 @@
     "gatsby-plugin-google-analytics": "^1.0.14",
     "gatsby-plugin-google-fonts": "^0.0.3",
     "gatsby-plugin-manifest": "^1.0.11",
-    "gatsby-plugin-netlify": "^1.0.12",
-    "gatsby-plugin-offline": "^1.0.11",
     "gatsby-plugin-react-helmet": "^2.0.2",
     "gatsby-plugin-sharp": "^1.6.22",
     "gatsby-plugin-sitemap": "^1.2.7",
