@@ -10,7 +10,7 @@ exports.onRenderBody = ({ setPostBodyComponents }, options = {}) => {
 		styles: 'https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css',
 	}, options)
 
-	if(!options.apiKey && !warning){
+	if(!options.apiKey){
 		if (!warning) {
 			warning = true
 			console.log('No Snipcart API key found')
