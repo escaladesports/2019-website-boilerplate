@@ -9,7 +9,7 @@ function templatePath(id){
 
 // Removes trailing slash
 exports.onCreatePage = ({ page, boundActionCreators }) => {
-	const { createPage, deletePage } = boundActionCreators
+	const { createPage, deletePage, createRedirect } = boundActionCreators
 	return new Promise((resolve, reject) => {
 		const newPage = Object.assign({}, page, {
 			path: page.path === `/` ? page.path : page.path.replace(/\/$/, ``),
@@ -17,6 +17,10 @@ exports.onCreatePage = ({ page, boundActionCreators }) => {
 		if (newPage.path !== page.path) {
 			deletePage(page)
 			createPage(newPage)
+			createRedirect({
+				fromPath: page.path,
+				toPath: newPage.path
+			})
 		}
 		resolve()
 	})
