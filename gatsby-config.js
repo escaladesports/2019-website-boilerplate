@@ -151,6 +151,7 @@ else{
 }
 
 // Always keep as last
+/*
 plugins.push({
 	resolve: 'gatsby-plugin-netlify',
 	options: {
@@ -162,6 +163,7 @@ plugins.push({
 		transformHeaders: (headers, path) => headers,
 	}
 })
+*/
 
 module.exports = {
 	siteMetadata: meta,

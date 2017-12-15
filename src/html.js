@@ -26,13 +26,6 @@ class Html extends Component {
 						dangerouslySetInnerHTML={{ __html: this.props.body }}
 					/>
 					{this.props.postBodyComponents}
-					{process.env.GATSBY_SNIPCART_API_KEY &&
-						<div>
-							<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-							<script src="https://cdn.snipcart.com/scripts/2.0/snipcart.js" id="snipcart" data-api-key={process.env.SNIPCART_API_KEY}></script>
-							<link href="https://cdn.snipcart.com/themes/2.0/base/snipcart.min.css" type="text/css" rel="stylesheet" />
-						</div>
-					}
 				</body>
 			</html>
 		)

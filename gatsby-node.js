@@ -11,16 +11,19 @@ function templatePath(id){
 exports.onCreatePage = ({ page, boundActionCreators }) => {
 	const { createPage, deletePage, createRedirect } = boundActionCreators
 	return new Promise((resolve, reject) => {
+		console.log(page.path)
 		const newPage = Object.assign({}, page, {
 			path: page.path === `/` ? page.path : page.path.replace(/\/$/, ``),
 		})
 		if (newPage.path !== page.path) {
 			deletePage(page)
 			createPage(newPage)
+			/*
 			createRedirect({
 				fromPath: page.path,
 				toPath: newPage.path
 			})
+			*/
 		}
 		resolve()
 	})
@@ -28,7 +31,7 @@ exports.onCreatePage = ({ page, boundActionCreators }) => {
 
 // Create dynamic page test
 exports.createPages = ({ boundActionCreators, graphql }) => {
-	const { createPage } = boundActionCreators
+	const { createPage, createRedirect } = boundActionCreators
 
 	// Home page
 	createPage({
@@ -77,13 +80,11 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 
 
 						if (isPath('pages', filePath)) {
-							console.log('Found page')
 							ctx.type = 'page'
 							ctx.slug = ctx.slug.replace('/pages', '')
 							if (!template) template = 'page'
 						}
 						else if (isPath('products', filePath)){
-							console.log('Found product')
 							ctx.type = 'product'
 							ctx.id = fields.id
 							ctx.slug = `/product/${ctx.id.toLowerCase()}`
@@ -96,6 +97,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 							context: ctx,
 						}
 
+						console.log(`Creating page: `, ctx.slug)
 						createPage(pageObj)
 					})
 				})
