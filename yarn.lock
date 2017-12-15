@@ -3091,6 +3091,10 @@ es5-ext@^0.10.12, es5-ext@^0.10.35, es5-ext@^0.10.9, es5-ext@~0.10.14:
     es6-iterator "~2.0.1"
     es6-symbol "~3.1.1"
 
+es6-error@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/es6-error/-/es6-error-4.0.2.tgz#eec5c726eacef51b7f6b73c20db6e1b13b069c98"
+
 es6-iterator@~2.0.1:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/es6-iterator/-/es6-iterator-2.0.3.tgz#a7de889141a05a94b0854403b2d0a0fbfa98f3b7"
@@ -4018,6 +4022,23 @@ gatsby-source-filesystem@^1.5.9:
     slash "^1.0.0"
     valid-url "^1.0.9"
 
+gatsby-source-salsify@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/gatsby-source-salsify/-/gatsby-source-salsify-1.0.4.tgz#d014d55576457889264e4444b214c52af3884a66"
+  dependencies:
+    camelcase "^4.1.0"
+    crypto "^1.0.1"
+    es6-error "^4.0.2"
+    front-matter "^2.3.0"
+    fs-extra "^5.0.0"
+    globby "^7.1.1"
+    graphql "^0.10.3"
+    graphql-client "^2.0.0"
+    isomorphic-fetch "^2.2.1"
+    json-stringify-safe "^5.0.1"
+    lodash "^4.17.4"
+    read-pkg-up "^2.0.0"
+
 gatsby-transformer-remark@^1.7.24:
   version "1.7.25"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-1.7.25.tgz#7fb1a0447270f780d933b838c16b0a82aa195d72"
@@ -4445,6 +4466,12 @@ graceful-fs@^4.0.0, graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.3,
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
+graphql-client@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-client/-/graphql-client-2.0.0.tgz#870364baba3f7da4a60d60d7a918cc49898ea162"
+  dependencies:
+    isomorphic-fetch "^2.2.1"
+
 graphql-relay@^0.5.1:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/graphql-relay/-/graphql-relay-0.5.4.tgz#58050cfe16118595f82ab3aabfc974546ce755a8"
@@ -4455,6 +4482,12 @@ graphql-skip-limit@^1.0.8:
   dependencies:
     babel-runtime "^6.26.0"
     graphql "^0.11.7"
+
+graphql@^0.10.3:
+  version "0.10.5"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.10.5.tgz#c9be17ca2bdfdbd134077ffd9bbaa48b8becd298"
+  dependencies:
+    iterall "^1.1.0"
 
 graphql@^0.11.3, graphql@^0.11.7:
   version "0.11.7"
@@ -5453,7 +5486,7 @@ items@2.x.x:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/items/-/items-2.1.1.tgz#8bd16d9c83b19529de5aea321acaada78364a198"
 
-iterall@1.1.3:
+iterall@1.1.3, iterall@^1.1.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.3.tgz#1cbbff96204056dde6656e2ed2e2226d0e6d72c9"
 
