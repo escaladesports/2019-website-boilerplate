@@ -7,21 +7,6 @@ function templatePath(id){
 	return path.resolve(`./src/templates/${id}.js`)
 }
 
-// Removes trailing slash
-exports.onCreatePage = ({ page, boundActionCreators }) => {
-	const { createPage, deletePage, createRedirect } = boundActionCreators
-	return new Promise((resolve, reject) => {
-		const newPage = Object.assign({}, page, {
-			path: page.path === `/` ? page.path : page.path.replace(/\/$/, ``),
-		})
-		if (newPage.path !== page.path) {
-			deletePage(page)
-			createPage(newPage)
-		}
-		resolve()
-	})
-}
-
 // Create dynamic page test
 exports.createPages = ({ boundActionCreators, graphql }) => {
 	const { createPage, createRedirect } = boundActionCreators
