@@ -5,7 +5,6 @@ const plugins = [
 	'gatsby-plugin-styled-jsx-postcss',
 	'gatsby-plugin-sharp',
 	'gatsby-transformer-sharp',
-	//'gatsby-plugin-offline',
 	'gatsby-plugin-react-helmet',
 	'gatsby-plugin-fastclick',
 	'gatsby-plugin-snipcart',
@@ -118,6 +117,8 @@ const plugins = [
 			}
 		}
 	},
+	'gatsby-plugin-manifest',
+	'gatsby-plugin-offline',
 ]
 
 if (process.env.SALSIFY_API_KEY){
@@ -150,7 +151,6 @@ else{
 }
 
 // Always keep as last
-/*
 plugins.push({
 	resolve: 'gatsby-plugin-netlify',
 	options: {
@@ -161,7 +161,7 @@ plugins.push({
 		mergeCachingHeaders: true, // boolean to turn off the default caching headers
 		transformHeaders: (headers, path) => headers, // optional transform for manipulating headers under each path (e.g.sorting), etc.
 	}
-})*/
+})
 
 module.exports = {
 	siteMetadata: meta,
