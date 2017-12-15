@@ -5,7 +5,7 @@ const plugins = [
 	'gatsby-plugin-styled-jsx-postcss',
 	'gatsby-plugin-sharp',
 	'gatsby-transformer-sharp',
-	'gatsby-plugin-offline',
+	//'gatsby-plugin-offline',
 	'gatsby-plugin-react-helmet',
 	'gatsby-plugin-fastclick',
 	'gatsby-plugin-snipcart',
