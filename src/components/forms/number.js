@@ -33,9 +33,12 @@ export default class extends React.Component{
 		this.props.handleChange(this.input.value)
 	}
 	render(){
+		const errorClass = this.state.error ? 'error' : '';
+		const requiredClass = this.props.required ? 'required' : '';
+
 		return (
-			<label className={ this.state.error ? 'error' : '' } style={ this.props.labelStyle }>
-				{ this.props.label }
+			<label className={ errorClass + ' ' + requiredClass }>
+				<span className="labelText">{ this.props.label }</span>
 				<button type='button' onClick={ this.decrementClick }>-</button>
 				<input
 					type='number'
@@ -65,6 +68,10 @@ export default class extends React.Component{
 							display: block;
 							clear: both;
 						}
+					}
+					.labelText {
+						display: block;
+						margin-bottom: 7px;
 					}
 					input{
 						display: inline-block;
@@ -122,6 +129,12 @@ export default class extends React.Component{
 						}
 						& .msg{
 							display: block;
+						}
+					}
+					.required {
+						& .labelText:after {
+							content: '*';
+							color: red;
 						}
 					}
 				`}</style>

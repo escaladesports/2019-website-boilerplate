@@ -18,9 +18,12 @@ export default class extends React.Component{
 		}
 	}
 	render(){
+		const errorClass = this.state.error ? 'error' : '';
+		const requiredClass = this.props.required ? 'required' : '';
+
 		return (
-			<label className={ this.state.error ? 'error' : '' }>
-				{ this.props.label }
+			<label className={ errorClass + ' ' + requiredClass }>
+				<span className="labelText">{ this.props.label }</span>
 				<input type={this.props.type || 'text'} onBlur={this.handleBlur} required={this.props.required ? 'required' : ''} name={this.props.name} />
 				<div className="msg">{this.state.error}</div>
 				<style jsx>{`
@@ -55,6 +58,12 @@ export default class extends React.Component{
 						}
 						& .msg{
 							display: block;
+						}
+					}
+					.required {
+						& .labelText:after {
+							content: '*';
+							color: red;
 						}
 					}
 				`}</style>

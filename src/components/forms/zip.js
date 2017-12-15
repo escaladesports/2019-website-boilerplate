@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../_settings'
+import validate from 'is-valid-zip'
 
 export default class extends React.Component {
 	constructor(props){
@@ -8,9 +8,16 @@ export default class extends React.Component {
 		this.handleBlur = this.handleBlur.bind(this)
 	}
 	handleBlur(e){
-		if(!e.target.value && this.props.required){
+		if(!e.target.value){
+			if(this.props.required){
+				this.setState({
+					error: 'This field is required.'
+				})
+			}
+		}
+		else if(!validate(e.target.value)){
 			this.setState({
-				error: 'This field is required.'
+				error: 'Please enter a valid US zip code.'
 			})
 		}
 		else{
@@ -24,15 +31,7 @@ export default class extends React.Component {
 		return (
 			<label className={ errorClass + ' ' + requiredClass }>
 				<span className="labelText">{ this.props.label }</span>
-				<select
-					onChange={this.props.onChange}
-					onBlur={this.handleBlur}
-					required={this.props.required ? 'required' : ''}
-					name={this.props.name}
-				>
-					{this.props.empty && <option></option>}
-					{ this.props.children }
-				</select>
+				<input type='text' onBlur={this.handleBlur} onChange={this.props.handleChange} required={this.props.required ? 'required' : ''} name={this.props.name} placeholder={ this.props.placeholder } />
 				<div className="msg">{this.state.error}</div>
 				<style jsx>{`
 					label{
@@ -40,10 +39,7 @@ export default class extends React.Component {
 						margin-bottom: 20px;
 						display: block;
 					}
-					select{
-						border-radius: 0;
-						background: #fff;
-						appearance: none;
+					input{
 						display: block;
 						outline: 0;
 						border: 1px solid #ccc;
@@ -52,10 +48,6 @@ export default class extends React.Component {
 						font-size: 1em;
 						height: 40px;
 						margin-top: 7px;
-						background-image: linear-gradient(45deg,transparent 50%,#000 0),linear-gradient(135deg,#000 50%,transparent 0),linear-gradient(90deg,#ccc,#ccc);
-						background-position: calc(100% - 17px) calc(1em + 2px),calc(100% - 12px) calc(1em + 2px),calc(100% - 2.1em) .5em;
-						background-size: 5px 5px,5px 5px,1px 1.4em;
-						background-repeat: no-repeat;
 						&:active, &:focus{
 							border: 1px solid #000;
 						}
@@ -67,7 +59,7 @@ export default class extends React.Component {
 					}
 					.error{
 						color: #f00;
-						& select{
+						& input{
 							border: 1px solid red;
 							background-color: rgba(255, 0, 0, .1);
 						}

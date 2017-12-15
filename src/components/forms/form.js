@@ -7,17 +7,17 @@ import Loader from 'components/loader'
 import serialize from 'form-serialize'
 
 export default class extends React.Component {
-	constructor(props) {
+	constructor(props){
 		super(props)
 		this.state = {}
 	}
-	componentDidMount() {
+	componentDidMount(){
 		const form = ReactDOM.findDOMNode(this)
-		if (this.props.netlify) {
+		if(this.props.netlify){
 			form.addEventListener('submit', e => {
 
 				// Don't process form if already working on previous request or done
-				if (this.state.className === 'processing') {
+				if(this.state.className === 'processing') {
 					e.preventDefault()
 					return
 				}
@@ -33,13 +33,13 @@ export default class extends React.Component {
 					const data = serialize(e.target)
 					const action = e.target.getAttribute('action')
 					fetch(action, {
-						method: 'POST',
-						body: data,
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-							'X-Requested-With': 'XMLHttpRequest'
-						}
-					})
+							method: 'POST',
+							body: data,
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+								'X-Requested-With': 'XMLHttpRequest'
+							}
+						})
 						.then(res => {
 							if (res.status !== 200) {
 								console.log('Status error!')
@@ -65,7 +65,7 @@ export default class extends React.Component {
 				}
 			}, false)
 		}
-		if (this.props.google && this.iframe) {
+		if(this.props.google && this.iframe){
 
 			form.addEventListener('submit', e => {
 				// Show loading
@@ -81,35 +81,35 @@ export default class extends React.Component {
 			})
 		}
 	}
-	render() {
+	render(){
 		let action
-		if (this.props.action) {
+		if(this.props.action){
 			action = this.props.action
 		}
-		else if (this.props.google) {
+		else if(this.props.google){
 			action = `https://docs.google.com/forms/d/e/${this.props.google}/formResponse`
 		}
-		else {
+		else{
 			action = 'thank-you'
 		}
 		return (
 			<div>
 				<form
-					name={this.props.name}
-					action={action}
-					target={this.props.google && 'hidden_iframe'}
-					data-netlify={this.props.netlify}
-					className={this.state.className}
-					onSubmit={this.props.onSubmit}
+					name={ this.props.name }
+					action={ action }
+					target={this.props.google && 'hidden_iframe' }
+					data-netlify={ this.props.netlify }
+					className={ this.state.className }
+					onSubmit={ this.props.onSubmit }
 					data-netlify-honeypot={this.props.netlify && 'bf'}
 					method='post'
-				>
-					{this.state.results}
+					>
+					{ this.state.results }
 					<div className='formContents'>
 						{this.props.netlify &&
 							<input name='bf' />
 						}
-						{this.props.children}
+						{ this.props.children }
 					</div>
 				</form>
 				{this.props.google &&

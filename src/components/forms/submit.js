@@ -4,14 +4,13 @@ export default class extends React.Component {
 	render(){
 		return (
 			<div>
-				<button type='submit'>{this.props.value || 'Submit'}</button>
+				<input value={this.props.value || 'Submit'} type="submit" />
 				<style jsx>{`
-					button{
-						border-radius: 0;
-						background-color: #333;
-						color: #fff;
+					input{
+						background-color: #fff;
+						color: #333;
 						border: 1px solid #333;
-						padding: 10px 30px;
+						padding: 20px;
 						cursor: pointer;
 						user-select: none;
 						font-size: .75em;
@@ -21,8 +20,8 @@ export default class extends React.Component {
 						width: auto;
 						margin-bottom: 20px;
 						&:hover, &:active, &:focus{
-							background-color: #fff;
-							color: #333;
+							background-color: #000;
+							color: #fff;
 						}
 					}
 				`}</style>
