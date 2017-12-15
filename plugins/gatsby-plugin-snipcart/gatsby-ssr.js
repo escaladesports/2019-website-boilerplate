@@ -11,8 +11,10 @@ exports.onRenderBody = ({ setPostBodyComponents }, options = {}) => {
 	}, options)
 
 	if(!options.apiKey && !warning){
-		warning = true
-		console.log('No Snipcart API key found')
+		if (!warning) {
+			warning = true
+			console.log('No Snipcart API key found')
+		}
 		return
 	}
 
