@@ -10,6 +10,7 @@ const plugins = [
 	'gatsby-plugin-remove-trailing-slashes',
 	'gatsby-plugin-hide-trailing-slashes',
 	'gatsby-plugin-snipcart',
+	'gatsby-plugin-mobx',
 	{
 		resolve: 'gatsby-transformer-remark',
 		options: {

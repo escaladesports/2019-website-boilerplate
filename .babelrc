@@ -9,6 +9,8 @@
 				"utils": "./utils"
 			},
 			"cwd": "babelrc"
-		}]
+		}],
+		"dynamic-import-node",
+		"transform-decorators-legacy"
 	]
 }

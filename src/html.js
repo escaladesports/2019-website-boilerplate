@@ -13,7 +13,7 @@ const propTypes = {
 class Html extends Component {
 	render() {
 		return (
-			<html op="news" lang="en">
+			<html lang="en">
 				<head>
 					{this.props.headComponents}
 					<meta charSet="utf-8" />
