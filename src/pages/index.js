@@ -1,17 +1,16 @@
 import React from 'react'
 import Img from 'gatsby-image'
 import { observer, inject } from 'mobx-react'
+import MobXExample from 'components/mobx-example'
 
 import { OpenCart, AddToCart, CartQty, CartHasQty } from 'react-snipcart'
 
-@inject("ExampleStore")
-@observer
 export default class Index extends React.Component {
 	render() {
-		console.log(this.props.ExampleStore)
 		const img = this.props.data.testFile
 		return (
 			<div>
+				<MobXExample />
 				<OpenCart>
 					<CartHasQty>
 						<CartQty />

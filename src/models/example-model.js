@@ -1,19 +1,10 @@
-import { observable } from 'mobx'
-
-const steps = [
-	'cart',
-	'shipping',
-	'billing',
-	'confirmation',
-	'complete'
-]
+import { observable, computed } from 'mobx'
 
 export default class ExampleModel {
-	@observable isOpen
-	@observable step
+	@observable a = 0
+	@observable b = 0
 
-	constructor() {
-		this.isOpen = false
-		this.step = steps[0]
+	@computed get total(){
+		return this.a + this.b
 	}
 }
