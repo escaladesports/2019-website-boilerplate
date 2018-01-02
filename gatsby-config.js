@@ -125,7 +125,6 @@ const plugins = [
 	'gatsby-plugin-manifest',
 ]
 
-/*
 if (process.env.SALSIFY_API_KEY){
 	plugins.push({
 		resolve: 'gatsby-source-salsify',
@@ -142,7 +141,6 @@ if (process.env.SALSIFY_API_KEY){
 		},
 	})
 }
-*/
 
 if (process.env.GOOGLE_ANALYTICS_ID){
 	plugins.push({
