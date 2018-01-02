@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'components/head'
 import Header from 'components/header'
 import Footer from 'components/footer'
-import PageIsLoading from 'components/page-is-loading'
+import PageIsLoading from 'gatsby-page-is-loading'
 import PageProgress from 'components/page-progress'
 import NoSSR from 'react-no-ssr'
 
