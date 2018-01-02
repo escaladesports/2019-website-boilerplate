@@ -36,6 +36,7 @@
     "gatsby": "^1.9.134",
     "gatsby-image": "^1.0.27",
     "gatsby-link": "^1.6.30",
+    "gatsby-plugin-canonical-urls": "^1.0.10",
     "gatsby-plugin-fastclick": "^1.0.0",
     "gatsby-plugin-favicon": "^2.1.1",
     "gatsby-plugin-google-analytics": "^1.0.14",

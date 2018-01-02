@@ -8,9 +8,14 @@ const plugins = [
 	'gatsby-plugin-react-helmet',
 	'gatsby-plugin-fastclick',
 	'gatsby-plugin-remove-trailing-slashes',
-	//'gatsby-plugin-hide-trailing-slashes',
 	'gatsby-plugin-snipcart',
 	'gatsby-plugin-mobx',
+	{
+		resolve: 'gatsby-plugin-canonical-urls',
+		options: {
+			siteUrl: 'https://gatsby-boilerplate.netlify.com',
+		},
+	},
 	{
 		resolve: 'gatsby-transformer-remark',
 		options: {
