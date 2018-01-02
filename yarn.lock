@@ -4441,16 +4441,6 @@ gatsby-plugin-canonical-urls@^1.0.10:
   dependencies:
     babel-runtime "^6.26.0"
 
-gatsby-plugin-fastclick@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-fastclick/-/gatsby-plugin-fastclick-1.0.1.tgz#a82fa6825a3ec425cc410aac635a82751c4b407c"
-  dependencies:
-    es6-error "^4.0.2"
-    json-stringify-safe "^5.0.1"
-    lodash "^4.17.4"
-    react-fastclick "^3.0.2"
-    read-pkg-up "^2.0.0"
-
 gatsby-plugin-favicon@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-favicon/-/gatsby-plugin-favicon-2.1.1.tgz#da3cf0c8d9ea50e13b09916aac57ef9fdbfe428b"
@@ -4555,16 +4545,6 @@ gatsby-remark-prismjs@^1.2.11:
     babel-runtime "^6.26.0"
     parse-numeric-range "^0.0.2"
     prismjs "^1.7.0"
-    unist-util-visit "^1.1.1"
-
-gatsby-remark-responsive-iframe@^1.4.16:
-  version "1.4.16"
-  resolved "https://registry.yarnpkg.com/gatsby-remark-responsive-iframe/-/gatsby-remark-responsive-iframe-1.4.16.tgz#38efb84a4b6f0f9704afb45970bf8b8a7668c446"
-  dependencies:
-    babel-runtime "^6.26.0"
-    bluebird "^3.5.0"
-    cheerio "^1.0.0-rc.2"
-    lodash "^4.17.4"
     unist-util-visit "^1.1.1"
 
 gatsby-remark-smartypants@^1.4.10:
@@ -9016,10 +8996,6 @@ react-dom@^15.6.0:
 react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
-
-react-fastclick@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/react-fastclick/-/react-fastclick-3.0.2.tgz#2994c60088cda90b0b2cbfac4b6e7c6bc73d6a3a"
 
 react-helmet@^5.2.0:
   version "5.2.0"
