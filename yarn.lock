@@ -4574,22 +4574,6 @@ gatsby-source-filesystem@^1.5.9:
     slash "^1.0.0"
     valid-url "^1.0.9"
 
-gatsby-source-salsify@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/gatsby-source-salsify/-/gatsby-source-salsify-1.0.6.tgz#0b464b74d3cbbdd676003646bd8c96347532a349"
-  dependencies:
-    camelcase "^4.1.0"
-    crypto "^1.0.1"
-    es6-error "^4.0.2"
-    front-matter "^2.3.0"
-    fs-extra "^5.0.0"
-    globby "^7.1.1"
-    graphql-client "^2.0.0"
-    isomorphic-fetch "^2.2.1"
-    json-stringify-safe "^5.0.1"
-    lodash "^4.17.4"
-    read-pkg-up "^2.0.0"
-
 gatsby-transformer-remark@^1.7.24:
   version "1.7.26"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-1.7.26.tgz#58c273517b6039489b183fc4194ad07ee46e71ff"
@@ -5022,12 +5006,6 @@ graceful-fs@^4.0.0, graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.3,
 "graceful-readlink@>= 1.0.0":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
-
-graphql-client@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/graphql-client/-/graphql-client-2.0.0.tgz#870364baba3f7da4a60d60d7a918cc49898ea162"
-  dependencies:
-    isomorphic-fetch "^2.2.1"
 
 graphql-relay@^0.5.1:
   version "0.5.4"
