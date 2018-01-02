@@ -10,20 +10,21 @@ export default class Index extends React.Component {
 		const img = this.props.data.testFile
 		return (
 			<div>
+				{/*
 				<MobXExample />
-				<OpenCart>
-					<CartHasQty>
-						<CartQty />
-					</CartHasQty>
-				</OpenCart>
+				*/}
 				<AddToCart data={{
 					id: 'ABC123',
 					name: 'Test Product',
 					url: '/',
-					price: '499.99'
+					price: '499.99',
+					openCart: true,
 				}}>
 					<div>Add to Cart</div>
 				</AddToCart>
+				<OpenCart>
+					<CartQty />
+				</OpenCart>
 				<div>Image:</div>
 				<div className='container'>
 					<Img sizes={img.sizes} />

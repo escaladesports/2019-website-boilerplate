@@ -4493,9 +4493,9 @@ gatsby-plugin-sitemap@^1.2.7:
     babel-runtime "^6.26.0"
     sitemap "^1.12.0"
 
-gatsby-plugin-snipcart@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-snipcart/-/gatsby-plugin-snipcart-1.0.4.tgz#5024337680e468ea5aa77b12b3cbc269753db4c1"
+gatsby-plugin-snipcart@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-snipcart/-/gatsby-plugin-snipcart-1.0.5.tgz#4a58656668b511ff447cf12f56b23fa5e5df759f"
 
 gatsby-react-router-scroll@^1.0.7:
   version "1.0.7"
@@ -9078,9 +9078,9 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
-react-snipcart@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/react-snipcart/-/react-snipcart-0.1.1.tgz#1cf33e7ae71e4d4a8074aa8d54b155c44a7f3cf5"
+react-snipcart@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-snipcart/-/react-snipcart-0.1.5.tgz#8d76e0773d6707b88b6417fdedf817aa8e05c71e"
   dependencies:
     "@babel/core" "^7.0.0-beta.35"
     "@babel/preset-env" "^7.0.0-beta.35"
