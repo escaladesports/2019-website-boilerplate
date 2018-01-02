@@ -1,5 +1,4 @@
 import React from 'react'
-import PageIsLoading from 'components/page-is-loading'
 
 export default class extends React.Component {
 	render() {
