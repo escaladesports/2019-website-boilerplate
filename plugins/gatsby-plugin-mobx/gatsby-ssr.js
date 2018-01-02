@@ -1,3 +1,4 @@
+import React from 'react'
 import { Provider, useStaticRendering } from 'mobx-react'
 import { renderToString } from 'react-dom/server'
 import stores from '../../gatsby-mobx-config.js'

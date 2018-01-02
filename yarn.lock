@@ -4574,9 +4574,9 @@ gatsby-source-filesystem@^1.5.9:
     slash "^1.0.0"
     valid-url "^1.0.9"
 
-gatsby-source-salsify@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/gatsby-source-salsify/-/gatsby-source-salsify-1.0.5.tgz#7427234823d8a27f08c0f9b8506c0f682ee33cbf"
+gatsby-source-salsify@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/gatsby-source-salsify/-/gatsby-source-salsify-1.0.6.tgz#0b464b74d3cbbdd676003646bd8c96347532a349"
   dependencies:
     camelcase "^4.1.0"
     crypto "^1.0.1"
@@ -4584,7 +4584,6 @@ gatsby-source-salsify@^1.0.5:
     front-matter "^2.3.0"
     fs-extra "^5.0.0"
     globby "^7.1.1"
-    graphql "^0.10.3"
     graphql-client "^2.0.0"
     isomorphic-fetch "^2.2.1"
     json-stringify-safe "^5.0.1"
@@ -5040,12 +5039,6 @@ graphql-skip-limit@^1.0.9:
   dependencies:
     babel-runtime "^6.26.0"
     graphql "^0.11.7"
-
-graphql@^0.10.3:
-  version "0.10.5"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.10.5.tgz#c9be17ca2bdfdbd134077ffd9bbaa48b8becd298"
-  dependencies:
-    iterall "^1.1.0"
 
 graphql@^0.11.3, graphql@^0.11.7:
   version "0.11.7"
@@ -6068,7 +6061,7 @@ items@2.x.x:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/items/-/items-2.1.1.tgz#8bd16d9c83b19529de5aea321acaada78364a198"
 
-iterall@1.1.3, iterall@^1.1.0:
+iterall@1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.3.tgz#1cbbff96204056dde6656e2ed2e2226d0e6d72c9"
 

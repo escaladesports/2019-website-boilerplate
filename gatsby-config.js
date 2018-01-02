@@ -59,6 +59,7 @@ const plugins = [
 			}
 		}
 	},
+	/*
 	{
 		resolve: '@andrew-codes/gatsby-plugin-elasticlunr-search',
 		options: {
@@ -83,6 +84,7 @@ const plugins = [
 			}
 		}
 	},
+	*/
 	/*
 	{
 		resolve: 'gatsby-plugin-google-fonts',
