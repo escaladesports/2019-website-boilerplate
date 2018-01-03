@@ -4445,6 +4445,13 @@ gatsby-page-is-loading@^0.1.0:
     babel-plugin-transform-react-remove-prop-types "^0.4.10"
     webpack "^3.10.0"
 
+gatsby-page-load-delay@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/gatsby-page-load-delay/-/gatsby-page-load-delay-0.1.0.tgz#43178f1cd35934e59dc2d8463d90f7cf6bcfd578"
+  dependencies:
+    babel-runtime "^6.26.0"
+    history "^4.7.2"
+
 gatsby-plugin-canonical-urls@^1.0.10:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-canonical-urls/-/gatsby-plugin-canonical-urls-1.0.10.tgz#3c1aef9f7f2ed1626c05f8f5cb6235dd0dffd41b"
