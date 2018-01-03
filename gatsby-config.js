@@ -9,6 +9,7 @@ const plugins = [
 	'gatsby-plugin-remove-trailing-slashes',
 	'gatsby-plugin-snipcart',
 	'gatsby-plugin-mobx',
+	'gatsby-page-transitions',
 	{
 		resolve: 'gatsby-plugin-canonical-urls',
 		options: {
