@@ -12,7 +12,6 @@ export default class Index extends React.Component {
 		window.pageExitTime = 1000
 	}
 	render() {
-		console.log('Contact page:', this.props.transition.status)
 		return (
 			<section className={this.props.transition.status}>
 				<Form netlify="true" name='contact'>

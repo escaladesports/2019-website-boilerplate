@@ -7,7 +7,6 @@ import { OpenCart, AddToCart, CartQty, CartHasQty } from 'react-snipcart'
 
 export default class Index extends React.Component {
 	render() {
-		console.log('Home page:', this.props.transition.status)
 		const img = this.props.data.testFile
 		return (
 			<section className={this.props.transition.status}>
