@@ -12,8 +12,9 @@ export default class Index extends React.Component {
 		window.pageExitTime = 1000
 	}
 	render() {
+		console.log('Contact page:', this.props.status)
 		return (
-			<section className={this.props.transition.status}>
+			<section className={this.props.status}>
 				<Form netlify="true" name='contact'>
 					<Email name='email' label='Your email:' required />
 					<Textarea name='message' label='Your message:' required />

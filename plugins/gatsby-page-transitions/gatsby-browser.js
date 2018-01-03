@@ -47,10 +47,7 @@ class ReplaceComponentRenderer extends React.Component {
 					createElement(this.props.pageResources.component, {
 						...this.props,
 						...this.props.pageResources.json,
-						transition: {
-							status: this.state.status,
-							nextPageResources: this.state.nextPageResources,
-						},
+						status: this.state.status,
 					})
 				}
 			</div>
