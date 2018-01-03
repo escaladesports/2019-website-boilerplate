@@ -9,7 +9,7 @@ const plugins = [
 	'gatsby-plugin-remove-trailing-slashes',
 	'gatsby-plugin-snipcart',
 	'gatsby-plugin-mobx',
-	'gatsby-page-load-delay',
+	'gatsby-plugin-page-load-delay',
 	{
 		resolve: 'gatsby-plugin-canonical-urls',
 		options: {
