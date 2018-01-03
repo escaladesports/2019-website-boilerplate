@@ -47,7 +47,7 @@
     "gatsby-plugin-sharp": "^1.6.22",
     "gatsby-plugin-sitemap": "^1.2.7",
     "gatsby-plugin-snipcart": "^1.0.5",
-    "gatsby-plugin-styled-jsx-postcss": "^0.1.0",
+    "gatsby-plugin-styled-jsx-postcss": "^0.1.1",
     "gatsby-remark-copy-linked-files": "^1.5.23",
     "gatsby-remark-images": "^1.5.34",
     "gatsby-remark-prismjs": "^1.2.11",

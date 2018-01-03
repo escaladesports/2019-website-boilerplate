@@ -4515,9 +4515,9 @@ gatsby-plugin-snipcart@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-snipcart/-/gatsby-plugin-snipcart-1.0.5.tgz#4a58656668b511ff447cf12f56b23fa5e5df759f"
 
-gatsby-plugin-styled-jsx-postcss@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-styled-jsx-postcss/-/gatsby-plugin-styled-jsx-postcss-0.1.0.tgz#8ac71e3f1b9ee1186204f1629d9cf3b24a9b4041"
+gatsby-plugin-styled-jsx-postcss@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-styled-jsx-postcss/-/gatsby-plugin-styled-jsx-postcss-0.1.1.tgz#379d5f7aea7de5fe05eff6d60933418f011e323f"
   dependencies:
     babel-runtime "^6.26.0"
     es6-error "^4.0.2"
