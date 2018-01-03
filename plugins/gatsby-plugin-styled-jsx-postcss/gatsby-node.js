@@ -12,3 +12,4 @@ exports.modifyBabelrc = ({ babelrc }) => {
 		]),
 	}
 }
+

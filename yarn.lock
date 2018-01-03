@@ -8332,19 +8332,6 @@ postcss-discard-unused@^2.2.1:
     postcss "^5.0.14"
     uniqs "^2.0.0"
 
-postcss-easy-import@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-easy-import/-/postcss-easy-import-3.0.0.tgz#8eaaf5ae59566083d0cae98735dfd803e3ab194d"
-  dependencies:
-    globby "^6.1.0"
-    is-glob "^4.0.0"
-    lodash "^4.17.4"
-    object-assign "^4.0.1"
-    pify "^3.0.0"
-    postcss "^6.0.11"
-    postcss-import "^10.0.0"
-    resolve "^1.1.7"
-
 postcss-filter-plugins@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/postcss-filter-plugins/-/postcss-filter-plugins-2.0.2.tgz#6d85862534d735ac420e4a85806e1f5d4286d84c"
@@ -8387,16 +8374,6 @@ postcss-image-set-polyfill@^0.3.3, postcss-image-set-polyfill@^0.3.5:
   dependencies:
     postcss "^6.0.1"
     postcss-media-query-parser "^0.2.3"
-
-postcss-import@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-import/-/postcss-import-10.0.0.tgz#4c85c97b099136cc5ea0240dc1dfdbfde4e2ebbe"
-  dependencies:
-    object-assign "^4.0.1"
-    postcss "^6.0.1"
-    postcss-value-parser "^3.2.3"
-    read-cache "^1.0.0"
-    resolve "^1.1.7"
 
 postcss-import@^8.2.0:
   version "8.2.0"
