@@ -11,8 +11,8 @@ export default class Index extends React.Component {
 		const img = this.props.data.testFile
 		return (
 			<section className={this.props.status}>
-				<TimeLimit to='2018-01-05'>Before.</TimeLimit>
-				<TimeLimit from='2018-01-05'>After.</TimeLimit>
+				<TimeLimit to='2018-01-04'>Before.</TimeLimit>
+				<TimeLimit from='2018-01-04'>After.</TimeLimit>
 				{/*
 				<MobXExample />
 				*/}

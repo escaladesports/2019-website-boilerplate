@@ -2,6 +2,7 @@ require('dotenv').config({ silent: true })
 const meta = require('./src/meta')
 
 const plugins = [
+	'gatsby-plugin-preact',
 	'gatsby-plugin-styled-jsx-postcss',
 	'gatsby-plugin-sharp',
 	'gatsby-transformer-sharp',
@@ -10,6 +11,7 @@ const plugins = [
 	'gatsby-plugin-snipcart',
 	'gatsby-plugin-mobx',
 	'gatsby-plugin-page-load-delay',
+	'gatsby-plugin-webpack-bundle-analyzer',
 	{
 		resolve: 'gatsby-plugin-canonical-urls',
 		options: {
