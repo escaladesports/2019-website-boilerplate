@@ -9162,19 +9162,6 @@ react-snipcart@^0.1.5:
     raf "^3.4.0"
     webpack "^3.10.0"
 
-react-time-limit@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/react-time-limit/-/react-time-limit-0.1.1.tgz#434bde5b8db36fb4211c16e3daa6d989b54bebac"
-  dependencies:
-    "@babel/core" "^7.0.0-beta.35"
-    "@babel/preset-env" "^7.0.0-beta.35"
-    babel-loader "8.0.0-beta.0"
-    babel-plugin-transform-react-remove-prop-types "^0.4.10"
-
-react-typography@^0.15.10:
-  version "0.15.10"
-  resolved "https://registry.yarnpkg.com/react-typography/-/react-typography-0.15.10.tgz#1ece7bbd856735bd2ada4f6c40be508e994655a8"
-
 react@^15.6.0:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
@@ -9867,7 +9854,7 @@ right-align@^0.1.1:
   dependencies:
     align-text "^0.1.1"
 
-rimraf@2, rimraf@^2.2.6, rimraf@^2.2.8, rimraf@^2.3.2, rimraf@^2.4.4, rimraf@^2.5.0, rimraf@^2.5.1, rimraf@^2.5.4, rimraf@^2.6.1, rimraf@^2.6.2:
+rimraf@2, rimraf@^2.2.6, rimraf@^2.2.8, rimraf@^2.3.2, rimraf@^2.4.4, rimraf@^2.5.0, rimraf@^2.5.1, rimraf@^2.5.4, rimraf@^2.6.1:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.6.2.tgz#2ed8150d24a16ea8651e6d6ef0f47c4158ce7a36"
   dependencies:

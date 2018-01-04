@@ -79,11 +79,7 @@
     "react-helmet": "^5.2.0",
     "react-no-ssr": "^1.1.0",
     "react-snipcart": "^0.1.5",
-    "react-time-limit": "^0.1.1",
-    "react-typography": "^0.15.10",
-    "rimraf": "^2.6.2",
-    "url-status-code": "^1.1.0",
-    "webpack-bundle-analyzer": "^2.9.1"
+    "url-status-code": "^1.1.0"
   },
   "devDependencies": {
     "add": "^2.0.6",
