@@ -3,15 +3,15 @@ import Img from 'gatsby-image'
 import { observer, inject } from 'mobx-react'
 import MobXExample from 'components/mobx-example'
 import { OpenCart, AddToCart, CartQty, CartHasQty } from 'react-snipcart'
-import TimeLimit from 'react-time-limit'
+import test from '../markdown/components/test.md'
+console.log(test)
 
 export default class Index extends React.Component {
 	render() {
 		const img = this.props.data.testFile
 		return (
 			<section className={this.props.status}>
-				<TimeLimit to='2018-01-04'>Before.</TimeLimit>
-				<TimeLimit from='2018-01-04'>After.</TimeLimit>
+				<div dangerouslySetInnerHTML={{ __html: test.__content }} />
 				{/*
 				<MobXExample />
 				*/}

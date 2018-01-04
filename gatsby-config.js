@@ -11,7 +11,7 @@ const plugins = [
 	'gatsby-plugin-snipcart',
 	'gatsby-plugin-mobx',
 	'gatsby-plugin-page-load-delay',
-	//'gatsby-plugin-raw-loader',
+	'gatsby-plugin-import-markdown',
 	{
 		resolve: 'gatsby-plugin-webpack-bundle-analyzer',
 		options: {
