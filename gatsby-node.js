@@ -68,14 +68,15 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 							ctx.slug = `/product/${ctx.id.toLowerCase()}`
 							if(!template) template = 'product'
 						}
+						if (ctx.type) {
+							const pageObj = {
+								path: ctx.slug,
+								component: path.resolve(`./src/templates/${template || 'default'}.js`),
+								context: ctx,
+							}
 
-						const pageObj = {
-							path: ctx.slug,
-							component: path.resolve(`./src/templates/${template || 'default'}.js`),
-							context: ctx,
+							createPage(pageObj)
 						}
-
-						createPage(pageObj)
 					})
 				})
 			)
