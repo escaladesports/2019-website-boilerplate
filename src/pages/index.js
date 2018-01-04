@@ -3,7 +3,7 @@ import Img from 'gatsby-image'
 import { observer, inject } from 'mobx-react'
 import MobXExample from 'components/mobx-example'
 import { OpenCart, AddToCart, CartQty, CartHasQty } from 'react-snipcart'
-import TimeLimit from 'components/time-limit'
+import TimeLimit from 'react-time-limit'
 
 export default class Index extends React.Component {
 	render() {

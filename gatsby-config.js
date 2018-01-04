@@ -11,7 +11,14 @@ const plugins = [
 	'gatsby-plugin-snipcart',
 	'gatsby-plugin-mobx',
 	'gatsby-plugin-page-load-delay',
-	'gatsby-plugin-webpack-bundle-analyzer',
+	{
+		resolve: 'gatsby-plugin-webpack-bundle-analyzer',
+		options: {
+			defaultSizes: 'gzip',
+			production: false,
+			disable: true,
+		},
+	},
 	{
 		resolve: 'gatsby-plugin-canonical-urls',
 		options: {
