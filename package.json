@@ -65,6 +65,7 @@
     "lost": "^8.2.0",
     "mobx": "^3.4.1",
     "mobx-react": "^4.3.5",
+    "moment": "^2.20.1",
     "npm-run-all": "^4.1.2",
     "opn": "^5.1.0",
     "postcss-cssnext": "^3.0.2",
@@ -76,9 +77,6 @@
     "react-snipcart": "^0.1.5",
     "react-typography": "^0.15.10",
     "rimraf": "^2.6.2",
-    "styled-jsx": "^2.2.1",
-    "styled-jsx-plugin-postcss": "^0.1.2",
-    "typography": "^0.15.10",
     "url-status-code": "^1.1.0"
   },
   "devDependencies": {

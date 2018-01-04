@@ -2,8 +2,8 @@ import React from 'react'
 import Img from 'gatsby-image'
 import { observer, inject } from 'mobx-react'
 import MobXExample from 'components/mobx-example'
-
 import { OpenCart, AddToCart, CartQty, CartHasQty } from 'react-snipcart'
+import TimeLimit from 'components/time-limit'
 
 export default class Index extends React.Component {
 	render() {
@@ -11,6 +11,8 @@ export default class Index extends React.Component {
 		const img = this.props.data.testFile
 		return (
 			<section className={this.props.status}>
+				<TimeLimit to='2018-01-05'>Before.</TimeLimit>
+				<TimeLimit from='2018-01-05'>After.</TimeLimit>
 				{/*
 				<MobXExample />
 				*/}
