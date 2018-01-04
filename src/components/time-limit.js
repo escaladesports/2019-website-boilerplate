@@ -1,5 +1,4 @@
 import React from 'react'
-import moment from 'moment'
 
 export default class extends React.Component {
 	render() {
@@ -11,12 +10,20 @@ export default class extends React.Component {
 		now = now.getTime()
 
 		if(from){
-			if (now < moment(from, props.format).valueOf()){
+			if(typeof from === 'string'){
+				from = new Date(from)
+				from = from.getTime()
+			}
+			if (now < from){
 				render = false
 			}
 		}
-		if(to){
-			if (now >= moment(to, props.format).valueOf()){
+		if (to) {
+			if (typeof to === 'string') {
+				to = new Date(to)
+				to = to.getTime()
+			}
+			if (now >= to){
 				render = false
 			}
 		}
