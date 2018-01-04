@@ -7,7 +7,6 @@ import TimeLimit from 'components/time-limit'
 
 export default class Index extends React.Component {
 	render() {
-		console.log('Home page:', this.props.status)
 		const img = this.props.data.testFile
 		return (
 			<section className={this.props.status}>

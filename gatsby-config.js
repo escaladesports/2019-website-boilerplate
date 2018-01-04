@@ -15,7 +15,7 @@ const plugins = [
 	{
 		resolve: 'gatsby-plugin-canonical-urls',
 		options: {
-			siteUrl: 'https://gatsby-boilerplate.netlify.com',
+			siteUrl: meta.siteUrl,
 		},
 	},
 	{

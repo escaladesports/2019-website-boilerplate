@@ -1,5 +1,5 @@
 module.exports = {
 	title: 'Boilerplate Title',
 	description: 'Boilerplate Description',
-	siteUrl: 'https://yoursite.com',
+	siteUrl: 'https://gatsby-boilerplate.netlify.com',
 }
