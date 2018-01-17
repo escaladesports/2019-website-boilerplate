@@ -7,6 +7,8 @@ const propTypes = {
 	postBodyComponents: PropTypes.node.isRequired,
 }
 
+console.log(process.env)
+
 class Html extends Component {
 	render() {
 		return (

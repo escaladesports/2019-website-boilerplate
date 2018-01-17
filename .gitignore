@@ -17,8 +17,10 @@ dist
 json
 public
 .cache
+envdotjs-key
+env.js
+.serverless
 
 # Temporary
 temp
 temp-*
-.serverless

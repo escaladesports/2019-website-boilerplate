@@ -1,4 +1,4 @@
-require('dotenv').config({ silent: true })
+require('envdotjs').load()
 const meta = require('./src/meta')
 
 const plugins = [
