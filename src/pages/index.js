@@ -3,16 +3,16 @@ import Img from 'gatsby-image'
 import { observer, inject } from 'mobx-react'
 import MobXExample from 'components/mobx-example'
 import { OpenCart, AddToCart, CartQty, CartHasQty } from 'react-snipcart'
-import test from '../markdown/components/test.md'
-console.log(test)
+//import test from '../markdown/components/test.md'
+//console.log(test)
 
 export default class Index extends React.Component {
 	render() {
 		const img = this.props.data.testFile
 		return (
 			<section className={this.props.status}>
-				<div dangerouslySetInnerHTML={{ __html: test.__content }} />
 				{/*
+				<div dangerouslySetInnerHTML={{ __html: test.__content }} />
 				<MobXExample />
 				*/}
 				<AddToCart data={{

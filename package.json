@@ -61,6 +61,7 @@
     "gatsby-transformer-sharp": "^1.6.15",
     "globby": "^7.1.1",
     "gray-matter": "^3.1.1",
+    "handlebars": "^4.0.11",
     "history": "^4.7.2",
     "is-email": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",

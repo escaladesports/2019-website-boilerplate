@@ -132,6 +132,7 @@ const plugins = [
 		}
 	},
 	'gatsby-plugin-manifest',
+	//'gatsby-plugin-html-only',
 ]
 
 if (process.env.SALSIFY_API_KEY){
