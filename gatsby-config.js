@@ -13,6 +13,12 @@ const plugins = [
 	'gatsby-plugin-page-load-delay',
 	'gatsby-plugin-import-markdown',
 	{
+		resolve: 'gatsby-plugin-hubspot',
+		options: {
+			id: process.env.HUBSPOT_ID
+		},
+	},
+	{
 		resolve: 'gatsby-plugin-webpack-bundle-analyzer',
 		options: {
 			defaultSizes: 'gzip',
@@ -132,7 +138,6 @@ const plugins = [
 		}
 	},
 	'gatsby-plugin-manifest',
-	//'gatsby-plugin-html-only',
 ]
 
 if (process.env.SALSIFY_API_KEY){
