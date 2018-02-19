@@ -1,5 +1,6 @@
 import React from 'react'
-import Form from 'components/forms/form'
+import Form from 'react-netlify-form'
+
 import Email from 'components/forms/email'
 import Textarea from 'components/forms/textarea'
 import Submit from 'components/forms/submit'
@@ -15,11 +16,13 @@ export default class Index extends React.Component {
 		console.log('Contact page:', this.props.status)
 		return (
 			<section className={this.props.status}>
-				<Form netlify="true" name='contact'>
-					<Email name='email' label='Your email:' required />
-					<Textarea name='message' label='Your message:' required />
-					<Submit />
-				</Form>
+				<Form name='contact' render={state => (
+					<div>
+						<Email name='email' label='Your email:' required />
+						<Textarea name='message' label='Your message:' required />
+						<Submit />
+					</div>
+				)} />
 				<style jsx>{`
 					section{
 						opacity: 0;

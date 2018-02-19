@@ -12,11 +12,11 @@
     "build:empty": "node utils/rm-empty-dirs",
     "clean": "run-p clean:cache clean:public",
     "clean:cache": "rimraf .cache",
-	 "clean:public": "rimraf public",
-	 "encrypt": "envdotjs",
+    "clean:public": "rimraf public",
+    "encrypt": "envdotjs",
     "serve": "gatsby serve --open",
-	 "test": "npm run build:rewrites",
-	 "unencrypt": "envdotjs --unencrypt"
+    "test": "npm run build:rewrites",
+    "unencrypt": "envdotjs --unencrypt"
   },
   "dependencies": {
     "@andrew-codes/gatsby-plugin-elasticlunr-search": "^1.0.3",
@@ -81,6 +81,7 @@
     "raf": "^3.4.0",
     "raw-loader": "^0.5.1",
     "react-helmet": "^5.2.0",
+    "react-netlify-form": "^0.1.1",
     "react-no-ssr": "^1.1.0",
     "react-snipcart": "^0.1.5",
     "url-status-code": "^1.1.0"
