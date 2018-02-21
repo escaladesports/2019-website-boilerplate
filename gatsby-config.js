@@ -138,6 +138,7 @@ const plugins = [
 		}
 	},
 	'gatsby-plugin-manifest',
+	'gatsby-plugin-escalade-stock',
 ]
 
 if (process.env.SALSIFY_API_KEY){

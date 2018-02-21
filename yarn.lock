@@ -3679,6 +3679,30 @@ es6-weak-map@^2.0.1:
     es6-iterator "^2.0.1"
     es6-symbol "^3.1.1"
 
+escalade-data-store@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/escalade-data-store/-/escalade-data-store-1.0.2.tgz#bfcc7bb306d660d626e50d949c9ae1e0ec368c9a"
+  dependencies:
+    babel-runtime "^6.26.0"
+    fetch-retry "^1.1.1"
+    js-cookie "^2.2.0"
+
+escalade-react-stock@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/escalade-react-stock/-/escalade-react-stock-1.0.1.tgz#444dd8ee2f916a61773f129b1058cb1f5464e97e"
+  dependencies:
+    escalade-stock-store "^1.0.0"
+    styled-jsx "^2.2.4"
+
+escalade-stock-store@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/escalade-stock-store/-/escalade-stock-store-1.0.0.tgz#9c56d848ef498c9f89942ee788110cd04b465b9f"
+  dependencies:
+    babel-runtime "^6.26.0"
+    escalade-data-store "^1.0.2"
+    fetch-retry "^1.1.1"
+    js-cookie "^2.2.0"
+
 escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
@@ -6176,6 +6200,10 @@ jpeg-js@^0.2.0:
 js-base64@^2.1.9:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.1.tgz#e02813181cd53002888e918935467acb2910e596"
+
+js-cookie@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.0.tgz#1b2c279a6eece380a12168b92485265b35b1effb"
 
 js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "3.0.2"
