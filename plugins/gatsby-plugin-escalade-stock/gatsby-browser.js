@@ -1,5 +1,5 @@
 import { prefetchStock } from 'escalade-react-stock'
 
-exports.onInitialClientRender = (options) => {
-	console.log(options)
+exports.onInitialClientRender = () => {
+	console.log(arguments)
 }
