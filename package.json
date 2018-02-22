@@ -85,6 +85,8 @@
     "react-netlify-form": "^0.1.1",
     "react-no-ssr": "^1.1.0",
     "react-snipcart": "^0.1.5",
+    "read-markdown": "^1.0.2",
+    "remark": "^9.0.0",
     "url-status-code": "^1.1.0"
   },
   "devDependencies": {

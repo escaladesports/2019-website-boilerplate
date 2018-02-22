@@ -5,8 +5,9 @@ import cloudinary from 'utils/cloudinary'
 
 class ProductTemplate extends React.Component {
 	render() {
-		const fm = this.props.data.markdownRemark.frontmatter
+		const markdown = this.props.data.productMarkdown
 		const salsify = this.props.data.salsifyContent
+		console.log(markdown)
 		return (
 			<div>
 				<Head title={salsify.itemName} />
@@ -28,10 +29,8 @@ export const pageQuery = graphql`
 				url
 			}
 		}
-		markdownRemark(fields: { id: { eq: $id } }){
-			frontmatter {
-				title
-			}
+		productMarkdown(id: { eq: $id }){
+			title
 		}
 	}
 `

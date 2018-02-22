@@ -14,7 +14,7 @@ const plugins = [
 	'gatsby-plugin-snipcart',
 	'gatsby-plugin-mobx',
 	'gatsby-plugin-page-load-delay',
-	'gatsby-plugin-import-markdown',
+	'gatsby-plugin-source-product-markdown',
 	{
 		resolve: 'gatsby-plugin-hubspot',
 		options: {
@@ -144,9 +144,8 @@ const plugins = [
 	{
 		resolve: 'gatsby-plugin-escalade-stock',
 		options: {
-			ids: [
-				'A6FS15845R'
-			]
+			siteId: process.env.GATSBY_ESCALADE_SITE_ID,
+			ids: productIds
 		}
 	},
 ]
