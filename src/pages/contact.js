@@ -16,13 +16,15 @@ export default class Index extends React.Component {
 		console.log('Contact page:', this.props.status)
 		return (
 			<section className={this.props.status}>
-				<Form name='contact' render={state => (
-					<div>
-						<Email name='email' label='Your email:' required />
-						<Textarea name='message' label='Your message:' required />
-						<Submit />
-					</div>
-				)} />
+				<Form name='contact'>
+					{state => (
+						<div>
+							<Email name='email' label='Your email:' required />
+							<Textarea name='message' label='Your message:' required />
+							<Submit />
+						</div>
+					)}
+				</Form>
 				<style jsx>{`
 					section{
 						opacity: 0;
