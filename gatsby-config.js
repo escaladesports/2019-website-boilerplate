@@ -1,5 +1,8 @@
 require('envdotjs').load()
 const meta = require('./src/meta')
+const extract = require('extract-front-matter-properties')
+
+const productIds = extract('./src/markdown/products/**/*.md', 'id', { sync: true })
 
 const plugins = [
 	'gatsby-plugin-preact',
@@ -141,7 +144,9 @@ const plugins = [
 	{
 		resolve: 'gatsby-plugin-escalade-stock',
 		options: {
-			test: 3
+			ids: [
+				'A6FS15845R'
+			]
 		}
 	},
 ]
@@ -150,8 +155,7 @@ if (process.env.SALSIFY_API_KEY){
 	plugins.push({
 		resolve: 'gatsby-source-salsify',
 		options: {
-			//ids: ['U2508', 'U2000'],
-			markdownPath: `${__dirname}/src/markdown/products`,
+			ids: productIds,
 			apiKey: process.env.SALSIFY_API_KEY,
 			types: {
 				webImages: 'array'
