@@ -91,6 +91,7 @@
     "add": "^2.0.6",
     "babel-loader": "7.1.1",
     "extract-front-matter-properties": "^1.0.2",
+    "gatsby-plugin-source-product-markdown": "^1.0.1",
     "yarn": "^1.3.2"
   }
 }

@@ -11,7 +11,7 @@ const plugins = [
 	'gatsby-transformer-sharp',
 	'gatsby-plugin-react-helmet',
 	'gatsby-plugin-remove-trailing-slashes',
-	'gatsby-plugin-snipcart',
+	//'gatsby-plugin-snipcart',
 	'gatsby-plugin-mobx',
 	'gatsby-plugin-page-load-delay',
 	'gatsby-plugin-source-product-markdown',
