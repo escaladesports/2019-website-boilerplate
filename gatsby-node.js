@@ -14,10 +14,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 	// Home page
 	createPage({
 		path: '/',
-		component: path.resolve('src/pages/index.js'),
-		context: {
-			productId: 7
-		}
+		component: path.resolve('src/pages/index.js')
 	})
 
 
@@ -35,7 +32,9 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 									fields {
 										slug
 										id
-										template
+									}
+									frontmatter{
+										category
 									}
 								}
 							}
@@ -43,9 +42,10 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 					}
 				`).then(result => {
 					if (result.errors) {
-						console.log(result.errors)
 						reject(result.errors)
 					}
+
+					const categories = []
 
 					// Create markdown pages
 					result.data.allMarkdownRemark.edges.forEach(edge => {
@@ -56,7 +56,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 							slug: fields.slug
 						}
 
-
 						if (isPath('pages', filePath)) {
 							ctx.type = 'page'
 							ctx.slug = ctx.slug.replace('/pages', '')
@@ -65,8 +64,28 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 						else if (isPath('products', filePath)){
 							ctx.type = 'product'
 							ctx.id = fields.id
-							ctx.slug = `/product/${ctx.id.toLowerCase()}`
+							ctx.lowerId = fields.id.toLowerCase()
+							ctx.upperId = fields.id.toUpperCase()
+							ctx.slug = `/product/${ctx.lowerId}`
 							if(!template) template = 'product'
+
+							// Create category
+							const category = edge.node.frontmatter.category
+							if (categories.indexOf(category) === -1) {
+								categories.push(category)
+								const slug = `/category/${category}`
+								const pageObj = {
+									path: slug,
+									component: path.resolve(`./src/templates/category.js`),
+									context: {
+										type: `category`,
+										id: category,
+										slug: slug
+									},
+								}
+								console.log(pageObj)
+								createPage(pageObj)
+							}
 						}
 						if (ctx.type) {
 							const pageObj = {
@@ -83,10 +102,13 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 		}),
 
 
-
 	]
 
 	return Promise.all(promises)
+		.catch(err => {
+			console.log(err)
+			process.exit(1)
+		})
 
 }
 

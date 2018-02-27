@@ -4707,9 +4707,9 @@ gatsby-plugin-snipcart@^1.0.5:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-snipcart/-/gatsby-plugin-snipcart-1.0.6.tgz#21460b958980e7f7b335874522ae07187dd1840f"
 
-gatsby-plugin-source-product-markdown@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-source-product-markdown/-/gatsby-plugin-source-product-markdown-1.0.1.tgz#4b6286374362a6d67b68b2ee608a9c33e76a69d6"
+gatsby-plugin-source-product-markdown@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-source-product-markdown/-/gatsby-plugin-source-product-markdown-1.0.4.tgz#759516349e1ac655a3adbba59810620b27b9a6bd"
   dependencies:
     babel-runtime "^6.26.0"
     front-matter "^2.3.0"

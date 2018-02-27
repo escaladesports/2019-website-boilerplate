@@ -54,6 +54,7 @@
     "gatsby-plugin-sharp": "^1.6.22",
     "gatsby-plugin-sitemap": "^1.2.7",
     "gatsby-plugin-snipcart": "^1.0.5",
+    "gatsby-plugin-source-product-markdown": "^1.0.4",
     "gatsby-plugin-styled-jsx-postcss": "^0.1.1",
     "gatsby-plugin-webpack-bundle-analyzer": "^0.1.1",
     "gatsby-remark-copy-linked-files": "^1.5.23",
@@ -92,7 +93,6 @@
     "add": "^2.0.6",
     "babel-loader": "7.1.1",
     "extract-front-matter-properties": "^1.0.2",
-    "gatsby-plugin-source-product-markdown": "^1.0.1",
     "opn-cli": "^3.1.0",
     "yarn": "^1.3.2"
   }

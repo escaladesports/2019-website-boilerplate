@@ -7,7 +7,6 @@ class ProductTemplate extends React.Component {
 	render() {
 		const markdown = this.props.data.productMarkdown
 		const salsify = this.props.data.salsifyContent
-		console.log(markdown)
 		return (
 			<div>
 				<Head title={salsify.itemName} />
@@ -24,15 +23,16 @@ export default ProductTemplate
 
 
 export const pageQuery = graphql`
-	query ProductById($id: String!) {
-		salsifyContent(id: { eq: $id }){
+	query ProductById($upperId: String!) {
+		salsifyContent(id: { eq: $upperId }){
 			itemName
 			webImages{
 				url
 			}
 		}
-		productMarkdown(id: { eq: $id }){
+		productMarkdown(productId: { eq: $upperId }){
 			title
+			id
 		}
 	}
 `
