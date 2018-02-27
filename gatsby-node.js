@@ -11,11 +11,8 @@ function templatePath(id){
 exports.createPages = ({ boundActionCreators, graphql }) => {
 	const { createPage, createRedirect } = boundActionCreators
 
-	// Home page
-	createPage({
-		path: '/',
-		component: path.resolve('src/pages/index.js')
-	})
+
+
 
 
 	const promises = [

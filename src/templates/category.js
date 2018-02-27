@@ -8,10 +8,10 @@ class CategoryTemplate extends React.Component {
 		console.log(products)
 		return (
 			<div>
-				<h1>{this.props.pathContext.id} category</h1>
+				<h1>{ this.props.pathContext.id } category</h1>
 				<ul>
 					{products.map(({ node }) => {
-						return <li>{node.title}</li>
+						return <li>{ node.title }</li>
 					})}
 				</ul>
 			</div>
