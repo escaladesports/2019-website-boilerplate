@@ -4,15 +4,22 @@ import Head from 'components/head'
 
 class CategoryTemplate extends React.Component {
 	render() {
-		console.log(this.props.data)
+		const products = this.props.data.allProductMarkdown.edges
+		console.log(products)
 		return (
-			<div>Category page</div>
+			<div>
+				<h1>{this.props.pathContext.id} category</h1>
+				<ul>
+					{products.map(({ node }) => {
+						return <li>{node.title}</li>
+					})}
+				</ul>
+			</div>
 		)
 	}
 }
 
 export default CategoryTemplate
-
 
 export const pageQuery = graphql`
 	query ProductsByCategory($id: String!) {
@@ -22,7 +29,6 @@ export const pageQuery = graphql`
 		}){
 			edges {
 				node {
-					category
 					title
 				}
 			}
