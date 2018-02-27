@@ -57,33 +57,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 							ctx.type = 'page'
 							ctx.slug = ctx.slug.replace('/pages', '')
 							if (!template) template = 'page'
-						}
-						else if (isPath('products', filePath)){
-							ctx.type = 'product'
-							ctx.id = fields.id
-							ctx.lowerId = fields.id.toLowerCase()
-							ctx.upperId = fields.id.toUpperCase()
-							ctx.slug = `/product/${ctx.lowerId}`
-							if(!template) template = 'product'
 
-							// Create category
-							const category = edge.node.frontmatter.category
-							if (categories.indexOf(category) === -1) {
-								categories.push(category)
-								const slug = `/category/${category}`
-								const pageObj = {
-									path: slug,
-									component: path.resolve(`./src/templates/category.js`),
-									context: {
-										type: `category`,
-										id: category,
-										slug: slug
-									},
-								}
-								createPage(pageObj)
-							}
-						}
-						if (ctx.type) {
 							const pageObj = {
 								path: ctx.slug,
 								component: path.resolve(`./src/templates/${template || 'default'}.js`),

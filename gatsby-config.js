@@ -15,6 +15,7 @@ const plugins = [
 	'gatsby-plugin-mobx',
 	'gatsby-plugin-page-load-delay',
 	'gatsby-plugin-source-product-markdown',
+	'gatsby-plugin-product-markdown-pages',
 	{
 		resolve: 'gatsby-plugin-hubspot',
 		options: {
