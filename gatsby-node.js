@@ -83,7 +83,6 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
 										slug: slug
 									},
 								}
-								console.log(pageObj)
 								createPage(pageObj)
 							}
 						}
