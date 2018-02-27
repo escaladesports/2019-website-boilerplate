@@ -39,8 +39,16 @@ exports.createPages = async ({ boundActionCreators, graphql }) => {
 		})
 
 		// Create cateogry page
-		if(categories.indexOf(node.category) === -1){
-
+		const category = node.category
+		if (categories.indexOf(category) === -1){
+			categories.push(category)
+			createPage({
+				path: `/category/${category}`,
+				component: resolve(`./src/templates/category.js`),
+				context: {
+					category,
+				},
+			})
 		}
 	})
 

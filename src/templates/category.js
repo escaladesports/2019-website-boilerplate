@@ -22,9 +22,9 @@ class CategoryTemplate extends React.Component {
 export default CategoryTemplate
 
 export const pageQuery = graphql`
-	query ProductsByCategory($id: String!) {
+	query ProductsByCategory($category: String!) {
 		allProductMarkdown(filter: {
-			category: { eq: $id },
+			category: { eq: $category },
 			variant: { eq: false }
 		}){
 			edges {
