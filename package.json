@@ -49,7 +49,7 @@
     "gatsby-plugin-manifest": "^1.0.11",
     "gatsby-plugin-page-load-delay": "^0.1.1",
     "gatsby-plugin-preact": "^1.0.14",
-    "gatsby-plugin-product-markdown-pages": "^1.0.1",
+    "gatsby-plugin-product-markdown-pages": "^1.1.1",
     "gatsby-plugin-react-helmet": "^2.0.2",
     "gatsby-plugin-remove-trailing-slashes": "^1.0.1",
     "gatsby-plugin-sharp": "^1.6.22",

@@ -4667,9 +4667,9 @@ gatsby-plugin-preact@^1.0.14:
     preact "^8.2.5"
     preact-compat "^3.17.0"
 
-gatsby-plugin-product-markdown-pages@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-product-markdown-pages/-/gatsby-plugin-product-markdown-pages-1.0.1.tgz#d9aa057227ba4a994298e5dd8e5033a61b90ce2d"
+gatsby-plugin-product-markdown-pages@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-product-markdown-pages/-/gatsby-plugin-product-markdown-pages-1.1.1.tgz#15d9fb4aa52b1afb1b23a7ee97acd797b306ba1d"
   dependencies:
     babel-runtime "^6.26.0"
     gatsby-source-filesystem "^1.5.24"
