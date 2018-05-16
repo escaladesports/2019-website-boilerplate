@@ -1,5 +1,6 @@
 import React from 'react'
 import Img from 'gatsby-image'
+import '../components/styles.css'
 
 export default class Index extends React.Component {
 	render() {
@@ -11,13 +12,13 @@ export default class Index extends React.Component {
 					<Img sizes={img.sizes} />
 				</div>
 				<style jsx>{`
-					:root{
-						--width: 300px;
-					}
+					@import "src/components/styles.css";
 					section{
+						div{
+							color: var(--red);
+						}
 						.container{
-							width: var(--width);
-							margin-left: var(--width);
+							width: 300px;
 						}
 					}
 				`}</style>
