@@ -3,9 +3,5 @@ module.exports = {
 		'postcss-cssnext': {},
 		'postcss-nested': {},
 		'lost': {},
-		'css-mqpacker': {},
-		'cssnano': {
-			autoprefixer: false
-		},
 	},
 }

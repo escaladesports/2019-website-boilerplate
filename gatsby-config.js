@@ -5,14 +5,12 @@ const extract = require('extract-front-matter-properties')
 const productIds = extract('./src/markdown/products/**/*.md', 'id', { sync: true })
 
 const plugins = [
-	'gatsby-plugin-preact',
 	'gatsby-plugin-styled-jsx-postcss',
 	'gatsby-plugin-sharp',
 	'gatsby-transformer-sharp',
 	'gatsby-plugin-react-helmet',
 	'gatsby-plugin-remove-trailing-slashes',
 	//'gatsby-plugin-snipcart',
-	'gatsby-plugin-mobx',
 	'gatsby-plugin-page-load-delay',
 	'gatsby-source-product-markdown',
 	'gatsby-plugin-product-markdown-pages',

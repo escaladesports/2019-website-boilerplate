@@ -1,9 +1,5 @@
 import React from 'react'
 import Img from 'gatsby-image'
-import { observer, inject } from 'mobx-react'
-import MobXExample from 'components/mobx-example'
-//import test from '../markdown/components/test.md'
-//console.log(test)
 
 export default class Index extends React.Component {
 	render() {
@@ -15,8 +11,14 @@ export default class Index extends React.Component {
 					<Img sizes={img.sizes} />
 				</div>
 				<style jsx>{`
-					.container{
-						width: 300px;
+					:root{
+						--width: 300px;
+					}
+					section{
+						.container{
+							width: var(--width);
+							margin-left: var(--width);
+						}
 					}
 				`}</style>
 			</section>
@@ -25,7 +27,6 @@ export default class Index extends React.Component {
 }
 
 
-// MSRP
 export const pageQuery = graphql`
 	query HomepageQueries {
 		productData: allMarkdownRemark {

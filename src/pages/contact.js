@@ -13,7 +13,6 @@ export default class Index extends React.Component {
 		window.pageExitTime = 1000
 	}
 	render() {
-		console.log('Contact page:', this.props.status)
 		return (
 			<section className={this.props.status}>
 				<Form name='contact'>
