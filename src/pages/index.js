@@ -10,10 +10,6 @@ export default class Index extends React.Component {
 		const img = this.props.data.testFile
 		return (
 			<section className={this.props.status}>
-				{/*
-				<div dangerouslySetInnerHTML={{ __html: test.__content }} />
-				<MobXExample />
-				*/}
 				<div>Image:</div>
 				<div className='container'>
 					<Img sizes={img.sizes} />
