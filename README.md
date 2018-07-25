@@ -1,5 +1,3 @@
-# Escalade Sports Docs
+# Gatsby Boilerplate
 
 WIP
-
-[https://escalade-docs.netlify.com/](https://escalade-docs.netlify.com/)
