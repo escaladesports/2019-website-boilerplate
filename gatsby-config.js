@@ -87,12 +87,12 @@ module.exports = {
 		`gatsby-plugin-sitemap`,
 		`gatsby-plugin-netlify`,
 		`gatsby-plugin-netlify-identity-widget`,
-		// {
-		// 	resolve: `gatsby-plugin-netlify-cms`,
-		// 	options: {
-		// 		modulePath: `${__dirname}/src/components/cms.js`,
-		// 	},
-		// },
-		`gatsby-plugin-netlify-cache`,
+		{
+			resolve: `gatsby-plugin-netlify-cms`,
+			options: {
+				modulePath: `${__dirname}/src/components/cms.js`,
+			},
+		},
+		// `gatsby-plugin-netlify-cache`,
 	],
 }
