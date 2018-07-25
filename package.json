@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "scripts": {
-    "build": "npm run patch && NODE_ENV=production gatsby build",
+    "build": "NODE_ENV=production gatsby build",
     "clean": "run-p clean:gatsbyCache clean:nodeCache",
     "clean:gatsbyCache": "rm -rf .cache",
     "clean:nodeCache": "rm -rf node_modules/.cache",
@@ -13,7 +13,6 @@
     "lint": "eslint ./ --fix",
     "live": "opn https://escalade-docs.netlify.com/",
     "netlify": "opn https://app.netlify.com/sites/escalade-docs/deploys",
-    "patch": "sed -i -e 's/if(c\\.initial) return;/if(!c||c.initial) return;/g' ./node_modules/extract-text-webpack-plugin/index.js",
     "serve": "cd public && serve --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
