@@ -1,6 +1,6 @@
 import React from 'react'
 
-class H1 extends React.Component {
+export default class H1 extends React.Component {
 	render() {
 		return (
 			<h1>
@@ -15,5 +15,3 @@ class H1 extends React.Component {
 		)
 	}
 }
-
-export default H1

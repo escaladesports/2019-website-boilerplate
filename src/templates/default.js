@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import Meta from '../components/meta'
 
-class DocsTemplate extends React.Component{
+export default class DocsTemplate extends React.Component{
 	render(){
 		const data = this.props.data
 		const content = data.markdownRemark
@@ -24,8 +24,6 @@ class DocsTemplate extends React.Component{
 		)
 	}
 }
-
-export default DocsTemplate
 
 export const query = graphql`
 	query DocsTemplateQuery($slug: String!) {
