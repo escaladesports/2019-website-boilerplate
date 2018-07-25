@@ -1,0 +1,28 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+
+media_folder: static/uploads
+public_folder: /uploads
+
+collections:
+  - name: page
+    label: Page
+    folder: src/markdown/pages
+    create: true
+    fields:
+      - label: Title
+        name: title
+        widget: string
+        tagname: h1
+        required: true
+      - label: Description
+        name: description
+        widget: string
+        tagname: p
+        required: true
+      - label: Template
+        name: template
+        widget: string
+        required: false

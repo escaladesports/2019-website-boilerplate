@@ -74,7 +74,14 @@ module.exports = {
 			},
 		},
 		`gatsby-plugin-offline`,
+		`gatsby-plugin-sitemap`,
 		`gatsby-plugin-netlify`,
+		{
+			resolve: `gatsby-plugin-netlify-cms`,
+			options: {
+				modulePath: `${__dirname}/src/components/cms.js`,
+			},
+		},
 		`gatsby-plugin-netlify-cache`,
 		{
 			resolve: `gatsby-plugin-html-attributes`,
