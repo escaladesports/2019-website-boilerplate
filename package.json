@@ -1,5 +1,5 @@
 {
-  "name": "docs.escaladesports.com",
+  "name": "gatsby-boilerplate",
   "version": "0.0.0",
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "scripts": {
@@ -11,8 +11,8 @@
     "dev:gatsby": "gatsby develop --open",
     "encrypt": "envdotjs encrypt",
     "lint": "eslint ./ --fix",
-    "live": "opn https://escalade-docs.netlify.com/",
-    "netlify": "opn https://app.netlify.com/sites/escalade-docs/deploys",
+    "live": "opn https://gatsby-boilerplate.netlify.com/",
+    "netlify": "opn https://app.netlify.com/sites/gatsby-boilerplate/deploys",
     "serve": "cd public && serve --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
