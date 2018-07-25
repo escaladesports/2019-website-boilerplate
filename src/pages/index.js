@@ -1,48 +1,29 @@
-import React from 'react'
-import Img from 'gatsby-image'
-import '../components/styles.css'
+import React, { Fragment } from 'react'
+import { Helmet } from 'react-helmet'
 
-export default class Index extends React.Component {
+export default class HomePage extends React.Component {
 	render() {
-		const img = this.props.data.testFile
 		return (
-			<section className={this.props.status}>
-				<div>Image:</div>
-				<div className='container'>
-					<Img sizes={img.sizes} />
-				</div>
+			<Fragment>
+				<Helmet>
+					<title>{this.props.data.site.siteMetadata.title}</title>
+				</Helmet>
+				<section>
+					<div>Home Page</div>
+				</section>
 				<style jsx>{`
-					@import "src/components/styles.css";
-					section{
-						div{
-							color: var(--red);
-						}
-						.container{
-							width: 300px;
-						}
-					}
+					@import 'src/css';
 				`}</style>
-			</section>
+			</Fragment>
 		)
 	}
 }
 
-
-export const pageQuery = graphql`
-	query HomepageQueries {
-		productData: allMarkdownRemark {
-			edges {
-				node {
-					html
-					frontmatter {
-						title
-					}
-				}
-			}
-		}
-		testFile: imageSharp(id: { regex: "/test.jpg/" }) {
-			sizes(maxWidth: 300) {
-				...GatsbyImageSharpSizes_noBase64
+export const query = graphql`
+	query HomePageQuery{
+		site {
+			siteMetadata {
+				title
 			}
 		}
 	}

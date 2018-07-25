@@ -1,51 +1,34 @@
-import React from 'react'
-import Head from 'components/head'
-import Header from 'components/header'
-import Footer from 'components/footer'
-import PageIsLoading from 'gatsby-page-is-loading'
-import PageProgress from 'components/page-progress'
-import NoSSR from 'react-no-ssr'
+import React, { Fragment } from 'react'
+import { Helmet } from 'react-helmet'
 
-export default class Template extends React.Component {
-	render() {
-		return (
-			<div>
-				<Head />
-				<Header />
-				{this.props.children()}
-				<Footer />
-				<NoSSR>
-					<PageIsLoading>
-						<PageProgress />
-					</PageIsLoading>
-				</NoSSR>
+class Layout extends React.Component{
+	render(){
+		const { data, children } = this.props
+		return(
+			<Fragment>
+				<Helmet>
+					<meta charSet="utf-8" />
+					<title>{data.site.siteMetadata.title }</title>
+				</Helmet>
+				<main>
+					{children()}
+				</main>
 				<style jsx global>{`
-					html{
-						height: 100%;
-						box-sizing: border-box;
-					}
-					*, *:before, *:after{
-						box-sizing: inherit;
-					}
-					body{
-						position: relative;
-						min-height: 100%;
-						margin: 0;
-						font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-						text-rendering: optimizeLegibility;
-					}
-					html, body{
-						-webkit-tap-highlight-color: rgba(0,0,0,0);
-					}
-					img{
-						max-width: 100%;
-					}
-					::selection{
-						background-color: #333;
-						color: #fff;
-					}
+					@import 'src/css/global';
 				`}</style>
-			</div>
+			</Fragment>
 		)
 	}
 }
+
+export default Layout
+
+export const query = graphql`
+	query LayoutQuery {
+		site {
+			siteMetadata {
+				title
+			}
+		}
+	}
+`

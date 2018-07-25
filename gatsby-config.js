@@ -1,183 +1,87 @@
-require('envdotjs').load()
-const meta = require('./src/meta')
-const extract = require('extract-front-matter-properties')
-
-const productIds = extract('./src/markdown/products/**/*.md', 'id', { sync: true })
-
-const plugins = [
-	'gatsby-plugin-styled-jsx-postcss',
-	'gatsby-plugin-sharp',
-	'gatsby-transformer-sharp',
-	'gatsby-plugin-react-helmet',
-	'gatsby-plugin-remove-trailing-slashes',
-	//'gatsby-plugin-snipcart',
-	'gatsby-plugin-page-load-delay',
-	'gatsby-source-product-markdown',
-	'gatsby-plugin-product-markdown-pages',
-	{
-		resolve: 'gatsby-plugin-hubspot',
-		options: {
-			id: process.env.HUBSPOT_ID
-		},
+module.exports = {
+	siteMetadata: {
+		title: `Escalade Web Engineering Docs`,
 	},
-	{
-		resolve: 'gatsby-plugin-webpack-bundle-analyzer',
-		options: {
-			defaultSizes: 'gzip',
-			production: false,
-			disable: true,
-		},
-	},
-	{
-		resolve: 'gatsby-plugin-canonical-urls',
-		options: {
-			siteUrl: meta.siteUrl,
-		},
-	},
-	{
-		resolve: 'gatsby-transformer-remark',
-		options: {
-			plugins: [
-				'gatsby-remark-prismjs',
-				'gatsby-remark-copy-linked-files',
-				'gatsby-remark-smartypants',
-			],
-		},
-	},
-	{
-		resolve: 'gatsby-source-filesystem',
-		options: {
-			name: 'markdown',
-			path: `${__dirname}/src/markdown`,
-		},
-	},
-	{
-		resolve: 'gatsby-source-filesystem',
-		options: {
-			name: 'img',
-			path: `${__dirname}/src/img`,
-		},
-	},
-	{
-		resolve: 'gatsby-plugin-favicon',
-		options: {
-			logo: './src/img/icon.png',
-			injectHTML: true,
-			icons: {
-				android: false,
-				appleIcon: false,
-				appleStartup: false,
-				coast: false,
-				favicons: true,
-				firefox: false,
-				twitter: false,
-				yandex: false,
-				windows: false
-			}
-		}
-	},
-	/*
-	{
-		resolve: '@andrew-codes/gatsby-plugin-elasticlunr-search',
-		options: {
-			fields: [
-				'title',
-				'id',
-				'pageId',
-				'type',
-				'slug',
-				'splitSlug',
-				//'html',
-			],
-			resolvers: {
-				MarkdownRemark: {
-					title: node => node.frontmatter.title,
-					id: node => node.fields.slug,
-					splitSlug: node => node.fields.slug.split('/'),
-					pageId: node => node.frontmatter.id,
-					type: node => node.frontmatter.type,
-					//html: node => matter(node.internal.content).content,
+	plugins: [
+		'gatsby-plugin-esca-css',
+		`gatsby-plugin-sharp`,
+		`gatsby-transformer-sharp`,
+		`gatsby-plugin-react-helmet`,
+		`gatsby-plugin-remove-trailing-slashes`,
+		{
+			resolve: `gatsby-plugin-favicon`,
+			options: {
+				logo: `./src/img/icon.png`,
+				injectHTML: true,
+				icons: {
+					android: false,
+					appleIcon: false,
+					appleStartup: false,
+					coast: false,
+					favicons: true,
+					firefox: false,
+					twitter: false,
+					yandex: false,
+					windows: false
 				}
 			}
-		}
-	},
-	*/
-	/*
-	{
-		resolve: 'gatsby-plugin-google-fonts',
-		options: {
-			fonts: [
-          'limelight',
-          'source sans pro\:300,400,400i,700',
-			]
-		}
-	},
-	*/
-	{
-		resolve: 'gatsby-plugin-sitemap',
-		options: {
-			serialize: ({ site, allSitePage }) => {
-				allSitePage.edges = allSitePage.edges.filter((edge) => {
-					if ([
-						// Excluded pages from sitemap
-						'/404',
-						'/offline-plugin-app-shell-fallback',
-					].indexOf(edge.node.path) === -1) return true
-					return false
-				})
-				return allSitePage.edges.map(edge => {
-					// Remove trailing slash
-					let path = edge.node.path.split('/')
-					if (!path[path.length - 1]) path.pop()
-					path = path.join('/')
-					return {
-						url: site.siteMetadata.siteUrl + path,
-						changefreq: `daily`,
-						priority: 0.7,
-					}
-				})
-			}
-		}
-	},
-	'gatsby-plugin-manifest',
-	{
-		resolve: 'gatsby-plugin-escalade-stock',
-		options: {
-			siteId: process.env.GATSBY_ESCALADE_SITE_ID,
-			ids: productIds
-		}
-	},
-]
-
-if (process.env.SALSIFY_API_KEY){
-	plugins.push({
-		resolve: 'gatsby-source-salsify',
-		options: {
-			ids: productIds,
-			apiKey: process.env.SALSIFY_API_KEY,
-			types: {
-				webImages: 'array'
-			},
-			media: [
-				'webImages'
-			],
 		},
-	})
-}
-
-if (process.env.GOOGLE_ANALYTICS_ID){
-	plugins.push({
-		resolve: 'gatsby-plugin-google-analytics',
-		options: {
-			trackingId: process.env.GOOGLE_ANALYTICS_ID
-		}
-	})
-}
-else{
-	console.log('No Google Analytics ID found')
-}
-
-module.exports = {
-	siteMetadata: meta,
-	plugins: plugins,
+		{
+			resolve: `gatsby-plugin-web-font-loader`,
+			options: {
+				google: {
+					families: [
+						`Oswald`,
+						`Open Sans`,
+					]
+				}
+			}
+		},
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				path: `${__dirname}/src/pages`,
+				name: `pages`,
+			},
+		},
+		{
+			resolve: `gatsby-transformer-remark`,
+			options: {
+				plugins: [
+					`gatsby-remark-prismjs`,
+					`gatsby-remark-copy-linked-files`,
+					`gatsby-remark-smartypants`,
+					{
+						resolve: `gatsby-remark-external-links`,
+						options: {
+							target: `_blank`,
+						}
+					},
+				],
+			},
+		},
+		`gatsby-plugin-markdown-pages`,
+		`gatsby-plugin-polyfill-io`,
+		{
+			resolve: `gatsby-plugin-manifest`,
+			options: {
+				name: `Escalade Web Engineering Docs`,
+				short_name: `Escalade`,
+				start_url: `/`,
+				background_color: `#fff`,
+				theme_color: `#52b8fc`,
+				display: `minimal-ui`,
+				icon: `src/img/icon.png`
+			},
+		},
+		`gatsby-plugin-offline`,
+		`gatsby-plugin-netlify`,
+		`gatsby-plugin-netlify-cache`,
+		{
+			resolve: `gatsby-plugin-html-attributes`,
+			options: {
+				lang: `en`,
+			},
+		},
+	],
 }
