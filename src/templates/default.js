@@ -17,9 +17,6 @@ export default class DocsTemplate extends React.Component{
 				<section>
 					<div dangerouslySetInnerHTML={{ __html: content.html }} />
 				</section>
-				<style jsx>{`
-					@import 'src/css';
-				`}</style>
 			</Fragment>
 		)
 	}

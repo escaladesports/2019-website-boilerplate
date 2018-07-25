@@ -7,9 +7,6 @@ export default class HomePage extends React.Component {
 				<section>
 					<div>Home Page</div>
 				</section>
-				<style jsx>{`
-					@import 'src/css';
-				`}</style>
 			</Fragment>
 		)
 	}
