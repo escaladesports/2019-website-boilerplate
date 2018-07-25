@@ -58,7 +58,6 @@
     "prism-themes": "^1.0.1",
     "prismjs": "^1.14.0",
     "react": "^16.4.0",
-    "react-burgers": "^1.0.4",
     "react-dom": "^16.4.0",
     "react-helmet": "^5.2.0",
     "react-no-ssr": "^1.1.0",
