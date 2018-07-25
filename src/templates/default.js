@@ -3,18 +3,19 @@ import Meta from '../components/meta'
 
 export default class DefaultTemplate extends React.Component{
 	render(){
-		const data = this.props.data
-		const content = data.markdownRemark
-		const fm = content.frontmatter
-		const title = fm.title ? fm.title : content.fields.title
+		const {
+			frontmatter,
+			html,
+			excerpt,
+		} =  this.props.data.markdownRemark
 		return(
 			<Fragment>
 				<Meta
-					title={title}
-					description={content.excerpt}
+					title={frontmatter.title}
+					description={excerpt}
 				/>
 				<section>
-					<div dangerouslySetInnerHTML={{ __html: content.html }} />
+					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</section>
 			</Fragment>
 		)
