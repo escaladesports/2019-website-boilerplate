@@ -1,4 +1,4 @@
-import CMS from 'netlify-cms/src'
+import CMS from 'netlify-cms'
 import 'netlify-cms/dist/cms.css'
 import identity from 'netlify-identity-widget'
 import '../css/cms.css'
