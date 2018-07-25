@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react'
 import Meta from '../components/meta'
 
-export default class DocsTemplate extends React.Component{
+export default class DefaultTemplate extends React.Component{
 	render(){
 		const data = this.props.data
 		const content = data.markdownRemark
 		const fm = content.frontmatter
 		const title = fm.title ? fm.title : content.fields.title
-		console.log(this.props)
 		return(
 			<Fragment>
 				<Meta
