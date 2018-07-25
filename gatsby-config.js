@@ -76,6 +76,7 @@ module.exports = {
 		`gatsby-plugin-offline`,
 		`gatsby-plugin-sitemap`,
 		`gatsby-plugin-netlify`,
+		`gatsby-plugin-netlify-identity-widget`,
 		{
 			resolve: `gatsby-plugin-netlify-cms`,
 			options: {
