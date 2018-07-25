@@ -1,6 +1,10 @@
 const { title, shortTitle } = require('./meta')
 
 module.exports = {
+	siteMetadata: {
+		title,
+		siteUrl: `https://www.escaladesports.com`,
+	},
 	plugins: [
 		'gatsby-plugin-esca-css',
 		`gatsby-plugin-sharp`,
