@@ -98,6 +98,6 @@ module.exports = {
 				modulePath: `${__dirname}/src/components/cms.js`,
 			},
 		},
-		// `gatsby-plugin-netlify-cache`,
+		`gatsby-plugin-netlify-cache`,
 	],
 }
