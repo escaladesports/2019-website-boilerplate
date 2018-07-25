@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Helmet } from 'react-helmet'
+import Meta from '../components/meta'
 
 class DocsTemplate extends React.Component{
 	render(){
@@ -10,10 +10,10 @@ class DocsTemplate extends React.Component{
 		console.log(this.props)
 		return(
 			<Fragment>
-				<Helmet>
-					<title>{title} · {data.site.siteMetadata.title}</title>
-					<meta name='description' content={content.excerpt} />
-				</Helmet>
+				<Meta
+					title={title}
+					description={content.excerpt}
+				/>
 				<section>
 					<div dangerouslySetInnerHTML={{ __html: content.html }} />
 				</section>
@@ -35,11 +35,6 @@ export const query = graphql`
 			html
 			excerpt(pruneLength: 175)
 			frontmatter{
-				title
-			}
-		}
-		site {
-			siteMetadata {
 				title
 			}
 		}

@@ -1,7 +1,6 @@
+const { title, shortTitle } = require('./meta')
+
 module.exports = {
-	siteMetadata: {
-		title: `Escalade Web Engineering Docs`,
-	},
 	plugins: [
 		'gatsby-plugin-esca-css',
 		`gatsby-plugin-sharp`,
@@ -65,8 +64,8 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
-				name: `Escalade Web Engineering Docs`,
-				short_name: `Escalade`,
+				name: title,
+				short_name: shortTitle,
 				start_url: `/`,
 				background_color: `#fff`,
 				theme_color: `#52b8fc`,

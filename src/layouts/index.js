@@ -1,14 +1,15 @@
 import React, { Fragment } from 'react'
 import { Helmet } from 'react-helmet'
+import { title } from '../../meta'
 
-class Layout extends React.Component{
+export default class Layout extends React.Component{
 	render(){
 		const { data, children } = this.props
 		return(
 			<Fragment>
 				<Helmet>
 					<meta charSet="utf-8" />
-					<title>{data.site.siteMetadata.title }</title>
+					<title>{title}</title>
 				</Helmet>
 				<main>
 					{children()}
@@ -20,15 +21,3 @@ class Layout extends React.Component{
 		)
 	}
 }
-
-export default Layout
-
-export const query = graphql`
-	query LayoutQuery {
-		site {
-			siteMetadata {
-				title
-			}
-		}
-	}
-`
