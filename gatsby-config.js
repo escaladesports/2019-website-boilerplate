@@ -43,7 +43,7 @@ module.exports = {
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
-				path: `${__dirname}/src/pages`,
+				path: `${__dirname}/src/markdown/pages`,
 				name: `pages`,
 			},
 		},
@@ -63,7 +63,12 @@ module.exports = {
 				],
 			},
 		},
-		`gatsby-plugin-markdown-pages`,
+		{
+			resolve: `gatsby-plugin-markdown-pages`,
+			options: {
+				path: `./src/markdown/pages`,
+			}
+		},
 		{
 			resolve: `gatsby-plugin-html-attributes`,
 			options: {
