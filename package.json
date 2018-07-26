@@ -23,6 +23,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "eslint": "^5.2.0",
     "eslint-config-escalade-sports": "^0.1.2",
     "gatsby": "^1.9.247",
     "gatsby-image": "^1.0.51",

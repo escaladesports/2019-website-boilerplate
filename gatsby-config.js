@@ -1,4 +1,4 @@
-const { title, shortTitle } = require('./site-config')
+const { title, shortTitle } = require(`./site-config`)
 
 module.exports = {
 	siteMetadata: {
@@ -29,7 +29,7 @@ module.exports = {
 						resolve: `gatsby-remark-external-links`,
 						options: {
 							target: `_blank`,
-						}
+						},
 					},
 				],
 			},
@@ -38,7 +38,7 @@ module.exports = {
 			resolve: `gatsby-plugin-markdown-pages`,
 			options: {
 				path: `./src/markdown/pages`,
-			}
+			},
 		},
 		{
 			resolve: `gatsby-plugin-manifest`,
@@ -49,7 +49,7 @@ module.exports = {
 				background_color: `#fff`,
 				theme_color: `#52b8fc`,
 				display: `minimal-ui`,
-				icon: `src/img/icon.png`
+				icon: `src/img/icon.png`,
 			},
 		},
 		`gatsby-plugin-offline`,
@@ -88,9 +88,9 @@ module.exports = {
 					firefox: false,
 					twitter: false,
 					yandex: false,
-					windows: false
-				}
-			}
+					windows: false,
+				},
+			},
 		},
 		{
 			resolve: `gatsby-plugin-web-font-loader`,
@@ -99,9 +99,9 @@ module.exports = {
 					families: [
 						`Oswald`,
 						`Open Sans`,
-					]
-				}
-			}
+					],
+				},
+			},
 		},
 	],
 }
