@@ -6,40 +6,11 @@ module.exports = {
 		siteUrl: `https://www.escaladesports.com`,
 	},
 	plugins: [
-		'gatsby-plugin-esca-css',
+		// Build plugins
+		`gatsby-plugin-esca-css`,
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
-		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-remove-trailing-slashes`,
-		{
-			resolve: `gatsby-plugin-favicon`,
-			options: {
-				logo: `./src/img/icon.png`,
-				injectHTML: true,
-				icons: {
-					android: false,
-					appleIcon: false,
-					appleStartup: false,
-					coast: false,
-					favicons: true,
-					firefox: false,
-					twitter: false,
-					yandex: false,
-					windows: false
-				}
-			}
-		},
-		{
-			resolve: `gatsby-plugin-web-font-loader`,
-			options: {
-				google: {
-					families: [
-						`Oswald`,
-						`Open Sans`,
-					]
-				}
-			}
-		},
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
@@ -70,13 +41,6 @@ module.exports = {
 			}
 		},
 		{
-			resolve: `gatsby-plugin-html-attributes`,
-			options: {
-				lang: `en`,
-			},
-		},
-		`gatsby-plugin-polyfill-io`,
-		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
 				name: title,
@@ -91,8 +55,6 @@ module.exports = {
 		`gatsby-plugin-offline`,
 		`gatsby-plugin-sitemap`,
 		`gatsby-plugin-netlify`,
-		`gatsby-plugin-recaptcha`,
-		`gatsby-plugin-netlify-identity-widget`,
 		{
 			resolve: `gatsby-plugin-netlify-cms`,
 			options: {
@@ -100,5 +62,46 @@ module.exports = {
 			},
 		},
 		`gatsby-plugin-netlify-cache`,
+
+		// Injections
+		`gatsby-plugin-react-helmet`,
+		`gatsby-plugin-recaptcha`,
+		`gatsby-plugin-netlify-identity-widget`,
+		`gatsby-plugin-polyfill-io`,
+		{
+			resolve: `gatsby-plugin-html-attributes`,
+			options: {
+				lang: `en`,
+			},
+		},
+		{
+			resolve: `gatsby-plugin-favicon`,
+			options: {
+				logo: `./src/img/icon.png`,
+				injectHTML: true,
+				icons: {
+					android: false,
+					appleIcon: false,
+					appleStartup: false,
+					coast: false,
+					favicons: true,
+					firefox: false,
+					twitter: false,
+					yandex: false,
+					windows: false
+				}
+			}
+		},
+		{
+			resolve: `gatsby-plugin-web-font-loader`,
+			options: {
+				google: {
+					families: [
+						`Oswald`,
+						`Open Sans`,
+					]
+				}
+			}
+		},
 	],
 }
