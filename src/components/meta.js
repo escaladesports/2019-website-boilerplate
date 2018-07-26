@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 import {
 	title as siteTitle,
 	description as siteDescription,
-} from '../../meta'
+} from '../../site-config'
 
 export default class Meta extends React.Component {
 	render() {

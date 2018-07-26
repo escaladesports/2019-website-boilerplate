@@ -1,4 +1,4 @@
-const { title, shortTitle } = require('./meta')
+const { title, shortTitle } = require('./site-config')
 
 module.exports = {
 	siteMetadata: {
@@ -91,6 +91,7 @@ module.exports = {
 		`gatsby-plugin-offline`,
 		`gatsby-plugin-sitemap`,
 		`gatsby-plugin-netlify`,
+		`gatsby-plugin-recaptcha`,
 		`gatsby-plugin-netlify-identity-widget`,
 		{
 			resolve: `gatsby-plugin-netlify-cms`,

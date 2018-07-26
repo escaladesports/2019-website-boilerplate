@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Helmet } from 'react-helmet'
-import { title } from '../../meta'
+import { title } from '../../site-config'
 
 export default class Layout extends React.Component{
 	render(){
