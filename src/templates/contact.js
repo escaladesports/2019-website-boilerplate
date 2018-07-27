@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
-import Meta from '../components/meta'
 import Form from 'react-netlify-form'
 import ReCaptcha from 'react-recaptcha'
+import { css } from 'emotion'
+import Button from '../components/button'
+import Meta from '../components/meta'
 
 export default class DefaultTemplate extends React.Component{
 	render(){
@@ -16,15 +18,15 @@ export default class DefaultTemplate extends React.Component{
 					title={frontmatter.title}
 					description={excerpt}
 				/>
-				<section>
+				<section className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
 						<Form>
 							{({ loading, error, success }) => (
 								<Fragment>
-									{loading && 'Loading...'}
-									{error && 'Error.'}
-									{success && 'Success.'}
+									{loading && `Loading...`}
+									{error && `Error.`}
+									{success && `Success.`}
 									{!loading && !success && (
 										<Fragment>
 											<label>
@@ -36,7 +38,7 @@ export default class DefaultTemplate extends React.Component{
 												<textarea name='Message' required />
 											</label>
 											<ReCaptcha sitekey='6Lcg9A4UAAAAAJt4z7SDzNIr-5bRQkZJa-q6d-LS' />
-											<button>Submit</button>
+											<Button>Submit</Button>
 										</Fragment>
 									)}
 								</Fragment>
@@ -44,15 +46,16 @@ export default class DefaultTemplate extends React.Component{
 						</Form>
 					</div>
 				</section>
-				<style jsx>{`
-					label{
-						display: block;
-					}
-				`}</style>
 			</Fragment>
 		)
 	}
 }
+
+const styles = css({
+	label: {
+		display: `block`,
+	},
+})
 
 export const query = graphql`
 	query ContactTemplate($slug: String!) {

@@ -13,22 +13,26 @@
     "live": "opn https://gatsby-boilerplate.netlify.com/",
     "netlify": "opn https://app.netlify.com/sites/gatsby-boilerplate/deploys",
     "precommit": "lint-staged",
-    "serve": "cd public && serve --open",
+    "serve": "gatsby serve --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "lint-staged": {
     "**/*.js": [
-      "eslint ./ --fix",
+      "eslint --fix",
       "git add"
     ]
   },
   "dependencies": {},
   "devDependencies": {
+    "color": "^3.0.0",
+    "emotion": "^9.2.6",
+    "emotion-server": "^9.2.6",
     "eslint": "^5.2.0",
     "eslint-config-escalade-sports": "^0.1.2",
     "gatsby": "^1.9.247",
     "gatsby-image": "^1.0.51",
     "gatsby-link": "^1.6.40",
+    "gatsby-plugin-emotion": "^1.1.17",
     "gatsby-plugin-esca-css": "^1.0.3",
     "gatsby-plugin-favicon": "^2.1.1",
     "gatsby-plugin-google-fonts": "^0.0.4",
@@ -49,7 +53,6 @@
     "gatsby-plugin-web-font-loader": "^1.0.2",
     "gatsby-remark-copy-linked-files": "^1.5.32",
     "gatsby-remark-external-links": "^0.0.4",
-    "gatsby-remark-prismjs": "^2.0.2",
     "gatsby-remark-smartypants": "^1.4.12",
     "gatsby-source-filesystem": "^1.5.36",
     "gatsby-transformer-remark": "^1.7.41",
@@ -59,8 +62,6 @@
     "netlify-cms": "^1.9.3",
     "npm-run-all": "^4.1.3",
     "opn-cli": "^3.1.0",
-    "prism-themes": "^1.0.1",
-    "prismjs": "^1.14.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
     "react-helmet": "^5.2.0",

@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react'
 import { Helmet } from 'react-helmet'
+import { injectGlobal, css } from 'emotion'
+import globalStyles from '../styles/global'
 import { title } from '../../site-config'
+
+injectGlobal(globalStyles)
 
 export default class Layout extends React.Component{
 	render(){
-		const { data, children } = this.props
 		return(
 			<Fragment>
 				<Helmet>
@@ -12,11 +15,8 @@ export default class Layout extends React.Component{
 					<title>{title}</title>
 				</Helmet>
 				<main>
-					{children()}
+					{this.props.children()}
 				</main>
-				<style jsx global>{`
-					@import 'src/css/global';
-				`}</style>
 			</Fragment>
 		)
 	}

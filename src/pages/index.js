@@ -1,13 +1,19 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import { css } from 'emotion'
 
 export default class HomePage extends React.Component {
 	render() {
 		return (
-			<Fragment>
-				<section>
-					<div>Home Page</div>
-				</section>
-			</Fragment>
+			<section className={styles}>
+				<h1>Home Page</h1>
+			</section>
 		)
 	}
 }
+
+const styles = css({
+	padding: 30,
+	h1: {
+		color: `red`,
+	},
+})
