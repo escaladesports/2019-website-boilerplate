@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import { Helmet } from 'react-helmet'
-import { injectGlobal, css } from 'emotion'
+import { injectGlobal } from 'emotion'
 import globalStyles from '../styles/global'
 import { title } from '../../site-config'
 
