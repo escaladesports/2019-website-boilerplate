@@ -18,7 +18,6 @@ export default {
 	},
 	body: {
 		position: `relative`,
-		minHeight: `100%`,
 		margin: 0,
 		fontFamily: `${secondaryFont}, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
 		textRendering: `optimizeLegibility`,
