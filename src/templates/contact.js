@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import Form from 'react-netlify-form'
 import ReCaptcha from 'react-recaptcha'
 import { css } from 'emotion'
-import Button from '../components/button'
+import buttonMixin from '../styles/mixins/button'
 import Meta from '../components/meta'
 
 export default class DefaultTemplate extends React.Component{
@@ -38,7 +38,7 @@ export default class DefaultTemplate extends React.Component{
 												<textarea name='Message' required />
 											</label>
 											<ReCaptcha sitekey='6Lcg9A4UAAAAAJt4z7SDzNIr-5bRQkZJa-q6d-LS' />
-											<Button>Submit</Button>
+											<button className={buttonMixin}>Submit</button>
 										</Fragment>
 									)}
 								</Fragment>

@@ -3651,9 +3651,9 @@ escape-string-regexp@1.0.5, escape-string-regexp@^1.0.0, escape-string-regexp@^1
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-eslint-config-escalade-sports@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-escalade-sports/-/eslint-config-escalade-sports-0.1.2.tgz#43287aa4387aa31b1282f02dd5fdc449e386a8e8"
+eslint-config-escalade-sports@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-escalade-sports/-/eslint-config-escalade-sports-0.2.1.tgz#6833bdc3339851ee30f258ddc2e0ff179fc9d2f7"
   dependencies:
     babel-eslint "^8.2.6"
     eslint-plugin-jsx-a11y "^6.1.1"

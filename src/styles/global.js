@@ -1,4 +1,12 @@
-import { mixins } from './config'
+import {
+	white,
+	primaryColor,
+	primaryActiveColor,
+} from './colors'
+import {
+	primaryFont,
+	secondaryFont,
+} from './fonts'
 
 export default {
 	html: {
@@ -12,7 +20,7 @@ export default {
 		position: `relative`,
 		minHeight: `100%`,
 		margin: 0,
-		fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
+		fontFamily: `${secondaryFont}, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
 		textRendering: `optimizeLegibility`,
 		fontSize: 18,
 	},
@@ -20,7 +28,11 @@ export default {
 		'-webkit-tap-highlight-color': `rgba(0, 0, 0, 0)`,
 	},
 	a: {
-		...mixins.link,
+		color: primaryColor,
+		'&:focus, &:hover, &:active': {
+			textDecoration: `none`,
+			color: primaryActiveColor,
+		},
 	},
 	p: {
 		lineHeight: `28px`,
@@ -28,20 +40,16 @@ export default {
 	img: {
 		maxWidth: `100%`,
 	},
-	h1: {
-		...mixins.h1,
-	},
-	h2: {
-		...mixins.h2,
-	},
-	h3: {
-		...mixins.h3,
+	'h1, h2, h3': {
+		fontFamily: primaryFont,
+		textTransform: `uppercase`,
 	},
 	li: {
 		lineHeight: `1.3em`,
 		marginBottom: 4,
 	},
 	'::selection': {
-		...mixins.highlight,
+		color: white,
+		backgroundColor: primaryColor,
 	},
 }
