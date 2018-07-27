@@ -5,6 +5,12 @@ import { css } from 'emotion'
 import buttonMixin from '../styles/mixins/button'
 import Meta from '../components/meta'
 
+const styles = css({
+	label: {
+		display: `block`,
+	},
+})
+
 export default class DefaultTemplate extends React.Component{
 	render(){
 		const {
@@ -50,12 +56,6 @@ export default class DefaultTemplate extends React.Component{
 		)
 	}
 }
-
-const styles = css({
-	label: {
-		display: `block`,
-	},
-})
 
 export const query = graphql`
 	query ContactTemplate($slug: String!) {
