@@ -17,14 +17,10 @@ collections:
         widget: string
         tagname: h1
         required: true
-      - label: Description
-        name: description
-        widget: string
-        tagname: p
-        required: true
       - label: Template
         name: template
         widget: string
+        default: default
         required: false
       - label: Body
         name: body
