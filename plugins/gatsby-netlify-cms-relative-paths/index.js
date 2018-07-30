@@ -11,6 +11,5 @@ module.exports = async ({ markdownNode, markdownAST, getNode }, options) => {
 		imgs.forEach((img, key) => {
 			img.url = newPaths[key]
 		})
-		console.log(imgs)
 	}
 }

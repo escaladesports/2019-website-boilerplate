@@ -11,8 +11,8 @@ module.exports = async (markdownPath, imagePath, options) => {
 	){
 		return imagePath
 	}
-	let path = dirname(markdownPath).replace(`${cwd}/`, ``)
+	markdownPath = dirname(markdownPath).replace(`${cwd}/`, ``)
 	imagePath = imagePath.replace(publicPath, mediaPath)
-	const newPath = relative(path, imagePath)
+	const newPath = relative(markdownPath, imagePath)
 	return newPath
 }

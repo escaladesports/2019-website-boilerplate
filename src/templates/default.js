@@ -8,7 +8,6 @@ export default class DefaultTemplate extends React.Component{
 			html,
 			excerpt,
 		} =  this.props.data.markdownRemark
-		console.log(frontmatter)
 		return(
 			<Fragment>
 				<Meta
