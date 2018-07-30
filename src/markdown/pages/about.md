@@ -1,5 +1,6 @@
 ---
 title: About Us
+image: /uploads/logo.png
 ---
 
 # About Us
