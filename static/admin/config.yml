@@ -26,3 +26,6 @@ collections:
         name: template
         widget: string
         required: false
+      - label: Body
+        name: body
+        widget: markdown
