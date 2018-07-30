@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "CMS" }]*/
 import CMS from 'netlify-cms'
 import 'netlify-cms/dist/cms.css'
 import identity from 'netlify-identity-widget'
@@ -13,14 +14,14 @@ injectGlobal({
 	},
 	'.nc-githubAuthenticationPage-button': {
 		color: `transparent !important`,
-	},
-	'.nc-githubAuthenticationPage-button::after': {
-		content: `Sign In`,
-		textAlign: `center`,
-		color: `#fff`,
-		position: `absolute`,
-		left: 0,
-		right: 0,
+		'&:after': {
+			content: `Sign In`,
+			textAlign: `center`,
+			color: `#fff`,
+			position: `absolute`,
+			left: 0,
+			right: 0,
+		},
 	},
 })
 
