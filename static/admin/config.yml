@@ -20,7 +20,6 @@ collections:
       - label: Template
         name: template
         widget: string
-        default: default
         required: false
       - label: Image
         name: image

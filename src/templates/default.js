@@ -8,6 +8,7 @@ export default class DefaultTemplate extends React.Component{
 			html,
 			excerpt,
 		} =  this.props.data.markdownRemark
+		console.log(frontmatter)
 		return(
 			<Fragment>
 				<Meta
@@ -31,6 +32,13 @@ export const query = graphql`
 			excerpt(pruneLength: 175)
 			frontmatter{
 				title
+				image{
+					childImageSharp {
+						sizes(maxWidth: 550) {
+							...GatsbyImageSharpSizes_withWebp
+						}
+					}
+				}
 			}
 		}
 	}

@@ -11,6 +11,7 @@ module.exports = {
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
+		`gatsby-netlify-cms-relative-paths`,
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
@@ -19,15 +20,29 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				path: `${__dirname}/static/uploads`,
+				name: `uploads`,
+			},
+		},
+		{
 			resolve: `gatsby-transformer-remark`,
 			options: {
 				plugins: [
+					//`gatsby-netlify-cms-relative-paths`,
 					`gatsby-remark-copy-linked-files`,
 					`gatsby-remark-smartypants`,
 					{
 						resolve: `gatsby-remark-external-links`,
 						options: {
 							target: `_blank`,
+						},
+					},
+					{
+						resolve: `gatsby-remark-images`,
+						options: {
+							maxWidth: 600,
 						},
 					},
 				],

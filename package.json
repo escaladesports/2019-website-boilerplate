@@ -7,7 +7,7 @@
     "clean": "run-p clean:gatsbyCache clean:nodeCache",
     "clean:gatsbyCache": "rm -rf .cache",
     "clean:nodeCache": "rm -rf node_modules/.cache",
-    "dev": "gatsby develop --open",
+    "dev": "npm run clean && gatsby develop --open",
     "encrypt": "envdotjs encrypt",
     "lint": "eslint ./src",
     "live": "opn https://gatsby-boilerplate.netlify.com/",
@@ -22,7 +22,11 @@
       "git add"
     ]
   },
-  "dependencies": {},
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "read-yaml-promise": "^1.0.2",
+    "unist-util-select": "^1.5.0"
+  },
   "devDependencies": {
     "color": "^3.0.0",
     "emotion": "^9.2.6",
@@ -52,6 +56,7 @@
     "gatsby-plugin-web-font-loader": "^1.0.2",
     "gatsby-remark-copy-linked-files": "^1.5.32",
     "gatsby-remark-external-links": "^0.0.4",
+    "gatsby-remark-images": "^1.5.67",
     "gatsby-remark-smartypants": "^1.4.12",
     "gatsby-source-filesystem": "^1.5.36",
     "gatsby-transformer-remark": "^1.7.41",
