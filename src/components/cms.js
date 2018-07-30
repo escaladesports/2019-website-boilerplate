@@ -3,19 +3,20 @@ import CMS from 'netlify-cms'
 import 'netlify-cms/dist/cms.css'
 import identity from 'netlify-identity-widget'
 import { injectGlobal } from 'emotion'
+import logo from '../img/logo.png'
 
 injectGlobal({
 	'.nc-githubAuthenticationPage-logo svg': {
 		display: `none !important`,
 	},
 	'.nc-githubAuthenticationPage-logo': {
-		background: `url('../img/logo.png') no-repeat center center !important`,
+		background: `url('${logo}') no-repeat center center !important`,
 		backgroundSize: `contain !important`,
 	},
 	'.nc-githubAuthenticationPage-button': {
 		color: `transparent !important`,
 		'&:after': {
-			content: `Sign In`,
+			content: `"Sign In"`,
 			textAlign: `center`,
 			color: `#fff`,
 			position: `absolute`,
