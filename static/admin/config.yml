@@ -22,6 +22,11 @@ collections:
         widget: string
         default: default
         required: false
+      - label: Image
+        name: image
+        widget: images
+        required: false
       - label: Body
         name: body
         widget: markdown
+        required: false
