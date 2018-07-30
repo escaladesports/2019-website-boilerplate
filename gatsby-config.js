@@ -27,10 +27,16 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `gatsby-plugin-markdown-pages`,
+			options: {
+				path: `./src/markdown/pages`,
+			},
+		},
+		{
 			resolve: `gatsby-transformer-remark`,
 			options: {
 				plugins: [
-					//`gatsby-netlify-cms-relative-paths`,
+					`gatsby-netlify-cms-relative-paths`,
 					`gatsby-remark-copy-linked-files`,
 					`gatsby-remark-smartypants`,
 					{
@@ -42,16 +48,14 @@ module.exports = {
 					{
 						resolve: `gatsby-remark-images`,
 						options: {
-							maxWidth: 600,
+							maxWidth: 1200,
+							linkImagesToOriginal: false,
+							withWebp: {
+								quality: 95,
+							},
 						},
 					},
 				],
-			},
-		},
-		{
-			resolve: `gatsby-plugin-markdown-pages`,
-			options: {
-				path: `./src/markdown/pages`,
 			},
 		},
 		{

@@ -32,13 +32,13 @@ export const query = graphql`
 			excerpt(pruneLength: 175)
 			frontmatter{
 				title
-				image{
-					childImageSharp {
-						sizes(maxWidth: 550) {
-							...GatsbyImageSharpSizes_withWebp
-						}
-					}
-				}
+				# image{
+				# 	childImageSharp {
+				# 		sizes(maxWidth: 550) {
+				# 			...GatsbyImageSharpSizes_withWebp
+				# 		}
+				# 	}
+				# }
 			}
 		}
 	}

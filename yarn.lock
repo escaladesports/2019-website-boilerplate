@@ -4744,8 +4744,8 @@ gatsby-plugin-sitemap@^1.2.25:
     sitemap "^1.12.0"
 
 gatsby-plugin-web-font-loader@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-web-font-loader/-/gatsby-plugin-web-font-loader-1.0.2.tgz#ed34f6c1c0a19d6a57d8ed716f12246d1911b448"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-web-font-loader/-/gatsby-plugin-web-font-loader-1.0.3.tgz#9dc892b24c4e16ab7506c7726efe8d62aaef2022"
   dependencies:
     babel-runtime "^6.26.0"
     webfontloader "^1.6.28"
