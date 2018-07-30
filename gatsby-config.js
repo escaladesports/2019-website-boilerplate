@@ -11,7 +11,7 @@ module.exports = {
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
-		`gatsby-netlify-cms-relative-paths`,
+		`gatsby-plugin-netlify-cms-paths`,
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
@@ -36,7 +36,7 @@ module.exports = {
 			resolve: `gatsby-transformer-remark`,
 			options: {
 				plugins: [
-					`gatsby-netlify-cms-relative-paths`,
+					`gatsby-plugin-netlify-cms-paths`,
 					`gatsby-remark-copy-linked-files`,
 					`gatsby-remark-smartypants`,
 					{

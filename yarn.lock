@@ -4650,6 +4650,14 @@ gatsby-plugin-markdown-pages@^1.0.2:
   dependencies:
     babel-runtime "^6.26.0"
 
+gatsby-plugin-netlify-cms-paths@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify-cms-paths/-/gatsby-plugin-netlify-cms-paths-1.0.1.tgz#bcfa67ef7d67d9d94ed00da2eb4f309dd6f73c16"
+  dependencies:
+    babel-runtime "^6.26.0"
+    read-yaml-promise "^1.0.2"
+    unist-util-select "^1.5.0"
+
 gatsby-plugin-netlify-cms@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify-cms/-/gatsby-plugin-netlify-cms-2.0.1.tgz#1c22c3b4019486436295cfb6ee8180658847dbd8"
