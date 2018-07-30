@@ -27,7 +27,7 @@ export default class DefaultTemplate extends React.Component{
 				<section className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
-						<Form>
+						<Form name='Contact'>
 							{({ loading, error, success }) => (
 								<Fragment>
 									{loading && `Loading...`}
