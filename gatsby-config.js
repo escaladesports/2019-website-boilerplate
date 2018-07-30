@@ -1,9 +1,9 @@
-const { title, shortTitle } = require(`./site-config`)
+const { title, shortTitle, siteUrl } = require(`./site-config`)
 
 module.exports = {
 	siteMetadata: {
 		title,
-		siteUrl: `https://www.escaladesports.com`,
+		siteUrl,
 	},
 	plugins: [
 		// Build plugins
