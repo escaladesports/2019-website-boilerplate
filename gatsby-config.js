@@ -10,6 +10,9 @@ module.exports = {
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
 		`gatsby-plugin-netlify-cms-paths`,
+		`gatsby-plugin-sitemap`,
+		`gatsby-plugin-robots-txt`,
+		`gatsby-plugin-netlify`,
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {
@@ -57,6 +60,18 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `gatsby-plugin-netlify-cms`,
+			options: {
+				modulePath: `${__dirname}/src/components/cms.js`,
+			},
+		},
+		{
+			resolve: `gatsby-plugin-canonical-urls`,
+			options: {
+				siteUrl: config.siteUrl,
+			},
+		},
+		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
 				name: config.title,
@@ -69,17 +84,8 @@ module.exports = {
 			},
 		},
 		`gatsby-plugin-offline`,
-		`gatsby-plugin-sitemap`,
-		`gatsby-plugin-robots-txt`,
-		`gatsby-plugin-netlify`,
-		{
-			resolve: `gatsby-plugin-netlify-cms`,
-			options: {
-				modulePath: `${__dirname}/src/components/cms.js`,
-			},
-		},
 
-		// Injections
+		// Client plugins
 		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-recaptcha`,
 		`gatsby-plugin-netlify-identity-widget`,
