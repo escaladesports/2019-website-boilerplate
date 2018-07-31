@@ -1,11 +1,8 @@
 require(`dotenv`).config({ silent: true })
-const { title, shortTitle, siteUrl } = require(`./site-config`)
+const config = require(`./site-config`)
 
 module.exports = {
-	siteMetadata: {
-		title,
-		siteUrl,
-	},
+	siteMetadata: config,
 	plugins: [
 		// Build plugins
 		`gatsby-plugin-emotion`,
@@ -62,8 +59,8 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
-				name: title,
-				short_name: shortTitle,
+				name: config.title,
+				short_name: config.shortTitle,
 				start_url: `/`,
 				background_color: `#fff`,
 				theme_color: `#52b8fc`,
