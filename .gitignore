@@ -22,10 +22,11 @@ envdotjs-key
 env.js
 env.key
 env.js.key
+.env.js
+.env.key
+.env.js.key
 .serverless
 _optimize
-.babelrc
-.postcssrc
 
 # Temporary
 temp
