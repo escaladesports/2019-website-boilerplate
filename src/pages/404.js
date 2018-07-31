@@ -11,7 +11,6 @@ export default class PageNotFound extends React.Component {
 			<Fragment>
 				<Meta title={frontmatter.title} />
 				<section>
-					<h1>404 Page Version</h1>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</section>
 			</Fragment>
