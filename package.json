@@ -1,6 +1,6 @@
 {
   "name": "gatsby-boilerplate",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "scripts": {
     "build": "NODE_ENV=production gatsby build",
