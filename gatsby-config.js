@@ -1,3 +1,4 @@
+require(`dotenv`).config({ silent: true })
 const { title, shortTitle, siteUrl } = require(`./site-config`)
 
 module.exports = {
