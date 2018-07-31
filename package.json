@@ -8,6 +8,7 @@
     "clean:gatsbyCache": "rm -rf .cache",
     "clean:nodeCache": "rm -rf node_modules/.cache",
     "dev": "npm run clean && gatsby develop --open",
+    "env": "node utils/env",
     "lint": "eslint ./src",
     "live": "opn https://gatsby-boilerplate.netlify.com/",
     "netlify": "opn https://app.netlify.com/sites/gatsby-boilerplate/deploys",
