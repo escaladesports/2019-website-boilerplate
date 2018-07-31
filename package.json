@@ -52,7 +52,6 @@
     "gatsby-plugin-react-helmet": "^2.0.10",
     "gatsby-plugin-recaptcha": "^1.0.4",
     "gatsby-plugin-remove-trailing-slashes": "^1.0.9",
-    "gatsby-plugin-robots-txt": "^1.3.0",
     "gatsby-plugin-sharp": "^1.6.44",
     "gatsby-plugin-sitemap": "^1.2.25",
     "gatsby-plugin-web-font-loader": "^1.0.3",
