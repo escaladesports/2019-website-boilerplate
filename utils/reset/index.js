@@ -1,9 +1,9 @@
-import { spawn } from 'child-process-promise'
-import {
+const { spawn } = require(`child-process-promise`)
+const {
 	remove,
 	pathExists,
-} from 'fs-extra'
-import rename from './rename'
+} = require(`fs-extra`)
+const rename = require(`./rename`)
 
 async function resetGit() {
 	if (!await pathExists(`.git`)) {
@@ -21,9 +21,9 @@ async function resetGit() {
 	})
 }
 
-async function reset(options){
-	await rename(options)
+async function reset(){
+	await rename()
 	await resetGit()
 }
 
-export default reset
+reset()

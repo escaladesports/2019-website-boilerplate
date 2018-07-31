@@ -12,7 +12,7 @@
     "live": "opn https://gatsby-boilerplate.netlify.com/",
     "netlify": "opn https://app.netlify.com/sites/gatsby-boilerplate/deploys",
     "precommit": "lint-staged",
-    "reset": "babel-node utils/reset",
+    "reset": "node utils/reset",
     "serve": "gatsby serve --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

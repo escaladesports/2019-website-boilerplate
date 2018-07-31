@@ -1,12 +1,12 @@
-import { basename } from 'path'
-import {
+const { basename } = require(`path`)
+const {
 	readJson,
 	outputJson,
 	pathExists,
-} from 'fs-extra'
+} = require(`fs-extra`)
 
 
-function recursiveReset(options, obj) {
+function recursiveReset(options = {}, obj) {
 	for (let i in obj) {
 		if (i === `dependencies` || i === `devDependencies`) {
 			continue
@@ -21,7 +21,7 @@ function recursiveReset(options, obj) {
 	return obj
 }
 
-async function renamePackage(options) {
+async function renamePackage(options = {}) {
 	if (!await pathExists(`package.json`)) {
 		return console.log(`No package.json file found`)
 	}
@@ -41,11 +41,11 @@ async function renamePackage(options) {
 	await outputJson(`package.json`, pkg, { spaces: 2 })
 }
 
-async function rename(options) {
+async function rename(options = {}) {
 	if (!options.name) {
 		options.name = basename(process.cwd())
 	}
 	await renamePackage(options)
 }
 
-export default rename
+module.exports = rename
