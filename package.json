@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "scripts": {
-    "build": "NODE_ENV=production gatsby build",
+    "build": "run-p build:gatsby build:functions",
+    "build:gatsby": "NODE_ENV=production gatsby build",
+    "build:functions": "netlify-lambda build src/functions",
     "clean": "run-p clean:gatsbyCache clean:nodeCache",
     "clean:gatsbyCache": "rm -rf .cache",
     "clean:nodeCache": "rm -rf node_modules/.cache",
@@ -23,9 +25,7 @@
       "git add"
     ]
   },
-  "dependencies": {
-    "gatsby-plugin-robots-txt": "^1.3.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "child-process-promise": "^2.2.1",
     "color": "^3.0.0",
@@ -55,6 +55,7 @@
     "gatsby-plugin-react-helmet": "^2.0.10",
     "gatsby-plugin-recaptcha": "^1.0.4",
     "gatsby-plugin-remove-trailing-slashes": "^1.0.9",
+    "gatsby-plugin-robots-txt": "^1.3.0",
     "gatsby-plugin-sharp": "^1.6.44",
     "gatsby-plugin-sitemap": "^1.2.25",
     "gatsby-plugin-web-font-loader": "^1.0.3",
@@ -69,6 +70,7 @@
     "isomorphic-fetch": "^2.2.1",
     "lint-staged": "^7.2.0",
     "netlify-cms": "^1.9.3",
+    "netlify-lambda": "^0.4.0",
     "npm-run-all": "^4.1.3",
     "opn-cli": "^3.1.0",
     "react": "^16.4.0",
