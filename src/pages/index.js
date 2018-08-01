@@ -6,7 +6,7 @@ export default class HomePage extends React.Component {
 		const { html } = this.props.data.markdownRemark
 		return (
 			<Layout>
-				<div dangerouslySetInnerHTML={{ _html: html }} />
+				<div dangerouslySetInnerHTML={{ __html: html }} />
 			</Layout>
 		)
 	}

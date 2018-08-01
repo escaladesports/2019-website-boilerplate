@@ -38,7 +38,7 @@ export default class DefaultTemplate extends React.Component{
 												Message:
 												<textarea name='Message' required />
 											</label>
-											<ReCaptcha sitekey='6Le2PGcUAAAAADwr6YfbeaKK4Rch8SuzXmFx6Zqf' />
+											<ReCaptcha sitekey={process.env.SITE_RECAPTCHA_KEY} />
 											<button className={buttonMixin}>Submit</button>
 										</Fragment>
 									)}
