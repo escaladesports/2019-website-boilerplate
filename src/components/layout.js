@@ -16,9 +16,7 @@ export default class Layout extends React.Component{
 					<title>{title}</title>
 				</Helmet>
 				<Header />
-				<main>
-					{this.props.children()}
-				</main>
+				<main>{ this.props.children }</main>
 				<Footer />
 			</Fragment>
 		)

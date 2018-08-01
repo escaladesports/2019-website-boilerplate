@@ -3,6 +3,7 @@ import Form from 'react-netlify-form'
 import ReCaptcha from 'react-recaptcha'
 import { css } from 'emotion'
 import buttonMixin from '../styles/mixins/button'
+import Layout from '../components/layout'
 import Meta from '../components/meta'
 
 const styles = css({
@@ -19,7 +20,7 @@ export default class DefaultTemplate extends React.Component{
 			excerpt,
 		} =  this.props.data.markdownRemark
 		return(
-			<Fragment>
+			<Layout>
 				<Meta
 					title={frontmatter.title}
 					description={excerpt}
@@ -52,7 +53,7 @@ export default class DefaultTemplate extends React.Component{
 						</Form>
 					</div>
 				</section>
-			</Fragment>
+			</Layout>
 		)
 	}
 }

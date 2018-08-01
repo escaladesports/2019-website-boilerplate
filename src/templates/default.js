@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import Layout from '../components/layout'
 import Meta from '../components/meta'
 
 export default class DefaultTemplate extends React.Component{
@@ -9,7 +10,7 @@ export default class DefaultTemplate extends React.Component{
 			excerpt,
 		} =  this.props.data.markdownRemark
 		return(
-			<Fragment>
+			<Layout>
 				<Meta
 					title={frontmatter.title}
 					description={excerpt}
@@ -17,7 +18,7 @@ export default class DefaultTemplate extends React.Component{
 				<section>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</section>
-			</Fragment>
+			</Layout>
 		)
 	}
 }

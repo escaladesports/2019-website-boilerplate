@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react'
+import React from 'react'
+import Layout from '../components/layout'
 import Meta from '../components/meta'
 
 export default class PageNotFound extends React.Component {
@@ -8,12 +9,12 @@ export default class PageNotFound extends React.Component {
 			html,
 		} = this.props.data.markdownRemark
 		return (
-			<Fragment>
+			<Layout>
 				<Meta title={frontmatter.title} />
 				<section>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 				</section>
-			</Fragment>
+			</Layout>
 		)
 	}
 }
