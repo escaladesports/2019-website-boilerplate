@@ -9,6 +9,7 @@ export default class DefaultTemplate extends React.Component{
 			html,
 			excerpt,
 		} =  this.props.data.markdownRemark
+		console.log(this.props.data)
 		return(
 			<Layout>
 				<Meta
@@ -28,8 +29,12 @@ export const query = graphql`
 		markdownRemark(fields: {
 			slug: { eq: $slug }
 		}){
+			fileAbsolutePath
 			html
 			excerpt(pruneLength: 175)
+			fields{
+				slug
+			}
 			frontmatter{
 				title
 				# image{

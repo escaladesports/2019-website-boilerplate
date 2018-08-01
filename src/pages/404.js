@@ -21,8 +21,8 @@ export default class PageNotFound extends React.Component {
 
 export const query = graphql`
 	query PageNotFound {
-		markdownRemark(fields: {
-			slug: { eq: "/404" }
+		markdownRemark(fileAbsolutePath: {
+			regex: "/src/markdown/404.md/"
 		}){
 			html
 			frontmatter{

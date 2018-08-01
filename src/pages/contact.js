@@ -6,12 +6,6 @@ import buttonMixin from '../styles/mixins/button'
 import Layout from '../components/layout'
 import Meta from '../components/meta'
 
-const styles = css({
-	label: {
-		display: `block`,
-	},
-})
-
 export default class DefaultTemplate extends React.Component{
 	render(){
 		const {
@@ -58,10 +52,16 @@ export default class DefaultTemplate extends React.Component{
 	}
 }
 
+const styles = css`
+	label{
+		display: block;
+	}
+`
+
 export const query = graphql`
-	query ContactTemplate($slug: String!) {
-		markdownRemark(fields: {
-			slug: { eq: $slug }
+	query ContactTemplate {
+		markdownRemark(fileAbsolutePath: {
+			regex: "/src/markdown/contact.md/"
 		}){
 			html
 			excerpt(pruneLength: 175)
