@@ -16,9 +16,7 @@ export default class DefaultTemplate extends React.Component{
 					title={frontmatter.title}
 					description={excerpt}
 				/>
-				<section>
-					<div dangerouslySetInnerHTML={{ __html: html }} />
-				</section>
+				<div dangerouslySetInnerHTML={{ __html: html }} />
 			</Layout>
 		)
 	}

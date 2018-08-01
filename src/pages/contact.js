@@ -19,7 +19,7 @@ export default class DefaultTemplate extends React.Component{
 					title={frontmatter.title}
 					description={excerpt}
 				/>
-				<section className={styles}>
+				<div className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
 						<Form name='Contact'>
@@ -46,7 +46,7 @@ export default class DefaultTemplate extends React.Component{
 							)}
 						</Form>
 					</div>
-				</section>
+				</div>
 			</Layout>
 		)
 	}

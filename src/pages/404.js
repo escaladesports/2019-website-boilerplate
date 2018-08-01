@@ -11,9 +11,7 @@ export default class PageNotFound extends React.Component {
 		return (
 			<Layout>
 				<Meta title={frontmatter.title} />
-				<section>
-					<div dangerouslySetInnerHTML={{ __html: html }} />
-				</section>
+				<div dangerouslySetInnerHTML={{ __html: html }} />
 			</Layout>
 		)
 	}
