@@ -6,22 +6,22 @@ import {
 } from '../colors'
 import { primaryFont } from '../fonts'
 
-export default css({
-	fontFamily: primaryFont,
-	backgroundColor: primaryColor,
-	color: white,
-	cursor: `pointer`,
-	borderRadius: 8,
-	padding: [10, 30],
-	fontSize: `1.1em`,
-	textTransform: `uppercase`,
-	border: 0,
-	outline: 0,
-	userSelect: `none`,
-	'&:focus, &: hover, &: active': {
-		backgroundColor: primaryActiveColor,
-	},
-	'&:active': {
-		transform: `translate(0, 2px)`,
-	},
-})
+export default css`
+	font-family: ${primaryFont};
+	background-color: ${primaryColor};
+	color: ${white};
+	cursor: pointer;
+	border-radius: 8px;
+	padding: 10px 30px;
+	font-size: 1.1em;
+	text-transform: uppercase;
+	border: 0;
+	outline: 0;
+	user-select: none;
+	&:focus, &:hover, &:active {
+		background-color: ${primaryActiveColor};
+	}
+	&:active {
+		transform: translate(0, 2px);
+	}
+`
