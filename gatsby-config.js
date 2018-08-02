@@ -115,6 +115,12 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `gatsby-plugin-google-tagmanager`,
+			options: {
+				id: `GTM-TD88KD8`,
+			},
+		},
+		{
 			resolve: `gatsby-plugin-web-font-loader`,
 			options: {
 				google: {

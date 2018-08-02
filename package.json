@@ -43,6 +43,7 @@
     "gatsby-plugin-esca-css": "^1.0.3",
     "gatsby-plugin-favicon": "^2.1.1",
     "gatsby-plugin-google-fonts": "^0.0.4",
+    "gatsby-plugin-google-tagmanager": "^1.0.19",
     "gatsby-plugin-html-attributes": "^1.0.4",
     "gatsby-plugin-manifest": "^1.0.22",
     "gatsby-plugin-markdown-pages": "^1.0.2",
