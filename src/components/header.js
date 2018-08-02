@@ -1,9 +1,15 @@
 import React from 'react'
+import Link from 'gatsby-link'
 
 export default class Header extends React.Component{
 	render(){
 		return (
-			<header></header>
+			<header>
+				<ul>
+					<li><Link to='/about'>About</Link></li>
+					<li><Link to='/contact'>Contact</Link></li>
+				</ul>
+			</header>
 		)
 	}
 }
