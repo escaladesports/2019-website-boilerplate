@@ -9,6 +9,8 @@ exports.onPreBuild = async (_, {
 	token,
 	prefix,
 	secrets,
+	cron = {},
+	timezone = `UTC`,
 }) => {
 	path = `${path}/**/*.js`
 	const files = await glob(path)
@@ -16,16 +18,42 @@ exports.onPreBuild = async (_, {
 	if(secrets){
 		let parsedSecrets = []
 		for(let i in secrets){
-			parsedSecrets.push(` --secret ${i}=${secrets[i]}`)
+			parsedSecrets.push(`--secret ${i}=${secrets[i]}`)
 		}
-		secrets = parsedSecrets.join(``)
+		secrets = parsedSecrets.join(` `)
 	}
 
 	for (let i = files.length; i--;) {
 		const filePath = files[i]
 		const taskName = `${prefix}${parse(filePath).name}`
 		console.log(`Deploying webtask "${taskName}"...`)
-		const cmd = `wt create "${filePath}" --bundle --container "${container}" --url "${url}" --token "${token}" --name "${taskName}"${secrets}`
+		let cmd = [ `wt` ]
+		if (cron[taskName]) {
+			cmd.push(`cron`)
+		}
+		cmd.push(`create`)
+		if(cron[taskName]){
+			const schedule = typeof cron[taskName] === `string`
+				? cron[taskName]
+				: `0 0 * * *`
+			cmd.push(
+				`--schedule "${schedule}"`,
+				`--tz ${timezone}`,
+			)
+		}
+		cmd.push(
+			`"${filePath}"`,
+			`--bundle`,
+			`--container "${container}"`,
+			`--url "${url}"`,
+			`--token "${token}"`,
+			`--name "${taskName}"`,
+		)
+		if(secrets){
+			cmd.push(secrets)
+		}
+		cmd = cmd.join(` `)
+		console.log(cmd)
 		try {
 			await spawn(cmd, [], {
 				shell: true,
@@ -38,6 +66,4 @@ exports.onPreBuild = async (_, {
 		}
 		console.log(`Deployed webtask "${taskName}"`)
 	}
-
-	process.exit(0)
 }
