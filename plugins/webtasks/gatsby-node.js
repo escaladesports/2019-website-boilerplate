@@ -26,11 +26,16 @@ exports.onPreBuild = async (_, {
 		const taskName = `${prefix}${parse(filePath).name}`
 		console.log(`Deploying webtask "${taskName}"...`)
 		const cmd = `wt create "${filePath}" --bundle --container "${container}" --url "${url}" --token "${token}" --name "${taskName}"${secrets}`
-		console.log(cmd)
-		await spawn(cmd, [], {
-			shell: true,
-			stdio: `inherit`,
-		})
+		try {
+			await spawn(cmd, [], {
+				shell: true,
+				stdio: `inherit`,
+			})
+		}
+		catch(err){
+			console.error(err)
+			process.exit(1)
+		}
 		console.log(`Deployed webtask "${taskName}"`)
 	}
 

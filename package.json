@@ -84,6 +84,7 @@
     "react-recaptcha": "^2.3.10",
     "statable": "^0.3.2",
     "static-server": "^2.2.1",
-    "toml": "^2.3.3"
+    "toml": "^2.3.3",
+    "wt-cli": "^10.0.3"
   }
 }
