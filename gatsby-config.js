@@ -72,6 +72,19 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `webtasks`,
+			options: {
+				path: `src/functions`,
+				container: process.env.WEBTASKS_CONTAINER,
+				token: process.env.WEBTASKS_TOKEN,
+				prefix: `test-`,
+				secrets: {
+					test: `testing!`,
+					SITE_RECAPTCHA_KEY: process.env.SITE_RECAPTCHA_KEY,
+				},
+			},
+		},
+		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
 				name: config.title,

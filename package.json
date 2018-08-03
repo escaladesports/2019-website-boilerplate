@@ -27,7 +27,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "child-process-promise": "^2.2.1",
+    "async-child-process": "^1.1.1",
+    "child-process-async": "^1.0.1",
     "color": "^3.0.0",
     "dotenv": "^6.0.0",
     "emotion": "^9.2.6",
