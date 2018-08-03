@@ -15,6 +15,8 @@ exports.onPreBuild = async (_, {
 	path = `${path}/**/*.js`
 	const files = await glob(path)
 
+	if (typeof prefix === `function`) prefix = prefix()
+
 	if(secrets){
 		let parsedSecrets = []
 		for(let i in secrets){
@@ -53,7 +55,6 @@ exports.onPreBuild = async (_, {
 			cmd.push(secrets)
 		}
 		cmd = cmd.join(` `)
-		console.log(cmd)
 		try {
 			await spawn(cmd, [], {
 				shell: true,

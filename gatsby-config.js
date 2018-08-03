@@ -77,7 +77,24 @@ module.exports = {
 				path: `src/functions`,
 				container: process.env.WEBTASKS_CONTAINER,
 				token: process.env.WEBTASKS_TOKEN,
-				prefix: `test-`,
+				prefix: () => {
+					const prefix = []
+					const {
+						CONTEXT,
+						BRANCH,
+					} = process.env
+					if (CONTEXT === `production`){
+						prefix.push(`production`)
+					}
+					else if (BRANCH){
+						prefix.push(BRANCH)
+					}
+					else{
+						prefix.push(`development`)
+					}
+					prefix.push(`gatsby-boilerplate`)
+					return `${prefix.join(`-`)}-`
+				},
 				secrets: {
 					test: `testing!`,
 					SITE_RECAPTCHA_KEY: process.env.SITE_RECAPTCHA_KEY,
@@ -152,7 +169,7 @@ module.exports = {
 			proxy({
 				target: `http://localhost:9000`,
 				pathRewrite: {
-					"/.netlify/functions/": ``,
+					'/.netlify/functions/': ``,
 				},
 			})
 		)
