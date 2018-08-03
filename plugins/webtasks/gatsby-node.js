@@ -18,7 +18,7 @@ exports.onPreBuild = async (_, {
 		for(let i in secrets){
 			parsedSecrets.push(` --secret ${i}=${secrets[i]}`)
 		}
-		secrets = parsedSecrets.join()
+		secrets = parsedSecrets.join(``)
 	}
 
 	for (let i = files.length; i--;) {
