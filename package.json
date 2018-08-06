@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "scripts": {
-    "build": "run-s patch build:gatsby",
+    "build": "run-s patch build:gatsby build:post",
     "build:gatsby": "NODE_ENV=production gatsby build",
+    "build:post": "node utils/post-process",
     "clean": "run-p clean:gatsbyCache clean:nodeCache",
     "clean:gatsbyCache": "rm -rf .cache",
     "clean:nodeCache": "rm -rf node_modules/.cache",
