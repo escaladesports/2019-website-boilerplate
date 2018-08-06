@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "scripts": {
-    "build": "NODE_ENV=production gatsby build",
+    "build": "run-s patch build:gatsby",
+    "build:gatsby": "NODE_ENV=production gatsby build",
     "clean": "run-p clean:gatsbyCache clean:nodeCache",
     "clean:gatsbyCache": "rm -rf .cache",
     "clean:nodeCache": "rm -rf node_modules/.cache",
@@ -14,6 +15,7 @@
     "lint": "eslint ./src",
     "live": "opn https://gatsby-boilerplate.netlify.com/",
     "netlify": "opn https://app.netlify.com/sites/gatsby-boilerplate/deploys",
+    "patch": "node utils/patch",
     "precommit": "lint-staged",
     "reset": "node utils/reset",
     "serve": "gatsby serve --open",

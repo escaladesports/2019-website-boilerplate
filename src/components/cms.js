@@ -27,9 +27,9 @@ injectGlobal`
 `
 
 window.netlifyIdentity = identity
-// identity.init({
-// 	logo: false,
-// })
+identity.init({
+	logo: false,
+})
 identity.on(`login`, () => {
 	window.location.reload(false)
 })
