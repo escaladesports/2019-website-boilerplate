@@ -12,7 +12,7 @@ async function postProcess(){
 		let str = await readFile(path, `utf8`)
 		str = str.replace(
 			`<meta charset="UTF-8">`,
-			`<meta name="googlebot" content="noindex" /><meta charset="UTF-8">`)
+			`<meta name="robots" content="noindex" /><meta charset="UTF-8">`)
 		await outputFile(path, str)
 		console.log(`Post processed`)
 	}
