@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { Helmet } from 'react-helmet'
 import { injectGlobal } from 'emotion'
-import RouteDelayed from '../../plugins/loading-progress-state'
+import RouteDelayed from '../../plugins/route-delayed-animation'
 import globalStyles from '../styles/global'
 import { title } from '../../site-config'
 import Header from '../components/header'

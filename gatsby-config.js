@@ -71,41 +71,6 @@ module.exports = {
 				siteUrl: config.siteUrl,
 			},
 		},
-		// {
-		// 	resolve: `webtasks`,
-		// 	options: {
-		// 		path: `src/functions`,
-		// 		container: process.env.WEBTASKS_CONTAINER,
-		// 		token: process.env.WEBTASKS_TOKEN,
-		// 		prefix: () => {
-		// 			const prefix = []
-		// 			const {
-		// 				CONTEXT,
-		// 				BRANCH,
-		// 			} = process.env
-		// 			if (CONTEXT === `production`){
-		// 				prefix.push(`production`)
-		// 			}
-		// 			else if (BRANCH){
-		// 				prefix.push(BRANCH)
-		// 			}
-		// 			else{
-		// 				prefix.push(`development`)
-		// 			}
-		// 			prefix.push(`gatsby-boilerplate`)
-		// 			return `${prefix.join(`-`)}-`
-		// 		},
-		// 		shouldDeploy: () => {
-		// 			if(process.env.CONTEXT !== `production`){
-		// 				return false
-		// 			}
-		// 		},
-		// 		secrets: {
-		// 			test: `testing!`,
-		// 			SITE_RECAPTCHA_KEY: process.env.SITE_RECAPTCHA_KEY,
-		// 		},
-		// 	},
-		// },
 		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
@@ -121,6 +86,7 @@ module.exports = {
 		`gatsby-plugin-offline`,
 
 		// Client plugins
+		`route-delayed-animation`,
 		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-recaptcha`,
 		`gatsby-plugin-netlify-identity-widget`,
