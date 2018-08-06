@@ -4,17 +4,12 @@ const {
 } = require(`fs-extra`)
 
 const cwd = process.cwd()
-const path = `${cwd}/node_modules/netlify-identity-widget/build/netlify-identity-widget.js`
-const find = `logo:t.modal.logo`
-const replace = `logo:false`
+const path = `${cwd}/node_modules/netlify-identity-widget/build/netlify-identity.js`
 
 async function patch(){
 	try{
 		let str = await readFile(path, `utf8`)
-		if(str.indexOf(find) === -1){
-			throw new Error(`Can't find string to replace`)
-		}
-		str = str.replace(find, replace)
+		str = str.replace(`logo:t.modal.logo`, `logo:false`)
 		await outputFile(path, str)
 		console.log(`Patched identity widget`)
 	}
