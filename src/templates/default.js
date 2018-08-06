@@ -9,7 +9,6 @@ export default class DefaultTemplate extends React.Component{
 			html,
 			excerpt,
 		} =  this.props.data.markdownRemark
-		console.log(this.props.data)
 		return(
 			<Layout>
 				<Meta

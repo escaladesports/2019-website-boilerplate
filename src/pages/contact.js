@@ -52,11 +52,11 @@ export default class DefaultTemplate extends React.Component{
 	}
 }
 
-const styles = css`
-	label{
-		display: block;
-	}
-`
+const styles = css({
+	label: {
+		display: `block`,
+	},
+})
 
 export const query = graphql`
 	query ContactTemplate {

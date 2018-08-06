@@ -8,47 +8,47 @@ import {
 	secondaryFont,
 } from './fonts'
 
-export default `
-	html {
-		height: 100%;
-		box-sizing: border-box;
+export default {
+	html: {
+		height: `100%`,
+		boxSizing: `border-box`,
 	},
-	*, *:before, *:after {
-		box-sizing: inherit;
-	}
-	body {
-		position: relative;
-		margin: 0;
-		font-family: "${secondaryFont}", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-		text-rendering: optimizeLegibility;
-		font-size: 18px;
-	}
-	html, body {
-		-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	}
-	a {
-		color: ${primaryColor};
-		&:focus, &:hover, &:active {
-			text-decoration: none;
-			color: ${primaryActiveColor};
-		}
-	}
-	p {
-		line-height: 28px;
-	}
-	img {
-		max-width: 100%;
-	}
-	h1, h2, h3 {
-		font-family: ${primaryFont};
-		text-transform: uppercase;
-	}
-	li {
-		line-height: 1.3em;
-		margin-bottom: 4px;
-	}
-	::selection: {
-		color: ${white};
-		background-color: ${primaryColor};
-	}
-`
+	'*, *:before, *:after': {
+		boxSizing: `inherit`,
+	},
+	body: {
+		position: `relative`,
+		margin: 0,
+		fontFamily: `"${secondaryFont}", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
+		textRendering: `optimizeLegibility`,
+		fontSize: `18px`,
+	},
+	'html, body': {
+		'-webkit-tap-highlight-color': `rgba(0, 0, 0, 0)`,
+	},
+	a: {
+		color: primaryColor,
+		'&:focus, &:hover, &:active': {
+			textDecoration: `none`,
+			color: primaryActiveColor,
+		},
+	},
+	p: {
+		lineHeight: `28px`,
+	},
+	img: {
+		maxWidth: `100%`,
+	},
+	'h1, h2, h3': {
+		fontFamily: primaryFont,
+		textTransform: `uppercase`,
+	},
+	li: {
+		lineHeight: `1.3em`,
+		marginBottom: `4px`,
+	},
+	'::selection': {
+		color: white,
+		backgroundColor: primaryColor,
+	},
+}
