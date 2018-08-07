@@ -89,7 +89,6 @@ module.exports = {
 		`route-delayed-animation`,
 		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-recaptcha`,
-		`gatsby-plugin-netlify-identity-widget`,
 		`gatsby-plugin-polyfill-io`,
 		{
 			resolve: `gatsby-plugin-html-attributes`,

@@ -22,6 +22,7 @@ export default {
 		fontFamily: `"${secondaryFont}", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
 		textRendering: `optimizeLegibility`,
 		fontSize: `18px`,
+		height: `200vh`,
 	},
 	'html, body': {
 		'-webkit-tap-highlight-color': `rgba(0, 0, 0, 0)`,
