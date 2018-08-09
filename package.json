@@ -4,8 +4,9 @@
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "scripts": {
     "build": "npm run build:gatsby",
-    "build:module": "rm -rf dist && mkdir dist && babel src/export --out-dir dist",
     "build:gatsby": "npm run patch && NODE_ENV=production gatsby build && node utils/gatsby-post-process",
+    "build:module": "rm -rf dist && mkdir dist && babel src/export --out-dir dist",
+    "build:plugin": "babel plugins/export --out-dir ./",
     "clean": "rm -rf .cache",
     "dev": "run-p dev:functions dev:gatsby",
     "dev:gatsby": "gatsby develop --open",
