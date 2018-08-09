@@ -28,7 +28,7 @@ export default class HomePage extends React.Component {
 					open={this.state.open}
 					onClose={() => this.setState({ open: false })}
 				>
-					<div style={{ height: `150vh` }}>Modal content</div>
+					<div>Modal content</div>
 				</Modal>
 			</Layout>
 		)

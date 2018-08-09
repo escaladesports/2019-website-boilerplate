@@ -32,6 +32,7 @@ function stopPropagation(e){
 
 const modalPadding = 15
 const closeSize = 30
+const maxWidth = 900
 
 const bgStyles = css({
 	background: `rgba(0, 0, 0, .4)`,
@@ -49,9 +50,13 @@ const dialogStyles = css({
 	minHeight: `100%`,
 	width: `100%`,
 	padding: modalPadding,
-	'@media (min-width: 800px)': {
+	[`@media (min-width: ${maxWidth}px)`]: {
 		top: 30,
-		maxWidth: 900,
+		left: `50%`,
+		transform: `translateX(-50%)`,
+		marginBottom: 30,
+		maxWidth: maxWidth,
+		minHeight: 0,
 	},
 })
 
