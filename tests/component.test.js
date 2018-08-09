@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, cleanup } from 'react-testing-library'
 import 'jest-dom/extend-expect'
-import Example from '../src/components'
+import Example from '../src/components/export'
 
 afterEach(cleanup)
 

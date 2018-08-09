@@ -91,12 +91,6 @@ module.exports = {
 		`gatsby-plugin-recaptcha`,
 		`gatsby-plugin-polyfill-io`,
 		{
-			resolve: `gatsby-plugin-html-attributes`,
-			options: {
-				lang: `en`,
-			},
-		},
-		{
 			resolve: `gatsby-plugin-favicon`,
 			options: {
 				logo: `./src/img/icon.png`,
