@@ -49,6 +49,10 @@ const dialogStyles = css({
 	minHeight: `100%`,
 	width: `100%`,
 	padding: modalPadding,
+	'@media (min-width: 800px)': {
+		top: 30,
+		maxWidth: 900,
+	},
 })
 
 const closeStyles = css({
