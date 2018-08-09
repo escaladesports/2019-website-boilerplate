@@ -1,7 +1,8 @@
 import React from 'react'
 import { css } from 'emotion'
-import Layout from '../components/layout'
 import buttonStyles from '../styles/mixins/button'
+import Layout from '../components/layout'
+import Meta from '../components/meta'
 import Modal from '../components/modal'
 
 export default class HomePage extends React.Component {
@@ -15,10 +16,10 @@ export default class HomePage extends React.Component {
 		const { html } = this.props.data.markdownRemark
 		return (
 			<Layout>
+				<Meta />
 				<div className={divStyles} dangerouslySetInnerHTML={{ __html: html }} />
 				<button
 					onClick={() => this.setState({ open: true })}
-
 					className={buttonStyles}
 				>
 					Test
@@ -27,7 +28,7 @@ export default class HomePage extends React.Component {
 					open={this.state.open}
 					onClose={() => this.setState({ open: false })}
 				>
-					<div style={{height: `150vh`}}>Modal content</div>
+					<div style={{ height: `150vh` }}>Modal content</div>
 				</Modal>
 			</Layout>
 		)
