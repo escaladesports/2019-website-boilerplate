@@ -83,6 +83,7 @@ module.exports = {
 				secrets: {
 					BUILD_HOOK: process.env.BUILD_HOOK,
 				},
+				shouldDeploy: process.env.BRANCH === `master`,
 			},
 		},
 		{

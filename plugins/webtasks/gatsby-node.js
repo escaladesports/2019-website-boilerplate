@@ -9,9 +9,16 @@ exports.onPreBuild = async (_, {
 	token,
 	secrets,
 	cron,
+	shouldDeploy,
 	timezone = `UTC`,
 }) => {
 
+	if (typeof shouldDeploy === `function` && !shouldDeploy()){
+		return
+	}
+	if(typeof shouldDeploy === `boolean` && !shouldDeploy){
+		return false
+	}
 
 	if(secrets){
 		let parsedSecrets = []
