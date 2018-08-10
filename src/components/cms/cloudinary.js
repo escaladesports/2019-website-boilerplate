@@ -17,7 +17,7 @@ class cloudinaryPreview extends React.component{
 	}
 }
 
-export default {
+export {
 	cloudinaryControl,
 	cloudinaryPreview,
 }
