@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "scripts": {
-    "build": "npm run build:gatsby",
+    "build": "npm-p build:lambda build:gatsby",
+    "build:lambda": "netlify-lambda build",
     "build:gatsby": "npm run patch && NODE_ENV=production gatsby build && node utils/gatsby-post-process",
     "build:module": "rm -rf dist && mkdir dist && babel src/export --out-dir dist",
     "build:plugin": "babel plugins/export --out-dir ./",
