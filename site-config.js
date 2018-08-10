@@ -3,4 +3,7 @@ module.exports = {
 	shortTitle: `Boilerplate`,
 	description: `A boilerplate for new Gatsby projects.`,
 	siteUrl: process.env.URL || `https://gatsby-boilerplate.netlify.com`,
+	cmsEmailWhitelist: [
+		`escaladesports.com`,
+	],
 }

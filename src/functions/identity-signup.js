@@ -1,6 +1,4 @@
-const whitelist = [
-	`escaladesports.com`,
-]
+import { cmsEmailWhitelist } from '../../site-config'
 
 export function handler({ body }, _, callback){
 	const { user } = JSON.parse(body)
@@ -8,7 +6,7 @@ export function handler({ body }, _, callback){
 	const domain = email.split(`@`)[1]
 	let res = ``
 	let statusCode = 400
-	if(whitelist.indexOf(domain) !== -1){
+	if(cmsEmailWhitelist.indexOf(domain) !== -1){
 		statusCode = 200
 		res = JSON.stringify({
 			app_metadata: {
