@@ -19,7 +19,7 @@
     "precommit": "lint-staged",
     "reset": "node utils/reset",
     "serve": "gatsby serve --open",
-    "test": "jest"
+    "test": "npm run build && jest"
   },
   "lint-staged": {
     "**/*.js": [
@@ -93,6 +93,7 @@
     "react-no-ssr": "^1.1.0",
     "react-recaptcha": "^2.3.10",
     "react-testing-library": "^4.1.7",
+    "request": "^2.87.0",
     "statable": "^0.3.2",
     "static-server": "^2.2.1",
     "toml": "^2.3.3",

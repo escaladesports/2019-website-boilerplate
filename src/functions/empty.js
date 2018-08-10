@@ -1,3 +1,5 @@
-module.exports = function ({ secrets }, cb) {
-	cb(null, secrets)
+module.exports = function (_, cb) {
+	cb(null, JSON.stringify({
+		success: true,
+	}))
 }

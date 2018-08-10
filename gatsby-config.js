@@ -73,6 +73,19 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `webtasks`,
+			options: {
+				name: `gatsby-boilerplate-autodeploy`,
+				path: `src/webtasks/autodeploy.js`,
+				container: process.env.WEBTASKS_CONTAINER,
+				token: process.env.WEBTASKS_TOKEN,
+				cron: `0 0 * * *`,
+				secrets: {
+					BUILD_HOOK: process.env.BUILD_HOOK,
+				},
+			},
+		},
+		{
 			resolve: `gatsby-plugin-manifest`,
 			options: {
 				name: config.title,
