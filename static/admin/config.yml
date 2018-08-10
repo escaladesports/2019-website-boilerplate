@@ -25,6 +25,10 @@ collections:
         name: image
         widget: image
         required: false
+      - label: Cloudinary Image
+        name: cloudinaryImage
+        widget: cloudinary
+        required: false
       - label: Body
         name: body
         widget: markdown
