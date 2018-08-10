@@ -1,12 +1,24 @@
+const whitelist = [
+	`escaladesports.com`,
+]
+
 export function handler({ body }, _, callback){
 	console.log(`IDENTITY SIGNUP`)
-	console.log(body)
-	callback(null, {
-		statusCode: 200,
-		body: JSON.stringify({
+	const { user } = JSON.parse(body)
+	const { email } = user
+	const domain = email.split(`@`)[1]
+	let res = ``
+	let statusCode = 400
+	if(whitelist.indexOf(domain) !== -1){
+		statusCode = 200
+		res = JSON.stringify({
 			app_metadata: {
 				roles: [`admin`],
 			},
-		}),
+		})
+	}
+	callback(null, {
+		statusCode,
+		body: res,
 	})
 }
