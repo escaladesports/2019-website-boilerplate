@@ -15,7 +15,6 @@ async function emailifyHtml(contents){
 	let promises = []
 	for(let path in contents){
 		let html = contents[path]
-		console.log(html)
 
 		html = stripComments(html)
 		html = await posthtml()
