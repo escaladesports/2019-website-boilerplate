@@ -6,12 +6,35 @@ export default class Footer extends React.Component{
 	render(){
 		return (
 			<footer className={footerStyles}>
-				<Link to='/privacy-policy'>Privacy Policy</Link>
+				<ul>
+					<li><Link to='/privacy-policy'>Privacy Policy</Link></li>
+					<li><a href='/admin/'>CMS</a></li>
+				</ul>
 			</footer>
 		)
 	}
 }
 
 const footerStyles = css({
-	padding: 30,
+	ul: {
+		listStyleType: `none`,
+		padding: 30,
+		margin: 0,
+	},
+	li: {
+		display: `inline-block`,
+	},
+	a: {
+		textDecoration: `none`,
+		padding: `0 10px`,
+		display: `inline-block`,
+	},
+	'ul > li': {
+		':first-of-type > a': {
+			paddingLeft: 0,
+		},
+		':last-of-type > a': {
+			paddingRight: 0,
+		},
+	},
 })
