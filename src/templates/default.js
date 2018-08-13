@@ -9,10 +9,11 @@ export default class DefaultTemplate extends React.Component{
 			html,
 			excerpt,
 		} =  this.props.data.markdownRemark
+		const { title } = frontmatter
 		return(
 			<Layout>
 				<Meta
-					title={frontmatter.title}
+					title={title}
 					description={excerpt}
 				/>
 				<div dangerouslySetInnerHTML={{ __html: html }} />

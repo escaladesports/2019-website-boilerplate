@@ -11,6 +11,12 @@ module.exports = {
 		`gatsby-plugin-remove-trailing-slashes`,
 		`gatsby-plugin-netlify-cms-paths`,
 		{
+			resolve: `email-templates`,
+			options: {
+				files: `email-templates/**/*`,
+			},
+		},
+		{
 			resolve: `gatsby-plugin-sitemap`,
 			options: {
 				exclude: [`/email-templates/*`],
