@@ -1,10 +1,13 @@
 import React from 'react'
 import { css } from 'emotion'
+import Link from 'gatsby-link'
 
 export default class Footer extends React.Component{
 	render(){
 		return (
-			<footer className={footerStyles}>Footer</footer>
+			<footer className={footerStyles}>
+				<Link to='/privacy-policy'>Privacy Policy</Link>
+			</footer>
 		)
 	}
 }

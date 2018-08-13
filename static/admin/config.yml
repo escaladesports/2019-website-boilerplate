@@ -7,29 +7,49 @@ media_folder: static/uploads
 public_folder: /uploads
 
 collections:
-  - name: page
-    label: Page
-    folder: src/markdown/pages
-    create: true
-    fields:
-      - label: Title
-        name: title
-        widget: string
-        tagname: h1
-        required: true
-      - label: Template
-        name: template
-        widget: string
-        required: false
-      - label: Image
-        name: image
-        widget: image
-        required: false
-      - label: Cloudinary Image
-        name: cloudinaryImage
-        widget: cloudinary
-        required: false
-      - label: Body
-        name: body
-        widget: markdown
-        required: false
+  - label: Pages
+    name: pages
+    files:
+      - label: Home
+        name: index
+        file: src/markdown/index.md
+        fields:
+          - label: Body
+            name: body
+            widget: markdown
+      - label: Contact
+        name: contact
+        file: src/markdown/contact.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Body
+            name: body
+            widget: markdown
+      - label: Privacy Policy
+        name: privacy-policy
+        file: src/markdown/privacy-policy.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Address
+            name: address
+            widget: text
+          - label: Email
+            name: email
+            widget: string
+          - label: Body
+            name: body
+            widget: markdown
+      - label: Page Not Found
+        name: '404'
+        file: src/markdown/404.md
+        fields:
+          - label: Title
+            name: title
+            widget: string
+          - label: Body
+            name: body
+            widget: markdown
