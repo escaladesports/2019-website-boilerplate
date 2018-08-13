@@ -10,8 +10,21 @@ module.exports = {
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
 		`gatsby-plugin-netlify-cms-paths`,
-		`gatsby-plugin-sitemap`,
-		`gatsby-plugin-robots-txt`,
+		{
+			resolve: `gatsby-plugin-sitemap`,
+			options: {
+				exclude: [`/email-templates/*`],
+			},
+		},
+		{
+			resolve: `gatsby-plugin-robots-txt`,
+			options: {
+				policy: [{
+					userAgent: `*`,
+					disallow: [`/email-templates`],
+				}],
+			},
+		},
 		`gatsby-plugin-netlify`,
 		{
 			resolve: `gatsby-source-filesystem`,

@@ -34,13 +34,6 @@ export const query = graphql`
 			}
 			frontmatter{
 				title
-				# image{
-				# 	childImageSharp {
-				# 		sizes(maxWidth: 550) {
-				# 			...GatsbyImageSharpSizes_withWebp
-				# 		}
-				# 	}
-				# }
 			}
 		}
 	}

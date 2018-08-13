@@ -3,10 +3,7 @@ import CMS from 'netlify-cms'
 import 'netlify-cms/dist/cms.css'
 import identity from 'netlify-identity-widget'
 import { injectGlobal } from 'emotion'
-import logo from '../../img/logo.png'
-// import { cloudinaryControl, cloudinaryPreview } from './cloudinary'
-
-// CMS.registerWidget(`cloudinary`, cloudinaryControl, cloudinaryPreview)
+import logo from '../../../static/backend-logo.png'
 
 injectGlobal({
 	'.nc-githubAuthenticationPage-logo svg': {
