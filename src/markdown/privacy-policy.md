@@ -1,7 +1,7 @@
 ---
 title: Privacy Policy
-address: >
-  Some Address
+address: |
+  Address Name
   Street Name
   City, State Zip
 email: some-email@gmail.com
