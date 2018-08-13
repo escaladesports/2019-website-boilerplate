@@ -4,7 +4,7 @@ import RouteDelayed from '../../plugins/route-delayed-animation'
 import globalStyles from '../styles/global'
 import Header from './header'
 import Footer from './footer'
-import RouteDelayedAnimation from '../components/route-delayed-animation'
+import RouteDelayedAnimation from './route-delayed-animation'
 
 injectGlobal(globalStyles)
 
@@ -37,7 +37,7 @@ const layoutStyles = css({
 
 const contentStyles = css({
 	margin: `0 auto`,
-	padding: 30,
+	padding: `0 30px`,
 	maxWidth: 960,
 	width: `100%`,
 	flex: `1 0 auto`,
