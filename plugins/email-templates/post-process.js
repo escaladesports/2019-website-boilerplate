@@ -15,11 +15,18 @@ async function emailifyHtml(contents){
 	let promises = []
 	for(let path in contents){
 		let html = contents[path]
+		console.log(html)
 
 		html = stripComments(html)
 		html = await posthtml()
 			.use(inlineCss())
-			.use(removeTags({ tags: [`style`, `script`, `link`, `iframe`, `noscript`] }))
+			.use(removeTags({ tags: [
+				//`style`,
+				`script`,
+				//`link`,
+				`iframe`,
+				`noscript`,
+			] }))
 			.use(doctype({ doctype: `HTML 4.01 Strict` }))
 			.use(removeAttributes([
 				`data-reactid`,

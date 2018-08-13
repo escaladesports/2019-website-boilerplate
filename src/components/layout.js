@@ -20,7 +20,8 @@ export default class Layout extends React.Component{
 		return(
 			<Fragment>
 				<Helmet>
-					<html className={globalStyles} />
+					<html className={htmlStyles} />
+					<body className={bodyStyles} />
 				</Helmet>
 				<div className={layoutStyles}>
 					<Header />
@@ -37,22 +38,22 @@ export default class Layout extends React.Component{
 	}
 }
 
-const globalStyles = css({
+const htmlStyles = css({
 	height: `100%`,
 	boxSizing: `border-box`,
+	'-webkit-tap-highlight-color': `rgba(0, 0, 0, 0)`,
 	'*, *:before, *:after': {
 		boxSizing: `inherit`,
 	},
-	body: {
-		position: `relative`,
-		margin: 0,
-		fontFamily: `"${secondaryFont}", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
-		textRendering: `optimizeLegibility`,
-		fontSize: `18px`,
-	},
-	'html, body': {
-		'-webkit-tap-highlight-color': `rgba(0, 0, 0, 0)`,
-	},
+})
+
+const bodyStyles = css({
+	position: `relative`,
+	margin: 0,
+	fontFamily: `"${secondaryFont}", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
+	textRendering: `optimizeLegibility`,
+	fontSize: `18px`,
+	'-webkit-tap-highlight-color': `rgba(0, 0, 0, 0)`,
 	a: {
 		color: primaryColor,
 		'&:focus, &:hover, &:active': {

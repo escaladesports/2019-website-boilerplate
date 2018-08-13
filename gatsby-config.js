@@ -10,12 +10,12 @@ module.exports = {
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
 		`gatsby-plugin-netlify-cms-paths`,
-		{
-			resolve: `email-templates`,
-			options: {
-				files: `email-templates/**/*`,
-			},
-		},
+		// {
+		// 	resolve: `email-templates`,
+		// 	options: {
+		// 		files: `email-templates/**/*`,
+		// 	},
+		// },
 		{
 			resolve: `gatsby-plugin-sitemap`,
 			options: {
@@ -117,7 +117,6 @@ module.exports = {
 				icon: `src/img/icon.png`,
 			},
 		},
-		`gatsby-plugin-offline`,
 
 		// Client plugins
 		`route-delayed-animation`,
