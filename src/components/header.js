@@ -5,7 +5,7 @@ import { css } from 'emotion'
 export default class Header extends React.Component{
 	render(){
 		return (
-			<header className={styles}>
+			<header className={headerStyles}>
 				<ul>
 					<li><Link to='/'>Home</Link></li>
 					<li><Link to='/about'>About</Link></li>
@@ -16,18 +16,26 @@ export default class Header extends React.Component{
 	}
 }
 
-const styles = css`
-	ul{
-		list-style-type: none;
-		padding: 0;
-		margin: 0;
-	}
-	li{
-		display: inline-block;
-	}
-	a{
-		text-decoration: none;
-		padding: 10px;
-		display: inline-block;
-	}
-`
+const headerStyles = css({
+	ul: {
+		listStyleType: `none`,
+		padding: 30,
+		margin: 0,
+	},
+	li: {
+		display: `inline-block`,
+	},
+	a: {
+		textDecoration: `none`,
+		padding: `0 10px`,
+		display: `inline-block`,
+	},
+	'ul > li': {
+		':first-of-type > a': {
+			paddingLeft: 0,
+		},
+		':last-of-type > a': {
+			paddingRight: 0,
+		},
+	},
+})
