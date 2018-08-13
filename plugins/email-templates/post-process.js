@@ -20,9 +20,9 @@ async function emailifyHtml(contents){
 		html = await posthtml()
 			.use(inlineCss())
 			.use(removeTags({ tags: [
-				//`style`,
+				`style`,
 				`script`,
-				//`link`,
+				`link`,
 				`iframe`,
 				`noscript`,
 			] }))
