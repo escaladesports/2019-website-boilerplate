@@ -5,12 +5,12 @@ module.exports = function(){
 	return function custom(tree) {
 		tree.walk(node => {
 			if (typeof node === `object`) {
+				if (!node.attrs) {
+					node.attrs = {}
+				}
 				let src = node.attrs.src
 				switch(node.tag){
 				case `html`:
-					if(!node.attrs){
-						node.attrs = {}
-					}
 					Object.assign(node.attrs, {
 						'xmlns:v': `urn:schemas-microsoft-com:vml`,
 						'xmlns:o': `urn:schemas-microsoft-com:office:office`,
