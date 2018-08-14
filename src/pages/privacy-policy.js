@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '../components/layout'
+import Layout from '../components/layouts/default'
 import Meta from '../components/meta'
 
 export default class GridPage extends React.Component{

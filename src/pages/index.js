@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from 'emotion'
 import buttonStyles from '../styles/mixins/button'
-import Layout from '../components/layout'
+import Layout from '../components/layouts/default'
 import Meta from '../components/meta'
 import Modal from '../components/modal'
 

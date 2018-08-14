@@ -3,7 +3,7 @@ import Form from 'react-netlify-form'
 import ReCaptcha from 'react-recaptcha'
 import { css } from 'emotion'
 import buttonMixin from '../styles/mixins/button'
-import Layout from '../components/layout'
+import Layout from '../components/layouts/default'
 import Meta from '../components/meta'
 
 export default class DefaultTemplate extends React.Component{

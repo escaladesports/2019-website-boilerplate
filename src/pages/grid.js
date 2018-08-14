@@ -1,6 +1,6 @@
 import React from 'react'
 import { cx, css } from 'emotion'
-import Layout from '../components/layout'
+import Layout from '../components/layouts/default'
 import Meta from '../components/meta'
 import grid from '../styles/mixins/grid'
 

@@ -3,7 +3,6 @@ const { readFile, outputFile } = require(`fs-extra`)
 const posthtml = require(`posthtml`)
 const removeTags = require(`posthtml-remove-tags`)
 const doctype = require(`posthtml-doctype`)
-//const inlineCss = require(`posthtml-inline-css`)
 const beautify = require(`posthtml-beautify`)
 const stripComments = require(`strip-html-comments`)
 const removeAttributes = require(`posthtml-remove-attributes`)
@@ -18,9 +17,7 @@ async function emailifyHtml(contents){
 
 		html = stripComments(html)
 		html = await posthtml()
-			//.use(inlineCss())
 			.use(removeTags({ tags: [
-				//`style`,
 				`script`,
 				`link`,
 				`iframe`,
@@ -32,7 +29,6 @@ async function emailifyHtml(contents){
 				`data-reactroot`,
 				`data-react-checksum`,
 				`data-react-helmet`,
-				//`class`,
 			]))
 			.use(custom())
 			.use(beautify({
