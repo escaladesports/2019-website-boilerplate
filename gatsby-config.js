@@ -121,7 +121,7 @@ module.exports = {
 		`gatsby-plugin-offline`,
 
 		// Client plugins
-		`route-delayed-animation`,
+		//`route-delayed-animation`,
 		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-recaptcha`,
 		`gatsby-plugin-polyfill-io`,
@@ -150,14 +150,13 @@ module.exports = {
 		// 	},
 		// },
 		{
-			resolve: `gatsby-plugin-web-font-loader`,
+			resolve: `download-google-fonts`,
 			options: {
-				google: {
-					families: [
-						`Oswald`,
-						`Open Sans`,
-					],
-				},
+				fonts: [
+					`Oswald`,
+					`Open Sans`,
+				],
+				subset: `cyrillic`,
 			},
 		},
 	],
