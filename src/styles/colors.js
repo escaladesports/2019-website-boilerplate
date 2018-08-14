@@ -1,10 +1,14 @@
 import color from 'color'
 
 const colors = {
-	primaryColor: `#52b8fc`,
+	primaryColor: `#00dd00`,
 	secondaryColor: `#333`,
 	white: `#fff`,
 }
-colors.primaryActiveColor = color(colors.primary).lighten(.5)
+
+colors.primaryActiveColor = color(colors.primaryColor)
+	.lighten(.5)
+	.rgb()
+	.string()
 
 export default colors

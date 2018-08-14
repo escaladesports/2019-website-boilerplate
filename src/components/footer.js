@@ -25,7 +25,6 @@ const footerStyles = css({
 		display: `inline-block`,
 	},
 	a: {
-		textDecoration: `none`,
 		padding: `0 10px`,
 		display: `inline-block`,
 	},

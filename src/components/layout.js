@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { css } from 'emotion'
-import { Helmet } from 'react-helmet'
 import RouteDelayed from '../../plugins/route-delayed-animation'
 import Header from './header'
 import Footer from './footer'
@@ -8,21 +7,18 @@ import RouteDelayedAnimation from './route-delayed-animation'
 import {
 	white,
 	primaryColor,
-	primaryActiveColor,
 } from '../styles/colors'
 import {
 	primaryFont,
 	secondaryFont,
 } from '../styles/fonts'
+import linkMixin from '../styles/mixins/link'
+import '../styles/global.css'
 
 export default class Layout extends React.Component{
 	render(){
 		return(
 			<Fragment>
-				<Helmet>
-					<html className={htmlStyles} />
-					<body className={bodyStyles} />
-				</Helmet>
 				<div className={layoutStyles}>
 					<Header />
 					<div className={contentStyles}>
@@ -38,29 +34,13 @@ export default class Layout extends React.Component{
 	}
 }
 
-const htmlStyles = css({
-	height: `100%`,
-	boxSizing: `border-box`,
-	'-webkit-tap-highlight-color': `rgba(0, 0, 0, 0)`,
-	'*, *:before, *:after': {
-		boxSizing: `inherit`,
-	},
-})
 
-const bodyStyles = css({
-	position: `relative`,
-	margin: 0,
-	fontFamily: `"${secondaryFont}", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`,
-	textRendering: `optimizeLegibility`,
-	fontSize: `18px`,
-	'-webkit-tap-highlight-color': `rgba(0, 0, 0, 0)`,
-	a: {
-		color: primaryColor,
-		'&:focus, &:hover, &:active': {
-			textDecoration: `none`,
-			color: primaryActiveColor,
-		},
-	},
+const layoutStyles = css({
+	minHeight: `100vh`,
+	display: `flex`,
+	flexDirection: `column`,
+	fontFamily: secondaryFont,
+	a: linkMixin,
 	p: {
 		lineHeight: `28px`,
 	},
@@ -79,12 +59,6 @@ const bodyStyles = css({
 		color: white,
 		backgroundColor: primaryColor,
 	},
-})
-
-const layoutStyles = css({
-	minHeight: `100vh`,
-	display: `flex`,
-	flexDirection: `column`,
 })
 
 const contentStyles = css({

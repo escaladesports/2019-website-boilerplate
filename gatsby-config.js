@@ -91,20 +91,20 @@ module.exports = {
 				siteUrl: config.siteUrl,
 			},
 		},
-		{
-			resolve: `webtasks`,
-			options: {
-				name: `gatsby-boilerplate-autodeploy`,
-				path: `src/webtasks/autodeploy.js`,
-				container: process.env.WEBTASKS_CONTAINER,
-				token: process.env.WEBTASKS_TOKEN,
-				cron: `0 0 * * *`,
-				secrets: {
-					BUILD_HOOK: process.env.BUILD_HOOK,
-				},
-				shouldDeploy: process.env.BRANCH === `master`,
-			},
-		},
+		// {
+		// 	resolve: `webtasks`,
+		// 	options: {
+		// 		name: `gatsby-boilerplate-autodeploy`,
+		// 		path: `src/webtasks/autodeploy.js`,
+		// 		container: process.env.WEBTASKS_CONTAINER,
+		// 		token: process.env.WEBTASKS_TOKEN,
+		// 		cron: `0 0 * * *`,
+		// 		secrets: {
+		// 			BUILD_HOOK: process.env.BUILD_HOOK,
+		// 		},
+		// 		shouldDeploy: process.env.BRANCH === `master`,
+		// 	},
+		// },
 		// {
 		// 	resolve: `gatsby-plugin-manifest`,
 		// 	options: {
@@ -142,12 +142,12 @@ module.exports = {
 				},
 			},
 		},
-		{
-			resolve: `gatsby-plugin-google-tagmanager`,
-			options: {
-				id: `GTM-TD88KD8`,
-			},
-		},
+		// {
+		// 	resolve: `gatsby-plugin-google-tagmanager`,
+		// 	options: {
+		// 		id: `GTM-TD88KD8`,
+		// 	},
+		// },
 		{
 			resolve: `gatsby-plugin-web-font-loader`,
 			options: {

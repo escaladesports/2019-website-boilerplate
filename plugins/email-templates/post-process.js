@@ -32,6 +32,7 @@ async function emailifyHtml(contents){
 				`data-reactroot`,
 				`data-react-checksum`,
 				`data-react-helmet`,
+				`class`,
 			]))
 			.use(custom())
 			.use(beautify({
