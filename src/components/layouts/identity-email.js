@@ -12,6 +12,9 @@ export default class EmailLayout extends React.Component {
 					<html lang='en' dir='ltr' />
 					<body bgColor='#fff' width='100%' />
 				</Helmet>
+				<p className={img}>
+					<img src='/backend-logo.png' />
+				</p>
 				{this.props.children}
 			</div>
 		)
@@ -23,4 +26,11 @@ const wrapper = css({
 	padding: 20,
 	margin: `0 auto`,
 	a: linkMixin,
+})
+
+const img = css({
+	textAlign: `center`,
+	img: {
+		width: 300,
+	},
 })

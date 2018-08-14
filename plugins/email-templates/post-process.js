@@ -10,7 +10,7 @@ const removeAttributes = require(`posthtml-remove-attributes`)
 const custom = require(`./posthtml-custom`)
 const cwd = process.cwd()
 
-async function emailifyHtml(contents){
+async function emailifyHtml(contents, url){
 	let promises = []
 	for(let path in contents){
 		let html = contents[path]
@@ -30,7 +30,7 @@ async function emailifyHtml(contents){
 				`data-react-checksum`,
 				`data-react-helmet`,
 			]))
-			.use(custom())
+			.use(custom(url))
 			.use(beautify({
 				rules: { indent: `tab` },
 			}))
@@ -41,7 +41,7 @@ async function emailifyHtml(contents){
 	await Promise.all(promises)
 }
 
-async function processHtml(path = `**/*`) {
+async function processHtml(path = `**/*`, url) {
 	let paths = await glob(`${cwd}/public/${path}.html`)
 	let promises = paths.map(path => {
 		return readFile(path, `utf8`)
@@ -51,7 +51,7 @@ async function processHtml(path = `**/*`) {
 	paths.forEach((path, key) => {
 		obj[path] = contents[key]
 	})
-	await emailifyHtml(obj)
+	await emailifyHtml(obj, url)
 }
 
 module.exports = processHtml

@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '../../components/layouts/email'
+import Layout from '../../components/layouts/identity-email'
 
 export default class EmailIdentityPasswordRecovery extends React.Component {
 	render() {

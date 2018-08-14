@@ -1,7 +1,7 @@
 'use strict'
 const { join } = require(`path`)
 
-module.exports = function(){
+module.exports = function(url){
 	return function custom(tree) {
 		tree.walk(node => {
 			if (typeof node === `object`) {
@@ -30,10 +30,10 @@ module.exports = function(){
 						`)
 					break
 				case `img`:
-					if (process.env.URL && src.indexOf(`://`) === -1) {
-						let url = process.env.URL.split(`://`)
-						src = join(url[1], src)
-						src = `${url[0]}://${src}`
+					if (url && src.indexOf(`://`) === -1) {
+						let srcUrl = url.split(`://`)
+						src = join(srcUrl[1], src)
+						src = `${srcUrl[0]}://${src}`
 						node.attrs.src = src
 					}
 					break
