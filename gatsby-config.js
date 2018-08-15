@@ -121,7 +121,7 @@ module.exports = {
 		`gatsby-plugin-offline`,
 
 		// Client plugins
-		//`route-delayed-animation`,
+		`route-delayed-animation`,
 		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-recaptcha`,
 		`gatsby-plugin-polyfill-io`,
@@ -166,7 +166,6 @@ module.exports = {
 						],
 					},
 				],
-				subset: `cyrillic`,
 			},
 		},
 	],
