@@ -153,8 +153,19 @@ module.exports = {
 			resolve: `download-google-fonts`,
 			options: {
 				fonts: [
-					`Oswald`,
-					`Open Sans`,
+					{
+						family: `Roboto`,
+						variants: [
+							`400`,
+							`400i`,
+							`700`,
+							`700i`,
+						],
+						subsets: [
+							`latin`,
+							`latin-ext`,
+						],
+					},
 				],
 				subset: `cyrillic`,
 			},
