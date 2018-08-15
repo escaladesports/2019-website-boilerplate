@@ -2,6 +2,7 @@ const {
 	readFile,
 	outputFile,
 } = require(`fs-extra`)
+const CleanCss = require(`clean-css`)
 
 module.exports = async () => {
 	// Read files
@@ -14,7 +15,8 @@ module.exports = async () => {
 	const woffLines = getLines(woff)
 	mergeLines(woff2Lines, woffLines)
 
-	const css = createCssString(woff2, woff2Lines)
+	let css = createCssString(woff2, woff2Lines)
+	css = new CleanCss().minify(css).styles
 	await outputFile(`./.cache/google-fonts/google-fonts.css`, css)
 }
 

@@ -154,16 +154,12 @@ module.exports = {
 			options: {
 				fonts: [
 					{
-						family: `Roboto`,
-						variants: [
-							`400`,
-							`400i`,
-							`700`,
-							`700i`,
-						],
-						subsets: [
-							`latin`,
-						],
+						family: `Oswald`,
+						subsets: [ `latin` ],
+					},
+					{
+						family: `Open Sans`,
+						subsets: [ `latin` ],
 					},
 				],
 			},

@@ -44,6 +44,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "child-process-async": "^1.0.1",
     "child-process-promise": "^2.2.1",
+    "clean-css": "^4.2.1",
     "color": "^3.0.0",
     "dotenv": "^6.0.0",
     "download": "^7.1.0",
