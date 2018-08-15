@@ -42,7 +42,7 @@ module.exports = async () => {
 	// Replace domains with relative paths in CSS
 	domains.forEach(domain => {
 		while (cssData.indexOf(domain) !== -1) {
-			cssData = cssData.replace(domain, `/fonts`)
+			cssData = cssData.replace(domain, `/google-fonts`)
 		}
 	})
 

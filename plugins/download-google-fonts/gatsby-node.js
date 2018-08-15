@@ -10,7 +10,7 @@ const downloadCSS = require(`./download-css`)
 const mergeCSS = require(`./merge-css`)
 const downloadFonts = require(`./download-fonts`)
 
-const hashPath = `./.cache/google-fonts/hash`
+const hashPath = `.cache/google-fonts/hash.txt`
 
 exports.onPreBootstrap = async (_, options) => {
 	const hash = Hash(options)
@@ -19,7 +19,7 @@ exports.onPreBootstrap = async (_, options) => {
 		await downloadCSS(options)
 		await mergeCSS()
 		await downloadFonts()
-		await copy(`./.cache/google-fonts/fonts`, `./public/google-fonts`)
 		await outputFile(hashPath, hash)
 	}
+	await copy(`./.cache/google-fonts/fonts`, `./public/google-fonts`)
 }
