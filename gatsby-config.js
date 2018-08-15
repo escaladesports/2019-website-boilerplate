@@ -150,14 +150,18 @@ module.exports = {
 		// 	},
 		// },
 		{
-			resolve: `gatsby-plugin-web-font-loader`,
+			resolve: `download-google-fonts`,
 			options: {
-				google: {
-					families: [
-						`Oswald`,
-						`Open Sans`,
-					],
-				},
+				fonts: [
+					{
+						family: `Oswald`,
+						subsets: [ `latin` ],
+					},
+					{
+						family: `Open Sans`,
+						subsets: [ `latin` ],
+					},
+				],
 			},
 		},
 	],
