@@ -2,31 +2,19 @@ const {
 	readFile,
 	pathExists,
 	ensureDir,
+	outputFile,
 } = require(`fs-extra`)
 const { parse } = require(`url`)
-const glob = require(`globby`)
 const getUrls = require(`get-urls`)
 const download = require(`download`)
 
-// const formatOrder = [
-// 	//`eot`,
-// 	`woff2`,
-// 	`woff`,
-// 	//`ttf`,
-// 	//`svg`,
-// ]
+const filePath = `./.cache/google-fonts/google-fonts.css`
 
 module.exports = async () => {
 
 	// Extract URLs from CSS
-	const cssFiles = await glob(`./.cache/google-fonts/*.css`)
-	const cssData = await Promise.all(cssFiles.map(path => {
-		return readFile(path, `utf8`)
-	}))
-	const fontLinks = []
-	cssData.forEach(data => {
-		fontLinks.push(...getUrls(data))
-	})
+	let cssData = await readFile(filePath, `utf8`)
+	const fontLinks = [...getUrls(cssData)]
 
 	// Download font files
 	const domains = []
@@ -41,29 +29,23 @@ module.exports = async () => {
 		if (fontPaths.indexOf(pathname) === -1){
 			fontPaths.push(pathname)
 		}
-		if(!await pathExists(`./.cache/google-fonts${pathname}`)){
+		if(!await pathExists(`./.cache/google-fonts/fonts${pathname}`)){
 			let dirPath = pathname.split(`/`)
 			dirPath.pop()
 			dirPath = dirPath.join(`/`)
-			dirPath = `./.cache/google-fonts${dirPath}`
+			dirPath = `./.cache/google-fonts/fonts${dirPath}`
 			await ensureDir(dirPath)
 			await download(url, dirPath)
 		}
 	}
 
 	// Replace domains with relative paths in CSS
-	const relativeCss = cssData.map(data => {
-		domains.forEach(domain => {
-			while (data.indexOf(domain) !== -1) {
-				data = data.replace(domain, ``)
-			}
-		})
-		return data
+	domains.forEach(domain => {
+		while (cssData.indexOf(domain) !== -1) {
+			cssData = cssData.replace(domain, `/fonts`)
+		}
 	})
 
-	console.log(relativeCss)
+	await outputFile(filePath, cssData)
 
-
-
-	process.exit(0)
 }

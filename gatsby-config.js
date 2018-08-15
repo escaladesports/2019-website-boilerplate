@@ -163,7 +163,6 @@ module.exports = {
 						],
 						subsets: [
 							`latin`,
-							`latin-ext`,
 						],
 					},
 				],
