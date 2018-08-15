@@ -106,19 +106,20 @@ module.exports = {
 		// 		shouldDeploy: process.env.BRANCH === `master`,
 		// 	},
 		// },
-		// {
-		// 	resolve: `gatsby-plugin-manifest`,
-		// 	options: {
-		// 		name: config.title,
-		// 		short_name: config.shortTitle,
-		// 		start_url: `/`,
-		// 		background_color: `#fff`,
-		// 		theme_color: `#52b8fc`,
-		// 		display: `minimal-ui`,
-		// 		icon: `src/img/icon.png`,
-		// 	},
-		// },
-		// `gatsby-plugin-offline`,
+		`gatsby-plugin-remove-serviceworker`,
+		{
+			resolve: `gatsby-plugin-manifest`,
+			options: {
+				name: config.title,
+				short_name: config.shortTitle,
+				start_url: `/`,
+				background_color: `#fff`,
+				theme_color: `#52b8fc`,
+				display: `minimal-ui`,
+				icon: `src/img/icon.png`,
+			},
+		},
+		`gatsby-plugin-offline`,
 
 		// Client plugins
 		`route-delayed-animation`,
