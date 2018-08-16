@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import Form from 'react-netlify-form'
-import ReCaptcha from 'react-recaptcha'
 import { css } from 'emotion'
 import buttonMixin from '../styles/mixins/button'
 import Layout from '../components/layouts/default'
@@ -22,26 +21,41 @@ export default class DefaultTemplate extends React.Component{
 				<div className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
-						<Form name='Contact'>
-							{({ loading, error, success }) => (
+						<Form
+							name='Contact'
+							recaptcha={{
+								size: `invisible`,
+								sitekey: process.env.GATSBY_SITE_RECAPTCHA_KEY,
+							}}
+						>
+							{({ loading, error, recaptchaError, success, recaptcha }) => (
 								<Fragment>
-									{loading && `Loading...`}
-									{error && `Error.`}
-									{success && `Success.`}
-									{!loading && !success && (
+									{loading &&
+										<div>Loading...</div>
+									}
+									{error &&
+										<div>Your information was not sent. Please try again later.</div>
+									}
+									{recaptchaError &&
+										<div>Recaptcha did not match. Please make sure the box is checked.</div>
+									}
+									{success &&
+										<div>Thank you for contacting us!</div>
+									}
+									{!loading && !success &&
 										<Fragment>
-											<label>
-												Name:
+											<div>
 												<input type='text' name='Name' required />
-											</label>
-											<label>
-												Message:
+											</div>
+											<div>
 												<textarea name='Message' required />
-											</label>
-											<ReCaptcha sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY} />
-											<button className={buttonMixin}>Submit</button>
+											</div>
+											<div>
+												<button className={buttonMixin}>Submit</button>
+											</div>
 										</Fragment>
-									)}
+									}
+									{recaptcha}
 								</Fragment>
 							)}
 						</Form>
@@ -55,6 +69,9 @@ export default class DefaultTemplate extends React.Component{
 const styles = css({
 	label: {
 		display: `block`,
+	},
+	'.grecaptcha-badge': {
+		display: `none !important`,
 	},
 })
 

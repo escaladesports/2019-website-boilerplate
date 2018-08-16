@@ -124,7 +124,6 @@ module.exports = {
 		// Client plugins
 		`route-delayed-animation`,
 		`gatsby-plugin-react-helmet`,
-		`gatsby-plugin-recaptcha`,
 		`gatsby-plugin-polyfill-io`,
 		{
 			resolve: `gatsby-plugin-favicon`,
