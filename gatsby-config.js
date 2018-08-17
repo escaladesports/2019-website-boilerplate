@@ -5,7 +5,13 @@ const proxy = require(`http-proxy-middleware`)
 module.exports = {
 	plugins: [
 		// Build plugins
-		`gatsby-plugin-emotion`,
+		{
+			resolve: `gatsby-plugin-emotion`,
+			options: {
+				hoist: true,
+				sourceMap: true,
+			},
+		},
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,

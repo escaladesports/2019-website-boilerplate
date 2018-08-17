@@ -2,7 +2,7 @@ import React from 'react'
 import { cx, css } from 'emotion'
 import Layout from '../components/layouts/default'
 import Meta from '../components/meta'
-//import grid from '../styles/mixins/grid'
+import createGrid from '../styles/mixins/grid'
 
 export default class GridPage extends React.Component{
 	render(){
@@ -11,7 +11,7 @@ export default class GridPage extends React.Component{
 			<Layout>
 				<Meta title='Grid Example' />
 				<h1>Grid Example</h1>
-				<div className={gridClass}>
+				<div className={cx(gridStyles, gridColor)}>
 					{function(){
 						const els = []
 						for(let i = 0; i < 31; i++){
@@ -25,19 +25,14 @@ export default class GridPage extends React.Component{
 	}
 }
 
-// const gridStyles = grid({
-// 	gutter: 5,
-// 	height: 200,
-// 	columns: {
-// 		0: 1,
-// 		300: 2,
-// 		600: 3,
-// 		900: 4,
-// 	},
-// })
-const gridStyles = css({
-	'> * ': {
-		width: `25%`,
+const gridStyles = createGrid({
+	margin: 5,
+	height: 200,
+	columns: {
+		0: 1,
+		300: 2,
+		600: 3,
+		900: 4,
 	},
 })
 
@@ -47,5 +42,3 @@ const gridColor = css({
 		border: `1px solid #000`,
 	},
 })
-
-const gridClass = cx(gridStyles, gridColor)
