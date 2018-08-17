@@ -11,7 +11,7 @@ export default class GridPage extends React.Component{
 			<Layout>
 				<Meta title='Grid Example' />
 				<h1>Grid Example</h1>
-				<div className={cx(gridColor, gridStyles)}>
+				<div className={gridClass}>
 					{function(){
 						const els = []
 						for(let i = 0; i < 31; i++){
@@ -42,3 +42,5 @@ const gridColor = css({
 		border: `1px solid #000`,
 	},
 })
+
+const gridClass = cx(gridColor, gridStyles)
