@@ -75,6 +75,49 @@ The Data concerning the User is collected to allow the Owner to provide its Serv
 
 Users can find further detailed information about such purposes of processing and about the specific Personal Data used for each purpose in the respective sections of this document.
 
+## Detailed information on the processing of Personal Data
+
+Personal Data is collected for the following purposes and using the following services:
+
+### Analytics
+
+The services contained in this section enable the Owner to monitor and analyze web traffic and can be used to keep track of User behavior.
+
+#### Google Analytics (Google Inc.)
+
+Google Analytics is a web analysis service provided by Google Inc. (“Google”). Google utilizes the Data collected to track and examine the use of this Application, to prepare reports on its activities and share them with other Google services.
+Google may use the Data collected to contextualize and personalize the ads of its own advertising network.
+
+Personal Data collected: Cookies and Usage Data.
+
+Place of processing: United States – [Privacy Policy](https://www.google.com/intl/en/policies/privacy/) – [Opt Out](https://tools.google.com/dlpage/gaoptout?hl=en). Privacy Shield participant.
+
+### Tag Management
+
+This type of service helps the Owner to manage the tags or scripts needed on this Application in a centralized fashion.
+This results in the Users' Data flowing through these services, potentially resulting in the retention of this Data.
+
+#### Google Tag Manager (Google LLC)
+
+Google Tag Manager is a tag management service provided by Google LLC.
+
+Personal Data collected: Cookies and Usage Data.
+
+Place of processing: United States – [Privacy Policy](https://www.google.com/intl/en/policies/privacy/). Privacy Shield participant.
+
+### SPAM protection
+
+This type of service analyzes the traffic of this Application, potentially containing Users' Personal Data, with the purpose of filtering it from parts of traffic, messages and content that are recognized as SPAM.
+
+#### Google reCAPTCHA (Google Inc.)
+
+Google reCAPTCHA is a SPAM protection service provided by Google Inc.
+The use of reCAPTCHA is subject to the Google [privacy policy](https://www.google.com/policies/privacy/) and [terms of use](https://www.google.com/intl/en/policies/terms/).
+
+Personal Data collected: Cookies and Usage Data.
+
+Place of processing: United States – [Privacy Policy](https://www.google.com/intl/policies/privacy/). Privacy Shield participant.
+
 ## The rights of Users
 
 Users may exercise certain rights regarding their Data processed by the Owner.

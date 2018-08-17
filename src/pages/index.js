@@ -23,8 +23,7 @@ export default class HomePage extends React.Component {
 				<Img
 					className={imageStyles}
 					sizes={headerImage.childImageSharp.sizes}
-					alt="homepageBanner"
-					title="homepageBanner"
+					alt="Escalade Sports"
 				/>
 				<button
 					onClick={() => this.setState({ open: true })}
