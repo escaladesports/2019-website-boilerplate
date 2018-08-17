@@ -135,12 +135,14 @@ module.exports = {
 				},
 			},
 		},
-		// {
-		// 	resolve: `gatsby-plugin-google-tagmanager`,
-		// 	options: {
-		// 		id: `GTM-TD88KD8`,
-		// 	},
-		// },
+		{
+			resolve: `gatsby-plugin-google-analytics`,
+			options: {
+				trackingId: `UA-2411855-10`,
+				anonymize: true,
+				respectDNT: true,
+			},
+		},
 		{
 			resolve: `download-google-fonts`,
 			options: {
