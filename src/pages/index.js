@@ -1,5 +1,4 @@
 import React from 'react'
-import { css } from 'emotion'
 import buttonStyles from '../styles/mixins/button'
 import Layout from '../components/layouts/default'
 import Meta from '../components/meta'
@@ -17,7 +16,7 @@ export default class HomePage extends React.Component {
 		return (
 			<Layout>
 				<Meta />
-				<div className={divStyles} dangerouslySetInnerHTML={{ __html: html }} />
+				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<button
 					onClick={() => this.setState({ open: true })}
 					className={buttonStyles}
@@ -34,10 +33,6 @@ export default class HomePage extends React.Component {
 		)
 	}
 }
-
-const divStyles = css({
-	transition: `transform 1s`,
-})
 
 export const query = graphql`
 	query HomePage {

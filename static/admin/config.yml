@@ -17,6 +17,9 @@ collections:
           - label: Body
             name: body
             widget: markdown
+          - label: Header Image
+            name: headerImg
+            widget: image
       - label: Contact
         name: contact
         file: src/markdown/contact.md
