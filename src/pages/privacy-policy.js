@@ -6,10 +6,8 @@ export default class GridPage extends React.Component{
 	render(){
 		const { html, excerpt, frontmatter } = this.props.data.markdownRemark
 		const { title, address, email } = frontmatter
-		console.log(address)
 		const addressHTML = address.replace(/\n/g, `<br />`)
 		const emailHTML = `<a href='mailto:${email}'>${email}</a>`
-		console.log(address)
 		const processedHTML = html
 			.replace(/{{address}}/g, addressHTML)
 			.replace(/{{email}}/g, emailHTML)
