@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-boilerplate",
+  "name": "project-boilerplate",
   "version": "1.0.0",
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "scripts": {
@@ -17,8 +17,8 @@
     "dev:functions": "netlify-lambda serve src/functions",
     "env": "node utils/env",
     "lint": "eslint ./",
-    "live": "opn https://escalade-boilerplate.netlify.com/",
-    "netlify": "opn https://app.netlify.com/sites/escalade-boilerplate/deploys",
+    "live": "opn https://project-boilerplate.netlify.com/",
+    "netlify": "opn https://app.netlify.com/sites/project-boilerplate/deploys",
     "patch": "node utils/patch",
     "precommit": "lint-staged",
     "prepublishOnly": "npm run build",
@@ -26,7 +26,7 @@
     "serve": "gatsby serve --open",
     "test": "npm run test:module",
     "test:module": "npm run build:module && jest",
-    "travis": "opn https://travis-ci.org/escaladesports/gatsby-boilerplate/branches"
+    "travis": "opn https://travis-ci.org/escaladesports/project-boilerplate/branches"
   },
   "lint-staged": {
     "**/*.js": [

@@ -1,6 +1,6 @@
-# Gatsby Boilerplate
+# New Project Boilerplate
 
-A simple starter for new [Gatsby](https://www.gatsbyjs.org/) projects.
+A simple starter for new web applications, Gatsby plugins, react components, or JavaScript modules.
 
 ## Installation
 
