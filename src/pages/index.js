@@ -1,4 +1,6 @@
 import React from 'react'
+import Img from 'gatsby-image'
+import { css } from 'emotion'
 import buttonStyles from '../styles/mixins/button'
 import Layout from '../components/layouts/default'
 import Meta from '../components/meta'
@@ -12,11 +14,18 @@ export default class HomePage extends React.Component {
 		}
 	}
 	render() {
-		const { html } = this.props.data.markdownRemark
+		const { html, frontmatter } = this.props.data.markdownRemark
+		const { headerImage } = frontmatter
 		return (
 			<Layout>
 				<Meta />
 				<div dangerouslySetInnerHTML={{ __html: html }} />
+				<Img
+					className={imageStyles}
+					sizes={headerImage.childImageSharp.sizes}
+					alt="homepageBanner"
+					title="homepageBanner"
+				/>
 				<button
 					onClick={() => this.setState({ open: true })}
 					className={buttonStyles}
@@ -34,12 +43,25 @@ export default class HomePage extends React.Component {
 	}
 }
 
+const imageStyles = css({
+	marginBottom: 30,
+})
+
 export const query = graphql`
 	query HomePage {
 		markdownRemark(fileAbsolutePath: {
 			regex: "/src/markdown/index.md/"
 		}){
 			html
+			frontmatter{
+				headerImage{
+					childImageSharp {
+						sizes(maxWidth: 1600, quality: 100) {
+							...GatsbyImageSharpSizes_withWebp
+						}
+					}
+				}
+			}
 		}
 	}
 `

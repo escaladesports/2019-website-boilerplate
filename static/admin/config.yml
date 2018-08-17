@@ -18,7 +18,7 @@ collections:
             name: body
             widget: markdown
           - label: Header Image
-            name: headerImg
+            name: headerImage
             widget: image
       - label: Contact
         name: contact
