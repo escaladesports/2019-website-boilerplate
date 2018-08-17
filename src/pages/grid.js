@@ -2,7 +2,7 @@ import React from 'react'
 import { cx, css } from 'emotion'
 import Layout from '../components/layouts/default'
 import Meta from '../components/meta'
-import grid from '../styles/mixins/grid'
+//import grid from '../styles/mixins/grid'
 
 export default class GridPage extends React.Component{
 	render(){
@@ -25,14 +25,19 @@ export default class GridPage extends React.Component{
 	}
 }
 
-const gridStyles = grid({
-	gutter: 5,
-	height: 200,
-	columns: {
-		0: 1,
-		300: 2,
-		600: 3,
-		900: 4,
+// const gridStyles = grid({
+// 	gutter: 5,
+// 	height: 200,
+// 	columns: {
+// 		0: 1,
+// 		300: 2,
+// 		600: 3,
+// 		900: 4,
+// 	},
+// })
+const gridStyles = css({
+	'> * ': {
+		width: `25%`,
 	},
 })
 
@@ -43,4 +48,4 @@ const gridColor = css({
 	},
 })
 
-const gridClass = cx(gridColor, gridStyles)
+const gridClass = cx(gridStyles, gridColor)
