@@ -11,7 +11,7 @@ export default class Modal extends React.Component{
 				onClick={this.props.onClose}
 			>
 				<div className={dialogStyles} onClick={stopPropagation}>
-					<div className={closeStyles} onClick={this.props.onClose}>
+					<div className={`close ${closeStyles}`} onClick={this.props.onClose}>
 						×
 					</div>
 					<div className={contentStyles}>
