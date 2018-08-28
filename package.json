@@ -25,8 +25,36 @@
     "reset": "node utils/reset",
     "serve": "gatsby serve --open",
     "test": "npm run test:module",
-    "test:module": "npm run build:module && jest",
+    "test:update": "jest --updateSnapshot",
+    "test:module": "jest",
     "travis": "opn https://travis-ci.org/escaladesports/project-boilerplate/branches"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.jsx?$": "<rootDir>/jest-preprocess.js"
+    },
+    "testRegex": "/.*(__tests__\\/.*)|(.*(test|spec))\\.jsx?$",
+    "moduleNameMapper": {
+      ".+\\.(css|styl|less|sass|scss)$": "identity-obj-proxy",
+      ".+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    },
+    "testPathIgnorePatterns": [
+      "node_modules",
+      ".cache",
+      "__snapshots__",
+      "public",
+      "dist"
+    ],
+    "transformIgnorePatterns": [
+      "node_modules/(?!(gatsby)/)"
+    ],
+    "globals": {
+      "__PATH_PREFIX__": ""
+    },
+    "testURL": "http://localhost",
+    "setupFiles": [
+      "<rootDir>/loadershim.js"
+    ]
   },
   "lint-staged": {
     "**/*.js": [
@@ -39,7 +67,14 @@
   },
   "main": "dist/index.js",
   "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
     "babel-cli": "^6.26.0",
+    "babel-core": "^7.0.0-0",
+    "babel-jest": "^23.4.2",
     "babel-plugin-emotion": "^9.2.6",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
@@ -87,6 +122,7 @@
     "google-fonts-plugin": "^2.0.2",
     "http-proxy-middleware": "^0.18.0",
     "husky": "^0.14.3",
+    "identity-obj-proxy": "^3.0.0",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^23.4.2",
     "jest-dom": "^1.12.0",
@@ -106,6 +142,7 @@
     "react-helmet": "^5.2.0",
     "react-netlify-form": "^2.0.7",
     "react-no-ssr": "^1.1.0",
+    "react-test-renderer": "^16.4.2",
     "react-testing-library": "^4.1.7",
     "request": "^2.87.0",
     "statable": "^0.3.2",
