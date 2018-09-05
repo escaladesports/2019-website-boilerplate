@@ -17,9 +17,7 @@ async function postProcess(){
 		console.log(`Post processed`)
 	}
 	catch (err) {
-		console.log(`Failed to post process`)
-		console.error(err)
-		process.exit(1)
+		console.log(`Failed to post process CMS`)
 	}
 }
 
