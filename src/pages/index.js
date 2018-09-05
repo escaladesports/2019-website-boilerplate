@@ -5,7 +5,6 @@ import buttonStyles from '../styles/mixins/button'
 import Layout from '../components/layouts/default'
 import Meta from '../components/meta'
 import Modal from '../components/modal'
-import InView from '../components/in-view'
 
 export default class HomePage extends React.Component {
 	constructor(props){
@@ -32,19 +31,6 @@ export default class HomePage extends React.Component {
 				>
 					Test
 				</button>
-				<div style={{marginTop: `200vh`, marginBottom: `200vh`}}>
-					<InView offset={100} style={{overflow: `hidden`}}>
-						{inView => (
-							<div style={{
-								height: 300,
-								background: `#eee`,
-								opacity: inView ? 1 : 0,
-								transform: `translateX(${inView ? `0` : `100`}px)`,
-								transition: `opacity 1s, transform 1s`,
-							}}>Intersection Observer</div>
-						)}
-					</InView>
-				</div>
 				<Modal
 					open={this.state.open}
 					onClose={() => this.setState({ open: false })}
