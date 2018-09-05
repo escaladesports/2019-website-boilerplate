@@ -55,7 +55,7 @@ const layoutStyles = css({
 		lineHeight: `1.3em`,
 		marginBottom: `4px`,
 	},
-	'::selection': {
+	'& ::selection': {
 		color: white,
 		backgroundColor: primaryColor,
 	},
