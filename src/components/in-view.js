@@ -1,5 +1,4 @@
 import React from 'react'
-const { IntersectionObserver } = global
 
 export default class InView extends React.Component{
 	static defaultProps = {
@@ -26,8 +25,8 @@ export default class InView extends React.Component{
 		}
 	}
 	componentDidMount(){
-		if (IntersectionObserver) {
-			this.observer = new IntersectionObserver(this.onChange, {
+		if (global.IntersectionObserver) {
+			this.observer = new global.IntersectionObserver(this.onChange, {
 				rootMargin: this.props.offset,
 			})
 			this.observer.observe(this.el)
@@ -37,7 +36,7 @@ export default class InView extends React.Component{
 		}
 	}
 	componentWillUnmount() {
-		if (IntersectionObserver) {
+		if (global.IntersectionObserver) {
 			this.observer.unobserve(this.el)
 		}
 	}
