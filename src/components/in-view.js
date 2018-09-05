@@ -3,7 +3,7 @@ const { IntersectionObserver } = global
 
 export default class InView extends React.Component{
 	static defaultProps = {
-		offset: 0,
+		offset: `0px`,
 	}
 	constructor(props){
 		super(props)
@@ -28,7 +28,7 @@ export default class InView extends React.Component{
 	componentDidMount(){
 		if (IntersectionObserver) {
 			this.observer = new IntersectionObserver(this.onChange, {
-				rootMargin: `${-this.props.offset}px`,
+				rootMargin: this.props.offset,
 			})
 			this.observer.observe(this.el)
 		}
