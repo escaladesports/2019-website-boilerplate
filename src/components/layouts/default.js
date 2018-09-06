@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { css } from 'emotion'
-// import RouteDelayed from '../../../plugins/route-delayed-animation'
+import RouteDelayed from '../../../plugins/route-delayed-animation'
 import Header from '../header'
 import Footer from '../footer'
-// import RouteDelayedAnimation from '../route-delayed-animation'
+import RouteDelayedAnimation from '../route-delayed-animation'
 import {
 	white,
 	primaryColor,
@@ -26,9 +26,9 @@ export default class Layout extends React.Component{
 					</div>
 					<Footer />
 				</div>
-				{/* <RouteDelayed>
+				<RouteDelayed>
 					<RouteDelayedAnimation />
-				</RouteDelayed> */}
+				</RouteDelayed>
 			</Fragment>
 		)
 	}

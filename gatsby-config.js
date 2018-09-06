@@ -114,7 +114,7 @@ module.exports = {
 		// },
 
 		// Client plugins
-		//`route-delayed-animation`,
+		`route-delayed-animation`,
 		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-polyfill-io`,
 		{
