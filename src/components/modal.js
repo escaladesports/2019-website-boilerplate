@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from 'emotion'
-import { white } from '../styles/colors'
+import colors from '../styles/colors'
+const { white } = colors
 
 export default class Modal extends React.Component{
 	render(){

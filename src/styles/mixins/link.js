@@ -1,8 +1,9 @@
 import { css } from 'emotion'
-import {
+import colors from '../colors'
+const {
 	primaryColor,
 	primaryActiveColor,
-} from '../colors'
+} = colors
 
 export default css({
 	color: primaryColor,
