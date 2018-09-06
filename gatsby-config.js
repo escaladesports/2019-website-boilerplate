@@ -144,7 +144,7 @@ module.exports = {
 			},
 		},
 		{
-			resolve: `download-google-fonts`,
+			resolve: `gatsby-plugin-prefetch-google-fonts`,
 			options: {
 				fonts: [
 					{
