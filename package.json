@@ -2,6 +2,10 @@
   "name": "project-boilerplate",
   "version": "1.0.0",
   "author": "Kennedy Rose <krose@escaladesports.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/escaladesports/project-boilerplate.git"
+  },
   "scripts": {
     "build": "npm run build:lambda && npm run build:gatsby",
     "build:lambda": "netlify-lambda build src/functions",
