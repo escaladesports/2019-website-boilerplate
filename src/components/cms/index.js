@@ -1,7 +1,6 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "CMS" }]*/
 import CMS from 'netlify-cms'
 import { injectGlobal } from 'emotion'
-// import identity from 'netlify-identity-widget'
 import logo from '../../../static/backend-logo.png'
 
 injectGlobal({
@@ -25,8 +24,3 @@ injectGlobal({
 		},
 	},
 })
-
-// window.netlifyIdentity = identity
-// identity.on(`login`, () => {
-// 	window.location.reload(false)
-// })
