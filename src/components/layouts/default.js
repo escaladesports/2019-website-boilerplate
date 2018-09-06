@@ -4,16 +4,14 @@ import { css } from 'emotion'
 import Header from '../header'
 import Footer from '../footer'
 // import RouteDelayedAnimation from '../route-delayed-animation'
-import colors from '../../styles/colors'
-const {
+import {
 	white,
 	primaryColor,
-} = colors
-import fonts from '../../styles/fonts'
-const {
+} from '../../styles/colors'
+import {
 	primaryFont,
 	secondaryFont,
-} = fonts
+} from '../../styles/fonts'
 import linkMixin from '../../styles/mixins/link'
 import '../../styles/global.css'
 

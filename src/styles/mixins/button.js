@@ -1,12 +1,10 @@
 import { css } from 'emotion'
-import colors from '../colors'
-const {
+import {
 	white,
 	primaryColor,
 	primaryActiveColor,
-} = colors
-import fonts from '../fonts'
-const { primaryFont } = fonts
+} from '../colors'
+import { primaryFont } from '../fonts'
 
 export default css({
 	fontFamily: primaryFont,

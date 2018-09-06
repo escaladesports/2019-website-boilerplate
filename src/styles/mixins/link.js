@@ -1,15 +1,13 @@
-import { css } from 'emotion'
-import colors from '../colors'
-const {
+import {
 	primaryColor,
 	primaryActiveColor,
-} = colors
+} from '../colors'
 
-export default css({
+export default {
 	color: primaryColor,
 	textDecoration: `none`,
 	'&:focus, &:hover, &:active': {
 		textDecoration: `underline`,
 		color: primaryActiveColor,
 	},
-})
+}
