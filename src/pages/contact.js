@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { graphql } from 'gatsby'
-// import Form from 'react-netlify-form'
+import Form from 'react-netlify-form'
 import { css } from 'emotion'
-// import buttonMixin from '../styles/mixins/button'
+import buttonMixin from '../styles/mixins/button'
 import Layout from '../components/layouts/default'
 import Meta from '../components/meta'
 
@@ -22,7 +22,7 @@ export default class DefaultTemplate extends React.Component{
 				<div className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
-						{/* <Form
+						<Form
 							name='Contact'
 							recaptcha={{
 								size: `invisible`,
@@ -59,7 +59,7 @@ export default class DefaultTemplate extends React.Component{
 									{recaptcha}
 								</Fragment>
 							)}
-						</Form> */}
+						</Form>
 					</div>
 				</div>
 			</Layout>
