@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { graphql } from 'gatsby'
 import Form from 'react-netlify-form'
 import { css } from 'emotion'
 import buttonMixin from '../styles/mixins/button'

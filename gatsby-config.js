@@ -14,7 +14,6 @@ module.exports = {
 		},
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
-		`gatsby-plugin-catch-links`,
 		`gatsby-plugin-remove-trailing-slashes`,
 		`gatsby-plugin-netlify-cms-paths`,
 		{
@@ -89,8 +88,8 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-netlify-cms`,
 			options: {
-				enableIdentityWidget: false,
 				modulePath: `${__dirname}/src/components/cms/index.js`,
+				enableIdentityWidget: true,
 			},
 		},
 		{
@@ -145,7 +144,7 @@ module.exports = {
 			},
 		},
 		{
-			resolve: `download-google-fonts`,
+			resolve: `gatsby-plugin-prefetch-google-fonts`,
 			options: {
 				fonts: [
 					{

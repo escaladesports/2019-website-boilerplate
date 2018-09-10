@@ -1,5 +1,7 @@
 import { State } from 'statable'
 
-module.exports = new State({
+const state = new State({
 	delayed: false,
 })
+
+export default state

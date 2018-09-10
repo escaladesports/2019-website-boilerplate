@@ -1,6 +1,3 @@
-const fonts = {
-	primaryFont: `oswald`,
-	secondaryFont: `open sans`,
-}
-
-export default fonts
+export const
+	primaryFont = `oswald`,
+	secondaryFont = `open sans`

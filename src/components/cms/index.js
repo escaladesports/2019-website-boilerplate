@@ -1,19 +1,18 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "CMS" }]*/
 import CMS from 'netlify-cms'
-import 'netlify-cms/dist/cms.css'
-import identity from 'netlify-identity-widget'
 import { injectGlobal } from 'emotion'
 import logo from '../../../static/backend-logo.png'
 
 injectGlobal({
-	'.nc-githubAuthenticationPage-logo svg': {
+	color: `red`,
+	'.e4hp3ji1 svg': {
 		display: `none !important`,
 	},
-	'.nc-githubAuthenticationPage-logo': {
+	'.e4hp3ji1': {
 		background: `url('${logo}') no-repeat center center !important`,
 		backgroundSize: `contain !important`,
 	},
-	'.nc-githubAuthenticationPage-button': {
+	'.e4hp3ji2': {
 		color: `transparent !important`,
 		'&:after': {
 			content: `"Sign In"`,
@@ -24,9 +23,4 @@ injectGlobal({
 			right: 0,
 		},
 	},
-})
-
-window.netlifyIdentity = identity
-identity.on(`login`, () => {
-	window.location.reload(false)
 })
