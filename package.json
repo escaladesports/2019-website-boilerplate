@@ -92,6 +92,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-dynamic-import-node": "^2.1.0",
     "babel-plugin-emotion": "^9.2.6",
     "child-process-async": "^1.0.1",
     "child-process-promise": "^2.2.1",
