@@ -4,7 +4,7 @@ import Layout from '../../components/layouts/identity-email'
 export default class EmailIdentityInvitation extends React.Component {
 	render() {
 		return (
-			<Layout>
+			<Layout title='You have been invited'>
 				<h2>You have been invited</h2>
 				<p>You have been invited to create a user on {`{{ .SiteURL}}`}. Follow this link to accept the invite:</p>
 				<p>

@@ -1,22 +1,19 @@
 import React from 'react'
 import { css } from 'emotion'
-import { Helmet } from 'react-helmet'
+import EmailTemplate from './email'
 import linkMixin from '../../styles/mixins/link'
-import '../../styles/global.css'
 
 export default class EmailLayout extends React.Component {
 	render() {
 		return (
-			<div className={wrapper}>
-				<Helmet>
-					<html lang='en' dir='ltr' />
-					<body bgColor='#fff' width='100%' />
-				</Helmet>
-				<p className={img}>
-					<img src='/backend-logo.png' />
-				</p>
-				{this.props.children}
-			</div>
+			<EmailTemplate title={this.props.title}>
+				<div className={wrapper}>
+					<p className={img}>
+						<img src='/backend-logo.png' />
+					</p>
+					{this.props.children}
+				</div>
+			</EmailTemplate>
 		)
 	}
 }
