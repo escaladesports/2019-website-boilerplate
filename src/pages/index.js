@@ -22,7 +22,7 @@ export default class HomePage extends React.Component {
 				<Meta />
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<Img
-					className={imageStyles}
+					className={styles}
 					sizes={headerImage.childImageSharp.sizes}
 					alt="Escalade Sports"
 				/>
@@ -43,9 +43,9 @@ export default class HomePage extends React.Component {
 	}
 }
 
-const imageStyles = css({
-	marginBottom: 30,
-})
+const styles = css`
+	margin-bottom: 30px;
+`
 
 export const query = graphql`
 	query HomePage {

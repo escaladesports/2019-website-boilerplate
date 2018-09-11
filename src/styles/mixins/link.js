@@ -1,13 +1,14 @@
+import { css } from 'emotion'
 import {
 	primaryColor,
 	primaryActiveColor,
 } from '../colors'
 
-export default {
-	color: primaryColor,
-	textDecoration: `none`,
-	'&:focus, &:hover, &:active': {
-		textDecoration: `underline`,
-		color: primaryActiveColor,
-	},
-}
+export default css`
+	color: ${primaryColor};
+	text-decoration: none;
+	&:focus, &:hover, &:active{
+		text-decoration: underline;
+		color: ${primaryActiveColor};
+	}
+`

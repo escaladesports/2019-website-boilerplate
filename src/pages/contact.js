@@ -67,14 +67,14 @@ export default class DefaultTemplate extends React.Component{
 	}
 }
 
-const styles = css({
-	label: {
-		display: `block`,
-	},
-	'.grecaptcha-badge': {
-		display: `none !important`,
-	},
-})
+const styles = css`
+	label{
+		display: block;
+	}
+	.grecaptcha-badge{
+		display: none !important;
+	}
+`
 
 export const query = graphql`
 	query ContactTemplate {

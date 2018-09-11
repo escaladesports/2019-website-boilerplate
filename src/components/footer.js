@@ -15,25 +15,24 @@ export default class Footer extends React.Component{
 	}
 }
 
-const footerStyles = css({
-	ul: {
-		listStyleType: `none`,
-		padding: 30,
-		margin: 0,
-	},
-	li: {
-		display: `inline-block`,
-	},
-	a: {
-		padding: `0 10px`,
-		display: `inline-block`,
-	},
-	'ul > li': {
-		':first-of-type > a': {
-			paddingLeft: 0,
-		},
-		':last-of-type > a': {
-			paddingRight: 0,
-		},
-	},
-})
+const footerStyles = css`
+	ul{
+		list-style-type: none;
+		padding: 30px;
+		margin: 0;
+	}
+	li{
+		display: inline-block;
+	}
+	a{
+		padding: 0 10px;
+	}
+	ul > li{
+		:first-of-type > a{
+			padding-left: 0;
+		}
+		:last-of-type > a{
+			padding-right: 0;
+		}
+	}
+`

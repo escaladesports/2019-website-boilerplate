@@ -1,35 +1,45 @@
-import { css } from 'emotion'
+import { cx, css } from 'emotion'
 
 export default function createCSSGrid({
 	margin = 5,
 	height = `auto`,
 	columns = {},
 }){
-	const mq = {}
+	if(typeof height === `number`) height += `px`
+	const mq = []
 	for(let breakpoint in columns){
 		const width = `calc(100% * (1/${columns[breakpoint]}) - ${margin * 2}px)`
 		if (breakpoint != 0) {
-			mq[`@media(min-width:${breakpoint}px)`] = {
-				'> *': { width },
-			}
+			mq.push(css`
+				@media(min-width: ${breakpoint}px){
+					> *{
+						width: ${width};
+					}
+				}
+			`)
 		}
 		else{
-			mq[`> *`] = {
-				width,
-				height,
-				margin,
-			}
+			mq.push(css`
+				> * {
+					width: ${width};
+					height: ${height};
+					margin: ${margin}px;
+				}
+			`)
 		}
 	}
 
-	return css({
-		display: `flex`,
-		flexFlow: `row wrap`,
-		margin: -margin,
-		'> *': {
-			height,
-			margin,
-		},
+
+	return cx(
+		css`
+			display: flex;
+			flex-flow: row wrap;
+			margin: ${-margin}px;
+			> *{
+				height: ${height};
+				margin: ${margin}px;
+			}
+		`,
 		...mq,
-	})
+	)
 }

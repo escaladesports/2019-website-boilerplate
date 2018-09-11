@@ -19,9 +19,9 @@ export default class Layout extends React.Component{
 	render(){
 		return(
 			<Fragment>
-				<div className={layoutStyles}>
+				<div className={styles.layout}>
 					<Header />
-					<div className={contentStyles}>
+					<div className={styles.content}>
 						<main>{this.props.children}</main>
 					</div>
 					<Footer />
@@ -35,36 +35,39 @@ export default class Layout extends React.Component{
 }
 
 
-const layoutStyles = css({
-	minHeight: `100vh`,
-	display: `flex`,
-	flexDirection: `column`,
-	fontFamily: secondaryFont,
-	a: linkMixin,
-	p: {
-		lineHeight: `28px`,
-	},
-	img: {
-		maxWidth: `100%`,
-	},
-	'h1, h2, h3': {
-		fontFamily: primaryFont,
-		textTransform: `uppercase`,
-	},
-	li: {
-		lineHeight: `1.3em`,
-		marginBottom: `4px`,
-	},
-	'& ::selection': {
-		color: white,
-		backgroundColor: primaryColor,
-	},
-})
-
-const contentStyles = css({
-	margin: `0 auto`,
-	padding: `0 30px`,
-	maxWidth: 960,
-	width: `100%`,
-	flex: `1 0 auto`,
-})
+const styles = {
+	layout: css`
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+		font-family: ${secondaryFont};
+		a{
+			${linkMixin};
+		}
+		p{
+			line-height: 28px;
+		}
+		img{
+			max-width: 100%;
+		}
+		h1, h2, h3{
+			font-family: ${primaryFont};
+			text-transform: uppercase;
+		}
+		li{
+			line-height: 1.3em;
+			margin-bottom: 4px;
+		}
+		& ::selection{
+			color: ${white};
+			background-color: ${primaryColor};
+		}
+	`,
+	content: css`
+		margin: 0 auto;
+		padding: 0 30px;
+		max-width: 960px;
+		width: 100%;
+		flex: 1 0 auto;
+	`,
+}
