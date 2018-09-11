@@ -26,7 +26,7 @@ export default class EmailLayout extends React.Component {
 		return (
 			<Fragment>
 				<Helmet>
-					<html lang={lang} xmlns='http://www.w3.org/1999/xhtml' className={global} />
+					<html lang={lang} xmlns='http://www.w3.org/1999/xhtml' />
 					<meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
 					<meta name='viewport' content='width=device-width, initial-scale=1.0' />
 					<title>{title}</title>
