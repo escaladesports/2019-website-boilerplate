@@ -35,6 +35,12 @@
 			"loose": false
 		}],
 		"@babel/plugin-proposal-json-strings",
-		"babel-plugin-dynamic-import-node"
+		"babel-plugin-dynamic-import-node",
+		["babel-plugin-module-resolver", {
+			"root": "./src"
+		}],
+		["babel-plugin-module-resolver", {
+			"root": "./"
+		}, "secondaryResolver"]
 	]
 }

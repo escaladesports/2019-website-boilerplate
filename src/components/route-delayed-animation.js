@@ -1,6 +1,6 @@
 import React from 'react'
 import { css, keyframes } from 'emotion'
-import { primaryColor } from '../styles/colors'
+import { primaryColor } from 'styles/colors'
 
 export default class RouteDelayedAnimation extends React.Component {
 	render() {

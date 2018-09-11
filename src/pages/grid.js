@@ -1,8 +1,8 @@
 import React from 'react'
 import { css } from 'emotion'
-import Layout from '../components/layouts/default'
-import Meta from '../components/meta'
-import createGrid from '../styles/mixins/grid'
+import Layout from 'components/layouts/default'
+import Meta from 'components/meta'
+import createGrid from 'styles/mixins/grid'
 
 export default class GridPage extends React.Component{
 	render(){

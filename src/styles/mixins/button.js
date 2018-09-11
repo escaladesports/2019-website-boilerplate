@@ -3,8 +3,8 @@ import {
 	white,
 	primaryColor,
 	primaryActiveColor,
-} from '../colors'
-import { primaryFont } from '../fonts'
+} from 'styles/colors'
+import { primaryFont } from 'styles/fonts'
 
 const buttonStyles = css`
 	font-family: ${primaryFont};

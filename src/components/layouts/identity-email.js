@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from 'emotion'
-import EmailTemplate from './email'
-import linkMixin from '../../styles/mixins/link'
+import EmailTemplate from 'components/layouts/email'
+import linkMixin from 'styles/mixins/link'
 
 export default class EmailLayout extends React.Component {
 	render() {

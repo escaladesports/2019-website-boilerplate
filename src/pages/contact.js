@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { graphql } from 'gatsby'
 import Form from 'react-netlify-form'
 import { css } from 'emotion'
-import buttonMixin from '../styles/mixins/button'
-import Layout from '../components/layouts/default'
-import Meta from '../components/meta'
+import buttonMixin from 'styles/mixins/button'
+import Layout from 'components/layouts/default'
+import Meta from 'components/meta'
 
 export default class DefaultTemplate extends React.Component{
 	render(){
@@ -30,7 +30,7 @@ export default class DefaultTemplate extends React.Component{
 							}}
 						>
 							{({ loading, error, recaptchaError, success, recaptcha }) => (
-								<Fragment>
+								<>
 									{loading &&
 										<div>Loading...</div>
 									}
@@ -44,7 +44,7 @@ export default class DefaultTemplate extends React.Component{
 										<div>Thank you for contacting us!</div>
 									}
 									{!loading && !success &&
-										<Fragment>
+										<>
 											<div>
 												<input type='text' name='Name' required />
 											</div>
@@ -54,10 +54,10 @@ export default class DefaultTemplate extends React.Component{
 											<div>
 												<button className={buttonMixin}>Submit</button>
 											</div>
-										</Fragment>
+										</>
 									}
 									{recaptcha}
-								</Fragment>
+								</>
 							)}
 						</Form>
 					</div>

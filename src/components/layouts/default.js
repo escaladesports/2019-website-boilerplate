@@ -1,24 +1,24 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { css } from 'emotion'
-import RouteDelayed from '../../../plugins/route-delayed-animation'
-import Header from '../header'
-import Footer from '../footer'
-import RouteDelayedAnimation from '../route-delayed-animation'
+import RouteDelayed from 'plugins/route-delayed-animation'
+import Header from 'components/header'
+import Footer from 'components/footer'
+import RouteDelayedAnimation from 'components/route-delayed-animation'
 import {
 	white,
 	primaryColor,
-} from '../../styles/colors'
+} from 'styles/colors'
 import {
 	primaryFont,
 	secondaryFont,
-} from '../../styles/fonts'
-import linkMixin from '../../styles/mixins/link'
-import '../../styles/global.css'
+} from 'styles/fonts'
+import linkMixin from 'styles/mixins/link'
+import 'styles/global.css'
 
 export default class Layout extends React.Component{
 	render(){
 		return(
-			<Fragment>
+			<>
 				<div className={styles.layout}>
 					<Header />
 					<div className={styles.content}>
@@ -29,7 +29,7 @@ export default class Layout extends React.Component{
 				<RouteDelayed>
 					<RouteDelayedAnimation />
 				</RouteDelayed>
-			</Fragment>
+			</>
 		)
 	}
 }

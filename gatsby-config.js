@@ -1,10 +1,16 @@
-require(`dotenv`).config({ silent: true })
-const config = require(`./site-config`)
+const path = require(`path`)
 const proxy = require(`http-proxy-middleware`)
+const config = require(`./site-config`)
+require(`dotenv`).config({ silent: true })
 
 module.exports = {
 	plugins: [
-		// Build plugins
+		{
+			resolve: `gatsby-plugin-root-import`,
+			options: {
+				root: path.join(__dirname, `src`),
+			},
+		},
 		{
 			resolve: `gatsby-plugin-emotion`,
 			options: {

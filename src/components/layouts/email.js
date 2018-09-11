@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Box, Item } from 'react-html-email'
 
@@ -24,7 +24,7 @@ export default class EmailLayout extends React.Component {
 			children,
 		} = this.props
 		return (
-			<Fragment>
+			<>
 				<Helmet>
 					<html lang={lang} xmlns='http://www.w3.org/1999/xhtml' />
 					<meta httpEquiv='Content-Type' content='text/html; charset=utf-8' />
@@ -83,7 +83,7 @@ export default class EmailLayout extends React.Component {
 						</Box>
 					</Item>
 				</Box>
-			</Fragment>
+			</>
 		)
 	}
 }

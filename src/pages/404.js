@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../components/layouts/default'
-import Meta from '../components/meta'
+import Layout from 'components/layouts/default'
+import Meta from 'components/meta'
 
 export default class PageNotFound extends React.Component {
 	render() {
