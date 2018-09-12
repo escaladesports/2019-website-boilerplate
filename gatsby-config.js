@@ -25,7 +25,6 @@ module.exports = {
 		{
 			resolve: `email-templates`,
 			options: {
-				files: `email-templates/**/*`,
 				siteUrl: process.env.URL || config.siteUrl,
 			},
 		},

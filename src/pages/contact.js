@@ -31,19 +31,19 @@ export default class DefaultTemplate extends React.Component{
 						>
 							{({ loading, error, recaptchaError, success, recaptcha }) => (
 								<>
-									{loading &&
+									{loading && (
 										<div>Loading...</div>
-									}
-									{error &&
+									)}
+									{error && (
 										<div>Your information was not sent. Please try again later.</div>
-									}
-									{recaptchaError &&
+									)}
+									{recaptchaError && (
 										<div>Recaptcha did not match. Please make sure the box is checked.</div>
-									}
-									{success &&
+									)}
+									{success && (
 										<div>Thank you for contacting us!</div>
-									}
-									{!loading && !success &&
+									)}
+									{!loading && !success && (
 										<>
 											<div>
 												<input type='text' name='Name' required />
@@ -55,7 +55,7 @@ export default class DefaultTemplate extends React.Component{
 												<button className={buttonMixin}>Submit</button>
 											</div>
 										</>
-									}
+									)}
 									{recaptcha}
 								</>
 							)}
