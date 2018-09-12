@@ -6,7 +6,6 @@ const doctype = require(`posthtml-doctype`)
 const beautify = require(`posthtml-beautify`)
 const stripComments = require(`strip-html-comments`)
 const removeAttributes = require(`posthtml-remove-attributes`)
-
 const custom = require(`./posthtml-custom`)
 const cwd = process.cwd()
 

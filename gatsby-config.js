@@ -5,7 +5,6 @@ require(`dotenv`).config({ silent: true })
 
 module.exports = {
 	plugins: [
-		`email-templates-markdown`,
 		{
 			resolve: `gatsby-plugin-root-import`,
 			options: {
@@ -26,7 +25,6 @@ module.exports = {
 		{
 			resolve: `email-templates`,
 			options: {
-				files: `email-templates/**/*`,
 				siteUrl: process.env.URL || config.siteUrl,
 			},
 		},
