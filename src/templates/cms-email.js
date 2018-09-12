@@ -1,0 +1,54 @@
+import React from 'react'
+import { css } from 'emotion'
+import EmailTemplate from 'components/layouts/email'
+import linkMixin from 'styles/mixins/link'
+
+export default class CMSEmailTemplate extends React.Component {
+	render() {
+		const { html, frontmatter } = this.props.data.markdownRemark
+		const { title } = frontmatter
+		return (
+			<EmailTemplate title={title}>
+				<div className={styles.wrapper}>
+					<p className={styles.img}>
+						<img src='/backend-logo.png' />
+					</p>
+					<p dangerouslySetInnerHTML={{__html: html}} />
+				</div>
+			</EmailTemplate>
+		)
+	}
+}
+
+const styles = {
+	wrapper: css`
+		max-width: 600px;
+		padding: 20px;
+		margin: 0 auto;
+		a: {
+			${linkMixin};
+		}
+	`,
+	img: css`
+		text-align: center;
+		img{
+			width: 300px;
+		}
+	`,
+}
+
+
+export const query = graphql`
+	query CMSEmail(
+		$fileAbsolutePath: String
+	) {
+		markdownRemark(fileAbsolutePath: {
+			eq: $fileAbsolutePath
+		}){
+			html
+			frontmatter{
+				title
+			}
+		}
+	}
+`

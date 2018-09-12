@@ -5,6 +5,7 @@ require(`dotenv`).config({ silent: true })
 
 module.exports = {
 	plugins: [
+		`email-templates-markdown`,
 		{
 			resolve: `gatsby-plugin-root-import`,
 			options: {
