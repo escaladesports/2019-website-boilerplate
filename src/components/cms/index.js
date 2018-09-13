@@ -24,3 +24,14 @@ injectGlobal({
 		},
 	},
 })
+
+const identityInterval = setInterval(() => {
+	if(window.netlifyIdentity){
+		console.log(`Found window.netlifyIdentity`)
+		clearInterval(identityInterval)
+		window.netlifyIdentity.on(`login`, () => {
+			console.log(`Identity login`)
+			window.location.reload(false)
+		})
+	}
+})
