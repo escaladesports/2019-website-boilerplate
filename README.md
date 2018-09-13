@@ -22,3 +22,7 @@ yarn reset
 
 - Develop plugin in `./plugins/export` directory
 - Change `build` script to `npm run build:plugin`
+
+## Netlify CMS
+
+Unless you're using the "invite only" option in Netlify Identity, make sure to add the "admin" role in the Git Gateway settings. Then add the "admin" role to any users you want to have access to the CMS.
