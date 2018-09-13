@@ -10,7 +10,7 @@
   "scripts": {
     "build": "npm run build:gatsby",
     "build:lambda": "netlify-lambda build src/functions",
-    "build:gatsby": "npm run patch && npm run build:lambda && NODE_ENV=production gatsby build && node utils/gatsby-post-process",
+    "build:gatsby": "npm run build:lambda && NODE_ENV=production gatsby build && node utils/gatsby-post-process",
     "build:module": "rm -rf dist && mkdir dist && babel src/export --out-dir dist",
     "build:plugin": "babel plugins/export --out-dir ./",
     "clean": "run-p clean:cache clean:public clean:functions",
@@ -24,7 +24,6 @@
     "lint": "eslint ./",
     "live": "opn https://project-boilerplate.netlify.com/",
     "netlify": "opn https://app.netlify.com/sites/project-boilerplate/deploys",
-    "patch": "node utils/patch",
     "precommit": "lint-staged",
     "prepublishOnly": "npm run build",
     "reset": "node utils/reset",

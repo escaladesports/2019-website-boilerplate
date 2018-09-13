@@ -28,7 +28,9 @@ injectGlobal`
 `
 
 window.netlifyIdentity = netlifyIdentityWidget
-netlifyIdentityWidget.init()
+netlifyIdentityWidget.init({
+	logo: false,
+})
 
 // Fix for CMS not loading on login
 const identityInterval = setInterval(() => {
