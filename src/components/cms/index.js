@@ -3,28 +3,30 @@ import CMS from 'netlify-cms'
 import { injectGlobal } from 'emotion'
 import logo from '../../../static/backend-logo.png'
 
-injectGlobal({
-	color: `red`,
-	'.e4hp3ji1 svg': {
-		display: `none !important`,
-	},
-	'.e4hp3ji1': {
-		background: `url('${logo}') no-repeat center center !important`,
-		backgroundSize: `contain !important`,
-	},
-	'.e4hp3ji2': {
-		color: `transparent !important`,
-		'&:after': {
-			content: `"Sign In"`,
-			textAlign: `center`,
-			color: `#fff`,
-			position: `absolute`,
-			left: 0,
-			right: 0,
-		},
-	},
-})
+injectGlobal(`
+	#nc-root > div > section{
+		> span{
+			background: url(${logo}) no-repeat center center !important;
+			background-size: contain !important;
+			> svg{
+				display: none !important;
+			}
+		}
+		> button{
+			color: transparent !important;
+			:after{
+				content: "Sign In";
+				text-align: center;
+				color: #fff;
+				position: absolute;
+				left: 0;
+				right: 0;
+			}
+		}
+	}
+`)
 
+// Fix for CMS not loading on login
 const identityInterval = setInterval(() => {
 	if(window.netlifyIdentity){
 		console.log(`Found window.netlifyIdentity`)
