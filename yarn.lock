@@ -10507,7 +10507,7 @@ netlify-cms@^2.1.1:
     netlify-cms-widget-string "^2.0.4"
     netlify-cms-widget-text "^2.0.5"
 
-netlify-identity-widget@^1.4.11:
+netlify-identity-widget@^1.4.11, netlify-identity-widget@^1.4.14:
   version "1.4.14"
   resolved "https://registry.yarnpkg.com/netlify-identity-widget/-/netlify-identity-widget-1.4.14.tgz#32539380b85ce98881f3cea2d59111cb031ea994"
 

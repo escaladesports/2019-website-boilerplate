@@ -1,5 +1,6 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "CMS" }]*/
-import CMS from 'netlify-cms'
+import CMS, { init } from 'netlify-cms'
+import netlifyIdentityWidget from 'netlify-identity-widget'
 import { injectGlobal } from 'emotion'
 import logo from '../../../static/backend-logo.png'
 
@@ -26,6 +27,9 @@ injectGlobal`
 	}
 `
 
+window.netlifyIdentity = netlifyIdentityWidget
+netlifyIdentityWidget.init()
+
 // Fix for CMS not loading on login
 const identityInterval = setInterval(() => {
 	if(window.netlifyIdentity){
@@ -37,3 +41,5 @@ const identityInterval = setInterval(() => {
 		})
 	}
 })
+
+init()
