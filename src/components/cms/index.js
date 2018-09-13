@@ -3,7 +3,7 @@ import CMS from 'netlify-cms'
 import { injectGlobal } from 'emotion'
 import logo from '../../../static/backend-logo.png'
 
-injectGlobal(`
+injectGlobal`
 	#nc-root > div > section{
 		> span{
 			background: url(${logo}) no-repeat center center !important;
@@ -24,7 +24,7 @@ injectGlobal(`
 			}
 		}
 	}
-`)
+`
 
 // Fix for CMS not loading on login
 const identityInterval = setInterval(() => {
