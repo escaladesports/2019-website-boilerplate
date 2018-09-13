@@ -40,8 +40,8 @@ async function emailifyHtml(contents, url){
 	await Promise.all(promises)
 }
 
-async function processHtml(path = `**/*`, url) {
-	let paths = await glob(`${cwd}/public/${path}.html`)
+async function processHtml(path, url) {
+	let paths = await glob(`${cwd}/public/${path}/**/*.html`)
 	let promises = paths.map(path => {
 		return readFile(path, `utf8`)
 	})

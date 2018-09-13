@@ -58,6 +58,5 @@ exports.onPostBuild = async (_, {
 	publicPath = `email-templates`,
 	siteUrl = process.env.URL,
 }) => {
-	const files = `${publicPath}/**/*.html`
-	await postProcess(files, siteUrl)
+	await postProcess(publicPath, siteUrl)
 }
