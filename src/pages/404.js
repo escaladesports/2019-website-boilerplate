@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import Layout from 'components/layouts/default'
 import Meta from 'components/meta'
 
-export default class PageNotFound extends React.Component {
+export default class NotFoundPage extends React.Component {
 	render() {
 		const {
 			frontmatter,
@@ -19,7 +19,7 @@ export default class PageNotFound extends React.Component {
 }
 
 export const query = graphql`
-	query PageNotFound {
+	query NotFoundPage {
 		markdownRemark(fileAbsolutePath: {
 			regex: "/src/markdown/404.md/"
 		}){

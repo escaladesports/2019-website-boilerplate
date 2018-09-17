@@ -1,48 +1,16 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Link from 'gatsby-link'
 import Layout from 'components/layouts/default'
 import Meta from 'components/meta'
+import PostList from 'components/blog/post-list'
 
 export default class BlogPage extends React.Component {
 	render() {
-		const posts = this.props.data.allMarkdownRemark.edges.map(
-			({ node }) => {
-				const { excerpt, frontmatter } = node
-				return {
-					excerpt,
-					...frontmatter,
-				}
-			}
-		)
+		const posts = this.props.data.allMarkdownRemark.edges.map(edges => edges.node)
 		return (
 			<Layout>
 				<Meta title='Blog' />
-				{posts.map(({ title, path, tags, date, formattedDate, excerpt }, index) => (
-					<div key={`blog${index}`}>
-						<h2>
-							<Link to={`/blog/${path}`}>
-								{title}
-							</Link>
-						</h2>
-						<time dateTime={date}>{formattedDate}</time>
-						<ul>
-							{tags.map((tag, index) => (
-								<li key={`tag${index}`}>
-									<Link to={`/blog/tag/${tag}`}>
-										{tag}
-									</Link>
-								</li>
-							))}
-						</ul>
-						<p>{excerpt}</p>
-						<div>
-							<Link to={`/blog/${path}`}>
-								Read More
-							</Link>
-						</div>
-					</div>
-				))}
+				<PostList posts={posts} />
 			</Layout>
 		)
 	}

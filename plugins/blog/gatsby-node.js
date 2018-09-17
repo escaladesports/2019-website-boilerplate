@@ -8,8 +8,10 @@ exports.createPages = async ({ actions, graphql }) => {
 
 	const res = await graphql(`{
 		allMarkdownRemark(
-			fileAbsolutePath: {
-				regex: "/src/markdown/blog/"
+			filter: {
+				fileAbsolutePath: {
+					regex: "/src/markdown/blog/"
+				}
 			}
 			sort: { order: DESC, fields: [frontmatter___date] }
 		) {
@@ -25,21 +27,26 @@ exports.createPages = async ({ actions, graphql }) => {
 		}
 	}`)
 
+	if(res.errors){
+		console.error(res.errors)
+		process.exit(1)
+	}
+
 	const posts = res.data.allMarkdownRemark.edges.map(edge => edge.node)
 
 	const foundTags = []
 	posts.forEach(({ id, frontmatter }, index) => {
 		const { tags, path } = frontmatter
-		const previous = posts[index - 1]
-		const next = posts[index + 1]
+		let previous = posts[index + 1]
+		let next = posts[index - 1]
 
 		createPage({
 			path: `/blog/${path}`,
 			component: postTemplate,
 			context: {
 				id,
-				previous,
-				next,
+				previousId: previous ? previous.id : id,
+				nextId: next ? next.id : id,
 			},
 		})
 
