@@ -14,7 +14,7 @@ export default class CMSEmailTemplate extends React.Component {
 					<p className={styles.img}>
 						<img src='/backend-logo.png' />
 					</p>
-					<p dangerouslySetInnerHTML={{__html: html}} />
+					<div dangerouslySetInnerHTML={{__html: html}} />
 				</div>
 			</EmailTemplate>
 		)
