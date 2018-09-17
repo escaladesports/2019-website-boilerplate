@@ -29,13 +29,19 @@ export default class Footer extends React.Component{
 		})
 		const previous = page > 1 ? page - 1 : false
 		const next = page < totalPages ? page + 1 : false
+
 		return (
 			<ul className={styles.list}>
-				{previous && (
-					<li><Link to={this.getLink(previous)}>Previous</Link></li>
-				)}
+				<li className={styles.previous}>
+					{previous && (
+						<Link to={this.getLink(previous)}>Previous</Link>
+					)}
+				</li>
+				<li className={styles.summary}>
+					Page {page} of {totalPages}
+				</li>
 				{paginationModel.map(({ type, isActive, value }, key) => (
-					<li key={`page${key}`}>
+					<li key={`page${key}`} className={styles.link}>
 						{type === `PAGE` && isActive && value}
 						{type === `PAGE` && !isActive && (
 							<Link to={this.getLink(value)}>{value}</Link>
@@ -45,25 +51,58 @@ export default class Footer extends React.Component{
 						)}
 					</li>
 				))}
-				{next && (
-					<li><Link to={this.getLink(next)}>Next</Link></li>
-				)}
+				<li className={styles.next}>
+					{next && (
+						<Link to={this.getLink(next)}>Next</Link>
+					)}
+				</li>
 			</ul>
 		)
 	}
 }
 
+
+const breakpoint = 600
 const styles = {
 	list: css`
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
+		font-size: .8em;
 		li{
 			display: inline-block;
-			margin-right: 10px;
+			min-height: 1px;
+			width: ${100 / 3}%;
+			:first-of-type{
+				padding-left: 0;
+			}
 			:last-of-type{
-				margin-right: 0;
+				padding-right: 0;
 			}
 		}
+		@media(min-width: ${breakpoint}px){
+			li{
+				padding: 0 5px;
+				width: auto;
+			}
+		}
+	`,
+	link: css`
+		display: none !important;
+		@media(min-width: ${breakpoint}px){
+			display: inline-block !important;
+		}
+	`,
+	summary: css`
+		text-align: center;
+		@media(min-width: ${breakpoint}px){
+			display: none !important;
+		}
+	`,
+	previous: css`
+		text-align: left;
+	`,
+	next: css`
+		text-align: right;
 	`,
 }
