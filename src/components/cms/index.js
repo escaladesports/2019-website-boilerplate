@@ -34,10 +34,11 @@ netlifyIdentityWidget.init({
 
 // Fix for CMS not loading on login
 const identityInterval = setInterval(() => {
-	if(window.netlifyIdentity){
+	const identity = window.netlifyIdentity
+	if(identity){
 		console.log(`Found window.netlifyIdentity`)
 		clearInterval(identityInterval)
-		window.netlifyIdentity.on(`login`, () => {
+		identity.on(`login`, () => {
 			console.log(`Identity login`)
 			window.location.reload(false)
 		})

@@ -7,7 +7,10 @@ export function handler({ body }, _, callback){
 	const domain = email.split(`@`)[1]
 	let res = ``
 	let statusCode = 400
-	if(cmsEmailWhitelist.indexOf(domain) !== -1){
+	if(
+		cmsEmailWhitelist.indexOf(domain) !== -1 ||
+		cmsEmailWhitelist.indexOf(email) !== -1
+	){
 		console.log(`Whitelisting`)
 		statusCode = 200
 		res = JSON.stringify({
