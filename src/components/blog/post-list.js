@@ -12,7 +12,7 @@ export default class PostList extends React.Component {
 					return (
 						<li key={`blog${index}`}>
 							<h2>
-								<Link to={`/blog/${path}`}>
+								<Link to={`/blog/post/${path}`}>
 									{title}
 								</Link>
 							</h2>
@@ -20,7 +20,7 @@ export default class PostList extends React.Component {
 							<TagList tags={tags} />
 							<p>{excerpt}</p>
 							<div>
-								<Link to={`/blog/${path}`}>
+								<Link to={`/blog/post/${path}`}>
 									Read More
 								</Link>
 							</div>

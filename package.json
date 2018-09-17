@@ -168,6 +168,7 @@
     "static-server": "^2.2.1",
     "strip-html-comments": "^1.0.0",
     "toml": "^2.3.3",
+    "ultimate-pagination": "^1.0.0",
     "wt-cli": "^10.0.3"
   }
 }

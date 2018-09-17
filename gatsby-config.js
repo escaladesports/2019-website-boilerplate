@@ -1,7 +1,7 @@
+require(`dotenv`).config({ silent: true })
 const path = require(`path`)
 const proxy = require(`http-proxy-middleware`)
 const config = require(`./site-config`)
-require(`dotenv`).config({ silent: true })
 
 module.exports = {
 	plugins: [

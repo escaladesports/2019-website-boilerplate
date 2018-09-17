@@ -8,6 +8,7 @@ export default class Footer extends React.Component{
 			<footer className={footerStyles}>
 				<ul>
 					<li><Link to='/privacy-policy'>Privacy Policy</Link></li>
+					<li><a href='/email-templates/cms-invitation'>Email Template</a></li>
 					<li><a href='/admin/'>CMS</a></li>
 				</ul>
 			</footer>
