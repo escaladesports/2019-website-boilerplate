@@ -1,8 +1,10 @@
 ---
-title: "First Post"
-path: "first-post"
-date: "2015-05-28T22:40:32.169Z"
-tags: ["latin", "sample"]
+title: First Post
+date: '2015-05-28T22:40:32.169Z'
+tags:
+  - latin
+  - sample
+path: first-post
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id mi magna. Praesent tempus nunc eget erat rutrum, at laoreet tortor semper. Mauris lacinia dolor nibh, sit amet maximus felis euismod a. In hac habitasse platea dictumst. Praesent pharetra hendrerit velit, at viverra justo scelerisque ut. Phasellus non risus posuere, malesuada quam in, maximus quam. Nullam sollicitudin, felis id malesuada dictum, risus eros lobortis neque, vitae porttitor urna urna a diam. Donec vitae diam rhoncus, egestas purus vel, suscipit dolor. In hac habitasse platea dictumst. Nullam auctor suscipit mi at fermentum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed interdum molestie arcu, sit amet congue purus. Vestibulum a orci consequat, euismod neque quis, efficitur libero.
