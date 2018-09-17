@@ -56,3 +56,25 @@ collections:
           - label: Body
             name: body
             widget: markdown
+  - label: Blog
+    name: blog
+    folder: src/markdown/blog
+    create: true
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Date
+        name: date
+        widget: date
+      - label: Tags
+        name: tags
+        widget: list
+      - label: Path
+        name: path
+        widget: path
+        hint: The URL to the page. Should only contain lowercase characters with no spaces.
+        required: false
+      - label: Body
+        name: body
+        widget: markdown

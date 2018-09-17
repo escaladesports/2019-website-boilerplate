@@ -22,6 +22,7 @@ module.exports = {
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
 		`gatsby-plugin-netlify-cms-paths`,
+		`blog`,
 		{
 			resolve: `email-templates`,
 			options: {

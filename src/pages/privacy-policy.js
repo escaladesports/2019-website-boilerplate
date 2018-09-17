@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import Layout from 'components/layouts/default'
 import Meta from 'components/meta'
 
-export default class GridPage extends React.Component{
+export default class PrivacyPolicyPage extends React.Component{
 	render(){
 		const { html, excerpt, frontmatter } = this.props.data.markdownRemark
 		const { title, address, email } = frontmatter

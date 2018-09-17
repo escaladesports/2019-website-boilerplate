@@ -6,7 +6,7 @@ import buttonMixin from 'styles/mixins/button'
 import Layout from 'components/layouts/default'
 import Meta from 'components/meta'
 
-export default class DefaultTemplate extends React.Component{
+export default class ContactPage extends React.Component{
 	render(){
 		const {
 			frontmatter,
