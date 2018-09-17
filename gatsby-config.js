@@ -98,6 +98,7 @@ module.exports = {
 				manualInit: true,
 			},
 		},
+		`cms-no-index`,
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
