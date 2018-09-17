@@ -26,7 +26,7 @@ const styles = {
 		max-width: 600px;
 		padding: 20px;
 		margin: 0 auto;
-		a: {
+		a{
 			${linkMixin};
 		}
 	`,
