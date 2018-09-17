@@ -1,4 +1,4 @@
-const { resolve } = require(`path`)
+const { resolve, parse } = require(`path`)
 
 const tagsTemplate = resolve(`src/templates/tags.js`)
 const postTemplate = resolve(`src/templates/post.js`)
@@ -18,6 +18,7 @@ exports.createPages = async ({ actions, graphql }) => {
 			edges {
 				node {
 					id
+					fileAbsolutePath
 					frontmatter {
 						path
 						tags
@@ -35,13 +36,13 @@ exports.createPages = async ({ actions, graphql }) => {
 	const posts = res.data.allMarkdownRemark.edges.map(edge => edge.node)
 
 	const foundTags = []
-	posts.forEach(({ id, frontmatter }, index) => {
+	posts.forEach(({ id, fileAbsolutePath, frontmatter }, index) => {
 		const { tags, path } = frontmatter
 		let previous = posts[index + 1]
 		let next = posts[index - 1]
 
 		createPage({
-			path: `/blog/${path}`,
+			path: `/blog/${path || parse(fileAbsolutePath).name}`,
 			component: postTemplate,
 			context: {
 				id,
