@@ -72,8 +72,9 @@ collections:
         widget: list
       - label: Path
         name: path
-        widget: path
-        hint: The URL to the page. Should only contain lowercase characters with no spaces.
+        widget: string
+        pattern: ["^[a-z0-9_-]+$", "Must contain only lowercase characters and hyphens"]
+        hint: The URL to the page. Must contain only lowercase characters and hyphens.
         required: false
       - label: Body
         name: body
