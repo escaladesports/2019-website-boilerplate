@@ -27,19 +27,27 @@ export default class Footer extends React.Component{
 			hidePreviousAndNextPageLinks: true,
 			hideFirstAndLastPageLinks: true,
 		})
+		const previous = page > 1 ? page - 1 : false
+		const next = page < totalPages ? page + 1 : false
 		return (
 			<ul className={styles.list}>
-				{paginationModel.map((data, key) => (
+				{previous && (
+					<li><Link to={this.getLink(previous)}>Previous</Link></li>
+				)}
+				{paginationModel.map(({ type, isActive, value }, key) => (
 					<li key={`page${key}`}>
-						{data.type === `PAGE` && data.isActive && data.value}
-						{data.type === `PAGE` && !data.isActive && (
-							<Link to={this.getLink(data.value)}>{data.value}</Link>
+						{type === `PAGE` && isActive && value}
+						{type === `PAGE` && !isActive && (
+							<Link to={this.getLink(value)}>{value}</Link>
 						)}
-						{data.type !== `PAGE` && (
+						{type !== `PAGE` && (
 							<span>...</span>
 						)}
 					</li>
 				))}
+				{next && (
+					<li><Link to={this.getLink(next)}>Next</Link></li>
+				)}
 			</ul>
 		)
 	}
@@ -50,5 +58,12 @@ const styles = {
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
+		li{
+			display: inline-block;
+			margin-right: 10px;
+			:last-of-type{
+				margin-right: 0;
+			}
+		}
 	`,
 }

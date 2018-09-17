@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { css } from 'emotion'
 import Layout from 'components/layouts/default'
 import Meta from 'components/meta'
 import PostList from 'components/blog/post-list'
@@ -18,14 +19,23 @@ export default class BlogPage extends React.Component {
 					description={description}
 				/>
 				<PostList posts={posts} />
-				<Pagination
-					page={page}
-					totalPages={totalPages}
-					linkPrefix='/blog'
-				/>
+				<div className={styles.pagination}>
+					<Pagination
+						page={page}
+						totalPages={totalPages}
+						linkPrefix='/blog'
+					/>
+				</div>
 			</Layout>
 		)
 	}
+}
+
+const styles = {
+	pagination: css`
+		text-align: center;
+		margin-top: 30px;
+	`,
 }
 
 export const query = graphql`
