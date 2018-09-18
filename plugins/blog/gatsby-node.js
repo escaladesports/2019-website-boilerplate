@@ -39,7 +39,7 @@ exports.createPages = async ({ actions, graphql }) => {
 	}
 
 	const posts = res.data.allMarkdownRemark.edges.map(edge => edge.node)
-	const allTags = []
+	const allTags = {}
 
 	posts.forEach(({ id, frontmatter, fields }, index) => {
 		const { tags } = frontmatter
@@ -59,9 +59,10 @@ exports.createPages = async ({ actions, graphql }) => {
 		})
 
 		tags.forEach(tag => {
-			if (allTags.indexOf(tag) === -1) {
-				allTags.push(tag)
+			if(!allTags[tag]){
+				allTags[tag] = 0
 			}
+			allTags[tag]++
 		})
 	})
 
@@ -82,13 +83,24 @@ exports.createPages = async ({ actions, graphql }) => {
 	}
 
 	// Create tags pages
-	allTags.forEach(tag => {
-		createPage({
-			path: `/blog/tags/${tag}`,
-			component: tagsTemplate,
-			context: { tag },
-		})
-	})
+	for (let tag in allTags) {
+		const totalPages = Math.ceil(allTags[tag] / postsPerPage)
+		for (let i = totalPages; i--;) {
+			const page = i + 1
+			let path = i === 0 ? `/blog/tags/${tag}` : `/blog/tags/${tag}/${page}`
+			createPage({
+				path,
+				component: tagsTemplate,
+				context: {
+					tag,
+					skip: i * postsPerPage,
+					limit: postsPerPage,
+					page,
+					totalPages,
+				},
+			})
+		}
+	}
 }
 
 // Create URL paths for posts
