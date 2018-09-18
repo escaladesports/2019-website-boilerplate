@@ -1,6 +1,7 @@
 const { resolve, parse } = require(`path`)
 const { postsPerPage } = require(`../../site-config`)
 
+const markdownPath = resolve(`src/markdown/blog`)
 const blogTemplate = resolve(`src/templates/blog.js`)
 const tagsTemplate = resolve(`src/templates/tags.js`)
 const postTemplate = resolve(`src/templates/post.js`)
@@ -20,10 +21,12 @@ exports.createPages = async ({ actions, graphql }) => {
 			edges {
 				node {
 					id
-					fileAbsolutePath
 					frontmatter {
 						path
 						tags
+					}
+					fields{
+						path
 					}
 				}
 			}
@@ -38,14 +41,15 @@ exports.createPages = async ({ actions, graphql }) => {
 	const posts = res.data.allMarkdownRemark.edges.map(edge => edge.node)
 	const allTags = []
 
-	posts.forEach(({ id, fileAbsolutePath, frontmatter }, index) => {
-		const { tags, path } = frontmatter
+	posts.forEach(({ id, frontmatter, fields }, index) => {
+		const { tags } = frontmatter
+		const { path } = fields
 		let previous = posts[index + 1]
 		let next = posts[index - 1]
 
 		// Create single post page
 		createPage({
-			path: `/blog/post/${path || parse(fileAbsolutePath).name}`,
+			path,
 			component: postTemplate,
 			context: {
 				id,
@@ -85,4 +89,21 @@ exports.createPages = async ({ actions, graphql }) => {
 			context: { tag },
 		})
 	})
+}
+
+// Create URL paths for posts
+exports.onCreateNode = ({ node, actions }) => {
+	const { createNodeField } = actions
+	const { fileAbsolutePath } = node
+	if (fileAbsolutePath && fileAbsolutePath.indexOf(markdownPath) === 0) {
+		let path = node.frontmatter.path || parse(fileAbsolutePath).name
+		if(!isNaN(path)){
+			path = `post-${path}`
+		}
+		createNodeField({
+			node,
+			name: `path`,
+			value: `/blog/${path}`,
+		})
+	}
 }

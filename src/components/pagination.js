@@ -43,11 +43,9 @@ export default class Footer extends React.Component{
 				{paginationModel.map(({ type, isActive, value }, key) => (
 					<li key={`page${key}`} className={styles.link}>
 						{type === `PAGE` && isActive && value}
+						{type !== `PAGE` && `...`}
 						{type === `PAGE` && !isActive && (
 							<Link to={this.getLink(value)}>{value}</Link>
-						)}
-						{type !== `PAGE` && (
-							<span>...</span>
 						)}
 					</li>
 				))}

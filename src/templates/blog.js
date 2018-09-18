@@ -33,7 +33,6 @@ export default class BlogPage extends React.Component {
 
 const styles = {
 	pagination: css`
-		text-align: center;
 		margin-top: 30px;
 	`,
 }
