@@ -7,12 +7,13 @@ export default class PostList extends React.Component {
 	render() {
 		return (
 			<ul className={styles.list}>
-				{this.props.posts.map(({ excerpt, frontmatter}, index) => {
-					const { title, path, tags, date, formattedDate } = frontmatter
+				{this.props.posts.map(({ excerpt, fields, frontmatter}, index) => {
+					const { title, tags, date, formattedDate } = frontmatter
+					const { path } = fields
 					return (
 						<li key={`blog${index}`}>
 							<h2>
-								<Link to={`/blog/${path}`}>
+								<Link to={path}>
 									{title}
 								</Link>
 							</h2>
@@ -20,7 +21,7 @@ export default class PostList extends React.Component {
 							<TagList tags={tags} />
 							<p>{excerpt}</p>
 							<div>
-								<Link to={`/blog/${path}`}>
+								<Link to={path}>
 									Read More
 								</Link>
 							</div>

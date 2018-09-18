@@ -43,14 +43,14 @@ export default class PostTemplate extends React.Component{
 				<div>
 					{next && (
 						<div className={styles.next}>
-							<Link to={`/blog/${next.frontmatter.path}`}>
+							<Link to={next.fields.path}>
 								Next Post: {next.frontmatter.title}
 							</Link>
 						</div>
 					)}
 					{previous && (
 						<div>
-							<Link to={`/blog/${previous.frontmatter.path}`}>
+							<Link to={previous.fields.path}>
 								Previous Post: {previous.frontmatter.title}
 							</Link>
 						</div>
@@ -89,6 +89,8 @@ export const query = graphql`
 		){
 			frontmatter{
 				title
+			}
+			fields{
 				path
 			}
 		}
@@ -98,6 +100,8 @@ export const query = graphql`
 		){
 			frontmatter{
 				title
+			}
+			fields{
 				path
 			}
 		}

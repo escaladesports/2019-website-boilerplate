@@ -53,11 +53,13 @@ export const query = graphql`
 				node{
 					excerpt(pruneLength: 250)
 					frontmatter{
-						path
 						title
 						tags,
 						date,
 						formattedDate: date(formatString: "MMMM DD, YYYY")
+					}
+					fields{
+						path
 					}
 				}
 			}
