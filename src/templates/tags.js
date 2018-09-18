@@ -1,10 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { css } from 'emotion'
 import Layout from 'components/layouts/default'
 import Meta from 'components/meta'
 import PostList from 'components/blog/post-list'
-import Pagination from 'components/pagination'
 
 export default class TagsTemplate extends React.Component{
 	render(){
@@ -18,23 +16,15 @@ export default class TagsTemplate extends React.Component{
 					description={posts[0].excerpt}
 				/>
 				<h2>Tag: {tag}</h2>
-				<PostList posts={posts} />
-				<div className={styles.pagination}>
-					<Pagination
-						page={page}
-						totalPages={totalPages}
-						linkPrefix={`/blog/tags/${tag}`}
-					/>
-				</div>
+				<PostList
+					posts={posts}
+					page={page}
+					totalPages={totalPages}
+					linkPrefix={`/blog/tags/${tag}`}
+				/>
 			</Layout>
 		)
 	}
-}
-
-const styles = {
-	pagination: css`
-		margin-top: 30px;
-	`,
 }
 
 export const query = graphql`

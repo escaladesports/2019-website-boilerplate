@@ -2,33 +2,46 @@ import React from 'react'
 import Link from 'gatsby-link'
 import { css } from 'emotion'
 import TagList from 'components/blog/tag-list'
+import Pagination from 'components/pagination'
 
 export default class PostList extends React.Component {
 	render() {
+		const { page, totalPages, posts } = this.props
 		return (
-			<ul className={styles.list}>
-				{this.props.posts.map(({ excerpt, fields, frontmatter}, index) => {
-					const { title, tags, date, formattedDate } = frontmatter
-					const { path } = fields
-					return (
-						<li key={`blog${index}`}>
-							<h2>
-								<Link to={path}>
-									{title}
-								</Link>
-							</h2>
-							<time dateTime={date}>{formattedDate}</time>
-							<TagList tags={tags} />
-							<p>{excerpt}</p>
-							<div>
-								<Link to={path}>
-									Read More
-								</Link>
-							</div>
-						</li>
-					)
-				})}
-			</ul>
+			<>
+				<ul className={styles.list}>
+					{posts.map(({ excerpt, fields, frontmatter }, index) => {
+						const { title, tags, date, formattedDate } = frontmatter
+						const { path } = fields
+						return (
+							<li key={`blog${index}`}>
+								<h2>
+									<Link to={path}>
+										{title}
+									</Link>
+								</h2>
+								<time dateTime={date}>{formattedDate}</time>
+								<TagList tags={tags} />
+								<p>{excerpt}</p>
+								<div>
+									<Link to={path}>
+										Read More
+									</Link>
+								</div>
+							</li>
+						)
+					})}
+				</ul>
+				{totalPages > 1 &&
+					<div className={styles.pagination}>
+						<Pagination
+							page={page}
+							totalPages={totalPages}
+							linkPrefix='/blog'
+						/>
+					</div>
+				}
+			</>
 		)
 	}
 }
@@ -44,5 +57,8 @@ const styles = {
 				margin-bottom: 0;
 			}
 		}
+	`,
+	pagination: css`
+		margin-top: 30px;
 	`,
 }
