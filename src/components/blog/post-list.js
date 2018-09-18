@@ -6,7 +6,12 @@ import Pagination from 'components/pagination'
 
 export default class PostList extends React.Component {
 	render() {
-		const { page, totalPages, posts } = this.props
+		const {
+			page,
+			totalPages,
+			posts,
+			linkPrefix,
+		} = this.props
 		return (
 			<>
 				<ul className={styles.list}>
@@ -37,7 +42,7 @@ export default class PostList extends React.Component {
 						<Pagination
 							page={page}
 							totalPages={totalPages}
-							linkPrefix='/blog'
+							linkPrefix={linkPrefix}
 						/>
 					</div>
 				}
