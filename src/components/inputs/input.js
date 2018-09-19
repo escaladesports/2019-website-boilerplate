@@ -18,9 +18,16 @@ export default class Input extends React.Component {
 		this.blurHandler = this.blurHandler.bind(this)
 	}
 	changeHandler(e) {
-		const { value } = e.target
-		this.setState({ value })
-		this.validate(value)
+		const { value, checked } = e.target
+		if (this.props.type !== `checkbox`) {
+			this.setState({ value })
+			this.validate(value)
+		}
+		else{
+			const { parent, name } = this.props
+			this.setState({ value: checked })
+			parent.setState({ [name]: checked })
+		}
 	}
 	blurHandler() {
 		this.validate(this.state.value, true)
@@ -34,7 +41,6 @@ export default class Input extends React.Component {
 		} = this.props
 		let error = false
 
-		// Check if required
 		if (required && !value) {
 			error = `This field is required`
 		}
