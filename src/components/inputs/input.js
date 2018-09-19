@@ -101,6 +101,13 @@ export default class Input extends React.Component {
 					{children}
 				</select>
 		}
+		else if(type === `checkbox`){
+			inputEl =
+				<input
+					{...inputProps}
+					type={type}
+				/>
+		}
 		else{
 			if(mask){
 				inputEl =
@@ -133,7 +140,11 @@ export default class Input extends React.Component {
 		return (
 			<label className={cx(styles.label, error && styles.error)}>
 				{!!label && (
-					<span>{label}{!required && ` (optional)`}</span>
+					<span>
+						{label}
+						{!required && type !== `checkbox` && ` (optional)`}
+						{type === `checkbox` && `: `}
+					</span>
 				)}
 				{inputEl}
 				{error !== false && (

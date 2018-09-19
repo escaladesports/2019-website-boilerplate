@@ -38,6 +38,7 @@ export default class ContactForm extends React.Component{
 					<option>Warranty Claim</option>
 				</Input>
 				<Textarea parent={this} />
+				<Input type='checkbox' label='Toggle' name='toggle' />
 				<button disabled={!this.canSubmit()} className={buttonMixin}>
 					Submit
 				</button>
