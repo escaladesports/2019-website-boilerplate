@@ -161,6 +161,7 @@
     "react-dom": "^16.4.0",
     "react-helmet": "^5.2.0",
     "react-html-email": "^3.0.0",
+    "react-input-mask": "^2.0.4",
     "react-netlify-form": "^2.1.0",
     "react-no-ssr": "^1.1.0",
     "react-test-renderer": "^16.4.2",

@@ -1,6 +1,6 @@
 import React from 'react'
-import Input from 'components/inputs/input'
 import isPhone from 'is-phone'
+import Input from 'components/inputs/input'
 
 function validate(value) {
 	if (!isPhone(value)) {
@@ -14,6 +14,7 @@ export default class EmailInput extends React.Component{
 		name: `phone`,
 		type: `tel`,
 		autoComplete: `tel`,
+		mask: `(999) 999-9999`,
 		validate,
 	}
 	render(){

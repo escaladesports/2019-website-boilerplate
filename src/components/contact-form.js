@@ -30,15 +30,9 @@ export default class ContactForm extends React.Component{
 				<Email parent={this} />
 				<Phone parent={this} />
 				<Textarea parent={this} />
-
-				<div>
-					<button
-						disabled={!this.canSubmit()}
-						className={buttonMixin}
-					>
-						Submit
-					</button>
-				</div>
+				<button disabled={!this.canSubmit()} className={buttonMixin}>
+					Submit
+				</button>
 			</>
 		)
 	}

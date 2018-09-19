@@ -1,5 +1,6 @@
 import React from 'react'
 import { cx, css } from 'emotion'
+import InputMask from 'react-input-mask'
 
 export default class Input extends React.Component {
 	static defaultProps = {
@@ -65,6 +66,7 @@ export default class Input extends React.Component {
 			required,
 			name,
 			autoComplete,
+			mask,
 		} = this.props
 		const {
 			value,
@@ -84,7 +86,32 @@ export default class Input extends React.Component {
 			inputEl = <textarea {...inputProps} />
 		}
 		else{
-			inputEl = <input {...inputProps} type={type} autoComplete={autoComplete} />
+			if(mask){
+				inputEl =
+					<InputMask
+						mask={mask}
+						onChange={this.changeHandler}
+						onBlur={this.blurHandler}
+						value={value}
+					>
+						{maskProps => (
+							<input
+								{...inputProps}
+								{...maskProps}
+								type={type}
+								autoComplete={autoComplete}
+							/>
+						)}
+					</InputMask>
+			}
+			else {
+				inputEl =
+					<input
+						{...inputProps}
+						type={type}
+						autoComplete={autoComplete}
+					/>
+			}
 		}
 
 		return (
