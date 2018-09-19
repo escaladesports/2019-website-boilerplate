@@ -64,25 +64,33 @@ export default class Input extends React.Component {
 			type,
 			required,
 			name,
-			autocomplete,
+			autoComplete,
 		} = this.props
 		const {
 			value,
 			error,
 		} = this.state
 
+		const inputProps = {
+			name,
+			required,
+			value,
+			onChange: this.changeHandler,
+			onBlur: this.blurHandler,
+		}
+
+		let inputEl
+		if(type === `textarea`){
+			inputEl = <textarea {...inputProps} />
+		}
+		else{
+			inputEl = <input {...inputProps} type={type} autoComplete={autoComplete} />
+		}
+
 		return (
 			<label className={cx(styles.label, error && styles.error)}>
 				<span>{label}</span>
-				<input
-					name={name}
-					type={type}
-					required={required}
-					autoComplete={autocomplete}
-					value={value}
-					onChange={this.changeHandler}
-					onBlur={this.blurHandler}
-				/>
+				{inputEl}
 				{error !== false && (
 					<span>{error}</span>
 				)}
@@ -93,21 +101,34 @@ export default class Input extends React.Component {
 
 function noop(){}
 
+const padding = 8
 const styles = {
 	label: css`
 		display: block;
 		margin-bottom: 10px;
+		input, textarea{
+			width: 100%;
+			display: block;
+			outline: none;
+			border: 1px solid #ccc;
+			font-size: .8em;
+			:focus{
+				border-color: #000;
+			}
+		}
 		input{
 			height: 34px;
-			width: 100%;
-			padding: 0 5px;
-			display: block;
+			padding: 0 ${padding}px;
+		}
+		textarea{
+			padding: ${padding}px;
+			height: 100px;
 		}
 	`,
 	error: css`
 		color: #f00;
-		input{
-			border: 1px solid #f00;
+		input, textarea{
+			border-color: #f00 !important;
 		}
 	`,
 }

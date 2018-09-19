@@ -1,7 +1,8 @@
 import React from 'react'
 import buttonMixin from 'styles/mixins/button'
-import Input from 'components/inputs/input'
+import Name from 'components/inputs/name'
 import Email from 'components/inputs/email'
+import Textarea from 'components/inputs/textarea'
 
 export default class ContactForm extends React.Component{
 	constructor(props){
@@ -11,23 +12,16 @@ export default class ContactForm extends React.Component{
 	canSubmit(){
 		return (
 			this.state.email &&
-			this.state.name
+			this.state.name &&
+			this.state.message
 		)
 	}
 	render(){
 		return (
 			<>
-				<Email
-					label='Email'
-					name='email'
-					parent={this}
-				/>
-				<Input
-					label='Name'
-					name='name'
-					required={false}
-					parent={this}
-				/>
+				<Email parent={this} />
+				<Name parent={this} />
+				<Textarea parent={this} />
 
 				<div>
 					<button

@@ -10,7 +10,9 @@ function validate(value) {
 
 export default class EmailInput extends React.Component{
 	static defaultProps = {
-		autofill: `email`,
+		label: `Email`,
+		name: `email`,
+		autoComplete: `email`,
 		validate,
 	}
 	render(){
