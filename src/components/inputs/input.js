@@ -67,6 +67,7 @@ export default class Input extends React.Component {
 			name,
 			autoComplete,
 			mask,
+			children,
 		} = this.props
 		const {
 			value,
@@ -77,6 +78,7 @@ export default class Input extends React.Component {
 			name,
 			required,
 			value,
+			autoComplete,
 			onChange: this.changeHandler,
 			onBlur: this.blurHandler,
 		}
@@ -84,6 +86,13 @@ export default class Input extends React.Component {
 		let inputEl
 		if(type === `textarea`){
 			inputEl = <textarea {...inputProps} />
+		}
+		else if(type === `select`){
+			inputEl =
+				<select {...inputProps}>
+					<option disabled value='' />
+					{children}
+				</select>
 		}
 		else{
 			if(mask){
@@ -95,22 +104,12 @@ export default class Input extends React.Component {
 						value={value}
 					>
 						{maskProps => (
-							<input
-								{...inputProps}
-								{...maskProps}
-								type={type}
-								autoComplete={autoComplete}
-							/>
+							<input {...inputProps} {...maskProps} type={type} />
 						)}
 					</InputMask>
 			}
 			else {
-				inputEl =
-					<input
-						{...inputProps}
-						type={type}
-						autoComplete={autoComplete}
-					/>
+				inputEl = <input {...inputProps} type={type} />
 			}
 		}
 
@@ -135,12 +134,13 @@ const styles = {
 	label: css`
 		display: block;
 		margin-bottom: 10px;
-		input, textarea{
+		input, textarea, select{
 			width: 100%;
 			display: block;
 			outline: none;
 			border: 1px solid #ccc;
 			font-size: .8em;
+			background-color: transparent;
 			:focus{
 				border-color: #000;
 			}
@@ -152,6 +152,18 @@ const styles = {
 		textarea{
 			padding: ${padding}px;
 			height: 100px;
+		}
+		select{
+			height: 34px;
+			border-radius: 0;
+			-webkit-appearance: none;
+			-webkit-border-radius: 0px;
+			background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%28138, 138, 138%29'></polygon></svg>");
+			background-origin: content-box;
+			background-position: right 0px center;
+			background-repeat: no-repeat;
+			background-size: 9px 6px;
+			padding: ${padding}px;
 		}
 	`,
 	error: css`
