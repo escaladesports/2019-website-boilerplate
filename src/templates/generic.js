@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import Layout from 'components/layouts/default'
 import Meta from 'components/meta'
 
-export default class DefaultTemplate extends React.Component{
+export default class GenericTemplate extends React.Component{
 	render(){
 		const {
 			frontmatter,
@@ -24,16 +24,13 @@ export default class DefaultTemplate extends React.Component{
 }
 
 export const query = graphql`
-	query DefaultTemplate($slug: String!) {
-		markdownRemark(fields: {
-			slug: { eq: $slug }
-		}){
+	query GenericTemplate($id: String!) {
+		markdownRemark(
+			id: { eq: $id }
+		){
 			fileAbsolutePath
 			html
 			excerpt(pruneLength: 175)
-			fields{
-				slug
-			}
 			frontmatter{
 				title
 			}

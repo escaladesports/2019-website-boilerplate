@@ -29,10 +29,17 @@ export default class ContactPage extends React.Component{
 							form={(
 								<>
 									<div>
-										<input type='text' name='Name' required />
+										<input
+											type='text'
+											name='Name'
+											required
+										/>
 									</div>
 									<div>
-										<textarea name='Message' required />
+										<textarea
+											name='Message'
+											required
+										/>
 									</div>
 									<div>
 										<button className={buttonMixin}>Submit</button>
@@ -52,7 +59,7 @@ const styles = css`
 		display: block;
 	}
 	.grecaptcha-badge{
-		/* display: none !important; */
+		display: none !important;
 	}
 `
 

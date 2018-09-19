@@ -117,7 +117,6 @@
     "gatsby-plugin-favicon": "^3.1.4",
     "gatsby-plugin-google-analytics": "^2.0.0-rc.1",
     "gatsby-plugin-google-fonts": "^0.0.4",
-    "gatsby-plugin-markdown-pages": "^1.0.2",
     "gatsby-plugin-netlify": "^2.0.0-rc.2",
     "gatsby-plugin-netlify-cms": "^3.0.0-rc.1",
     "gatsby-plugin-netlify-cms-paths": "^1.0.1",

@@ -6490,12 +6490,6 @@ gatsby-plugin-google-fonts@^0.0.4:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-google-fonts/-/gatsby-plugin-google-fonts-0.0.4.tgz#dc1402a71f27c3ae6caee10777d10adadf74bd7c"
 
-gatsby-plugin-markdown-pages@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-markdown-pages/-/gatsby-plugin-markdown-pages-1.0.3.tgz#be8c942b09003fb5f13e999c24dfb48edeefefc4"
-  dependencies:
-    babel-runtime "^6.26.0"
-
 gatsby-plugin-netlify-cms-paths@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-netlify-cms-paths/-/gatsby-plugin-netlify-cms-paths-1.0.2.tgz#492542f998d574ac6dda9e78be9d93c9137c6358"

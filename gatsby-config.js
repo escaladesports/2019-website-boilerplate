@@ -23,6 +23,7 @@ module.exports = {
 		`gatsby-plugin-remove-trailing-slashes`,
 		`gatsby-plugin-netlify-cms-paths`,
 		`blog`,
+		`generic-pages`,
 		{
 			resolve: `email-templates`,
 			options: {
@@ -57,12 +58,6 @@ module.exports = {
 			options: {
 				path: `${__dirname}/static/uploads`,
 				name: `uploads`,
-			},
-		},
-		{
-			resolve: `gatsby-plugin-markdown-pages`,
-			options: {
-				path: `./src/markdown/pages`,
 			},
 		},
 		{
@@ -151,21 +146,21 @@ module.exports = {
 				respectDNT: true,
 			},
 		},
-		{
-			resolve: `gatsby-plugin-prefetch-google-fonts`,
-			options: {
-				fonts: [
-					{
-						family: `Oswald`,
-						subsets: [ `latin` ],
-					},
-					{
-						family: `Open Sans`,
-						subsets: [ `latin` ],
-					},
-				],
-			},
-		},
+		// {
+		// 	resolve: `gatsby-plugin-prefetch-google-fonts`,
+		// 	options: {
+		// 		fonts: [
+		// 			{
+		// 				family: `Oswald`,
+		// 				subsets: [ `latin` ],
+		// 			},
+		// 			{
+		// 				family: `Open Sans`,
+		// 				subsets: [ `latin` ],
+		// 			},
+		// 		],
+		// 	},
+		// },
 	],
 	siteMetadata: config,
 	developMiddleware: app => {
