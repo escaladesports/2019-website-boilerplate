@@ -89,7 +89,9 @@ export default class Input extends React.Component {
 
 		return (
 			<label className={cx(styles.label, error && styles.error)}>
-				<span>{label}</span>
+				{!!label && (
+					<span>{label}</span>
+				)}
 				{inputEl}
 				{error !== false && (
 					<span>{error}</span>

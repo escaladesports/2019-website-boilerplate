@@ -141,6 +141,7 @@
     "husky": "^0.14.3",
     "identity-obj-proxy": "^3.0.0",
     "is-email": "^1.0.0",
+    "is-phone": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^23.6.0",
     "jest-dom": "^1.12.0",

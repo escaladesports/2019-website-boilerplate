@@ -3,6 +3,7 @@ import buttonMixin from 'styles/mixins/button'
 import Name from 'components/inputs/name'
 import Email from 'components/inputs/email'
 import Textarea from 'components/inputs/textarea'
+import Phone from 'components/inputs/phone'
 
 export default class ContactForm extends React.Component{
 	constructor(props){
@@ -10,17 +11,24 @@ export default class ContactForm extends React.Component{
 		this.state = {}
 	}
 	canSubmit(){
-		return (
-			this.state.email &&
-			this.state.name &&
-			this.state.message
-		)
+		const required = [
+			`email`,
+			`name`,
+			`message`,
+		]
+		for(let i = required.length; i--;){
+			if(!this.state[required[i]]){
+				return false
+			}
+		}
+		return true
 	}
 	render(){
 		return (
 			<>
-				<Email parent={this} />
 				<Name parent={this} />
+				<Email parent={this} />
+				<Phone parent={this} />
 				<Textarea parent={this} />
 
 				<div>
