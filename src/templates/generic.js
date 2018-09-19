@@ -28,7 +28,6 @@ export const query = graphql`
 		markdownRemark(
 			id: { eq: $id }
 		){
-			fileAbsolutePath
 			html
 			excerpt(pruneLength: 175)
 			frontmatter{
