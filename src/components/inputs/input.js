@@ -1,5 +1,5 @@
 import React from 'react'
-import Label from 'components/inputs/label'
+import { cx, css } from 'emotion'
 
 export default class Input extends React.Component {
 	static defaultProps = {
@@ -12,7 +12,6 @@ export default class Input extends React.Component {
 		this.state = {
 			value: ``,
 			error: false,
-			blurred: false,
 		}
 		this.changeHandler = this.changeHandler.bind(this)
 		this.blurHandler = this.blurHandler.bind(this)
@@ -23,29 +22,41 @@ export default class Input extends React.Component {
 		this.validate(value)
 	}
 	blurHandler() {
-		this.validate(this.state.value)
-		this.setState({ blurred: true })
+		this.validate(this.state.value, true)
 	}
-	validate(value) {
+	validate(value, message) {
 		const {
 			name,
 			required,
 			parent,
+			validate,
 		} = this.props
-		if (required) {
-			if (!value) {
-				this.setState({ error: `This field is required` })
-				if(parent){
-					parent.setState({ [name]: `` })
-				}
-			}
-			else {
-				this.setState({ error: false })
-				if (parent) {
-					parent.setState({ [name]: value })
-				}
+		let error = false
+
+		// Check if required
+		if (required && !value) {
+			error = `This field is required`
+		}
+
+		// Custom validation
+		if(validate && value){
+			const customError = validate(value)
+			if (customError){
+				error = customError
 			}
 		}
+
+		this.setState({ error: message ? error : false })
+
+		if(parent){
+			if (error) {
+				parent.setState({ [name]: `` })
+			}
+			else {
+				parent.setState({ [name]: value })
+			}
+		}
+
 	}
 	render() {
 		const {
@@ -53,31 +64,50 @@ export default class Input extends React.Component {
 			type,
 			required,
 			name,
+			autocomplete,
 		} = this.props
 		const {
 			value,
 			error,
-			blurred,
 		} = this.state
 
 		return (
-			<div>
-				<Label label={label}>
-					<input
-						name={name}
-						type={type}
-						required={required}
-						value={value}
-						onChange={this.changeHandler}
-						onBlur={this.blurHandler}
-					/>
-					{blurred && error !== false && (
-						<div>{error}</div>
-					)}
-				</Label>
-			</div>
+			<label className={cx(styles.label, error && styles.error)}>
+				<span>{label}</span>
+				<input
+					name={name}
+					type={type}
+					required={required}
+					autoComplete={autocomplete}
+					value={value}
+					onChange={this.changeHandler}
+					onBlur={this.blurHandler}
+				/>
+				{error !== false && (
+					<span>{error}</span>
+				)}
+			</label>
 		)
 	}
 }
 
 function noop(){}
+
+const styles = {
+	label: css`
+		display: block;
+		margin-bottom: 10px;
+		input{
+			height: 34px;
+			width: 100%;
+			padding: 0 5px;
+			display: block;
+		}
+	`,
+	error: css`
+		color: #f00;
+		input{
+			border: 1px solid #f00;
+		}
+	`,
+}
