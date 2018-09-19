@@ -116,7 +116,7 @@ export default class Input extends React.Component {
 		return (
 			<label className={cx(styles.label, error && styles.error)}>
 				{!!label && (
-					<span>{label}</span>
+					<span>{label}{!required && ` (optional)`}</span>
 				)}
 				{inputEl}
 				{error !== false && (
@@ -143,6 +143,11 @@ const styles = {
 			background-color: transparent;
 			:focus{
 				border-color: #000;
+			}
+			&:-webkit-autofill,
+			&:-webkit-autofill:hover,
+			&:-webkit-autofill:focus{
+  				-webkit-box-shadow: 0 0 0px 1000px #fff inset;
 			}
 		}
 		input{
