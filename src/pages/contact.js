@@ -1,10 +1,10 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'emotion'
-import buttonMixin from 'styles/mixins/button'
 import Layout from 'components/layouts/default'
 import Meta from 'components/meta'
 import Form from 'components/form'
+import ContactForm from 'components/contact-form'
 
 export default class ContactPage extends React.Component{
 	render(){
@@ -26,26 +26,7 @@ export default class ContactPage extends React.Component{
 							success={(
 								<div>Thank you for contacting us!</div>
 							)}
-							form={(
-								<>
-									<div>
-										<input
-											type='text'
-											name='Name'
-											required
-										/>
-									</div>
-									<div>
-										<textarea
-											name='Message'
-											required
-										/>
-									</div>
-									<div>
-										<button className={buttonMixin}>Submit</button>
-									</div>
-								</>
-							)}
+							form={<ContactForm />}
 						/>
 					</div>
 				</div>
