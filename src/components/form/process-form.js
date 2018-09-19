@@ -2,7 +2,7 @@
 /*eslint no-undef: "error"*/
 import fetch from 'isomorphic-fetch'
 
-export default async function process(){
+export default async function processForm(){
 	const {
 		onSubmit,
 		action,

@@ -52,7 +52,7 @@ const styles = css`
 		display: block;
 	}
 	.grecaptcha-badge{
-		display: none !important;
+		/* display: none !important; */
 	}
 `
 
