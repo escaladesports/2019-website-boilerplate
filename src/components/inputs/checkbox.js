@@ -1,15 +1,18 @@
 import React from 'react'
-import Input from 'components/inputs/input'
+import Field from 'components/inputs/field'
 
 export default class Checkbox extends React.Component{
 	static defaultProps = {
-		label: `Name`,
-		name: `name`,
-		autoComplete: `name`,
+		type: `checkbox`,
+		required: false,
 	}
 	render(){
 		return (
-			<Input {...this.props} />
+			<Field {...this.props}>
+				{props => (
+					<input {...props} type='checkbox' />
+				)}
+			</Field>
 		)
 	}
 }

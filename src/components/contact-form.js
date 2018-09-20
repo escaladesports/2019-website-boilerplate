@@ -5,7 +5,8 @@ import Email from 'components/inputs/email'
 import Textarea from 'components/inputs/textarea'
 import Phone from 'components/inputs/phone'
 import Zip from 'components/inputs/zip'
-import Input from 'components/inputs/input'
+import Checkbox from 'components/inputs/checkbox'
+import Select from 'components/inputs/select'
 
 export default class ContactForm extends React.Component{
 	constructor(props){
@@ -32,13 +33,13 @@ export default class ContactForm extends React.Component{
 				<Email parent={this} />
 				<Phone parent={this} required={false} />
 				<Zip parent={this} required={false} />
-				<Input type='select' label='Subject' name='subject' required={false}>
+				<Select parent={this} label='Subject' name='subject' required={false}>
 					<option>General</option>
 					<option>Customer Service</option>
 					<option>Warranty Claim</option>
-				</Input>
+				</Select>
 				<Textarea parent={this} />
-				<Input type='checkbox' label='Toggle' name='toggle' required={false} />
+				<Checkbox parent={this} label='Toggle' name='toggle' required={false} />
 				<button disabled={!this.canSubmit()} className={buttonMixin}>
 					Submit
 				</button>
