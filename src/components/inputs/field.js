@@ -4,9 +4,7 @@ import InputMask from 'react-input-mask'
 
 export default class Field extends React.Component {
 	static defaultProps = {
-		type: `text`,
 		required: true,
-		setState: noop,
 	}
 	constructor(props){
 		super(props)
@@ -128,8 +126,6 @@ export default class Field extends React.Component {
 		)
 	}
 }
-
-function noop(){}
 
 const styles = {
 	label: css`

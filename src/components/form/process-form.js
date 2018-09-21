@@ -8,22 +8,25 @@ export default async function processForm(){
 		action,
 		onError,
 		validate,
+		recaptcha,
 	} = this.props
 
 	let body = new FormData(this.form)
 
-	if (!this.state.recaptchaValue) {
-		const msg = `reCAPTCHA value not set`
-		console.error(msg)
-		onError(msg)
-		return this.setState({
-			loading: false,
-			error: false,
-			success: false,
-			recaptchaError: true,
-		})
+	if (recaptcha) {
+		if (!this.state.recaptchaValue) {
+			const msg = `reCAPTCHA value not set`
+			console.error(msg)
+			onError(msg)
+			return this.setState({
+				loading: false,
+				error: false,
+				success: false,
+				recaptchaError: true,
+			})
+		}
+		body.append(`g-recaptcha-response`, this.state.recaptchaValue)
 	}
-	body.append(`g-recaptcha-response`, this.state.recaptchaValue)
 
 	this.setState({
 		loading: true,

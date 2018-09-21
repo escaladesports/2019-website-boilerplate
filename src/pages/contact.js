@@ -1,24 +1,52 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'emotion'
+import { Helmet } from 'react-helmet'
 import Layout from 'components/layouts/default'
-import Meta from 'components/meta'
 import Form from 'components/form'
-import ContactForm from 'components/contact-form'
+import buttonMixin from 'styles/mixins/button'
+import Name from 'components/inputs/name'
+import Email from 'components/inputs/email'
+import Textarea from 'components/inputs/textarea'
+import Phone from 'components/inputs/phone'
+import Zip from 'components/inputs/zip'
+import Checkbox from 'components/inputs/checkbox'
+import Select from 'components/inputs/select'
 
-export default class ContactPage extends React.Component{
+export default class ContactPage extends React.Component {
+	constructor(props) {
+		super(props)
+		this.state = {}
+	}
+	canSubmit() {
+		const required = [
+			`email`,
+			`name`,
+		]
+		for (let i = required.length; i--;) {
+			if (!this.state[required[i]]) {
+				return false
+			}
+		}
+		return true
+	}
 	render(){
 		const {
 			frontmatter,
 			html,
 			excerpt,
-		} =  this.props.data.markdownRemark
+		} =  this.props.data.page
+		const { title } = frontmatter
+		const {
+			siteTitle,
+		} = this.props.data.site.frontmatter
+
 		return(
 			<Layout>
-				<Meta
-					title={frontmatter.title}
-					description={excerpt}
-				/>
+				<Helmet>
+					<title>{`${title} | ${siteTitle}`}</title>
+					<meta name='description' content={excerpt} />
+				</Helmet>
 				<div className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
@@ -26,7 +54,26 @@ export default class ContactPage extends React.Component{
 							success={(
 								<div>Thank you for contacting us!</div>
 							)}
-							form={<ContactForm />}
+							onSuccess={res => console.log(res)}
+							recaptcha={false}
+							form={
+								<>
+									<Name parent={this} />
+									<Email parent={this} />
+									<Phone parent={this} required={false} />
+									<Zip parent={this} required={false} />
+									<Select parent={this} label='Subject' name='subject' required={false}>
+										<option>General</option>
+										<option>Customer Service</option>
+										<option>Warranty Claim</option>
+									</Select>
+									<Textarea parent={this} required={false} />
+									<Checkbox parent={this} label='Toggle' name='toggle' />
+									<button disabled={!this.canSubmit()} className={buttonMixin}>
+										Submit
+									</button>
+								</>
+							}
 						/>
 					</div>
 				</div>
@@ -46,13 +93,21 @@ const styles = css`
 
 export const query = graphql`
 	query ContactTemplate {
-		markdownRemark(fileAbsolutePath: {
+		page: markdownRemark(fileAbsolutePath: {
 			regex: "/src/markdown/contact.md/"
 		}){
 			html
 			excerpt(pruneLength: 175)
 			frontmatter{
 				title
+			}
+		}
+
+		site: markdownRemark(fileAbsolutePath: {
+			regex: "/src/markdown/settings/site.md/"
+		}){
+			frontmatter{
+				siteTitle
 			}
 		}
 	}

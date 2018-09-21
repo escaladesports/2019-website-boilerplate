@@ -1,15 +1,19 @@
 import React from 'react'
 import { css } from 'emotion'
+import { graphql } from 'gatsby'
+import { Helmet } from 'react-helmet'
 import Layout from 'components/layouts/default'
-import Meta from 'components/meta'
 import createGrid from 'styles/mixins/grid'
 
 export default class GridPage extends React.Component{
 	render(){
-
+		const { siteTitle, siteDescription } = this.props.data.site.frontmatter
 		return(
 			<Layout>
-				<Meta title='Grid Example' />
+				<Helmet>
+					<title>{`Grid Example | ${siteTitle}`}</title>
+					<meta name='description' content={siteDescription} />
+				</Helmet>
 				<h1>Grid Example</h1>
 				<div className={styles}>
 					{function(){
@@ -39,5 +43,18 @@ const styles = css`
 	> *{
 		background: #ccc;
 		border: 1px solid #000;
+	}
+`
+
+export const query = graphql`
+	query GridPage {
+		site: markdownRemark(fileAbsolutePath: {
+			regex: "/src/markdown/settings/site.md/"
+		}){
+			frontmatter{
+				siteTitle
+				siteDescription
+			}
+		}
 	}
 `

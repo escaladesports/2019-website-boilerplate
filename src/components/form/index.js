@@ -10,6 +10,7 @@ class NetlifyForm extends React.Component {
 	static defaultProps = {
 		loading: <div>Loading...</div>,
 		error: msg => <div>{msg}</div>,
+		recatpcha: true,
 		onSubmit: noop,
 		onSuccess: noop,
 		onError: noop,
@@ -30,33 +31,40 @@ class NetlifyForm extends React.Component {
 		this.process = processForm.bind(this)
 	}
 	render(){
-		const { loading, error, recaptchaError, success } = this.state
+		const {
+			loading,
+			error,
+			recaptchaError,
+			success,
+		} = this.state
 		return (
 			<form
 				ref={el => this.form = el}
 				onSubmit={this.onSubmit}
 			>
-				{loading &&
+				{loading && (
 					this.props.loading
-				}
-				{!!error &&
+				)}
+				{!!error && (
 					this.props.error(`Internal server error. Your information was not sent. Please try again.`)
-				}
-				{!!recaptchaError &&
+				)}
+				{!!recaptchaError && (
 					this.props.error(`reCAPTCHA not complete. Please try again.`)
-				}
-				{success &&
+				)}
+				{success && (
 					this.props.success
-				}
-				{!loading && !success &&
+				)}
+				{!loading && !success && (
 					this.props.form
-				}
-				<Recaptcha
-					sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
-					size='invisible'
-					ref={el => this.recaptchaEl = el}
-					onChange={this.onRecaptchaChange}
-				/>
+				)}
+				{this.props.recaptcha && (
+					<Recaptcha
+						sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
+						size='invisible'
+						ref={el => this.recaptchaEl = el}
+						onChange={this.onRecaptchaChange}
+					/>
+				)}
 			</form>
 		)
 	}
