@@ -2,9 +2,9 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { css } from 'emotion'
+import { Helmet } from 'react-helmet'
 import buttonStyles from 'styles/mixins/button'
 import Layout from 'components/layouts/default'
-import Meta from 'components/meta'
 import Modal from 'components/modal'
 
 export default class HomePage extends React.Component {
@@ -15,11 +15,15 @@ export default class HomePage extends React.Component {
 		}
 	}
 	render() {
-		const { html, frontmatter } = this.props.data.markdownRemark
+		const { html, frontmatter } = this.props.data.page
 		const { headerImage } = frontmatter
+		const { siteTitle, siteDescription } = this.props.data.site.frontmatter
 		return (
 			<Layout>
-				<Meta />
+				<Helmet>
+					<title>{siteTitle}</title>
+					<meta name='description' content={siteDescription} />
+				</Helmet>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<Img
 					className={styles}
@@ -49,7 +53,7 @@ const styles = css`
 
 export const query = graphql`
 	query HomePage {
-		markdownRemark(fileAbsolutePath: {
+		page: markdownRemark(fileAbsolutePath: {
 			regex: "/src/markdown/index.md/"
 		}){
 			html
@@ -61,6 +65,14 @@ export const query = graphql`
 						}
 					}
 				}
+			}
+		}
+		site: markdownRemark(fileAbsolutePath: {
+			regex: "/src/markdown/settings/site.md/"
+		}){
+			frontmatter{
+				siteTitle
+				siteDescription
 			}
 		}
 	}

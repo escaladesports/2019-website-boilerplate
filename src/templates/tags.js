@@ -1,20 +1,20 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { Helmet } from 'react-helmet'
 import Layout from 'components/layouts/default'
-import Meta from 'components/meta'
 import PostList from 'components/blog/post-list'
 
 export default class TagsTemplate extends React.Component{
 	render(){
 		const { tag, page, totalPages } = this.props.pageContext
-		const posts = this.props.data.allMarkdownRemark.edges.map(edge => edge.node)
+		const posts = this.props.data.posts.edges.map(edge => edge.node)
+		const { siteTitle } = this.props.data.site.frontmatter
 
 		return(
 			<Layout>
-				<Meta
-					title={`Posts Tagged with ${tag}`}
-					description={posts[0].excerpt}
-				/>
+				<Helmet>
+					<title>{`Posts Tagged with ${tag} | ${siteTitle}`}</title>
+				</Helmet>
 				<h2>Tag: {tag}</h2>
 				<PostList
 					posts={posts}
@@ -29,7 +29,7 @@ export default class TagsTemplate extends React.Component{
 
 export const query = graphql`
 	query TagsTemplate($tag: String!, $skip: Int!, $limit: Int!) {
-		allMarkdownRemark(
+		posts: allMarkdownRemark(
 			filter: {
 				frontmatter: {
 					tags: { in: [$tag] }
@@ -50,6 +50,14 @@ export const query = graphql`
 						path
 					}
 				}
+			}
+		}
+
+		site: markdownRemark(fileAbsolutePath: {
+			regex: "/src/markdown/settings/site.md/"
+		}){
+			frontmatter{
+				siteTitle
 			}
 		}
 	}

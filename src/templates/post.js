@@ -1,9 +1,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'emotion'
+import { Helmet } from 'react-helmet'
 import Link from 'gatsby-link'
 import Layout from 'components/layouts/default'
-import Meta from 'components/meta'
 import TagList from 'components/blog/tag-list'
 
 export default class PostTemplate extends React.Component{
@@ -19,6 +19,7 @@ export default class PostTemplate extends React.Component{
 			date,
 			formattedDate,
 		} = frontmatter
+		const { siteTitle } = this.props.data.site.frontmatter
 
 		const { id, nextId, previousId } = this.props.pageContext
 		let next = false
@@ -32,10 +33,10 @@ export default class PostTemplate extends React.Component{
 
 		return(
 			<Layout>
-				<Meta
-					title={title}
-					description={excerpt}
-				/>
+				<Helmet>
+					<title>{`${title} | ${siteTitle}`}</title>
+					<meta name='description' content={excerpt} />
+				</Helmet>
 				<h1>{title}</h1>
 				<time dateTime={date}>{formattedDate}</time>
 				<TagList tags={tags} />
@@ -103,6 +104,14 @@ export const query = graphql`
 			}
 			fields{
 				path
+			}
+		}
+
+		site: markdownRemark(fileAbsolutePath: {
+			regex: "/src/markdown/settings/site.md/"
+		}){
+			frontmatter{
+				siteTitle
 			}
 		}
 	}

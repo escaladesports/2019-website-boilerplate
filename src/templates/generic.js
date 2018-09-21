@@ -3,18 +3,19 @@ import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import Layout from 'components/layouts/default'
 
-export default class NotFoundPage extends React.Component {
-	render() {
+export default class GenericTemplate extends React.Component{
+	render(){
 		const {
 			frontmatter,
 			html,
 			excerpt,
-		} = this.props.data.page
+		} =  this.props.data.page
+		const { title } = frontmatter
 		const { siteTitle } = this.props.data.site.frontmatter
-		return (
+		return(
 			<Layout>
 				<Helmet>
-					<title>{`${frontmatter.title} | ${siteTitle}`}</title>
+					<title>{`${title} | ${siteTitle}`}</title>
 					<meta name='description' content={excerpt} />
 				</Helmet>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
@@ -24,10 +25,10 @@ export default class NotFoundPage extends React.Component {
 }
 
 export const query = graphql`
-	query NotFoundPage {
-		page: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/404.md/"
-		}){
+	query GenericTemplate($id: String!) {
+		page: markdownRemark(
+			id: { eq: $id }
+		){
 			html
 			excerpt(pruneLength: 175)
 			frontmatter{

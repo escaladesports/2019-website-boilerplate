@@ -21,8 +21,12 @@ const buttonStyles = css`
 	&:focus, &:hover, &:active{
 		background-color: ${primaryActiveColor};
 	}
-	&:active'{
+	&:active{
 		transform: translate(0, 2px);
+	}
+	&:disabled{
+		background-color: #ccc;
+		cursor: default;
 	}
 `
 
