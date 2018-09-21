@@ -5,7 +5,8 @@ import Layout from 'components/layouts/default'
 
 export default class ProductTemplate extends React.Component{
 	render(){
-		const { title } = this.props.data.product
+		const { title } = this.props.data.product.frontmatter
+		const { html } = this.props.data.product
 		const { siteTitle } = this.props.data.site.frontmatter
 		return(
 			<Layout>
@@ -13,6 +14,7 @@ export default class ProductTemplate extends React.Component{
 					<title>{`${title} | ${siteTitle}`}</title>
 				</Helmet>
 				<h1>{title}</h1>
+				<div dangerouslySetInnerHTML={{__html: html}} />
 			</Layout>
 		)
 	}
@@ -20,10 +22,14 @@ export default class ProductTemplate extends React.Component{
 
 export const query = graphql`
 	query ProductTemplate($id: String!) {
-		product: productMarkdown(
-			productId: { eq: $id }
+		product: markdownRemark(
+			frontmatter: {
+				id: { eq: $id }
+			}
 		){
-			title
+			frontmatter{
+				title
+			}
 		}
 
 		site: markdownRemark(fileAbsolutePath: {
@@ -32,6 +38,7 @@ export const query = graphql`
 			frontmatter{
 				siteTitle
 			}
+			html
 		}
 	}
 `
