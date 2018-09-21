@@ -79,3 +79,25 @@ collections:
       - label: Body
         name: body
         widget: markdown
+  - label: Settings
+    name: settings
+    files:
+      - label: Site Settings
+        name: site
+        file: src/markdown/site.md
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Site Settings
+          - label: Site Title
+            name: siteTitle
+            widget: text
+          - label: Site Description
+            name: siteDescription
+            widget: text
+          - label: Maximum Posts Per Page
+            name: postsPerPage
+            widget: number
+            valueType: int
+            min: 1
