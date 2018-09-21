@@ -24,6 +24,7 @@ module.exports = {
 		`gatsby-plugin-netlify-cms-paths`,
 		`blog`,
 		`generic-pages`,
+		`products`,
 		{
 			resolve: `email-templates`,
 			options: {

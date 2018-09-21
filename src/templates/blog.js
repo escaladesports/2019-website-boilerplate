@@ -34,6 +34,9 @@ export const query = graphql`
 				fileAbsolutePath: {
 					regex: "/src/markdown/blog/"
 				}
+				fields: {
+					published: { eq: true }
+				}
 			}
 			skip: $skip,
 			limit: $limit,

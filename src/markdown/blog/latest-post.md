@@ -1,8 +1,9 @@
 ---
 title: "Latest Post"
 path: "latest-post"
-date: "2018-06-14T03:49:16.408Z"
+date: "2020-06-14T03:49:16.408Z"
 tags: ["latin", "latest"]
+published: true
 ---
 
 Donec ac est aliquet, porttitor est nec, vestibulum urna. Nulla vel scelerisque odio. Suspendisse interdum ligula in facilisis tristique. In ligula lectus, dignissim eu bibendum et, pulvinar gravida leo. In pellentesque nunc purus, vitae consectetur velit congue a. Sed tincidunt erat ac ligula dictum, a commodo dolor placerat. Integer ante turpis, sodales sit amet varius sed, convallis ac ipsum. Fusce non accumsan dolor, eget ultrices sapien. Phasellus rhoncus, justo eget faucibus euismod, diam erat luctus massa, eget efficitur ante purus mattis ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eget nisl nisi. Curabitur ultricies tempus faucibus.

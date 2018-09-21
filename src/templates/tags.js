@@ -34,6 +34,9 @@ export const query = graphql`
 				frontmatter: {
 					tags: { in: [$tag] }
 				}
+				fields: {
+					published: { eq: true }
+				}
 			}
 			skip: $skip,
 			limit: $limit,
