@@ -54,7 +54,7 @@ export default class ContactPage extends React.Component {
 							success={(
 								<div>Thank you for contacting us!</div>
 							)}
-							onSuccess={res => console.log(res)}
+							onSuccess={() => console.log(this.state)}
 							recaptcha={false}
 							form={
 								<>

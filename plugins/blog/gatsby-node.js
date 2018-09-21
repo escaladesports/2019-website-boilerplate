@@ -15,6 +15,9 @@ exports.createPages = async ({ actions, graphql }) => {
 				fileAbsolutePath: {
 					regex: "/src/markdown/blog/"
 				}
+				frontmatter: {
+					published: { eq: true }
+				}
 			}
 			sort: { order: DESC, fields: [frontmatter___date] }
 		) {

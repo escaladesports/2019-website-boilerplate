@@ -79,6 +79,10 @@ collections:
       - label: Body
         name: body
         widget: markdown
+      - label: Published
+        name: published
+        widget: boolean
+        default: true
   - label: Settings
     name: settings
     files:
