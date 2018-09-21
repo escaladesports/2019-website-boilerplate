@@ -73,7 +73,9 @@ collections:
       - label: Path
         name: path
         widget: string
-        pattern: ["^[a-z0-9_-]+$", "Must contain only lowercase characters and hyphens"]
+        pattern:
+          - ^[a-z0-9_-]+$
+          - Must contain only lowercase characters and hyphens
         hint: The URL to the page. Must contain only lowercase characters and hyphens.
         required: false
       - label: Body
