@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from 'emotion'
-import Field from 'components/inputs/field'
-import defaultStyles from 'components/inputs/styles'
+import Field from './field'
+import defaultStyles from './styles'
 
 export default class TextArea extends React.Component{
 	static defaultProps = {

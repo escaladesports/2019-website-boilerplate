@@ -3,8 +3,8 @@ import { graphql } from 'gatsby'
 import { css } from 'emotion'
 import { Helmet } from 'react-helmet'
 import Link from 'gatsby-link'
-import Layout from 'components/layouts/default'
-import TagList from 'components/blog/tag-list'
+import Layout from '../components/layouts/default'
+import TagList from '../components/blog/tag-list'
 
 export default class PostTemplate extends React.Component{
 	render(){

@@ -1,6 +1,6 @@
 import React from 'react'
 import isValidZip from 'is-valid-zip'
-import Input from 'components/inputs/input'
+import Input from './input'
 
 function validate(value) {
 	if (!isValidZip(value)) {

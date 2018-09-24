@@ -1,8 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import Layout from 'components/layouts/default'
-import PostList from 'components/blog/post-list'
+import Layout from '../components/layouts/default'
+import PostList from '../components/blog/post-list'
 
 export default class BlogPage extends React.Component {
 	render() {

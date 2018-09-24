@@ -1,16 +1,9 @@
 require(`dotenv`).config({ silent: true })
-const path = require(`path`)
 const proxy = require(`http-proxy-middleware`)
 const config = require(`./site-config`)
 
 module.exports = {
 	plugins: [
-		{
-			resolve: `gatsby-plugin-root-import`,
-			options: {
-				root: path.join(__dirname, `src`),
-			},
-		},
 		{
 			resolve: `gatsby-plugin-emotion`,
 			options: {

@@ -1,5 +1,5 @@
 import React from 'react'
-import Field from 'components/inputs/field'
+import Field from './field'
 
 export default class Checkbox extends React.Component{
 	static defaultProps = {

@@ -1,8 +1,8 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import { css } from 'emotion'
-import TagList from 'components/blog/tag-list'
-import Pagination from 'components/pagination'
+import TagList from './tag-list'
+import Pagination from '../pagination'
 
 export default class PostList extends React.Component {
 	render() {

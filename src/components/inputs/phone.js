@@ -1,6 +1,6 @@
 import React from 'react'
 import isPhone from 'is-phone'
-import Input from 'components/inputs/input'
+import Input from './input'
 
 function validate(value) {
 	if (!isPhone(value)) {

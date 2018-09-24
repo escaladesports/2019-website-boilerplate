@@ -1,8 +1,8 @@
 import React from 'react'
 import { css } from 'emotion'
 import { graphql } from 'gatsby'
-import EmailTemplate from 'components/layouts/email'
-import linkMixin from 'styles/mixins/link'
+import EmailTemplate from '../components/layouts/email'
+import linkMixin from '../styles/mixins/link'
 
 export default class CMSEmailTemplate extends React.Component {
 	render() {

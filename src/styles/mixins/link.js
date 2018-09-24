@@ -2,7 +2,7 @@ import { css } from 'emotion'
 import {
 	primaryColor,
 	primaryActiveColor,
-} from 'styles/colors'
+} from '../colors'
 
 export default css`
 	color: ${primaryColor};

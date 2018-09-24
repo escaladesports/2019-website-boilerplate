@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Link from 'gatsby-link'
 import { Helmet } from 'react-helmet'
-import Layout from 'components/layouts/default'
+import Layout from '../components/layouts/default'
 
 export default class ProductCategoryTemplate extends React.Component{
 	render(){
