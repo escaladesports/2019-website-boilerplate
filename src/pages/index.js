@@ -3,9 +3,11 @@ import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { css } from 'emotion'
 import { Helmet } from 'react-helmet'
+import { Image } from 'cloudinary-react'
 import buttonStyles from '../styles/mixins/button'
 import Layout from '../components/layouts/default'
 import Modal from '../components/modal'
+import Lazy from '../components/lazy-load'
 
 export default class HomePage extends React.Component {
 	constructor(props){
@@ -30,6 +32,15 @@ export default class HomePage extends React.Component {
 					sizes={headerImage.childImageSharp.sizes}
 					alt="Escalade Sports"
 				/>
+				<Lazy ratio={[515, 343]}>
+					<Image
+						cloudName="demo"
+						publicId="sample"
+						width="auto"
+						crop="scale"
+						responsive
+					/>
+				</Lazy>
 				<button
 					onClick={() => this.setState({ open: true })}
 					className={buttonStyles}

@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: ["error", { "varsIgnorePattern": "once" }]*/
 import React from 'react'
 
 export default class InView extends React.Component{
@@ -15,13 +16,19 @@ export default class InView extends React.Component{
 		const { y } = boundingClientRect
 		if(y > 0){
 			if(isIntersecting){
-				console.log(`In view`)
+				if (this.props.once) {
+					this.unobserve()
+				}
 				this.setState({ inView: true })
 			}
 			else {
-				console.log(`Not in view`)
 				this.setState({ inView: false })
 			}
+		}
+	}
+	unobserve() {
+		if (global.IntersectionObserver) {
+			this.observer.unobserve(this.el)
 		}
 	}
 	componentDidMount(){
@@ -36,14 +43,13 @@ export default class InView extends React.Component{
 		}
 	}
 	componentWillUnmount() {
-		if (global.IntersectionObserver) {
-			this.observer.unobserve(this.el)
-		}
+		this.unobserve()
 	}
 	render() {
 		const {
 			tag,
 			children,
+			once,
 			...props
 		} = this.props
 		const { inView } = this.state
