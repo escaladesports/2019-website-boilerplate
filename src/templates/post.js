@@ -3,6 +3,8 @@ import { graphql } from 'gatsby'
 import { css } from 'emotion'
 import { Helmet } from 'react-helmet'
 import Link from 'gatsby-link'
+import Image from '../components/cloudinary-image'
+import Lazy from '../components/lazy-load'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
 
@@ -18,6 +20,7 @@ export default class PostTemplate extends React.Component{
 			tags,
 			date,
 			formattedDate,
+			image,
 		} = frontmatter
 		const { siteTitle } = this.props.data.site.frontmatter
 
@@ -40,6 +43,11 @@ export default class PostTemplate extends React.Component{
 				<h1>{title}</h1>
 				<time dateTime={date}>{formattedDate}</time>
 				<TagList tags={tags} />
+				{!!image && (
+					<Lazy ratio={[515, 343]}>
+						<Image id={image} />
+					</Lazy>
+				)}
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<div>
 					{next && (
@@ -79,8 +87,9 @@ export const query = graphql`
 			excerpt(pruneLength: 175)
 			frontmatter{
 				title
-				tags,
-				date,
+				tags
+				image
+				date
 				formattedDate: date(formatString: "MMMM DD, YYYY")
 			}
 		}

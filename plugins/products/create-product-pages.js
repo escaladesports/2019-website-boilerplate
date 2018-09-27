@@ -35,12 +35,11 @@ module.exports = async function createProductPages(createPage, graphql){
 
 	// Get product data
 	result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-		const { id } = node.frontmatter
 		createPage({
 			path: node.fields.path,
 			component,
 			context: {
-				id,
+				id: node.frontmatter.id,
 			},
 		})
 	})

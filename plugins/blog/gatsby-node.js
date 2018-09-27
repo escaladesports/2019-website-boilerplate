@@ -1,16 +1,16 @@
 const { resolve, parse } = require(`path`)
-const { postsPerPage } = require(`../../site-config`)
 
 const markdownPath = resolve(`src/markdown/blog`)
 const blogTemplate = resolve(`src/templates/blog.js`)
 const tagsTemplate = resolve(`src/templates/tags.js`)
 const postTemplate = resolve(`src/templates/post.js`)
+const now = new Date()
 
 exports.createPages = async ({ actions, graphql }) => {
 	const { createPage } = actions
 
 	const res = await graphql(`{
-		allMarkdownRemark(
+		posts: allMarkdownRemark(
 			filter: {
 				fileAbsolutePath: {
 					regex: "/src/markdown/blog/"
@@ -36,6 +36,16 @@ exports.createPages = async ({ actions, graphql }) => {
 				}
 			}
 		}
+
+		config: markdownRemark(
+			fileAbsolutePath: {
+				regex: "/src/markdown/settings/site.md/"
+			}
+		){
+			frontmatter{
+				postsPerPage
+			}
+		}
 	}`)
 
 	if(res.errors){
@@ -43,10 +53,11 @@ exports.createPages = async ({ actions, graphql }) => {
 		process.exit(1)
 	}
 
-	const posts = res.data.allMarkdownRemark.edges.map(edge => edge.node)
-	const now = new Date()
+	const { postsPerPage } = res.data.config.frontmatter
+
+	const posts = res.data.posts.edges.map(edge => edge.node)
 	for(let i = posts.length; i--;){
-		if(now < new Date(posts[i].frontmatter.date)){
+		if(!posts[i].fields.published){
 			posts.splice(i, 1)
 		}
 	}
@@ -55,11 +66,9 @@ exports.createPages = async ({ actions, graphql }) => {
 
 	posts.forEach(({ id, frontmatter, fields }, index) => {
 		const { tags } = frontmatter
-		const { path, published } = fields
+		const { path } = fields
 		let previous = posts[index + 1]
 		let next = posts[index - 1]
-
-		if(!published) return
 
 		// Create single post page
 		createPage({
@@ -135,7 +144,7 @@ exports.onCreateNode = ({ node, actions }) => {
 		createNodeField({
 			node,
 			name: `published`,
-			value: (published === true && new Date() > new Date(date)) ? true : false,
+			value: (published === true && now > new Date(date)) ? true : false,
 		})
 	}
 }

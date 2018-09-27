@@ -33,13 +33,12 @@ module.exports = async function createProductPages(createPage, graphql){
 
 	// Get product data
 	result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-		const { id } = node
 		const { path, category } = node.fields
 		createPage({
 			path,
 			component,
 			context: {
-				id,
+				id: node.id,
 				category,
 			},
 		})
