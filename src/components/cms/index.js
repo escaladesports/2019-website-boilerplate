@@ -3,6 +3,7 @@ import CMS, { init } from 'netlify-cms'
 import netlifyIdentityWidget from 'netlify-identity-widget'
 import { injectGlobal } from 'emotion'
 import { CurrencyControl, CurrencyPreview } from './currency'
+import { StrictRelationControl, StrictRelationPreview } from './strict-relation'
 import logo from '../../../static/backend-logo.png'
 
 injectGlobal`
@@ -47,5 +48,6 @@ const identityInterval = setInterval(() => {
 })
 
 CMS.registerWidget(`currency`, CurrencyControl, CurrencyPreview)
+CMS.registerWidget(`strict-relation`, StrictRelationControl, StrictRelationPreview)
 
 init()

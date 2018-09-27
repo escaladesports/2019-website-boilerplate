@@ -73,7 +73,7 @@ collections:
         hint: Must contain only alphanumeric characters and hyphens
       - label: Category
         name: category
-        widget: relation
+        widget: strict-relation
         collection: categories
         searchFields:
           - id
