@@ -1,6 +1,6 @@
 import React from 'react'
-import { css } from 'emotion'
 import CurrencyInput from 'react-currency-masked-input'
+import formatUSD from '../../functions/format-usd'
 
 export class CurrencyControl extends React.Component{
 	constructor(props){
@@ -26,7 +26,7 @@ export class CurrencyControl extends React.Component{
 				onChange={this.handleChange}
 				defaultValue={value || ``}
 				id={forID}
-				className={`${classNameWrapper} ${styles.input}`}
+				className={classNameWrapper}
 			/>
 		)
 	}
@@ -35,24 +35,7 @@ export class CurrencyControl extends React.Component{
 export class CurrencyPreview extends React.Component{
 	render(){
 		return (
-			<div>
-				{
-					(this.props.value / 100)
-						.toLocaleString(`en-US`, {
-							style: `currency`,
-							currency: `USD`,
-						})
-				}
-			</div>
+			<div>{formatUSD(this.props.value)}</div>
 		)
 	}
-}
-
-const styles = {
-	input: css`
-		:before{
-			content: '$';
-			display: inline-block;
-		}
-	`,
 }

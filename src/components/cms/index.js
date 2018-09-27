@@ -36,14 +36,13 @@ netlifyIdentityWidget.init({
 const identityInterval = setInterval(() => {
 	const identity = window.netlifyIdentity
 	if(identity){
-		console.log(`Found window.netlifyIdentity`)
 		clearInterval(identityInterval)
 		identity.on(`login`, () => {
 			console.log(`Identity login`)
 			window.location.reload(false)
 		})
 	}
-})
+}, 1)
 
 CMS.registerWidget(`currency`, CurrencyControl, CurrencyPreview)
 

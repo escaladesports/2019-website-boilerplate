@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "npm run build:gatsby",
-    "build:lambda": "netlify-lambda build src/functions",
+    "build:lambda": "netlify-lambda build src/lambda",
     "build:gatsby": "npm run build:lambda && NODE_ENV=production gatsby build",
     "build:module": "rm -rf dist && mkdir dist && babel src/export --out-dir dist",
     "build:plugin": "babel plugins/export --out-dir ./",
@@ -19,7 +19,7 @@
     "clean:functions": "rm -rf dist-functions",
     "dev": "run-p dev:functions dev:gatsby",
     "dev:gatsby": "gatsby develop --open",
-    "dev:functions": "netlify-lambda serve src/functions",
+    "dev:functions": "netlify-lambda serve src/lambda",
     "env": "node utils/env",
     "lint": "eslint ./",
     "live": "opn https://project-boilerplate.netlify.com/",
