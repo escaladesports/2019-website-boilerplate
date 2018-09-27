@@ -1,5 +1,6 @@
 ---
 title: Pickleball
+id: pickleball
 published: true
 ---
 

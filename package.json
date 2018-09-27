@@ -159,6 +159,7 @@
     "posthtml-remove-attributes": "^1.0.0",
     "posthtml-remove-tags": "^0.1.0",
     "react": "^16.4.0",
+    "react-currency-masked-input": "^2.2.0",
     "react-dom": "^16.4.0",
     "react-helmet": "^5.2.0",
     "react-html-email": "^3.0.0",
