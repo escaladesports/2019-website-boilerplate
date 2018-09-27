@@ -5,14 +5,28 @@ import Layout from '../components/layouts/default'
 
 export default class PrivacyPolicyPage extends React.Component{
 	render(){
-		const { html, excerpt, frontmatter } = this.props.data.page
-		const { title, address, email } = frontmatter
-		const { siteTitle } = this.props.data.site.frontmatter
+		const {
+			page: {
+				frontmatter: {
+					title,
+					address,
+					email,
+				},
+				html,
+				excerpt,
+			},
+			site: {
+				frontmatter: {
+					siteTitle,
+				},
+			},
+		} = this.props.data
 		const addressHTML = address.replace(/\n/g, `<br />`)
 		const emailHTML = `<a href='mailto:${email}'>${email}</a>`
 		const processedHTML = html
 			.replace(/{{address}}/g, addressHTML)
 			.replace(/{{email}}/g, emailHTML)
+
 		return(
 			<Layout>
 				<Helmet>

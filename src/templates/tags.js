@@ -6,9 +6,22 @@ import PostList from '../components/blog/post-list'
 
 export default class TagsTemplate extends React.Component{
 	render(){
-		const { tag, page, totalPages } = this.props.pageContext
-		const posts = this.props.data.posts.edges.map(edge => edge.node)
-		const { siteTitle } = this.props.data.site.frontmatter
+		const {
+			pageContext: {
+				tag,
+				page,
+				totalPages,
+			},
+			data: {
+				posts,
+				site: {
+					frontmatter: {
+						siteTitle,
+					},
+				},
+			},
+		} = this.props
+		const postsList = posts.edges.map(edge => edge.node)
 
 		return(
 			<Layout>
@@ -17,7 +30,7 @@ export default class TagsTemplate extends React.Component{
 				</Helmet>
 				<h2>Tag: {tag}</h2>
 				<PostList
-					posts={posts}
+					posts={postsList}
 					page={page}
 					totalPages={totalPages}
 					linkPrefix={`/blog/tags/${tag}`}

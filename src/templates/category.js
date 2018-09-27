@@ -6,19 +6,46 @@ import Layout from '../components/layouts/default'
 
 export default class ProductCategoryTemplate extends React.Component{
 	render(){
-		const products = this.props.data.product.edges.map(edge => edge.node)
-		const { siteTitle } = this.props.data.site.frontmatter
-		const { category } = this.props.pageContext
+		const {
+			data: {
+				products: {
+					edges,
+				},
+				site: {
+					frontmatter: {
+						siteTitle,
+					},
+				},
+			},
+			pageContext: {
+				category,
+			},
+		} = this.props
+
+		const products = edges.map(({
+			node: {
+				frontmatter: {
+					title,
+				},
+				fields: {
+					path,
+				},
+			},
+		}) => ({
+			title,
+			path,
+		}))
+
 		return(
 			<Layout>
 				<Helmet>
 					<title>{`${category} | ${siteTitle}`}</title>
 				</Helmet>
 				<h1>{category}</h1>
-				{products.map(({ frontmatter, fields }, index) => (
+				{products.map(({ title, path }, index) => (
 					<div key={`product${index}`}>
-						<Link to={fields.path}>
-							<h1>{frontmatter.title}</h1>
+						<Link to={path}>
+							<h1>{title}</h1>
 						</Link>
 					</div>
 				))}
@@ -29,7 +56,7 @@ export default class ProductCategoryTemplate extends React.Component{
 
 export const query = graphql`
 	query ProductCategoryTemplate($category: String!) {
-		product: allMarkdownRemark(
+		products: allMarkdownRemark(
 			filter: {
 				frontmatter: {
 					category: { eq: $category }

@@ -7,7 +7,11 @@ import createGrid from '../styles/mixins/grid'
 
 export default class GridPage extends React.Component{
 	render(){
-		const { siteTitle, siteDescription } = this.props.data.site.frontmatter
+
+		const {
+			siteTitle,
+			siteDescription,
+		} = this.props.data.site.frontmatter
 		return(
 			<Layout>
 				<Helmet>

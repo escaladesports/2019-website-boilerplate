@@ -15,10 +15,7 @@ export default class CloudinaryImage extends React.Component{
 			...props
 		} = this.props
 		return (
-			<Image
-				publicId={id}
-				{...props}
-			/>
+			<Image publicId={id} {...props} />
 		)
 	}
 }

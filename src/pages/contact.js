@@ -32,14 +32,19 @@ export default class ContactPage extends React.Component {
 	}
 	render(){
 		const {
-			frontmatter,
-			html,
-			excerpt,
-		} =  this.props.data.page
-		const { title } = frontmatter
-		const {
-			siteTitle,
-		} = this.props.data.site.frontmatter
+			page: {
+				frontmatter: {
+					title,
+				},
+				html,
+				excerpt,
+			},
+			site: {
+				frontmatter: {
+					siteTitle,
+				},
+			},
+		} = this.props.data
 
 		return(
 			<Layout>

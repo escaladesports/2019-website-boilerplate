@@ -6,8 +6,13 @@ import linkMixin from '../styles/mixins/link'
 
 export default class CMSEmailTemplate extends React.Component {
 	render() {
-		const { html, frontmatter } = this.props.data.markdownRemark
-		const { title } = frontmatter
+		const {
+			frontmatter: {
+				title,
+			},
+			html,
+		} = this.props.data.markdownRemark
+
 		return (
 			<EmailTemplate title={title}>
 				<div className={styles.wrapper}>

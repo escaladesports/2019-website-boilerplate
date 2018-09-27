@@ -10,29 +10,35 @@ import TagList from '../components/blog/tag-list'
 
 export default class PostTemplate extends React.Component{
 	render(){
-		const {
-			frontmatter,
-			html,
-			excerpt,
-		} =  this.props.data.post
-		const {
-			title,
-			tags,
-			date,
-			formattedDate,
-			image,
-		} = frontmatter
-		const { siteTitle } = this.props.data.site.frontmatter
 
-		const { id, nextId, previousId } = this.props.pageContext
-		let next = false
-		let previous = false
-		if(id !== nextId){
-			next = this.props.data.next
-		}
-		if(id !== previousId){
-			previous = this.props.data.previous
-		}
+		const {
+			pageContext: {
+				id,
+				nextId,
+				previousId,
+			},
+			data: {
+				post: {
+					frontmatter: {
+						title,
+						tags,
+						date,
+						formattedDate,
+						image,
+					},
+					html,
+					excerpt,
+				},
+				site: {
+					frontmatter: {
+						siteTitle,
+					},
+				},
+			},
+		} = this.props
+
+		const next = (id === nextId) ? false : this.props.data.next
+		const previous = (id === previousId) ? false : this.props.data.previous
 
 		return(
 			<Layout>

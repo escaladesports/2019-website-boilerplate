@@ -15,9 +15,25 @@ export default class HomePage extends React.Component {
 		}
 	}
 	render() {
-		const { html, frontmatter } = this.props.data.page
-		const { headerImage } = frontmatter
-		const { siteTitle, siteDescription } = this.props.data.site.frontmatter
+		const {
+			page: {
+				frontmatter: {
+					headerImage: {
+						childImageSharp: {
+							sizes: headerImage,
+						},
+					},
+				},
+				html,
+			},
+			site: {
+				frontmatter: {
+					siteTitle,
+					siteDescription,
+				},
+			},
+		} = this.props.data
+
 		return (
 			<Layout>
 				<Helmet>
@@ -27,7 +43,7 @@ export default class HomePage extends React.Component {
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<Img
 					className={styles}
-					sizes={headerImage.childImageSharp.sizes}
+					sizes={headerImage}
 					alt="Escalade Sports"
 				/>
 				<button

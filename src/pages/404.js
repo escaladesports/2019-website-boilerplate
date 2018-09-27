@@ -6,15 +6,25 @@ import Layout from '../components/layouts/default'
 export default class NotFoundPage extends React.Component {
 	render() {
 		const {
-			frontmatter,
-			html,
-			excerpt,
-		} = this.props.data.page
-		const { siteTitle } = this.props.data.site.frontmatter
+			page: {
+				frontmatter: {
+					title,
+				},
+				html,
+				excerpt,
+			},
+			site: {
+				frontmatter: {
+					siteTitle,
+				},
+			},
+		} = this.props.data
+
+
 		return (
 			<Layout>
 				<Helmet>
-					<title>{`${frontmatter.title} | ${siteTitle}`}</title>
+					<title>{`${title} | ${siteTitle}`}</title>
 					<meta name='description' content={excerpt} />
 				</Helmet>
 				<div dangerouslySetInnerHTML={{ __html: html }} />

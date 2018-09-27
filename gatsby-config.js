@@ -140,21 +140,21 @@ module.exports = {
 				respectDNT: true,
 			},
 		},
-		// {
-		// 	resolve: `gatsby-plugin-prefetch-google-fonts`,
-		// 	options: {
-		// 		fonts: [
-		// 			{
-		// 				family: `Oswald`,
-		// 				subsets: [ `latin` ],
-		// 			},
-		// 			{
-		// 				family: `Open Sans`,
-		// 				subsets: [ `latin` ],
-		// 			},
-		// 		],
-		// 	},
-		// },
+		{
+			resolve: `gatsby-plugin-prefetch-google-fonts`,
+			options: {
+				fonts: [
+					{
+						family: `Oswald`,
+						subsets: [ `latin` ],
+					},
+					{
+						family: `Open Sans`,
+						subsets: [ `latin` ],
+					},
+				],
+			},
+		},
 	],
 	siteMetadata: config,
 	developMiddleware: app => {
