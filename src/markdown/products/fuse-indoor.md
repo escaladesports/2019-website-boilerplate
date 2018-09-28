@@ -2,7 +2,7 @@
 title: Fuse Indoor Pickleball Balls
 id: KZ42003O
 category: pickleball
-price: 1299
+price: 1399
 order: 2
 published: true
 variants:
