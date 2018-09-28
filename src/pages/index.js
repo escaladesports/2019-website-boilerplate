@@ -1,7 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Img from 'gatsby-image'
-import { css } from 'emotion'
 import { Helmet } from 'react-helmet'
 import buttonStyles from '../styles/mixins/button'
 import Layout from '../components/layouts/default'
@@ -17,13 +15,6 @@ export default class HomePage extends React.Component {
 	render() {
 		const {
 			page: {
-				frontmatter: {
-					headerImage: {
-						childImageSharp: {
-							sizes: headerImage,
-						},
-					},
-				},
 				html,
 			},
 			site: {
@@ -41,11 +32,7 @@ export default class HomePage extends React.Component {
 					<meta name='description' content={siteDescription} />
 				</Helmet>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
-				<Img
-					className={styles}
-					sizes={headerImage}
-					alt="Escalade Sports"
-				/>
+
 				<button
 					onClick={() => this.setState({ open: true })}
 					className={buttonStyles}
@@ -63,25 +50,12 @@ export default class HomePage extends React.Component {
 	}
 }
 
-const styles = css`
-	margin-bottom: 30px;
-`
-
 export const query = graphql`
 	query HomePage {
 		page: markdownRemark(fileAbsolutePath: {
 			regex: "/src/markdown/index.md/"
 		}){
 			html
-			frontmatter{
-				headerImage{
-					childImageSharp {
-						sizes(maxWidth: 1600, quality: 100) {
-							...GatsbyImageSharpSizes_withWebp
-						}
-					}
-				}
-			}
 		}
 		site: markdownRemark(fileAbsolutePath: {
 			regex: "/src/markdown/settings/site.md/"

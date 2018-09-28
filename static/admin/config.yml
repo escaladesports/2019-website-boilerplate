@@ -6,6 +6,11 @@ backend:
 media_folder: static/uploads
 public_folder: /uploads
 
+media_library:
+  name: uploadcare
+  config:
+    publicKey: demopublickey
+
 collections:
   - label: Pages
     name: pages
