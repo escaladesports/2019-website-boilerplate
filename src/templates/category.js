@@ -11,14 +11,18 @@ export default class ProductCategoryTemplate extends React.Component{
 				products: {
 					edges,
 				},
+				category: {
+					frontmatter: {
+						title,
+					},
+					html,
+					excerpt,
+				},
 				site: {
 					frontmatter: {
 						siteTitle,
 					},
 				},
-			},
-			pageContext: {
-				category,
 			},
 		} = this.props
 
@@ -39,13 +43,15 @@ export default class ProductCategoryTemplate extends React.Component{
 		return(
 			<Layout>
 				<Helmet>
-					<title>{`${category} | ${siteTitle}`}</title>
+					<title>{`${title} | ${siteTitle}`}</title>
+					<meta name='description' content={excerpt} />
 				</Helmet>
-				<h1>{category}</h1>
+				<h1>{title}</h1>
+				<div dangerouslySetInnerHTML={{__html: html}} />
 				{products.map(({ title, path }, index) => (
 					<div key={`product${index}`}>
 						<Link to={path}>
-							<h1>{title}</h1>
+							<h2>{title}</h2>
 						</Link>
 					</div>
 				))}
@@ -76,6 +82,18 @@ export const query = graphql`
 					}
 				}
 			}
+		}
+
+		category: markdownRemark(
+			frontmatter: {
+				id: { eq: $category }
+			}
+		){
+			frontmatter{
+				title
+			}
+			html
+			excerpt(pruneLength: 175)
 		}
 
 		site: markdownRemark(fileAbsolutePath: {

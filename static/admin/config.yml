@@ -81,11 +81,17 @@ collections:
         valueField: id
         displayFields:
           - title
+      - label: Color
+        name: color
+        widget: string
       - label: Price
         name: price
         widget: currency
         required: false
         default: 0
+      - label: Body
+        name: body
+        widget: markdown
       - label: Order
         name: order
         widget: number
@@ -124,6 +130,13 @@ collections:
         pattern:
           - ^[a-zA-Z0-9_-]+$
           - Must contain only alphanumeric characters and hyphens
+      - label: Body
+        name: body
+        widget: markdown
+      - label: Published
+        name: published
+        widget: boolean
+        default: true
   - label: Blog
     name: blog
     folder: src/markdown/blog

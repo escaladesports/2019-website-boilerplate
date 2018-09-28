@@ -38,6 +38,7 @@ export default class ProductTemplate extends React.Component{
 					price,
 				},
 				html,
+				excerpt,
 			},
 			site: {
 				frontmatter: {
@@ -54,6 +55,7 @@ export default class ProductTemplate extends React.Component{
 			<Layout>
 				<Helmet>
 					<title>{`${title} | ${siteTitle}`}</title>
+					<meta name='description' content={excerpt} />
 				</Helmet>
 				<h1>{title}</h1>
 				<ul>
@@ -100,6 +102,7 @@ export const query = graphql`
 				}
 			}
 			html
+			excerpt(pruneLength: 175)
 		}
 
 		site: markdownRemark(fileAbsolutePath: {
