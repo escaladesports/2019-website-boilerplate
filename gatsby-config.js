@@ -161,6 +161,7 @@ module.exports = {
 				],
 			},
 		},
+		`lunr-search`,
 	],
 	siteMetadata: config,
 	developMiddleware: app => {
