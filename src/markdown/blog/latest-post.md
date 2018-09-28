@@ -2,7 +2,9 @@
 title: "Latest Post"
 path: "latest-post"
 date: "2018-06-14T03:49:16.408Z"
-tags: ["latin", "latest"]
+tags:
+  - latin
+  - latest
 image: v1535403799/sample.jpg
 published: true
 ---

@@ -159,6 +159,11 @@ collections:
           - Must contain only lowercase characters and hyphens
         hint: The URL to the page. Must contain only lowercase characters and hyphens
         required: false
+      - label: Image
+        name: image
+        widget: string
+        required: false
+        hint: Image must be 1mb or less
       - label: Body
         name: body
         widget: markdown

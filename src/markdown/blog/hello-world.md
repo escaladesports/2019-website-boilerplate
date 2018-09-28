@@ -2,7 +2,9 @@
 title: "Hello World"
 path: "hello-world"
 date: "2017-07-14T03:49:16.408Z"
-tags: ["latin", "test"]
+tags:
+  - latin
+  - test
 published: true
 ---
 
