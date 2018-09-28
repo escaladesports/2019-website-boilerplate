@@ -86,10 +86,30 @@ collections:
         widget: currency
         required: false
         default: 0
+      - label: Order
+        name: order
+        widget: number
+        valueType: int
+        default: 1
+        hint: Products on the site are ordered from lowest to highest number
       - label: Published
         name: published
         widget: boolean
         default: true
+      - label: Variants
+        name: variants
+        widget: list
+        required: false
+        fields:
+          - label: Color
+            name: color
+            widget: string
+          - label: ID
+            name: id
+            widget: string
+            pattern:
+              - ^[a-zA-Z0-9_-]+$
+              - Must contain only alphanumeric characters and hyphens
   - label: Categories
     name: categories
     folder: src/markdown/categories

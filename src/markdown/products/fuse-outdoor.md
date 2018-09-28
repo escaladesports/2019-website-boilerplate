@@ -5,6 +5,7 @@ category: pickleball
 color: orange
 published: true
 price: 1999
+order: 1
 variants:
   - id: KZ41003Y-G2
     color: yellow

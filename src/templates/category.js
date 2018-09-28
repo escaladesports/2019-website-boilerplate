@@ -60,8 +60,10 @@ export const query = graphql`
 			filter: {
 				frontmatter: {
 					category: { eq: $category }
+					published: { eq: true }
 				}
 			}
+			sort: { order: DESC, fields: [frontmatter___order] }
 		){
 			edges{
 				node{
