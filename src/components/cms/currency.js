@@ -19,12 +19,16 @@ export class CurrencyControl extends React.Component{
 			setActiveStyle,
 			setInactiveStyle,
 		} = this.props
+		let defaultValue = parseInt(value)
+		if (defaultValue){
+			defaultValue = defaultValue / 100
+		}
 		return (
 			<CurrencyInput
 				onFocus={setActiveStyle}
 				onBlur={setInactiveStyle}
 				onChange={this.handleChange}
-				defaultValue={value || ``}
+				defaultValue={defaultValue || 0}
 				id={forID}
 				className={classNameWrapper}
 			/>
