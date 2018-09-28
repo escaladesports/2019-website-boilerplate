@@ -7,15 +7,34 @@ import formatUSD from '../functions/format-usd'
 export default class ProductTemplate extends React.Component{
 	constructor(props){
 		super(props)
-		this.state = {}
+
+		// Props that can change when a variant is selected
+		const variantProps = [
+			`color`,
+			`id`,
+		]
+
+		// Set parent product props to state
+		const {
+			frontmatter,
+			frontmatter: {
+				variants,
+			},
+		} = props.data.product
+		const state = {}
+		variantProps.forEach(prop => {
+			state[prop] = frontmatter[prop]
+		})
+		this.state = state
+
+		// Store all variants including parent
+		this.allVariants = [{ ...state }, ...variants]
 	}
 	render(){
 		const {
 			product: {
 				frontmatter: {
 					title,
-					color,
-					id,
 					price,
 				},
 				html,
@@ -26,6 +45,10 @@ export default class ProductTemplate extends React.Component{
 				},
 			},
 		} = this.props.data
+		const {
+			color,
+			id,
+		} = this.state
 
 		return(
 			<Layout>
@@ -33,6 +56,21 @@ export default class ProductTemplate extends React.Component{
 					<title>{`${title} | ${siteTitle}`}</title>
 				</Helmet>
 				<h1>{title}</h1>
+				<ul>
+					{this.allVariants.map((variant, index) => (
+						<li key={index}>
+							{variant.id === id && variant.color}
+							{variant.id !== id && (
+								<a href='#' onClick={e => {
+									e.preventDefault()
+									this.setState(variant)
+								}}>
+									{variant.color}
+								</a>
+							)}
+						</li>
+					))}
+				</ul>
 				<ul>
 					<li>Color: {color}</li>
 					<li>ID: {id}</li>
