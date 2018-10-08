@@ -1,4 +1,5 @@
 require(`dotenv`).config({ silent: true })
+const striptags = require(`striptags`)
 const proxy = require(`http-proxy-middleware`)
 const config = require(`./site-config`)
 
@@ -161,7 +162,62 @@ module.exports = {
 				],
 			},
 		},
-		`lunr-search`,
+		{
+			resolve: `search`,
+			options: {
+				query: `{
+					allMarkdownRemark(
+						filter: {
+							frontmatter: {
+								published: { eq: true }
+							}
+						}
+					) {
+						edges {
+							node {
+								id
+								html
+								excerpt
+								frontmatter {
+									title
+								}
+								fields{
+									path
+								}
+							}
+						}
+					}
+				}`,
+				parse: data => {
+					return data.allMarkdownRemark.edges.map(({
+						node: {
+							id,
+							html,
+							excerpt,
+							frontmatter: {
+								title,
+							},
+							fields: {
+								path,
+							},
+						},
+					}) => {
+						return {
+							id,
+							index: {
+								body: striptags(html),
+								title,
+							},
+							store: {
+								title,
+								excerpt,
+								path,
+							},
+						}
+					})
+				},
+			},
+		},
 	],
 	siteMetadata: config,
 	developMiddleware: app => {
