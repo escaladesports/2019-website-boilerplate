@@ -32,7 +32,6 @@ export default class HomePage extends React.Component {
 					<meta name='description' content={siteDescription} />
 				</Helmet>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
-
 				<button
 					onClick={() => this.setState({ open: true })}
 					className={buttonStyles}

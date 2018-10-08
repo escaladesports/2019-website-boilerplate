@@ -9,9 +9,6 @@ exports.createPages = async ({ actions, graphql }) => {
 	const res = await graphql(`{
 		posts: allMarkdownRemark(
 			filter: {
-				fileAbsolutePath: {
-					regex: "/src/markdown/blog/"
-				}
 				frontmatter: {
 					published: { eq: true }
 				}
@@ -22,8 +19,12 @@ exports.createPages = async ({ actions, graphql }) => {
 				node {
 					id
 					html
+					excerpt
 					frontmatter {
 						title
+					}
+					fields{
+						path
 					}
 				}
 			}
@@ -34,18 +35,30 @@ exports.createPages = async ({ actions, graphql }) => {
 		node: {
 			id,
 			html,
+			excerpt,
 			frontmatter: {
 				title,
+			},
+			fields: {
+				path,
 			},
 		},
 	}) => {
 		return {
 			id,
-			body: striptags(html),
-			title,
+			index: {
+				body: striptags(html),
+				title,
+			},
+			store: {
+				title,
+				excerpt,
+				path,
+			},
 		}
 	})
 
+	const itemStore = {}
 
 	// Create index
 	const lunrIndex = lunr(function(){
@@ -55,25 +68,30 @@ exports.createPages = async ({ actions, graphql }) => {
 		this.field(`excerpt`)
 		this.field(`path`)
 
-		posts.forEach(post => {
+		posts.forEach(({ id, index, store }) => {
 			this.add({
-				id: post.id,
-				...post,
+				id,
+				...index,
 			})
+			itemStore[id] = store
 		})
 	})
 	const index = JSON.stringify(lunrIndex)
-
+	const store = JSON.stringify(itemStore)
 
 	createNode({
 		index,
+		store,
 		id: `index`,
 		children: [],
 		internal: {
 			type: `LunrSearchIndex`,
 			contentDigest: crypto
 				.createHash(`md5`)
-				.update(JSON.stringify({ index }))
+				.update(JSON.stringify({
+					index,
+					store,
+				}))
 				.digest(`hex`),
 		},
 	})

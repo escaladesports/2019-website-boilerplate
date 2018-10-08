@@ -14,37 +14,17 @@ export default class SearchPage extends React.Component{
 		this.search = this.search.bind(this)
 	}
 	componentDidMount(){
-		this.index = lunr.Index.load(JSON.parse(this.props.data.lunrSearchIndex.index))
-		this.items = {}
-		this.props.data.allMarkdownRemark.edges.forEach(({
-			node: {
-				id,
-				fields: {
-					path,
-				},
-				frontmatter: {
-					title,
-				},
-				excerpt,
-			},
-		}) => {
-			this.items[id] = {
-				path,
-				title,
-				excerpt,
-			}
-		})
+		const { index, store } = this.props.data.lunrSearchIndex
+		console.log(store)
+		this.index = lunr.Index.load(JSON.parse(index))
+		this.store = JSON.parse(store)
 	}
 	search(e){
 		if(this.index){
-			const { value } = e.target
-			const obj = this.index.search(value)
-			const results = []
-			obj.forEach(({ ref }) => {
-				if(this.items[ref]){
-					results.push(this.items[ref])
-				}
-			})
+			const results = this.index.search(e.target.value)
+				.map(({ ref }) => {
+					return this.store[ref]
+				})
 			this.setState({ results })
 		}
 	}
@@ -87,6 +67,7 @@ export const query = graphql`
 
 		lunrSearchIndex{
 			index
+			store
 		}
 
 		allMarkdownRemark(

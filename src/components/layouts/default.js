@@ -49,6 +49,7 @@ const styles = {
 		}
 		img{
 			max-width: 100%;
+			position: relative;
 		}
 		h1, h2, h3{
 			font-family: ${primaryFont};
