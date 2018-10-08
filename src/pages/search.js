@@ -15,13 +15,17 @@ export default class SearchPage extends React.Component{
 	}
 	componentDidMount(){
 		const { index, store } = this.props.data.lunrSearchIndex
-		console.log(store)
 		this.index = lunr.Index.load(JSON.parse(index))
 		this.store = JSON.parse(store)
 	}
 	search(e){
 		if(this.index){
-			const results = this.index.search(e.target.value)
+			const { value } = e.target
+			if(!value){
+				this.setState({ results: [] })
+				return
+			}
+			const results = this.index.search(value)
 				.map(({ ref }) => {
 					return this.store[ref]
 				})
@@ -33,6 +37,7 @@ export default class SearchPage extends React.Component{
 			siteTitle,
 			siteDescription,
 		} = this.props.data.site.frontmatter
+		const { results } = this.state
 		return(
 			<Layout>
 				<Helmet>
@@ -44,18 +49,23 @@ export default class SearchPage extends React.Component{
 					type='text'
 					onChange={this.search}
 				/>
-				<ul>
-					{this.state.results.map(({ title, excerpt, path }, index) => (
-						<li key={`search-result-${index}`}>
-							<div>
-								<Link to={path}>{title}</Link>
-							</div>
-							<div>
-								{excerpt} <Link to={path}>Read more</Link>
-							</div>
-						</li>
-					))}
-				</ul>
+				{!results.length && (
+					<div>No results found.</div>
+				)}
+				{!!results.length && (
+					<ul>
+						{results.map(({ title, excerpt, path }, index) => (
+							<li key={`search-result-${index}`}>
+								<div>
+									<Link to={path}>{title}</Link>
+								</div>
+								<div>
+									{excerpt} <Link to={path}>Read more</Link>
+								</div>
+							</li>
+						))}
+					</ul>
+				)}
 			</Layout>
 		)
 	}
