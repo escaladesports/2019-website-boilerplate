@@ -163,6 +163,80 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `gatsby-plugin-feed`,
+			options: {
+				query: `{
+					site{
+						siteMetadata{
+							siteUrl
+						}
+					}
+				}`,
+				feeds: [
+					{
+						query: `{
+							allMarkdownRemark(
+								limit: 1000,
+								sort: { order: DESC, fields: [frontmatter___date]},
+								filter: {
+									fileAbsolutePath: {
+										regex: "/src/markdown/blog/"
+									}
+									frontmatter: {
+										published: { eq: true }
+									}
+								}
+							){
+								edges{
+									node{
+										excerpt
+										html
+										fields{
+											path
+										}
+										frontmatter{
+											title
+											date
+										}
+									}
+								}
+							}
+						}`,
+						serialize: ({
+							query: {
+								site: {
+									siteMetadata: {
+										siteUrl,
+									},
+								},
+								allMarkdownRemark: {
+									edges,
+								},
+							},
+						}) => {
+							return edges.map(({
+								node: {
+									html,
+									frontmatter,
+									fields: {
+										path,
+									},
+								},
+							}) => {
+								return {
+									...frontmatter,
+									url: `${siteUrl}${path}`,
+									guid: `${siteUrl}${path}`,
+									custom_elements: [{ 'content:encoded': html }],
+								}
+							})
+						},
+						output: `/rss.xml`,
+					},
+				],
+			},
+		},
+		{
 			resolve: `search`,
 			options: {
 				query: `{

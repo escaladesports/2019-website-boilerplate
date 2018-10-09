@@ -34,12 +34,24 @@ export default async function search(query){
 		})
 
 		// Finally, try a fuzzy search, without any boost
-		q.term(query, {
-			boost: 1,
-			usePipeline: false,
-			editDistance: 3,
-		})
+		// q.term(query, {
+		// 	boost: 1,
+		// 	usePipeline: false,
+		// 	editDistance: 3,
+		// })
 	})
+
+	let suggestions = results.map(v => {
+		return Object.keys(v.matchData.metadata)
+	})
+	if (suggestions.length){
+		suggestions = suggestions.reduce((a, b) => {
+			return a.concat(b)
+		})
+		suggestions = suggestions.filter((v, i, a) => {
+			return a.indexOf(v) === i
+		})
+	}
 
 	results = results.map(({ ref }) => {
 		return store[ref]
