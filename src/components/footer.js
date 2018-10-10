@@ -23,7 +23,7 @@ const footerStyles = css`
 		margin: 0;
 	}
 	li{
-		display: inline-block;
+		text-align: center;
 	}
 	a{
 		padding: 0 10px;
@@ -34,6 +34,12 @@ const footerStyles = css`
 		}
 		:last-of-type > a{
 			padding-right: 0;
+		}
+	}
+	@media(min-width: 800px){
+		li{
+			display: inline-block;
+			text-align: left;
 		}
 	}
 `
