@@ -85,6 +85,7 @@ const styles = {
 		ul {
 			list-style-type: none;
 			margin: 0;
+			padding: 0;
 		}
 		a {
 			padding: 0 10px;

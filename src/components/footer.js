@@ -28,18 +28,18 @@ const footerStyles = css`
 	a{
 		padding: 0 10px;
 	}
-	ul > li{
-		:first-of-type > a{
-			padding-left: 0;
-		}
-		:last-of-type > a{
-			padding-right: 0;
-		}
-	}
 	@media(min-width: 800px){
 		li{
 			display: inline-block;
 			text-align: left;
+		}
+		ul > li{
+			:first-of-type > a{
+				padding-left: 0;
+			}
+			:last-of-type > a{
+				padding-right: 0;
+			}
 		}
 	}
 `
