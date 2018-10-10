@@ -6,16 +6,34 @@ import Left from '@material-ui/icons/ChevronLeft'
 import Placeholder from './placeholder'
 
 export default class Carousel extends React.Component {
+	static defaultProps = {
+		width: 1000,
+		height: 400,
+	}
+	constructor(props){
+		super(props)
+		this.reset = this.reset.bind(this)
+	}
 	componentDidMount(){
+		this.reset()
+		window.addEventListener(`resize`, this.reset)
+	}
+	componentWillUnmount(){
+		window.removeEventListener(`resize`, this.reset)
+	}
+	// Fix for resize bug
+	// https://github.com/FormidableLabs/nuka-carousel/issues/103
+	reset() {
 		setTimeout(() => {
-			if(this.carousel){
+			if (this.carousel) {
 				this.carousel.setDimensions()
 			}
 		}, 0)
 	}
 	render() {
+		const { width, height } = this.props
 		return (
-			<Placeholder ratio={[1000, 400]}>
+			<Placeholder ratio={[width, height]}>
 				<NukaCarousel
 					wrapAround
 					transitionMode='scroll'
@@ -59,9 +77,9 @@ export default class Carousel extends React.Component {
 						const slides = []
 						for (let i = 1; i < 7; i++) {
 							slides.push(
-								<Placeholder ratio={[1000, 400]} key={`slide${i}`}>
+								<Placeholder ratio={[width, height]} key={`slide${i}`}>
 									<div className={styles.slide}>
-										<img src={`http://placehold.it/1000x400/ccc/999/&text=slide${i}`} />
+										<img src={`http://placehold.it/${width}x${height}/ccc/999/&text=slide${i}`} />
 									</div>
 								</Placeholder>
 							)
