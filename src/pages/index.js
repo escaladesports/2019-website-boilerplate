@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import buttonStyles from '../styles/mixins/button'
 import Layout from '../components/layouts/default'
 import Modal from '../components/modal'
+import Carousel from '../components/carousel'
 
 export default class HomePage extends React.Component {
 	constructor(props){
@@ -32,11 +33,12 @@ export default class HomePage extends React.Component {
 					<meta name='description' content={siteDescription} />
 				</Helmet>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
+				<Carousel />
 				<button
 					onClick={() => this.setState({ open: true })}
 					className={buttonStyles}
 				>
-					Test
+					Open Modal
 				</button>
 				<Modal
 					open={this.state.open}
