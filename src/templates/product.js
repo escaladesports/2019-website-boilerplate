@@ -32,24 +32,28 @@ export default class ProductTemplate extends React.Component{
 	}
 	render(){
 		const {
-			product: {
-				frontmatter: {
-					title,
-					price,
+			props: {
+				data: {
+					product: {
+						frontmatter: {
+							title,
+							price,
+						},
+						html,
+						excerpt,
+					},
+					site: {
+						siteMetadata: {
+							siteTitle,
+						},
+					},
 				},
-				html,
-				excerpt,
 			},
-			site: {
-				frontmatter: {
-					siteTitle,
-				},
+			state: {
+				color,
+				id,
 			},
-		} = this.props.data
-		const {
-			color,
-			id,
-		} = this.state
+		} = this
 
 		return(
 			<Layout>
@@ -105,13 +109,10 @@ export const query = graphql`
 			excerpt(pruneLength: 175)
 		}
 
-		site: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/settings/site.md/"
-		}){
-			frontmatter{
-				siteTitle
+		site{
+			siteMetadata{
+				siteTitle: title
 			}
-			html
 		}
 	}
 `

@@ -15,7 +15,7 @@ export default class TagsTemplate extends React.Component{
 			data: {
 				posts,
 				site: {
-					frontmatter: {
+					siteMetadata: {
 						siteTitle,
 					},
 				},
@@ -69,11 +69,9 @@ export const query = graphql`
 			}
 		}
 
-		site: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/settings/site.md/"
-		}){
-			frontmatter{
-				siteTitle
+		site{
+			siteMetadata{
+				siteTitle: title
 			}
 		}
 	}

@@ -18,7 +18,7 @@ export default class HomePage extends React.Component {
 				html,
 			},
 			site: {
-				frontmatter: {
+				siteMetadata: {
 					siteTitle,
 					siteDescription,
 				},
@@ -56,12 +56,10 @@ export const query = graphql`
 		}){
 			html
 		}
-		site: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/settings/site.md/"
-		}){
-			frontmatter{
-				siteTitle
-				siteDescription
+		site{
+			siteMetadata{
+				siteTitle: title
+				siteDescription: description
 			}
 		}
 	}

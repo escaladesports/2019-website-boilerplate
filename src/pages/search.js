@@ -10,7 +10,7 @@ export default class SearchPage extends React.Component{
 		const {
 			siteTitle,
 			siteDescription,
-		} = this.props.data.site.frontmatter
+		} = this.props.data.site.siteMetadata
 		return(
 			<Layout>
 				<Helmet>
@@ -57,12 +57,10 @@ export default class SearchPage extends React.Component{
 
 export const query = graphql`
 	query SearchPage {
-		site: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/settings/site.md/"
-		}){
-			frontmatter{
-				siteTitle
-				siteDescription
+		site{
+			siteMetadata{
+				siteTitle: title
+				siteDescription: description
 			}
 		}
 	}

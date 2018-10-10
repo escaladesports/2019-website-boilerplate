@@ -6,12 +6,20 @@ import Layout from '../components/layouts/default'
 export default class GenericTemplate extends React.Component{
 	render(){
 		const {
-			frontmatter,
-			html,
-			excerpt,
-		} =  this.props.data.page
-		const { title } = frontmatter
-		const { siteTitle } = this.props.data.site.frontmatter
+			page: {
+				frontmatter: {
+					title,
+				},
+				html,
+				excerpt,
+			},
+			site: {
+				siteMetadata: {
+					siteTitle,
+				},
+			},
+		} = this.props.data
+
 		return(
 			<Layout>
 				<Helmet>
@@ -36,11 +44,9 @@ export const query = graphql`
 			}
 		}
 
-		site: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/settings/site.md/"
-		}){
-			frontmatter{
-				siteTitle
+		site{
+			siteMetadata{
+				siteTitle: title
 			}
 		}
 	}

@@ -19,7 +19,7 @@ export default class ProductCategoryTemplate extends React.Component{
 					excerpt,
 				},
 				site: {
-					frontmatter: {
+					siteMetadata: {
 						siteTitle,
 					},
 				},
@@ -96,11 +96,9 @@ export const query = graphql`
 			excerpt(pruneLength: 175)
 		}
 
-		site: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/settings/site.md/"
-		}){
-			frontmatter{
-				siteTitle
+		site{
+			siteMetadata{
+				siteTitle: title
 			}
 		}
 	}

@@ -40,7 +40,7 @@ export default class ContactPage extends React.Component {
 				excerpt,
 			},
 			site: {
-				frontmatter: {
+				siteMetadata: {
 					siteTitle,
 				},
 			},
@@ -108,11 +108,9 @@ export const query = graphql`
 			}
 		}
 
-		site: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/settings/site.md/"
-		}){
-			frontmatter{
-				siteTitle
+		site{
+			siteMetadata{
+				siteTitle: title
 			}
 		}
 	}

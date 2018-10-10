@@ -11,7 +11,7 @@ export default class GridPage extends React.Component{
 		const {
 			siteTitle,
 			siteDescription,
-		} = this.props.data.site.frontmatter
+		} = this.props.data.site.siteMetadata
 		return(
 			<Layout>
 				<Helmet>
@@ -52,12 +52,10 @@ const styles = css`
 
 export const query = graphql`
 	query GridPage {
-		site: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/settings/site.md/"
-		}){
-			frontmatter{
-				siteTitle
-				siteDescription
+		site{
+			siteMetadata{
+				siteTitle: title
+				siteDescription: description
 			}
 		}
 	}
