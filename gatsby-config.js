@@ -1,9 +1,20 @@
 require(`dotenv`).config({ silent: true })
 const striptags = require(`striptags`)
 const proxy = require(`http-proxy-middleware`)
-const config = require(`./site-config`)
+const matter = require(`gray-matter`)
+const { readFileSync } = require(`fs-extra`)
+const { siteUrl, cloudinaryName } = require(`./site-config`)
+
+const { siteTitle, siteDescription } = matter(
+	readFileSync(`./src/markdown/settings/site.md`)
+).data
 
 module.exports = {
+	siteMetadata: {
+		title: siteTitle,
+		description: siteDescription,
+		siteUrl,
+	},
 	plugins: [
 		{
 			resolve: `gatsby-plugin-emotion`,
@@ -22,7 +33,7 @@ module.exports = {
 		{
 			resolve: `email-templates`,
 			options: {
-				siteUrl: process.env.URL || config.siteUrl,
+				siteUrl,
 			},
 		},
 		{
@@ -63,7 +74,7 @@ module.exports = {
 					{
 						resolve: `cloudinary-remark-transforms`,
 						options: {
-							cloudName: config.cloudinaryName,
+							cloudName: cloudinaryName,
 						},
 					},
 					`gatsby-remark-copy-linked-files`,
@@ -99,7 +110,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
-				siteUrl: config.siteUrl,
+				siteUrl,
 			},
 		},
 		// {
@@ -168,7 +179,10 @@ module.exports = {
 				query: `{
 					site{
 						siteMetadata{
+							title
+							description
 							siteUrl
+							site_url: siteUrl
 						}
 					}
 				}`,
@@ -293,7 +307,6 @@ module.exports = {
 			},
 		},
 	],
-	siteMetadata: config,
 	developMiddleware: app => {
 		app.use(
 			`/.netlify/functions/`,

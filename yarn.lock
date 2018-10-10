@@ -7368,7 +7368,7 @@ gray-matter@^3.0.6, gray-matter@^3.1.1:
     kind-of "^5.0.2"
     strip-bom-string "^1.0.0"
 
-gray-matter@^4.0.0:
+gray-matter@^4.0.0, gray-matter@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/gray-matter/-/gray-matter-4.0.1.tgz#375263c194f0d9755578c277e41b1c1dfdf22c7d"
   dependencies:

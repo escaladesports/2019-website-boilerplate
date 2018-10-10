@@ -12,9 +12,7 @@ exports.createPages = async ({ actions, graphql }) => {
 	const res = await graphql(`{
 		posts: allMarkdownRemark(
 			filter: {
-				fileAbsolutePath: {
-					regex: "/src/markdown/blog/"
-				}
+				fileAbsolutePath: { regex: "/src/markdown/blog/" }
 				frontmatter: {
 					published: { eq: true }
 				}
@@ -38,9 +36,7 @@ exports.createPages = async ({ actions, graphql }) => {
 		}
 
 		config: markdownRemark(
-			fileAbsolutePath: {
-				regex: "/src/markdown/settings/site.md/"
-			}
+			fileAbsolutePath: { regex: "/src/markdown/settings/site.md/" }
 		){
 			frontmatter{
 				postsPerPage
