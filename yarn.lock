@@ -958,6 +958,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@brainhubeu/react-carousel@^1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@brainhubeu/react-carousel/-/react-carousel-1.10.1.tgz#0782050cbbfd407bcd7ae6ed81b030564e5c4701"
+
 "@emotion/babel-utils@^0.6.4":
   version "0.6.10"
   resolved "https://registry.yarnpkg.com/@emotion/babel-utils/-/babel-utils-0.6.10.tgz#83dbf3dfa933fae9fc566e54fbb45f14674c6ccc"

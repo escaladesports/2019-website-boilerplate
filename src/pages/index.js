@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import buttonStyles from '../styles/mixins/button'
 import Layout from '../components/layouts/default'
 import Modal from '../components/modal'
-import Carousel from '../components/carousel'
+import Carousel from '../components/carousel-2'
 
 export default class HomePage extends React.Component {
 	constructor(props){
