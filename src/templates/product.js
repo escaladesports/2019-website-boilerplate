@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet } from 'react-helmet'
 import Layout from '../components/layouts/default'
 import formatUSD from '../functions/format-usd'
 
@@ -56,11 +55,7 @@ export default class ProductTemplate extends React.Component{
 		} = this
 
 		return(
-			<Layout>
-				<Helmet>
-					<title>{`${title} | ${siteTitle}`}</title>
-					<meta name='description' content={excerpt} />
-				</Helmet>
+			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
 				<h1>{title}</h1>
 				<ul>
 					{this.allVariants.map((variant, index) => (

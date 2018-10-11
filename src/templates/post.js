@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'emotion'
-import { Helmet } from 'react-helmet'
 import Link from 'gatsby-link'
 import Image from '../components/cloudinary-image'
 import Lazy from '../components/lazy-load'
@@ -41,11 +40,7 @@ export default class PostTemplate extends React.Component{
 		const previous = (id === previousId) ? false : this.props.data.previous
 
 		return(
-			<Layout>
-				<Helmet>
-					<title>{`${title} | ${siteTitle}`}</title>
-					<meta name='description' content={excerpt} />
-				</Helmet>
+			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
 				<h1>{title}</h1>
 				<time dateTime={date}>{formattedDate}</time>
 				<TagList tags={tags} />

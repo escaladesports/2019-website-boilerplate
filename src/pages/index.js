@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet } from 'react-helmet'
 import buttonStyles from '../styles/mixins/button'
 import Layout from '../components/layouts/default'
 import Modal from '../components/modal'
@@ -27,11 +26,7 @@ export default class HomePage extends React.Component {
 		} = this.props.data
 
 		return (
-			<Layout>
-				<Helmet>
-					<title>{siteTitle}</title>
-					<meta name='description' content={siteDescription} />
-				</Helmet>
+			<Layout siteTitle={siteTitle} description={siteDescription}>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<Carousel />
 				<button

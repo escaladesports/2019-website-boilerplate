@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from 'emotion'
+import { Helmet } from 'react-helmet'
 import RouteDelayed from '../../../plugins/route-delayed-animation'
 import Header from '../header'
 import Footer from '../footer'
@@ -17,8 +18,19 @@ import '../../styles/global.css'
 
 export default class Layout extends React.Component{
 	render(){
+		const {
+			title,
+			description,
+			siteTitle,
+		} = this.props
 		return(
 			<>
+				<Helmet>
+					<title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
+					{!!description && (
+						<meta name='description' content={description} />
+					)}
+				</Helmet>
 				<div className={styles.layout}>
 					<Header />
 					<div className={styles.content}>

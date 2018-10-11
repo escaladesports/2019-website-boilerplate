@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'emotion'
-import { Helmet } from 'react-helmet'
 import Layout from '../components/layouts/default'
 import Form from '../components/form'
 import buttonMixin from '../styles/mixins/button'
@@ -47,11 +46,7 @@ export default class ContactPage extends React.Component {
 		} = this.props.data
 
 		return(
-			<Layout>
-				<Helmet>
-					<title>{`${title} | ${siteTitle}`}</title>
-					<meta name='description' content={excerpt} />
-				</Helmet>
+			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
 				<div className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>

@@ -22,9 +22,10 @@ export default class TagsTemplate extends React.Component{
 			},
 		} = this.props
 		const postsList = posts.edges.map(edge => edge.node)
+		const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
 
 		return(
-			<Layout>
+			<Layout title={`Posts Tagged with ${tag}`} siteTitle={siteTitle} description={description}>
 				<Helmet>
 					<title>{`Posts Tagged with ${tag} | ${siteTitle}`}</title>
 				</Helmet>

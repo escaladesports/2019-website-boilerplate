@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet } from 'react-helmet'
 import Layout from '../components/layouts/default'
 
 export default class PrivacyPolicyPage extends React.Component{
@@ -28,11 +27,7 @@ export default class PrivacyPolicyPage extends React.Component{
 			.replace(/{{email}}/g, emailHTML)
 
 		return(
-			<Layout>
-				<Helmet>
-					<title>{`${title} | ${siteTitle}`}</title>
-					<meta name='description' content={excerpt} />
-				</Helmet>
+			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
 				<div dangerouslySetInnerHTML={{ __html: processedHTML }} />
 			</Layout>
 		)

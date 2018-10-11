@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet } from 'react-helmet'
 import Layout from '../components/layouts/default'
 import PostList from '../components/blog/post-list'
 
@@ -24,11 +23,7 @@ export default class BlogPage extends React.Component {
 		const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
 
 		return (
-			<Layout>
-				<Helmet>
-					<title>{`Blog | ${siteTitle}`}</title>
-					<meta name='description' content={description} />
-				</Helmet>
+			<Layout title='Blog' siteTitle={siteTitle} description={description}>
 				<PostList
 					posts={posts}
 					page={page}

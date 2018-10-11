@@ -42,7 +42,7 @@ export default class ProductCategoryTemplate extends React.Component{
 
 		return(
 			<Layout>
-				<Helmet>
+				<Helmet title={title} siteTitle={siteTitle} description={excerpt}>
 					<title>{`${title} | ${siteTitle}`}</title>
 					<meta name='description' content={excerpt} />
 				</Helmet>

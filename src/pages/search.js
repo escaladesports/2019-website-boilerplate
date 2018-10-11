@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react'
-import { Helmet } from 'react-helmet'
 import { graphql } from 'gatsby'
 import Link from 'gatsby-link'
 import Layout from '../components/layouts/default'
@@ -12,11 +11,7 @@ export default class SearchPage extends React.Component{
 			siteDescription,
 		} = this.props.data.site.siteMetadata
 		return(
-			<Layout>
-				<Helmet>
-					<title>{`Search | ${siteTitle}`}</title>
-					<meta name='description' content={siteDescription} />
-				</Helmet>
+			<Layout title='Search' siteTitle={siteTitle} description={siteDescription}>
 				<h1>Search</h1>
 				<input
 					type='text'

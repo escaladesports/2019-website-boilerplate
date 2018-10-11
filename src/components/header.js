@@ -42,7 +42,7 @@ export default class Header extends React.Component{
 					</ul>
 				</nav>
 				{this.state.open && (
-					<style>{`body { overflow: hidden; }`}</style>
+					<style>{`body{overflow:hidden}`}</style>
 				)}
 			</header>
 		)
