@@ -21,6 +21,8 @@ export default class Placeholder extends React.Component{
 const styles = {
 	outer: css`
 		position: relative;
+		width: 100%;
+		overflow: hidden;
 		:before{
 			display: block;
 			content: '';

@@ -57,7 +57,11 @@ export default class CarouselComp extends React.Component {
 					infinite
 					value={this.state.onSlide}
 					onChange={onSlide => this.setState({ onSlide })}
-					slides={slides}
+					slides={slides.map((slide, index) => (
+						<Placeholder key={`slide${index}`} ratio={[width, height]}>
+							{slide}
+						</Placeholder>
+					))}
 					className={styles.carousel}
 					ref={el => this.carousel = el}
 				/>
