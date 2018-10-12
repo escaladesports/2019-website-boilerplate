@@ -6,6 +6,10 @@ color: orange
 published: true
 price: 1999
 order: 1
+images:
+  - v1535403799/sample.jpg
+  - v1535403799/sample.jpg
+  - v1535403799/sample.jpg
 variants:
   - id: KZ41003Y-G2
     color: yellow

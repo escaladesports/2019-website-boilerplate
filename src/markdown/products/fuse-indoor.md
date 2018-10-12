@@ -6,6 +6,10 @@ color: orange
 price: 1399
 order: 2
 published: true
+images:
+  - v1535403799/sample.jpg
+  - v1535403799/sample.jpg
+  - v1535403799/sample.jpg
 variants:
   - color: yellow
     id: KZ42003Y

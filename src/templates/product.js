@@ -1,7 +1,9 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import Img from '../components/cloudinary-image'
 import Layout from '../components/layouts/default'
 import formatUSD from '../functions/format-usd'
+import Lazy from '../components/lazy-load'
 
 export default class ProductTemplate extends React.Component{
 	constructor(props){
@@ -37,6 +39,7 @@ export default class ProductTemplate extends React.Component{
 						frontmatter: {
 							title,
 							price,
+							images,
 						},
 						html,
 						excerpt,
@@ -57,6 +60,11 @@ export default class ProductTemplate extends React.Component{
 		return(
 			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
 				<h1>{title}</h1>
+				{images && !!images.length && (
+					<Lazy ratio={[900, 600]}>
+						<Img id={images[0]} />
+					</Lazy>
+				)}
 				<ul>
 					{this.allVariants.map((variant, index) => (
 						<li key={index}>
@@ -95,6 +103,7 @@ export const query = graphql`
 				price
 				color
 				id
+				images
 				variants{
 					color
 					id
