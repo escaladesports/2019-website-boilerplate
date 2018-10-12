@@ -14,7 +14,7 @@ export default async function fetchIndex() {
 		// Fake latency
 		await tick()
 
-		let res = await fetch(`./search-index.json`)
+		let res = await fetch(`/search-index.json`)
 		res = await res.json()
 		indexStore.index = lunr.Index.load(res.index)
 		indexStore.store = res.store

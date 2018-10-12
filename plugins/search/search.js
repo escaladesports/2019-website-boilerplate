@@ -1,21 +1,11 @@
 import lunr from 'lunr'
 import fetchIndex from './fetch-index'
-import searchState from './state'
 import indexStore from './index-store'
 
-let id = 0
-
 export default async function search(query){
-	searchState.setState({ query })
 	if (!query) {
-		searchState.setState({ results: [] })
-		return
+		return []
 	}
-
-	id++
-	const curId = id
-
-	searchState.setState({ loading: true })
 
 	await fetchIndex()
 
@@ -34,33 +24,16 @@ export default async function search(query){
 		})
 
 		// Finally, try a fuzzy search, without any boost
-		// q.term(query, {
-		// 	boost: 1,
-		// 	usePipeline: false,
-		// 	editDistance: 3,
-		// })
-	})
-
-	let suggestions = results.map(v => {
-		return Object.keys(v.matchData.metadata)
-	})
-	if (suggestions.length){
-		suggestions = suggestions.reduce((a, b) => {
-			return a.concat(b)
+		q.term(query, {
+			boost: 1,
+			usePipeline: false,
+			editDistance: 3,
 		})
-		suggestions = suggestions.filter((v, i, a) => {
-			return a.indexOf(v) === i
-		})
-	}
+	})
 
 	results = results.map(({ ref }) => {
 		return store[ref]
 	})
 
-	if(curId !== id) return
-
-	searchState.setState({
-		loading: false,
-		results,
-	})
+	return results
 }
