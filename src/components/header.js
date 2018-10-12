@@ -97,6 +97,7 @@ const styles = {
 			display: block;
 			text-align: left;
 			overflow: hidden;
+			z-index: 1;
 			li{
 				display: inline-block;
 			}
@@ -116,5 +117,8 @@ const styles = {
 		cursor: pointer;
 		width: 34px;
 		height: 34px;
+		@media(min-width: ${breakpoint}px){
+			display: none;
+		}
 	`,
 }
