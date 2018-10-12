@@ -1,96 +1,110 @@
 import React from 'react'
-import NukaCarousel from 'nuka-carousel'
 import { css, cx } from 'emotion'
+import Carousel from '@brainhubeu/react-carousel'
 import Right from '@material-ui/icons/ChevronRight'
 import Left from '@material-ui/icons/ChevronLeft'
+import '@brainhubeu/react-carousel/lib/style.css'
 import Placeholder from './placeholder'
 
-export default class Carousel extends React.Component {
+export default class CarouselComp extends React.Component {
 	static defaultProps = {
 		width: 1000,
 		height: 400,
 	}
 	constructor(props){
 		super(props)
-		this.reset = this.reset.bind(this)
+		this.state = {
+			onSlide: 0,
+		}
+		this.nextSlide = this.nextSlide.bind(this)
+		this.previousSlide = this.previousSlide.bind(this)
 	}
-	componentDidMount(){
-		this.reset()
-		window.addEventListener(`resize`, this.reset)
+	nextSlide(){
+		let onSlide = this.state.onSlide + 1
+		this.setState({ onSlide })
 	}
-	componentWillUnmount(){
-		window.removeEventListener(`resize`, this.reset)
+	previousSlide() {
+		let onSlide = this.state.onSlide - 1
+		this.setState({ onSlide })
 	}
-	// Fix for resize bug
-	// https://github.com/FormidableLabs/nuka-carousel/issues/103
-	reset() {
-		setTimeout(() => {
-			if (this.carousel) {
-				this.carousel.setDimensions()
-			}
-		}, 0)
+	goToSlide(n){
+		const slideTotal = this.getSlides().length
+		const moduloItem = this.calculateButtonValue() % slideTotal
+		const onSlide = this.state.onSlide - (moduloItem - n)
+		this.setState({ onSlide })
+	}
+	calculateButtonValue(){
+		const slideTotal = this.getSlides().length
+		const { onSlide } = this.state
+		return onSlide >= 0
+			? onSlide
+			: onSlide + slideTotal * Math.ceil(Math.abs(onSlide / slideTotal))
+	}
+	getSlides(){
+		const { children } = this.props
+		return Array.isArray(children) ? children : [children]
 	}
 	render() {
-		const { width, height } = this.props
+		const {
+			width,
+			height,
+		} = this.props
+		const slides = this.getSlides()
+		const slideTotal = slides.length
 		return (
 			<Placeholder ratio={[width, height]}>
-				<NukaCarousel
-					wrapAround
-					transitionMode='scroll'
-					slidesToScroll={1}
+				<Carousel
+					infinite
+					value={this.state.onSlide}
+					onChange={onSlide => this.setState({ onSlide })}
+					slides={slides}
+					className={styles.carousel}
 					ref={el => this.carousel = el}
-					renderCenterRightControls={({ nextSlide }) => (
-						<button onClick={nextSlide} className={styles.button}>
-							<Right className={styles.icon} />
-						</button>
-					)}
-					renderCenterLeftControls={({ previousSlide }) => (
-						<button onClick={previousSlide} className={styles.button}>
-							<Left className={styles.icon} />
-						</button>
-					)}
-					renderBottomCenterControls={({ slideCount, currentSlide, goToSlide }) => (
-						<div className={styles.bottomControls}>
-							{function(){
-								const buttons = []
-								for(let i = 0; i < slideCount; i++){
-									buttons.push(
-										<button
-											type='button'
-											className={cx(
-												styles.button,
-												styles.bottomButton,
-												currentSlide === i &&
-													styles.bottomButtonActive
-											)}
-											onClick={() => goToSlide(i)}
-											key={`slideControl${i}`}
-										/>
-									)
-								}
-								return buttons
-							}()}
-						</div>
-					)}
-				>
-					{function () {
-						const slides = []
-						for (let i = 1; i < 7; i++) {
-							slides.push(
-								<Placeholder ratio={[width, height]} key={`slide${i}`}>
-									<div className={styles.slide}>
-										<img src={`http://placehold.it/${width}x${height}/ccc/999/&text=slide${i}`} />
-									</div>
-								</Placeholder>
-							)
-						}
-						return slides
-					}()}
-				</NukaCarousel>
+				/>
+				{slideTotal > 1 && <>
+					<button
+						onClick={this.previousSlide}
+						className={cx(styles.button, styles.left)}
+					>
+						<Left className={styles.icon} />
+					</button>
+					<button
+						onClick={this.nextSlide}
+						className={cx(styles.button, styles.right)}
+					>
+						<Right className={styles.icon} />
+					</button>
+					<div className={styles.bottomControls}>
+						{(() => {
+							const buttons = []
+							let onSlide = this.calculateButtonValue()
+							while (onSlide > slideTotal - 1) {
+								onSlide -= slideTotal
+							}
+							for (let i = 0; i < slideTotal; i++) {
+								buttons.push(
+									<button
+										type='button'
+										className={cx(
+											styles.button,
+											styles.bottomButton,
+											onSlide === i &&
+											styles.bottomButtonActive
+										)}
+										onClick={() => this.goToSlide(i)}
+										key={`slideControl${i}`}
+									/>
+								)
+							}
+							return buttons
+						})()}
+					</div>
+				</>}
 			</Placeholder>
 		)
 	}
 }
+
 
 const circleSize = 14
 const arrowSize = 40
@@ -99,6 +113,10 @@ const styles = {
 	bottomControls: css`
 		margin-bottom: 10px;
 		display: none;
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		transform: translateX(-50%);
 		@media(min-width: 800px){
 			display: block;
 		}
@@ -109,17 +127,20 @@ const styles = {
 		background: transparent;
 		outline: none;
 		cursor: pointer;
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
 		:hover{
 			opacity: .5;
 		}
 	`,
-	sideButton: css`
-		font-size: 4em;
+	left: css`
+		left: 0;
+	`,
+	right: css`
+		right: 0;
 	`,
 	bottomButton: css`
-		text-indent: -9999px;
-		overflow: hidden;
-		white-space: nowrap;
 		padding: 6px 5px;
 		position: relative;
 		:before{
@@ -144,8 +165,5 @@ const styles = {
 		width: ${arrowSize}px !important;
 		height: ${arrowSize}px !important;
 		fill: #333 !important;
-	`,
-	slide: css`
-		cursor: default;
 	`,
 }
