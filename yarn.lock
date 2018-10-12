@@ -3620,7 +3620,7 @@ cloneable-readable@^1.0.0:
     process-nextick-args "^2.0.0"
     readable-stream "^2.3.5"
 
-cloudinary-core@^2.3.0:
+cloudinary-core@^2.3.0, cloudinary-core@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/cloudinary-core/-/cloudinary-core-2.5.0.tgz#580d7255a394f0900879e7eee0d6f3072df99ac5"
   dependencies:

@@ -2,10 +2,18 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'emotion'
 import Link from 'gatsby-link'
-import Image from '../components/cloudinary-image'
+import { Helmet } from 'react-helmet'
+import { Cloudinary } from 'cloudinary-core'
+import Img from '../components/cloudinary-image'
 import Lazy from '../components/lazy-load'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
+import { cloudinaryName } from '../../site-config'
+
+const cl = new Cloudinary({
+	cloud_name: cloudinaryName,
+	secure: true,
+})
 
 export default class PostTemplate extends React.Component{
 	render(){
@@ -41,12 +49,20 @@ export default class PostTemplate extends React.Component{
 
 		return(
 			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
+				{!!image && (
+					<Helmet>
+						<meta property='og:image' content={cl.url(image, {
+							width: 900,
+							crop: `scale`,
+						})} />
+					</Helmet>
+				)}
 				<h1>{title}</h1>
 				<time dateTime={date}>{formattedDate}</time>
 				<TagList tags={tags} />
 				{!!image && (
 					<Lazy ratio={[515, 343]}>
-						<Image id={image} />
+						<Img id={image} />
 					</Lazy>
 				)}
 				<div dangerouslySetInnerHTML={{ __html: html }} />
