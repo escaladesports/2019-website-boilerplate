@@ -30,6 +30,8 @@ export default class Layout extends React.Component{
 					{!!description && (
 						<meta name='description' content={description} />
 					)}
+					<meta property='og:title' content={title} />
+					<meta property='og:site_name' content={siteTitle} />
 				</Helmet>
 				<div className={styles.layout}>
 					<Header />
