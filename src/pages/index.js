@@ -28,7 +28,12 @@ export default class HomePage extends React.Component {
 		return (
 			<Layout siteTitle={siteTitle} description={siteDescription}>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
-				<Carousel />
+				<Carousel width={1000} height={400}>
+					<img src={`http://placehold.it/1000x400/ccc/999/&text=slide1`} />
+					<img src={`http://placehold.it/1000x400/ccc/999/&text=slide2`} />
+					<img src={`http://placehold.it/1000x400/ccc/999/&text=slide3`} />
+				</Carousel>
+				<br />
 				<button
 					onClick={() => this.setState({ open: true })}
 					className={buttonStyles}
