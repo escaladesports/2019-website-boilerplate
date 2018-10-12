@@ -62,7 +62,7 @@ export default class PostTemplate extends React.Component{
 				<TagList tags={tags} />
 				{!!image && (
 					<Lazy ratio={[515, 343]}>
-						<Img id={image} />
+						<Img id={image} alt={title} />
 					</Lazy>
 				)}
 				<div dangerouslySetInnerHTML={{ __html: html }} />
