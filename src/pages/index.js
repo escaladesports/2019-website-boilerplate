@@ -33,6 +33,7 @@ export default class HomePage extends React.Component {
 					<img src={`http://placehold.it/1000x400/ccc/999/&text=slide2`} />
 					<img src={`http://placehold.it/1000x400/ccc/999/&text=slide3`} />
 				</Carousel>
+				<br />
 				<button
 					onClick={() => this.setState({ open: true })}
 					className={buttonStyles}
