@@ -1,9 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Img from '../components/cloudinary-image'
 import Layout from '../components/layouts/default'
 import formatUSD from '../functions/format-usd'
-import Lazy from '../components/lazy-load'
+import Carousel from '../components/photo-carousel'
 
 export default class ProductTemplate extends React.Component{
 	constructor(props){
@@ -57,13 +56,14 @@ export default class ProductTemplate extends React.Component{
 			},
 		} = this
 
+		const hasImages = images && !!images.length
+		// const hasThumbnails = images && (images.length > 1)
+
 		return(
 			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
 				<h1>{title}</h1>
-				{images && !!images.length && (
-					<Lazy ratio={[900, 600]}>
-						<Img id={images[0]} />
-					</Lazy>
+				{hasImages && (
+					<Carousel images={images} />
 				)}
 				<ul>
 					{this.allVariants.map((variant, index) => (
