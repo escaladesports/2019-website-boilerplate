@@ -21,20 +21,24 @@ exports.sourceNodes = async (
 			skus: ids,
 		}),
 	})
-	const { inventory } = await res.json()
+	const { prices } = await res.json()
 
-	for (let id in inventory){
-		const nodeContent = Object.assign({}, inventory[id], {
+	for (let id in prices){
+		prices[id].price = Number(prices[id].price)
+		if(isNaN(prices[id].price)){
+			prices[id].price = 0
+		}
+		const nodeContent = Object.assign({}, prices[id], {
 			productId: id,
 			lowerId: id.toLowerCase(),
 			upperId: id.toUpperCase(),
 		})
 		const nodeMeta = {
-			id: createNodeId(`escalade-inventory-${id}`),
+			id: createNodeId(`escalade-pricing-${id}`),
 			parent: null,
 			children: [],
 			internal: {
-				type: `EscaladeInventory`,
+				type: `EscaladePricing`,
 				mediatype: `text/html`,
 				content: JSON.stringify(nodeContent),
 				contentDigest: createContentDigest(nodeContent),
@@ -46,8 +50,7 @@ exports.sourceNodes = async (
 
 }
 
-
 const endpoints = {
-	production: `https://inventory.escsportsapi.com/load`,
-	testing: `https://inventory-test.escsportsapi.com/load`,
+	production: `https://pricing.escsportsapi.com/load`,
+	testing: `https://pricing-test.escsportsapi.com/load`,
 }

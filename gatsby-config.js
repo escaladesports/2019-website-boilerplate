@@ -46,7 +46,14 @@ module.exports = {
 		`gatsby-plugin-remove-trailing-slashes`,
 		//`gatsby-plugin-netlify-cms-paths`,
 		{
-			resolve: `esca-stock`,
+			resolve: `escalade-stock`,
+			options: {
+				ids: productIds,
+				siteId: `onix`,
+			},
+		},
+		{
+			resolve: `escalade-pricing`,
 			options: {
 				ids: productIds,
 				siteId: `onix`,
