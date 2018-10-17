@@ -59,6 +59,15 @@ module.exports = {
 				siteId: `onix`,
 			},
 		},
+		{
+			resolve: `source-salsify`,
+			options: {
+				ids: productIds,
+				apiKey: process.env.SALSIFY_API_KEY,
+				org: process.env.SALSIFY_ORG,
+				cacheWebImages: false,
+			},
+		},
 		`blog`,
 		`generic-pages`,
 		`products`,
