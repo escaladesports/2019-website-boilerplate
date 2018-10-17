@@ -20,7 +20,7 @@ export default class ProductTemplate extends React.Component{
 			frontmatter: {
 				variants,
 			},
-		} = props.data.product
+		} = props.data.markdownRemark
 		const state = {}
 		variantProps.forEach(prop => {
 			state[prop] = frontmatter[prop]
@@ -34,7 +34,7 @@ export default class ProductTemplate extends React.Component{
 		const {
 			props: {
 				data: {
-					product: {
+					markdownRemark: {
 						frontmatter: {
 							title,
 							price,
@@ -42,6 +42,9 @@ export default class ProductTemplate extends React.Component{
 						},
 						html,
 						excerpt,
+					},
+					salsifyContent: {
+						itemName,
 					},
 					site: {
 						siteMetadata: {
@@ -60,8 +63,8 @@ export default class ProductTemplate extends React.Component{
 		// const hasThumbnails = images && (images.length > 1)
 
 		return(
-			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
-				<h1>{title}</h1>
+			<Layout title={itemName || title} siteTitle={siteTitle} description={excerpt}>
+				<h1>{itemName || title}</h1>
 				{hasImages && (
 					<Carousel images={images} />
 				)}
@@ -93,7 +96,7 @@ export default class ProductTemplate extends React.Component{
 
 export const query = graphql`
 	query ProductTemplate($id: String!) {
-		product: markdownRemark(
+		markdownRemark(
 			frontmatter: {
 				id: { eq: $id }
 			}
@@ -111,6 +114,12 @@ export const query = graphql`
 			}
 			html
 			excerpt(pruneLength: 175)
+		}
+
+		salsifyContent(
+			itemNumber: { eq: $id }
+		){
+			itemName
 		}
 
 		site{
