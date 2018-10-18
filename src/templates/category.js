@@ -8,16 +8,15 @@ export default class ProductCategoryTemplate extends React.Component{
 	render(){
 		const {
 			data: {
-				products: {
-					edges,
-				},
-				category: {
+				productMarkdown,
+				categoryMarkdown: {
 					frontmatter: {
 						title,
 					},
 					html,
 					excerpt,
 				},
+				allSalsifyContent,
 				site: {
 					siteMetadata: {
 						siteTitle,
@@ -26,9 +25,11 @@ export default class ProductCategoryTemplate extends React.Component{
 			},
 		} = this.props
 
-		const products = edges.map(({
+		// Collect markdown data
+		const products = productMarkdown.edges.map(({
 			node: {
 				frontmatter: {
+					id,
 					title,
 				},
 				fields: {
@@ -36,9 +37,16 @@ export default class ProductCategoryTemplate extends React.Component{
 				},
 			},
 		}) => ({
+			id,
 			title,
 			path,
 		}))
+
+		// Collect Salsify data by ID
+		const salsify = {}
+		allSalsifyContent.edges.forEach(({ node }) => {
+			salsify[node.itemNumber] = node
+		})
 
 		return(
 			<Layout>
@@ -48,10 +56,10 @@ export default class ProductCategoryTemplate extends React.Component{
 				</Helmet>
 				<h1>{title}</h1>
 				<div dangerouslySetInnerHTML={{__html: html}} />
-				{products.map(({ title, path }, index) => (
+				{products.map(({ id, title, path }, index) => (
 					<div key={`product${index}`}>
 						<Link to={path}>
-							<h2>{title}</h2>
+							<h2>{salsify[id].itemName || title}</h2>
 						</Link>
 					</div>
 				))}
@@ -61,8 +69,8 @@ export default class ProductCategoryTemplate extends React.Component{
 }
 
 export const query = graphql`
-	query ProductCategoryTemplate($category: String!) {
-		products: allMarkdownRemark(
+	query ProductCategoryTemplate($category: String!, $productIds: String) {
+		productMarkdown: allMarkdownRemark(
 			filter: {
 				frontmatter: {
 					category: { eq: $category }
@@ -84,7 +92,20 @@ export const query = graphql`
 			}
 		}
 
-		category: markdownRemark(
+		allSalsifyContent(
+			filter: {
+				itemNumber: { regex: $productIds }
+			}
+		){
+			edges{
+				node{
+					itemName
+					itemNumber
+				}
+			}
+		}
+
+		categoryMarkdown: markdownRemark(
 			frontmatter: {
 				id: { eq: $category }
 			}
