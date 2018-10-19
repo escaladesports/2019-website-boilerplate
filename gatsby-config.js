@@ -66,6 +66,9 @@ module.exports = {
 				apiKey: process.env.SALSIFY_API_KEY,
 				org: process.env.SALSIFY_ORG,
 				cacheWebImages: false,
+				media: [
+					`webImages`,
+				],
 			},
 		},
 		`blog`,

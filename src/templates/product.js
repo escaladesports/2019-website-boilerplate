@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { Image } from 'cloudinary-react'
 import Layout from '../components/layouts/default'
 import formatUSD from '../functions/format-usd'
 import Carousel from '../components/photo-carousel'
@@ -45,6 +46,7 @@ export default class ProductTemplate extends React.Component{
 					},
 					salsifyContent: {
 						itemName,
+						webImages,
 					},
 					site: {
 						siteMetadata: {
@@ -59,12 +61,23 @@ export default class ProductTemplate extends React.Component{
 			},
 		} = this
 
+		console.log(webImages[0])
+
 		const hasImages = images && !!images.length
 		// const hasThumbnails = images && (images.length > 1)
 
 		return(
 			<Layout title={itemName || title} siteTitle={siteTitle} description={excerpt}>
 				<h1>{itemName || title}</h1>
+				<Image
+					cloudName='salsify'
+					publicId='bom1bejm1xum9dr5uaiq.jpg'
+					privateCdn={true}
+					cname='images.salsify.com'
+					width='auto'
+					crop='scale'
+					responsive={true}
+				/>
 				{hasImages && (
 					<Carousel images={images} />
 				)}
@@ -120,6 +133,12 @@ export const query = graphql`
 			itemNumber: { eq: $id }
 		){
 			itemName
+			webImages{
+				id
+				name
+				url
+				filename
+			}
 		}
 
 		site{
