@@ -38,7 +38,6 @@ export default class ProductTemplate extends React.Component{
 					markdownRemark: {
 						frontmatter: {
 							title,
-							price,
 						},
 						html,
 						excerpt,
@@ -51,6 +50,12 @@ export default class ProductTemplate extends React.Component{
 						siteMetadata: {
 							siteTitle,
 						},
+					},
+					escaladePricing: {
+						price,
+					},
+					escaladeInventory: {
+						stock,
 					},
 				},
 			},
@@ -99,7 +104,8 @@ export default class ProductTemplate extends React.Component{
 				<ul>
 					<li>Color: {color}</li>
 					<li>ID: {id}</li>
-					<li>Price: {formatUSD(price)}</li>
+					<li>Price: {formatUSD(price, true)}</li>
+					<li>{stock ? `In stock` : `Out of stock`}</li>
 				</ul>
 				<div dangerouslySetInnerHTML={{__html: html}} />
 			</Layout>
@@ -145,6 +151,17 @@ export const query = graphql`
 			siteMetadata{
 				siteTitle: title
 			}
+		}
+
+		escaladePricing(
+			productId: { eq: $id }
+		){
+			price
+		}
+		escaladeInventory(
+			productId: { eq: $id }
+		){
+			stock
 		}
 	}
 `
