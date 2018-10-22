@@ -44,7 +44,15 @@ export default class CarouselComp extends React.Component {
 		const { onSlide } = this.state
 		const slideTotal = slides.length
 		const slideValue = this.calculateButtonValue() % slideTotal
-		const thumbnailsPerPage = 8
+		const thumbnailsPerPage = 9
+		const thumbnailsMax = slideTotal - thumbnailsPerPage
+		let thumbnailsPage = slideValue - Math.floor(thumbnailsPerPage / 2)
+		if (thumbnailsPage < 0){
+			thumbnailsPage = 0
+		}
+		else if (thumbnailsPage > thumbnailsMax){
+			thumbnailsPage = thumbnailsMax
+		}
 		return <>
 			<Placeholder ratio={ratio}>
 				<Carousel
@@ -77,7 +85,7 @@ export default class CarouselComp extends React.Component {
 			</Placeholder>
 			<div className={styles.thumbnails}>
 				<Carousel
-					value={slideValue}
+					value={thumbnailsPage}
 					slidesPerPage={thumbnailsPerPage}
 					slides={slides.map((slide, index) => (
 						<Placeholder
