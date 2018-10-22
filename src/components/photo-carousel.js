@@ -41,12 +41,23 @@ export default class CarouselComp extends React.Component {
 	}
 	render() {
 		const { ratio, slides } = this.props
+		const { onSlide } = this.state
 		const slideTotal = slides.length
-		return (
+		const slideValue = this.calculateButtonValue() % slideTotal
+		const thumbnailsPerPage = 9
+		const thumbnailsMax = slideTotal - thumbnailsPerPage
+		let thumbnailsPage = slideValue - Math.floor(thumbnailsPerPage / 2)
+		if (thumbnailsPage < 0){
+			thumbnailsPage = 0
+		}
+		else if (thumbnailsPage > thumbnailsMax){
+			thumbnailsPage = thumbnailsMax
+		}
+		return <>
 			<Placeholder ratio={ratio}>
 				<Carousel
 					infinite
-					value={this.state.onSlide}
+					value={onSlide}
 					onChange={onSlide => this.setState({ onSlide })}
 					slides={slides.map((slide, index) => (
 						<Placeholder key={`slide${index}`} ratio={ratio}>
@@ -72,7 +83,31 @@ export default class CarouselComp extends React.Component {
 					</button>
 				</>}
 			</Placeholder>
-		)
+			<div className={styles.thumbnails}>
+				<Carousel
+					value={thumbnailsPage}
+					slidesPerPage={thumbnailsPerPage}
+					slides={slides.map((slide, index) => (
+						<Placeholder
+							role='button'
+							key={`thumbnail${index}`}
+							ratio={ratio}
+						>
+							<button
+								className={cx(
+									styles.button,
+									styles.thumbnail,
+									index === slideValue && styles.activeThumbnail
+								)}
+								onClick={() => this.goToSlide(index)}
+							>
+								{slide}
+							</button>
+						</Placeholder>
+					))}
+				/>
+			</div>
+		</>
 	}
 }
 
@@ -88,7 +123,7 @@ const styles = {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
-		:hover{
+		:focus, :hover{
 			opacity: .5;
 		}
 	`,
@@ -102,5 +137,14 @@ const styles = {
 		width: ${arrowSize}px !important;
 		height: ${arrowSize}px !important;
 		fill: #333 !important;
+	`,
+	thumbnails: css`
+		margin-top: 30px;
+	`,
+	thumbnail: css`
+		border: 1px solid transparent;
+	`,
+	activeThumbnail: css`
+		border-color: #333;
 	`,
 }
