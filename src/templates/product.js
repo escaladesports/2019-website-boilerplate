@@ -39,7 +39,6 @@ export default class ProductTemplate extends React.Component{
 						frontmatter: {
 							title,
 							price,
-							images,
 						},
 						html,
 						excerpt,
@@ -61,25 +60,26 @@ export default class ProductTemplate extends React.Component{
 			},
 		} = this
 
-		console.log(webImages[0])
-
-		const hasImages = images && !!images.length
+		const hasImages = webImages && !!webImages.length
 		// const hasThumbnails = images && (images.length > 1)
 
 		return(
 			<Layout title={itemName || title} siteTitle={siteTitle} description={excerpt}>
 				<h1>{itemName || title}</h1>
-				<Image
-					cloudName='salsify'
-					publicId='bom1bejm1xum9dr5uaiq.jpg'
-					privateCdn={true}
-					cname='images.salsify.com'
-					width='auto'
-					crop='scale'
-					responsive={true}
-				/>
 				{hasImages && (
-					<Carousel images={images} />
+					<Carousel ratio={[16, 9]} slides={webImages.map(({ url }, index) => (
+						<Image
+							key={`img${index}`}
+							cloudName='salsify'
+							publicId={url.split(`/`).pop()}
+							privateCdn={true}
+							cname='images.salsify.com'
+							width='auto'
+							aspectRatio='16:9'
+							crop='pad'
+							responsive={true}
+						/>
+					))} />
 				)}
 				<ul>
 					{this.allVariants.map((variant, index) => (

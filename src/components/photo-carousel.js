@@ -1,6 +1,5 @@
 import React from 'react'
 import { css, cx } from 'emotion'
-import Img from '../components/cloudinary-image'
 import Carousel from '@brainhubeu/react-carousel'
 import Right from '@material-ui/icons/ChevronRight'
 import Left from '@material-ui/icons/ChevronLeft'
@@ -28,30 +27,30 @@ export default class CarouselComp extends React.Component {
 		this.setState({ onSlide })
 	}
 	goToSlide(n){
-		const slideTotal = this.props.images.length
+		const slideTotal = this.props.slides.length
 		const moduloItem = this.calculateButtonValue() % slideTotal
 		const onSlide = this.state.onSlide - (moduloItem - n)
 		this.setState({ onSlide })
 	}
 	calculateButtonValue(){
-		const slideTotal = this.props.images.length
+		const slideTotal = this.props.slides.length
 		const { onSlide } = this.state
 		return onSlide >= 0
 			? onSlide
 			: onSlide + slideTotal * Math.ceil(Math.abs(onSlide / slideTotal))
 	}
 	render() {
-		const { ratio, images } = this.props
-		const slideTotal = images.length
+		const { ratio, slides } = this.props
+		const slideTotal = slides.length
 		return (
 			<Placeholder ratio={ratio}>
 				<Carousel
 					infinite
 					value={this.state.onSlide}
 					onChange={onSlide => this.setState({ onSlide })}
-					slides={images.map((id, index) => (
+					slides={slides.map((slide, index) => (
 						<Placeholder key={`slide${index}`} ratio={ratio}>
-							<Img id={id} key={`prod${index}`} />
+							{slide}
 						</Placeholder>
 
 					))}
