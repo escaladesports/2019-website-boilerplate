@@ -61,13 +61,13 @@ export default class ProductTemplate extends React.Component{
 		} = this
 
 		const hasImages = webImages && !!webImages.length
-		// const hasThumbnails = images && (images.length > 1)
+		const imageRatio = [16, 9]
 
 		return(
 			<Layout title={itemName || title} siteTitle={siteTitle} description={excerpt}>
 				<h1>{itemName || title}</h1>
 				{hasImages && (
-					<Carousel ratio={[16, 9]} slides={webImages.map(({ url }, index) => (
+					<Carousel ratio={imageRatio} slides={webImages.map(({ url }, index) => (
 						<Image
 							key={`img${index}`}
 							cloudName='salsify'
@@ -75,7 +75,7 @@ export default class ProductTemplate extends React.Component{
 							privateCdn={true}
 							cname='images.salsify.com'
 							width='auto'
-							aspectRatio='16:9'
+							aspectRatio={`${imageRatio[0]}:${imageRatio[1]}`}
 							crop='pad'
 							responsive={true}
 						/>
