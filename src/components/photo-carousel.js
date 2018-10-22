@@ -41,12 +41,15 @@ export default class CarouselComp extends React.Component {
 	}
 	render() {
 		const { ratio, slides } = this.props
+		const { onSlide } = this.state
 		const slideTotal = slides.length
-		return (
+		const slideValue = this.calculateButtonValue() % slideTotal
+		const thumbnailsPerPage = 8
+		return <>
 			<Placeholder ratio={ratio}>
 				<Carousel
 					infinite
-					value={this.state.onSlide}
+					value={onSlide}
 					onChange={onSlide => this.setState({ onSlide })}
 					slides={slides.map((slide, index) => (
 						<Placeholder key={`slide${index}`} ratio={ratio}>
@@ -72,7 +75,23 @@ export default class CarouselComp extends React.Component {
 					</button>
 				</>}
 			</Placeholder>
-		)
+			<div className={styles.thumbnails}>
+				<Carousel
+					value={slideValue}
+					slidesPerPage={thumbnailsPerPage}
+					slides={slides.map((slide, index) => (
+						<Placeholder
+							key={`thumbnail${index}`}
+							className={cx(styles.thumbnail, index === slideValue && styles.activeThumbnail)}
+							ratio={ratio}
+							onClick={() => this.goToSlide(index)}
+						>
+							{slide}
+						</Placeholder>
+					))}
+				/>
+			</div>
+		</>
 	}
 }
 
@@ -102,5 +121,14 @@ const styles = {
 		width: ${arrowSize}px !important;
 		height: ${arrowSize}px !important;
 		fill: #333 !important;
+	`,
+	thumbnails: css`
+		margin-top: 30px;
+	`,
+	thumbnail: css`
+		border: 1px solid transparent;
+	`,
+	activeThumbnail: css`
+		border-color: #333;
 	`,
 }
