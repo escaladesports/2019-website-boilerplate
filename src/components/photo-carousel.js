@@ -81,12 +81,20 @@ export default class CarouselComp extends React.Component {
 					slidesPerPage={thumbnailsPerPage}
 					slides={slides.map((slide, index) => (
 						<Placeholder
+							role='button'
 							key={`thumbnail${index}`}
-							className={cx(styles.thumbnail, index === slideValue && styles.activeThumbnail)}
 							ratio={ratio}
-							onClick={() => this.goToSlide(index)}
 						>
-							{slide}
+							<button
+								className={cx(
+									styles.button,
+									styles.thumbnail,
+									index === slideValue && styles.activeThumbnail
+								)}
+								onClick={() => this.goToSlide(index)}
+							>
+								{slide}
+							</button>
 						</Placeholder>
 					))}
 				/>
@@ -107,7 +115,7 @@ const styles = {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
-		:hover{
+		:focus, :hover{
 			opacity: .5;
 		}
 	`,
