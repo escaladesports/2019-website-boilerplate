@@ -62,14 +62,22 @@ export default class ContactPage extends React.Component {
 									<Email parent={this} />
 									<Phone parent={this} required={false} />
 									<Zip parent={this} required={false} />
-									<Select parent={this} label='Subject' name='subject' required={false}>
+									<Select
+										parent={this}
+										label='Subject'
+										name='subject'
+										required={false}
+									>
 										<option>General</option>
 										<option>Customer Service</option>
 										<option>Warranty Claim</option>
 									</Select>
 									<Textarea parent={this} required={false} />
 									<Checkbox parent={this} label='Toggle' name='toggle' />
-									<button disabled={!this.canSubmit()} className={buttonMixin}>
+									<button
+										disabled={!this.canSubmit()}
+										className={buttonMixin}
+									>
 										Submit
 									</button>
 								</>

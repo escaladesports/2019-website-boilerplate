@@ -15,30 +15,25 @@ const required = [
 	`comment`,
 ]
 
-export async function handler({ body }, _, callback){
-
-	function done(obj) {
-		callback(null, {
-			statusCode: 200,
-			body: JSON.stringify(obj),
-		})
-		process.exit(0)
-	}
+export async function handler({ body }){
 
 	try{
-		body = JSON.parse(body)
-		const input = body.data
+		const input = JSON.parse(body)
 		const data = {}
 
 		// Validate user input
-		required.forEach(name => {
+		for(let i = 0; i <= required.length; i++){
+			const name = required[i]
 			if (!(name in input)) {
-				done({
-					success: false,
-					message: `Form could not be submit. Missing required fields.`,
-				})
+				return {
+					statusCode: 200,
+					body: JSON.stringify({
+						success: false,
+						message: `Form could not be submit. Missing required fields.`,
+					}),
+				}
 			}
-		})
+		}
 
 		// Filter to only accepted values
 		for(let i in input){
@@ -51,10 +46,13 @@ export async function handler({ body }, _, callback){
 		data.timestamp = Date.now()
 		data.published = false
 
+		console.log(data)
+
 		octokit.authenticate({
 			type: `token`,
 			token: process.env.GITHUB_API_TOKEN,
 		})
+		console.log(`Octokit authenticated...`)
 		await octokit.repos.createFile({
 			owner: `escaladesports`,
 			repo: `project-boilerplate`,
@@ -63,10 +61,17 @@ export async function handler({ body }, _, callback){
 			message: `User generated comment`,
 			content: Buffer.from(`---\n${stringify(data)}---`).toString(`base64`),
 		})
-		done({ success: true })
+		console.log(`File created in repo...`)
+		return {
+			statusCode: 200,
+			body: JSON.stringify({ success: true }),
+		}
 	}
 	catch(err){
 		console.error(err)
-		done({ success: false })
+		return {
+			statusCode: 200,
+			body: JSON.stringify({ success: false }),
+		}
 	}
 }
