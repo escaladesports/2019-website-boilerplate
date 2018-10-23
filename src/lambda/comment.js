@@ -27,7 +27,6 @@ export async function handler({ body }, _, callback){
 
 	try{
 		body = JSON.parse(body)
-		console.log(body)
 		const input = body.data
 		const data = {}
 

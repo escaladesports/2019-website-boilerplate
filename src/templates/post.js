@@ -8,6 +8,7 @@ import Img from '../components/cloudinary-image'
 import Lazy from '../components/lazy-load'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
+import CommentForm from '../components/comment-form'
 import { cloudinaryName } from '../../site-config'
 
 const cl = new Cloudinary({
@@ -82,6 +83,10 @@ export default class PostTemplate extends React.Component{
 						</div>
 					)}
 				</div>
+				<div className={styles.commentForm}>
+					<h3>Leave a comment:</h3>
+					<CommentForm />
+				</div>
 			</Layout>
 		)
 	}
@@ -92,6 +97,9 @@ const styles = {
 		@media(min-width: 600px){
 			float: right;
 		}
+	`,
+	commentForm: css`
+		margin-top: 30px;
 	`,
 }
 

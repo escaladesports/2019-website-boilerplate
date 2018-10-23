@@ -1,5 +1,5 @@
 async function onSubmit(e) {
-	console.log(`Netlify form submit...`)
+	console.log(`Form submit...`)
 	e.preventDefault()
 
 	// Check invisible recaptcha

@@ -6,7 +6,7 @@ import onRecaptchaChange from './on-recaptcha-change'
 import awaitRecaptchaValue from './await-recaptcha-value'
 import processForm from './process-form'
 
-class NetlifyForm extends React.Component {
+export default class Form extends React.Component {
 	static defaultProps = {
 		loading: <div>Loading...</div>,
 		error: msg => <div>{msg}</div>,
@@ -71,5 +71,3 @@ class NetlifyForm extends React.Component {
 }
 
 function noop(){}
-
-export default NetlifyForm
