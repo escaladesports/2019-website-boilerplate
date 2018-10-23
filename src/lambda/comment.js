@@ -8,11 +8,13 @@ const allowed = [
 	`name`,
 	`email`,
 	`comment`,
+	`slug`,
 ]
 const required = [
 	`name`,
 	`email`,
 	`comment`,
+	`slug`,
 ]
 
 export async function handler({ body }){
@@ -36,9 +38,15 @@ export async function handler({ body }){
 		}
 
 		// Filter to only accepted values
+		let comment = ``
 		for(let i in input){
 			if (allowed.indexOf(i) > -1) {
-				data[i] = input[i]
+				if(i === `comment`){
+					comment = input[i]
+				}
+				else {
+					data[i] = input[i]
+				}
 			}
 		}
 
@@ -46,7 +54,7 @@ export async function handler({ body }){
 		data.timestamp = Date.now()
 		data.published = false
 
-		console.log(data)
+		const markdownData = `---\n${stringify(data)}---\n\n${comment}`
 
 		octokit.authenticate({
 			type: `token`,
@@ -59,7 +67,7 @@ export async function handler({ body }){
 			ref: `master`,
 			path: `src/markdown/comments/${data.timestamp}.md`,
 			message: `User generated comment`,
-			content: Buffer.from(`---\n${stringify(data)}---`).toString(`base64`),
+			content: Buffer.from(markdownData).toString(`base64`),
 		})
 		console.log(`File created in repo...`)
 		return {

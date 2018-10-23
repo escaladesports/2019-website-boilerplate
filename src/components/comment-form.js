@@ -18,7 +18,7 @@ export default class CommentForm extends React.Component{
 			method: `post`,
 			body: JSON.stringify(this.state),
 		})
-		const data = await res.text()
+		const data = await res.json()
 		console.log(data)
 	}
 	render(){
@@ -34,6 +34,7 @@ export default class CommentForm extends React.Component{
 					<div>
 						<Textarea name='comment' parent={this} />
 					</div>
+					<input type='hidden' name='slug' value={this.props.slug} />
 					<div>
 						<button className={buttonMixin}>Submit</button>
 					</div>

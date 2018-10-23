@@ -24,6 +24,7 @@ export default class PostTemplate extends React.Component{
 				id,
 				nextId,
 				previousId,
+				slug,
 			},
 			data: {
 				post: {
@@ -37,6 +38,7 @@ export default class PostTemplate extends React.Component{
 					html,
 					excerpt,
 				},
+				comments,
 				site: {
 					siteMetadata: {
 						siteTitle,
@@ -44,6 +46,8 @@ export default class PostTemplate extends React.Component{
 				},
 			},
 		} = this.props
+
+		console.log(comments)
 
 		const next = (id === nextId) ? false : this.props.data.next
 		const previous = (id === previousId) ? false : this.props.data.previous
@@ -85,7 +89,7 @@ export default class PostTemplate extends React.Component{
 				</div>
 				<div className={styles.commentForm}>
 					<h3>Leave a comment:</h3>
-					<CommentForm />
+					<CommentForm slug={slug} />
 				</div>
 			</Layout>
 		)
@@ -104,7 +108,8 @@ const styles = {
 }
 
 export const query = graphql`
-	query PostTemplate($id: String!, $previousId: String!, $nextId: String!) {
+	query PostTemplate($id: String!, $previousId: String!, $nextId: String!, $slug: String!) {
+
 		post: markdownRemark(
 			id: { eq: $id }
 		){
@@ -127,6 +132,24 @@ export const query = graphql`
 			}
 			fields{
 				path
+			}
+		}
+
+		comments: allMarkdownRemark(
+			filter: {
+				fileAbsolutePath: { regex: "/markdown/comments/" },
+				frontmatter: {
+					slug: { eq: $slug }
+				}
+			}
+		){
+			edges{
+				node{
+					frontmatter{
+						email
+						name
+					}
+				}
 			}
 		}
 

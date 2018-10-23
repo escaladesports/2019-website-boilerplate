@@ -29,6 +29,7 @@ exports.createPages = async ({ actions, graphql }) => {
 					}
 					fields{
 						path
+						slug
 						published
 					}
 				}
@@ -62,7 +63,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
 	posts.forEach(({ id, frontmatter, fields }, index) => {
 		const { tags } = frontmatter
-		const { path } = fields
+		const { path, slug } = fields
 		let previous = posts[index + 1]
 		let next = posts[index - 1]
 
@@ -74,6 +75,7 @@ exports.createPages = async ({ actions, graphql }) => {
 				id,
 				previousId: previous ? previous.id : id,
 				nextId: next ? next.id : id,
+				slug,
 			},
 		})
 
@@ -132,6 +134,11 @@ exports.onCreateNode = ({ node, actions }) => {
 		if (!isNaN(slug)){
 			slug = `post-${slug}`
 		}
+		createNodeField({
+			node,
+			name: `slug`,
+			value: slug,
+		})
 		createNodeField({
 			node,
 			name: `path`,
