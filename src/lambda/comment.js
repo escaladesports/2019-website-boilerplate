@@ -24,7 +24,7 @@ export async function handler({ body }){
 		const data = {}
 
 		// Validate user input
-		for(let i = 0; i <= required.length; i++){
+		for(let i = 0; i < required.length; i++){
 			const name = required[i]
 			if (!(name in input)) {
 				return {
@@ -51,7 +51,8 @@ export async function handler({ body }){
 		}
 
 		// Add generated data
-		data.date = (new Date()).toISOString()
+		const now = new Date()
+		data.date = now.toISOString()
 		data.published = false
 
 		// Change name to title for Netlify CMS
@@ -69,7 +70,7 @@ export async function handler({ body }){
 			owner: `escaladesports`,
 			repo: `project-boilerplate`,
 			ref: `master`,
-			path: `src/markdown/comments/${data.date}.md`,
+			path: `src/markdown/comments/${now.getTime()}.md`,
 			message: `User generated comment`,
 			content: Buffer.from(markdownData).toString(`base64`),
 		})

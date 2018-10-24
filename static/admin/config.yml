@@ -177,7 +177,7 @@ collections:
         widget: boolean
         default: true
   - label: Approved Comments
-    name: comment
+    name: approved-comments
     folder: src/markdown/comments
     filter:
       field: published
@@ -196,12 +196,15 @@ collections:
       - label: Body
         name: body
         widget: markdown
+      - label: Slug
+        name: slug
+        widget: hidden
       - label: Approved
         name: published
         widget: boolean
         default: false
   - label: Unapproved Comments
-    name: comment
+    name: unapproved-comments
     folder: src/markdown/comments
     filter:
       field: published
@@ -220,6 +223,9 @@ collections:
       - label: Body
         name: body
         widget: markdown
+      - label: Slug
+        name: slug
+        widget: hidden
       - label: Approved
         name: published
         widget: boolean

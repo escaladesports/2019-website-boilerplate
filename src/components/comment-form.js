@@ -24,16 +24,16 @@ export default class CommentForm extends React.Component{
 		this.submit = this.submit.bind(this)
 	}
 	async submit(values, { resetForm, setSubmitting }){
-
+		this.setState({ error: false })
 		const res = await fetch(`/.netlify/functions/comment`, {
 			method: `post`,
 			body: JSON.stringify(values),
 		})
-		const data = await res.json()
+		const { success, message } = await res.json()
 
 		// TODO: Display message
-		if(data.success === false){
-			this.setState({ error: data.message })
+		if(success === false){
+			this.setState({ error: message })
 		}
 		else{
 			this.setState({ success: true })
@@ -50,6 +50,7 @@ export default class CommentForm extends React.Component{
 					email: ``,
 					name: ``,
 					comment: ``,
+					slug: this.props.slug,
 				}}
 				validationSchema={object().shape({
 					email: string()
@@ -136,6 +137,8 @@ export default class CommentForm extends React.Component{
 										)}
 									</div>
 
+									<input type='hidden' name='slug' value={values.slug} />
+
 									<div className={styles.inputBlock}>
 										<Button
 											type='submit'
@@ -146,7 +149,6 @@ export default class CommentForm extends React.Component{
 											Submit
 										</Button>
 									</div>
-									<input type='hidden' name='slug' value={this.props.slug} />
 								</form>
 							</MuiThemeProvider>
 						)}
