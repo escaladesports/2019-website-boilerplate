@@ -321,7 +321,14 @@ module.exports = {
 					}
 				}`,
 				parse: data => {
-					return data.allMarkdownRemark.edges.map(({
+					data = data.allMarkdownRemark.edges
+					data = data.filter(node => {
+						if(node && node.fields && node.fields.path){
+							return true
+						}
+						return false
+					})
+					return data.map(({
 						node: {
 							id,
 							html,

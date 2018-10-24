@@ -9,6 +9,7 @@ import Lazy from '../components/lazy-load'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
 import CommentForm from '../components/comment-form'
+import Comments from '../components/comments'
 import { cloudinaryName } from '../../site-config'
 
 const cl = new Cloudinary({
@@ -38,7 +39,9 @@ export default class PostTemplate extends React.Component{
 					html,
 					excerpt,
 				},
-				comments,
+				comments: {
+					edges: commentsList,
+				},
 				site: {
 					siteMetadata: {
 						siteTitle,
@@ -47,7 +50,20 @@ export default class PostTemplate extends React.Component{
 			},
 		} = this.props
 
-		console.log(comments)
+		const comments = commentsList.map(({ node: {
+			html,
+			frontmatter: {
+				email,
+				name,
+				date,
+			},
+		}}) => ({
+			html,
+			email,
+			name,
+			date,
+			formattedDate,
+		}))
 
 		const next = (id === nextId) ? false : this.props.data.next
 		const previous = (id === previousId) ? false : this.props.data.previous
@@ -90,6 +106,9 @@ export default class PostTemplate extends React.Component{
 				<div className={styles.commentForm}>
 					<h3>Leave a comment:</h3>
 					<CommentForm slug={slug} />
+				</div>
+				<div className={styles.comments}>
+					<Comments comments={comments} />
 				</div>
 			</Layout>
 		)
@@ -139,15 +158,19 @@ export const query = graphql`
 			filter: {
 				fileAbsolutePath: { regex: "/markdown/comments/" },
 				frontmatter: {
-					slug: { eq: $slug }
+					slug: { eq: $slug },
+					published: { eq: true }
 				}
 			}
 		){
 			edges{
 				node{
+					html
 					frontmatter{
 						email
 						name
+						date
+						formattedDate: date(formatString: "MMMM DD, YYYY")
 					}
 				}
 			}

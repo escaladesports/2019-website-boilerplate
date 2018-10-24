@@ -51,7 +51,7 @@ export async function handler({ body }){
 		}
 
 		// Add generated data
-		data.timestamp = Date.now()
+		data.date = (new Date()).toISOString()
 		data.published = false
 
 		const markdownData = `---\n${stringify(data)}---\n\n${comment}`
@@ -65,7 +65,7 @@ export async function handler({ body }){
 			owner: `escaladesports`,
 			repo: `project-boilerplate`,
 			ref: `master`,
-			path: `src/markdown/comments/${data.timestamp}.md`,
+			path: `src/markdown/comments/${data.date}.md`,
 			message: `User generated comment`,
 			content: Buffer.from(markdownData).toString(`base64`),
 		})
