@@ -1,6 +1,7 @@
 import dotEnv from 'dotenv'
 import Octokit from '@octokit/rest'
 import { stringify } from 'yaml'
+import md5 from 'md5'
 const octokit = Octokit()
 dotEnv.config({ silent: true })
 
@@ -54,6 +55,7 @@ export async function handler({ body }){
 		const now = new Date()
 		data.date = now.toISOString()
 		data.published = false
+		data.md5 = md5(data.email)
 
 		// Change name to title for Netlify CMS
 		data.title = data.name

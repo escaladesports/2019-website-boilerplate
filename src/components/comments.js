@@ -1,6 +1,9 @@
 import React from 'react'
 import { css } from 'emotion'
+import Gravatar from 'react-gravatar'
 import formatDateTime from '../functions/format-date-time'
+
+const avatarSize = 75
 
 export default class Comments extends React.Component{
 	render(){
@@ -14,18 +17,30 @@ export default class Comments extends React.Component{
 						{comments.map(({
 							html,
 							name,
+							md5,
 							date,
 						}, index) => {
+							console.log(md5)
 							return (
-								<div key={`comment${index}`}>
-									<h4 className={styles.name}>{name}</h4>
-									<time
-										dateTime={date}
-										className={styles.time}
-									>
-										{formatDateTime(date)}
-									</time>
-									<div dangerouslySetInnerHTML={{ __html: html }} />
+								<div className={styles.columns} key={`comment${index}`}>
+									<div>
+										<Gravatar
+											md5={md5}
+											rating='pg'
+											default='mp'
+											size={avatarSize}
+										/>
+									</div>
+									<div>
+										<h4 className={styles.name}>{name}</h4>
+										<time
+											dateTime={date}
+											className={styles.time}
+										>
+											{formatDateTime(date)}
+										</time>
+										<div dangerouslySetInnerHTML={{ __html: html }} />
+									</div>
 								</div>
 							)
 						})}
@@ -55,5 +70,17 @@ const styles = {
 	`,
 	time: css`
 		font-size: .75em;
+	`,
+	columns: css`
+		display: flex;
+		> div{
+			:first-of-type{
+			width: ${avatarSize}px;
+			}
+			:last-of-type{
+				padding-left: 30px;
+				width: calc(100% - ${avatarSize}px);
+			}
+		}
 	`,
 }

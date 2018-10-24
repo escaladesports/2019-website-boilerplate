@@ -53,13 +53,13 @@ export default class PostTemplate extends React.Component{
 			comments = commentsList.edges.map(({ node: {
 				html,
 				frontmatter: {
-					email,
+					md5,
 					name,
 					date,
 				},
 			} }) => ({
 				html,
-				email,
+				md5,
 				name,
 				date,
 			}))
@@ -170,7 +170,7 @@ export const query = graphql`
 				node{
 					html
 					frontmatter{
-						email
+						md5
 						name: title
 						date
 					}

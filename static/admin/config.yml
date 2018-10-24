@@ -199,6 +199,9 @@ collections:
       - label: Slug
         name: slug
         widget: hidden
+      - label: MD5
+        name: md5
+        widget: hidden
       - label: Approved
         name: published
         widget: boolean
@@ -225,6 +228,9 @@ collections:
         widget: markdown
       - label: Slug
         name: slug
+        widget: hidden
+      - label: MD5
+        name: md5
         widget: hidden
       - label: Approved
         name: published
