@@ -11,6 +11,7 @@ import TagList from '../components/blog/tag-list'
 import CommentForm from '../components/comment-form'
 import Comments from '../components/comments'
 import { cloudinaryName } from '../../site-config'
+import formatDate from '../functions/format-date'
 
 const cl = new Cloudinary({
 	cloud_name: cloudinaryName,
@@ -33,7 +34,6 @@ export default class PostTemplate extends React.Component{
 						title,
 						tags,
 						date,
-						formattedDate,
 						image,
 					},
 					html,
@@ -62,7 +62,6 @@ export default class PostTemplate extends React.Component{
 				email,
 				name,
 				date,
-				formattedDate,
 			}))
 		}
 
@@ -80,7 +79,7 @@ export default class PostTemplate extends React.Component{
 					</Helmet>
 				)}
 				<h1>{title}</h1>
-				<time dateTime={date}>{formattedDate}</time>
+				<time dateTime={date}>{formatDate(date)}</time>
 				<TagList tags={tags} />
 				{!!image && (
 					<Lazy ratio={[515, 343]}>
@@ -143,7 +142,6 @@ export const query = graphql`
 				tags
 				image
 				date
-				formattedDate: date(formatString: "MMMM DD, YYYY")
 			}
 		}
 
@@ -166,7 +164,7 @@ export const query = graphql`
 					published: { eq: true }
 				}
 			},
-			sort: { order: DESC, fields: [frontmatter___date] }
+			sort: { order: ASC, fields: [frontmatter___date] }
 		){
 			edges{
 				node{
@@ -175,7 +173,6 @@ export const query = graphql`
 						email
 						name: title
 						date
-						formattedDate: date(formatString: "MMMM DD, YYYY")
 					}
 				}
 			}

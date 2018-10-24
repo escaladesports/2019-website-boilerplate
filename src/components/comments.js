@@ -1,5 +1,6 @@
 import React from 'react'
 import { css } from 'emotion'
+import formatDateTime from '../functions/format-date-time'
 
 export default class Comments extends React.Component{
 	render(){
@@ -14,19 +15,20 @@ export default class Comments extends React.Component{
 							html,
 							name,
 							date,
-							formattedDate,
-						}, index) => (
-							<div key={`comment${index}`}>
-								<h4 className={styles.name}>{name}</h4>
-								<time
-									dateTime={date}
-									className={styles.time}
-								>
-									{formattedDate}
-								</time>
-								<div dangerouslySetInnerHTML={{ __html: html }} />
-							</div>
-						))}
+						}, index) => {
+							return (
+								<div key={`comment${index}`}>
+									<h4 className={styles.name}>{name}</h4>
+									<time
+										dateTime={date}
+										className={styles.time}
+									>
+										{formatDateTime(date)}
+									</time>
+									<div dangerouslySetInnerHTML={{ __html: html }} />
+								</div>
+							)
+						})}
 					</div>
 				)}
 				{!hasComments && (
@@ -36,6 +38,7 @@ export default class Comments extends React.Component{
 		)
 	}
 }
+
 
 const styles = {
 	commentsList: css`

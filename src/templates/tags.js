@@ -62,6 +62,7 @@ export const query = graphql`
 					frontmatter{
 						title
 						tags
+						date,
 					}
 					fields{
 						path

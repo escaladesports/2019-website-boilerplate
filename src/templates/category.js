@@ -84,6 +84,7 @@ export const query = graphql`
 					frontmatter{
 						id
 						title
+						date,
 					}
 					fields{
 						path

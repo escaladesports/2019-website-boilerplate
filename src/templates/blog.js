@@ -57,7 +57,6 @@ export const query = graphql`
 						title
 						tags,
 						date,
-						formattedDate: date(formatString: "MMMM DD, YYYY")
 					}
 					fields{
 						path

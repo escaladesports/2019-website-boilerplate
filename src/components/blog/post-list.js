@@ -3,6 +3,7 @@ import Link from 'gatsby-link'
 import { css } from 'emotion'
 import TagList from './tag-list'
 import Pagination from '../pagination'
+import formatDate from '../../functions/format-date'
 
 export default class PostList extends React.Component {
 	render() {
@@ -16,7 +17,7 @@ export default class PostList extends React.Component {
 			<>
 				<ul className={styles.list}>
 					{posts.map(({ excerpt, fields, frontmatter }, index) => {
-						const { title, tags, date, formattedDate } = frontmatter
+						const { title, tags, date } = frontmatter
 						const { path } = fields
 						return (
 							<li key={`blog${index}`}>
@@ -25,7 +26,7 @@ export default class PostList extends React.Component {
 										{title}
 									</Link>
 								</h2>
-								<time dateTime={date}>{formattedDate}</time>
+								<time dateTime={date}>{formatDate(date)}</time>
 								<TagList tags={tags} />
 								<p>{excerpt}</p>
 								<div>
