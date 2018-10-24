@@ -187,15 +187,39 @@ collections:
       - label: Date
         name: date
         widget: date
-      - label: Body
-        name: body
-        widget: markdown
       - label: Name
         name: title
         widget: string
       - label: Email
         name: email
         widget: string
+      - label: Body
+        name: body
+        widget: markdown
+      - label: Approved
+        name: published
+        widget: boolean
+        default: false
+  - label: Unapproved Comments
+    name: comment
+    folder: src/markdown/comments
+    filter:
+      field: published
+      value: false
+    create: false
+    fields:
+      - label: Date
+        name: date
+        widget: date
+      - label: Name
+        name: title
+        widget: string
+      - label: Email
+        name: email
+        widget: string
+      - label: Body
+        name: body
+        widget: markdown
       - label: Approved
         name: published
         widget: boolean
