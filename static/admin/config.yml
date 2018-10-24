@@ -180,7 +180,7 @@ collections:
     name: comment
     folder: src/markdown/comments
     filter:
-      field: approved
+      field: published
       value: true
     create: false
     fields:
@@ -197,7 +197,7 @@ collections:
         name: email
         widget: string
       - label: Approved
-        name: approved
+        name: published
         widget: boolean
         default: false
   - label: Settings

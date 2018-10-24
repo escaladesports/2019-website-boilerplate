@@ -168,7 +168,7 @@ export const query = graphql`
 					html
 					frontmatter{
 						email
-						name
+						name: title
 						date
 						formattedDate: date(formatString: "MMMM DD, YYYY")
 					}
