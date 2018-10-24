@@ -9,7 +9,7 @@ export default class Comments extends React.Component{
 			<>
 				<h3>Comments:</h3>
 				{hasComments && (
-					<div classList={styles.commentsList}>
+					<div className={styles.commentsList}>
 						{comments.map(({
 							html,
 							name,

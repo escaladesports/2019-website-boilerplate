@@ -39,9 +39,7 @@ export default class PostTemplate extends React.Component{
 					html,
 					excerpt,
 				},
-				comments: {
-					edges: commentsList,
-				},
+				comments: commentsList,
 				site: {
 					siteMetadata: {
 						siteTitle,
@@ -50,20 +48,23 @@ export default class PostTemplate extends React.Component{
 			},
 		} = this.props
 
-		const comments = commentsList.map(({ node: {
-			html,
-			frontmatter: {
+		let comments = []
+		if(commentsList){
+			comments = commentsList.edges.map(({ node: {
+				html,
+				frontmatter: {
+					email,
+					name,
+					date,
+				},
+			} }) => ({
+				html,
 				email,
 				name,
 				date,
-			},
-		}}) => ({
-			html,
-			email,
-			name,
-			date,
-			formattedDate,
-		}))
+				formattedDate,
+			}))
+		}
 
 		const next = (id === nextId) ? false : this.props.data.next
 		const previous = (id === previousId) ? false : this.props.data.previous
@@ -122,7 +123,7 @@ const styles = {
 		}
 	`,
 	commentForm: css`
-		margin-top: 30px;
+		margin: 60px 0;
 	`,
 }
 
@@ -156,7 +157,7 @@ export const query = graphql`
 
 		comments: allMarkdownRemark(
 			filter: {
-				fileAbsolutePath: { regex: "/markdown/comments/" },
+				fileAbsolutePath: { regex: "/src/markdown/comments/" },
 				frontmatter: {
 					slug: { eq: $slug },
 					published: { eq: true }

@@ -1,34 +1,21 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'emotion'
+import { Formik } from 'formik'
+import { object, string } from 'yup'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
-import Form from '../components/form'
-import buttonMixin from '../styles/mixins/button'
-import Name from '../components/inputs/name'
-import Email from '../components/inputs/email'
-import Textarea from '../components/inputs/textarea'
-import Phone from '../components/inputs/phone'
-import Zip from '../components/inputs/zip'
-import Checkbox from '../components/inputs/checkbox'
-import Select from '../components/inputs/select'
+
+const theme = createMuiTheme({
+	palette: {
+		primary: { main: primaryColor },
+	},
+})
 
 export default class ContactPage extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {}
-	}
-	canSubmit() {
-		const required = [
-			`email`,
-			`name`,
-		]
-		for (let i = required.length; i--;) {
-			if (!this.state[required[i]]) {
-				return false
-			}
-		}
-		return true
-	}
 	render(){
 		const {
 			page: {
@@ -50,39 +37,108 @@ export default class ContactPage extends React.Component {
 				<div className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
-						<Form
-							success={(
-								<div>Thank you for contacting us!</div>
-							)}
-							onSuccess={() => console.log(this.state)}
-							recaptcha={false}
-							form={
-								<>
-									<Name parent={this} />
-									<Email parent={this} />
-									<Phone parent={this} required={false} />
-									<Zip parent={this} required={false} />
-									<Select
-										parent={this}
-										label='Subject'
-										name='subject'
-										required={false}
-									>
-										<option>General</option>
-										<option>Customer Service</option>
-										<option>Warranty Claim</option>
-									</Select>
-									<Textarea parent={this} required={false} />
-									<Checkbox parent={this} label='Toggle' name='toggle' />
-									<button
-										disabled={!this.canSubmit()}
-										className={buttonMixin}
-									>
-										Submit
-									</button>
-								</>
-							}
-						/>
+						<Formik
+							initialValues={{
+								email: ``,
+								name: ``,
+								message: ``,
+							}}
+							validationSchema={object().shape({
+								email: string()
+									.email()
+									.required(`required`),
+								name: string()
+									.required(`required`),
+								message: string()
+									.required(`required`),
+							})}
+							onSubmit={values => {
+								console.log(values)
+							}}
+						>
+							{props => {
+								const {
+									values,
+									touched,
+									errors,
+									isSubmitting,
+									handleChange,
+									handleBlur,
+									handleSubmit,
+								} = props
+								return (
+									<MuiThemeProvider theme={theme}>
+										<form onSubmit={handleSubmit}>
+
+											<div className={styles.inputBlock}>
+												<TextField
+													id='email'
+													label='Email'
+													fullWidth
+													value={values.email}
+													onChange={handleChange}
+													onBlur={handleBlur}
+													error={errors.email && touched.email}
+												/>
+												{errors.email && touched.email && (
+													<div className={styles.errorMsg}>
+														{errors.email}
+													</div>
+												)}
+											</div>
+
+											<div className={styles.inputBlock}>
+												<TextField
+													id='name'
+													label='Name'
+													fullWidth
+													value={values.name}
+													onChange={handleChange}
+													onBlur={handleBlur}
+													error={errors.name && touched.name}
+												/>
+												{errors.name && touched.name && (
+													<div className={styles.errorMsg}>
+														{errors.name}
+													</div>
+												)}
+											</div>
+
+											<div className={styles.inputBlock}>
+												<TextField
+													id='message'
+													label='Message'
+													fullWidth
+													value={values.message}
+													onChange={handleChange}
+													onBlur={handleBlur}
+													error={errors.message && touched.message}
+													multiline={true}
+													rows={1}
+													rowsMax={4}
+												/>
+												{errors.message && touched.message && (
+													<div className={styles.errorMsg}>
+														{errors.message}
+													</div>
+												)}
+											</div>
+
+											<div className={styles.inputBlock}>
+												<Button
+													type='submit'
+													variant='outlined'
+													color='primary'
+													disabled={isSubmitting}
+												>
+													Submit
+												</Button>
+											</div>
+										</form>
+									</MuiThemeProvider>
+								)
+							}}
+						</Formik>
 					</div>
 				</div>
 			</Layout>
@@ -90,14 +146,19 @@ export default class ContactPage extends React.Component {
 	}
 }
 
-const styles = css`
-	label{
-		display: block;
-	}
-	.grecaptcha-badge{
-		display: none !important;
-	}
-`
+const styles = {
+	inputBlock: css`
+		margin-top: 20px;
+	`,
+	errorMsg: css`
+		margin-top: 3px;
+		font-size: .75em;
+		color: #f44336;
+		:first-letter{
+			text-transform: uppercase;
+		}
+	`,
+}
 
 export const query = graphql`
 	query ContactTemplate {
