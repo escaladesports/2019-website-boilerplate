@@ -54,6 +54,10 @@ export async function handler({ body }){
 		data.date = (new Date()).toISOString()
 		data.published = false
 
+		// Change name to title for Netlify CMS
+		data.title = data.name
+		delete data.name
+
 		const markdownData = `---\n${stringify(data)}---\n\n${comment}`
 
 		octokit.authenticate({

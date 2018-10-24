@@ -176,6 +176,30 @@ collections:
         name: published
         widget: boolean
         default: true
+  - label: Approved Comments
+    name: comment
+    folder: src/markdown/comments
+    filter:
+      field: approved
+      value: true
+    create: false
+    fields:
+      - label: Date
+        name: date
+        widget: date
+      - label: Body
+        name: body
+        widget: markdown
+      - label: Name
+        name: title
+        widget: string
+      - label: Email
+        name: email
+        widget: string
+      - label: Approved
+        name: approved
+        widget: boolean
+        default: false
   - label: Settings
     name: settings
     files:
