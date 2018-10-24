@@ -104,12 +104,12 @@ export default class PostTemplate extends React.Component{
 						</div>
 					)}
 				</div>
+				<div className={styles.comments}>
+					<Comments comments={comments} />
+				</div>
 				<div className={styles.commentForm}>
 					<h3>Leave a comment:</h3>
 					<CommentForm slug={slug} />
-				</div>
-				<div className={styles.comments}>
-					<Comments comments={comments} />
 				</div>
 			</Layout>
 		)
@@ -122,8 +122,11 @@ const styles = {
 			float: right;
 		}
 	`,
+	comments: css`
+		margin: 60px 0 30px 0;
+	`,
 	commentForm: css`
-		margin: 60px 0;
+		margin-bottom: 30px;
 	`,
 }
 
@@ -162,7 +165,8 @@ export const query = graphql`
 					slug: { eq: $slug },
 					published: { eq: true }
 				}
-			}
+			},
+			sort: { order: DESC, fields: [frontmatter___date] }
 		){
 			edges{
 				node{

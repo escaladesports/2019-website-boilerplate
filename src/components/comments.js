@@ -17,8 +17,13 @@ export default class Comments extends React.Component{
 							formattedDate,
 						}, index) => (
 							<div key={`comment${index}`}>
-								<h4>{name}</h4>
-								<time dateTime={date}>{formattedDate}</time>
+								<h4 className={styles.name}>{name}</h4>
+								<time
+									dateTime={date}
+									className={styles.time}
+								>
+									{formattedDate}
+								</time>
 								<div dangerouslySetInnerHTML={{ __html: html }} />
 							</div>
 						))}
@@ -35,10 +40,17 @@ export default class Comments extends React.Component{
 const styles = {
 	commentsList: css`
 		> div{
-			border-top: 1px solid #333;
+			border-top: 1px solid #ccc;
+			padding: 20px 0;
 			:first-of-type{
 				border-top: 0;
 			}
 		}
+	`,
+	name: css`
+		margin: 0;
+	`,
+	time: css`
+		font-size: .75em;
 	`,
 }
