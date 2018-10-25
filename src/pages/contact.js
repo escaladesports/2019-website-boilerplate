@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Recaptcha from 'react-google-invisible-recaptcha'
 import fetch from 'isomorphic-fetch'
-import { stringify } from 'query-string'
+// import { stringify } from 'query-string'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
 
@@ -18,13 +18,16 @@ const theme = createMuiTheme({
 	},
 })
 
+const formName = `Contact`
+const formAction = `/thank-you`
+
 export default class ContactPage extends React.Component {
 	async onSubmit(values){
 		console.log(values)
 		try {
-			await fetch(`/`, {
-				method: `post`,
-				body: stringify(values),
+			await fetch(formAction, {
+				method: `POST`,
+				body: (new window.FormData(document.querySelector(`form`))),
 			})
 			console.log(`Success!`)
 		}
@@ -59,7 +62,7 @@ export default class ContactPage extends React.Component {
 								name: ``,
 								message: ``,
 								'g-recaptcha-response': ``,
-								'form-name': `Contact`,
+								'form-name': formName,
 							}}
 							validationSchema={object().shape({
 								email: string()
@@ -96,8 +99,8 @@ export default class ContactPage extends React.Component {
 								return (
 									<MuiThemeProvider theme={theme}>
 										<form
-											name='Contact'
-											action='/'
+											name={formName}
+											action={formAction}
 											onSubmit={handleSubmit}
 											method='POST'
 											data-netlify
