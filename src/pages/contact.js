@@ -97,6 +97,7 @@ export default class ContactPage extends React.Component {
 									<MuiThemeProvider theme={theme}>
 										<form
 											name='Contact'
+											action='/'
 											onSubmit={handleSubmit}
 											method='POST'
 											data-netlify
