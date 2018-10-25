@@ -24,10 +24,15 @@ const formAction = `/thank-you`
 export default class ContactPage extends React.Component {
 	async onSubmit(values){
 		console.log(values)
+		const body = new window.FormData(document.querySelector(`form`))
+
+		body.append(`g-recaptcha-response`, values[`g-recaptcha-response`])
+		body.append(`form-name`, formName)
+
 		try {
 			await fetch(formAction, {
 				method: `POST`,
-				body: (new window.FormData(document.querySelector(`form`))),
+				body,
 			})
 			console.log(`Success!`)
 		}
