@@ -71,7 +71,7 @@ export default class ContactPage extends React.Component {
 									.required(`required`),
 							})}
 							onSubmit={(values, { resetForm }) => {
-								if (!values.recaptcha) {
+								if (!values[`g-recaptcha-response`]) {
 									console.log(`Requestion reCAPTCHA`)
 									this.recaptcha.execute()
 								}
@@ -206,9 +206,9 @@ const styles = {
 			text-transform: uppercase;
 		}
 	`,
-	// recaptcha: css`
-	// 	display: none;
-	// `,
+	recaptcha: css`
+		display: none;
+	`,
 }
 
 export const query = graphql`
