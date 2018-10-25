@@ -7,6 +7,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Recaptcha from 'react-google-invisible-recaptcha'
+import fetch from 'isomorphic-fetch'
+import querystring from 'querystring'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
 
@@ -17,8 +19,18 @@ const theme = createMuiTheme({
 })
 
 export default class ContactPage extends React.Component {
-	onSubmit(values){
+	async onSubmit(values){
 		console.log(values)
+		try {
+			await fetch(`/`, {
+				method: `post`,
+				body: querystring(values),
+			})
+			console.log(`Success!`)
+		}
+		catch(err){
+			console.error(err)
+		}
 	}
 	render(){
 		const {
@@ -46,7 +58,8 @@ export default class ContactPage extends React.Component {
 								email: ``,
 								name: ``,
 								message: ``,
-								recaptcha: ``,
+								'g-recaptcha-response': ``,
+								'form-name': `Contact`,
 							}}
 							validationSchema={object().shape({
 								email: string()
@@ -81,7 +94,13 @@ export default class ContactPage extends React.Component {
 								} = props
 								return (
 									<MuiThemeProvider theme={theme}>
-										<form onSubmit={handleSubmit}>
+										<form
+											name='Contact'
+											onSubmit={handleSubmit}
+											method='POST'
+											data-netlify
+											data-netlify-recaptcha
+										>
 
 											<div className={styles.inputBlock}>
 												<TextField
@@ -157,7 +176,7 @@ export default class ContactPage extends React.Component {
 													sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
 													onResolved={() => {
 														const response = this.recaptcha.getResponse()
-														setFieldValue(`recaptcha`, response)
+														setFieldValue(`g-recaptcha-response`, response)
 														submitForm()
 													}}
 												/>
