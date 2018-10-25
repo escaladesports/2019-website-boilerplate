@@ -6,6 +6,7 @@ import { object, string } from 'yup'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import Recaptcha from 'react-google-invisible-recaptcha'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
 
@@ -16,6 +17,9 @@ const theme = createMuiTheme({
 })
 
 export default class ContactPage extends React.Component {
+	onSubmit(values){
+		console.log(values)
+	}
 	render(){
 		const {
 			page: {
@@ -42,6 +46,7 @@ export default class ContactPage extends React.Component {
 								email: ``,
 								name: ``,
 								message: ``,
+								recaptcha: ``,
 							}}
 							validationSchema={object().shape({
 								email: string()
@@ -52,8 +57,14 @@ export default class ContactPage extends React.Component {
 								message: string()
 									.required(`required`),
 							})}
-							onSubmit={values => {
-								console.log(values)
+							onSubmit={(values, { resetForm }) => {
+								if (!values.recaptcha) {
+									this.recaptcha.execute()
+								}
+								else{
+									resetForm()
+									console.log(values)
+								}
 							}}
 						>
 							{props => {
@@ -65,6 +76,8 @@ export default class ContactPage extends React.Component {
 									handleChange,
 									handleBlur,
 									handleSubmit,
+									setFieldValue,
+									submitForm,
 								} = props
 								return (
 									<MuiThemeProvider theme={theme}>
@@ -134,6 +147,19 @@ export default class ContactPage extends React.Component {
 													Submit
 												</Button>
 											</div>
+
+											<div className={styles.recaptcha}>
+												<Recaptcha
+													className='TEST'
+													ref={el => this.recaptcha = el}
+													sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
+													onResolved={() => {
+														const response = this.recaptcha.getResponse()
+														setFieldValue(`recaptcha`, response)
+														submitForm()
+													}}
+												/>
+											</div>
 										</form>
 									</MuiThemeProvider>
 								)
@@ -157,6 +183,9 @@ const styles = {
 		:first-letter{
 			text-transform: uppercase;
 		}
+	`,
+	recaptcha: css`
+		display: none;
 	`,
 }
 

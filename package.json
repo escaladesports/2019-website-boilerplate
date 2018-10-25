@@ -176,6 +176,7 @@
     "react": "^16.4.0",
     "react-currency-masked-input": "^2.2.0",
     "react-dom": "^16.4.0",
+    "react-google-invisible-recaptcha": "^0.2.11",
     "react-gravatar": "^2.6.3",
     "react-helmet": "^5.2.0",
     "react-html-email": "^3.0.0",
