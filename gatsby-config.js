@@ -322,7 +322,7 @@ module.exports = {
 				}`,
 				parse: data => {
 					data = data.allMarkdownRemark.edges
-					data = data.filter(node => {
+					data = data.filter(({ node }) => {
 						if(node && node.fields && node.fields.path){
 							return true
 						}

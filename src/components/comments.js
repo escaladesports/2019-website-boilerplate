@@ -20,7 +20,6 @@ export default class Comments extends React.Component{
 							md5,
 							date,
 						}, index) => {
-							console.log(md5)
 							return (
 								<div className={styles.columns} key={`comment${index}`}>
 									<div>
