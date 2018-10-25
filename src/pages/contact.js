@@ -170,12 +170,12 @@ export default class ContactPage extends React.Component {
 											<div className={styles.recaptcha}>
 												<Recaptcha
 													ref={el => {
-														console.log(el)
 														this.recaptcha = el
 													}}
 													sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
 													onResolved={() => {
 														const response = this.recaptcha.getResponse()
+														console.log(`reCAPTCHA response`, response)
 														setFieldValue(`g-recaptcha-response`, response)
 														submitForm()
 													}}
