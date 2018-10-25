@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Recaptcha from 'react-google-invisible-recaptcha'
 import fetch from 'isomorphic-fetch'
-import querystring from 'querystring'
+import { stringify } from 'query-string'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
 
@@ -24,7 +24,7 @@ export default class ContactPage extends React.Component {
 		try {
 			await fetch(`/`, {
 				method: `post`,
-				body: querystring(values),
+				body: stringify(values),
 			})
 			console.log(`Success!`)
 		}
