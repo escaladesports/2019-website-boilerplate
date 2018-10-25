@@ -206,9 +206,9 @@ const styles = {
 			text-transform: uppercase;
 		}
 	`,
-	recaptcha: css`
-		display: none;
-	`,
+	// recaptcha: css`
+	// 	display: none;
+	// `,
 }
 
 export const query = graphql`
