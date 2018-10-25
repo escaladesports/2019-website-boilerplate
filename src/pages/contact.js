@@ -25,10 +25,15 @@ export default class ContactPage extends React.Component {
 	async onSubmit(values){
 		console.log(values)
 
+		const body = objectToFormData(values)
+		for (var pair of body.entries()) {
+			console.log(pair[0] + `, ` + pair[1])
+		}
+
 		try {
 			await fetch(formAction, {
 				method: `POST`,
-				body: objectToFormData(values),
+				body,
 			})
 			console.log(`Success!`)
 		}
