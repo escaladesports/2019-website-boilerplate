@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Recaptcha from 'react-google-invisible-recaptcha'
 import fetch from 'isomorphic-fetch'
-// import { stringify } from 'query-string'
+import objectToFormData from 'object-to-formdata'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
 
@@ -24,15 +24,11 @@ const formAction = `/thank-you`
 export default class ContactPage extends React.Component {
 	async onSubmit(values){
 		console.log(values)
-		const body = new window.FormData(document.querySelector(`form`))
-
-		body.append(`g-recaptcha-response`, values[`g-recaptcha-response`])
-		body.append(`form-name`, formName)
 
 		try {
 			await fetch(formAction, {
 				method: `POST`,
-				body,
+				body: objectToFormData(values),
 			})
 			console.log(`Success!`)
 		}
