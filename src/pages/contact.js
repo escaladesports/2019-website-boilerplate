@@ -72,6 +72,7 @@ export default class ContactPage extends React.Component {
 							})}
 							onSubmit={(values, { resetForm }) => {
 								if (!values.recaptcha) {
+									console.log(`Requestion reCAPTCHA`)
 									this.recaptcha.execute()
 								}
 								else{
