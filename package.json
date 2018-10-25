@@ -18,7 +18,7 @@
     "clean:public": "rm -rf public",
     "clean:functions": "rm -rf dist-functions",
     "dev": "run-p dev:functions dev:gatsby",
-    "dev:gatsby": "gatsby develop --open",
+    "dev:gatsby": "gatsby develop --https --open",
     "dev:functions": "netlify-lambda serve src/lambda",
     "env": "node utils/env",
     "lint": "eslint ./",

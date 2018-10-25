@@ -75,14 +75,18 @@ export default class ProductTemplate extends React.Component{
 					<Carousel ratio={imageRatio} slides={webImages.map(({ url }, index) => (
 						<Image
 							key={`img${index}`}
-							cloudName='salsify'
 							publicId={url.split(`/`).pop()}
-							privateCdn={true}
-							cname='images.salsify.com'
+							// cname='images.salsify.com'
+							secureDistribution='images.salsify.com'
 							width='auto'
 							aspectRatio={`${imageRatio[0]}:${imageRatio[1]}`}
 							crop='pad'
 							responsive={true}
+
+							cloudName='salsify'
+							privateCdn={true}
+							secure={true}
+							// cdnSubdomain={true}
 						/>
 					))} />
 				)}
