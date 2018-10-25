@@ -110,7 +110,7 @@ export default class ContactPage extends React.Component {
 
 											<div className={styles.inputBlock}>
 												<TextField
-													id='email'
+													name='email'
 													label='Email'
 													fullWidth
 													value={values.email}
@@ -127,7 +127,7 @@ export default class ContactPage extends React.Component {
 
 											<div className={styles.inputBlock}>
 												<TextField
-													id='name'
+													name='name'
 													label='Name'
 													fullWidth
 													value={values.name}
@@ -144,7 +144,7 @@ export default class ContactPage extends React.Component {
 
 											<div className={styles.inputBlock}>
 												<TextField
-													id='message'
+													name='message'
 													label='Message'
 													fullWidth
 													value={values.message}
