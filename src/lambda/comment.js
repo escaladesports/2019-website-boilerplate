@@ -2,8 +2,25 @@ import dotEnv from 'dotenv'
 import Octokit from '@octokit/rest'
 import { stringify } from 'yaml'
 import md5 from 'md5'
+import Recaptcha from 'recaptcha-verify'
 const octokit = Octokit()
 dotEnv.config({ silent: true })
+const recaptcha = new Recaptcha({
+	secret: process.env.SITE_RECAPTCHA_SECRET,
+	verbose: true,
+})
+const verifyRecaptcha = function(token){
+	return new Promise((resolve, reject) => {
+		recaptcha.checkResponse(token, (err, res) => {
+			if (err){
+				reject(err)
+			}
+			else{
+				resolve(res)
+			}
+		})
+	})
+}
 
 const allowed = [
 	`name`,
@@ -32,7 +49,7 @@ export async function handler({ body }){
 					statusCode: 200,
 					body: JSON.stringify({
 						success: false,
-						message: `Form could not be submit. Missing required fields.`,
+						message: `Missing required fields. Form could not be submit.`,
 					}),
 				}
 			}
@@ -48,6 +65,17 @@ export async function handler({ body }){
 				else {
 					data[i] = input[i]
 				}
+			}
+		}
+
+		const recaptchaResponse = await verifyRecaptcha(input.recaptcha)
+		if (!recaptchaResponse.success) {
+			return {
+				statusCode: 200,
+				body: JSON.stringify({
+					success: false,
+					message: `reCAPTCHA error. Form could not be submit.`,
+				}),
 			}
 		}
 
@@ -86,7 +114,10 @@ export async function handler({ body }){
 		console.error(err)
 		return {
 			statusCode: 200,
-			body: JSON.stringify({ success: false }),
+			body: JSON.stringify({
+				success: false,
+				message: `Server error. Form could not be submit.`,
+			}),
 		}
 	}
 }

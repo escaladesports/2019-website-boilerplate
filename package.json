@@ -186,6 +186,7 @@
     "react-test-renderer": "^16.4.2",
     "react-testing-library": "^5.0.1",
     "read-markdown": "^1.0.2",
+    "recaptcha-verify": "^0.1.1",
     "request": "^2.87.0",
     "statable": "^0.3.2",
     "static-server": "^2.2.1",

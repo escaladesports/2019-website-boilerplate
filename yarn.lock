@@ -13861,6 +13861,10 @@ realpath-native@^1.0.0:
   dependencies:
     util.promisify "^1.0.0"
 
+recaptcha-verify@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/recaptcha-verify/-/recaptcha-verify-0.1.1.tgz#0f091d2ef0ae62ff738ba002cfae9affe8d91fae"
+
 "recompose@0.28.0 - 0.30.0":
   version "0.30.0"
   resolved "https://registry.yarnpkg.com/recompose/-/recompose-0.30.0.tgz#82773641b3927e8c7d24a0d87d65aeeba18aabd0"

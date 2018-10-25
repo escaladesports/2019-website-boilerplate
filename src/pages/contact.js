@@ -63,7 +63,7 @@ export default class ContactPage extends React.Component {
 								}
 								else{
 									resetForm()
-									console.log(values)
+									this.onSubmit(values)
 								}
 							}}
 						>
@@ -150,8 +150,10 @@ export default class ContactPage extends React.Component {
 
 											<div className={styles.recaptcha}>
 												<Recaptcha
-													className='TEST'
-													ref={el => this.recaptcha = el}
+													ref={el => {
+														console.log(el)
+														this.recaptcha = el
+													}}
 													sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
 													onResolved={() => {
 														const response = this.recaptcha.getResponse()

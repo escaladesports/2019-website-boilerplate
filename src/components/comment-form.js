@@ -7,6 +7,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Gravatar from 'react-gravatar'
+import Recaptcha from 'react-google-invisible-recaptcha'
 import { primaryColor } from '../styles/colors'
 
 const theme = createMuiTheme({
@@ -24,9 +25,10 @@ export default class CommentForm extends React.Component{
 			success: false,
 			error: false,
 		}
-		this.submit = this.submit.bind(this)
+		this.onSubmit = this.onSubmit.bind(this)
 	}
-	async submit(values, { resetForm, setSubmitting }){
+	async onSubmit(values, { resetForm, setSubmitting }){
+		console.log(`onSubmit`)
 		this.setState({ error: false })
 		const res = await fetch(`/.netlify/functions/comment`, {
 			method: `post`,
@@ -53,6 +55,7 @@ export default class CommentForm extends React.Component{
 					email: ``,
 					name: ``,
 					comment: ``,
+					recaptcha: ``,
 					slug: this.props.slug,
 				}}
 				validationSchema={object().shape({
@@ -64,7 +67,14 @@ export default class CommentForm extends React.Component{
 					comment: string()
 						.required(`required`),
 				})}
-				onSubmit={this.submit}
+				onSubmit={(values, fns) => {
+					if (!values.recaptcha) {
+						this.recaptcha.execute()
+					}
+					else {
+						this.onSubmit(values, fns)
+					}
+				}}
 			>
 				{props => {
 					const {
@@ -75,6 +85,8 @@ export default class CommentForm extends React.Component{
 						handleChange,
 						handleBlur,
 						handleSubmit,
+						setFieldValue,
+						submitForm,
 					} = props
 					return <>
 						{!!error && (
@@ -83,22 +95,22 @@ export default class CommentForm extends React.Component{
 						{success && (
 							<div>Success!</div>
 						)}
-						{!isSubmitting && !success && (
-							<div className={styles.formCols}>
-								<div>
-									<Gravatar
-										email={values.email}
-										rating='pg'
-										default='mp'
-										size={avatarSize}
-									/>
-									<div className={styles.gravatarNotice}>
-										Avatar provided by <a href='https://gravatar.com/'>Gravatar</a>
+						<form onSubmit={handleSubmit}>
+							{!isSubmitting && !success && (
+								<div className={styles.formCols}>
+									<div>
+										<Gravatar
+											email={values.email}
+											rating='pg'
+											default='mp'
+											size={avatarSize}
+										/>
+										<div className={styles.gravatarNotice}>
+											Avatar provided by <a href='https://gravatar.com/'>Gravatar</a>
+										</div>
 									</div>
-								</div>
-								<div>
-									<MuiThemeProvider theme={theme}>
-										<form onSubmit={handleSubmit}>
+									<div>
+										<MuiThemeProvider theme={theme}>
 											<div className={styles.inputBlock}>
 												<TextField
 													id='email'
@@ -165,11 +177,24 @@ export default class CommentForm extends React.Component{
 													Submit
 												</Button>
 											</div>
-										</form>
-									</MuiThemeProvider>
+
+										</MuiThemeProvider>
+									</div>
 								</div>
+							)}
+							<div className={styles.recaptcha}>
+								<Recaptcha
+									ref={el => this.recaptcha = el}
+									sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
+									onResolved={() => {
+										const response = this.recaptcha.getResponse()
+										console.log(`reCAPTCHA response`, response)
+										setFieldValue(`recaptcha`, response)
+										submitForm()
+									}}
+								/>
 							</div>
-						)}
+						</form>
 						{isSubmitting && (
 							<div>Loading...</div>
 						)}
@@ -209,5 +234,8 @@ const styles = {
 				width: calc(100% - ${avatarSize}px);
 			}
 		}
+	`,
+	recaptcha: css`
+		display: none;
 	`,
 }
