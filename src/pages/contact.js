@@ -96,9 +96,8 @@ export default class ContactPage extends React.Component {
 									submitForm,
 								} = props
 								return (
-									<MuiThemeProvider theme={theme}>
-										<form onSubmit={handleSubmit}>
-
+									<form onSubmit={handleSubmit}>
+										<MuiThemeProvider theme={theme}>
 											{!isSubmitting && !success && <>
 												<div className={styles.inputBlock}>
 													<TextField
@@ -166,20 +165,19 @@ export default class ContactPage extends React.Component {
 												</div>
 											</>}
 
-											<div className={styles.recaptcha}>
-												<Recaptcha
-													ref={el => this.recaptcha = el}
-													sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
-													onResolved={() => {
-														const response = this.recaptcha.getResponse()
-														setFieldValue(`recaptcha`, response)
-														submitForm()
-													}}
-												/>
-											</div>
-
-										</form>
-									</MuiThemeProvider>
+										</MuiThemeProvider>
+										<div className={styles.recaptcha}>
+											<Recaptcha
+												ref={el => this.recaptcha = el}
+												sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
+												onResolved={() => {
+													const response = this.recaptcha.getResponse()
+													setFieldValue(`recaptcha`, response)
+													submitForm()
+												}}
+											/>
+										</div>
+									</form>
 								)
 							}}
 						</Formik>
