@@ -93,10 +93,11 @@ export default class Form extends React.Component {
 										submitForm()
 									}}
 									onError={err => {
-										console.log(err)
+										console.error(err)
+										setFieldValue(`recaptcha`, false)
 									}}
 									onExpired={() => {
-										console.log(`Expired`)
+										setFieldValue(`recaptcha`, false)
 									}}
 								/>
 							</div>
