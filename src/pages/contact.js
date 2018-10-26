@@ -26,8 +26,8 @@ export default class ContactPage extends React.Component {
 		console.log(values)
 
 		const body = new window.FormData(document.querySelector(`form`))
-		body.append(`g-recaptcha-response`, values[`g-recaptcha-response`])
-		body.append(`form-name`, formName)
+		// body.append(`g-recaptcha-response`, values[`g-recaptcha-response`])
+		// body.append(`form-name`, formName)
 
 		// const body = objectToFormData(values)
 
@@ -117,7 +117,7 @@ export default class ContactPage extends React.Component {
 											data-netlify
 											data-netlify-recaptcha
 										>
-
+											<input type='hidden' name='form-name' value={formName} />
 											<div className={styles.inputBlock}>
 												<TextField
 													name='email'
