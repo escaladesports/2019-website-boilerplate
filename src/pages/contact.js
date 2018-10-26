@@ -5,13 +5,13 @@ import { object, string } from 'yup'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import NoSSR from 'react-no-ssr'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
 import Form from '../components/form'
 import Error from '../components/error-message'
 import Success from '../components/success-message'
 import Loading from '../components/loading'
-import NoSSR from 'react-no-ssr'
 
 const theme = createMuiTheme({
 	palette: {
@@ -65,10 +65,10 @@ export default class ContactPage extends React.Component {
 								initialValues={initialValues}
 								validationSchema={validationSchema}
 								error={
-									<Error>Something went wrong</Error>
+									<Error>Server error! Your message was not received.</Error>
 								}
 								success={
-									<Success>Success!</Success>
+									<Success>Thank you for your message! A representative will reach out to you as soon as possible.</Success>
 								}
 								loading={
 									<Loading />
