@@ -18,7 +18,7 @@ const theme = createMuiTheme({
 	},
 })
 
-const formName = `Contact`
+const formName = `Contact Test`
 const formAction = `/`
 
 export default class ContactPage extends React.Component {
