@@ -8,12 +8,33 @@ import Button from '@material-ui/core/Button'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
 import Form from '../components/form'
+import Error from '../components/error-message'
+import Success from '../components/success-message'
+import Loading from '../components/loading'
 
 const theme = createMuiTheme({
 	palette: {
 		primary: { main: primaryColor },
 	},
 })
+
+const initialValues = {
+	email: ``,
+	name: ``,
+	message: ``,
+}
+const validationSchema = object().shape({
+	email: string()
+		.email()
+		.required(`required`),
+	name: string()
+		.required(`required`),
+	message: string()
+		.required(`required`),
+})
+async function onSubmit(values){
+	console.log(values)
+}
 
 export default class ContactPage extends React.Component {
 	render(){
@@ -38,27 +59,18 @@ export default class ContactPage extends React.Component {
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
 						<Form
-							onSubmit={values => console.log(values)}
+							onSubmit={onSubmit}
+							initialValues={initialValues}
+							validationSchema={validationSchema}
 							error={
-								<div>Something went wrong</div>
+								<Error>Something went wrong</Error>
 							}
 							success={
-								<div>Success!</div>
+								<Success>Success!</Success>
 							}
-							initialValues={{
-								email: ``,
-								name: ``,
-								message: ``,
-							}}
-							validationSchema={object().shape({
-								email: string()
-									.email()
-									.required(`required`),
-								name: string()
-									.required(`required`),
-								message: string()
-									.required(`required`),
-							})}
+							loading={
+								<Loading />
+							}
 							form={({
 								values,
 								touched,

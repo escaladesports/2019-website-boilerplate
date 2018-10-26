@@ -4,7 +4,8 @@ export const
 	primaryColor = `#00dd00`,
 	secondaryColor = `#333`,
 	white = `#fff`,
-	primaryActiveColor = color(primaryColor)
-		.lighten(.5)
-		.rgb()
-		.string()
+	primaryActiveColor = color(primaryColor).lighten(.5).rgb().string(),
+	errorColor = `#f44336`,
+	lightErrorColor = color(errorColor).lighten(.6).rgb().string(),
+	successColor = `#00dd00`,
+	lightSuccessColor = color(successColor).lighten(1.2).rgb().string()
