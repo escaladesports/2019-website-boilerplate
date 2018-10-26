@@ -26,6 +26,9 @@ export default class Form extends React.Component {
 			else if (onSubmit) {
 				await onSubmit(values)
 			}
+			else{
+				console.log(`Form data not submitting anywhere:`, values)
+			}
 			this.setState({ success: true })
 			resetForm()
 		}
