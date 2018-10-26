@@ -27,6 +27,10 @@ export default class ContactPage extends React.Component {
 
 		const body = objectToFormData(values)
 
+		for (var pair of body.entries()) {
+			console.log(pair[0] + `, ` + pair[1])
+		}
+
 		try {
 			await fetch(formAction, {
 				method: `POST`,
@@ -109,6 +113,7 @@ export default class ContactPage extends React.Component {
 											data-netlify
 											data-netlify-recaptcha
 										>
+											<input type='hidden' name='form-name' value={formName} />
 											<div className={styles.inputBlock}>
 												<TextField
 													name='email'
