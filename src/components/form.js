@@ -16,22 +16,30 @@ export default class Form extends React.Component {
 		this.setState({ error: false })
 		const { action, onSubmit } = this.props
 
-		try {
-			if (action) {
+		if (action) {
+			try {
 				await fetch(action, {
 					method: `post`,
 					body: JSON.stringify(values),
 				})
+				this.setState({ success: true })
+				resetForm()
 			}
-			else if (onSubmit) {
-				await onSubmit(values)
+			catch (err) {
+				console.error(err)
+				this.setState({ success: false })
 			}
-			this.setState({ success: true })
-			resetForm()
 		}
-		catch (err) {
-			console.error(err)
-			this.setState({ success: false })
+		else if(onSubmit){
+			try {
+				await onSubmit(values)
+				this.setState({ success: true })
+				resetForm()
+			}
+			catch (err) {
+				console.error(err)
+				this.setState({ success: false })
+			}
 		}
 
 		setSubmitting(false)
