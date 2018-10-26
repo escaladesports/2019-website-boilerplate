@@ -59,6 +59,7 @@ export default class Form extends React.Component {
 				validationSchema={validationSchema}
 				onSubmit={(values, fns) => {
 					if (!values.recaptcha) {
+						fns.setSubmitting(false)
 						this.recaptcha.execute()
 					}
 					else {
@@ -90,6 +91,12 @@ export default class Form extends React.Component {
 										console.log(`reCAPTCHA response`, response)
 										setFieldValue(`recaptcha`, response)
 										submitForm()
+									}}
+									onError={err => {
+										console.log(err)
+									}}
+									onExpired={() => {
+										console.log(`Expired`)
 									}}
 								/>
 							</div>

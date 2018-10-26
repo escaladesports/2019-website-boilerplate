@@ -33,9 +33,6 @@ const validationSchema = object().shape({
 	message: string()
 		.required(`required`),
 })
-async function onSubmit(values){
-	console.log(values)
-}
 
 export default class ContactPage extends React.Component {
 	render(){
@@ -61,7 +58,7 @@ export default class ContactPage extends React.Component {
 					<div className='form'>
 						<NoSSR>
 							<Form
-								onSubmit={onSubmit}
+								action='/.netlify/functions/contact'
 								initialValues={initialValues}
 								validationSchema={validationSchema}
 								error={
