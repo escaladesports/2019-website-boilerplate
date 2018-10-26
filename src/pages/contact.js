@@ -7,8 +7,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Recaptcha from 'react-google-invisible-recaptcha'
-import fetch from 'isomorphic-fetch'
-// import objectToFormData from 'object-to-formdata'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
 
@@ -18,33 +16,9 @@ const theme = createMuiTheme({
 	},
 })
 
-const formName = `Contact Test`
-const formAction = `/`
-
 export default class ContactPage extends React.Component {
-	async onSubmit(values){
+	onSubmit(values){
 		console.log(values)
-
-		const body = new window.FormData(document.querySelector(`form`))
-		// body.append(`g-recaptcha-response`, values[`g-recaptcha-response`])
-		// body.append(`form-name`, formName)
-
-		// const body = objectToFormData(values)
-
-		for (var pair of body.entries()) {
-			console.log(pair[0] + `, ` + pair[1])
-		}
-
-		try {
-			await fetch(formAction, {
-				method: `POST`,
-				body,
-			})
-			console.log(`Success!`)
-		}
-		catch(err){
-			console.error(err)
-		}
 	}
 	render(){
 		const {
@@ -72,8 +46,7 @@ export default class ContactPage extends React.Component {
 								email: ``,
 								name: ``,
 								message: ``,
-								'g-recaptcha-response': ``,
-								'form-name': formName,
+								recaptcha: ``,
 							}}
 							validationSchema={object().shape({
 								email: string()
@@ -84,13 +57,12 @@ export default class ContactPage extends React.Component {
 								message: string()
 									.required(`required`),
 							})}
-							onSubmit={(values) => {
-								if (!values[`g-recaptcha-response`]) {
-									console.log(`Requestion reCAPTCHA`)
+							onSubmit={(values, { resetForm }) => {
+								if (!values.recaptcha) {
 									this.recaptcha.execute()
 								}
 								else{
-									//resetForm()
+									resetForm()
 									this.onSubmit(values)
 								}
 							}}
@@ -109,18 +81,11 @@ export default class ContactPage extends React.Component {
 								} = props
 								return (
 									<MuiThemeProvider theme={theme}>
-										<form
-											name={formName}
-											action={formAction}
-											onSubmit={handleSubmit}
-											method='POST'
-											data-netlify
-											data-netlify-recaptcha
-										>
-											<input type='hidden' name='form-name' value={formName} />
+										<form onSubmit={handleSubmit}>
+
 											<div className={styles.inputBlock}>
 												<TextField
-													name='email'
+													id='email'
 													label='Email'
 													fullWidth
 													value={values.email}
@@ -137,7 +102,7 @@ export default class ContactPage extends React.Component {
 
 											<div className={styles.inputBlock}>
 												<TextField
-													name='name'
+													id='name'
 													label='Name'
 													fullWidth
 													value={values.name}
@@ -154,7 +119,7 @@ export default class ContactPage extends React.Component {
 
 											<div className={styles.inputBlock}>
 												<TextField
-													name='message'
+													id='message'
 													label='Message'
 													fullWidth
 													value={values.message}
@@ -185,14 +150,11 @@ export default class ContactPage extends React.Component {
 
 											<div className={styles.recaptcha}>
 												<Recaptcha
-													ref={el => {
-														this.recaptcha = el
-													}}
+													ref={el => this.recaptcha = el}
 													sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
 													onResolved={() => {
 														const response = this.recaptcha.getResponse()
-														console.log(`reCAPTCHA response`, response)
-														setFieldValue(`g-recaptcha-response`, response)
+														setFieldValue(`recaptcha`, response)
 														submitForm()
 													}}
 												/>
@@ -221,9 +183,9 @@ const styles = {
 			text-transform: uppercase;
 		}
 	`,
-	// recaptcha: css`
-	// 	display: none;
-	// `,
+	recaptcha: css`
+		display: none;
+	`,
 }
 
 export const query = graphql`
