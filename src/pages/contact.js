@@ -8,7 +8,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Recaptcha from 'react-google-invisible-recaptcha'
 import fetch from 'isomorphic-fetch'
-// import objectToFormData from 'object-to-formdata'
+import objectToFormData from 'object-to-formdata'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
 
@@ -18,22 +18,14 @@ const theme = createMuiTheme({
 	},
 })
 
-const formName = `Contact Test`
+const formName = `Contact Page`
 const formAction = `/`
 
 export default class ContactPage extends React.Component {
 	async onSubmit(values){
 		console.log(values)
 
-		const body = new window.FormData(document.querySelector(`form`))
-		// body.append(`g-recaptcha-response`, values[`g-recaptcha-response`])
-		// body.append(`form-name`, formName)
-
-		// const body = objectToFormData(values)
-
-		for (var pair of body.entries()) {
-			console.log(pair[0] + `, ` + pair[1])
-		}
+		const body = objectToFormData(values)
 
 		try {
 			await fetch(formAction, {
@@ -117,7 +109,6 @@ export default class ContactPage extends React.Component {
 											data-netlify
 											data-netlify-recaptcha
 										>
-											<input type='hidden' name='form-name' value={formName} />
 											<div className={styles.inputBlock}>
 												<TextField
 													name='email'
