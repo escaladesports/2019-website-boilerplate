@@ -17,8 +17,16 @@ const theme = createMuiTheme({
 })
 
 export default class ContactPage extends React.Component {
+	constructor(props){
+		super(props)
+		this.state = {
+			success: false,
+			error: false,
+		}
+	}
 	onSubmit(values){
 		console.log(values)
+		this.setState({ success: true })
 	}
 	render(){
 		const {
@@ -36,11 +44,19 @@ export default class ContactPage extends React.Component {
 			},
 		} = this.props.data
 
+		const { success, error } = this.state
+
 		return(
 			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
 				<div className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
+						{!!error && (
+							<div>{error}</div>
+						)}
+						{success && (
+							<div>Success!</div>
+						)}
 						<Formik
 							initialValues={{
 								email: ``,
@@ -83,70 +99,72 @@ export default class ContactPage extends React.Component {
 									<MuiThemeProvider theme={theme}>
 										<form onSubmit={handleSubmit}>
 
-											<div className={styles.inputBlock}>
-												<TextField
-													id='email'
-													label='Email'
-													fullWidth
-													value={values.email}
-													onChange={handleChange}
-													onBlur={handleBlur}
-													error={errors.email && touched.email}
-												/>
-												{errors.email && touched.email && (
-													<div className={styles.errorMsg}>
-														{errors.email}
-													</div>
-												)}
-											</div>
+											{!isSubmitting && !success && <>
+												<div className={styles.inputBlock}>
+													<TextField
+														id='email'
+														label='Email'
+														fullWidth
+														value={values.email}
+														onChange={handleChange}
+														onBlur={handleBlur}
+														error={errors.email && touched.email}
+													/>
+													{errors.email && touched.email && (
+														<div className={styles.errorMsg}>
+															{errors.email}
+														</div>
+													)}
+												</div>
 
-											<div className={styles.inputBlock}>
-												<TextField
-													id='name'
-													label='Name'
-													fullWidth
-													value={values.name}
-													onChange={handleChange}
-													onBlur={handleBlur}
-													error={errors.name && touched.name}
-												/>
-												{errors.name && touched.name && (
-													<div className={styles.errorMsg}>
-														{errors.name}
-													</div>
-												)}
-											</div>
+												<div className={styles.inputBlock}>
+													<TextField
+														id='name'
+														label='Name'
+														fullWidth
+														value={values.name}
+														onChange={handleChange}
+														onBlur={handleBlur}
+														error={errors.name && touched.name}
+													/>
+													{errors.name && touched.name && (
+														<div className={styles.errorMsg}>
+															{errors.name}
+														</div>
+													)}
+												</div>
 
-											<div className={styles.inputBlock}>
-												<TextField
-													id='message'
-													label='Message'
-													fullWidth
-													value={values.message}
-													onChange={handleChange}
-													onBlur={handleBlur}
-													error={errors.message && touched.message}
-													multiline={true}
-													rows={1}
-													rowsMax={4}
-												/>
-												{errors.message && touched.message && (
-													<div className={styles.errorMsg}>
-														{errors.message}
-													</div>
-												)}
-											</div>
+												<div className={styles.inputBlock}>
+													<TextField
+														id='message'
+														label='Message'
+														fullWidth
+														value={values.message}
+														onChange={handleChange}
+														onBlur={handleBlur}
+														error={errors.message && touched.message}
+														multiline={true}
+														rows={1}
+														rowsMax={4}
+													/>
+													{errors.message && touched.message && (
+														<div className={styles.errorMsg}>
+															{errors.message}
+														</div>
+													)}
+												</div>
 
-											<div className={styles.inputBlock}>
-												<Button
-													type='submit'
-													variant='outlined'
-													color='primary'
-													disabled={isSubmitting}
-												>
-													Submit
-												</Button>
-											</div>
+												<div className={styles.inputBlock}>
+													<Button
+														type='submit'
+														variant='outlined'
+														color='primary'
+														disabled={isSubmitting}
+													>
+														Submit
+													</Button>
+												</div>
+											</>}
 
 											<div className={styles.recaptcha}>
 												<Recaptcha
@@ -159,6 +177,7 @@ export default class ContactPage extends React.Component {
 													}}
 												/>
 											</div>
+
 										</form>
 									</MuiThemeProvider>
 								)
