@@ -1,14 +1,13 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'emotion'
-import { Formik } from 'formik'
 import { object, string } from 'yup'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import Recaptcha from 'react-google-invisible-recaptcha'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
+import Form from '../components/form'
 
 const theme = createMuiTheme({
 	palette: {
@@ -17,17 +16,6 @@ const theme = createMuiTheme({
 })
 
 export default class ContactPage extends React.Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			success: false,
-			error: false,
-		}
-	}
-	onSubmit(values){
-		console.log(values)
-		this.setState({ success: true })
-	}
 	render(){
 		const {
 			page: {
@@ -44,25 +32,23 @@ export default class ContactPage extends React.Component {
 			},
 		} = this.props.data
 
-		const { success, error } = this.state
-
 		return(
 			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
 				<div className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
-						{!!error && (
-							<div>{error}</div>
-						)}
-						{success && (
-							<div>Success!</div>
-						)}
-						<Formik
+						<Form
+							onSubmit={values => console.log(values)}
+							error={
+								<div>Something went wrong</div>
+							}
+							success={
+								<div>Success!</div>
+							}
 							initialValues={{
 								email: ``,
 								name: ``,
 								message: ``,
-								recaptcha: ``,
 							}}
 							validationSchema={object().shape({
 								email: string()
@@ -73,114 +59,83 @@ export default class ContactPage extends React.Component {
 								message: string()
 									.required(`required`),
 							})}
-							onSubmit={(values, { resetForm }) => {
-								if (!values.recaptcha) {
-									this.recaptcha.execute()
-								}
-								else{
-									resetForm()
-									this.onSubmit(values)
-								}
-							}}
-						>
-							{props => {
-								const {
-									values,
-									touched,
-									errors,
-									isSubmitting,
-									handleChange,
-									handleBlur,
-									handleSubmit,
-									setFieldValue,
-									submitForm,
-								} = props
-								return (
-									<form onSubmit={handleSubmit}>
-										<MuiThemeProvider theme={theme}>
-											{!isSubmitting && !success && <>
-												<div className={styles.inputBlock}>
-													<TextField
-														id='email'
-														label='Email'
-														fullWidth
-														value={values.email}
-														onChange={handleChange}
-														onBlur={handleBlur}
-														error={errors.email && touched.email}
-													/>
-													{errors.email && touched.email && (
-														<div className={styles.errorMsg}>
-															{errors.email}
-														</div>
-													)}
-												</div>
+							form={({
+								values,
+								touched,
+								errors,
+								isSubmitting,
+								handleChange,
+								handleBlur,
+							}) => (
+								<MuiThemeProvider theme={theme}>
+									<div className={styles.inputBlock}>
+										<TextField
+											id='email'
+											label='Email'
+											fullWidth
+											value={values.email}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											error={errors.email && touched.email}
+										/>
+										{errors.email && touched.email && (
+											<div className={styles.errorMsg}>
+												{errors.email}
+											</div>
+										)}
+									</div>
 
-												<div className={styles.inputBlock}>
-													<TextField
-														id='name'
-														label='Name'
-														fullWidth
-														value={values.name}
-														onChange={handleChange}
-														onBlur={handleBlur}
-														error={errors.name && touched.name}
-													/>
-													{errors.name && touched.name && (
-														<div className={styles.errorMsg}>
-															{errors.name}
-														</div>
-													)}
-												</div>
+									<div className={styles.inputBlock}>
+										<TextField
+											id='name'
+											label='Name'
+											fullWidth
+											value={values.name}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											error={errors.name && touched.name}
+										/>
+										{errors.name && touched.name && (
+											<div className={styles.errorMsg}>
+												{errors.name}
+											</div>
+										)}
+									</div>
 
-												<div className={styles.inputBlock}>
-													<TextField
-														id='message'
-														label='Message'
-														fullWidth
-														value={values.message}
-														onChange={handleChange}
-														onBlur={handleBlur}
-														error={errors.message && touched.message}
-														multiline={true}
-														rows={1}
-														rowsMax={4}
-													/>
-													{errors.message && touched.message && (
-														<div className={styles.errorMsg}>
-															{errors.message}
-														</div>
-													)}
-												</div>
+									<div className={styles.inputBlock}>
+										<TextField
+											id='message'
+											label='Message'
+											fullWidth
+											value={values.message}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											error={errors.message && touched.message}
+											multiline={true}
+											rows={1}
+											rowsMax={4}
+										/>
+										{errors.message && touched.message && (
+											<div className={styles.errorMsg}>
+												{errors.message}
+											</div>
+										)}
+									</div>
 
-												<div className={styles.inputBlock}>
-													<Button
-														type='submit'
-														variant='outlined'
-														color='primary'
-														disabled={isSubmitting}
-													>
-														Submit
-													</Button>
-												</div>
-											</>}
+									<div className={styles.inputBlock}>
+										<Button
+											type='submit'
+											variant='outlined'
+											color='primary'
+											disabled={isSubmitting}
+										>
+												Submit
+										</Button>
+									</div>
+								</MuiThemeProvider>
+							)}
+						/>
 
-										</MuiThemeProvider>
-										<div className={styles.recaptcha}>
-											<Recaptcha
-												ref={el => this.recaptcha = el}
-												sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
-												onResolved={() => {
-													const response = this.recaptcha.getResponse()
-													setFieldValue(`recaptcha`, response)
-													submitForm()
-												}}
-											/>
-										</div>
-									</form>
-								)
-							}}
-						</Formik>
 					</div>
 				</div>
 			</Layout>
@@ -199,9 +154,6 @@ const styles = {
 		:first-letter{
 			text-transform: uppercase;
 		}
-	`,
-	recaptcha: css`
-		display: none;
 	`,
 }
 
