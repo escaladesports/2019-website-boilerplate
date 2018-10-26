@@ -84,13 +84,13 @@ export default class ContactPage extends React.Component {
 								message: string()
 									.required(`required`),
 							})}
-							onSubmit={(values, { resetForm }) => {
+							onSubmit={(values) => {
 								if (!values[`g-recaptcha-response`]) {
 									console.log(`Requestion reCAPTCHA`)
 									this.recaptcha.execute()
 								}
 								else{
-									resetForm()
+									//resetForm()
 									this.onSubmit(values)
 								}
 							}}
