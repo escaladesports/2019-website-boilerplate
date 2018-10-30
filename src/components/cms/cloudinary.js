@@ -3,6 +3,7 @@ import Script from 'react-load-script'
 import { buttons, components } from 'netlify-cms-ui-default'
 import { css } from 'emotion'
 import Img from '../cloudinary-image'
+import { cloudinaryName, cloudinaryUploadPreset } from '../../site-config'
 
 class CloudinaryControl extends React.Component{
 	constructor(props){
@@ -13,8 +14,8 @@ class CloudinaryControl extends React.Component{
 		const { cloudinary } = window
 		if (cloudinary){
 			cloudinary.openUploadWidget({
-				cloudName: `escalade-sports`,
-				uploadPreset: `boilerplate`,
+				cloudName: cloudinaryName,
+				uploadPreset: cloudinaryUploadPreset,
 			}, (err, { event, info: { public_id }}) => {
 				if(err){
 					console.error(err)
