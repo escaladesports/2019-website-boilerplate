@@ -2,6 +2,7 @@ import CMS, { init } from 'netlify-cms'
 import netlifyIdentityWidget from 'netlify-identity-widget'
 import { injectGlobal } from 'emotion'
 import { CurrencyControl, CurrencyPreview } from './currency'
+import { CloudinaryControl, CloudinaryPreview } from './cloudinary'
 import logo from '../../../static/backend-logo.png'
 
 injectGlobal`
@@ -45,5 +46,6 @@ const identityInterval = setInterval(() => {
 }, 1)
 
 CMS.registerWidget(`currency`, CurrencyControl, CurrencyPreview)
+CMS.registerWidget(`cloudinary`, CloudinaryControl, CloudinaryPreview)
 
 init()
