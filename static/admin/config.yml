@@ -25,6 +25,9 @@ collections:
           - label: Header Image
             name: headerImage
             widget: image
+          - label: Cloudinary Test
+            name: cloudinaryTest
+            widget: cloudinary
       - label: Contact
         name: contact
         file: src/markdown/contact.md
