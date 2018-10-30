@@ -2,13 +2,18 @@ import dotEnv from 'dotenv'
 import Recaptcha from 'recaptcha-verify'
 import Mailgun from 'mailgun-js'
 dotEnv.config({ silent: true })
+const {
+	SITE_RECAPTCHA_SECRET,
+	MAILGUN_API_KEY,
+	MAILGUN_DOMAIN,
+} = process.env
 const recaptcha = new Recaptcha({
-	secret: process.env.SITE_RECAPTCHA_SECRET,
+	secret: SITE_RECAPTCHA_SECRET,
 	verbose: true,
 })
 const mailgun = Mailgun({
-	apiKey: process.env.MAILGUN_API_KEY,
-	domain: process.env.MAILGUN_DOMAIN,
+	apiKey: MAILGUN_API_KEY,
+	domain: MAILGUN_DOMAIN,
 })
 
 const allowed = [
@@ -62,14 +67,13 @@ export async function handler({ body }){
 		}
 
 		// Send email
-		console.log(data)
 		let text = []
 		for(let key in data){
 			text.push(`${key}: ${data[key]}`)
 		}
 		text = text.join(`\n`)
 		await sendMail({
-			from: `no-reply@${process.env.MAILGUN_DOMAIN}`,
+			from: `no-reply@${MAILGUN_DOMAIN}`,
 			to: `krose@escaladesports.com`,
 			subject: `Contact Form Submission`,
 			text,

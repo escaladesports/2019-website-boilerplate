@@ -3,6 +3,7 @@ import Octokit from '@octokit/rest'
 import { stringify } from 'yaml'
 import md5 from 'md5'
 import Recaptcha from 'recaptcha-verify'
+import { gitHubRepo, gitHubOwner } from '../../site-config'
 const octokit = Octokit()
 dotEnv.config({ silent: true })
 const recaptcha = new Recaptcha({
@@ -85,8 +86,8 @@ export async function handler({ body }){
 		})
 		console.log(`Octokit authenticated...`)
 		await octokit.repos.createFile({
-			owner: `escaladesports`,
-			repo: `project-boilerplate`,
+			owner: gitHubOwner,
+			repo: gitHubRepo,
 			ref: `master`,
 			path: `src/markdown/comments/${now.getTime()}.md`,
 			message: `User generated comment`,
