@@ -59,8 +59,8 @@ export default class ContactPage extends React.Component {
 					<div className='form'>
 						<NoSSR>
 							<Form
-								// action='/.netlify/functions/contact'
-								recaptcha={false}
+								action='/.netlify/functions/contact'
+								// recaptcha={false}
 								initialValues={initialValues}
 								validationSchema={validationSchema}
 								error={

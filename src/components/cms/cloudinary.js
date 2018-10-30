@@ -3,7 +3,7 @@ import Script from 'react-load-script'
 import { buttons, components } from 'netlify-cms-ui-default'
 import { css } from 'emotion'
 import Img from '../cloudinary-image'
-import { cloudinaryName, cloudinaryUploadPreset } from '../../site-config'
+import { cloudinaryName, cloudinaryUploadPreset } from '../../../site-config'
 
 class CloudinaryControl extends React.Component{
 	constructor(props){
@@ -27,15 +27,16 @@ class CloudinaryControl extends React.Component{
 		}
 	}
 	render(){
+		const { value } = this.props
 		return (
 			<div>
-				<div>{this.props.value}</div>
+				<div>{value}</div>
 				<button
 					onClick={this.openWidget}
 					className={styles.button}
 				>
-					{!!this.props.value && `Replace`}
-					{!this.props.value && `Upload`}
+					{!!value && `Replace`}
+					{!value && `Upload`}
 				</button>
 				<Script url='https://widget.cloudinary.com/v2.0/global/all.js' />
 			</div>
