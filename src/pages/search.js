@@ -1,5 +1,4 @@
 import React from 'react'
-import { graphql } from 'gatsby'
 import Link from 'gatsby-link'
 import Layout from '../components/layouts/default'
 import { search } from '../../plugins/search'
@@ -27,15 +26,11 @@ export default class SearchPage extends React.Component{
 	}
 	render(){
 		const {
-			siteTitle,
-			siteDescription,
-		} = this.props.data.site.siteMetadata
-		const {
 			loading,
 			results,
 		} = this.state
 		return(
-			<Layout title='Search' siteTitle={siteTitle} description={siteDescription}>
+			<Layout title='Search'>
 				<h1>Search</h1>
 				<input
 					type='text'
@@ -65,16 +60,3 @@ export default class SearchPage extends React.Component{
 		)
 	}
 }
-
-
-
-export const query = graphql`
-	query SearchPage {
-		site{
-			siteMetadata{
-				siteTitle: title
-				siteDescription: description
-			}
-		}
-	}
-`

@@ -45,15 +45,10 @@ export default class ContactPage extends React.Component {
 				html,
 				excerpt,
 			},
-			site: {
-				siteMetadata: {
-					siteTitle,
-				},
-			},
 		} = this.props.data
 
 		return(
-			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
+			<Layout title={title} description={excerpt}>
 				<div className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
@@ -180,12 +175,6 @@ export const query = graphql`
 			excerpt(pruneLength: 175)
 			frontmatter{
 				title
-			}
-		}
-
-		site{
-			siteMetadata{
-				siteTitle: title
 			}
 		}
 	}

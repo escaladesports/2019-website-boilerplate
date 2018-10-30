@@ -12,15 +12,10 @@ export default class GenericTemplate extends React.Component{
 				html,
 				excerpt,
 			},
-			site: {
-				siteMetadata: {
-					siteTitle,
-				},
-			},
 		} = this.props.data
 
 		return(
-			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
+			<Layout title={title} description={excerpt}>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 			</Layout>
 		)
@@ -36,12 +31,6 @@ export const query = graphql`
 			excerpt(pruneLength: 175)
 			frontmatter{
 				title
-			}
-		}
-
-		site{
-			siteMetadata{
-				siteTitle: title
 			}
 		}
 	}

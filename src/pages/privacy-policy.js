@@ -14,11 +14,6 @@ export default class PrivacyPolicyPage extends React.Component{
 				html,
 				excerpt,
 			},
-			site: {
-				siteMetadata: {
-					siteTitle,
-				},
-			},
 		} = this.props.data
 		const addressHTML = address.replace(/\n/g, `<br />`)
 		const emailHTML = `<a href='mailto:${email}'>${email}</a>`
@@ -27,7 +22,7 @@ export default class PrivacyPolicyPage extends React.Component{
 			.replace(/{{email}}/g, emailHTML)
 
 		return(
-			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
+			<Layout title={title} description={excerpt}>
 				<div dangerouslySetInnerHTML={{ __html: processedHTML }} />
 			</Layout>
 		)
@@ -45,12 +40,6 @@ export const query = graphql`
 				title
 				address
 				email
-			}
-		}
-
-		site{
-			siteMetadata{
-				siteTitle: title
 			}
 		}
 	}

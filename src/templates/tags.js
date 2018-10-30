@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Helmet } from 'react-helmet'
 import Layout from '../components/layouts/default'
 import PostList from '../components/blog/post-list'
 
@@ -14,21 +13,13 @@ export default class TagsTemplate extends React.Component{
 			},
 			data: {
 				posts,
-				site: {
-					siteMetadata: {
-						siteTitle,
-					},
-				},
 			},
 		} = this.props
 		const postsList = posts.edges.map(edge => edge.node)
 		const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
 
 		return(
-			<Layout title={`Posts Tagged with ${tag}`} siteTitle={siteTitle} description={description}>
-				<Helmet>
-					<title>{`Posts Tagged with ${tag} | ${siteTitle}`}</title>
-				</Helmet>
+			<Layout title={`Posts Tagged with ${tag}`} description={description}>
 				<h2>Tag: {tag}</h2>
 				<PostList
 					posts={postsList}
@@ -68,12 +59,6 @@ export const query = graphql`
 						path
 					}
 				}
-			}
-		}
-
-		site{
-			siteMetadata{
-				siteTitle: title
 			}
 		}
 	}

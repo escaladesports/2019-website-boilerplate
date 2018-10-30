@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import Link from 'gatsby-link'
-import { Helmet } from 'react-helmet'
 import Layout from '../components/layouts/default'
 
 export default class ProductCategoryTemplate extends React.Component{
@@ -17,11 +16,6 @@ export default class ProductCategoryTemplate extends React.Component{
 					excerpt,
 				},
 				allSalsifyContent,
-				site: {
-					siteMetadata: {
-						siteTitle,
-					},
-				},
 			},
 		} = this.props
 
@@ -49,11 +43,7 @@ export default class ProductCategoryTemplate extends React.Component{
 		})
 
 		return(
-			<Layout>
-				<Helmet title={title} siteTitle={siteTitle} description={excerpt}>
-					<title>{`${title} | ${siteTitle}`}</title>
-					<meta name='description' content={excerpt} />
-				</Helmet>
+			<Layout title={title} description={excerpt}>
 				<h1>{title}</h1>
 				<div dangerouslySetInnerHTML={{__html: html}} />
 				{products.map(({ id, title, path }, index) => (
@@ -116,12 +106,6 @@ export const query = graphql`
 			}
 			html
 			excerpt(pruneLength: 175)
-		}
-
-		site{
-			siteMetadata{
-				siteTitle: title
-			}
 		}
 	}
 `

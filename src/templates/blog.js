@@ -12,18 +12,13 @@ export default class BlogPage extends React.Component {
 			},
 			data: {
 				allMarkdownRemark,
-				site: {
-					siteMetadata: {
-						siteTitle,
-					},
-				},
 			},
 		} = this.props
 		const posts = allMarkdownRemark.edges.map(edges => edges.node)
 		const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
 
 		return (
-			<Layout title='Blog' siteTitle={siteTitle} description={description}>
+			<Layout title='Blog' description={description}>
 				<PostList
 					posts={posts}
 					page={page}
@@ -62,12 +57,6 @@ export const query = graphql`
 						path
 					}
 				}
-			}
-		}
-
-		site{
-			siteMetadata{
-				siteTitle: title
 			}
 		}
 	}

@@ -40,11 +40,6 @@ export default class PostTemplate extends React.Component{
 					excerpt,
 				},
 				comments: commentsList,
-				site: {
-					siteMetadata: {
-						siteTitle,
-					},
-				},
 			},
 		} = this.props
 
@@ -69,7 +64,7 @@ export default class PostTemplate extends React.Component{
 		const previous = (id === previousId) ? false : this.props.data.previous
 
 		return(
-			<Layout title={title} siteTitle={siteTitle} description={excerpt}>
+			<Layout title={title} description={excerpt}>
 				{!!image && (
 					<Helmet>
 						<meta property='og:image' content={cl.url(image, {
@@ -186,12 +181,6 @@ export const query = graphql`
 			}
 			fields{
 				path
-			}
-		}
-
-		site{
-			siteMetadata{
-				siteTitle: title
 			}
 		}
 	}

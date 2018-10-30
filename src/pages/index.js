@@ -17,16 +17,10 @@ export default class HomePage extends React.Component {
 			page: {
 				html,
 			},
-			site: {
-				siteMetadata: {
-					siteTitle,
-					siteDescription,
-				},
-			},
 		} = this.props.data
 
 		return (
-			<Layout siteTitle={siteTitle} description={siteDescription}>
+			<Layout>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<Carousel width={1000} height={400}>
 					<img src={`https://placehold.it/1000x400/ccc/999/&text=slide1`} />
@@ -57,12 +51,6 @@ export const query = graphql`
 			regex: "/src/markdown/index.md/"
 		}){
 			html
-		}
-		site{
-			siteMetadata{
-				siteTitle: title
-				siteDescription: description
-			}
 		}
 	}
 `

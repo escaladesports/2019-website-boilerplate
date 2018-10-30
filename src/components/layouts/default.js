@@ -1,4 +1,5 @@
 import React from 'react'
+import { StaticQuery, graphql } from 'gatsby'
 import { css } from 'emotion'
 import { Helmet } from 'react-helmet'
 import RouteDelayed from '../../../plugins/route-delayed-animation'
@@ -21,29 +22,47 @@ export default class Layout extends React.Component{
 		const {
 			title,
 			description,
-			siteTitle,
 		} = this.props
 		return(
-			<>
-				<Helmet>
-					<title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
-					{!!description && (
-						<meta name='description' content={description} />
-					)}
-					<meta property='og:title' content={title} />
-					<meta property='og:site_name' content={siteTitle} />
-				</Helmet>
-				<div className={styles.layout}>
-					<Header />
-					<div className={styles.content}>
-						<main>{this.props.children}</main>
-					</div>
-					<Footer />
-				</div>
-				<RouteDelayed>
-					<RouteDelayedAnimation />
-				</RouteDelayed>
-			</>
+			<StaticQuery
+				query={graphql`
+					query DefaultTemplateQuery{
+						site{
+							siteMetadata{
+								siteTitle: title
+								siteDescription: description
+							}
+						}
+					}
+				`}
+				render={({
+					site: {
+						siteMetadata: {
+							siteTitle,
+							siteDescription,
+						},
+					},
+				}) => (
+					<>
+						<Helmet>
+							<title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
+							<meta name='description' content={description || siteDescription} />
+							<meta property='og:title' content={title} />
+							<meta property='og:site_name' content={siteTitle} />
+						</Helmet>
+						<div className={styles.layout}>
+							<Header />
+							<div className={styles.content}>
+								<main>{this.props.children}</main>
+							</div>
+							<Footer />
+						</div>
+						<RouteDelayed>
+							<RouteDelayedAnimation />
+						</RouteDelayed>
+					</>
+				)}
+			/>
 		)
 	}
 }

@@ -46,11 +46,6 @@ export default class ProductTemplate extends React.Component{
 						itemName,
 						webImages,
 					},
-					site: {
-						siteMetadata: {
-							siteTitle,
-						},
-					},
 					escaladePricing: {
 						price,
 					},
@@ -69,7 +64,7 @@ export default class ProductTemplate extends React.Component{
 		const imageRatio = [16, 9]
 
 		return(
-			<Layout title={itemName || title} siteTitle={siteTitle} description={excerpt}>
+			<Layout title={itemName || title} description={excerpt}>
 				<h1>{itemName || title}</h1>
 				{hasImages && (
 					<Carousel ratio={imageRatio} slides={webImages.map(({ url }, index) => (
@@ -148,12 +143,6 @@ export const query = graphql`
 				name
 				url
 				filename
-			}
-		}
-
-		site{
-			siteMetadata{
-				siteTitle: title
 			}
 		}
 
