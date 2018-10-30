@@ -169,7 +169,7 @@ collections:
         required: false
       - label: Image
         name: image
-        widget: string
+        widget: cloudinary
         required: false
         hint: Image must be 1mb or less
       - label: Body

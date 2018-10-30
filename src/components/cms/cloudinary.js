@@ -2,6 +2,7 @@ import React from 'react'
 import Script from 'react-load-script'
 import { buttons, components } from 'netlify-cms-ui-default'
 import { css } from 'emotion'
+import Img from '../cloudinary-image'
 
 class CloudinaryControl extends React.Component{
 	constructor(props){
@@ -43,7 +44,11 @@ class CloudinaryControl extends React.Component{
 
 class CloudinaryPreview extends React.Component{
 	render(){
-		return <div>{this.props.value}</div>
+		return (
+			<div>
+				<Img id={this.props.value} />
+			</div>
+		)
 	}
 }
 
