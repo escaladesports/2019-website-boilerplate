@@ -1,9 +1,12 @@
 import React from 'react'
 import fetch from 'isomorphic-fetch'
-import { Formik } from 'formik'
+import { Formik, Form } from 'formik'
 import Recaptcha from 'react-google-invisible-recaptcha'
 
-export default class Form extends React.Component {
+export default class CustomForm extends React.Component {
+	static defaultProps = {
+		recaptcha: true,
+	}
 	constructor(props) {
 		super(props)
 		this.state = {
@@ -53,7 +56,7 @@ export default class Form extends React.Component {
 				initialValues={initialValues}
 				validationSchema={validationSchema}
 				onSubmit={(values, fns) => {
-					if (!values.recaptcha) {
+					if (this.props.recaptcha && !values.recaptcha) {
 						fns.setSubmitting(false)
 						this.recaptcha.execute()
 					}
@@ -65,39 +68,40 @@ export default class Form extends React.Component {
 				{props => {
 					const {
 						isSubmitting,
-						handleSubmit,
 						setFieldValue,
 						submitForm,
 					} = props
 					return (
-						<form onSubmit={handleSubmit}>
-
+						<Form>
 							{error && this.props.error}
 							{success && this.props.success}
 							{isSubmitting && loading}
 							{!isSubmitting && !success && form(props)}
 
-							<div style={{ display: `none` }}>
-								<Recaptcha
-									ref={el => this.recaptcha = el}
-									sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
-									onResolved={() => {
-										const response = this.recaptcha.getResponse()
-										console.log(`reCAPTCHA response`, response)
-										setFieldValue(`recaptcha`, response)
-										submitForm()
-									}}
-									onError={err => {
-										console.error(err)
-										setFieldValue(`recaptcha`, false)
-									}}
-									onExpired={() => {
-										setFieldValue(`recaptcha`, false)
-									}}
-								/>
-							</div>
+							{this.props.recaptcha && (
+								<div style={{ display: `none` }}>
+									<Recaptcha
+										ref={el => this.recaptcha = el}
+										sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
+										onResolved={() => {
+											const response = this.recaptcha.getResponse()
+											console.log(`reCAPTCHA response`, response)
+											setFieldValue(`recaptcha`, response)
+											submitForm()
+										}}
+										onError={err => {
+											console.error(err)
+											setFieldValue(`recaptcha`, false)
+										}}
+										onExpired={() => {
+											setFieldValue(`recaptcha`, false)
+										}}
+									/>
+								</div>
+							)}
+						</Form>
 
-						</form>
+
 					)
 				}}
 			</Formik>

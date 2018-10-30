@@ -6,6 +6,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import NoSSR from 'react-no-ssr'
+import { ErrorMessage } from 'formik'
 import { primaryColor } from '../styles/colors'
 import Layout from '../components/layouts/default'
 import Form from '../components/form'
@@ -58,7 +59,8 @@ export default class ContactPage extends React.Component {
 					<div className='form'>
 						<NoSSR>
 							<Form
-								action='/.netlify/functions/contact'
+								// action='/.netlify/functions/contact'
+								recaptcha={false}
 								initialValues={initialValues}
 								validationSchema={validationSchema}
 								error={
@@ -81,7 +83,7 @@ export default class ContactPage extends React.Component {
 									<MuiThemeProvider theme={theme}>
 										<div className={styles.inputBlock}>
 											<TextField
-												id='email'
+												name='email'
 												label='Email'
 												fullWidth
 												value={values.email}
@@ -89,16 +91,16 @@ export default class ContactPage extends React.Component {
 												onBlur={handleBlur}
 												error={errors.email && touched.email}
 											/>
-											{errors.email && touched.email && (
-												<div className={styles.errorMsg}>
-													{errors.email}
-												</div>
-											)}
+											<ErrorMessage
+												name='email'
+												component='div'
+												className={styles.errorMsg}
+											/>
 										</div>
 
 										<div className={styles.inputBlock}>
 											<TextField
-												id='name'
+												name='name'
 												label='Name'
 												fullWidth
 												value={values.name}
@@ -106,16 +108,16 @@ export default class ContactPage extends React.Component {
 												onBlur={handleBlur}
 												error={errors.name && touched.name}
 											/>
-											{errors.name && touched.name && (
-												<div className={styles.errorMsg}>
-													{errors.name}
-												</div>
-											)}
+											<ErrorMessage
+												name='name'
+												component='div'
+												className={styles.errorMsg}
+											/>
 										</div>
 
 										<div className={styles.inputBlock}>
 											<TextField
-												id='message'
+												name='message'
 												label='Message'
 												fullWidth
 												value={values.message}
@@ -126,11 +128,11 @@ export default class ContactPage extends React.Component {
 												rows={1}
 												rowsMax={4}
 											/>
-											{errors.message && touched.message && (
-												<div className={styles.errorMsg}>
-													{errors.message}
-												</div>
-											)}
+											<ErrorMessage
+												name='message'
+												component='div'
+												className={styles.errorMsg}
+											/>
 										</div>
 
 										<div className={styles.inputBlock}>
@@ -140,7 +142,7 @@ export default class ContactPage extends React.Component {
 												color='primary'
 												disabled={isSubmitting}
 											>
-													Submit
+												Submit
 											</Button>
 										</div>
 									</MuiThemeProvider>
