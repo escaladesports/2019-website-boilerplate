@@ -1,6 +1,6 @@
 ---
 title: You have been invited
-template: cms-email
+template: backend-email
 ---
 
 ## You have been invited

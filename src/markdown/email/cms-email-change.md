@@ -1,6 +1,6 @@
 ---
 title: Confirm Change of Email
-template: cms-email
+template: backend-email
 ---
 
 ## Confirm Change of Email

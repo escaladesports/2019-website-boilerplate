@@ -1,6 +1,6 @@
 ---
 title: Reset Password
-template: cms-email
+template: backend-email
 ---
 
 ## Reset Password

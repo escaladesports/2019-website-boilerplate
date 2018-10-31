@@ -1,6 +1,6 @@
 ---
 title: Confirm your signup
-template: cms-email
+template: backend-email
 ---
 
 ## Confirm your signup

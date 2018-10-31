@@ -1,20 +1,22 @@
 import dotEnv from 'dotenv'
 import Recaptcha from 'recaptcha-verify'
-import Mailgun from 'mailgun-js'
+// import Mailgun from 'mailgun-js'
+import fetch from 'isomorphic-fetch'
+import { siteUrl } from '../../site-config'
 dotEnv.config({ silent: true })
 const {
 	SITE_RECAPTCHA_SECRET,
-	MAILGUN_API_KEY,
-	MAILGUN_DOMAIN,
+	// MAILGUN_API_KEY,
+	// MAILGUN_DOMAIN,
 } = process.env
 const recaptcha = new Recaptcha({
 	secret: SITE_RECAPTCHA_SECRET,
 	verbose: true,
 })
-const mailgun = Mailgun({
-	apiKey: MAILGUN_API_KEY,
-	domain: MAILGUN_DOMAIN,
-})
+// const mailgun = Mailgun({
+// 	apiKey: MAILGUN_API_KEY,
+// 	domain: MAILGUN_DOMAIN,
+// })
 
 const allowed = [
 	`name`,
@@ -66,18 +68,23 @@ export async function handler({ body }){
 			}
 		}
 
+		// Fetch email template
+		const res = await fetch(`${siteUrl}/email-templates/contact`)
+		const template = await res.text()
+		console.log(template)
+
 		// Send email
-		let text = []
-		for(let key in data){
-			text.push(`${key}: ${data[key]}`)
-		}
-		text = text.join(`\n`)
-		await sendMail({
-			from: `no-reply@${MAILGUN_DOMAIN}`,
-			to: `krose@escaladesports.com`,
-			subject: `Contact Form Submission`,
-			text,
-		})
+		// let text = []
+		// for(let key in data){
+		// 	text.push(`${key}: ${data[key]}`)
+		// }
+		// text = text.join(`\n`)
+		// await sendMail({
+		// 	from: `no-reply@${MAILGUN_DOMAIN}`,
+		// 	to: `krose@escaladesports.com`,
+		// 	subject: `Contact Form Submission`,
+		// 	text,
+		// })
 
 		return {
 			statusCode: 200,
@@ -109,11 +116,11 @@ function verifyRecaptcha(token) {
 	})
 }
 
-async function sendMail(data){
-	return new Promise((resolve, reject) => {
-		mailgun.messages().send(data, (error, body) => {
-			if(error) reject(error)
-			else resolve(body)
-		})
-	})
-}
+// async function sendMail(data){
+// 	return new Promise((resolve, reject) => {
+// 		mailgun.messages().send(data, (error, body) => {
+// 			if(error) reject(error)
+// 			else resolve(body)
+// 		})
+// 	})
+// }
