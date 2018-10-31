@@ -5,4 +5,6 @@ template: backend-email
 
 ## Contact Form Submission
 
+- Email: {{email}}
 - Name: {{name}}
+- Message: {{message}}
