@@ -3,17 +3,12 @@ import { renderEmail } from 'react-html-email'
 import { renderToString } from 'react-dom/server'
 import Helmet from 'react-helmet'
 import { renderStylesToString } from 'emotion-server'
-import Layout from '../components/layouts/email'
-import Test from '../components/test-component'
+import Test from '../pages/email-templates/test'
 
 export async function handler(){
 
 	const bodyText = renderStylesToString(
-		renderToString(
-			<Layout title='Test Title'>
-				<Test />
-			</Layout>
-		)
+		renderToString(<Test />)
 	)
 	const helmet = Helmet.renderStatic()
 	const html = renderEmail(
