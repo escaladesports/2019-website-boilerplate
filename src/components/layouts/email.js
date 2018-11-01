@@ -70,11 +70,11 @@ export default class EmailLayout extends React.Component {
 						}
 					`}</style>
 				</Helmet>
-				<Box width="100%" height="100%" bgcolor={bgColor}>
+				<Box width='100%' height='100%' bgcolor={bgColor}>
 					<Item align={align} valign={vAlign}>
 						<Box
 							width={width}
-							align="center"
+							align='center'
 							cellPadding={cellPadding}
 							cellSpacing={cellSpacing}
 							style={style}

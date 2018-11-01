@@ -1,6 +1,7 @@
 {
 	"presets": [
 		["escalade", {
+			"modules": "auto",
 			"targets": {
 				"node": "8.10"
 			}

@@ -1,22 +1,11 @@
 import dotEnv from 'dotenv'
 import Recaptcha from 'recaptcha-verify'
-import Mailgun from 'mailgun-js'
-import fetch from 'isomorphic-fetch'
-import Handlebars from 'handlebars'
-import { siteUrl } from '../../site-config'
+import sendEmail from '../functions/send-email'
 dotEnv.config({ silent: true })
-const {
-	SITE_RECAPTCHA_SECRET,
-	MAILGUN_API_KEY,
-	MAILGUN_DOMAIN,
-} = process.env
+const { SITE_RECAPTCHA_SECRET } = process.env
 const recaptcha = new Recaptcha({
 	secret: SITE_RECAPTCHA_SECRET,
 	verbose: true,
-})
-const mailgun = Mailgun({
-	apiKey: MAILGUN_API_KEY,
-	domain: MAILGUN_DOMAIN,
 })
 
 const allowed = [
@@ -71,17 +60,13 @@ export async function handler({ body }){
 			}
 		}
 
-		// Fetch email template
-		const res = await fetch(`${siteUrl}/email-templates/contact`)
-		const template = await res.text()
-		const html = Handlebars.compile(template)(data)
-
-		// Send email
-		await sendMail({
+		// Build and send email
+		await sendEmail({
+			template: `contact`,
 			from: data.email,
 			to: sendTo,
 			subject,
-			html,
+			data,
 		})
 
 		return {
@@ -114,11 +99,3 @@ function verifyRecaptcha(token) {
 	})
 }
 
-async function sendMail(data){
-	return new Promise((resolve, reject) => {
-		mailgun.messages().send(data, (error, body) => {
-			if(error) reject(error)
-			else resolve(body)
-		})
-	})
-}
