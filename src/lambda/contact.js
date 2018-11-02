@@ -1,12 +1,8 @@
-import dotEnv from 'dotenv'
-import Recaptcha from 'recaptcha-verify'
+import React from 'react'
+import { renderToString } from 'react-dom/server'
+import EmailTemplate from '../pages/email-templates/contact'
+import verifyRecaptcha from '../functions/verify-recaptcha'
 import sendEmail from '../functions/send-email'
-dotEnv.config({ silent: true })
-const { SITE_RECAPTCHA_SECRET } = process.env
-const recaptcha = new Recaptcha({
-	secret: SITE_RECAPTCHA_SECRET,
-	verbose: true,
-})
 
 const allowed = [
 	`name`,
@@ -18,14 +14,13 @@ const required = [
 	`email`,
 	`message`,
 ]
-const sendTo = `krose@escaladesports.com`
+const to = `krose@escaladesports.com`
 const subject = `Contact Form Submission`
 
 export async function handler({ body }){
 
 	try{
 		const input = JSON.parse(body)
-		const data = {}
 
 		// Validate user input
 		for(let i = 0; i < required.length; i++){
@@ -42,6 +37,7 @@ export async function handler({ body }){
 		}
 
 		// Filter to only accepted values
+		const data = {}
 		for(let i in input){
 			if (allowed.indexOf(i) > -1) {
 				data[i] = input[i]
@@ -61,12 +57,12 @@ export async function handler({ body }){
 		}
 
 		// Build and send email
+		const html = renderToString(<EmailTemplate {...data} />)
 		await sendEmail({
-			template: `contact`,
+			html,
 			from: data.email,
-			to: sendTo,
+			to,
 			subject,
-			data,
 		})
 
 		return {
@@ -85,17 +81,3 @@ export async function handler({ body }){
 		}
 	}
 }
-
-function verifyRecaptcha(token) {
-	return new Promise((resolve, reject) => {
-		recaptcha.checkResponse(token, (err, res) => {
-			if (err) {
-				reject(err)
-			}
-			else {
-				resolve(res)
-			}
-		})
-	})
-}
-
