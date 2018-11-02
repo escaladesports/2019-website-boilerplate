@@ -19,6 +19,17 @@ const subject = `Contact Form Submission`
 
 export async function handler({ body }){
 
+	/*
+	// Change to:
+	return await sendLambdaEmail({
+		allowed: [`name`, `email`, `message`],
+		required: [`name`, `email`, `message`],
+		to: `krose@escaladesports.com`,
+		subject: `Contact Form Submission`,
+		body,
+	})
+	*/
+
 	try{
 		const input = JSON.parse(body)
 

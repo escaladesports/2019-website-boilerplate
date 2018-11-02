@@ -31,6 +31,7 @@ exports.createPages = async ({ actions, graphql }, {
 
 	nodes.forEach(({ fileAbsolutePath, frontmatter }) => {
 		const { template } = frontmatter
+		if (!template) return
 		let path = fileAbsolutePath
 			.replace(cwd, ``)
 			.replace(`/${markdownPath}/`, ``)
