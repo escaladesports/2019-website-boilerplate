@@ -74,12 +74,12 @@ module.exports = {
 		`blog`,
 		`generic-pages`,
 		`products`,
-		{
-			resolve: `email-templates`,
-			options: {
-				siteUrl,
-			},
-		},
+		// {
+		// 	resolve: `email-templates`,
+		// 	options: {
+		// 		siteUrl,
+		// 	},
+		// },
 		{
 			resolve: `gatsby-plugin-sitemap`,
 			options: {

@@ -3,7 +3,7 @@ import { renderEmail } from 'react-html-email'
 import { renderToString } from 'react-dom/server'
 import Helmet from 'react-helmet'
 import { renderStylesToString } from 'emotion-server'
-import Test from '../pages/email-templates/test'
+import Test from '../pages/email-templates/contact'
 
 export async function handler(){
 
