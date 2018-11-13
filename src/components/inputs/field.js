@@ -1,6 +1,7 @@
 import React from 'react'
 import { css, cx } from 'emotion'
 import { Field, ErrorMessage } from 'formik'
+import { primaryColor } from '../../styles/colors'
 
 export default class CustomField extends React.Component{
 	static defaultProps = {
@@ -94,15 +95,23 @@ const styles = {
 		border: 0;
 		font-size: 1em;
 		padding: 5px 3px;
-		border-bottom: 1px solid #333;
+		border-bottom: 1px solid #aaa;
 		background: transparent;
+		:hover{
+			border-bottom: 1px solid #333;
+		}
+		:focus{
+			border-bottom: 1px solid ${primaryColor};
+		}
 	`,
 	error: css`
 		color: #f44336;
 	`,
 	erroredInput: css`
 		color: #f44336;
-		border-color: #f44336;
+		&, :hover, :focus{
+			border-bottom: 1px solid #f44336;
+		}
 	`,
 	errorMsg: css`
 		margin-top: 3px;
