@@ -1,141 +1,110 @@
 import React from 'react'
-import { cx, css } from 'emotion'
-import InputMask from 'react-input-mask'
+import { css, cx } from 'emotion'
+import { Field, ErrorMessage } from 'formik'
 
-export default class Field extends React.Component {
+export default class CustomField extends React.Component{
 	static defaultProps = {
-		required: true,
+		type: `text`,
 	}
 	constructor(props){
 		super(props)
 		this.state = {
-			value: ``,
-			error: false,
+			focus: false,
 		}
-		this.changeHandler = this.changeHandler.bind(this)
-		this.blurHandler = this.blurHandler.bind(this)
+		this.onFocus = this.onFocus.bind(this)
+		this.onBlur = this.onBlur.bind(this)
 	}
-	changeHandler(e) {
-		const { value, checked } = e.target
-		if (this.props.type !== `checkbox`) {
-			this.setState({ value })
-			this.validate(value)
-		}
-		else{
-			const { parent, name } = this.props
-			this.setState({ value: checked })
-			if (parent) {
-				parent.setState({ [name]: checked })
-			}
+	onFocus(){
+		this.setState({ focus: true })
+	}
+	onBlur(e){
+		const { handleBlur } = this.props
+		this.setState({ focus: false })
+		if (handleBlur){
+			handleBlur(e)
 		}
 	}
-	blurHandler() {
-		this.validate(this.state.value, true)
-	}
-	validate(value, message) {
+	render(){
 		const {
+			errors,
+			touched,
+			type,
 			name,
-			required,
-			parent,
-			validate,
-		} = this.props
-		let error = false
-
-		if (required && !value) {
-			error = `This field is required`
-		}
-
-		// Custom validation
-		if(validate && value){
-			const customError = validate(value)
-			if (customError){
-				error = customError
-			}
-		}
-
-		this.setState({ error: message ? error : false })
-
-		if(parent){
-			if (error) {
-				parent.setState({ [name]: `` })
-			}
-			else {
-				parent.setState({ [name]: value })
-			}
-		}
-
-	}
-	render() {
-		const {
 			label,
-			type,
-			required,
-			name,
-			autoComplete,
-			mask,
-			children,
+			component,
+			values,
 		} = this.props
-		const {
-			value,
-			error,
-		} = this.state
-
-		const inputProps = {
-			name,
-			required,
-			value,
-			autoComplete,
-			type,
-			onChange: this.changeHandler,
-			onBlur: this.blurHandler,
+		const isTouched = touched[name]
+		let value = ``
+		if(values){
+			value = values[name]
 		}
-
-		let inputEl
-		if (mask) {
-			inputEl =
-				<InputMask
-					mask={mask}
-					onChange={this.changeHandler}
-					onBlur={this.blurHandler}
-					value={value}
-				>
-					{maskProps => children({
-						...inputProps,
-						...maskProps,
-					})}
-				</InputMask>
-		}
-		else{
-			inputEl = children(inputProps)
-		}
-
 		return (
-			<label className={cx(styles.label, error && styles.error)}>
-				{!!label && (
-					<span>
-						{label}
-						{!required && type !== `checkbox` && ` (optional)`}
-						{type === `checkbox` && `: `}
-					</span>
-				)}
-				{inputEl}
-				{error !== false && (
-					<span>{error}</span>
-				)}
+			<label className={cx(
+				errors[name] && isTouched && styles.error,
+				styles.inputBlock
+			)}>
+				<div className={cx(
+					styles.label,
+					(isTouched || value || this.state.focus) && styles.movedLabel
+				)}>
+					{label || name}
+				</div>
+				<Field
+					name={name}
+					type={type}
+					component={component}
+					onFocus={this.onFocus}
+					onBlur={this.onBlur}
+					className={styles.input}
+				/>
+				<ErrorMessage
+					name={name}
+					component='div'
+					className={styles.errorMsg}
+				/>
 			</label>
 		)
 	}
 }
 
 const styles = {
-	label: css`
+	inputBlock: css`
 		display: block;
-		margin-bottom: 10px;
+		margin-top: 20px;
+	`,
+	label: css`
+		position: relative;
+		z-index: -1;
+		transform: scale(1) translate(5px, 26px);
+		transform-origin: 0;
+		transition: transform .2s;
+	`,
+	movedLabel: css`
+		transform: scale(.8) translate(0, 0);
+	`,
+	input: css`
+		display: block;
+		width: 100%;
+		outline: none;
+		border: 0;
+		font-size: 1em;
+		padding: 5px 3px;
+		border-bottom: 1px solid #333;
+		background: transparent;
 	`,
 	error: css`
-		color: #f00;
+		color: #f44336;
 		input, textarea{
-			border-color: #f00 !important;
+			color: #f44336;
+			border-color: #f44336;
+		}
+	`,
+	errorMsg: css`
+		margin-top: 3px;
+		font-size: .75em;
+		:first-letter{
+			text-transform: uppercase;
 		}
 	`,
 }
