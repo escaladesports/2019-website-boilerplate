@@ -35,13 +35,14 @@ export default class CustomField extends React.Component{
 			values,
 		} = this.props
 		const isTouched = touched[name]
+		const isErrored = errors[name] && isTouched
 		let value = ``
 		if(values){
 			value = values[name]
 		}
 		return (
 			<label className={cx(
-				errors[name] && isTouched && styles.error,
+				isErrored && styles.error,
 				styles.inputBlock
 			)}>
 				<div className={cx(
@@ -56,7 +57,10 @@ export default class CustomField extends React.Component{
 					component={component}
 					onFocus={this.onFocus}
 					onBlur={this.onBlur}
-					className={styles.input}
+					className={cx(
+						styles.input,
+						isErrored && styles.erroredInput
+					)}
 				/>
 				<ErrorMessage
 					name={name}
@@ -95,10 +99,10 @@ const styles = {
 	`,
 	error: css`
 		color: #f44336;
-		input, textarea{
-			color: #f44336;
-			border-color: #f44336;
-		}
+	`,
+	erroredInput: css`
+		color: #f44336;
+		border-color: #f44336;
 	`,
 	errorMsg: css`
 		margin-top: 3px;
