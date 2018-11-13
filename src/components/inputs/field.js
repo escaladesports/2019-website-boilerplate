@@ -47,7 +47,7 @@ export default class CustomField extends React.Component{
 			)}>
 				<div className={cx(
 					styles.label,
-					(isTouched || value || this.state.focus) && styles.movedLabel
+					(value || this.state.focus) && styles.movedLabel
 				)}>
 					{label || name}
 				</div>
@@ -80,7 +80,7 @@ const styles = {
 	label: css`
 		position: relative;
 		z-index: -1;
-		transform: scale(1) translate(5px, 26px);
+		transform: scale(1) translate(0, 26px);
 		transform-origin: 0;
 		transition: transform .2s;
 	`,

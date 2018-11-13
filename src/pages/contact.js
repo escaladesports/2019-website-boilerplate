@@ -57,18 +57,18 @@ export default class ContactPage extends React.Component {
 							}
 							form={props => <>
 								<Field
-									label='Email:'
+									label='Email'
 									name='email'
 									type='email'
 									{...props}
 								/>
 								<Field
-									label='Name:'
+									label='Name'
 									name='name'
 									{...props}
 								/>
 								<Field
-									label='Message:'
+									label='Message'
 									name='message'
 									component='textarea'
 									{...props}
