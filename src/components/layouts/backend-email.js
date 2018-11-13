@@ -6,7 +6,6 @@ import EmailTemplate from '../components/layouts/email'
 export default class BackendEmail extends React.Component {
 	render() {
 		let { title, children } = this.props
-
 		return (
 			<EmailTemplate title={title}>
 				<div className={styles.wrapper}>
