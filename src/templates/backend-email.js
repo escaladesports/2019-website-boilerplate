@@ -1,18 +1,11 @@
 import React from 'react'
 import { css } from 'emotion'
-import { graphql } from 'gatsby'
 import linkMixin from '../styles/mixins/link'
 import EmailTemplate from '../components/layouts/email'
 
 export default class BackendEmail extends React.Component {
 	render() {
-		let { title, children, data } = this.props
-		if (data && data.markdownRemark){
-			title = data.markdownRemark.frontmatter.title
-			children = (
-				<div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} />
-			)
-		}
+		let { title, children } = this.props
 
 		return (
 			<EmailTemplate title={title}>
@@ -43,19 +36,3 @@ const styles = {
 		}
 	`,
 }
-
-export const query = graphql`
-	query BackendEmail(
-		$fileAbsolutePath: String
-	) {
-		markdownRemark(fileAbsolutePath: {
-			eq: $fileAbsolutePath
-		}){
-			html
-			frontmatter{
-				title
-			}
-		}
-	}
-`
-
