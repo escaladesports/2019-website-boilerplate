@@ -2,7 +2,8 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'emotion'
 import { object, string } from 'yup'
-import Field from '../components/inputs/field'
+import Field from '../components/field'
+import Button from '../components/button'
 import Layout from '../components/layouts/default'
 import Form from '../components/form'
 import Error from '../components/error-message'
@@ -75,12 +76,12 @@ export default class ContactPage extends React.Component {
 								/>
 
 								<div className={styles.inputBlock}>
-									<button
+									<Button
 										type='submit'
 										disabled={props.isSubmitting}
 									>
 										Submit
-									</button>
+									</Button>
 								</div>
 							</>}
 						/>

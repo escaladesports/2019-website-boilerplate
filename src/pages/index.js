@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import buttonStyles from '../styles/mixins/button'
+import Button from '../components/button'
 import Layout from '../components/layouts/default'
 import Modal from '../components/modal'
 import Carousel from '../components/carousel'
@@ -28,12 +28,11 @@ export default class HomePage extends React.Component {
 					<img src={`https://placehold.it/1000x400/ccc/999/&text=slide3`} />
 				</Carousel>
 				<br />
-				<button
+				<Button
 					onClick={() => this.setState({ open: true })}
-					className={buttonStyles}
 				>
 					Open Modal
-				</button>
+				</Button>
 				<Modal
 					open={this.state.open}
 					onClose={() => this.setState({ open: false })}

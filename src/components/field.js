@@ -1,7 +1,7 @@
 import React from 'react'
 import { css, cx } from 'emotion'
 import { Field, ErrorMessage } from 'formik'
-import { primaryColor } from '../../styles/colors'
+import { primaryColor } from '../styles/colors'
 
 export default class CustomField extends React.Component{
 	static defaultProps = {
@@ -45,7 +45,6 @@ export default class CustomField extends React.Component{
 		let height = `auto`
 		if(component === `textarea` && this.input && values[name] !== ``){
 			height = this.input.scrollHeight
-			console.log(height)
 		}
 		return (
 			<label className={cx(
@@ -92,7 +91,7 @@ export default class CustomField extends React.Component{
 const styles = {
 	inputBlock: css`
 		display: block;
-		margin-top: 16px;
+		margin-bottom: 16px;
 		font-size: .9em;
 	`,
 	label: css`
