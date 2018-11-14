@@ -92,7 +92,7 @@ export default class CustomField extends React.Component{
 const styles = {
 	inputBlock: css`
 		display: block;
-		margin-top: 20px;
+		margin-top: 16px;
 		font-size: .9em;
 	`,
 	label: css`
