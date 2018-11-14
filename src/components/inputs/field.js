@@ -42,6 +42,11 @@ export default class CustomField extends React.Component{
 		if(values){
 			value = values[name]
 		}
+		let height = `auto`
+		if(component === `textarea` && this.input && values[name] !== ``){
+			height = this.input.scrollHeight
+			console.log(height)
+		}
 		return (
 			<label className={cx(
 				isErrored && styles.error,
@@ -64,6 +69,9 @@ export default class CustomField extends React.Component{
 						component={component}
 						onFocus={this.onFocus}
 						onBlur={this.onBlur}
+						rows={component === `textarea` ? 1 : null}
+						innerRef={el => this.input = el}
+						style={{ height }}
 						className={cx(
 							styles.input,
 							isErrored && styles.erroredInput
@@ -99,13 +107,19 @@ const styles = {
 	`,
 	inputContainer: css`
 		position: relative;
-		:after{
+		padding-bottom: 2px;
+		:before, :after{
 			content: '';
 			position: absolute;
-			height: 2px;
 			right: 0;
 			left: 0;
 			bottom: 0;
+			height: 2px;
+		}
+		:before{
+			border-bottom: 1px solid #aaa;
+		}
+		:after{
 			border-bottom: 2px solid ${primaryColor};
 			transform: scaleX(0);
 			transition: transform .2s;
@@ -114,6 +128,7 @@ const styles = {
 	focusedInputContainer: css`
 		:after{
 			transform: scaleX(1);
+			border-color: ${primaryColor};
 		}
 	`,
 	erroredInputContainer: css`
@@ -129,15 +144,8 @@ const styles = {
 		border: 0;
 		font-size: 1em;
 		padding: 5px 3px;
-		border-bottom: 1px solid #aaa;
 		background: transparent;
-		margin-bottom: 2px;
-		:hover{
-			border-bottom: 1px solid #333;
-		}
-		:focus{
-			border-bottom: 1px solid ${primaryColor};
-		}
+		resize: none;
 	`,
 	error: css`
 		color: #f44336;
