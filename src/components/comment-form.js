@@ -1,21 +1,13 @@
 import React from 'react'
 import { css } from 'emotion'
 import { object, string } from 'yup'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
 import Gravatar from 'react-gravatar'
-import { primaryColor } from '../styles/colors'
+import Field from '../components/field'
+import Button from '../components/button'
 import Form from '../components/form'
 import Error from '../components/error-message'
 import Success from '../components/success-message'
 import Loading from '../components/loading'
-
-const theme = createMuiTheme({
-	palette: {
-		primary: { main: primaryColor },
-	},
-})
 
 const avatarSize = 100
 
@@ -50,18 +42,11 @@ export default class CommentForm extends React.Component{
 				loading={
 					<Loading />
 				}
-				form={({
-					values,
-					touched,
-					errors,
-					isSubmitting,
-					handleChange,
-					handleBlur,
-				}) => (
+				form={props => (
 					<div className={styles.formCols}>
 						<div>
 							<Gravatar
-								email={values.email}
+								email={props.values.email}
 								rating='pg'
 								default='mp'
 								size={avatarSize}
@@ -71,75 +56,34 @@ export default class CommentForm extends React.Component{
 							</div>
 						</div>
 						<div>
-							<MuiThemeProvider theme={theme}>
-								<div className={styles.inputBlock}>
-									<TextField
-										id='email'
-										label='Email'
-										fullWidth
-										value={values.email}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={errors.email && touched.email}
-									/>
-									{errors.email && touched.email && (
-										<div className={styles.errorMsg}>
-											{errors.email}
-										</div>
-									)}
-								</div>
+							<Field
+								label='Email'
+								name='email'
+								type='email'
+								{...props}
+							/>
+							<Field
+								label='Name'
+								name='name'
+								{...props}
+							/>
+							<Field
+								label='Comment'
+								name='comment'
+								component='textarea'
+								{...props}
+							/>
 
-								<div className={styles.inputBlock}>
-									<TextField
-										id='name'
-										label='Name'
-										fullWidth
-										value={values.name}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={errors.name && touched.name}
-									/>
-									{errors.name && touched.name && (
-										<div className={styles.errorMsg}>
-											{errors.name}
-										</div>
-									)}
-								</div>
+							<input type='hidden' name='slug' value={props.values.slug} />
 
-								<div className={styles.inputBlock}>
-									<TextField
-										id='comment'
-										label='Comment'
-										fullWidth
-										value={values.comment}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={errors.comment && touched.comment}
-										multiline={true}
-										rows={1}
-										rowsMax={4}
-									/>
-									{errors.comment && touched.comment && (
-										<div className={styles.errorMsg}>
-											{errors.comment}
-										</div>
-									)}
-								</div>
-
-								<input type='hidden' name='slug' value={values.slug} />
-
-								<div className={styles.inputBlock}>
-									<Button
-										type='submit'
-										variant='outlined'
-										color='primary'
-										disabled={isSubmitting}
-									>
-										Submit
-									</Button>
-								</div>
-
-							</MuiThemeProvider>
+							<div className={styles.inputBlock}>
+								<Button
+									type='submit'
+									disabled={props.isSubmitting}
+								>
+									Submit
+								</Button>
+							</div>
 						</div>
 					</div>
 				)}

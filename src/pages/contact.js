@@ -2,23 +2,13 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { css } from 'emotion'
 import { object, string } from 'yup'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import NoSSR from 'react-no-ssr'
-import { ErrorMessage } from 'formik'
-import { primaryColor } from '../styles/colors'
+import Field from '../components/field'
+import Button from '../components/button'
 import Layout from '../components/layouts/default'
 import Form from '../components/form'
 import Error from '../components/error-message'
 import Success from '../components/success-message'
 import Loading from '../components/loading'
-
-const theme = createMuiTheme({
-	palette: {
-		primary: { main: primaryColor },
-	},
-})
 
 const initialValues = {
 	email: ``,
@@ -52,98 +42,49 @@ export default class ContactPage extends React.Component {
 				<div className={styles}>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
-						<NoSSR>
-							<Form
-								action='/.netlify/functions/contact'
-								// recaptcha={false}
-								initialValues={initialValues}
-								validationSchema={validationSchema}
-								error={
-									<Error>Server error! Your message was not received.</Error>
-								}
-								success={
-									<Success>Thank you for your message! A representative will reach out to you as soon as possible.</Success>
-								}
-								loading={
-									<Loading />
-								}
-								form={({
-									values,
-									touched,
-									errors,
-									isSubmitting,
-									handleChange,
-									handleBlur,
-								}) => (
-									<MuiThemeProvider theme={theme}>
-										<div className={styles.inputBlock}>
-											<TextField
-												name='email'
-												label='Email'
-												fullWidth
-												value={values.email}
-												onChange={handleChange}
-												onBlur={handleBlur}
-												error={errors.email && touched.email}
-											/>
-											<ErrorMessage
-												name='email'
-												component='div'
-												className={styles.errorMsg}
-											/>
-										</div>
+						<Form
+							action='/.netlify/functions/contact'
+							// recaptcha={false}
+							initialValues={initialValues}
+							validationSchema={validationSchema}
+							error={
+								<Error>Server error! Your message was not received.</Error>
+							}
+							success={
+								<Success>Thank you for your message! A representative will reach out to you as soon as possible.</Success>
+							}
+							loading={
+								<Loading />
+							}
+							form={props => <>
+								<Field
+									label='Email'
+									name='email'
+									type='email'
+									{...props}
+								/>
+								<Field
+									label='Name'
+									name='name'
+									{...props}
+								/>
+								<Field
+									label='Message'
+									name='message'
+									component='textarea'
+									{...props}
+								/>
 
-										<div className={styles.inputBlock}>
-											<TextField
-												name='name'
-												label='Name'
-												fullWidth
-												value={values.name}
-												onChange={handleChange}
-												onBlur={handleBlur}
-												error={errors.name && touched.name}
-											/>
-											<ErrorMessage
-												name='name'
-												component='div'
-												className={styles.errorMsg}
-											/>
-										</div>
-
-										<div className={styles.inputBlock}>
-											<TextField
-												name='message'
-												label='Message'
-												fullWidth
-												value={values.message}
-												onChange={handleChange}
-												onBlur={handleBlur}
-												error={errors.message && touched.message}
-												multiline={true}
-												rows={1}
-												rowsMax={4}
-											/>
-											<ErrorMessage
-												name='message'
-												component='div'
-												className={styles.errorMsg}
-											/>
-										</div>
-
-										<div className={styles.inputBlock}>
-											<Button
-												type='submit'
-												variant='outlined'
-												color='primary'
-												disabled={isSubmitting}
-											>
-												Submit
-											</Button>
-										</div>
-									</MuiThemeProvider>
-								)}
-							/>
-						</NoSSR>
+								<div className={styles.inputBlock}>
+									<Button
+										type='submit'
+										disabled={props.isSubmitting}
+									>
+										Submit
+									</Button>
+								</div>
+							</>}
+						/>
 
 					</div>
 				</div>
@@ -154,7 +95,24 @@ export default class ContactPage extends React.Component {
 
 const styles = {
 	inputBlock: css`
+		display: block;
 		margin-top: 20px;
+	`,
+	input: css`
+		display: block;
+		width: 100%;
+		outline: none;
+		border: 0;
+		font-size: 1em;
+		padding: 5px 0;
+		border-bottom: 1px solid #333;
+	`,
+	error: css`
+		color: #f00;
+		input{
+			color: #f00;
+			border-color: #f00;
+		}
 	`,
 	errorMsg: css`
 		margin-top: 3px;
