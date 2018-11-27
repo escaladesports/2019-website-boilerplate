@@ -1,7 +1,5 @@
 import Recaptcha from 'recaptcha-verify'
-import dotEnv from 'dotenv'
-dotEnv.config({ silent: true })
-const { SITE_RECAPTCHA_SECRET } = process.env
+import { SITE_RECAPTCHA_SECRET } from '../../env'
 const recaptcha = new Recaptcha({
 	secret: SITE_RECAPTCHA_SECRET,
 	verbose: true,

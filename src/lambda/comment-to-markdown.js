@@ -1,13 +1,15 @@
-import dotEnv from 'dotenv'
 import Octokit from '@octokit/rest'
 import { stringify } from 'yaml'
 import md5 from 'md5'
 import Recaptcha from 'recaptcha-verify'
 import { gitHubRepo, gitHubOwner } from '../../site-config'
 const octokit = Octokit()
-dotEnv.config({ silent: true })
+import {
+	SITE_RECAPTCHA_SECRET,
+	GITHUB_API_TOKEN,
+} from '../../env'
 const recaptcha = new Recaptcha({
-	secret: process.env.SITE_RECAPTCHA_SECRET,
+	secret: SITE_RECAPTCHA_SECRET,
 	verbose: true,
 })
 
@@ -82,7 +84,7 @@ export async function handler({ body }){
 
 		octokit.authenticate({
 			type: `token`,
-			token: process.env.GITHUB_API_TOKEN,
+			token: GITHUB_API_TOKEN,
 		})
 		console.log(`Octokit authenticated...`)
 		await octokit.repos.createFile({
