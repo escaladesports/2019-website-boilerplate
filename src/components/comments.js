@@ -15,7 +15,7 @@ export default class Comments extends React.Component{
 				{hasComments && (
 					<div className={styles.commentsList}>
 						{comments.map(({
-							html,
+							comment,
 							name,
 							md5,
 							date,
@@ -38,7 +38,7 @@ export default class Comments extends React.Component{
 										>
 											{formatDateTime(date)}
 										</time>
-										<div dangerouslySetInnerHTML={{ __html: html }} />
+										<div dangerouslySetInnerHTML={{ __html: comment }} />
 									</div>
 								</div>
 							)

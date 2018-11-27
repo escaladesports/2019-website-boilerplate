@@ -1,10 +1,16 @@
-require(`dotenv`).config({ silent: true })
+
 const striptags = require(`striptags`)
 const proxy = require(`http-proxy-middleware`)
 const matter = require(`gray-matter`)
 const { readFileSync } = require(`fs-extra`)
-const { siteUrl, cloudinaryName } = require(`./site-config`)
 const globby = require(`globby`).sync
+const { siteUrl, cloudinaryName } = require(`./site-config`)
+const {
+	SALSIFY_API_KEY,
+	SALSIFY_ORG,
+	CONTENTFUL_SPACE_ID,
+	CONTENTFUL_READ_ACCESS_TOKEN,
+} = require(`./env`)
 
 // Get site info from markdown
 const { siteTitle, siteDescription } = matter(
@@ -63,8 +69,8 @@ module.exports = {
 			resolve: `source-salsify`,
 			options: {
 				ids: productIds,
-				apiKey: process.env.SALSIFY_API_KEY,
-				org: process.env.SALSIFY_ORG,
+				apiKey: SALSIFY_API_KEY,
+				org: SALSIFY_ORG,
 				cacheWebImages: false,
 				media: [
 					`webImages`,
@@ -96,6 +102,13 @@ module.exports = {
 			},
 		},
 		`gatsby-plugin-netlify`,
+		{
+			resolve: `gatsby-source-contentful`,
+			options: {
+				spaceId: CONTENTFUL_SPACE_ID,
+				accessToken: CONTENTFUL_READ_ACCESS_TOKEN,
+			},
+		},
 		{
 			resolve: `gatsby-source-filesystem`,
 			options: {

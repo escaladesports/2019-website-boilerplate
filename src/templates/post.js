@@ -39,29 +39,21 @@ export default class PostTemplate extends React.Component{
 					html,
 					excerpt,
 				},
-				comments: commentsList,
+				allContentfulComment: commentsList,
 			},
 		} = this.props
 
 		let comments = []
 		if(commentsList){
-			comments = commentsList.edges.map(({ node: {
-				html,
-				frontmatter: {
-					md5,
-					name,
-					date,
-				},
-			} }) => ({
-				html,
-				md5,
-				name,
-				date,
-			}))
+			comments = commentsList.edges.map(({ node }) => {
+				node.comment = node.comment.comment
+				return node
+			})
 		}
 
 		const next = (id === nextId) ? false : this.props.data.next
 		const previous = (id === previousId) ? false : this.props.data.previous
+		console.log(this.props.data)
 
 		return(
 			<Layout title={title} description={excerpt}>
@@ -169,6 +161,23 @@ export const query = graphql`
 						name: title
 						date
 					}
+				}
+			}
+		}
+
+		allContentfulComment(
+			filter: {
+				slug: { eq: $slug }
+			}
+		){
+			edges{
+				node{
+					comment{
+						comment
+					}
+					md5
+					name
+					date
 				}
 			}
 		}

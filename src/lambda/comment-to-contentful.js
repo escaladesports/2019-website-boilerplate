@@ -1,14 +1,17 @@
-import dotEnv from 'dotenv'
 import { createClient } from 'contentful-management'
 import md5 from 'md5'
 import Recaptcha from 'recaptcha-verify'
-dotEnv.config({ silent: true })
+import {
+	SITE_RECAPTCHA_SECRET,
+	CONTENTFUL_WRITE_ACCESS_TOKEN,
+	CONTENTFUL_SPACE_ID,
+} from '../../env'
 const recaptcha = new Recaptcha({
-	secret: process.env.SITE_RECAPTCHA_SECRET,
+	secret: SITE_RECAPTCHA_SECRET,
 	verbose: true,
 })
 const contentful = createClient({
-	accessToken: process.env.CONTENTFUL_MANAGEMENT_API_KEY,
+	accessToken: CONTENTFUL_WRITE_ACCESS_TOKEN,
 })
 
 const allowed = [
@@ -82,7 +85,7 @@ export async function handler({ body }){
 				'en-US': data[i],
 			}
 		}
-		const space = await contentful.getSpace(`s3yjqk0da4hq`)
+		const space = await contentful.getSpace(CONTENTFUL_SPACE_ID)
 		const environment = await space.getEnvironment(`master`)
 		const entry = await environment.createEntry(`comment`, {
 			fields: data,
