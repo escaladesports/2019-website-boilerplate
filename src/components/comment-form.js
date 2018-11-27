@@ -16,7 +16,7 @@ export default class CommentForm extends React.Component{
 	render(){
 		return (
 			<Form
-				action='/.netlify/functions/comment'
+				action='/.netlify/functions/comment-to-markdown'
 				initialValues={{
 					email: ``,
 					name: ``,
