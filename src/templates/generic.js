@@ -5,18 +5,25 @@ import Layout from '../components/layouts/default'
 export default class GenericTemplate extends React.Component{
 	render(){
 		const {
-			page: {
-				frontmatter: {
-					title,
+			title,
+			body: {
+				childMarkdownRemark: {
+					html,
+					excerpt,
 				},
-				html,
-				excerpt,
 			},
-		} = this.props.data
+		} = this.props.data.contentfulPage
+
+
 
 		return(
-			<Layout title={title} description={excerpt}>
-				<div dangerouslySetInnerHTML={{ __html: html }} />
+			<Layout
+				title={title}
+				description={excerpt}
+			>
+				<div dangerouslySetInnerHTML={{
+					__html: html,
+				}} />
 			</Layout>
 		)
 	}
@@ -24,13 +31,15 @@ export default class GenericTemplate extends React.Component{
 
 export const query = graphql`
 	query GenericTemplate($id: String!) {
-		page: markdownRemark(
+		contentfulPage(
 			id: { eq: $id }
 		){
-			html
-			excerpt(pruneLength: 175)
-			frontmatter{
-				title
+			title
+			body{
+				childMarkdownRemark{
+					html
+					excerpt(pruneLength: 175)
+				}
 			}
 		}
 	}
