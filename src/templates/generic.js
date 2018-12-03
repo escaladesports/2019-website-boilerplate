@@ -14,16 +14,9 @@ export default class GenericTemplate extends React.Component{
 			},
 		} = this.props.data.contentfulPage
 
-
-
 		return(
-			<Layout
-				title={title}
-				description={excerpt}
-			>
-				<div dangerouslySetInnerHTML={{
-					__html: html,
-				}} />
+			<Layout title={title} description={excerpt}>
+				<div dangerouslySetInnerHTML={{ __html: html }} />
 			</Layout>
 		)
 	}
