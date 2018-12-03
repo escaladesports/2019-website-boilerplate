@@ -11,7 +11,7 @@ module.exports = async function createProductPages(createPage, graphql){
 				node {
 					slug
 					product{
-						slug
+						productId
 					}
 				}
 			}

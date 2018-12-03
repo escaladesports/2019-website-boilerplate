@@ -9,6 +9,7 @@ export default class ProductCategoryTemplate extends React.Component{
 			data: {
 				contentfulCategory: {
 					name,
+					slug,
 					body: {
 						childMarkdownRemark: {
 							html,
@@ -31,10 +32,10 @@ export default class ProductCategoryTemplate extends React.Component{
 			<Layout title={name} description={excerpt}>
 				<h1>{name}</h1>
 				<div dangerouslySetInnerHTML={{__html: html}} />
-				{product.map(({ productId, name, slug }, index) => (
+				{product.map((product, index) => (
 					<div key={index}>
-						<Link to={`/${slug}`}>
-							<h2>{salsify[productId].itemName || name}</h2>
+						<Link to={`/${slug}/${product.slug}`}>
+							<h2>{salsify[product.productId].itemName || product.name}</h2>
 						</Link>
 					</div>
 				))}
@@ -50,6 +51,7 @@ export const query = graphql`
 			slug: { eq: $slug }
 		){
 			name
+			slug
 			body{
 				childMarkdownRemark{
 					html
@@ -57,9 +59,9 @@ export const query = graphql`
 				}
 			}
 			product{
-				productId,
-				name,
-				slug,
+				productId
+				name
+				slug
 			}
 		}
 

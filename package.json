@@ -8,7 +8,7 @@
     "url": "https://github.com/escaladesports/project-boilerplate.git"
   },
   "scripts": {
-    "build": "npm run build:gatsby",
+    "build": "npm run contentful && npm run build:gatsby",
     "build:lambda": "netlify-lambda build src/lambda --config lambda-webpack-config.js",
     "build:gatsby": "npm run build:lambda && NODE_ENV=production gatsby build",
     "build:module": "rm -rf dist && mkdir dist && babel src/export --out-dir dist",
@@ -17,7 +17,8 @@
     "clean:cache": "rm -rf .cache",
     "clean:public": "rm -rf public",
     "clean:functions": "rm -rf dist-functions",
-    "dev": "run-p dev:functions dev:gatsby",
+    "contentful": "node utils/contentful-to-json",
+    "dev": "npm run contentful && run-p dev:functions dev:gatsby",
     "dev:gatsby": "gatsby develop --https --open",
     "dev:functions": "netlify-lambda serve src/lambda --config lambda-webpack-config.js",
     "env": "node utils/env",

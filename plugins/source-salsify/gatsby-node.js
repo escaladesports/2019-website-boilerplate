@@ -5,7 +5,7 @@ const PromisePool = require(`es6-promise-pool`)
 
 const regStart = /[_a-zA-Z]/
 
-exports.sourceNodes = async ({ boundActionCreators }, options) => {
+exports.sourceNodes = async ({ actions }, options) => {
 	options = Object.assign(
 		{
 			ids: [],
@@ -30,7 +30,7 @@ exports.sourceNodes = async ({ boundActionCreators }, options) => {
 	}
 
 	const url = `https://app.salsify.com/api/v1/orgs/${options.org}/products/`
-	const { createNode } = boundActionCreators
+	const { createNode } = actions
 
 	/**
    * Fetch data from salsify
@@ -40,8 +40,8 @@ exports.sourceNodes = async ({ boundActionCreators }, options) => {
    * @param {Object} options gatsby-config options
    * @returns {Promise} Promise chain
    */
-	const salsifyFetcher = (url, id, options) =>
-		fetch(`${url}${id}`, {
+	const salsifyFetcher = (url, id, options) => {
+		return fetch(`${url}${id}`, {
 			method: `GET`,
 			headers: {
 				Authorization: `Bearer ${options.apiKey}`,
@@ -92,9 +92,10 @@ exports.sourceNodes = async ({ boundActionCreators }, options) => {
 			.then(datum => {
 				createNode(datum)
 			})
-			.catch(function(error) {
+			.catch(function (error) {
 				throw error
 			})
+	}
 
 	const generatePromises = function * () {
 		for (let i = 0; i < options.ids.length; i++) {

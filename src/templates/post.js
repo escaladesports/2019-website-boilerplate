@@ -143,27 +143,6 @@ export const query = graphql`
 			}
 		}
 
-		comments: allMarkdownRemark(
-			filter: {
-				fileAbsolutePath: { regex: "/src/markdown/comments/" },
-				frontmatter: {
-					slug: { eq: $slug },
-					published: { eq: true }
-				}
-			},
-			sort: { order: ASC, fields: [frontmatter___date] }
-		){
-			edges{
-				node{
-					html
-					frontmatter{
-						md5
-						name: title
-						date
-					}
-				}
-			}
-		}
 
 		allContentfulComment(
 			filter: {

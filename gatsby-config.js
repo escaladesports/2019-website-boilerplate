@@ -3,8 +3,8 @@ const striptags = require(`striptags`)
 const proxy = require(`http-proxy-middleware`)
 const matter = require(`gray-matter`)
 const { readFileSync } = require(`fs-extra`)
-const globby = require(`globby`).sync
 const { siteUrl, cloudinaryName } = require(`./site-config`)
+const productIds = require(`./.cache/product-ids.json`)
 const {
 	SALSIFY_API_KEY,
 	SALSIFY_ORG,
@@ -16,22 +16,6 @@ const {
 const { siteTitle, siteDescription } = matter(
 	readFileSync(`./src/markdown/settings/site.md`)
 ).data
-
-// Get product IDs from markdown
-const productMarkdown = globby(`./src/markdown/products/**/*.md`)
-const productIds = []
-productMarkdown.forEach(path => {
-	const contents = readFileSync(path)
-	const data = matter(contents).data
-	productIds.push(data.id)
-	if(Array.isArray(data.variants)){
-		data.variants.forEach(data => {
-			if(data.id){
-				productIds.push(data.id)
-			}
-		})
-	}
-})
 
 module.exports = {
 	siteMetadata: {
