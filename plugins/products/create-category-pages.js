@@ -6,24 +6,12 @@ module.exports = async function createProductPages(createPage, graphql){
 
 	// Query category markdown data
 	const result = await graphql(`{
-		allMarkdownRemark(
-			filter: {
-				fileAbsolutePath: {
-					regex: "/src/markdown/categories/"
-				}
-				frontmatter: {
-					published: { eq: true }
-				}
-			}
-		){
+		allContentfulCategory{
 			edges {
 				node {
-					fields{
-						path
-						category
-					}
-					frontmatter{
-						id
+					slug
+					product{
+						slug
 					}
 				}
 			}
@@ -35,66 +23,24 @@ module.exports = async function createProductPages(createPage, graphql){
 		process.exit(1)
 	}
 
-	const { edges } = result.data.allMarkdownRemark
 
-	for(let i = 0; i < edges.length; i++){
-		const {
-			node: {
-				fields: {
-					path,
-					category,
-				},
-				frontmatter: {
-					id: categoryId,
-				},
-			},
-		} = edges[i]
+	result.data.allContentfulCategory.edges.forEach(({
+		node: {
+			slug,
+			product,
+		},
+	}) => {
 
-		// Query product markdown data
-		const result = await graphql(`{
-			allMarkdownRemark(
-				filter: {
-					fileAbsolutePath: {
-						regex: "/src/markdown/products/"
-					}
-					frontmatter: {
-						published: { eq: true }
-						category: { eq: "${categoryId}" }
-					}
-				}
-			){
-				edges{
-					node{
-						frontmatter{
-							id
-						}
-					}
-				}
-			}
-		}`)
+		const productIds = product.map(({ productId }) => productId)
 
-		if (result.errors) {
-			console.error(result.errors)
-			process.exit(1)
-		}
-
-		const productIds = result.data.allMarkdownRemark.edges.map(({
-			node: {
-				frontmatter: {
-					id,
-				},
-			},
-		}) => id)
-
-		// Get all product IDs
 		createPage({
-			path,
+			path: `/${slug}`,
 			component,
 			context: {
-				category,
+				slug,
 				productIds: `/${productIds.join(`|`)}/`,
 			},
 		})
-	}
+	})
 
 }
