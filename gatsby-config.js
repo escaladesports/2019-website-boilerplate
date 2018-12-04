@@ -295,20 +295,16 @@ module.exports = {
 			resolve: `search`,
 			options: {
 				query: `{
-					allMarkdownRemark(
-						filter: {
-							frontmatter: {
-								published: { eq: true }
-							}
-						}
-					) {
-						edges {
-							node {
+					allContentfulProduct{
+						edges{
+							node{
 								id
-								html
-								excerpt
-								frontmatter {
-									title
+								name
+								body{
+									childMarkdownRemark{
+										html
+										excerpt
+									}
 								}
 								fields{
 									path
@@ -318,7 +314,7 @@ module.exports = {
 					}
 				}`,
 				parse: data => {
-					data = data.allMarkdownRemark.edges
+					data = data.allContentfulProduct.edges
 					data = data.filter(({ node }) => {
 						if(node && node.fields && node.fields.path){
 							return true
@@ -328,10 +324,12 @@ module.exports = {
 					return data.map(({
 						node: {
 							id,
-							html,
-							excerpt,
-							frontmatter: {
-								title,
+							name: title,
+							body: {
+								childMarkdownRemark: {
+									html,
+									excerpt,
+								},
 							},
 							fields: {
 								path,
