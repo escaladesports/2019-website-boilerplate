@@ -18,7 +18,6 @@ export default class PostTemplate extends React.Component{
 				id,
 				nextId,
 				previousId,
-				slug,
 			},
 			data: {
 				post: {
@@ -77,7 +76,7 @@ export default class PostTemplate extends React.Component{
 				</div>
 				<div className={styles.commentForm}>
 					<h3>Leave a comment:</h3>
-					<CommentForm slug={slug} />
+					<CommentForm id={id} />
 				</div>
 			</Layout>
 		)

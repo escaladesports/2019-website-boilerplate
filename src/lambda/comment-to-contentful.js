@@ -18,13 +18,13 @@ const allowed = [
 	`name`,
 	`email`,
 	`comment`,
-	`slug`,
+	`pageId`,
 ]
 const required = [
 	`name`,
 	`email`,
 	`comment`,
-	`slug`,
+	`pageId`,
 ]
 
 export async function handler({ body }){
@@ -91,7 +91,6 @@ export async function handler({ body }){
 			fields: data,
 		})
 		console.log(entry)
-
 
 		return {
 			statusCode: 200,
