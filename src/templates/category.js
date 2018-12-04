@@ -9,7 +9,6 @@ export default class ProductCategoryTemplate extends React.Component{
 			data: {
 				contentfulCategory: {
 					name,
-					slug,
 					body: {
 						childMarkdownRemark: {
 							html,
@@ -51,7 +50,6 @@ export const query = graphql`
 			slug: { eq: $slug }
 		){
 			name
-			slug
 			body{
 				childMarkdownRemark{
 					html

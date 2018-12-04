@@ -1,10 +1,8 @@
-const { resolve, parse } = require(`path`)
+const { resolve } = require(`path`)
 
-const markdownPath = resolve(`src/markdown/blog`)
 const blogTemplate = resolve(`src/templates/blog.js`)
 const tagsTemplate = resolve(`src/templates/tags.js`)
 const postTemplate = resolve(`src/templates/post.js`)
-const now = new Date()
 
 exports.createPages = async ({ actions, graphql }) => {
 	const { createPage } = actions
@@ -113,13 +111,13 @@ exports.createPages = async ({ actions, graphql }) => {
 // Create URL paths for posts
 exports.onCreateNode = ({ node, actions }) => {
 	const { createNodeField } = actions
-	const { fileAbsolutePath } = node
-	if (fileAbsolutePath && fileAbsolutePath.indexOf(markdownPath) === 0) {
-		const { path, published, date } = node.frontmatter
-		let slug = path || parse(fileAbsolutePath).name
-		if (!isNaN(slug)){
-			slug = `post-${slug}`
-		}
+	const {
+		slug,
+		internal: {
+			type,
+		},
+	} = node
+	if(type === `ContentfulPost`){
 		createNodeField({
 			node,
 			name: `slug`,
@@ -129,11 +127,6 @@ exports.onCreateNode = ({ node, actions }) => {
 			node,
 			name: `path`,
 			value: `/blog/${slug}`,
-		})
-		createNodeField({
-			node,
-			name: `published`,
-			value: (published === true && now > new Date(date)) ? true : false,
 		})
 	}
 }
