@@ -3,20 +3,12 @@ import { graphql } from 'gatsby'
 import { css } from 'emotion'
 import Link from 'gatsby-link'
 import { Helmet } from 'react-helmet'
-import { Cloudinary } from 'cloudinary-core'
 import Img from 'gatsby-image'
-import Lazy from '../components/lazy-load'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
 import CommentForm from '../components/comment-form'
 import Comments from '../components/comments'
-import { cloudinaryName } from '../../site-config'
 import formatDate from '../functions/format-date'
-
-const cl = new Cloudinary({
-	cloud_name: cloudinaryName,
-	secure: true,
-})
 
 export default class PostTemplate extends React.Component{
 	render(){
@@ -41,21 +33,12 @@ export default class PostTemplate extends React.Component{
 						},
 					},
 				},
-				allContentfulComment: commentsList,
+				allContentfulComment,
 			},
 		} = this.props
 
-		let comments = []
-		if(commentsList){
-			comments = commentsList.edges.map(({ node }) => {
-				node.comment = node.comment.comment
-				return node
-			})
-		}
-
 		const next = (id === nextId) ? false : this.props.data.next
 		const previous = (id === previousId) ? false : this.props.data.previous
-		console.log(this.props.data)
 
 		return(
 			<Layout title={title} description={excerpt}>
@@ -67,8 +50,8 @@ export default class PostTemplate extends React.Component{
 				<h1>{title}</h1>
 				<time dateTime={date}>{formatDate(date)}</time>
 				<TagList tags={tags} />
-				{!!image && (
-					<Img fluid={coverImage} alt={title} />
+				{!!coverImage && (
+					<Img fluid={coverImage.fluid} alt={title} />
 				)}
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<div>
@@ -88,7 +71,7 @@ export default class PostTemplate extends React.Component{
 					)}
 				</div>
 				<div className={styles.comments}>
-					<Comments comments={comments} />
+					<Comments comments={allContentfulComment ? allContentfulComment.edges : []} />
 				</div>
 				<div className={styles.commentForm}>
 					<h3>Leave a comment:</h3>
@@ -121,6 +104,7 @@ export const query = graphql`
 		){
 			title
 			tags{
+				name
 				slug
 			}
 			coverImage{
@@ -160,7 +144,9 @@ export const query = graphql`
 			edges{
 				node{
 					comment{
-						comment
+						childMarkdownRemark{
+							html
+						}
 					}
 					md5
 					name

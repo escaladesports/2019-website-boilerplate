@@ -15,10 +15,16 @@ export default class Comments extends React.Component{
 				{hasComments && (
 					<div className={styles.commentsList}>
 						{comments.map(({
-							comment,
-							name,
-							md5,
-							date,
+							node: {
+								comment: {
+									childMarkdownRemark: {
+										html,
+									},
+								},
+								name,
+								md5,
+								date,
+							},
 						}, index) => {
 							return (
 								<div className={styles.columns} key={`comment${index}`}>
@@ -38,7 +44,7 @@ export default class Comments extends React.Component{
 										>
 											{formatDateTime(date)}
 										</time>
-										<div dangerouslySetInnerHTML={{ __html: comment }} />
+										<div dangerouslySetInnerHTML={{ __html: html }} />
 									</div>
 								</div>
 							)

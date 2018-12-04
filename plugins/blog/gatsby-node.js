@@ -18,6 +18,9 @@ exports.createPages = async ({ actions, graphql }) => {
 					tags{
 						slug
 					}
+					fields{
+						path
+					}
 				}
 			}
 		}
@@ -44,6 +47,9 @@ exports.createPages = async ({ actions, graphql }) => {
 	posts.forEach(({
 		node: {
 			id,
+			fields: {
+				path,
+			},
 			slug,
 			tags,
 		},
@@ -53,7 +59,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
 		// Create single post page
 		createPage({
-			path: `/post/${slug}`,
+			path,
 			component: postTemplate,
 			context: {
 				id,
@@ -126,7 +132,7 @@ exports.onCreateNode = ({ node, actions }) => {
 		createNodeField({
 			node,
 			name: `path`,
-			value: `/blog/${slug}`,
+			value: `/post/${slug}`,
 		})
 	}
 }
