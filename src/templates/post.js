@@ -108,7 +108,7 @@ export const query = graphql`
 				slug
 			}
 			coverImage{
-				fluid(maxWidth: 1200){
+				fluid(maxWidth: 900, quality: 90){
 					...GatsbyContentfulFluid
 				}
 			}
