@@ -312,16 +312,26 @@ module.exports = {
 							}
 						}
 					}
+					allContentfulPost{
+						edges{
+							node{
+								id
+								title
+								body{
+									childMarkdownRemark{
+										html
+										excerpt
+									}
+								}
+								fields{
+									path
+								}
+							}
+						}
+					}
 				}`,
 				parse: data => {
-					data = data.allContentfulProduct.edges
-					data = data.filter(({ node }) => {
-						if(node && node.fields && node.fields.path){
-							return true
-						}
-						return false
-					})
-					return data.map(({
+					const products = data.allContentfulProduct.edges.map(({
 						node: {
 							id,
 							name: title,
@@ -349,6 +359,40 @@ module.exports = {
 							},
 						}
 					})
+
+					const posts = data.allContentfulPost.edges.map(({
+						node: {
+							id,
+							title,
+							body: {
+								childMarkdownRemark: {
+									html,
+									excerpt,
+								},
+							},
+							fields: {
+								path,
+							},
+						},
+					}) => {
+						return {
+							id,
+							index: {
+								body: striptags(html),
+								title,
+							},
+							store: {
+								title,
+								excerpt,
+								path,
+							},
+						}
+					})
+
+					return [
+						...products,
+						...posts,
+					]
 				},
 			},
 		},
