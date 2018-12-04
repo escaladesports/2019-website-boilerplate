@@ -10,27 +10,15 @@ exports.createPages = async ({ actions, graphql }) => {
 	const { createPage } = actions
 
 	const res = await graphql(`{
-		posts: allMarkdownRemark(
-			filter: {
-				fileAbsolutePath: { regex: "/src/markdown/blog/" }
-				frontmatter: {
-					published: { eq: true }
-				}
-			}
-			sort: { order: DESC, fields: [frontmatter___date] }
+		allContentfulPost(
+			sort: { order: DESC, fields: [date] }
 		) {
 			edges {
 				node {
 					id
-					frontmatter {
-						path
-						tags
-						date
-					}
-					fields{
-						path
+					slug
+					tags{
 						slug
-						published
 					}
 				}
 			}
@@ -52,38 +40,36 @@ exports.createPages = async ({ actions, graphql }) => {
 
 	const { postsPerPage } = res.data.config.frontmatter
 
-	const posts = res.data.posts.edges.map(edge => edge.node)
-	for(let i = posts.length; i--;){
-		if(!posts[i].fields.published){
-			posts.splice(i, 1)
-		}
-	}
-
+	const posts = res.data.allContentfulPost.edges
 	const allTags = {}
 
-	posts.forEach(({ id, frontmatter, fields }, index) => {
-		const { tags } = frontmatter
-		const { path, slug } = fields
+	posts.forEach(({
+		node: {
+			id,
+			slug,
+			tags,
+		},
+	}, index) => {
 		let previous = posts[index + 1]
 		let next = posts[index - 1]
 
 		// Create single post page
 		createPage({
-			path,
+			path: `/post/${slug}`,
 			component: postTemplate,
 			context: {
 				id,
-				previousId: previous ? previous.id : id,
-				nextId: next ? next.id : id,
+				previousId: previous ? previous.node.id : id,
+				nextId: next ? next.node.id : id,
 				slug,
 			},
 		})
 
-		tags.forEach(tag => {
-			if(!allTags[tag]){
-				allTags[tag] = 0
+		tags.forEach(({ slug }) => {
+			if(!allTags[slug]){
+				allTags[slug] = 0
 			}
-			allTags[tag]++
+			allTags[slug]++
 		})
 	})
 

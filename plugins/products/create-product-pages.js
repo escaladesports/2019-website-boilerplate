@@ -8,9 +8,8 @@ module.exports = async function createProductPages(createPage, graphql){
 			edges {
 				node {
 					productId
-					slug
-					category{
-						slug
+					fields{
+						path
 					}
 				}
 			}
@@ -26,12 +25,13 @@ module.exports = async function createProductPages(createPage, graphql){
 	result.data.allContentfulProduct.edges.forEach(({
 		node: {
 			productId,
-			slug,
-			category,
+			fields: {
+				path,
+			},
 		},
 	}) => {
 		createPage({
-			path: `/${category.slug}/${slug}`,
+			path,
 			component,
 			context: {
 				id: productId,

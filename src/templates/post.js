@@ -4,7 +4,7 @@ import { css } from 'emotion'
 import Link from 'gatsby-link'
 import { Helmet } from 'react-helmet'
 import { Cloudinary } from 'cloudinary-core'
-import Img from '../components/cloudinary-image'
+import Img from 'gatsby-image'
 import Lazy from '../components/lazy-load'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
@@ -30,14 +30,16 @@ export default class PostTemplate extends React.Component{
 			},
 			data: {
 				post: {
-					frontmatter: {
-						title,
-						tags,
-						date,
-						image,
+					title,
+					tags,
+					date,
+					coverImage,
+					body: {
+						childMarkdownRemark: {
+							html,
+							excerpt,
+						},
 					},
-					html,
-					excerpt,
 				},
 				allContentfulComment: commentsList,
 			},
@@ -57,35 +59,30 @@ export default class PostTemplate extends React.Component{
 
 		return(
 			<Layout title={title} description={excerpt}>
-				{!!image && (
+				{!!coverImage && (
 					<Helmet>
-						<meta property='og:image' content={cl.url(image, {
-							width: 900,
-							crop: `scale`,
-						})} />
+						<meta property='og:image' content={coverImage.src} />
 					</Helmet>
 				)}
 				<h1>{title}</h1>
 				<time dateTime={date}>{formatDate(date)}</time>
 				<TagList tags={tags} />
 				{!!image && (
-					<Lazy ratio={[515, 343]}>
-						<Img id={image} alt={title} />
-					</Lazy>
+					<Img fluid={coverImage} alt={title} />
 				)}
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<div>
 					{next && (
 						<div className={styles.next}>
-							<Link to={next.fields.path}>
-								Next Post: {next.frontmatter.title}
+							<Link to={`/post/${next.slug}`}>
+								Next Post: {next.title}
 							</Link>
 						</div>
 					)}
 					{previous && (
 						<div>
-							<Link to={previous.fields.path}>
-								Previous Post: {previous.frontmatter.title}
+							<Link to={`/post/${previous.slug}`}>
+								Previous Post: {previous.title}
 							</Link>
 						</div>
 					)}
@@ -119,28 +116,39 @@ const styles = {
 export const query = graphql`
 	query PostTemplate($id: String!, $previousId: String!, $nextId: String!, $slug: String!) {
 
-		post: markdownRemark(
+		post: contentfulPost(
 			id: { eq: $id }
 		){
-			html
-			excerpt(pruneLength: 175)
-			frontmatter{
-				title
-				tags
-				image
-				date
+			title
+			tags{
+				slug
+			}
+			coverImage{
+				fluid(maxWidth: 1200){
+					...GatsbyContentfulFluid
+				}
+			}
+			date
+			body{
+				childMarkdownRemark{
+					html
+					excerpt(pruneLength: 175)
+				}
 			}
 		}
 
-		previous: markdownRemark(
+		previous: contentfulPost(
 			id: { eq: $previousId }
 		){
-			frontmatter{
-				title
-			}
-			fields{
-				path
-			}
+			title
+			slug
+		}
+
+		next: contentfulPost(
+			id: { eq: $nextId }
+		){
+			title
+			slug
 		}
 
 
@@ -158,17 +166,6 @@ export const query = graphql`
 					name
 					date
 				}
-			}
-		}
-
-		next: markdownRemark(
-			id: { eq: $nextId }
-		){
-			frontmatter{
-				title
-			}
-			fields{
-				path
 			}
 		}
 	}

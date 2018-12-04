@@ -34,7 +34,7 @@ export default class ProductCategoryTemplate extends React.Component{
 				<div dangerouslySetInnerHTML={{__html: html}} />
 				{product.map((product, index) => (
 					<div key={index}>
-						<Link to={`/${slug}/${product.slug}`}>
+						<Link to={product.fields.path}>
 							<h2>{salsify[product.productId].itemName || product.name}</h2>
 						</Link>
 					</div>
@@ -61,7 +61,9 @@ export const query = graphql`
 			product{
 				productId
 				name
-				slug
+				fields{
+					path
+				}
 			}
 		}
 

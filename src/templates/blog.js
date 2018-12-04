@@ -32,6 +32,16 @@ export default class BlogPage extends React.Component {
 
 export const query = graphql`
 	query BlogPage($skip: Int!, $limit: Int!) {
+
+		allContentfulPost{
+			title
+			tags{
+				slug
+			}
+			date
+			slug
+		}
+
 		allMarkdownRemark(
 			filter: {
 				fileAbsolutePath: {
