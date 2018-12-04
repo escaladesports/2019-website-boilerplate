@@ -26,11 +26,12 @@ export default class Comments extends React.Component{
 								date,
 							},
 						}, index) => {
+							console.log(md5)
 							return (
 								<div className={styles.columns} key={`comment${index}`}>
 									<div>
 										<Gravatar
-											md5={md5}
+											md5={md5 || ` `}
 											rating='pg'
 											default='mp'
 											size={avatarSize}

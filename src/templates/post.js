@@ -33,7 +33,9 @@ export default class PostTemplate extends React.Component{
 						},
 					},
 				},
-				allContentfulComment,
+				allContentfulComment: {
+					edges: comments,
+				},
 			},
 		} = this.props
 
@@ -71,7 +73,7 @@ export default class PostTemplate extends React.Component{
 					)}
 				</div>
 				<div className={styles.comments}>
-					<Comments comments={allContentfulComment ? allContentfulComment.edges : []} />
+					<Comments comments={comments || []} />
 				</div>
 				<div className={styles.commentForm}>
 					<h3>Leave a comment:</h3>
@@ -97,7 +99,7 @@ const styles = {
 }
 
 export const query = graphql`
-	query PostTemplate($id: String!, $previousId: String!, $nextId: String!, $slug: String!) {
+	query PostTemplate($id: String!, $previousId: String!, $nextId: String!) {
 
 		post: contentfulPost(
 			id: { eq: $id }
@@ -135,11 +137,13 @@ export const query = graphql`
 			slug
 		}
 
-
 		allContentfulComment(
 			filter: {
-				slug: { eq: $slug }
+				page: {
+					id: { eq: $id }
+				}
 			}
+			sort: { order: DESC, fields: [date] }
 		){
 			edges{
 				node{
@@ -154,5 +158,6 @@ export const query = graphql`
 				}
 			}
 		}
+
 	}
 `
