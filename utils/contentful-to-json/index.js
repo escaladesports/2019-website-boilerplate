@@ -8,11 +8,19 @@ const client = contentful.createClient({
 })
 
 async function go(){
-	const res = await client.getEntries({
-		'content_type': `product`,
-	})
-	const productIds = res.items.map(item => item.fields.productId)
-	await outputJson(`.cache/product-ids.json`, productIds)
+	console.log(`Getting Contentful product IDs`)
+	try {
+		const res = await client.getEntries({
+			'content_type': `product`,
+		})
+		const productIds = res.items.map(item => item.fields.productId)
+		await outputJson(`.cache/product-ids.json`, productIds)
+	}
+	catch(err){
+		console.error(err)
+		process.exit(1)
+	}
+	console.log(`Output Contentful product IDs`)
 }
 
 go()
