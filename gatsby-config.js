@@ -230,28 +230,21 @@ module.exports = {
 				feeds: [
 					{
 						query: `{
-							allMarkdownRemark(
+							allContentfulPost(
 								limit: 1000,
-								sort: { order: DESC, fields: [frontmatter___date]},
-								filter: {
-									fileAbsolutePath: {
-										regex: "/src/markdown/blog/"
-									}
-									frontmatter: {
-										published: { eq: true }
-									}
-								}
+								sort: { order: DESC, fields: [date]}
 							){
 								edges{
 									node{
-										excerpt
-										html
+										title
+										date
+										body{
+											childMarkdownRemark{
+												html
+											}
+										}
 										fields{
 											path
-										}
-										frontmatter{
-											title
-											date
 										}
 									}
 								}
@@ -264,22 +257,28 @@ module.exports = {
 										siteUrl,
 									},
 								},
-								allMarkdownRemark: {
+								allContentfulPost: {
 									edges,
 								},
 							},
 						}) => {
 							return edges.map(({
 								node: {
-									html,
-									frontmatter,
+									body: {
+										childMarkdownRemark: {
+											html,
+										},
+									},
+									title,
+									date,
 									fields: {
 										path,
 									},
 								},
 							}) => {
 								return {
-									...frontmatter,
+									title,
+									date,
 									url: `${siteUrl}${path}`,
 									guid: `${siteUrl}${path}`,
 									custom_elements: [{ 'content:encoded': html }],

@@ -32,12 +32,11 @@ export default class PostTemplate extends React.Component{
 						},
 					},
 				},
-				allContentfulComment: {
-					edges: comments,
-				},
+				allContentfulComment,
 			},
 		} = this.props
 
+		const comments = allContentfulComment ? allContentfulComment.edges : []
 		const next = (id === nextId) ? false : this.props.data.next
 		const previous = (id === previousId) ? false : this.props.data.previous
 
