@@ -76,15 +76,21 @@ export async function handler({ body }){
 		const now = new Date()
 		data.date = now.toISOString()
 		data.md5 = md5(data.email)
-
-
-
-		// Add to Contentful
+		data.page = {
+			sys: {
+				type: `Link`,
+				linkType: `Entry`,
+				id: data.pageId,
+			},
+		}
+		delete data.pageId
 		for (let i in data) {
 			data[i] = {
 				'en-US': data[i],
 			}
 		}
+
+		// Add to Contentful
 		const space = await contentful.getSpace(CONTENTFUL_SPACE_ID)
 		const environment = await space.getEnvironment(`master`)
 		const entry = await environment.createEntry(`comment`, {

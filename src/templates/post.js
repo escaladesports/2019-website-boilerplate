@@ -22,6 +22,7 @@ export default class PostTemplate extends React.Component{
 			data: {
 				post: {
 					title,
+					contentful_id,
 					tags,
 					date,
 					coverImage,
@@ -75,7 +76,7 @@ export default class PostTemplate extends React.Component{
 				</div>
 				<div className={styles.commentForm}>
 					<h3>Leave a comment:</h3>
-					<CommentForm id={id} />
+					<CommentForm id={contentful_id} />
 				</div>
 			</Layout>
 		)
@@ -102,6 +103,7 @@ export const query = graphql`
 		post: contentfulPost(
 			id: { eq: $id }
 		){
+			contentful_id
 			title
 			tags{
 				name

@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from 'emotion'
 import Gravatar from 'react-gravatar'
+import NoSSR from 'react-no-ssr'
 import formatDateTime from '../functions/format-date-time'
 
 const avatarSize = 75
@@ -43,7 +44,9 @@ export default class Comments extends React.Component{
 											dateTime={date}
 											className={styles.time}
 										>
-											{formatDateTime(date)}
+											<NoSSR>
+												{formatDateTime(date)}
+											</NoSSR>
 										</time>
 										<div dangerouslySetInnerHTML={{ __html: html }} />
 									</div>
