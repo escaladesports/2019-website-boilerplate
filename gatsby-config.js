@@ -1,21 +1,15 @@
 
 const striptags = require(`striptags`)
 const proxy = require(`http-proxy-middleware`)
-const matter = require(`gray-matter`)
-const { readFileSync } = require(`fs-extra`)
 const { siteUrl, cloudinaryName } = require(`./site-config`)
-const productIds = require(`./.cache/product-ids.json`)
+const productIds = require(`./.cache/contentful-product-ids.json`)
+const { siteTitle, siteDescription } = require(`./.cache/contentful-site-settings.json`)
 const {
 	SALSIFY_API_KEY,
 	SALSIFY_ORG,
 	CONTENTFUL_SPACE_ID,
 	CONTENTFUL_READ_ACCESS_TOKEN,
 } = require(`./env`)
-
-// Get site info from markdown
-const { siteTitle, siteDescription } = matter(
-	readFileSync(`./src/markdown/settings/site.md`)
-).data
 
 module.exports = {
 	siteMetadata: {
