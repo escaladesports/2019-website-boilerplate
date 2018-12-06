@@ -1,6 +1,6 @@
 const { resolve } = require(`path`)
 
-const postTemplate = resolve(`src/templates/generic.js`)
+const pageTemplate = resolve(`src/templates/generic.js`)
 
 exports.createPages = async ({ actions, graphql }) => {
 	const { createPage } = actions
@@ -30,7 +30,7 @@ exports.createPages = async ({ actions, graphql }) => {
 
 		createPage({
 			path: slug,
-			component: postTemplate,
+			component: pageTemplate,
 			context: {
 				id,
 			},
