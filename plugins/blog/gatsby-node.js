@@ -25,12 +25,8 @@ exports.createPages = async ({ actions, graphql }) => {
 			}
 		}
 
-		config: markdownRemark(
-			fileAbsolutePath: { regex: "/src/markdown/settings/site.md/" }
-		){
-			frontmatter{
-				postsPerPage
-			}
+		contentfulSettings{
+			postsPerPage
 		}
 	}`)
 
@@ -39,7 +35,7 @@ exports.createPages = async ({ actions, graphql }) => {
 		process.exit(1)
 	}
 
-	const { postsPerPage } = res.data.config.frontmatter
+	const { postsPerPage } = res.data.contentfulSettings
 
 	const posts = res.data.allContentfulPost.edges
 	const allTags = {}

@@ -12,7 +12,7 @@ const client = contentful.createClient({
 async function siteSettings(){
 	console.log(`Getting Contentful site settings...`)
 	const res = await client.getEntries({
-		content_type: `siteSettings`,
+		content_type: `settings`,
 	})
 	const settings = res.items[0].fields
 	await outputJson(`.cache/contentful-site-settings.json`, settings)
