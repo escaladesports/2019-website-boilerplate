@@ -1,7 +1,7 @@
 
 const striptags = require(`striptags`)
 const proxy = require(`http-proxy-middleware`)
-const { siteUrl, cloudinaryName } = require(`./site-config`)
+const { siteUrl } = require(`./site-config`)
 const productIds = require(`./.cache/contentful-product-ids.json`)
 const { siteTitle, siteDescription } = require(`./.cache/contentful-site-settings.json`)
 const {
@@ -87,29 +87,9 @@ module.exports = {
 			},
 		},
 		{
-			resolve: `gatsby-source-filesystem`,
-			options: {
-				path: `${__dirname}/src/markdown`,
-				name: `pages`,
-			},
-		},
-		{
-			resolve: `gatsby-source-filesystem`,
-			options: {
-				path: `${__dirname}/static/uploads`,
-				name: `uploads`,
-			},
-		},
-		{
 			resolve: `gatsby-transformer-remark`,
 			options: {
 				plugins: [
-					{
-						resolve: `cloudinary-remark-transforms`,
-						options: {
-							cloudName: cloudinaryName,
-						},
-					},
 					`gatsby-remark-copy-linked-files`,
 					`gatsby-remark-smartypants`,
 					{
