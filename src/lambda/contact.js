@@ -1,5 +1,8 @@
 import React from 'react'
+import { join } from 'path'
 import { renderToString } from 'react-dom/server'
+import posthtml from 'posthtml'
+import { siteUrl } from '../../site-config'
 import EmailTemplate from '../pages/email-templates/contact'
 import verifyRecaptcha from '../functions/verify-recaptcha'
 import sendEmail from '../functions/send-email'
@@ -19,17 +22,6 @@ const subject = `Contact Form Submission`
 
 export async function handler({ body }){
 
-	/*
-	// Change to:
-	return await sendLambdaEmail({
-		allowed: [`name`, `email`, `message`],
-		required: [`name`, `email`, `message`],
-		to: `krose@escaladesports.com`,
-		subject: `Contact Form Submission`,
-		body,
-	})
-	*/
-
 	try{
 		const input = JSON.parse(body)
 
@@ -38,7 +30,7 @@ export async function handler({ body }){
 			const name = required[i]
 			if (!(name in input)) {
 				return {
-					statusCode: 200,
+					statusCode: 400,
 					body: JSON.stringify({
 						success: false,
 						message: `Missing required fields. Form could not be submit.`,
@@ -59,7 +51,7 @@ export async function handler({ body }){
 		const recaptchaResponse = await verifyRecaptcha(input.recaptcha)
 		if (!recaptchaResponse.success) {
 			return {
-				statusCode: 200,
+				statusCode: 400,
 				body: JSON.stringify({
 					success: false,
 					message: `reCAPTCHA error. Form could not be submit.`,
@@ -68,12 +60,18 @@ export async function handler({ body }){
 		}
 
 		// Build and send email
-		const html = renderToString(<EmailTemplate {...data} />)
+		const res = await posthtml()
+			.use(absoluteImages())
+			.process(renderToString(<EmailTemplate {...data} />))
+
+		const { html } = res
+		console.log(html)
+
 		await sendEmail({
-			html,
 			from: data.email,
 			to,
 			subject,
+			html,
 		})
 
 		return {
@@ -84,11 +82,34 @@ export async function handler({ body }){
 	catch(err){
 		console.error(err)
 		return {
-			statusCode: 200,
+			statusCode: 400,
 			body: JSON.stringify({
 				success: false,
 				message: `Server error. Form could not be submit.`,
 			}),
 		}
+	}
+}
+
+function absoluteImages() {
+	return function (tree) {
+		tree.walk(node => {
+			if (typeof node === `object`) {
+				if (!node.attrs) {
+					node.attrs = {}
+				}
+				let { src } = node.attrs
+				if (node.tag === `img`) {
+					if (siteUrl && src.indexOf(`://`) === -1) {
+						let srcUrl = siteUrl.split(`://`)
+						src = join(srcUrl[1], src)
+						src = `${srcUrl[0]}://${src}`
+						node.attrs.src = src
+					}
+				}
+			}
+			return node
+		})
+		return tree
 	}
 }

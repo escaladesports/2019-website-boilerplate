@@ -21,10 +21,11 @@ export default class CustomForm extends React.Component {
 
 		try {
 			if (action) {
-				await fetch(action, {
+				const res = await fetch(action, {
 					method: `post`,
 					body: JSON.stringify(values),
 				})
+				console.log(res)
 			}
 			else if (onSubmit) {
 				await onSubmit(values)
