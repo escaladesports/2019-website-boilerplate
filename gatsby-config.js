@@ -28,7 +28,6 @@ module.exports = {
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
-		//`gatsby-plugin-netlify-cms-paths`,
 		{
 			resolve: `escalade-stock`,
 			options: {
@@ -105,7 +104,6 @@ module.exports = {
 			resolve: `gatsby-transformer-remark`,
 			options: {
 				plugins: [
-					//`gatsby-plugin-netlify-cms-paths`,
 					{
 						resolve: `cloudinary-remark-transforms`,
 						options: {
@@ -133,15 +131,6 @@ module.exports = {
 				],
 			},
 		},
-		{
-			resolve: `gatsby-plugin-netlify-cms`,
-			options: {
-				modulePath: `${__dirname}/src/components/cms/index.js`,
-				enableIdentityWidget: false,
-				manualInit: true,
-			},
-		},
-		`cms-no-index`,
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
