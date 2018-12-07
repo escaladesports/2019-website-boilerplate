@@ -17,5 +17,6 @@ const styles = {
 		border: 1px solid ${successColor};
 		background-color: ${lightSuccessColor};
 		padding: 10px 15px;
+		margin-bottom: 30px;
 	`,
 }

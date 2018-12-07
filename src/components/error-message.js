@@ -17,5 +17,6 @@ const styles = {
 		border: 1px solid ${errorColor};
 		background-color: ${lightErrorColor};
 		padding: 10px 15px;
+		margin-bottom: 30px;
 	`,
 }
