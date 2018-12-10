@@ -1,7 +1,7 @@
 
 const striptags = require(`striptags`)
 const proxy = require(`http-proxy-middleware`)
-const { siteUrl } = require(`./site-config`)
+const { siteUrl, siteId } = require(`./site-config`)
 const productIds = require(`./.cache/contentful-product-ids.json`)
 const { siteTitle, siteDescription } = require(`./.cache/contentful-site-settings.json`)
 const {
@@ -32,14 +32,14 @@ module.exports = {
 			resolve: `escalade-stock`,
 			options: {
 				ids: productIds,
-				siteId: `onix`,
+				siteId,
 			},
 		},
 		{
 			resolve: `escalade-pricing`,
 			options: {
 				ids: productIds,
-				siteId: `onix`,
+				siteId,
 			},
 		},
 		{
