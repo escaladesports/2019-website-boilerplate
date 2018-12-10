@@ -37,7 +37,7 @@ async function emailTemplates(){
 	})
 	await Promise.all(res.items.map(({ fields }) => {
 		fields.body = (new Converter()).makeHtml(fields.body)
-		return outputJson(`.cache/contentful-${fields.slug}-email.json`, fields)
+		return outputJson(`node_modules/.cache/contentful-${fields.slug}-email.json`, fields)
 	}))
 	console.log(`Output Contentful email templates`)
 }
