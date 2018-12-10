@@ -14,8 +14,12 @@ export default class HomePage extends React.Component {
 	}
 	render() {
 		const {
-			page: {
-				html,
+			contentfulPage: {
+				body: {
+					childMarkdownRemark: {
+						html,
+					},
+				},
 			},
 		} = this.props.data
 
@@ -46,10 +50,12 @@ export default class HomePage extends React.Component {
 
 export const query = graphql`
 	query HomePage {
-		page: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/index.md/"
-		}){
-			html
+		contentfulPage(slug: { eq: "index" }){
+			body{
+				childMarkdownRemark{
+					html
+				}
+			}
 		}
 	}
 `

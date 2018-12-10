@@ -16,12 +16,12 @@ export default class CommentForm extends React.Component{
 	render(){
 		return (
 			<Form
-				action='/.netlify/functions/comment-to-markdown'
+				action='/.netlify/functions/comment-to-contentful'
 				initialValues={{
 					email: ``,
 					name: ``,
 					comment: ``,
-					slug: this.props.slug,
+					pageId: this.props.id,
 				}}
 				validationSchema={object().shape({
 					email: string()
@@ -74,7 +74,7 @@ export default class CommentForm extends React.Component{
 								{...props}
 							/>
 
-							<input type='hidden' name='slug' value={props.values.slug} />
+							<input type='hidden' name='pageId' value={props.values.pageId} />
 
 							<div className={styles.inputBlock}>
 								<Button

@@ -5,6 +5,10 @@ exports.createPages = async ({ graphql }, { query, parse }) => {
 
 	// Query data to be indexed
 	const res = await graphql(query)
+	if(res.errors){
+		console.error(res.errors)
+		process.exit(1)
+	}
 
 	const data = parse(res.data)
 

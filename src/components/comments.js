@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from 'emotion'
 import Gravatar from 'react-gravatar'
+import NoSSR from 'react-no-ssr'
 import formatDateTime from '../functions/format-date-time'
 
 const avatarSize = 75
@@ -15,16 +16,23 @@ export default class Comments extends React.Component{
 				{hasComments && (
 					<div className={styles.commentsList}>
 						{comments.map(({
-							html,
-							name,
-							md5,
-							date,
+							node: {
+								comment: {
+									childMarkdownRemark: {
+										html,
+									},
+								},
+								name,
+								md5,
+								date,
+							},
 						}, index) => {
+							console.log(md5)
 							return (
 								<div className={styles.columns} key={`comment${index}`}>
 									<div>
 										<Gravatar
-											md5={md5}
+											md5={md5 || ` `}
 											rating='pg'
 											default='mp'
 											size={avatarSize}
@@ -36,7 +44,9 @@ export default class Comments extends React.Component{
 											dateTime={date}
 											className={styles.time}
 										>
-											{formatDateTime(date)}
+											<NoSSR>
+												{formatDateTime(date)}
+											</NoSSR>
 										</time>
 										<div dangerouslySetInnerHTML={{ __html: html }} />
 									</div>

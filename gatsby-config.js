@@ -1,31 +1,15 @@
-require(`dotenv`).config({ silent: true })
+
 const striptags = require(`striptags`)
 const proxy = require(`http-proxy-middleware`)
-const matter = require(`gray-matter`)
-const { readFileSync } = require(`fs-extra`)
-const { siteUrl, cloudinaryName } = require(`./site-config`)
-const globby = require(`globby`).sync
-
-// Get site info from markdown
-const { siteTitle, siteDescription } = matter(
-	readFileSync(`./src/markdown/settings/site.md`)
-).data
-
-// Get product IDs from markdown
-const productMarkdown = globby(`./src/markdown/products/**/*.md`)
-const productIds = []
-productMarkdown.forEach(path => {
-	const contents = readFileSync(path)
-	const data = matter(contents).data
-	productIds.push(data.id)
-	if(Array.isArray(data.variants)){
-		data.variants.forEach(data => {
-			if(data.id){
-				productIds.push(data.id)
-			}
-		})
-	}
-})
+const { siteUrl } = require(`./site-config`)
+const productIds = require(`./.cache/contentful-product-ids.json`)
+const { siteTitle, siteDescription } = require(`./.cache/contentful-site-settings.json`)
+const {
+	SALSIFY_API_KEY,
+	SALSIFY_ORG,
+	CONTENTFUL_SPACE_ID,
+	CONTENTFUL_READ_ACCESS_TOKEN,
+} = require(`./env`)
 
 module.exports = {
 	siteMetadata: {
@@ -44,7 +28,6 @@ module.exports = {
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
-		//`gatsby-plugin-netlify-cms-paths`,
 		{
 			resolve: `escalade-stock`,
 			options: {
@@ -63,8 +46,8 @@ module.exports = {
 			resolve: `source-salsify`,
 			options: {
 				ids: productIds,
-				apiKey: process.env.SALSIFY_API_KEY,
-				org: process.env.SALSIFY_ORG,
+				apiKey: SALSIFY_API_KEY,
+				org: SALSIFY_ORG,
 				cacheWebImages: false,
 				media: [
 					`webImages`,
@@ -97,30 +80,16 @@ module.exports = {
 		},
 		`gatsby-plugin-netlify`,
 		{
-			resolve: `gatsby-source-filesystem`,
+			resolve: `gatsby-source-contentful`,
 			options: {
-				path: `${__dirname}/src/markdown`,
-				name: `pages`,
-			},
-		},
-		{
-			resolve: `gatsby-source-filesystem`,
-			options: {
-				path: `${__dirname}/static/uploads`,
-				name: `uploads`,
+				spaceId: CONTENTFUL_SPACE_ID,
+				accessToken: CONTENTFUL_READ_ACCESS_TOKEN,
 			},
 		},
 		{
 			resolve: `gatsby-transformer-remark`,
 			options: {
 				plugins: [
-					//`gatsby-plugin-netlify-cms-paths`,
-					{
-						resolve: `cloudinary-remark-transforms`,
-						options: {
-							cloudName: cloudinaryName,
-						},
-					},
 					`gatsby-remark-copy-linked-files`,
 					`gatsby-remark-smartypants`,
 					{
@@ -142,15 +111,6 @@ module.exports = {
 				],
 			},
 		},
-		{
-			resolve: `gatsby-plugin-netlify-cms`,
-			options: {
-				modulePath: `${__dirname}/src/components/cms/index.js`,
-				enableIdentityWidget: false,
-				manualInit: true,
-			},
-		},
-		`cms-no-index`,
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
@@ -233,28 +193,21 @@ module.exports = {
 				feeds: [
 					{
 						query: `{
-							allMarkdownRemark(
+							allContentfulPost(
 								limit: 1000,
-								sort: { order: DESC, fields: [frontmatter___date]},
-								filter: {
-									fileAbsolutePath: {
-										regex: "/src/markdown/blog/"
-									}
-									frontmatter: {
-										published: { eq: true }
-									}
-								}
+								sort: { order: DESC, fields: [date]}
 							){
 								edges{
 									node{
-										excerpt
-										html
+										title
+										date
+										body{
+											childMarkdownRemark{
+												html
+											}
+										}
 										fields{
 											path
-										}
-										frontmatter{
-											title
-											date
 										}
 									}
 								}
@@ -267,22 +220,28 @@ module.exports = {
 										siteUrl,
 									},
 								},
-								allMarkdownRemark: {
+								allContentfulPost: {
 									edges,
 								},
 							},
 						}) => {
 							return edges.map(({
 								node: {
-									html,
-									frontmatter,
+									body: {
+										childMarkdownRemark: {
+											html,
+										},
+									},
+									title,
+									date,
 									fields: {
 										path,
 									},
 								},
 							}) => {
 								return {
-									...frontmatter,
+									title,
+									date,
 									url: `${siteUrl}${path}`,
 									guid: `${siteUrl}${path}`,
 									custom_elements: [{ 'content:encoded': html }],
@@ -298,20 +257,33 @@ module.exports = {
 			resolve: `search`,
 			options: {
 				query: `{
-					allMarkdownRemark(
-						filter: {
-							frontmatter: {
-								published: { eq: true }
+					allContentfulProduct{
+						edges{
+							node{
+								id
+								name
+								body{
+									childMarkdownRemark{
+										html
+										excerpt
+									}
+								}
+								fields{
+									path
+								}
 							}
 						}
-					) {
-						edges {
-							node {
+					}
+					allContentfulPost{
+						edges{
+							node{
 								id
-								html
-								excerpt
-								frontmatter {
-									title
+								title
+								body{
+									childMarkdownRemark{
+										html
+										excerpt
+									}
 								}
 								fields{
 									path
@@ -321,20 +293,15 @@ module.exports = {
 					}
 				}`,
 				parse: data => {
-					data = data.allMarkdownRemark.edges
-					data = data.filter(({ node }) => {
-						if(node && node.fields && node.fields.path){
-							return true
-						}
-						return false
-					})
-					return data.map(({
+					const products = data.allContentfulProduct.edges.map(({
 						node: {
 							id,
-							html,
-							excerpt,
-							frontmatter: {
-								title,
+							name: title,
+							body: {
+								childMarkdownRemark: {
+									html,
+									excerpt,
+								},
 							},
 							fields: {
 								path,
@@ -354,6 +321,40 @@ module.exports = {
 							},
 						}
 					})
+
+					const posts = data.allContentfulPost.edges.map(({
+						node: {
+							id,
+							title,
+							body: {
+								childMarkdownRemark: {
+									html,
+									excerpt,
+								},
+							},
+							fields: {
+								path,
+							},
+						},
+					}) => {
+						return {
+							id,
+							index: {
+								body: striptags(html),
+								title,
+							},
+							store: {
+								title,
+								excerpt,
+								path,
+							},
+						}
+					})
+
+					return [
+						...products,
+						...posts,
+					]
 				},
 			},
 		},

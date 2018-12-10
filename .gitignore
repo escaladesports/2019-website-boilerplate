@@ -19,7 +19,6 @@ json
 public
 .cache
 envdotjs-key
-env.js
 env.key
 env.js.key
 .env.js

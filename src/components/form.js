@@ -21,23 +21,38 @@ export default class CustomForm extends React.Component {
 
 		try {
 			if (action) {
-				await fetch(action, {
+				const res = await fetch(action, {
 					method: `post`,
 					body: JSON.stringify(values),
 				})
+				if(res.status === 200){
+					this.setState({ success: true })
+					resetForm()
+				}
+				else {
+					this.setState({
+						success: false,
+						error: true,
+					})
+				}
 			}
 			else if (onSubmit) {
 				await onSubmit(values)
+				this.setState({ success: true })
+				resetForm()
 			}
 			else{
 				console.log(`Form data not submitting anywhere:`, values)
+				this.setState({ success: true })
+				resetForm()
 			}
-			this.setState({ success: true })
-			resetForm()
 		}
 		catch (err) {
 			console.error(err)
-			this.setState({ success: false })
+			this.setState({
+				success: false,
+				error: true,
+			})
 		}
 
 		setSubmitting(false)

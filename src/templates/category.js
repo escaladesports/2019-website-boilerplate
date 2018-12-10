@@ -7,34 +7,19 @@ export default class ProductCategoryTemplate extends React.Component{
 	render(){
 		const {
 			data: {
-				productMarkdown,
-				categoryMarkdown: {
-					frontmatter: {
-						title,
+				contentfulCategory: {
+					name,
+					body: {
+						childMarkdownRemark: {
+							html,
+							excerpt,
+						},
 					},
-					html,
-					excerpt,
+					product,
 				},
 				allSalsifyContent,
 			},
 		} = this.props
-
-		// Collect markdown data
-		const products = productMarkdown.edges.map(({
-			node: {
-				frontmatter: {
-					id,
-					title,
-				},
-				fields: {
-					path,
-				},
-			},
-		}) => ({
-			id,
-			title,
-			path,
-		}))
 
 		// Collect Salsify data by ID
 		const salsify = {}
@@ -43,13 +28,13 @@ export default class ProductCategoryTemplate extends React.Component{
 		})
 
 		return(
-			<Layout title={title} description={excerpt}>
-				<h1>{title}</h1>
+			<Layout title={name} description={excerpt}>
+				<h1>{name}</h1>
 				<div dangerouslySetInnerHTML={{__html: html}} />
-				{products.map(({ id, title, path }, index) => (
-					<div key={`product${index}`}>
-						<Link to={path}>
-							<h2>{salsify[id].itemName || title}</h2>
+				{product.map((product, index) => (
+					<div key={index}>
+						<Link to={product.fields.path}>
+							<h2>{salsify[product.productId].itemName || product.name}</h2>
 						</Link>
 					</div>
 				))}
@@ -59,26 +44,23 @@ export default class ProductCategoryTemplate extends React.Component{
 }
 
 export const query = graphql`
-	query ProductCategoryTemplate($category: String!, $productIds: String) {
-		productMarkdown: allMarkdownRemark(
-			filter: {
-				frontmatter: {
-					category: { eq: $category }
-					published: { eq: true }
+	query ProductCategoryTemplate($slug: String!, $productIds: String) {
+
+		contentfulCategory(
+			slug: { eq: $slug }
+		){
+			name
+			body{
+				childMarkdownRemark{
+					html
+					excerpt(pruneLength: 175)
 				}
 			}
-			sort: { order: DESC, fields: [frontmatter___order] }
-		){
-			edges{
-				node{
-					frontmatter{
-						id
-						title
-						date,
-					}
-					fields{
-						path
-					}
+			product{
+				productId
+				name
+				fields{
+					path
 				}
 			}
 		}
@@ -94,18 +76,6 @@ export const query = graphql`
 					itemNumber
 				}
 			}
-		}
-
-		categoryMarkdown: markdownRemark(
-			frontmatter: {
-				id: { eq: $category }
-			}
-		){
-			frontmatter{
-				title
-			}
-			html
-			excerpt(pruneLength: 175)
 		}
 	}
 `

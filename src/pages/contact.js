@@ -28,12 +28,14 @@ const validationSchema = object().shape({
 export default class ContactPage extends React.Component {
 	render(){
 		const {
-			page: {
-				frontmatter: {
-					title,
+			contentfulPage: {
+				title,
+				body: {
+					childMarkdownRemark: {
+						html,
+						excerpt,
+					},
 				},
-				html,
-				excerpt,
 			},
 		} = this.props.data
 
@@ -126,13 +128,13 @@ const styles = {
 
 export const query = graphql`
 	query ContactTemplate {
-		page: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/contact.md/"
-		}){
-			html
-			excerpt(pruneLength: 175)
-			frontmatter{
-				title
+		contentfulPage(slug: { eq: "contact" }){
+			title
+			body{
+				childMarkdownRemark{
+					html
+					excerpt(pruneLength: 175)
+				}
 			}
 		}
 	}

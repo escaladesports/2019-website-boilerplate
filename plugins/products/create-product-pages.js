@@ -4,22 +4,10 @@ const component = resolve(`src/templates/product.js`)
 
 module.exports = async function createProductPages(createPage, graphql){
 	const result = await graphql(`{
-		allMarkdownRemark(
-			filter: {
-				fileAbsolutePath: {
-					regex: "/src/markdown/products/"
-				}
-				frontmatter: {
-					published: { eq: true }
-				}
-			}
-		){
+		allContentfulProduct{
 			edges {
 				node {
-					frontmatter{
-						id
-						category
-					}
+					productId
 					fields{
 						path
 					}
@@ -34,12 +22,19 @@ module.exports = async function createProductPages(createPage, graphql){
 	}
 
 	// Get product data
-	result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+	result.data.allContentfulProduct.edges.forEach(({
+		node: {
+			productId,
+			fields: {
+				path,
+			},
+		},
+	}) => {
 		createPage({
-			path: node.fields.path,
+			path,
 			component,
 			context: {
-				id: node.frontmatter.id,
+				id: productId,
 			},
 		})
 	})

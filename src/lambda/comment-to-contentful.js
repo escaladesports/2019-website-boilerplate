@@ -1,29 +1,30 @@
-import Octokit from '@octokit/rest'
-import { stringify } from 'yaml'
+import { createClient } from 'contentful-management'
 import md5 from 'md5'
 import Recaptcha from 'recaptcha-verify'
-import { gitHubRepo, gitHubOwner } from '../../site-config'
-const octokit = Octokit()
 import {
 	SITE_RECAPTCHA_SECRET,
-	GITHUB_API_TOKEN,
+	CONTENTFUL_WRITE_ACCESS_TOKEN,
+	CONTENTFUL_SPACE_ID,
 } from '../../env'
 const recaptcha = new Recaptcha({
 	secret: SITE_RECAPTCHA_SECRET,
 	verbose: true,
+})
+const contentful = createClient({
+	accessToken: CONTENTFUL_WRITE_ACCESS_TOKEN,
 })
 
 const allowed = [
 	`name`,
 	`email`,
 	`comment`,
-	`slug`,
+	`pageId`,
 ]
 const required = [
 	`name`,
 	`email`,
 	`comment`,
-	`slug`,
+	`pageId`,
 ]
 
 export async function handler({ body }){
@@ -58,6 +59,7 @@ export async function handler({ body }){
 				}
 			}
 		}
+		data.comment = comment
 
 		const recaptchaResponse = await verifyRecaptcha(input.recaptcha)
 		if (!recaptchaResponse.success) {
@@ -73,29 +75,29 @@ export async function handler({ body }){
 		// Add generated data
 		const now = new Date()
 		data.date = now.toISOString()
-		data.published = false
 		data.md5 = md5(data.email)
+		data.page = {
+			sys: {
+				type: `Link`,
+				linkType: `Entry`,
+				id: data.pageId,
+			},
+		}
+		delete data.pageId
+		for (let i in data) {
+			data[i] = {
+				'en-US': data[i],
+			}
+		}
 
-		// Change name to title for Netlify CMS
-		data.title = data.name
-		delete data.name
-
-		const markdownData = `---\n${stringify(data)}---\n\n${comment}`
-
-		octokit.authenticate({
-			type: `token`,
-			token: GITHUB_API_TOKEN,
+		// Add to Contentful
+		const space = await contentful.getSpace(CONTENTFUL_SPACE_ID)
+		const environment = await space.getEnvironment(`master`)
+		const entry = await environment.createEntry(`comment`, {
+			fields: data,
 		})
-		console.log(`Octokit authenticated...`)
-		await octokit.repos.createFile({
-			owner: gitHubOwner,
-			repo: gitHubRepo,
-			ref: `master`,
-			path: `src/markdown/comments/${now.getTime()}.md`,
-			message: `User generated comment`,
-			content: Buffer.from(markdownData).toString(`base64`),
-		})
-		console.log(`File created in repo...`)
+		console.log(entry)
+
 		return {
 			statusCode: 200,
 			body: JSON.stringify({ success: true }),
