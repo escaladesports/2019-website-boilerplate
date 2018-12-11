@@ -42,11 +42,34 @@ async function emailTemplates(){
 	console.log(`Output Contentful email templates`)
 }
 
+async function redirects(){
+	console.log(`Getting Contentful redirects...`)
+	const res = await client.getEntries({
+		content_type: `redirects`,
+	})
+	const redirects = res.items.map(({
+		fields: {
+			from,
+			to,
+			type,
+		},
+	}) => ({
+		fromPath: from,
+		toPath: to,
+		isPermanent: type.indexOf(`301`) === 0 ? true : false,
+	}))
+	await outputJson(`node_modules/.cache/contentful-redirects.json`, redirects)
+	console.log(`Output Contentful redirects`)
+}
+
 async function runAll(){
 	try {
-		await siteSettings()
-		await productIds()
-		await emailTemplates()
+		await Promise.all([
+			siteSettings(),
+			productIds(),
+			emailTemplates(),
+			redirects(),
+		])
 	}
 	catch(err){
 		console.error(err)
