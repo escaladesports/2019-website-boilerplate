@@ -53,11 +53,13 @@ async function redirects(){
 			to,
 			type,
 		},
-	}) => ({
-		fromPath: from,
-		toPath: to,
-		isPermanent: type.indexOf(`301`) === 0 ? true : false,
-	}))
+	}) => {
+		return {
+			fromPath: from,
+			toPath: to,
+			isPermanent: type.indexOf(`301`) === 0 ? true : false,
+		}
+	})
 	await outputJson(`node_modules/.cache/contentful-redirects.json`, redirects)
 	console.log(`Output Contentful redirects`)
 }

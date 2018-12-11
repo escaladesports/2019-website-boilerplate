@@ -23,7 +23,6 @@ export default class ProductTemplate extends React.Component{
 			{...this.state},
 			...variants.map(({ productId, color }) => ({ productId, color })),
 		]
-		console.log(this.allVariants)
 	}
 	render(){
 		const {

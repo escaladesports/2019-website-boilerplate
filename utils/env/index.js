@@ -4,7 +4,6 @@ const { parse } = require(`toml`)
 const homedir = require(`os`).homedir()
 
 const cwd = process.cwd()
-console.log(cwd)
 
 async function fetchToken(){
 	const keyPath = `${homedir}/.config/netlify`

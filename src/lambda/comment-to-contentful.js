@@ -93,10 +93,9 @@ export async function handler({ body }){
 		// Add to Contentful
 		const space = await contentful.getSpace(CONTENTFUL_SPACE_ID)
 		const environment = await space.getEnvironment(`master`)
-		const entry = await environment.createEntry(`comment`, {
+		await environment.createEntry(`comment`, {
 			fields: data,
 		})
-		console.log(entry)
 
 		return {
 			statusCode: 200,

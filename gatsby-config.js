@@ -117,6 +117,7 @@ module.exports = {
 				siteUrl,
 			},
 		},
+		`contentful-redirects`,
 		// {
 		// 	resolve: `webtasks`,
 		// 	options: {

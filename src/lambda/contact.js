@@ -65,7 +65,6 @@ export async function handler({ body }){
 			.process(renderToString(<EmailTemplate {...data} />))
 
 		const { html } = res
-		console.log(html)
 
 		await sendEmail({
 			from: data.email,
