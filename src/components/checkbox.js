@@ -87,17 +87,17 @@ const styles = {
 	`,
 	check: css`
 		position: relative;
-		top: -2px;
-		left: -2px;
+		top: -1px;
+		left: -1px;
 		opacity: 0;
-		font-size: 1.2em;
+		font-size: 1.1em;
 		color: #999;
 	`,
 	label: css`
 		font-size: .9em;
 		display: inline-block;
 		position: relative;
-		top: -6px;
+		top: -5px;
 		margin-left: 7px;
 	`,
 	inputContainer: css`
