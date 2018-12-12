@@ -82,7 +82,7 @@ const styles = {
 		display: inline-block;
 		width: ${size}px;
 		height: ${size}px;
-		border: 2px solid #aaa;
+		border: 2px solid #999;
 		border-radius: 2px;
 	`,
 	check: css`
@@ -91,7 +91,7 @@ const styles = {
 		left: -2px;
 		opacity: 0;
 		font-size: 1.2em;
-		color: #fff;
+		color: #999;
 	`,
 	label: css`
 		font-size: .9em;
@@ -108,14 +108,17 @@ const styles = {
 		position: absolute;
 		z-index: -1;
 		:checked + div{
-			background-color: #aaa;
+			/* background-color: #aaa; */
 			.check{
 				opacity: 1;
 			}
 		}
 		:active + div, :focus + div{
 			border-color: ${primaryColor};
-			background-color: ${primaryColor};
+			/* background-color: ${primaryColor}; */
+			.check{
+				color: ${primaryColor};
+			}
 		}
 	`,
 	error: css`
