@@ -16,19 +16,9 @@ export default class PostList extends React.Component {
 		return (
 			<>
 				<ul className={styles.list}>
-					{posts.map(({
-						title,
-						tags,
-						date,
-						fields: {
-							path,
-						},
-						body: {
-							childMarkdownRemark: {
-								excerpt,
-							},
-						},
-					}, index) => {
+					{posts.map(({ excerpt, fields, frontmatter }, index) => {
+						const { title, tags, date } = frontmatter
+						const { path } = fields
 						return (
 							<li key={`blog${index}`}>
 								<h2>

@@ -1,55 +1,69 @@
-const { resolve } = require(`path`)
+const { resolve, parse } = require(`path`)
 
+const markdownPath = resolve(`src/markdown/blog`)
 const blogTemplate = resolve(`src/templates/blog.js`)
 const tagsTemplate = resolve(`src/templates/tags.js`)
 const postTemplate = resolve(`src/templates/post.js`)
+const now = new Date()
 
 exports.createPages = async ({ actions, graphql }) => {
 	const { createPage } = actions
 
 	const res = await graphql(`{
-		allContentfulPost(
-			sort: { order: DESC, fields: [date] }
+		posts: allMarkdownRemark(
+			filter: {
+				fileAbsolutePath: { regex: "/src/markdown/blog/" }
+				frontmatter: {
+					published: { eq: true }
+				}
+			}
+			sort: { order: DESC, fields: [frontmatter___date] }
 		) {
 			edges {
 				node {
 					id
-					slug
-					tags{
-						slug
+					frontmatter {
+						path
+						tags
+						date
 					}
 					fields{
 						path
+						slug
+						published
 					}
 				}
 			}
 		}
 
-		contentfulSettings{
-			postsPerPage
+		config: markdownRemark(
+			fileAbsolutePath: { regex: "/src/markdown/settings/site.md/" }
+		){
+			frontmatter{
+				postsPerPage
+			}
 		}
 	}`)
 
-	if(res.errors){
+	if (res.errors) {
 		console.error(res.errors)
 		process.exit(1)
 	}
 
-	const { postsPerPage } = res.data.contentfulSettings
+	const { postsPerPage } = res.data.config.frontmatter
 
-	const posts = res.data.allContentfulPost.edges
+	const posts = res.data.posts.edges.map(edge => edge.node)
+	for (let i = posts.length; i--;) {
+		if (!posts[i].fields.published) {
+			posts.splice(i, 1)
+		}
+	}
+
 	const allTags = {}
 
-	posts.forEach(({
-		node: {
-			id,
-			fields: {
-				path,
-			},
-			slug,
-			tags,
-		},
-	}, index) => {
+	posts.forEach(({ id, frontmatter, fields }, index) => {
+		const { tags } = frontmatter
+		const { path, slug } = fields
 		let previous = posts[index + 1]
 		let next = posts[index - 1]
 
@@ -59,22 +73,22 @@ exports.createPages = async ({ actions, graphql }) => {
 			component: postTemplate,
 			context: {
 				id,
-				previousId: previous ? previous.node.id : id,
-				nextId: next ? next.node.id : id,
+				previousId: previous ? previous.id : id,
+				nextId: next ? next.id : id,
 				slug,
 			},
 		})
 
-		tags.forEach(({ slug }) => {
-			if(!allTags[slug]){
-				allTags[slug] = 0
+		tags.forEach(tag => {
+			if (!allTags[tag]) {
+				allTags[tag] = 0
 			}
-			allTags[slug]++
+			allTags[tag]++
 		})
 	})
 
 	const totalPages = Math.ceil(posts.length / postsPerPage)
-	for (let i = totalPages; i--;){
+	for (let i = totalPages; i--;) {
 		const page = i + 1
 		let path = i === 0 ? `/blog` : `/blog/${page}`
 		createPage({
@@ -113,13 +127,13 @@ exports.createPages = async ({ actions, graphql }) => {
 // Create URL paths for posts
 exports.onCreateNode = ({ node, actions }) => {
 	const { createNodeField } = actions
-	const {
-		slug,
-		internal: {
-			type,
-		},
-	} = node
-	if(type === `ContentfulPost`){
+	const { fileAbsolutePath } = node
+	if (fileAbsolutePath && fileAbsolutePath.indexOf(markdownPath) === 0) {
+		const { path, published, date } = node.frontmatter
+		let slug = path || parse(fileAbsolutePath).name
+		if (!isNaN(slug)) {
+			slug = `post-${slug}`
+		}
 		createNodeField({
 			node,
 			name: `slug`,
@@ -128,7 +142,12 @@ exports.onCreateNode = ({ node, actions }) => {
 		createNodeField({
 			node,
 			name: `path`,
-			value: `/post/${slug}`,
+			value: `/blog/${slug}`,
+		})
+		createNodeField({
+			node,
+			name: `published`,
+			value: (published === true && now > new Date(date)) ? true : false,
 		})
 	}
 }

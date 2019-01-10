@@ -11,11 +11,11 @@ export default class BlogPage extends React.Component {
 				totalPages,
 			},
 			data: {
-				allContentfulPost,
+				allMarkdownRemark,
 			},
 		} = this.props
-		const posts = allContentfulPost.edges.map(edges => edges.node)
-		const description = posts.length ? posts[0].body.childMarkdownRemark.excerpt : null
+		const posts = allMarkdownRemark.edges.map(edges => edges.node)
+		const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
 
 		return (
 			<Layout title='Blog' description={description}>
@@ -32,27 +32,29 @@ export default class BlogPage extends React.Component {
 
 export const query = graphql`
 	query BlogPage($skip: Int!, $limit: Int!) {
-
-		allContentfulPost(
+		allMarkdownRemark(
+			filter: {
+				fileAbsolutePath: {
+					regex: "/src/markdown/blog/"
+				}
+				fields: {
+					published: { eq: true }
+				}
+			}
 			skip: $skip,
 			limit: $limit,
-			sort: { order: DESC, fields: [date] }
+			sort: { order: DESC, fields: [frontmatter___date] }
 		){
 			edges{
 				node{
-					title
-					tags{
-						name
-						slug
+					excerpt(pruneLength: 250)
+					frontmatter{
+						title
+						tags,
+						date,
 					}
-					date
 					fields{
 						path
-					}
-					body{
-						childMarkdownRemark{
-							excerpt(pruneLength: 175)
-						}
 					}
 				}
 			}

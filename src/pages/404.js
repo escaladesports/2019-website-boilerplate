@@ -2,8 +2,8 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layouts/default'
 
-export default class GenericTemplate extends React.Component{
-	render(){
+export default class NotFoundPage extends React.Component {
+	render() {
 		const {
 			page: {
 				frontmatter: {
@@ -14,7 +14,8 @@ export default class GenericTemplate extends React.Component{
 			},
 		} = this.props.data
 
-		return(
+
+		return (
 			<Layout title={title} description={excerpt}>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 			</Layout>
@@ -23,10 +24,10 @@ export default class GenericTemplate extends React.Component{
 }
 
 export const query = graphql`
-	query GenericTemplate($id: String!) {
-		page: markdownRemark(
-			id: { eq: $id }
-		){
+	query NotFoundPage {
+		page: markdownRemark(fileAbsolutePath: {
+			regex: "/src/markdown/404.md/"
+		}){
 			html
 			excerpt(pruneLength: 175)
 			frontmatter{

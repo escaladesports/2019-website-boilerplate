@@ -3,7 +3,6 @@ import { css } from 'emotion'
 import { object, string } from 'yup'
 import Gravatar from 'react-gravatar'
 import Field from '../components/field'
-import Checkbox from '../components/checkbox'
 import Button from '../components/button'
 import Form from '../components/form'
 import Error from '../components/error-message'
@@ -17,12 +16,12 @@ export default class CommentForm extends React.Component{
 	render(){
 		return (
 			<Form
-				action='/.netlify/functions/comment-to-contentful'
+				action='/.netlify/functions/comment-to-markdown'
 				initialValues={{
 					email: ``,
 					name: ``,
 					comment: ``,
-					pageId: this.props.id,
+					slug: this.props.slug,
 				}}
 				validationSchema={object().shape({
 					email: string()
@@ -74,12 +73,8 @@ export default class CommentForm extends React.Component{
 								component='textarea'
 								{...props}
 							/>
-							<Checkbox
-								label='Approved'
-								name='approved'
-								{...props}
-							/>
-							<input type='hidden' name='pageId' value={props.values.pageId} />
+
+							<input type='hidden' name='slug' value={props.values.slug} />
 
 							<div className={styles.inputBlock}>
 								<Button

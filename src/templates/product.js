@@ -9,33 +9,38 @@ export default class ProductTemplate extends React.Component{
 	constructor(props){
 		super(props)
 
+		// Props that can change when a variant is selected
+		const variantProps = [
+			`color`,
+			`id`,
+		]
+
 		// Set parent product props to state
 		const {
-			productId,
-			color,
-			variants,
-		} = props.data.contentfulProduct
-		this.state = {
-			productId,
-			color,
-		}
-		this.allVariants = [
-			{...this.state},
-			...variants.map(({ productId, color }) => ({ productId, color })),
-		]
+			frontmatter,
+			frontmatter: {
+				variants,
+			},
+		} = props.data.markdownRemark
+		const state = {}
+		variantProps.forEach(prop => {
+			state[prop] = frontmatter[prop]
+		})
+		this.state = state
+
+		// Store all variants including parent
+		this.allVariants = [{ ...state }, ...variants]
 	}
 	render(){
 		const {
 			props: {
 				data: {
-					contentfulProduct: {
-						name,
-						body: {
-							childMarkdownRemark: {
-								html,
-								excerpt,
-							},
+					markdownRemark: {
+						frontmatter: {
+							title,
 						},
+						html,
+						excerpt,
 					},
 					salsifyContent: {
 						itemName,
@@ -50,8 +55,8 @@ export default class ProductTemplate extends React.Component{
 				},
 			},
 			state: {
-				productId,
 				color,
+				id,
 			},
 		} = this
 
@@ -59,8 +64,8 @@ export default class ProductTemplate extends React.Component{
 		const imageRatio = [16, 9]
 
 		return(
-			<Layout title={itemName || name} description={excerpt}>
-				<h1>{itemName || name}</h1>
+			<Layout title={itemName || title} description={excerpt}>
+				<h1>{itemName || title}</h1>
 				{hasImages && (
 					<Carousel ratio={imageRatio} slides={webImages.map(({ url }, index) => (
 						<Image
@@ -83,8 +88,8 @@ export default class ProductTemplate extends React.Component{
 				<ul>
 					{this.allVariants.map((variant, index) => (
 						<li key={index}>
-							{variant.productId === productId && variant.color}
-							{variant.productId !== productId && (
+							{variant.id === id && variant.color}
+							{variant.id !== id && (
 								<a href='#' onClick={e => {
 									e.preventDefault()
 									this.setState(variant)
@@ -97,7 +102,7 @@ export default class ProductTemplate extends React.Component{
 				</ul>
 				<ul>
 					<li>Color: {color}</li>
-					<li>ID: {productId}</li>
+					<li>ID: {id}</li>
 					<li>Price: {formatUSD(price, true)}</li>
 					<li>{stock ? `In stock` : `Out of stock`}</li>
 				</ul>
@@ -109,27 +114,24 @@ export default class ProductTemplate extends React.Component{
 
 export const query = graphql`
 	query ProductTemplate($id: String!) {
-		contentfulProduct(
-			productId: { eq: $id }
+		markdownRemark(
+			frontmatter: {
+				id: { eq: $id }
+			}
 		){
-			name
-			color
-			productId
-			images{
-				sizes(maxWidth: 1200){
-					...GatsbyContentfulSizes
-				}
-			}
-			variants{
-				productId
+			frontmatter{
+				title
+				price
 				color
-			}
-			body{
-				childMarkdownRemark{
-					html
-					excerpt(pruneLength: 175)
+				id
+				images
+				variants{
+					color
+					id
 				}
 			}
+			html
+			excerpt(pruneLength: 175)
 		}
 
 		salsifyContent(

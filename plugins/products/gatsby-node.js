@@ -1,44 +1,40 @@
+const { resolve, parse } = require(`path`)
 const createProductPages = require(`./create-product-pages`)
 const createCategoryPages = require(`./create-category-pages`)
 
-const categoryNodes = {}
-const productNodes = {}
-
-function createPaths(createNodeField){
-	for (let i in productNodes){
-		const node = productNodes[i]
-		const { slug } = node
-		const category = categoryNodes[node.category___NODE]
-		if (category){
-			createNodeField({
-				node,
-				name: `path`,
-				value: `/${category.slug}/${slug}`,
-			})
-		}
-	}
-}
+const productPath = resolve(`src/markdown/products`)
+const categoryPath = resolve(`src/markdown/categories`)
 
 exports.createPages = async ({ actions, graphql }) => {
 	const { createPage } = actions
+
 	await createProductPages(createPage, graphql)
 	await createCategoryPages(createPage, graphql)
 }
 
 exports.onCreateNode = ({ node, actions }) => {
 	const { createNodeField } = actions
-	const {
-		id,
-		internal: {
-			type,
-		},
-	} = node
-	if(type === `ContentfulProduct`){
-		productNodes[id] = node
-		createPaths(createNodeField)
-	}
-	if(type === `ContentfulCategory`){
-		categoryNodes[id] = node
-		createPaths(createNodeField)
+	const { fileAbsolutePath } = node
+	if (fileAbsolutePath) {
+		let slug = parse(fileAbsolutePath).name
+		if (fileAbsolutePath.indexOf(productPath) === 0) {
+			createNodeField({
+				node,
+				name: `path`,
+				value: `/${node.frontmatter.category}/${slug}`,
+			})
+		}
+		else if(fileAbsolutePath.indexOf(categoryPath) === 0){
+			createNodeField({
+				node,
+				name: `path`,
+				value: `/${slug}`,
+			})
+			createNodeField({
+				node,
+				name: `category`,
+				value: slug,
+			})
+		}
 	}
 }
