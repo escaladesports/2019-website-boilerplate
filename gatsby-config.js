@@ -1,15 +1,36 @@
 
 const striptags = require(`striptags`)
 const proxy = require(`http-proxy-middleware`)
+const { readFileSync } = require(`fs-extra`)
+const globby = require(`globby`).sync
+const matter = require(`gray-matter`)
 const { siteUrl, siteId } = require(`./site-config`)
-const productIds = require(`./.cache/contentful-product-ids.json`)
-const { siteTitle, siteDescription } = require(`./.cache/contentful-site-settings.json`)
 const {
 	SALSIFY_API_KEY,
 	SALSIFY_ORG,
-	CONTENTFUL_SPACE_ID,
-	CONTENTFUL_READ_ACCESS_TOKEN,
 } = require(`./env`)
+
+
+// Get site info from markdown
+const { siteTitle, siteDescription } = matter(
+	readFileSync(`./src/markdown/settings/site.md`)
+).data
+
+// Get product IDs from markdown
+const productMarkdown = globby(`./src/markdown/products/**/*.md`)
+const productIds = []
+productMarkdown.forEach(path => {
+	const contents = readFileSync(path)
+	const data = matter(contents).data
+	productIds.push(data.id)
+	if (Array.isArray(data.variants)) {
+		data.variants.forEach(data => {
+			if (data.id) {
+				productIds.push(data.id)
+			}
+		})
+	}
+})
 
 module.exports = {
 	siteMetadata: {
@@ -80,10 +101,10 @@ module.exports = {
 		},
 		`gatsby-plugin-netlify`,
 		{
-			resolve: `gatsby-source-contentful`,
+			resolve: `gatsby-source-filesystem`,
 			options: {
-				spaceId: CONTENTFUL_SPACE_ID,
-				accessToken: CONTENTFUL_READ_ACCESS_TOKEN,
+				path: `${__dirname}/src/markdown`,
+				name: `pages`,
 			},
 		},
 		{
@@ -98,17 +119,25 @@ module.exports = {
 							target: `_blank`,
 						},
 					},
-					{
-						resolve: `gatsby-remark-images`,
-						options: {
-							maxWidth: 1200,
-							linkImagesToOriginal: false,
-							withWebp: {
-								quality: 95,
-							},
-						},
-					},
+					// {
+					// 	resolve: `gatsby-remark-images`,
+					// 	options: {
+					// 		maxWidth: 1200,
+					// 		linkImagesToOriginal: false,
+					// 		withWebp: {
+					// 			quality: 95,
+					// 		},
+					// 	},
+					// },
 				],
+			},
+		},
+		{
+			resolve: `gatsby-plugin-netlify-cms`,
+			options: {
+				modulePath: `${__dirname}/src/components/cms/index.js`,
+				enableIdentityWidget: false,
+				manualInit: true,
 			},
 		},
 		{
@@ -117,7 +146,7 @@ module.exports = {
 				siteUrl,
 			},
 		},
-		`contentful-redirects`,
+		`cms-no-index`,
 		// {
 		// 	resolve: `webtasks`,
 		// 	options: {
@@ -194,21 +223,28 @@ module.exports = {
 				feeds: [
 					{
 						query: `{
-							allContentfulPost(
+							allMarkdownRemark(
 								limit: 1000,
-								sort: { order: DESC, fields: [date]}
+								sort: { order: DESC, fields: [frontmatter___date]},
+								filter: {
+									fileAbsolutePath: {
+										regex: "/src/markdown/blog/"
+									}
+									frontmatter: {
+										published: { eq: true }
+									}
+								}
 							){
 								edges{
 									node{
-										title
-										date
-										body{
-											childMarkdownRemark{
-												html
-											}
-										}
+										excerpt
+										html
 										fields{
 											path
+										}
+										frontmatter{
+											title
+											date
 										}
 									}
 								}
@@ -221,28 +257,22 @@ module.exports = {
 										siteUrl,
 									},
 								},
-								allContentfulPost: {
+								allMarkdownRemark: {
 									edges,
 								},
 							},
 						}) => {
 							return edges.map(({
 								node: {
-									body: {
-										childMarkdownRemark: {
-											html,
-										},
-									},
-									title,
-									date,
+									html,
+									frontmatter,
 									fields: {
 										path,
 									},
 								},
 							}) => {
 								return {
-									title,
-									date,
+									...frontmatter,
 									url: `${siteUrl}${path}`,
 									guid: `${siteUrl}${path}`,
 									custom_elements: [{ 'content:encoded': html }],
@@ -258,33 +288,20 @@ module.exports = {
 			resolve: `search`,
 			options: {
 				query: `{
-					allContentfulProduct{
-						edges{
-							node{
-								id
-								name
-								body{
-									childMarkdownRemark{
-										html
-										excerpt
-									}
-								}
-								fields{
-									path
-								}
+					allMarkdownRemark(
+						filter: {
+							frontmatter: {
+								published: { eq: true }
 							}
 						}
-					}
-					allContentfulPost{
-						edges{
-							node{
+					) {
+						edges {
+							node {
 								id
-								title
-								body{
-									childMarkdownRemark{
-										html
-										excerpt
-									}
+								html
+								excerpt
+								frontmatter {
+									title
 								}
 								fields{
 									path
@@ -294,15 +311,20 @@ module.exports = {
 					}
 				}`,
 				parse: data => {
-					const products = data.allContentfulProduct.edges.map(({
+					data = data.allMarkdownRemark.edges
+					data = data.filter(({ node }) => {
+						if (node && node.fields && node.fields.path) {
+							return true
+						}
+						return false
+					})
+					return data.map(({
 						node: {
 							id,
-							name: title,
-							body: {
-								childMarkdownRemark: {
-									html,
-									excerpt,
-								},
+							html,
+							excerpt,
+							frontmatter: {
+								title,
 							},
 							fields: {
 								path,
@@ -322,40 +344,6 @@ module.exports = {
 							},
 						}
 					})
-
-					const posts = data.allContentfulPost.edges.map(({
-						node: {
-							id,
-							title,
-							body: {
-								childMarkdownRemark: {
-									html,
-									excerpt,
-								},
-							},
-							fields: {
-								path,
-							},
-						},
-					}) => {
-						return {
-							id,
-							index: {
-								body: striptags(html),
-								title,
-							},
-							store: {
-								title,
-								excerpt,
-								path,
-							},
-						}
-					})
-
-					return [
-						...products,
-						...posts,
-					]
 				},
 			},
 		},

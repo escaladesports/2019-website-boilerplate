@@ -1,5 +1,5 @@
 import React from 'react'
-import { css, cx } from 'emotion'
+import { css } from '@emotion/core'
 import Carousel from '@brainhubeu/react-carousel'
 import Right from '@material-ui/icons/ChevronRight'
 import Left from '@material-ui/icons/ChevronLeft'
@@ -58,23 +58,22 @@ export default class CarouselComp extends React.Component {
 							{slide}
 						</Placeholder>
 					))}
-					className={styles.carousel}
 					ref={el => this.carousel = el}
 				/>
 				{slideTotal > 1 && <>
 					<button
 						onClick={this.previousSlide}
-						className={cx(styles.button, styles.left)}
+						css={[styles.button, styles.left]}
 					>
-						<Left className={styles.icon} />
+						<Left css={styles.icon} />
 					</button>
 					<button
 						onClick={this.nextSlide}
-						className={cx(styles.button, styles.right)}
+						css={[styles.button, styles.right]}
 					>
-						<Right className={styles.icon} />
+						<Right css={styles.icon} />
 					</button>
-					<div className={styles.bottomControls}>
+					<div css={styles.bottomControls}>
 						{(() => {
 							const buttons = []
 							let onSlide = this.calculateButtonValue()
@@ -85,12 +84,12 @@ export default class CarouselComp extends React.Component {
 								buttons.push(
 									<button
 										type='button'
-										className={cx(
+										css={[
 											styles.button,
 											styles.bottomButton,
 											onSlide === i &&
-											styles.bottomButtonActive
-										)}
+											styles.bottomButtonActive,
+										]}
 										onClick={() => this.goToSlide(i)}
 										key={`slideControl${i}`}
 									/>

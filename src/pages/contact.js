@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { object, string } from 'yup'
 import Field from '../components/field'
 import Button from '../components/button'
@@ -28,20 +28,18 @@ const validationSchema = object().shape({
 export default class ContactPage extends React.Component {
 	render(){
 		const {
-			contentfulPage: {
-				title,
-				body: {
-					childMarkdownRemark: {
-						html,
-						excerpt,
-					},
+			page: {
+				frontmatter: {
+					title,
 				},
+				html,
+				excerpt,
 			},
 		} = this.props.data
 
 		return(
 			<Layout title={title} description={excerpt}>
-				<div className={styles}>
+				<div>
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
 						<Form
@@ -77,7 +75,7 @@ export default class ContactPage extends React.Component {
 									{...props}
 								/>
 
-								<div className={styles.inputBlock}>
+								<div css={styles.inputBlock}>
 									<Button
 										type='submit'
 										disabled={props.isSubmitting}
@@ -100,41 +98,17 @@ const styles = {
 		display: block;
 		margin-top: 20px;
 	`,
-	input: css`
-		display: block;
-		width: 100%;
-		outline: none;
-		border: 0;
-		font-size: 1em;
-		padding: 5px 0;
-		border-bottom: 1px solid #333;
-	`,
-	error: css`
-		color: #f00;
-		input{
-			color: #f00;
-			border-color: #f00;
-		}
-	`,
-	errorMsg: css`
-		margin-top: 3px;
-		font-size: .75em;
-		color: #f44336;
-		:first-letter{
-			text-transform: uppercase;
-		}
-	`,
 }
 
 export const query = graphql`
 	query ContactTemplate {
-		contentfulPage(slug: { eq: "contact" }){
-			title
-			body{
-				childMarkdownRemark{
-					html
-					excerpt(pruneLength: 175)
-				}
+		page: markdownRemark(fileAbsolutePath: {
+			regex: "/src/markdown/contact.md/"
+		}){
+			html
+			excerpt(pruneLength: 175)
+			frontmatter{
+				title
 			}
 		}
 	}

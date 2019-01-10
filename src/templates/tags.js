@@ -12,18 +12,17 @@ export default class TagsTemplate extends React.Component{
 				totalPages,
 			},
 			data: {
-				allContentfulPost,
+				posts,
 			},
 		} = this.props
-
-		const posts = allContentfulPost.edges.map(edge => edge.node)
-		const description = posts.length ? posts[0].body.childMarkdownRemark.excerpt : null
+		const postsList = posts.edges.map(edge => edge.node)
+		const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
 
 		return(
 			<Layout title={`Posts Tagged with ${tag}`} description={description}>
 				<h2>Tag: {tag}</h2>
 				<PostList
-					posts={posts}
+					posts={postsList}
 					page={page}
 					totalPages={totalPages}
 					linkPrefix={`/blog/tags/${tag}`}
@@ -35,36 +34,29 @@ export default class TagsTemplate extends React.Component{
 
 export const query = graphql`
 	query TagsTemplate($tag: String!, $skip: Int!, $limit: Int!) {
-
-		allContentfulPost(
+		posts: allMarkdownRemark(
 			filter: {
-				tags: {
-					elemMatch: {
-						slug: {
-							in: [$tag]
-						}
-					}
+				frontmatter: {
+					tags: { in: [$tag] }
+				}
+				fields: {
+					published: { eq: true }
 				}
 			}
 			skip: $skip,
 			limit: $limit,
-			sort: { order: DESC, fields: [date] }
+			sort: { order: DESC, fields: [frontmatter___date] }
 		){
 			edges{
 				node{
-					title
-					tags{
-						name
-						slug
+					excerpt(pruneLength: 175)
+					frontmatter{
+						title
+						tags
+						date,
 					}
-					date
 					fields{
 						path
-					}
-					body{
-						childMarkdownRemark{
-							excerpt(pruneLength: 175)
-						}
 					}
 				}
 			}

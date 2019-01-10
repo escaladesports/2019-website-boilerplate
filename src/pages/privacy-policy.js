@@ -5,22 +5,14 @@ import Layout from '../components/layouts/default'
 export default class PrivacyPolicyPage extends React.Component{
 	render(){
 		const {
-			contentfulSettings: {
-				address: {
-					childMarkdownRemark: {
-						html: address,
-					},
+			page: {
+				frontmatter: {
+					title,
+					address,
+					email,
 				},
-				email,
-			},
-			contentfulPage: {
-				title,
-				body: {
-					childMarkdownRemark: {
-						html,
-						excerpt,
-					},
-				},
+				html,
+				excerpt,
 			},
 		} = this.props.data
 		const addressHTML = address.replace(/\n/g, `<br />`)
@@ -39,21 +31,15 @@ export default class PrivacyPolicyPage extends React.Component{
 
 export const query = graphql`
 	query PrivacyPolicyPage {
-		contentfulSettings{
-			address{
-				childMarkdownRemark{
-					html
-				}
-			}
-			email
-		}
-		contentfulPage(slug: { eq: "privacy-policy" }){
-			title
-			body{
-				childMarkdownRemark{
-					html
-					excerpt(pruneLength: 175)
-				}
+		page: markdownRemark(fileAbsolutePath: {
+			regex: "/src/markdown/privacy-policy.md/"
+		}){
+			html
+			excerpt(pruneLength: 175)
+			frontmatter{
+				title
+				address
+				email
 			}
 		}
 	}

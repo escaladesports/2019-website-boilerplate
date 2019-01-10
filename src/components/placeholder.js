@@ -1,17 +1,17 @@
 import React from 'react'
-import { css, cx } from 'emotion'
+import { css } from '@emotion/core'
 
 export default class Placeholder extends React.Component{
 	render(){
-		const { ratio, className, children, ...otherProps } = this.props
+		const { ratio, children, ...otherProps } = this.props
 		const [ w, h ] = ratio
 		return (
 			<div
-				className={cx(className, styles.outer)}
+				css={styles.outer}
 				style={{ paddingTop: `${(h / w) * 100}%` }}
 				{...otherProps}
 			>
-				<div className={styles.inner}>
+				<div css={styles.inner}>
 					{children}
 				</div>
 			</div>

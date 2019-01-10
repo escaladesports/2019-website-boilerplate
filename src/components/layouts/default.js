@@ -1,6 +1,6 @@
 import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { Helmet } from 'react-helmet'
 import RouteDelayed from '../../../plugins/route-delayed-animation'
 import Header from '../header'
@@ -50,9 +50,9 @@ export default class Layout extends React.Component{
 							<meta property='og:title' content={title} />
 							<meta property='og:site_name' content={siteTitle} />
 						</Helmet>
-						<div className={styles.layout}>
+						<div css={styles.layout}>
 							<Header />
-							<div className={styles.content}>
+							<div css={styles.content}>
 								<main>{this.props.children}</main>
 							</div>
 							<Footer />

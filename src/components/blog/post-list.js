@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import TagList from './tag-list'
 import Pagination from '../pagination'
 import formatDate from '../../functions/format-date'
@@ -15,20 +15,10 @@ export default class PostList extends React.Component {
 		} = this.props
 		return (
 			<>
-				<ul className={styles.list}>
-					{posts.map(({
-						title,
-						tags,
-						date,
-						fields: {
-							path,
-						},
-						body: {
-							childMarkdownRemark: {
-								excerpt,
-							},
-						},
-					}, index) => {
+				<ul css={styles.list}>
+					{posts.map(({ excerpt, fields, frontmatter }, index) => {
+						const { title, tags, date } = frontmatter
+						const { path } = fields
 						return (
 							<li key={`blog${index}`}>
 								<h2>
@@ -49,7 +39,7 @@ export default class PostList extends React.Component {
 					})}
 				</ul>
 				{totalPages > 1 &&
-					<div className={styles.pagination}>
+					<div css={styles.pagination}>
 						<Pagination
 							page={page}
 							totalPages={totalPages}

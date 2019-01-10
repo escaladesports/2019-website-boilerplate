@@ -1,4 +1,4 @@
-import { cx, css } from 'emotion'
+import { css } from '@emotion/core'
 
 export default function createCSSGrid({
 	margin = 5,
@@ -30,7 +30,7 @@ export default function createCSSGrid({
 	}
 
 
-	return cx(
+	return [
 		css`
 			display: flex;
 			flex-flow: row wrap;
@@ -41,5 +41,5 @@ export default function createCSSGrid({
 			}
 		`,
 		...mq,
-	)
+	]
 }

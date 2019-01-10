@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import linkMixin from '../styles/mixins/link'
 import EmailTemplate from '../components/layouts/email'
 
@@ -9,8 +9,8 @@ export default class BackendEmail extends React.Component {
 
 		return (
 			<EmailTemplate title={title}>
-				<div className={styles.wrapper}>
-					<p className={styles.img}>
+				<div css={styles.wrapper}>
+					<p css={styles.img}>
 						<img src='/backend-logo.png' />
 					</p>
 					{children}

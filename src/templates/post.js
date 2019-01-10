@@ -1,14 +1,22 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import Link from 'gatsby-link'
 import { Helmet } from 'react-helmet'
-import Img from 'gatsby-image'
+import { Cloudinary } from 'cloudinary-core'
+import Img from '../components/cloudinary-image'
+import Lazy from '../components/lazy-load'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
 import CommentForm from '../components/comment-form'
 import Comments from '../components/comments'
+import { cloudinaryName } from '../../site-config'
 import formatDate from '../functions/format-date'
+
+const cl = new Cloudinary({
+	cloud_name: cloudinaryName,
+	secure: true,
+})
 
 export default class PostTemplate extends React.Component{
 	render(){
@@ -18,65 +26,84 @@ export default class PostTemplate extends React.Component{
 				id,
 				nextId,
 				previousId,
+				slug,
 			},
 			data: {
 				post: {
-					title,
-					contentful_id,
-					tags,
-					date,
-					coverImage,
-					body: {
-						childMarkdownRemark: {
-							html,
-							excerpt,
-						},
+					frontmatter: {
+						title,
+						tags,
+						date,
+						image,
 					},
+					html,
+					excerpt,
 				},
-				allContentfulComment,
+				comments: commentsList,
 			},
 		} = this.props
 
-		const comments = allContentfulComment ? allContentfulComment.edges : []
+		let comments = []
+		if(commentsList){
+			comments = commentsList.edges.map(({ node: {
+				html,
+				frontmatter: {
+					md5,
+					name,
+					date,
+				},
+			} }) => ({
+				html,
+				md5,
+				name,
+				date,
+			}))
+		}
+
 		const next = (id === nextId) ? false : this.props.data.next
 		const previous = (id === previousId) ? false : this.props.data.previous
 
 		return(
 			<Layout title={title} description={excerpt}>
-				{!!coverImage && (
+				{!!image && (
 					<Helmet>
-						<meta property='og:image' content={coverImage.src} />
+						<meta property='og:image' content={cl.url(image, {
+							width: 900,
+							crop: `scale`,
+						})} />
 					</Helmet>
 				)}
 				<h1>{title}</h1>
 				<time dateTime={date}>{formatDate(date)}</time>
 				<TagList tags={tags} />
-				{!!coverImage && (
-					<Img fluid={coverImage.fluid} alt={title} />
+				{!!image && (
+					<Lazy ratio={[515, 343]}>
+						<Img id={image} alt={title} />
+					</Lazy>
 				)}
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<div>
 					{next && (
-						<div className={styles.next}>
-							<Link to={`/post/${next.slug}`}>
-								Next Post: {next.title}
+						<div css={styles.next}>
+							<Link to={next.fields.path}>
+								Next Post: {next.frontmatter.title}
 							</Link>
 						</div>
 					)}
 					{previous && (
 						<div>
-							<Link to={`/post/${previous.slug}`}>
-								Previous Post: {previous.title}
+							<Link to={previous.fields.path}>
+								Previous Post: {previous.frontmatter.title}
 							</Link>
 						</div>
 					)}
 				</div>
-				<div className={styles.comments}>
-					<Comments comments={comments || []} />
+				<div css={styles.comments}>
+					<Comments comments={comments} />
 				</div>
-				<div className={styles.commentForm}>
+				<div css={styles.commentForm}>
 					<h3>Leave a comment:</h3>
-					<CommentForm id={contentful_id} />
+					<CommentForm slug={slug} />
 				</div>
 			</Layout>
 		)
@@ -98,66 +125,63 @@ const styles = {
 }
 
 export const query = graphql`
-	query PostTemplate($id: String!, $previousId: String!, $nextId: String!) {
+	query PostTemplate($id: String!, $previousId: String!, $nextId: String!, $slug: String!) {
 
-		post: contentfulPost(
+		post: markdownRemark(
 			id: { eq: $id }
 		){
-			contentful_id
-			title
-			tags{
-				name
-				slug
-			}
-			coverImage{
-				fluid(maxWidth: 900, quality: 90){
-					...GatsbyContentfulFluid
-				}
-			}
-			date
-			body{
-				childMarkdownRemark{
-					html
-					excerpt(pruneLength: 175)
-				}
+			html
+			excerpt(pruneLength: 175)
+			frontmatter{
+				title
+				tags
+				image
+				date
 			}
 		}
 
-		previous: contentfulPost(
+		previous: markdownRemark(
 			id: { eq: $previousId }
 		){
-			title
-			slug
-		}
-
-		next: contentfulPost(
-			id: { eq: $nextId }
-		){
-			title
-			slug
-		}
-
-		allContentfulComment(
-			filter: {
-				page: {
-					id: { eq: $id }
-				}
+			frontmatter{
+				title
 			}
-			sort: { order: DESC, fields: [date] }
+			fields{
+				path
+			}
+		}
+
+		comments: allMarkdownRemark(
+			filter: {
+				fileAbsolutePath: { regex: "/src/markdown/comments/" },
+				frontmatter: {
+					slug: { eq: $slug },
+					published: { eq: true }
+				}
+			},
+			sort: { order: ASC, fields: [frontmatter___date] }
 		){
 			edges{
 				node{
-					comment{
-						childMarkdownRemark{
-							html
-						}
+					html
+					frontmatter{
+						md5
+						name: title
+						date
 					}
-					md5
-					name
-					date
 				}
 			}
 		}
 
+		next: markdownRemark(
+			id: { eq: $nextId }
+		){
+			frontmatter{
+				title
+			}
+			fields{
+				path
+			}
+		}
 	}
 `

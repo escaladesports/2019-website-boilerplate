@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import Layout from '../components/layouts/default'
 import createGrid from '../styles/mixins/grid'
 
@@ -8,7 +8,7 @@ export default class GridPage extends React.Component{
 		return(
 			<Layout title='Grid Example'>
 				<h1>Grid Example</h1>
-				<div className={styles}>
+				<div css={styles}>
 					{function(){
 						const els = []
 						for(let i = 0; i < 31; i++){
