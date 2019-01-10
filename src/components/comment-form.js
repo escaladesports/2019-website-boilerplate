@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { object, string } from 'yup'
 import Gravatar from 'react-gravatar'
 import Field from '../components/field'
@@ -43,7 +43,7 @@ export default class CommentForm extends React.Component{
 					<Loading />
 				}
 				form={props => (
-					<div className={styles.formCols}>
+					<div css={styles.formCols}>
 						<div>
 							<Gravatar
 								email={props.values.email}
@@ -51,7 +51,7 @@ export default class CommentForm extends React.Component{
 								default='mp'
 								size={avatarSize}
 							/>
-							<div className={styles.gravatarNotice}>
+							<div css={styles.gravatarNotice}>
 								Avatar provided by <a href='https://gravatar.com/'>Gravatar</a>
 							</div>
 						</div>
@@ -76,7 +76,7 @@ export default class CommentForm extends React.Component{
 
 							<input type='hidden' name='slug' value={props.values.slug} />
 
-							<div className={styles.inputBlock}>
+							<div css={styles.inputBlock}>
 								<Button
 									type='submit'
 									disabled={props.isSubmitting}

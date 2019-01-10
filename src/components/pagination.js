@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import Link from 'gatsby-link'
 import { getPaginationModel } from 'ultimate-pagination'
 
@@ -31,17 +31,17 @@ export default class Footer extends React.Component{
 		const next = page < totalPages ? page + 1 : false
 
 		return (
-			<ul className={styles.list}>
-				<li className={styles.previous}>
+			<ul css={styles.list}>
+				<li css={styles.previous}>
 					{previous && (
 						<Link to={this.getLink(previous)}>Previous</Link>
 					)}
 				</li>
-				<li className={styles.summary}>
+				<li css={styles.summary}>
 					Page {page} of {totalPages}
 				</li>
 				{paginationModel.map(({ type, isActive, value }, key) => (
-					<li key={`page${key}`} className={styles.link}>
+					<li key={`page${key}`} css={styles.link}>
 						{type === `PAGE` && isActive && value}
 						{type !== `PAGE` && `...`}
 						{type === `PAGE` && !isActive && (
@@ -49,7 +49,7 @@ export default class Footer extends React.Component{
 						)}
 					</li>
 				))}
-				<li className={styles.next}>
+				<li css={styles.next}>
 					{next && (
 						<Link to={this.getLink(next)}>Next</Link>
 					)}

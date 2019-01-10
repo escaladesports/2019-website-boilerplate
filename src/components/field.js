@@ -1,5 +1,5 @@
 import React from 'react'
-import { css, cx } from 'emotion'
+import { css } from '@emotion/core'
 import { Field, ErrorMessage } from 'formik'
 import { primaryColor } from '../styles/colors'
 
@@ -47,21 +47,21 @@ export default class CustomField extends React.Component{
 			height = this.input.scrollHeight
 		}
 		return (
-			<label className={cx(
+			<label css={[
 				isErrored && styles.error,
-				styles.inputBlock
-			)}>
-				<div className={cx(
+				styles.inputBlock,
+			]}>
+				<div css={[
 					styles.label,
-					(value || isFocused) && styles.movedLabel
-				)}>
+					(value || isFocused) && styles.movedLabel,
+				]}>
 					{label || name}
 				</div>
-				<div className={cx(
+				<div css={[
 					styles.inputContainer,
 					!isErrored && isFocused && styles.focusedInputContainer,
-					isErrored && styles.erroredInputContainer
-				)}>
+					isErrored && styles.erroredInputContainer,
+				]}>
 					<Field
 						name={name}
 						type={type}
@@ -71,17 +71,17 @@ export default class CustomField extends React.Component{
 						rows={component === `textarea` ? 1 : null}
 						innerRef={el => this.input = el}
 						style={{ height }}
-						className={cx(
+						css={[
 							styles.input,
-							isErrored && styles.erroredInput
-						)}
+							isErrored && styles.erroredInput,
+						]}
 					/>
 
 				</div>
 				<ErrorMessage
 					name={name}
 					component='div'
-					className={styles.errorMsg}
+					css={styles.errorMsg}
 				/>
 			</label>
 		)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import Gravatar from 'react-gravatar'
 import formatDateTime from '../functions/format-date-time'
 
@@ -13,7 +13,7 @@ export default class Comments extends React.Component{
 			<>
 				<h3>Comments:</h3>
 				{hasComments && (
-					<div className={styles.commentsList}>
+					<div css={styles.commentsList}>
 						{comments.map(({
 							html,
 							name,
@@ -21,7 +21,7 @@ export default class Comments extends React.Component{
 							date,
 						}, index) => {
 							return (
-								<div className={styles.columns} key={`comment${index}`}>
+								<div css={styles.columns} key={`comment${index}`}>
 									<div>
 										<Gravatar
 											md5={md5}
@@ -31,11 +31,8 @@ export default class Comments extends React.Component{
 										/>
 									</div>
 									<div>
-										<h4 className={styles.name}>{name}</h4>
-										<time
-											dateTime={date}
-											className={styles.time}
-										>
+										<h4 css={styles.name}>{name}</h4>
+										<time dateTime={date} css={styles.time}>
 											{formatDateTime(date)}
 										</time>
 										<div dangerouslySetInnerHTML={{ __html: html }} />

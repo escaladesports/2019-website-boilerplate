@@ -5,7 +5,7 @@ export default class Button extends React.Component{
 	render(){
 		const { children, ...props } = this.props
 		return (
-			<button className={buttonStyles} {...props}>
+			<button css={buttonStyles} {...props}>
 				{children}
 			</button>
 		)

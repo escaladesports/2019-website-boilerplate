@@ -1,7 +1,7 @@
 import React from 'react'
 import Script from 'react-load-script'
 import { buttons, components } from 'netlify-cms-ui-default'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import Img from '../cloudinary-image'
 import { cloudinaryName, cloudinaryUploadPreset } from '../../../site-config'
 
@@ -33,7 +33,7 @@ class CloudinaryControl extends React.Component{
 				<div>{value}</div>
 				<button
 					onClick={this.openWidget}
-					className={styles.button}
+					css={styles.button}
 				>
 					{!!value && `Replace`}
 					{!value && `Upload`}

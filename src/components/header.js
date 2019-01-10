@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'gatsby-link'
-import { css, cx } from 'emotion'
+import { css } from '@emotion/core'
 import Close from '@material-ui/icons/Close'
 import { primaryColor } from '../styles/colors'
 
@@ -18,19 +18,22 @@ export default class Header extends React.Component{
 	render(){
 		const { open } = this.state
 		return (
-			<header className={styles.header}>
+			<header css={styles.header}>
 				<button
 					type='button'
 					onClick={this.toggle}
-					className={styles.menuButton}
+					css={styles.menuButton}
 				>
 					menu
 				</button>
 				<nav
-					className={cx(styles.nav, open && styles.navOpen)}
+					css={[
+						styles.nav,
+						open && styles.navOpen,
+					]}
 					onClick={this.toggle}
 				>
-					<Close className={styles.close} />
+					<Close css={styles.close} />
 					<ul>
 						<li><Link to='/'>Home</Link></li>
 						<li><Link to='/blog'>Blog</Link></li>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { css, cx } from 'emotion'
+import { css } from '@emotion/core'
 import Carousel from '@brainhubeu/react-carousel'
 import Right from '@material-ui/icons/ChevronRight'
 import Left from '@material-ui/icons/ChevronLeft'
@@ -89,25 +89,25 @@ export default class CarouselComp extends React.Component {
 						</Placeholder>
 
 					))}
-					className={styles.carousel}
+					css={styles.carousel}
 					ref={el => this.carousel = el}
 				/>
 				{slideTotal > 1 && <>
 					<button
 						onClick={this.previousSlide}
-						className={cx(styles.button, styles.left)}
+						css={[styles.button, styles.left]}
 					>
-						<Left className={styles.icon} />
+						<Left css={styles.icon} />
 					</button>
 					<button
 						onClick={this.nextSlide}
-						className={cx(styles.button, styles.right)}
+						css={[styles.button, styles.right]}
 					>
-						<Right className={styles.icon} />
+						<Right css={styles.icon} />
 					</button>
 				</>}
 			</Placeholder>
-			<div className={styles.thumbnails}>
+			<div css={styles.thumbnails}>
 				<Carousel
 					value={thumbnailsPage}
 					slidesPerPage={thumbnailsPerPage}
@@ -116,13 +116,13 @@ export default class CarouselComp extends React.Component {
 							role='button'
 							key={`thumbnail${index}`}
 							ratio={ratio}
-							className={cx(
+							css={[
 								styles.thumbnail,
-								index === slideValue && styles.activeThumbnail
-							)}
+								index === slideValue && styles.activeThumbnail,
+							]}
 						>
 							<button
-								className={styles.button}
+								css={styles.button}
 								onClick={() => this.goToSlide(index)}
 							>
 								{slide}

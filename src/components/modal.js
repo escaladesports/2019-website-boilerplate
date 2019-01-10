@@ -1,20 +1,20 @@
 import React from 'react'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { white } from '../styles/colors'
 
 export default class Modal extends React.Component{
 	render(){
 		return (
 			<div
-				className={styles.bg}
+				css={styles.bg}
 				style={{ display: this.props.open ? `block` : `none` }}
 				onClick={this.props.onClose}
 			>
-				<div className={styles.dialog} onClick={stopPropagation}>
-					<div className={`close ${styles.close}`} onClick={this.props.onClose}>
+				<div css={styles.dialog} onClick={stopPropagation}>
+					<div className='close' css={styles.close} onClick={this.props.onClose}>
 						×
 					</div>
-					<div className={styles.content}>
+					<div css={styles.content}>
 						{this.props.children}
 					</div>
 				</div>

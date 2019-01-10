@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import Link from 'gatsby-link'
 import { Helmet } from 'react-helmet'
 import { Cloudinary } from 'cloudinary-core'
@@ -84,7 +84,7 @@ export default class PostTemplate extends React.Component{
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<div>
 					{next && (
-						<div className={styles.next}>
+						<div css={styles.next}>
 							<Link to={next.fields.path}>
 								Next Post: {next.frontmatter.title}
 							</Link>
@@ -98,10 +98,10 @@ export default class PostTemplate extends React.Component{
 						</div>
 					)}
 				</div>
-				<div className={styles.comments}>
+				<div css={styles.comments}>
 					<Comments comments={comments} />
 				</div>
-				<div className={styles.commentForm}>
+				<div css={styles.commentForm}>
 					<h3>Leave a comment:</h3>
 					<CommentForm slug={slug} />
 				</div>

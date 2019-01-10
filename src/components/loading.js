@@ -1,12 +1,12 @@
 import React from 'react'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { primaryColor } from '../styles/colors'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 export default class LoadingAnimation extends React.Component{
 	render(){
 		return (
-			<div className={styles.container}>
+			<div css={styles.container}>
 				<CircularProgress style={{ color: primaryColor }} />
 			</div>
 		)

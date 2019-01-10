@@ -1,5 +1,5 @@
 import React from 'react'
-import { css, cx } from 'emotion'
+import { css } from '@emotion/core'
 import { Field, ErrorMessage } from 'formik'
 import Check from '@material-ui/icons/Check'
 import { primaryColor } from '../styles/colors'
@@ -38,11 +38,11 @@ export default class Checkbox extends React.Component {
 		const isErrored = errors[name] && isTouched
 
 		return (
-			<label className={cx(
+			<label css={[
 				isErrored && styles.error,
-				styles.inputBlock
-			)}>
-				<div className={styles.inputContainer}>
+				styles.inputBlock,
+			]}>
+				<div css={styles.inputContainer}>
 					<Field
 						name={name}
 						type='checkbox'
@@ -50,19 +50,19 @@ export default class Checkbox extends React.Component {
 						onFocus={this.onFocus}
 						onBlur={this.onBlur}
 						innerRef={el => this.input = el}
-						className={styles.input}
+						css={styles.input}
 					/>
-					<div className={cx(`box`, styles.checkbox)}>
-						<Check className={cx(`check`, styles.check)} />
+					<div css={styles.checkbox} className='box'>
+						<Check css={styles.check} className='check' />
 					</div>
-					<div className={styles.label}>
+					<div css={styles.label}>
 						{label || name}
 					</div>
 				</div>
 				<ErrorMessage
 					name={name}
 					component='div'
-					className={styles.errorMsg}
+					css={styles.errorMsg}
 				/>
 			</label>
 		)

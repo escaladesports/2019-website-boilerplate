@@ -1,11 +1,11 @@
 import React from 'react'
-import { css } from 'emotion'
+import { css } from '@emotion/core'
 import { successColor, lightSuccessColor } from '../styles/colors'
 
 export default class SuccessMessage extends React.Component{
 	render(){
 		return (
-			<div className={styles.box}>
+			<div css={styles.box}>
 				{this.props.children}
 			</div>
 		)
