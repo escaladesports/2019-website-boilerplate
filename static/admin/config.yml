@@ -3,13 +3,12 @@ backend:
   accept_roles:
     - admin
 
-media_folder: static/uploads
-public_folder: /uploads
-
 media_library:
-  name: uploadcare
+  name: cloudinary
+  output_filename_only: true
   config:
-    publicKey: demopublickey
+    cloud_name: escalade-sports
+    api_key: 449658775389987
 
 collections:
   - label: Pages
@@ -25,9 +24,6 @@ collections:
           - label: Header Image
             name: headerImage
             widget: image
-          - label: Cloudinary Test
-            name: cloudinaryTest
-            widget: cloudinary
       - label: Contact
         name: contact
         file: src/markdown/contact.md
@@ -169,7 +165,7 @@ collections:
         required: false
       - label: Image
         name: image
-        widget: cloudinary
+        widget: image
         required: false
         hint: Image must be 1mb or less
       - label: Body
