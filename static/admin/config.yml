@@ -9,6 +9,7 @@ media_library:
   config:
     cloud_name: escalade-sports
     api_key: 449658775389987
+    upload_preset: u7mubgw1
 
 collections:
   - label: Pages
