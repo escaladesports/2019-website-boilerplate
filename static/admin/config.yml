@@ -4,12 +4,12 @@ backend:
     - admin
 
 media_library:
-  name: cloudinary
+  name: cloudinary-v2
   output_filename_only: true
   config:
     cloud_name: escalade-sports
     api_key: 449658775389987
-    uploadPreset: lfg3y9df
+    upload_preset: lfg3y9df
 
 collections:
   - label: Pages
