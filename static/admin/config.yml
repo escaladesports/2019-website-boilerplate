@@ -8,7 +8,6 @@ media_library:
   output_filename_only: true
   config:
     cloud_name: escalade-sports
-    api_key: 449658775389987
     upload_preset: lfg3y9df
 
 collections:
