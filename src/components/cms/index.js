@@ -2,7 +2,7 @@ import CMS, { init } from 'netlify-cms'
 import netlifyIdentityWidget from 'netlify-identity-widget'
 import { injectGlobal } from 'emotion'
 import { CurrencyControl, CurrencyPreview } from './currency'
-import cloudinary from './cloudinary-v2'
+import cloudinary from './cloudinary-media-library'
 import logo from '../../../static/backend-logo.png'
 
 injectGlobal`
