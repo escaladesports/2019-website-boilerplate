@@ -1,11 +1,6 @@
-export function handler({ body }, _, callback){
+export function handler(req, _, callback){
 
-	try {
-		console.log(JSON.parse(body))
-	}
-	catch(err){
-		console.error(err)
-	}
+	console.log(req)
 
 
 
