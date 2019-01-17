@@ -69,9 +69,14 @@ async function init({ options = {}, handleInsert } = {}) {
 	return {
 		show: async ({ config: instanceConfig = {}, allowMultiple } = {}) => {
 
-			const res = await fetch(`./.netlify/functions/cloudinary-auth`)
-			const data = await res.text()
-			console.log(`data`, data)
+			try {
+				const res = await fetch(`./.netlify/functions/cloudinary-auth`)
+				const data = await res.text()
+				console.log(`data`, data)
+			}
+			catch(err){
+				console.error(err)
+			}
 
 			if (allowMultiple === false) {
 				instanceConfig.multiple = false

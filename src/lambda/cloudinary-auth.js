@@ -1,7 +1,11 @@
 export function handler({ body }, _, callback){
 
-	console.log(JSON.parse(body))
-
+	try {
+		console.log(JSON.parse(body))
+	}
+	catch(err){
+		console.error(err)
+	}
 
 
 
