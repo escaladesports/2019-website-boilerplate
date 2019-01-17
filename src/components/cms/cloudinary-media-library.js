@@ -70,7 +70,7 @@ async function init({ options = {}, handleInsert } = {}) {
 		show: async ({ config: instanceConfig = {}, allowMultiple } = {}) => {
 
 			try {
-				const res = await fetch(`./.netlify/functions/cloudinary-auth`)
+				const res = await fetch(`/.netlify/functions/cloudinary-auth`)
 				const data = await res.text()
 				console.log(`data`, data)
 			}
