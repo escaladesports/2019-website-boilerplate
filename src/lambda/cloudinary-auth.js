@@ -1,16 +1,10 @@
 
 
-export function handler(_, context, callback){
+export function handler(body, context, callback){
 
-	// const { nf_jwt } = parse(req.headers.cookie)
-	// console.log(`jwt`, nf_jwt)
-
-	// const auth = new GoTrue({
-	// 	APIUrl: `${process.env.URL}/.netlify/identity`,
-	// })
-
-	// auth
-	console.log(context)
+	console.log(`body`, body)
+	console.log(`context`, context)
+	console.log(`env`, process.env)
 
 	callback(null, {
 		statusCode: 200,
