@@ -1,8 +1,10 @@
+import { parse } from 'cookie'
+
 export function handler(req, _, callback){
 
-	console.log(req)
-
-
+	const { nf_jwt } = parse(req.headers.cookie)
+	console.log(`jwt`, nf_jwt)
+	console.log(process.env)
 
 	callback(null, {
 		statusCode: 200,
