@@ -70,7 +70,7 @@ async function init({ options = {}, handleInsert } = {}) {
 		show: async ({ config: instanceConfig = {}, allowMultiple } = {}) => {
 
 			const res = await fetch(`./.netlify/functions/cloudinary-auth`)
-			const data = await res.json()
+			const data = await res.text()
 			console.log(`data`, data)
 
 			if (allowMultiple === false) {
