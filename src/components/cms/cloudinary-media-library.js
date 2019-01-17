@@ -88,6 +88,6 @@ async function init({ options = {}, handleInsert } = {}) {
 	}
 }
 
-const cloudinaryMediaLibrary = { name: `cloudinary`, init }
+const cloudinaryMediaLibrary = { name: `cloudinary-auth`, init }
 
 export default cloudinaryMediaLibrary

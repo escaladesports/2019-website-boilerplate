@@ -4,7 +4,7 @@ backend:
     - admin
 
 media_library:
-  name: cloudinary-v2
+  name: cloudinary-auth
   output_filename_only: true
   config:
     cloud_name: escalade-sports
