@@ -2,9 +2,9 @@
 
 export function handler(body, context, callback){
 
-	console.log(`body`, body)
-	console.log(`context`, context)
-	console.log(`env`, process.env)
+	console.log(`BODY`, body)
+	console.log(`CONTEXT`, context)
+	console.log(`ENV`, process.env)
 
 	callback(null, {
 		statusCode: 200,
