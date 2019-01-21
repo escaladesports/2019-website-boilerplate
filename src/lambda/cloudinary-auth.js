@@ -10,7 +10,7 @@ export function handler(body, context, callback){
 
 	const { nf_jwt } = parse(body.headers.cookie)
 
-	console.log(`JWT`, JWT_SIGNING_SECRET)
+	console.log(`JWT`, nf_jwt)
 	console.log(`Signing secret`, JWT_SIGNING_SECRET)
 
 	console.log(
