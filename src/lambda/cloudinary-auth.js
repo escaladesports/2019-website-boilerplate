@@ -24,7 +24,7 @@ export function handler(body, context, callback){
 		if(roles.indexOf(`admin`) === -1){
 			throw `Admin role not found`
 		}
-		const timestamp = Math.round((new Date()).getTime() / 1000)
+		const timestamp = Math.round((new Date()).getTime() / 1000).toString()
 		const obj = {
 			cloud_name: CLOUDINARY_CLOUD_NAME,
 			timestamp,
