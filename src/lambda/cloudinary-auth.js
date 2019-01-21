@@ -24,22 +24,14 @@ export function handler(body, context, callback){
 	try {
 		console.log(
 			`bodyRes with bunk`,
-			jwt.verify(nf_jwt, `asdf`)
+			jwt.verify(nf_jwt, JWT_SIGNING_SECRET.replace(`8`, `7`))
 		)
 	}
 	catch(err){
 		console.error(err)
 	}
 
-	try {
-		console.log(
-			`bodyRes with nothing`,
-			jwt.verify(nf_jwt)
-		)
-	}
-	catch (err) {
-		console.error(err)
-	}
+
 	// console.log(
 	// 	`contextRes with bunk`,
 	// 	jwt.verify(context.clientContext.identity.token, `asdf`)
