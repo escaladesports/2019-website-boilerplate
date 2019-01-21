@@ -33,7 +33,7 @@ export function handler(body, context, callback){
 		}
 		console.log(`Signing object:`, obj)
 		console.log(`Signing with:`, CLOUDINARY_API_SECRET)
-		const signature = api_sign_request(obj, CLOUDINARY_API_SECRET)
+		const signature = api_sign_request(obj, CLOUDINARY_API_SECRET).toUpperCase()
 		console.log(`Signature`, signature)
 
 		callback(null, {
