@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken'
 import { parse } from 'cookie'
-import { createHash } from 'crypto'
+import { utils } from 'cloudinary'
+
+const { api_sign_request } = utils
 
 const {
 	JWT_SIGNING_SECRET,
@@ -23,17 +25,19 @@ export function handler(body, context, callback){
 			throw `Admin role not found`
 		}
 		const timestamp = Math.round((new Date()).getTime() / 1000)
-		const sigString = `cloud_name=${CLOUDINARY_CLOUD_NAME}&timestamp=${timestamp}&username=${CLOUDINARY_USERNAME}${CLOUDINARY_API_SECRET}`
-		const signature = createHash(`sha256`).update(sigString).digest(`hex`)
-		const testSignature = createHash(`sha256`).update(`public_id=sample_image&timestamp=1315060510abcd`).digest(`hex`)
-		console.log(`signature`, signature)
-		console.log(`testSignature`, testSignature)
+
+		// Should be b4ad47fb4e25c7bf5f92a20089f9db59bc302313
+
 		callback(null, {
 			statusCode: 200,
 			body: JSON.stringify({
 				username: CLOUDINARY_USERNAME,
 				timestamp,
-				signature,
+				signature: api_sign_request({
+					cloud_name: CLOUDINARY_CLOUD_NAME,
+					timestamp,
+					username: CLOUDINARY_USERNAME,
+				}, CLOUDINARY_API_SECRET),
 			}),
 		})
 	}

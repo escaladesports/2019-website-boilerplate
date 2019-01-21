@@ -28,6 +28,7 @@
     "prepublishOnly": "npm run build",
     "reset": "node utils/reset",
     "serve": "gatsby serve --open",
+    "sig": "node src/functions/test-signature",
     "test": "jest",
     "travis": "opn https://travis-ci.org/escaladesports/project-boilerplate/branches"
   },
@@ -83,6 +84,7 @@
     "child-process-async": "^1.0.1",
     "child-process-promise": "^2.2.1",
     "clean-css": "^4.2.1",
+    "cloudinary": "^1.13.2",
     "cloudinary-core": "^2.5.0",
     "cloudinary-react": "^1.0.6",
     "color": "^3.0.0",
