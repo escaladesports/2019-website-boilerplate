@@ -24,14 +24,16 @@ export function handler(body, context, callback){
 		if(roles.indexOf(`admin`) === -1){
 			throw `Admin role not found`
 		}
-		const timestamp = Math.round((new Date()).getTime() / 1000) + ``
-		const signature = api_sign_request({
+		const timestamp = Math.round((new Date()).getTime() / 1000)
+		const obj = {
 			cloud_name: CLOUDINARY_CLOUD_NAME,
 			timestamp,
 			username: CLOUDINARY_USERNAME,
-		}, CLOUDINARY_API_SECRET)
-
-		// Should be b4ad47fb4e25c7bf5f92a20089f9db59bc302313
+		}
+		console.log(`Signing object:`, obj)
+		console.log(`Signing with:`, CLOUDINARY_API_SECRET)
+		const signature = api_sign_request(obj, CLOUDINARY_API_SECRET)
+		console.log(`Signature`, signature)
 
 		callback(null, {
 			statusCode: 200,
