@@ -64,20 +64,12 @@ async function init({ options = {}, handleInsert } = {}) {
 		handleInsert(cloudinaryConfig.multiple ? assets : assets[0])
 	}
 
+	cloudinaryConfig.signature = await fetchSignature()
+
 	const mediaLibrary = window.cloudinary.createMediaLibrary(cloudinaryConfig, { insertHandler })
 
 	return {
 		show: async ({ config: instanceConfig = {}, allowMultiple } = {}) => {
-
-			let signature
-			try {
-				const res = await fetch(`/.netlify/functions/cloudinary-auth`)
-				const data = await res.json()
-				signature = data.signature
-			}
-			catch(err){
-				console.error(err)
-			}
 
 			if (allowMultiple === false) {
 				instanceConfig.multiple = false
@@ -86,12 +78,24 @@ async function init({ options = {}, handleInsert } = {}) {
 				config: {
 					...cloudinaryBehaviorConfig,
 					...instanceConfig,
-					signature,
+					signature: await fetchSignature(),
 				},
 			})
 		},
 		hide: () => mediaLibrary.hide(),
 		enableStandalone: () => true,
+	}
+}
+
+async function fetchSignature() {
+	try {
+		const res = await fetch(`/.netlify/functions/cloudinary-auth`)
+		const data = await res.json()
+		console.log(data.signature)
+		return data.signature
+	}
+	catch (err) {
+		console.error(err)
 	}
 }
 
