@@ -8,7 +8,7 @@ media_library:
   output_filename_only: true
   config:
     cloud_name: escalade-sports
-    upload_preset: lfg3y9df
+    api_key: 449658775389987
 
 collections:
   - label: Pages

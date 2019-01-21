@@ -69,10 +69,11 @@ async function init({ options = {}, handleInsert } = {}) {
 	return {
 		show: async ({ config: instanceConfig = {}, allowMultiple } = {}) => {
 
+			let signature
 			try {
 				const res = await fetch(`/.netlify/functions/cloudinary-auth`)
-				const data = await res.text()
-				console.log(`data`, data)
+				const data = await res.json()
+				signature = data.signature
 			}
 			catch(err){
 				console.error(err)
@@ -85,6 +86,7 @@ async function init({ options = {}, handleInsert } = {}) {
 				config: {
 					...cloudinaryBehaviorConfig,
 					...instanceConfig,
+					signature,
 				},
 			})
 		},
