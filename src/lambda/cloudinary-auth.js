@@ -10,6 +10,9 @@ export function handler(body, context, callback){
 
 	const { nf_jwt } = parse(body.headers.cookie)
 
+	console.log(`JWT`, JWT_SIGNING_SECRET)
+	console.log(`Signing secret`, JWT_SIGNING_SECRET)
+
 	console.log(
 		`bodyRes with secret`,
 		jwt.verify(nf_jwt, JWT_SIGNING_SECRET)
@@ -24,7 +27,7 @@ export function handler(body, context, callback){
 	try {
 		console.log(
 			`bodyRes with bunk`,
-			jwt.verify(nf_jwt, JWT_SIGNING_SECRET.replace(`8`, `7`))
+			jwt.verify(nf_jwt, `-xN_h82PHVTCMA9vdoHrcZxH-x5mb11y1537t3rGzcM`)
 		)
 	}
 	catch(err){
