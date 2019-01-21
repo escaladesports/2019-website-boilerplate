@@ -98,7 +98,7 @@ async function fetchSignature() {
 		return data
 	}
 	catch (err) {
-		console.error(err)
+		console.error(`fetchSignature error`, err)
 	}
 }
 
