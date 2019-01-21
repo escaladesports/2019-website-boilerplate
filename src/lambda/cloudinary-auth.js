@@ -24,7 +24,7 @@ export function handler(body, context, callback){
 		}
 		const timestamp = Math.round((new Date()).getTime() / 1000)
 		const sigString = `cloud_name=${CLOUDINARY_CLOUD_NAME}&timestamp=${timestamp}&username=${CLOUDINARY_USERNAME}${CLOUDINARY_API_SECRET}`
-		const signature = createHash(`sha256`).update(sigString).digest(`hex`)
+		const signature = createHash(`sha256`).update(sigString).digest(`base64`)
 		console.log(`signature`, signature)
 		callback(null, {
 			statusCode: 200,

@@ -96,7 +96,6 @@ async function fetchSignature() {
 	try {
 		const res = await fetch(`/.netlify/functions/cloudinary-auth`)
 		const data = await res.json()
-		console.log(data)
 		return data
 	}
 	catch (err) {
