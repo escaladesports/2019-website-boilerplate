@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken'
 import { parse } from 'cookie'
-import { utils } from 'cloudinary'
+// import { utils } from 'cloudinary'
+import crypto from 'crypto'
 
-const { api_sign_request } = utils
+// const { api_sign_request } = utils
 
 const {
 	JWT_SIGNING_SECRET,
@@ -32,7 +33,7 @@ export function handler(body, context, callback){
 		}
 		console.log(`Signing object:`, obj)
 		console.log(`Signing with:`, CLOUDINARY_API_SECRET)
-		const signature = api_sign_request(obj, CLOUDINARY_API_SECRET)
+		const signature = hashSignature(obj, CLOUDINARY_API_SECRET)
 		console.log(`Signature`, signature)
 
 		callback(null, {
@@ -55,4 +56,15 @@ export function handler(body, context, callback){
 	}
 
 
+}
+
+function hashSignature(obj, secret) {
+	const arr = []
+	obj.keys().sort().forEach(key => {
+		arr.push(`${key}=${obj[key]}`)
+	})
+
+	return crypto.createHash(`sha256`)
+		.update(arr.join(`&`) + secret)
+		.digest(`hex`)
 }
