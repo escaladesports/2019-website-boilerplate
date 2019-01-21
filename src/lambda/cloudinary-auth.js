@@ -22,13 +22,15 @@ export function handler(body, context, callback){
 		if(roles.indexOf(`admin`) === -1){
 			throw `Admin role not found`
 		}
-		const ts = Math.round((new Date()).getTime() / 1000)
-		const sigString = `cloud_name=${CLOUDINARY_CLOUD_NAME}&timestamp=${ts}&username=${CLOUDINARY_USERNAME}${CLOUDINARY_API_SECRET}`
+		const timestamp = Math.round((new Date()).getTime() / 1000)
+		const sigString = `cloud_name=${CLOUDINARY_CLOUD_NAME}&timestamp=${timestamp}&username=${CLOUDINARY_USERNAME}${CLOUDINARY_API_SECRET}`
 		const signature = createHash(`sha256`).update(sigString).digest(`hex`)
 		console.log(`signature`, signature)
 		callback(null, {
 			statusCode: 200,
 			body: JSON.stringify({
+				username: CLOUDINARY_USERNAME,
+				timestamp,
 				signature,
 			}),
 		})

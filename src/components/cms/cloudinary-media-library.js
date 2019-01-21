@@ -53,7 +53,12 @@ async function init({ options = {}, handleInsert } = {}) {
 	 */
 	const { config: providedConfig = {}, ...integrationOptions } = options
 	const resolvedOptions = { ...defaultOptions, ...integrationOptions }
-	const cloudinaryConfig = { ...defaultConfig, ...providedConfig, ...enforcedConfig }
+	const cloudinaryConfig = {
+		...defaultConfig,
+		...providedConfig,
+		...enforcedConfig,
+		...await fetchSignature(),
+	}
 	const cloudinaryBehaviorConfigKeys = [`default_transformations`, `max_files`, `multiple`]
 	const cloudinaryBehaviorConfig = pick(cloudinaryConfig, cloudinaryBehaviorConfigKeys)
 
@@ -63,8 +68,6 @@ async function init({ options = {}, handleInsert } = {}) {
 		const assets = data.assets.map(asset => getAssetUrl(asset, resolvedOptions))
 		handleInsert(cloudinaryConfig.multiple ? assets : assets[0])
 	}
-
-	cloudinaryConfig.signature = await fetchSignature()
 
 	const mediaLibrary = window.cloudinary.createMediaLibrary(cloudinaryConfig, { insertHandler })
 
@@ -78,7 +81,7 @@ async function init({ options = {}, handleInsert } = {}) {
 				config: {
 					...cloudinaryBehaviorConfig,
 					...instanceConfig,
-					signature: await fetchSignature(),
+					...await fetchSignature(),
 				},
 			})
 		},
@@ -91,8 +94,8 @@ async function fetchSignature() {
 	try {
 		const res = await fetch(`/.netlify/functions/cloudinary-auth`)
 		const data = await res.json()
-		console.log(data.signature)
-		return data.signature
+		console.log(data)
+		return data
 	}
 	catch (err) {
 		console.error(err)
