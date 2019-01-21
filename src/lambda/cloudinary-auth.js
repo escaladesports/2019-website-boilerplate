@@ -25,7 +25,9 @@ export function handler(body, context, callback){
 		const timestamp = Math.round((new Date()).getTime() / 1000)
 		const sigString = `cloud_name=${CLOUDINARY_CLOUD_NAME}&timestamp=${timestamp}&username=${CLOUDINARY_USERNAME}${CLOUDINARY_API_SECRET}`
 		const signature = createHash(`sha256`).update(sigString).digest(`hex`)
+		const testSignature = createHash(`sha256`).update(`public_id=sample_image&timestamp=1315060510abcd`).digest(`hex`)
 		console.log(`signature`, signature)
+		console.log(`testSignature`, testSignature)
 		callback(null, {
 			statusCode: 200,
 			body: JSON.stringify({
