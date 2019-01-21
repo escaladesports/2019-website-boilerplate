@@ -60,7 +60,7 @@ export function handler(body, context, callback){
 
 function hashSignature(obj, secret) {
 	const arr = []
-	obj.keys().sort().forEach(key => {
+	Object.keys(obj).sort().forEach(key => {
 		arr.push(`${key}=${obj[key]}`)
 	})
 
