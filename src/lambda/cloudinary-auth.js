@@ -30,8 +30,9 @@ export function handler(body, context, callback){
 		// Create signature
 		const timestamp = Date.now()
 		const str = `cloud_name=${CLOUDINARY_CLOUD_NAME}&timestamp=${timestamp}&username=${CLOUDINARY_USERNAME}${CLOUDINARY_API_SECRET}`
+		console.log(`STR`, str)
 		const signature = hasha(str, { algorithm: `sha256` })
-
+		console.log(`SIGNATURE`, signature)
 
 		callback(null, {
 			statusCode: 200,
