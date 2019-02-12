@@ -59,6 +59,7 @@ async function init({ options = {}, handleInsert } = {}) {
 		...enforcedConfig,
 		...await fetchSignature(),
 	}
+	console.log(`INIT CONFIG`, cloudinaryConfig)
 	const cloudinaryBehaviorConfigKeys = [`default_transformations`, `max_files`, `multiple`]
 	const cloudinaryBehaviorConfig = pick(cloudinaryConfig, cloudinaryBehaviorConfigKeys)
 
@@ -79,13 +80,13 @@ async function init({ options = {}, handleInsert } = {}) {
 			if (allowMultiple === false) {
 				instanceConfig.multiple = false
 			}
-			return mediaLibrary.show({
-				config: {
-					...cloudinaryBehaviorConfig,
-					...instanceConfig,
-					...await fetchSignature(),
-				},
-			})
+			const config = {
+				...cloudinaryBehaviorConfig,
+				...instanceConfig,
+				...await fetchSignature(),
+			}
+			console.log(`SHOW CONFIG`, config)
+			return mediaLibrary.show({ config })
 		},
 		hide: () => mediaLibrary.hide(),
 		enableStandalone: () => true,
