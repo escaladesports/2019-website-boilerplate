@@ -85,7 +85,6 @@ async function init({ options = {}, handleInsert } = {}) {
 				...await fetchSignature(),
 			}
 			console.log(`SHOW CONFIG`, config)
-			config.api_key = config.api_key.toString()
 			return mediaLibrary.show({ config })
 		},
 		hide: () => mediaLibrary.hide(),
