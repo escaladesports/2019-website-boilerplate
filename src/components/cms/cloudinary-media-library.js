@@ -59,6 +59,7 @@ async function init({ options = {}, handleInsert } = {}) {
 		...enforcedConfig,
 		...await fetchSignature(),
 	}
+	cloudinaryConfig.api_key = cloudinaryConfig.api_key.toString()
 	console.log(`INIT CONFIG`, cloudinaryConfig)
 	const cloudinaryBehaviorConfigKeys = [`default_transformations`, `max_files`, `multiple`]
 	const cloudinaryBehaviorConfig = pick(cloudinaryConfig, cloudinaryBehaviorConfigKeys)
@@ -85,6 +86,7 @@ async function init({ options = {}, handleInsert } = {}) {
 				...instanceConfig,
 				...await fetchSignature(),
 			}
+			config.api_key = config.api_key.toString()
 			console.log(`SHOW CONFIG`, config)
 			return mediaLibrary.show({ config })
 		},
