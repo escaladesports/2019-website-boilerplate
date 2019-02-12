@@ -14,6 +14,8 @@ export function handler(body, context, callback){
 
 	const { nf_jwt } = parse(body.headers.cookie)
 
+	console.log(`JWT`, nf_jwt)
+
 	try{
 		const {
 			app_metadata: {
