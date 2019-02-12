@@ -71,8 +71,6 @@ async function init({ options = {}, handleInsert } = {}) {
 		handleInsert(cloudinaryConfig.multiple ? assets : assets[0])
 	}
 
-	console.log(`cloudinaryConfig`, cloudinaryConfig)
-
 	const mediaLibrary = window.cloudinary.createMediaLibrary(cloudinaryConfig, { insertHandler })
 
 	return {
