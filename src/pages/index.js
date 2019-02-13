@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Image } from 'cloudinary-react'
+import Image from '../components/cloudinary-image'
 import Button from '../components/button'
 import Layout from '../components/layouts/default'
 import Modal from '../components/modal'
@@ -27,7 +27,7 @@ export default class HomePage extends React.Component {
 			<Layout>
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 
-				<Carousel width={1000} height={400}>
+				<Carousel ratio={[1000, 400]}>
 					<img src={`https://placehold.it/1000x400/ccc/999/&text=slide1`} />
 					<img src={`https://placehold.it/1000x400/ccc/999/&text=slide2`} />
 					<img src={`https://placehold.it/1000x400/ccc/999/&text=slide3`} />
@@ -37,11 +37,7 @@ export default class HomePage extends React.Component {
 
 				<Image
 					publicId={headerImage.split(`/`).pop()}
-					width='auto'
-					aspectRatio={`1000:400`}
-					crop='pad'
-					responsive={true}
-					cloudName='escalade-sports'
+					ratio={[1000, 400]}
 				/>
 
 				<br />

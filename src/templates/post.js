@@ -5,7 +5,6 @@ import Link from 'gatsby-link'
 import { Helmet } from 'react-helmet'
 import { Cloudinary } from 'cloudinary-core'
 import Img from '../components/cloudinary-image'
-import Lazy from '../components/lazy-load'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
 import CommentForm from '../components/comment-form'
@@ -77,9 +76,11 @@ export default class PostTemplate extends React.Component{
 				<time dateTime={date}>{formatDate(date)}</time>
 				<TagList tags={tags} />
 				{!!image && (
-					<Lazy ratio={[515, 343]}>
-						<Img id={image} alt={title} />
-					</Lazy>
+					<Img
+						id={image.split(`/`).pop()}
+						ratio={[515, 343]}
+						alt={title}
+					/>
 				)}
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 				<div>
