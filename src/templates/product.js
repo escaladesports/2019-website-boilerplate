@@ -124,7 +124,6 @@ export const query = graphql`
 				price
 				color
 				id
-				images
 				variants{
 					color
 					id
