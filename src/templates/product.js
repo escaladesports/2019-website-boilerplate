@@ -71,17 +71,14 @@ export default class ProductTemplate extends React.Component{
 						<Image
 							key={`img${index}`}
 							publicId={url.split(`/`).pop()}
-							// cname='images.salsify.com'
 							secureDistribution='images.salsify.com'
 							width='auto'
 							aspectRatio={`${imageRatio[0]}:${imageRatio[1]}`}
 							crop='pad'
 							responsive={true}
-
 							cloudName='salsify'
 							privateCdn={true}
 							secure={true}
-							// cdnSubdomain={true}
 						/>
 					))} />
 				)}
