@@ -5,7 +5,7 @@ backend:
 
 media_library:
   name: cloudinary-auth
-  output_filename_only: true
+  output_filename_only: false
   config:
     cloud_name: escalade-sports
     api_key: 449658775389987
