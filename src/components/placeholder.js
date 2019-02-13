@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 
+// Maintains aspect ratio
 export default class Placeholder extends React.Component{
 	render(){
 		const { ratio, children, ...otherProps } = this.props
