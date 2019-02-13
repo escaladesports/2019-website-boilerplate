@@ -18,6 +18,10 @@ yarn reset
 - `yarn reset`: Changes the project name in `package.json` to match the directory, resets the version number, and resets the git history.
 - `yarn env`: Pulls Netlify environment variables into a local `.env` file. (Only works if you have logged into [netlifyctl](https://github.com/netlify/netlifyctl#command-line-login) at least once and have permissions to the Netlify site)
 
+## Images
+
+All UI related images that belong in the template can be stored in the repository in the `src` directory. Any images that need to be edited through the CMS should be stored in Cloudinary to prevent the repository size from getting out of control.
+
 ## Preparing boilerplate to create Gatsby plugins
 
 - Develop plugin in `./plugins/export` directory
