@@ -45,6 +45,7 @@ export default class Layout extends React.Component{
 				}) => (
 					<>
 						<Helmet>
+							<html lang='en' />
 							<title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
 							<meta name='description' content={description || siteDescription} />
 							<meta property='og:title' content={title} />
