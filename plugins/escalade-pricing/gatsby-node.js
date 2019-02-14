@@ -1,27 +1,9 @@
-const fetch = require(`isomorphic-fetch`)
+const fetch = require(`./fetch`)
 
-exports.sourceNodes = async (
-	{
-		actions,
-		createNodeId,
-		createContentDigest,
-	}, {
-		ids,
-		siteId,
-		env = `production`,
-	}
-) => {
+exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }, options) => {
 	const { createNode } = actions
-	const res = await fetch(endpoints[env] || endpoints.production, {
-		headers: {
-			'ESC-API-Context': siteId,
-		},
-		method: `POST`,
-		body: JSON.stringify({
-			skus: ids,
-		}),
-	})
-	const { prices } = await res.json()
+
+	const prices = await fetch(options)
 
 	for (let id in prices){
 		prices[id].price = Number(prices[id].price)
@@ -48,9 +30,4 @@ exports.sourceNodes = async (
 		createNode(node)
 	}
 
-}
-
-const endpoints = {
-	production: `https://pricing.escsportsapi.com/load`,
-	testing: `https://pricing-test.escsportsapi.com/load`,
 }
