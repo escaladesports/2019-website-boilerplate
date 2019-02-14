@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import { Image } from 'cloudinary-react'
 import Layout from '../components/layouts/default'
-import formatUSD from '../functions/format-usd'
+import Price from '../components/price'
 import Carousel from '../components/photo-carousel'
 
 export default class ProductTemplate extends React.Component{
@@ -102,7 +102,7 @@ export default class ProductTemplate extends React.Component{
 				<ul>
 					<li>Color: {color}</li>
 					<li>ID: {id}</li>
-					<li>Price: {formatUSD(price, true)}</li>
+					<li>Price: $<Price id={id} price={price} /></li>
 					<li>{stock ? `In stock` : `Out of stock`}</li>
 				</ul>
 				<div dangerouslySetInnerHTML={{__html: html}} />
