@@ -65,12 +65,14 @@ export default class CarouselComp extends React.Component {
 						onClick={this.previousSlide}
 						css={[styles.button, styles.left]}
 					>
+						<span>left</span>
 						<Left css={styles.icon} />
 					</button>
 					<button
 						onClick={this.nextSlide}
 						css={[styles.button, styles.right]}
 					>
+						<span>right</span>
 						<Right css={styles.icon} />
 					</button>
 					<div css={styles.bottomControls}>
@@ -129,6 +131,12 @@ const styles = {
 		position: absolute;
 		top: 50%;
 		transform: translateY(-50%);
+		overflow: hidden;
+		span{
+			position: absolute;
+			color: transparent;
+			left: -1000px;
+		}
 		:hover{
 			opacity: .5;
 		}
