@@ -39,6 +39,7 @@ module.exports = {
 		siteUrl,
 	},
 	plugins: [
+		`gatsby-plugin-webpack-size`,
 		{
 			resolve: `gatsby-plugin-emotion`,
 			options: {
