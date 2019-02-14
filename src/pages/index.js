@@ -38,6 +38,7 @@ export default class HomePage extends React.Component {
 				<Image
 					publicId={headerImage.split(`/`).pop()}
 					ratio={[1000, 400]}
+					alt='Escalade logo'
 				/>
 
 				<br />
