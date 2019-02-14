@@ -28,9 +28,9 @@ export default class HomePage extends React.Component {
 				<div dangerouslySetInnerHTML={{ __html: html }} />
 
 				<Carousel ratio={[1000, 400]}>
-					<img src={`https://placehold.it/1000x400/ccc/999/&text=slide1`} />
-					<img src={`https://placehold.it/1000x400/ccc/999/&text=slide2`} />
-					<img src={`https://placehold.it/1000x400/ccc/999/&text=slide3`} />
+					<img src='https://placehold.it/1000x400/ccc/999/&text=slide1' alt='Slide 1' />
+					<img src='https://placehold.it/1000x400/ccc/999/&text=slide2' alt='Slide 2' />
+					<img src='https://placehold.it/1000x400/ccc/999/&text=slide3' alt='Slide 3' />
 				</Carousel>
 
 				<br />
