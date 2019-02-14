@@ -1,10 +1,10 @@
 import color from 'color'
 
 export const
-	primaryColor = `#00dd00`,
+	primaryColor = `#4286f4`,
 	secondaryColor = `#333`,
 	white = `#fff`,
-	primaryActiveColor = color(primaryColor).lighten(.5).rgb().string(),
+	primaryActiveColor = color(primaryColor).lighten(.1).rgb().string(),
 	errorColor = `#f44336`,
 	lightErrorColor = color(errorColor).lighten(.6).rgb().string(),
 	successColor = `#00dd00`,
