@@ -1,7 +1,7 @@
 import color from 'color'
 
 export const
-	primaryColor = `#4286f4`,
+	primaryColor = `#2152a0`,
 	secondaryColor = `#333`,
 	white = `#fff`,
 	primaryActiveColor = color(primaryColor).lighten(.1).rgb().string(),
