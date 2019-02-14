@@ -6,7 +6,6 @@ const pollInterval = 10 * 60 * 1000	// Minutes
 async function fetchPrices(options){
 	try {
 		const prices = await fetch(options)
-		console.log(pricesState)
 		pricesState.setState(prices)
 	}
 	catch(err){

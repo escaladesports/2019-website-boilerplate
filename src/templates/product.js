@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import { Image } from 'cloudinary-react'
 import Layout from '../components/layouts/default'
 import Price from '../components/price'
+import Stock from '../components/stock'
 import Carousel from '../components/photo-carousel'
 
 export default class ProductTemplate extends React.Component{
@@ -103,7 +104,14 @@ export default class ProductTemplate extends React.Component{
 					<li>Color: {color}</li>
 					<li>ID: {id}</li>
 					<li>Price: $<Price id={id} price={price} /></li>
-					<li>{stock ? `In stock` : `Out of stock`}</li>
+					<li>
+						<Stock stock={stock} id={id}>
+							{stock => <>
+								{!!stock && `In stock`}
+								{!stock && `Out of stock`}
+							</>}
+						</Stock>
+					</li>
 				</ul>
 				<div dangerouslySetInnerHTML={{__html: html}} />
 			</Layout>
