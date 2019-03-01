@@ -9,8 +9,3 @@
 [[redirects]]
 	from = "/admin"
 	to = "/admin/"
-
-[[redirects]]
-	from = "/*"
-	to = "/404"
-	status = 404
