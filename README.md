@@ -2,13 +2,25 @@
 
 A simple starter for new web applications, Gatsby plugins, react components, or JavaScript modules.
 
+## Requirements
+
+- [yarn](https://yarnpkg.com/)
+- [nvm](https://github.com/creationix/nvm)
+- [Netlify CLI](https://www.netlify.com/docs/cli/)
+- Netlify CLI Large Media Plugin
+  ```bash
+  netlify plugins:install netlify-lm-plugin
+  netlify lm:install
+  ```
+
 ## Installation
 
 ```bash
 git clone git@github.com:escaladesports/gatsby-boilerplate.git your-website
 cd your-website
-npm i
-npm run reset
+nvm use
+yarn
+yarn reset
 ```
 
 ## Usage
