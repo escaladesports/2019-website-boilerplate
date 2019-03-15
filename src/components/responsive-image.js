@@ -25,7 +25,7 @@ export default class ResponsiveImage extends React.Component{
 			})
 		}
 		resizeEvents.push(this.resize)
-		this.resize()
+		setTimeout(this.resize, 1)
 	}
 	componentWillUnmount(){
 		resizeEvents.splice(resizeEvents.indexOf(this.resize), 1)
@@ -35,6 +35,7 @@ export default class ResponsiveImage extends React.Component{
 			clientWidth: w,
 			clientHeight: h,
 		} = this.container
+		console.log(this.container, w)
 		if (w > this.state.w) {
 			this.setState({ w, h })
 		}
@@ -50,7 +51,6 @@ export default class ResponsiveImage extends React.Component{
 		return (
 			<InView once>
 				{inView => {
-					console.log(inView)
 					return (
 						<div
 							style={{ width }}
