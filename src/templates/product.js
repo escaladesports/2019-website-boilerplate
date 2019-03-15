@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import { Image } from 'cloudinary-react'
+import Img from '../components/cloudinary-image'
 import Layout from '../components/layouts/default'
 import Price from '../components/price'
 import Stock from '../components/stock'
@@ -70,17 +70,10 @@ export default class ProductTemplate extends React.Component{
 				<h1>{productTitle}</h1>
 				{hasImages && (
 					<Carousel ratio={imageRatio} slides={webImages.map(({ url }, index) => (
-						<Image
+						<Img
 							key={`img${index}`}
-							publicId={url.split(`/`).pop()}
-							secureDistribution='images.salsify.com'
-							width='auto'
-							aspectRatio={`${imageRatio[0]}:${imageRatio[1]}`}
-							crop='pad'
-							responsive={true}
-							cloudName='salsify'
-							privateCdn={true}
-							secure={true}
+							src={url}
+							ratio={imageRatio}
 							alt={`${productTitle} ${index + 1}`}
 						/>
 					))} />
