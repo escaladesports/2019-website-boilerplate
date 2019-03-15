@@ -1,5 +1,5 @@
 ---
-headerImage: /static/media/icon.png
+headerImage: /media/icon.png
 ---
 # Home Page
 
