@@ -4,6 +4,7 @@ backend:
     - admin
 
 media_folder: static/media
+public_folder: /media
 
 collections:
   - label: Pages
