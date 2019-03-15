@@ -3,19 +3,13 @@ import { graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import Link from 'gatsby-link'
 import { Helmet } from 'react-helmet'
-import { Cloudinary } from 'cloudinary-core'
-import Img from '../components/cloudinary-image'
+import Img from '../components/netlify-image'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
 import CommentForm from '../components/comment-form'
 import Comments from '../components/comments'
-import { cloudinaryName } from '../../site-config'
+import { siteUrl } from '../../site-config'
 import formatDate from '../functions/format-date'
-
-const cl = new Cloudinary({
-	cloud_name: cloudinaryName,
-	secure: true,
-})
 
 export default class PostTemplate extends React.Component{
 	render(){
@@ -66,10 +60,7 @@ export default class PostTemplate extends React.Component{
 			<Layout title={title} description={excerpt}>
 				{!!image && (
 					<Helmet>
-						<meta property='og:image' content={cl.url(image, {
-							width: 900,
-							crop: `scale`,
-						})} />
+						<meta property='og:image' content={siteUrl + image} />
 					</Helmet>
 				)}
 				<h1>{title}</h1>
@@ -77,8 +68,8 @@ export default class PostTemplate extends React.Component{
 				<TagList tags={tags} />
 				{!!image && (
 					<Img
-						id={image.split(`/`).pop()}
-						ratio={[515, 343]}
+						src={image}
+						ratio={[900, 600]}
 						alt={title}
 					/>
 				)}

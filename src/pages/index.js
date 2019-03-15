@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Image from '../components/cloudinary-image'
+import Img from '../components/netlify-image'
 import Button from '../components/button'
 import Layout from '../components/layouts/default'
 import Modal from '../components/modal'
@@ -35,9 +35,10 @@ export default class HomePage extends React.Component {
 
 				<br />
 
-				<Image
-					publicId={headerImage.split(`/`).pop()}
-					ratio={[1000, 400]}
+				<Img
+					src={headerImage}
+					width={404}
+					height={405}
 					alt='Escalade logo'
 				/>
 
