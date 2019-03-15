@@ -3,6 +3,8 @@ backend:
   accept_roles:
     - admin
 
+media_folder: static/uploads
+
 collections:
   - label: Pages
     name: pages
