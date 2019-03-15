@@ -1,29 +1,40 @@
 import React from 'react'
-import { Image } from 'cloudinary-react'
-import Placeholder from './placeholder'
-import { cloudinaryName } from '../../site-config'
+import { css } from '@emotion/core'
+import Responsive from './responsive-image'
 
-export default class CloudinaryImage extends React.Component{
+export default class NetlifyImage extends React.Component {
 	static defaultProps = {
-		cloudName: cloudinaryName,
-		width: `auto`,
-		crop: `pad`,
-		responsive: true,
+		transformations: `c_pad`,
 	}
-	render(){
+	render() {
 		const {
-			id,
-			ratio,
+			src,
+			alt,
+			transformations,
 			...props
 		} = this.props
-		let aspectRatio
-		if (ratio){
-			aspectRatio = `${ratio[0]}:${ratio[1]}`
-		}
+		let path = src.split(`/`)
+		console.log(path)
+		const name = path.pop()
+		path = path.join(`/`)
 		return (
-			<Placeholder ratio={ratio}>
-				<Image publicId={id} aspectRatio={aspectRatio} {...props} />
-			</Placeholder>
+			<Responsive {...props}>
+				{(w, h) => {
+					return (
+						<img
+							src={`${path}/w_${w},h_${h},${transformations}/${name}`}
+							css={styles.img}
+							alt={alt}
+						/>
+					)
+				}}
+			</Responsive>
 		)
 	}
+}
+
+const styles = {
+	img: css`
+		width: 100%;
+	`,
 }

@@ -10,18 +10,16 @@ export default class NetlifyImage extends React.Component{
 		const {
 			src,
 			resize,
-			ratio,
-			width,
-			height,
+			alt,
 			...props
 		} = this.props
 		return (
-			<Responsive ratio={ratio} width={width} height={height}>
+			<Responsive {...props}>
 				{(w, h) => (
 					<img
 						src={`${src}?nf_resize=${resize}&w=${w}&h=${h}`}
 						css={styles.img}
-						{...props}
+						alt={alt}
 					/>
 				)}
 			</Responsive>
