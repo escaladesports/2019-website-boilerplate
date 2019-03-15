@@ -1,11 +1,11 @@
 ---
-title: "Latest Post"
-path: "latest-post"
-date: "2018-06-14T03:49:16.408Z"
+title: Latest Post
+date: '2018-06-14T03:49:16.408Z'
 tags:
   - latin
   - latest
-image: https://res.cloudinary.com/escalade-sports/image/upload/v1535403799/sample.jpg
+path: latest-post
+image: /media/sample.jpg
 published: true
 ---
 
