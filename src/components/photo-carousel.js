@@ -122,7 +122,7 @@ export default class CarouselComp extends React.Component {
 							]}
 						>
 							<button
-								css={styles.button}
+								css={[styles.button, styles.thumbnailButton]}
 								onClick={() => this.goToSlide(index)}
 							>
 								{slide}
@@ -167,6 +167,10 @@ const styles = {
 	`,
 	thumbnail: css`
 		border: 1px solid transparent;
+	`,
+	thumbnailButton: css`
+		width: 100%;
+		height: 100%;
 	`,
 	activeThumbnail: css`
 		border-color: #333;

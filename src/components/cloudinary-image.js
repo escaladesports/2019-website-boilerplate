@@ -14,7 +14,6 @@ export default class NetlifyImage extends React.Component {
 			...props
 		} = this.props
 		let path = src.split(`/`)
-		console.log(path)
 		const name = path.pop()
 		path = path.join(`/`)
 		return (

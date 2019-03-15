@@ -53,11 +53,7 @@ export default class CarouselComp extends React.Component {
 					infinite
 					value={this.state.onSlide}
 					onChange={onSlide => this.setState({ onSlide })}
-					slides={slides.map((slide, index) => (
-						<Placeholder key={`slide${index}`} ratio={ratio}>
-							{slide}
-						</Placeholder>
-					))}
+					slides={slides}
 					ref={el => this.carousel = el}
 				/>
 				{slideTotal > 1 && <>
