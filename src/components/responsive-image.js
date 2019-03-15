@@ -49,17 +49,20 @@ export default class ResponsiveImage extends React.Component{
 		const { w, h } = this.state
 		return (
 			<InView once>
-				{inView => (
-					<div
-						style={{ width }}
-						css={styles.container}
-						ref={el => this.container = el}
-					>
-						<Placeholder ratio={ratio || [width, height]}>
-							{!!w && inView && children(w, h)}
-						</Placeholder>
-					</div>
-				)}
+				{inView => {
+					console.log(inView)
+					return (
+						<div
+							style={{ width }}
+							css={styles.container}
+							ref={el => this.container = el}
+						>
+							<Placeholder ratio={ratio || [width, height]}>
+								{!!w && inView && children(w, h)}
+							</Placeholder>
+						</div>
+					)
+				}}
 			</InView>
 		)
 	}
