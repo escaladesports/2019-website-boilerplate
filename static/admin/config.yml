@@ -3,13 +3,6 @@ backend:
   accept_roles:
     - admin
 
-media_library:
-  name: cloudinary-auth
-  output_filename_only: false
-  config:
-    cloud_name: escalade-sports
-    api_key: 449658775389987
-
 collections:
   - label: Pages
     name: pages
