@@ -76,6 +76,7 @@ module.exports = {
 				],
 			},
 		},
+		`schema-snapshot`,
 		`blog`,
 		`generic-pages`,
 		`products`,
