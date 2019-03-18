@@ -60,7 +60,10 @@ export default class PostTemplate extends React.Component{
 			<Layout title={title} description={excerpt}>
 				{!!image && (
 					<Helmet>
-						<meta property='og:image' content={siteUrl + image} />
+						<meta
+							property='og:image'
+							content={`${siteUrl}${image}?nf_resize=fit&w=900`}
+						/>
 					</Helmet>
 				)}
 				<h1>{title}</h1>
