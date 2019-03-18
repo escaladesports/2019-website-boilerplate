@@ -76,7 +76,6 @@ module.exports = {
 				],
 			},
 		},
-		`schema-snapshot`,
 		`blog`,
 		`generic-pages`,
 		`products`,
@@ -349,6 +348,7 @@ module.exports = {
 				},
 			},
 		},
+		`schema-snapshot`,
 	],
 	developMiddleware: app => {
 		app.use(
