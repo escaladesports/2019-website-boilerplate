@@ -28,6 +28,7 @@ export default class PostTemplate extends React.Component{
 						tags,
 						date,
 						image,
+						imageDesc,
 					},
 					html,
 					excerpt,
@@ -73,7 +74,7 @@ export default class PostTemplate extends React.Component{
 					<Img
 						src={image}
 						ratio={[900, 600]}
-						alt={title}
+						alt={imageDesc}
 					/>
 				)}
 				<div dangerouslySetInnerHTML={{ __html: html }} />
@@ -131,6 +132,7 @@ export const query = graphql`
 				title
 				tags
 				image
+				imageDesc
 				date
 			}
 		}

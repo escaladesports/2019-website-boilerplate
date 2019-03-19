@@ -19,6 +19,7 @@ export default class HomePage extends React.Component {
 				html,
 				frontmatter: {
 					headerImage,
+					headerImageDesc,
 				},
 			},
 		} = this.props.data
@@ -39,7 +40,7 @@ export default class HomePage extends React.Component {
 					src={headerImage}
 					width={404}
 					height={405}
-					alt='Escalade logo'
+					alt={headerImageDesc}
 				/>
 
 				<br />
@@ -70,6 +71,7 @@ export const query = graphql`
 			html
 			frontmatter{
 				headerImage
+				headerImageDesc
 			}
 		}
 	}
