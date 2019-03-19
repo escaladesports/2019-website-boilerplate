@@ -348,6 +348,7 @@ module.exports = {
 				},
 			},
 		},
+		`schema-snapshot`,
 	],
 	developMiddleware: app => {
 		app.use(

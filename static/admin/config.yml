@@ -20,6 +20,9 @@ collections:
           - label: Header Image
             name: headerImage
             widget: image
+          - label: Header Image Description
+            name: headerImageDesc
+            widget: string
       - label: Contact
         name: contact
         file: src/markdown/contact.md
@@ -163,7 +166,10 @@ collections:
         name: image
         widget: image
         required: false
-        hint: Image must be 1mb or less
+      - label: Image Description
+        name: imageDesc
+        widget: string
+        required: false
       - label: Body
         name: body
         widget: markdown

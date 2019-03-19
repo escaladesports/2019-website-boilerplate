@@ -1,0 +1,51 @@
+type MarkdownRemark implements Node {
+  frontmatter: MarkdownRemarkFrontmatter
+}
+
+type MarkdownRemarkFrontmatter {
+  title: String
+  headerImage: String
+  date(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+    MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+    documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to
+    "miliseconds" but you can also pass in as the measurement "years", "months",
+    "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  tags: [String]
+  path: String
+  published: Boolean
+  image: String
+  email: String
+  md5: String
+  slug: String
+  id: String
+  category: String
+  color: String
+  price: Int
+  order: Int
+  variants: [MarkdownRemarkFrontmatterVariants]
+  siteTitle: String
+  siteDescription: String
+  postsPerPage: Int
+  address: String
+}
+
+type MarkdownRemarkFrontmatterVariants {
+  color: String
+  id: String
+}
