@@ -34,10 +34,9 @@ yarn reset
 
 All UI related images that belong in the template can be stored in the repository in the `src` directory. Any images that need to be edited through the CMS should be stored in Cloudinary to prevent the repository size from getting out of control.
 
-## Preparing boilerplate to create Gatsby plugins
+## Schema
 
-- Develop plugin in `./plugins/export` directory
-- Change `build` script to `npm run build:plugin`
+The GraphQL schema is stored in `./src/schema.gql`. This is typically used to make sure the build script doesn't break whenever required fields in the markdown files are emptied out. If you delete the schema file, a snapshot of the current schema will be created the next time you run `yarn build` or `yarn dev`. This can be useful if you don't want to go through the hassle of writing it out yourself.
 
 ## Netlify CMS
 
