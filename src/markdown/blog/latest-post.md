@@ -6,6 +6,7 @@ tags:
   - latest
 path: latest-post
 image: /media/sample.jpg
+imageDesc: Sample image
 published: true
 ---
 
