@@ -7507,10 +7507,10 @@ gatsby-source-filesystem@^2.0.1-rc.1:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-transformer-remark@^2.3.5:
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.3.5.tgz#0465974c7b40505b1a2cc2c4e338d46908132460"
-  integrity sha512-YwdZI6vAd8LIKMch09OP7MxUkBtfAC8BttZ75JAO5PDK/Ia/fVCPPIvQmDwzQlx+2OVjY5i5jPX9ZaUwp70SjA==
+gatsby-transformer-remark@^2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-2.3.6.tgz#f3d64e9bf5335c58de8bc3307fecee18a3834d87"
+  integrity sha512-FxDSy87Ir2DiU4Dwj1S8gnA+J0y1faWoy7tfXBFRxES4yB5m3K2a9Tqdpl1DH52y1NaLezpnwf+tkUvamdbxnA==
   dependencies:
     "@babel/runtime" "^7.0.0"
     bluebird "^3.5.0"
@@ -7545,10 +7545,10 @@ gatsby-transformer-sharp@^2.1.1-rc.2:
     probe-image-size "^4.0.0"
     sharp "^0.21.3"
 
-gatsby@^2.2.0-rc.1:
-  version "2.2.0-rc.1"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.2.0-rc.1.tgz#655fb221b9db6cd96bf5a94d79b62420540a14b0"
-  integrity sha512-13y8LYm9qZDCoLTuYr2H0DcJHVSIu/h8CiASIMhRqimNxBvE6EILDP/1MHAmyNKshoTEtX8RTzpJCaKRm8jegQ==
+gatsby@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.2.0.tgz#46973febe3fb2ea5f09d9eccd50a3529ac9d2f2e"
+  integrity sha512-+ljmxEKlBRikLOh1lpYVyP5rd5qcD/mTTz7R70FpqNM4uEcdcAmNlSYuLEhh3NgIXqjr99HgvjcsqGRkbDGVGg==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     "@babel/core" "^7.0.0"
@@ -7613,12 +7613,12 @@ gatsby@^2.2.0-rc.1:
     graphql-compose "^5.11.0"
     graphql-playground-middleware-express "^1.7.10"
     graphql-relay "^0.6.0"
-    graphql-skip-limit "^2.0.6"
     graphql-tools "^3.0.4"
     hash-mod "^0.0.5"
     invariant "^2.2.4"
     is-relative "^1.0.0"
     is-relative-url "^2.0.0"
+    is-wsl "^1.1.0"
     jest-worker "^23.2.0"
     joi "12.x.x"
     json-loader "^0.5.7"
@@ -8051,13 +8051,6 @@ graphql-request@^1.5.0:
   integrity sha512-dDX2M+VMsxXFCmUX0Vo0TopIZIX4ggzOtiCsThgtrKR4niiaagsGTDIHj3fsOMFETpa064vzovI+4YV4QnMbcg==
   dependencies:
     cross-fetch "2.2.2"
-
-graphql-skip-limit@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/graphql-skip-limit/-/graphql-skip-limit-2.0.6.tgz#67cdfbf33254db338aade6e7b44ea3e779b4b1c4"
-  integrity sha512-Jg/K/Tvxno5Rkq+KRwEZ0ME+PZBRrgDIvYIUvYMj8/hitc38hXen1XLuHEbqfrlkmrzPzQv6TB6W5utfZwJs+Q==
-  dependencies:
-    "@babel/runtime" "^7.0.0"
 
 graphql-tools@^3.0.4:
   version "3.1.1"
@@ -12308,10 +12301,10 @@ nth-check@^1.0.1, nth-check@^1.0.2, nth-check@~1.0.1:
   dependencies:
     boolbase "~1.0.0"
 
-nuka-carousel@^4.4.1:
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/nuka-carousel/-/nuka-carousel-4.5.2.tgz#6c0116c70fe64a0667c5061c50d4bb275cf46f67"
-  integrity sha512-3z+vXckWplqBPtveDX8DkumkK8w9rGA8fEFUWeRuA/coSTF3iJxTpKfWn6UywcapPLU3KVFfvvTTpovaYcsvKw==
+nuka-carousel@^4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/nuka-carousel/-/nuka-carousel-4.5.3.tgz#31c7a8288c30588fc5f0419c341f46d2a18a7780"
+  integrity sha512-AOXuOZt35xVVfiOD3vO/H6J8PmokCsN9A9+wXUcM7FhL9QMJv0rgqxIT6mt/xONtXsXxzeOoFiSnrVjZ4+0UoA==
   dependencies:
     csstype "^2.6.3"
     d3-ease "^1.0.3"
