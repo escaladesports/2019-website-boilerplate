@@ -41,3 +41,10 @@ The GraphQL schema is stored in `./src/schema.gql`. This is typically used to ma
 ## Netlify CMS
 
 Unless you're using the "invite only" option in Netlify Identity, make sure to add the "admin" role in the Git Gateway settings. Then add the "admin" role to any users you want to have access to the CMS.
+
+You'll also need to point Netlify to your Netlify CMS email templates. These templates will change the Identity transactional emails to point to the `/admin` page instead of the home page. This can be found in the Netlify dashboard under "Settings -> Identity -> Emails". Change the template paths to:
+
+- Invitation template: `/email-templates/cms-invitation`
+- Confirmation template: `/email-templates/cms-confirmation`
+- Recovery template: `/email-templates/cms-password-recovery`
+- Email change template: `/email-templates/cms-email-change`
