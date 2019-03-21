@@ -71,9 +71,7 @@ module.exports = {
 				apiKey: SALSIFY_API_KEY,
 				org: SALSIFY_ORG,
 				cacheWebImages: false,
-				media: [
-					`webImages`,
-				],
+				media: [`webImages`],
 				types: {
 					webImages: `array`,
 					productVideo: `array`,
@@ -102,10 +100,12 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-robots-txt`,
 			options: {
-				policy: [{
-					userAgent: `*`,
-					disallow: [`/email-templates`],
-				}],
+				policy: [
+					{
+						userAgent: `*`,
+						disallow: [`/email-templates`],
+					},
+				],
 			},
 		},
 		`gatsby-plugin-netlify`,
@@ -207,11 +207,11 @@ module.exports = {
 				fonts: [
 					{
 						family: `Oswald`,
-						subsets: [ `latin` ],
+						subsets: [`latin`],
 					},
 					{
 						family: `Open Sans`,
-						subsets: [ `latin` ],
+						subsets: [`latin`],
 					},
 				],
 			},
@@ -262,31 +262,27 @@ module.exports = {
 						serialize: ({
 							query: {
 								site: {
-									siteMetadata: {
-										siteUrl,
-									},
+									siteMetadata: { siteUrl },
 								},
-								allMarkdownRemark: {
-									edges,
-								},
+								allMarkdownRemark: { edges },
 							},
 						}) => {
-							return edges.map(({
-								node: {
-									html,
-									frontmatter,
-									fields: {
-										path,
+							return edges.map(
+								({
+									node: {
+										html,
+										frontmatter,
+										fields: { path },
 									},
-								},
-							}) => {
-								return {
-									...frontmatter,
-									url: `${siteUrl}${path}`,
-									guid: `${siteUrl}${path}`,
-									custom_elements: [{ 'content:encoded': html }],
+								}) => {
+									return {
+										...frontmatter,
+										url: `${siteUrl}${path}`,
+										guid: `${siteUrl}${path}`,
+										custom_elements: [{ "content:encoded": html }],
+									}
 								}
-							})
+							)
 						},
 						output: `/rss.xml`,
 					},
@@ -327,36 +323,46 @@ module.exports = {
 						}
 						return false
 					})
-					return data.map(({
-						node: {
-							id,
-							html,
-							excerpt,
-							frontmatter: {
-								title,
-							},
-							fields: {
-								path,
-							},
-						},
-					}) => {
-						return {
-							id,
-							index: {
-								body: striptags(html),
-								title,
-							},
-							store: {
-								title,
+					return data.map(
+						({
+							node: {
+								id,
+								html,
 								excerpt,
-								path,
+								frontmatter: { title },
+								fields: { path },
 							},
+						}) => {
+							return {
+								id,
+								index: {
+									body: striptags(html),
+									title,
+								},
+								store: {
+									title,
+									excerpt,
+									path,
+								},
+							}
 						}
-					})
+					)
 				},
 			},
 		},
-		`schema-snapshot`,
+		{
+			resolve: `schema-snapshot`,
+			options: {
+				include: [
+					`MarkdownRemark`,
+					`MarkdownRemarkFrontmatter`,
+					`MarkdownRemarkFrontmatterVariants`,
+					`SalsifyContent`,
+					`SalsifyContentWebImages`,
+					`SalsifyContentSalsify_digitalAssets`,
+				],
+			},
+		},
 	],
 	developMiddleware: app => {
 		app.use(
@@ -364,7 +370,7 @@ module.exports = {
 			proxy({
 				target: `http://localhost:9000`,
 				pathRewrite: {
-					'/.netlify/functions/': `/`,
+					"/.netlify/functions/": `/`,
 				},
 			})
 		)
