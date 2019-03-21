@@ -2,13 +2,6 @@ const { printType } = require(`graphql`)
 const fs = require(`fs-extra`)
 const path = require(`path`)
 
-// Nodes to be included in snapshot
-const types = [
-	`MarkdownRemark`,
-	`MarkdownRemarkFrontmatter`,
-	`MarkdownRemarkFrontmatterVariants`,
-]
-
 // Path to snapshot relative of schema-snapshot plugin directory
 const schemaFilePath = path.join(process.cwd(), `./src/schema.gql`)
 
@@ -23,13 +16,13 @@ exports.sourceNodes = async ({ actions }) => {
 	}
 }
 
-exports.onPostBootstrap = async ({ store }) => {
+exports.onPostBootstrap = async ({ store }, { include }) => {
 	const { schema } = store.getState()
 
 	// Create snapshot if it doesn't exist
 	if (!await fs.exists(schemaFilePath)) {
 		console.log(`\nCreating GraphQL schema...\n`)
-		const typeDefs = types
+		const typeDefs = include
 			.map(type => printType(schema.getType(type)))
 			.join(`\n\n`)
 		await fs.outputFile(schemaFilePath, typeDefs + `\n`)

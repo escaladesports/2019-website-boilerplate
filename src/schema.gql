@@ -1,10 +1,22 @@
 type MarkdownRemark implements Node {
+  id: ID!
+  parent: Node
+  children: [Node!]!
+  internal: Internal!
   frontmatter: MarkdownRemarkFrontmatter
+  rawMarkdownBody: String
+  fileAbsolutePath: String
+  html: String
+  htmlAst: JSON
+  excerptAst(pruneLength: Int = 140, truncate: Boolean = false): JSON
+  timeToRead: Int
+  tableOfContents(pathToSlugField: String = "fields.slug", maxDepth: Int, heading: String): String
 }
 
 type MarkdownRemarkFrontmatter {
   title: String
   headerImage: String
+  headerImageDesc: String
   date(
     """
     Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
@@ -30,10 +42,11 @@ type MarkdownRemarkFrontmatter {
   path: String
   published: Boolean
   image: String
+  imageDesc: String
+  id: String
   email: String
   md5: String
   slug: String
-  id: String
   category: String
   color: String
   price: Int
@@ -48,4 +61,370 @@ type MarkdownRemarkFrontmatter {
 type MarkdownRemarkFrontmatterVariants {
   color: String
   id: String
+}
+
+type SalsifyContent implements Node {
+  id: ID!
+  parent: Node
+  children: [Node!]!
+  internal: Internal!
+  salsify_id: String
+  salsify_createdAt(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+    MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+    documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to
+    "miliseconds" but you can also pass in as the measurement "years", "months",
+    "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  salsify_updatedAt(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+    MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+    documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to
+    "miliseconds" but you can also pass in as the measurement "years", "months",
+    "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  salsify_version: Int
+  salsify_parentId: String
+  salsify_systemId: String
+  itemName: String
+  itemNumber: String
+  as400ItemName: String
+  brand: String
+  upc: String
+  productType: String
+  productSeries: String
+  productLine: String
+  category: String
+  productOriginCode: String
+  mainImage: String
+  webImages: [SalsifyContentWebImages]
+  whiteStudioImages: [String]
+  packagingImages: [String]
+  brandImages: String
+  productTitle: String
+  summaryBulletPoint01: String
+  summaryBulletPoint02: String
+  summaryBulletPoint03: String
+  summaryBulletPoint04: String
+  summaryBulletPoint05: String
+  longDescription: String
+  productComponents: String
+  keywords: [String]
+  cost__Evansville_: String
+  acPower: Boolean
+  numberOfBatteriesRequired: String
+  primaryColor: String
+  packageHeight___in_: String
+  packageLength___in_: String
+  packageWidth___in_: String
+  singleItemDropshipMethod: String
+  boxesPerItem: String
+  cubicFeetOfStandardPack: String
+  freightCategory: String
+  freightClass: String
+  _40_ContainerQuantity: String
+  _40_HcContainerQuantity: String
+  _20_ContainerQuantity: String
+  _53_TruckloadQuantity: String
+  maximumSkidQuantity: String
+  skidLength___in_: String
+  skidHeight___in_: String
+  skidWidth___in_: String
+  masterPackLength___in_: String
+  masterPackWidth___in_: String
+  masterPackHeight___in_: String
+  masterPackWeight___lb_: String
+  masterPackQuantity: String
+  indoor_OutdoorUse: String
+  assemblyRequired: Boolean
+  status: String
+  lastStatusChangeDate: String
+  countryOfOrigin: String
+  catalogDealerPrice: String
+  productName: String
+  summaryBullets: [String]
+  createdDate(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+    MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+    documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to
+    "miliseconds" but you can also pass in as the measurement "years", "months",
+    "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  updatedDate(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+    MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+    documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to
+    "miliseconds" but you can also pass in as the measurement "years", "months",
+    "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  digitalCatalogCategory: String
+  digitalCatalogSubcategory: String
+  size: String
+  availableInventory__Evansville_: String
+  onHandInventory__Evansville_: String
+  onHoldInventory__Evansville_: String
+  standardPackLength___in_: String
+  standardPackHeight___in_: String
+  standardPackWidth___in_: String
+  standardPackWeight___lb_: String
+  standardPackQuantity: String
+  as400DateCreated(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+    MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+    documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to
+    "miliseconds" but you can also pass in as the measurement "years", "months",
+    "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  singleItemUnitLength: String
+  singleItemUnitWidth: String
+  singleItemUnitHeight: String
+  singleItemUnitWeight: String
+  catalogDealerPriceInactive: String
+  countryOfOriginManual: String
+  onixPickleballComPrice: String
+  scheelsPrice: String
+  manuallyCreated: Boolean
+  variationType: [String]
+  escaladeSportsComDescription: String
+  escaladeSportsComPrice: String
+  totalInventory: String
+  escaladeSportsComLink: String
+  proposition65Warning: Boolean
+  salsify_digitalAssets: [SalsifyContentSalsify_digitalAssets]
+  productWebsite: String
+  msrp: String
+  map: String
+  accessoriesNotIncluded: String
+  assembledHeight___in_: String
+  assembledLength___in_: String
+  assembledWidth___in_: String
+  assembledWeight___lb_: String
+  material: String
+  numberOfHangtags: String
+  packagingType: String
+  standard_RegulationSize: Boolean
+  certifications_Approvals: String
+  regulatoryBody: String
+  chokingHazard: String
+  packageWeight___lb_: String
+  requiresOverBox: Boolean
+  fobPoint: String
+  warrantyDescription: String
+  estimatedAssemblyTime___min_: String
+  includedTools: String
+  requiredTools: String
+  numberOfPeopleRequiredForAssembly: String
+  bilingual_TrilingualPackaging: String
+  amazonComPrice: String
+  dsgPrice: String
+  additionalItemNumber__1_: String
+  additionalItemCost__1_: String
+  additionalItemNumber__2_: String
+  additionalItemCost__2_: String
+  additionalItemNumber__3_: String
+  additionalItemCost__3_: String
+  additionalItemNumber__4_: String
+  additionalItemCost__4_: String
+  additionalItemNumber__5_: String
+  additionalItemCost__5_: String
+  amazonAsin: String
+  additionalItemStatus__1_: String
+  additionalItemStatus__2_: String
+  additionalItemStatus__3_: String
+  additionalItemStatus__4_: String
+  additionalItemStatus__5_: String
+  graphicImages: [String]
+  academyPrice: String
+  amazonLink: String
+}
+
+type SalsifyContentWebImages {
+  id: String
+  url: String
+  name: String
+  created_at(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+    MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+    documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to
+    "miliseconds" but you can also pass in as the measurement "years", "months",
+    "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  updated_at(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+    MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+    documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to
+    "miliseconds" but you can also pass in as the measurement "years", "months",
+    "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  status: String
+  asset_height: Int
+  asset_width: Int
+  asset_resource_type: String
+  filename: String
+  bytes: Int
+  format: String
+  etag: String
+  system_id: String
+  Total_Inventory: String
+  Proposition_65_Warning: Boolean
+  Image_Description: String
+}
+
+type SalsifyContentSalsify_digitalAssets {
+  salsify_id: String
+  salsify_url: String
+  salsify_name: String
+  salsify_created_at(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+    MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+    documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to
+    "miliseconds" but you can also pass in as the measurement "years", "months",
+    "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  salsify_updated_at(
+    """
+    Format the date using Moment.js' date tokens, e.g. `date(formatString: "YYYY
+    MMMM DD")`. See https://momentjs.com/docs/#/displaying/format/ for
+    documentation for different tokens.
+    """
+    formatString: String
+
+    """Returns a string generated with Moment.js' `fromNow` function"""
+    fromNow: Boolean
+
+    """
+    Returns the difference between this date and the current time. Defaults to
+    "miliseconds" but you can also pass in as the measurement "years", "months",
+    "weeks", "days", "hours", "minutes", and "seconds".
+    """
+    difference: String
+
+    """Configures the locale Moment.js will use to format the date."""
+    locale: String
+  ): Date
+  salsify_status: String
+  salsify_asset_height: Int
+  salsify_asset_width: Int
+  salsify_asset_resource_type: String
+  salsify_filename: String
+  salsify_bytes: Int
+  salsify_format: String
+  salsify_etag: String
+  salsify_system_id: String
+  Total_Inventory: String
+  Proposition_65_Warning: Boolean
+  Image_Description: String
+  salsify_source_url: String
 }
