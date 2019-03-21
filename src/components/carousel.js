@@ -90,7 +90,9 @@ export default class CarouselComp extends React.Component {
 										]}
 										onClick={() => this.goToSlide(i)}
 										key={`slideControl${i}`}
-									/>
+									>
+										<span>Slide {i}</span>
+									</button>
 								)
 							}
 							return buttons
@@ -146,6 +148,10 @@ const styles = {
 	bottomButton: css`
 		padding: 6px 5px;
 		position: relative;
+		overflow: hidden;
+		span: {
+			position: absolute;
+		}
 		:before{
 			display: block;
 			content: "";
