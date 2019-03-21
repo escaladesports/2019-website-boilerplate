@@ -74,6 +74,14 @@ module.exports = {
 				media: [
 					`webImages`,
 				],
+				types: {
+					webImages: `array`,
+					productVideo: `array`,
+					featuredTechnologies: `array`,
+					variationType: `array`,
+					archiveImages: `array`,
+					whiteStudioImages: `array`,
+				},
 			},
 		},
 		`blog`,
