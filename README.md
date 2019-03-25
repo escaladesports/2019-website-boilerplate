@@ -21,7 +21,23 @@ cd your-website
 nvm use
 yarn
 yarn reset
+git remote add origin git@github.com:REMOTE_GIT_SITE.git
+git push
 ```
+
+- Setup new Netlify site using your new repo
+  - Make note of, or change, your new site's Site Name in the General configurations
+- Edit the `site-config.js` file, in the project root, changing the URL for the `siteUrl` key (ie. `siteUrl: process.env.URL || 'https://{SITE_NAME}.netlify.com',`)
+- From the project root, run `netlify link`
+  - Select 'Site Name' to link the repo by, using the Site Name from above
+- From the project root, run `netlify lm:setup`
+
+## Common Gotchas
+
+- Be sure to include `SALSIFY_API_KEY` and `SALSIFY_ORG` in your environment variables, or comment out the `source-salsify` plugin from the `gatsby-config.js` file. Failing to do so will result in build failing.
+- If you are being pestered to supply a username and password for LFS locking, enter the disabling command it provides:
+
+```git config lfs.https://{SITE_ID}.netlify.com/.netlify/large-media.locksverify false```
 
 ## Usage
 
