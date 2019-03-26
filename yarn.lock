@@ -7409,6 +7409,13 @@ gatsby-plugin-webpack-size@^0.0.3:
   dependencies:
     size-plugin "^1.0.1"
 
+gatsby-plugin-zygote@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-zygote/-/gatsby-plugin-zygote-1.0.3.tgz#f4e4512055a753636e6f3848163639006cd8f07c"
+  integrity sha512-B5v0YOMq+ziatTVHfaUaW3UUHE0oqF9nDA0kuhQDpcOjC0RGVLeuvNY8AwDm6QXBx7tllQLRMBQlzk3CHASvaA==
+  dependencies:
+    babel-runtime "^6.26.0"
+
 gatsby-react-router-scroll@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/gatsby-react-router-scroll/-/gatsby-react-router-scroll-2.0.6.tgz#b04a8fe6ee77db5ca8f804b7ef476fd205dc4a40"

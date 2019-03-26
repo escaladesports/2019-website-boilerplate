@@ -35,7 +35,6 @@ export default class ResponsiveImage extends React.Component{
 			clientWidth: w,
 			clientHeight: h,
 		} = this.container
-		console.log(this.container, w)
 		if (w > this.state.w) {
 			this.setState({ w, h })
 		}

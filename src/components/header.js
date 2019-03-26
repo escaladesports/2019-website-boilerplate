@@ -34,7 +34,7 @@ export default class Header extends React.Component{
 					onClick={this.toggle}
 				>
 					<Close css={styles.close} />
-					<ul>
+					<ul onClick={e => e.stopPropagation()}>
 						<li><Link to='/'>Home</Link></li>
 						<li><Link to='/blog'>Blog</Link></li>
 						<li><Link to='/about'>About</Link></li>
@@ -42,6 +42,7 @@ export default class Header extends React.Component{
 						<li><Link to='/pickleball'>Category</Link></li>
 						<li><Link to='/search'>Search</Link></li>
 						<li><Link to='/contact'>Contact</Link></li>
+						<li><a href='#' className='zygoteIco'>Cart</a></li>
 					</ul>
 				</nav>
 				{this.state.open && (
