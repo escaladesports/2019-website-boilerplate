@@ -97,6 +97,7 @@
     "gatsby-plugin-sharp": "^2.0.0-rc.3",
     "gatsby-plugin-sitemap": "^2.0.10",
     "gatsby-plugin-webpack-size": "^0.0.3",
+    "gatsby-plugin-zygote": "^1.0.3",
     "gatsby-remark-copy-linked-files": "^2.0.0-rc.1",
     "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-images": "^3.0.1",

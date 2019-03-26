@@ -117,6 +117,17 @@ module.exports = {
 			},
 		},
 		{
+			resolve: `gatsby-plugin-zygote`,
+			options: {
+				api: process.env.NODE_ENV === `production` ?
+					`https://yh5fc30fhh.execute-api.us-east-1.amazonaws.com/production/handler` :
+					`https://hzrxrm0s9b.execute-api.us-east-1.amazonaws.com/staging/handler`,
+				properties: {
+					site: `onix`,
+				},
+			},
+		},
+		{
 			resolve: `gatsby-transformer-remark`,
 			options: {
 				plugins: [
