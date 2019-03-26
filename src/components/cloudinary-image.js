@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 import Responsive from './responsive-image'
 import transform from '../functions/cloudinary-transform'
 
-export default class NetlifyImage extends React.Component {
+export default class CloudinaryImage extends React.Component {
 	static defaultProps = {
 		transformations: `c_pad`,
 	}
