@@ -40,6 +40,9 @@ export default class ProductTemplate extends React.Component{
 						frontmatter: {
 							title,
 						},
+						fields: {
+							path,
+						},
 						html,
 						excerpt,
 					},
@@ -68,6 +71,7 @@ export default class ProductTemplate extends React.Component{
 		return(
 			<Layout title={productTitle} description={excerpt}>
 				<h1>{productTitle}</h1>
+
 				{hasImages && (
 					<Carousel ratio={imageRatio} slides={webImages.map(({ url }, index) => (
 						<Img
@@ -78,6 +82,7 @@ export default class ProductTemplate extends React.Component{
 						/>
 					))} />
 				)}
+
 				<ul>
 					{this.allVariants.map((variant, index) => (
 						<li key={index}>
@@ -93,6 +98,19 @@ export default class ProductTemplate extends React.Component{
 						</li>
 					))}
 				</ul>
+
+				<button
+					data-id={id}
+					data-name={productTitle}
+					data-price={price}
+					data-img={hasImages ? webImages[0].url : null}
+					data-url={path}
+					data-desc={`Color: ${color}`}
+					data-open-cart
+				>
+					Add to Cart
+				</button>
+
 				<ul>
 					<li>Color: {color}</li>
 					<li>ID: {id}</li>
@@ -128,6 +146,9 @@ export const query = graphql`
 					color
 					id
 				}
+			}
+			fields{
+				path
 			}
 			html
 			excerpt(pruneLength: 175)
