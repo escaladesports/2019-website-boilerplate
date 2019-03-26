@@ -28,7 +28,6 @@
     "prepublishOnly": "npm run build",
     "reset": "node utils/reset",
     "serve": "gatsby serve --open",
-    "sig": "node src/functions/test-signature",
     "test": "jest",
     "travis": "opn https://travis-ci.org/escaladesports/project-boilerplate/branches"
   },

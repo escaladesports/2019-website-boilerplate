@@ -1,6 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import Responsive from './responsive-image'
+import transform from '../functions/cloudinary-transform'
 
 export default class NetlifyImage extends React.Component {
 	static defaultProps = {
@@ -13,15 +14,12 @@ export default class NetlifyImage extends React.Component {
 			transformations,
 			...props
 		} = this.props
-		let path = src.split(`/`)
-		const name = path.pop()
-		path = path.join(`/`)
 		return (
 			<Responsive {...props}>
 				{(w, h) => {
 					return (
 						<img
-							src={`${path}/w_${w},h_${h},${transformations}/${name}`}
+							src={transform(src, `w_${w},h_${h},${transformations}`)}
 							css={styles.img}
 							alt={alt}
 						/>

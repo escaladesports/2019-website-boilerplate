@@ -5,6 +5,7 @@ import Layout from '../components/layouts/default'
 import Price from '../components/price'
 import Stock from '../components/stock'
 import Carousel from '../components/photo-carousel'
+import transform from '../functions/cloudinary-transform'
 
 export default class ProductTemplate extends React.Component{
 	constructor(props){
@@ -67,6 +68,9 @@ export default class ProductTemplate extends React.Component{
 		const hasImages = webImages && !!webImages.length
 		const imageRatio = [16, 9]
 		const productTitle = itemName || title
+		const thumbnail = webImages ?
+			transform(webImages[0].url, `w_150,h_150,c_pad`) :
+			null
 
 		return(
 			<Layout title={productTitle} description={excerpt}>
@@ -103,7 +107,7 @@ export default class ProductTemplate extends React.Component{
 					data-id={id}
 					data-name={productTitle}
 					data-price={price}
-					data-img={hasImages ? webImages[0].url : null}
+					data-img={thumbnail}
 					data-url={path}
 					data-desc={`Color: ${color}`}
 					data-open-cart
