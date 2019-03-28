@@ -85,6 +85,7 @@ module.exports = {
 		`blog`,
 		`generic-pages`,
 		`products`,
+		`client-paths`,
 		{
 			resolve: `email-templates`,
 			options: {
