@@ -4,7 +4,11 @@ const proxy = require(`http-proxy-middleware`)
 const { readFileSync } = require(`fs-extra`)
 const globby = require(`globby`).sync
 const matter = require(`gray-matter`)
-const { siteUrl, siteId } = require(`./site-config`)
+const {
+	siteUrl,
+	siteId,
+	analyticsID,
+} = require(`./site-config`)
 const {
 	SALSIFY_API_KEY,
 	SALSIFY_ORG,
@@ -140,16 +144,6 @@ module.exports = {
 							target: `_blank`,
 						},
 					},
-					// {
-					// 	resolve: `gatsby-remark-images`,
-					// 	options: {
-					// 		maxWidth: 1200,
-					// 		linkImagesToOriginal: false,
-					// 		withWebp: {
-					// 			quality: 95,
-					// 		},
-					// 	},
-					// },
 				],
 			},
 		},
@@ -168,20 +162,6 @@ module.exports = {
 			},
 		},
 		`cms-no-index`,
-		// {
-		// 	resolve: `webtasks`,
-		// 	options: {
-		// 		name: `gatsby-boilerplate-autodeploy`,
-		// 		path: `src/webtasks/autodeploy.js`,
-		// 		container: process.env.WEBTASKS_CONTAINER,
-		// 		token: process.env.WEBTASKS_TOKEN,
-		// 		cron: `0 0 * * *`,
-		// 		secrets: {
-		// 			BUILD_HOOK: process.env.BUILD_HOOK,
-		// 		},
-		// 		shouldDeploy: process.env.BRANCH === `master`,
-		// 	},
-		// },
 
 		// Client plugins
 		`route-delayed-animation`,
@@ -208,7 +188,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-google-analytics`,
 			options: {
-				trackingId: `UA-2411855-10`,
+				trackingId: analyticsID,
 				anonymize: true,
 				respectDNT: true,
 			},

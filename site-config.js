@@ -3,6 +3,7 @@ module.exports = {
 	cloudinaryName: `escalade-sports`,
 	cloudinaryUploadPreset: `boilerplate`,
 	siteId: `onix`,
+	analyticsID: `UA-2411855-10`,
 
 	// For comments Lamda function
 	gitHubRepo: `project-boilerplate`,
