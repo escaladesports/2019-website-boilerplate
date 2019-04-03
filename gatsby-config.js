@@ -124,7 +124,7 @@ module.exports = {
 					`https://yh5fc30fhh.execute-api.us-east-1.amazonaws.com/production/handler` :
 					`https://hzrxrm0s9b.execute-api.us-east-1.amazonaws.com/staging/handler`,
 				properties: {
-					site: `onix`,
+					site: siteId,
 				},
 			},
 		},
