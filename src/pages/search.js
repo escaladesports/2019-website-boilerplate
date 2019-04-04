@@ -10,9 +10,29 @@ export default class SearchPage extends React.Component{
 		this.state = {
 			loading: false,
 			results: [],
+			term: ``,
+		}
+	}
+	componentDidMount(){
+		// Check URL for search term
+		const path = document.location.pathname.split(`/`)
+		if(path.length === 3){
+			let term = path.pop()
+			term = term.replace(/\+/g, `%20`)
+			term = decodeURIComponent(term)
+			this.search(term)
 		}
 	}
 	async search(term){
+		this.setState({ term })
+
+		// Change URL
+		if (window.history && window.history.replaceState) {
+			let path = encodeURIComponent(term)
+			path = path.replace(/%20/g, `+`)
+			window.history.replaceState({}, ``, `/search/${path}`)
+		}
+
 		this.id++
 		const curId = this.id
 		this.setState({ loading: true })
@@ -28,6 +48,7 @@ export default class SearchPage extends React.Component{
 		const {
 			loading,
 			results,
+			term,
 		} = this.state
 		return(
 			<Layout title='Search'>
@@ -37,12 +58,13 @@ export default class SearchPage extends React.Component{
 					onChange={e => this.search(e.target.value)}
 				/>
 				{loading && (
-					<div>Loading...</div>
+					<h3>Searching for "{term}"...</h3>
 				)}
-				{!results.length && !loading && (
-					<div>No results found.</div>
+				{term && !results.length && !loading && (
+					<h3>No results found for "{term}".</h3>
 				)}
-				{!!results.length && (
+				{!!results.length && <>
+					<h3>Results for "{term}":</h3>
 					<ul>
 						{results.map(({ title, excerpt, path }, index) => (
 							<li key={`searchResult${index}`}>
@@ -55,7 +77,7 @@ export default class SearchPage extends React.Component{
 							</li>
 						))}
 					</ul>
-				)}
+				</>}
 			</Layout>
 		)
 	}
