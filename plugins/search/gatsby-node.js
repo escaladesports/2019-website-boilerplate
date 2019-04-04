@@ -39,3 +39,11 @@ exports.createPages = async ({ graphql }, { query, parse }) => {
 	})
 
 }
+
+// Dynamic routing
+exports.onCreatePage = async({ page, actions: { createPage } }) => {
+	if (page.path.match(/^\/search/)) {
+		page.matchPath = `/search/*`
+		createPage(page)
+	}
+}
