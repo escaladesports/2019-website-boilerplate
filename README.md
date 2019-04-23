@@ -8,6 +8,7 @@ A simple starter for new web applications, Gatsby plugins, react components, or 
 - [nvm](https://github.com/creationix/nvm)
 - [Netlify CLI](https://www.netlify.com/docs/cli/)
 - [Git LFS](https://github.com/git-lfs/git-lfs?utm_source=gitlfs_site&utm_medium=repo_link&utm_campaign=gitlfs)
+- [Netlfiy Credential Helper](https://github.com/netlify/netlify-credential-helper)
 - Netlify CLI Large Media Plugin
   ```bash
   netlify plugins:install netlify-lm-plugin
