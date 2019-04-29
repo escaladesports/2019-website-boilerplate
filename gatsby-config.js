@@ -45,7 +45,7 @@ module.exports = {
 	plugins: [
 		`gatsby-plugin-webpack-size`,
 		{
-			resolve: `gatsby-plugin-emotion`,
+			resolve: `emotion`,
 			options: {
 				hoist: true,
 				sourceMap: true,
