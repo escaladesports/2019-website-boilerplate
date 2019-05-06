@@ -95,6 +95,13 @@ collections:
       - label: Body
         name: body
         widget: markdown
+      - label: Images
+        name: images
+        widget: list
+        field:
+          label: Image
+          name: image
+          widget: image
       - label: Order
         name: order
         widget: number

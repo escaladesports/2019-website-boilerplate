@@ -1,11 +1,10 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Img from '../components/cloudinary-image'
+import Img from '../components/netlify-image'
 import Layout from '../components/layouts/default'
 import Price from '../components/price'
 import Stock from '../components/stock'
 import Carousel from '../components/photo-carousel'
-import transform from '../functions/cloudinary-transform'
 
 export default class ProductTemplate extends React.Component{
 	constructor(props){
@@ -40,16 +39,13 @@ export default class ProductTemplate extends React.Component{
 					markdownRemark: {
 						frontmatter: {
 							title,
+							images,
 						},
 						fields: {
 							path,
 						},
 						html,
 						excerpt,
-					},
-					salsifyContent: {
-						itemName,
-						webImages,
 					},
 					escaladePricing: {
 						price,
@@ -65,24 +61,23 @@ export default class ProductTemplate extends React.Component{
 			},
 		} = this
 
-		const hasImages = webImages && !!webImages.length
+		const hasImages = images && !!images.length
 		const imageRatio = [16, 9]
-		const productTitle = itemName || title
-		const thumbnail = webImages ?
-			transform(webImages[0].url, `w_150,h_150,c_pad`) :
+		const thumbnail = hasImages ?
+			`${images[0]}?nf_resize=fit&w=150&h=150` :
 			null
 
 		return(
-			<Layout title={productTitle} description={excerpt}>
-				<h1>{productTitle}</h1>
+			<Layout title={title} description={excerpt}>
+				<h1>{title}</h1>
 
 				{hasImages && (
-					<Carousel ratio={imageRatio} slides={webImages.map(({ url }, index) => (
+					<Carousel ratio={imageRatio} slides={images.map((url, index) => (
 						<Img
+							ratio={imageRatio}
 							key={`img${index}`}
 							src={url}
-							ratio={imageRatio}
-							alt={`${productTitle} ${index + 1}`}
+							alt={`${title} ${index + 1}`}
 						/>
 					))} />
 				)}
@@ -105,7 +100,7 @@ export default class ProductTemplate extends React.Component{
 
 				<button
 					data-id={id}
-					data-name={productTitle}
+					data-name={title}
 					data-price={price}
 					data-img={thumbnail}
 					data-url={path}
@@ -146,6 +141,7 @@ export const query = graphql`
 				price
 				color
 				id
+				images
 				variants{
 					color
 					id
@@ -156,18 +152,6 @@ export const query = graphql`
 			}
 			html
 			excerpt(pruneLength: 175)
-		}
-
-		salsifyContent(
-			itemNumber: { eq: $id }
-		){
-			itemName
-			webImages{
-				id
-				name
-				url
-				filename
-			}
 		}
 
 		escaladePricing(
