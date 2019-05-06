@@ -15,7 +15,6 @@ export default class ProductCategoryTemplate extends React.Component{
 					html,
 					excerpt,
 				},
-				allSalsifyContent,
 			},
 		} = this.props
 
@@ -36,20 +35,14 @@ export default class ProductCategoryTemplate extends React.Component{
 			path,
 		}))
 
-		// Collect Salsify data by ID
-		const salsify = {}
-		allSalsifyContent.edges.forEach(({ node }) => {
-			salsify[node.itemNumber] = node
-		})
-
 		return(
 			<Layout title={title} description={excerpt}>
 				<h1>{title}</h1>
 				<div dangerouslySetInnerHTML={{__html: html}} />
-				{products.map(({ id, title, path }, index) => (
+				{products.map(({ title, path }, index) => (
 					<div key={`product${index}`}>
 						<Link to={path}>
-							<h2>{salsify[id].itemName || title}</h2>
+							<h2>{title}</h2>
 						</Link>
 					</div>
 				))}
@@ -59,7 +52,7 @@ export default class ProductCategoryTemplate extends React.Component{
 }
 
 export const query = graphql`
-	query ProductCategoryTemplate($category: String!, $productIds: String) {
+	query ProductCategoryTemplate($category: String!) {
 		productMarkdown: allMarkdownRemark(
 			filter: {
 				frontmatter: {
@@ -79,19 +72,6 @@ export const query = graphql`
 					fields{
 						path
 					}
-				}
-			}
-		}
-
-		allSalsifyContent(
-			filter: {
-				itemNumber: { regex: $productIds }
-			}
-		){
-			edges{
-				node{
-					itemName
-					itemNumber
 				}
 			}
 		}

@@ -9,11 +9,6 @@ const {
 	siteId,
 	analyticsID,
 } = require(`./site-config`)
-const {
-	SALSIFY_API_KEY,
-	SALSIFY_ORG,
-} = require(`./env`)
-
 
 // Get site info from markdown
 const { siteTitle, siteDescription } = matter(
@@ -66,24 +61,6 @@ module.exports = {
 			options: {
 				ids: productIds,
 				siteId,
-			},
-		},
-		{
-			resolve: `source-salsify`,
-			options: {
-				ids: productIds,
-				apiKey: SALSIFY_API_KEY,
-				org: SALSIFY_ORG,
-				cacheWebImages: false,
-				media: [`webImages`],
-				types: {
-					webImages: `array`,
-					productVideo: `array`,
-					featuredTechnologies: `array`,
-					variationType: `array`,
-					archiveImages: `array`,
-					whiteStudioImages: `array`,
-				},
 			},
 		},
 		`blog`,
@@ -342,19 +319,16 @@ module.exports = {
 				},
 			},
 		},
-		{
-			resolve: `schema-snapshot`,
-			options: {
-				include: [
-					`MarkdownRemark`,
-					`MarkdownRemarkFrontmatter`,
-					`MarkdownRemarkFrontmatterVariants`,
-					`SalsifyContent`,
-					`SalsifyContentWebImages`,
-					`SalsifyContentSalsify_digitalAssets`,
-				],
-			},
-		},
+		// {
+		// 	resolve: `schema-snapshot`,
+		// 	options: {
+		// 		include: [
+		// 			`MarkdownRemark`,
+		// 			`MarkdownRemarkFrontmatter`,
+		// 			`MarkdownRemarkFrontmatterVariants`,
+		// 		],
+		// 	},
+		// },
 	],
 	developMiddleware: app => {
 		app.use(
@@ -362,7 +336,7 @@ module.exports = {
 			proxy({
 				target: `http://localhost:9000`,
 				pathRewrite: {
-					"/.netlify/functions/": `/`,
+					'/.netlify/functions/': `/`,
 				},
 			})
 		)
