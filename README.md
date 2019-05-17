@@ -34,8 +34,6 @@ git push origin master
 
 Setup new Netlify site using your new repo (Note that your first build will likely fail until the rest of these instructions are completed)
 
-Edit the `site-config.js` file, in the project root, changing the URL for the `siteUrl` key (ie. `siteUrl: process.env.URL || 'https://{SITE_NAME}.netlify.com',`)
-
 ```bash
 netlify link
 netlify lm:setup
