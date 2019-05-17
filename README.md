@@ -27,12 +27,17 @@ git remote add origin git@github.com:REMOTE_GIT_SITE.git
 git push
 ```
 
-- Setup new Netlify site using your new repo
-  - Make note of, or change, your new site's Site Name in the General configurations
-- Edit the `site-config.js` file, in the project root, changing the URL for the `siteUrl` key (ie. `siteUrl: process.env.URL || 'https://{SITE_NAME}.netlify.com',`)
-- From the project root, run `netlify link`
-  - Select 'Site Name' to link the repo by, using the Site Name from above
-- From the project root, run `netlify lm:setup`
+Setup new Netlify site using your new repo (Note that your first build will likely fail until the rest of these instructions are completed)
+
+Edit the `site-config.js` file, in the project root, changing the URL for the `siteUrl` key (ie. `siteUrl: process.env.URL || 'https://{SITE_NAME}.netlify.com',`)
+
+```bash
+netlify link
+netlify lm:setup
+git add .
+commit -m 'Netlify config'
+git push -u origin master
+```
 
 ## Common Gotchas
 
