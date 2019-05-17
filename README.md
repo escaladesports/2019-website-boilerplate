@@ -23,8 +23,13 @@ cd your-website
 nvm use
 yarn
 yarn reset
+rm -rf .git
+netlify unlink
+git init
 git remote add origin git@github.com:REMOTE_GIT_SITE.git
-git push
+git add netlify.toml
+git commit -m 'Initial commit'
+git push origin master
 ```
 
 Setup new Netlify site using your new repo (Note that your first build will likely fail until the rest of these instructions are completed)
@@ -35,15 +40,9 @@ Edit the `site-config.js` file, in the project root, changing the URL for the `s
 netlify link
 netlify lm:setup
 git add .
-commit -m 'Netlify config'
-git push -u origin master
+git commit -m 'Project files'
+git push origin master
 ```
-
-## Common Gotchas
-
-- If you are being pestered to supply a username and password for LFS locking, enter the disabling command it provides:
-
-```git config lfs.https://{SITE_ID}.netlify.com/.netlify/large-media.locksverify false```
 
 ## Usage
 

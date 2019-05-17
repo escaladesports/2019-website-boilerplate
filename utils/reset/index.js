@@ -1,29 +1,74 @@
-const { spawn } = require(`child-process-promise`)
+const { basename } = require(`path`)
 const {
-	remove,
+	readFile,
+	readJson,
+	outputFile,
+	outputJson,
 	pathExists,
 } = require(`fs-extra`)
-const rename = require(`./rename`)
 
-async function resetGit() {
-	if (!await pathExists(`.git`)) {
-		return console.log(`No .git directory found`)
+
+function recursiveReset(options = {}, obj) {
+	for (let i in obj) {
+		if (i === `dependencies` || i === `devDependencies`) {
+			continue
+		}
+		if (typeof obj[i] === `object`) {
+			obj[i] = recursiveReset(options, obj[i])
+		}
+		else {
+			obj[i] = obj[i].replace(options.oldName, options.name)
+		}
 	}
-	console.log(`Resetting git...`)
-	await remove(`.git`)
-	await spawn([
-		`git init`,
-		`git add .`,
-		`git commit -m "Initial commit"`,
-	].join(` && `), [], {
-		shell: true,
-		stdio: `inherit`,
-	})
+	return obj
 }
 
-async function reset(){
-	await rename()
-	await resetGit()
+async function renamePackage(options = {}) {
+	if (!await pathExists(`package.json`)) {
+		return console.log(`No package.json file found`)
+	}
+	console.log(`Renaming in package.json file...`)
+	const pkg = await readJson(`package.json`)
+	if (pkg.name) {
+		options.oldName = pkg.name
+		pkg.name = options.name
+		recursiveReset(options, pkg)
+	}
+	if(pkg.keywords){
+		pkg.keywords = pkg.name.toLowerCase().split(`-`)
+	}
+	if(pkg.version){
+		pkg.version = `0.0.0`
+	}
+	await outputJson(`package.json`, pkg, { spaces: 2 })
 }
 
-reset()
+async function rename(options = {}) {
+	if (!options.name) {
+		options.name = basename(process.cwd())
+	}
+	await renamePackage(options)
+	await renameToml(options)
+}
+
+
+async function renameToml(options) {
+	if (!await pathExists(`netlify.toml`)) {
+		return console.log(`No netlify.toml file found`)
+	}
+	console.log(`Renaming in Netlify config...`)
+	let config = await readFile(`netlify.toml`)
+	config = config.toString()
+	config = config.split(`\n`)
+	for (let i = 0; i < config.length; i++) {
+		let line = config[i]
+		if (line.trim().indexOf(`ID = "${options.oldName}"`) === 0) {
+			config[i] = line.replace(`ID = "${options.oldName}"`, `ID = "${options.name}"`)
+			break
+		}
+	}
+	config = config.join(`\n`)
+	await outputFile(`netlify.toml`, config)
+}
+
+rename()
