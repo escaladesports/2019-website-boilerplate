@@ -8,7 +8,7 @@ A simple starter for new web applications, Gatsby plugins, react components, or 
 - [nvm](https://github.com/creationix/nvm)
 - [Netlify CLI](https://www.netlify.com/docs/cli/)
 - [Git LFS](https://github.com/git-lfs/git-lfs?utm_source=gitlfs_site&utm_medium=repo_link&utm_campaign=gitlfs)
-- [Netlfiy Credential Helper](https://github.com/netlify/netlify-credential-helper)
+- [Netlify Credential Helper](https://github.com/netlify/netlify-credential-helper)
 - Netlify CLI Large Media Plugin
   ```bash
   netlify plugins:install netlify-lm-plugin
@@ -49,7 +49,7 @@ git push origin master
 - `yarn dev`: Starts up live development server
 - `yarn build`: Builds site for production
 - `yarn reset`: Changes the project name in `package.json` to match the directory, resets the version number, and resets the git history.
-- `yarn env`: Pulls Netlify environment variables into a local `.env` file. (Only works if you have logged into [netlifyctl](https://github.com/netlify/netlifyctl#command-line-login) at least once and have permissions to the Netlify site)
+- `yarn env`: Pulls Netlify environment variables into a local `.env` file. (Only works if you have logged into [Netlify CLI](https://www.netlify.com/docs/cli/) at least once and have permissions to the Netlify site)
 
 ## Images
 
