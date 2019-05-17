@@ -42,7 +42,7 @@ netlify lm:setup
 git add .
 git commit -m 'Project files'
 git push origin master
-```
+````
 
 ## Usage
 
