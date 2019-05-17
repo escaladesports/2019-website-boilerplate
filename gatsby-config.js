@@ -1,4 +1,3 @@
-
 const striptags = require(`striptags`)
 const proxy = require(`http-proxy-middleware`)
 const { readFileSync } = require(`fs-extra`)
