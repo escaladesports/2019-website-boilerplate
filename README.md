@@ -48,7 +48,6 @@ git push origin master
 - `yarn build`: Builds site for production
 - `yarn reset`: Changes the project name in `package.json` to match the directory, resets the version number, and resets the git history.
 - `yarn env`: Pulls Netlify environment variables into a local `.env` file. (Only works if you have logged into [Netlify CLI](https://www.netlify.com/docs/cli/) at least once and have permissions to the Netlify site)
-  - **NOTE:** Any environment variables intended to be used on the front end should be prefixed with `GATSBY_` and placed in `.env.development` or `.env.production` (see [Gatsby docs](https://www.gatsbyjs.org/docs/environment-variables/))
 
 ## Images
 
