@@ -1,6 +1,5 @@
 require(`dotenv`).config({ silent: true })
 const striptags = require(`striptags`)
-const proxy = require(`http-proxy-middleware`)
 const { readFileSync } = require(`fs-extra`)
 const globby = require(`globby`).sync
 const matter = require(`gray-matter`)
@@ -169,21 +168,21 @@ module.exports = {
 				respectDNT: true,
 			},
 		},
-		{
-			resolve: `gatsby-plugin-prefetch-google-fonts`,
-			options: {
-				fonts: [
-					{
-						family: `Oswald`,
-						subsets: [`latin`],
-					},
-					{
-						family: `Open Sans`,
-						subsets: [`latin`],
-					},
-				],
-			},
-		},
+		// {
+		// 	resolve: `gatsby-plugin-prefetch-google-fonts`,
+		// 	options: {
+		// 		fonts: [
+		// 			{
+		// 				family: `Oswald`,
+		// 				subsets: [`latin`],
+		// 			},
+		// 			{
+		// 				family: `Open Sans`,
+		// 				subsets: [`latin`],
+		// 			},
+		// 		],
+		// 	},
+		// },
 		{
 			resolve: `gatsby-plugin-feed`,
 			options: {
@@ -318,6 +317,7 @@ module.exports = {
 				},
 			},
 		},
+		`open-browser`,
 		// {
 		// 	resolve: `schema-snapshot`,
 		// 	options: {
@@ -329,15 +329,4 @@ module.exports = {
 		// 	},
 		// },
 	],
-	developMiddleware: app => {
-		app.use(
-			`/.netlify/functions/`,
-			proxy({
-				target: `http://localhost:9000`,
-				pathRewrite: {
-					'/.netlify/functions/': `/`,
-				},
-			})
-		)
-	},
 }
