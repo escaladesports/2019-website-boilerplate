@@ -114,7 +114,6 @@ module.exports = {
 			options: {
 				plugins: [
 					`gatsby-remark-copy-linked-files`,
-					`gatsby-remark-smartypants`,
 					{
 						resolve: `gatsby-remark-external-links`,
 						options: {
