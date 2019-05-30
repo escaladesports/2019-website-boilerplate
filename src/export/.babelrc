@@ -1,9 +1,0 @@
-{
-	"presets": [
-		["escalade", {
-			"targets": {
-				"node": "8.10"
-			}
-		}]
-	]
-}
