@@ -6,7 +6,6 @@ const matter = require(`gray-matter`)
 const {
 	siteUrl,
 	siteId,
-	analyticsID,
 } = require(`./site-config`)
 
 // Get site info from markdown
@@ -143,14 +142,14 @@ module.exports = {
 				},
 			},
 		},
-		{
-			resolve: `gatsby-plugin-google-analytics`,
-			options: {
-				trackingId: analyticsID,
-				anonymize: true,
-				respectDNT: true,
-			},
-		},
+		// {
+		// 	resolve: `gatsby-plugin-google-analytics`,
+		// 	options: {
+		// 		trackingId: `UA-2411855-10`,
+		// 		anonymize: true,
+		// 		respectDNT: true,
+		// 	},
+		// },
 		// {
 		// 	resolve: `gatsby-plugin-prefetch-google-fonts`,
 		// 	options: {
