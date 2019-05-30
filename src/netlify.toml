@@ -11,7 +11,7 @@
 	to = "https://postman-echo.com/headers"
 	status = 200
 	force = true
-	[redirect.headers]
+	[redirects.headers]
 		Test-Key = "TEST"
 
 [[redirects]]
