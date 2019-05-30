@@ -3,6 +3,7 @@ const striptags = require(`striptags`)
 const { readFileSync } = require(`fs-extra`)
 const globby = require(`globby`).sync
 const matter = require(`gray-matter`)
+const { siteUrl } = require(`./site-config`)
 
 // Get site info from markdown
 const { siteTitle, siteDescription } = matter(
@@ -29,7 +30,7 @@ module.exports = {
 	siteMetadata: {
 		title: siteTitle,
 		description: siteDescription,
-		siteUrl: process.env.URL,
+		siteUrl,
 	},
 	plugins: [
 		`gatsby-plugin-emotion`,
@@ -57,7 +58,7 @@ module.exports = {
 		{
 			resolve: `email-templates`,
 			options: {
-				siteUrl: process.env.URL,
+				siteUrl,
 			},
 		},
 		{
@@ -110,7 +111,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
-				siteUrl: process.env.URL,
+				siteUrl,
 			},
 		},
 		`cms-no-index`,
