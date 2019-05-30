@@ -37,13 +37,8 @@ module.exports = {
 		siteUrl,
 	},
 	plugins: [
-		{
-			resolve: `emotion`,
-			options: {
-				hoist: true,
-				sourceMap: true,
-			},
-		},
+		`zygote`,
+		`emotion`,
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
@@ -94,17 +89,6 @@ module.exports = {
 			options: {
 				path: `${__dirname}/src/markdown`,
 				name: `pages`,
-			},
-		},
-		{
-			resolve: `gatsby-plugin-zygote`,
-			options: {
-				api: process.env.NODE_ENV === `production` ?
-					`https://yh5fc30fhh.execute-api.us-east-1.amazonaws.com/production/handler` :
-					`https://hzrxrm0s9b.execute-api.us-east-1.amazonaws.com/staging/handler`,
-				properties: {
-					site: siteId,
-				},
 			},
 		},
 		{
