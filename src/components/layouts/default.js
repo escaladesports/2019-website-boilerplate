@@ -2,6 +2,9 @@ import React from 'react'
 import { StaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import { Helmet } from 'react-helmet'
+import { Cart } from '@escaladesports/zygote-cart'
+import * as escaApi from '@escaladesports/zygote-plugin-esca-api'
+import * as standardPayment from '@escaladesports/zygote-cart/dist/plugins/zygote-plugin-standard-billing'
 import RouteDelayed from '../../../plugins/route-delayed-animation'
 import Header from '../header'
 import Footer from '../footer'
@@ -61,6 +64,26 @@ export default class Layout extends React.Component{
 						<RouteDelayed>
 							<RouteDelayedAnimation />
 						</RouteDelayed>
+						<Cart
+							infoWebhook='/api/inventory/load'
+							splitName={true}
+							plugins={[
+								standardPayment,
+								escaApi,
+							]}
+							totalModifications={[
+								{
+									id: `shipping`,
+									description: `Shipping`,
+									displayValue: `-`,
+								},
+								{
+									id: `tax`,
+									description: `Tax`,
+									displayValue: `-`,
+								},
+							]}
+						/>
 					</>
 				)}
 			/>

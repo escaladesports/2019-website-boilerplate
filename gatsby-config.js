@@ -37,8 +37,7 @@ module.exports = {
 		siteUrl,
 	},
 	plugins: [
-		`zygote`,
-		`emotion`,
+		`gatsby-plugin-emotion`,
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
@@ -122,6 +121,7 @@ module.exports = {
 		`cms-no-index`,
 
 		// Client plugins
+		// `zygote`,
 		`route-delayed-animation`,
 		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-polyfill-io`,
