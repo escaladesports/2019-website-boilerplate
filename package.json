@@ -17,7 +17,7 @@
     "clean:cache": "rm -rf .cache",
     "clean:public": "rm -rf public",
     "clean:functions": "rm -rf dist-functions",
-    "dev": "netlify dev -c \"yarn dev:gatsby\"",
+    "dev": "netlify dev --command \"yarn dev:gatsby\"",
     "dev:gatsby": "yarn netlify-toml && gatsby develop",
     "dev:functions": "netlify-lambda serve src/lambda --config lambda-webpack-config.js",
     "env": "node utils/env",
