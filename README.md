@@ -67,3 +67,7 @@ You'll also need to point Netlify to your Netlify CMS email templates. These tem
 - Confirmation template: `/email-templates/cms-confirmation`
 - Recovery template: `/email-templates/cms-password-recovery`
 - Email change template: `/email-templates/cms-email-change`
+
+## Netlify Config, Redirects, and Headers
+
+The Netify config file is located in `src/netlify.toml` and is transpiled to the root directory on `yarn dev` and `yarn build`. This allows you to use environment variables in the source config (example: `env.API_KEY`) that will be injected into the root config. Since these changes are one way, you should never edit the config that's in the root.
