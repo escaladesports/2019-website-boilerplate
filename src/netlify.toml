@@ -19,7 +19,7 @@
 		Content-Type = "application/json"
 		ESC-API-Key = "env.ESCA_API_KEY"
 		X-API-Key = "env.X_API_KEY"
-		ESC-API-Context = "env.ESCA_API_SITE"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/coupon/calculate"
@@ -30,7 +30,7 @@
 		Content-Type = "application/json"
 		ESC-API-Key = "env.ESCA_API_KEY"
 		X-API-Key = "env.X_API_KEY"
-		ESC-API-Context = "env.ESCA_API_SITE"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/products/shipping"
@@ -41,7 +41,7 @@
 		Content-Type = "application/json"
 		ESC-API-Key = "env.ESCA_API_KEY"
 		X-API-Key = "env.X_API_KEY"
-		ESC-API-Context = "env.ESCA_API_SITE"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/shipping/load"
@@ -52,7 +52,7 @@
 		Content-Type = "application/json"
 		ESC-API-Key = "env.ESCA_API_KEY"
 		X-API-Key = "env.X_API_KEY"
-		ESC-API-Context = "env.ESCA_API_SITE"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/orders/store"
@@ -63,7 +63,7 @@
 		Content-Type = "application/json"
 		ESC-API-Key = "env.ESCA_API_KEY"
 		X-API-Key = "env.X_API_KEY"
-		ESC-API-Context = "env.ESCA_API_SITE"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/pay/paypal"
@@ -92,4 +92,4 @@
 		Content-Type = "application/json"
 		ESC-API-Key = "env.ESCA_API_KEY"
 		X-API-Key = "env.X_API_KEY"
-		ESC-API-Context = "env.ESCA_API_SITE"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
