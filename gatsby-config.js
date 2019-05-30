@@ -318,15 +318,15 @@ module.exports = {
 			},
 		},
 		`open-browser`,
-		// {
-		// 	resolve: `schema-snapshot`,
-		// 	options: {
-		// 		include: [
-		// 			`MarkdownRemark`,
-		// 			`MarkdownRemarkFrontmatter`,
-		// 			`MarkdownRemarkFrontmatterVariants`,
-		// 		],
-		// 	},
-		// },
+		{
+			resolve: `schema-snapshot`,
+			options: {
+				include: [
+					`MarkdownRemark`,
+					`MarkdownRemarkFrontmatter`,
+					`MarkdownRemarkFrontmatterVariants`,
+				],
+			},
+		},
 	],
 }

@@ -27,7 +27,7 @@ rm -rf .git
 netlify unlink
 git init
 git remote add origin git@github.com:REMOTE_GIT_SITE.git
-git add netlify.toml
+git add package.json
 git commit -m 'Initial commit'
 git push origin master
 ```
