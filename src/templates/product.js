@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { addToCart } from '@escaladesports/zygote-cart'
 import Img from '../components/netlify-image'
 import Layout from '../components/layouts/default'
 import Price from '../components/price'
@@ -106,6 +107,14 @@ export default class ProductTemplate extends React.Component{
 					data-url={path}
 					data-desc={`Color: ${color}`}
 					data-open-cart
+					onClick={() => addToCart({
+						id,
+						name: title,
+						image: thumbnail,
+						description: `Color: ${color}`,
+						price,
+						shippable: true,
+					})}
 				>
 					Add to Cart
 				</button>
