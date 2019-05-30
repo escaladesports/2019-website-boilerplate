@@ -12,6 +12,7 @@ node_modules/
 # Development/Environment
 .env
 .env.*
+!.env.example
 dist
 dist-*
 .next

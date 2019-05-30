@@ -3,10 +3,6 @@ const striptags = require(`striptags`)
 const { readFileSync } = require(`fs-extra`)
 const globby = require(`globby`).sync
 const matter = require(`gray-matter`)
-const {
-	siteUrl,
-	siteId,
-} = require(`./site-config`)
 
 // Get site info from markdown
 const { siteTitle, siteDescription } = matter(
@@ -33,7 +29,7 @@ module.exports = {
 	siteMetadata: {
 		title: siteTitle,
 		description: siteDescription,
-		siteUrl,
+		siteUrl: process.env.URL,
 	},
 	plugins: [
 		`gatsby-plugin-emotion`,
@@ -44,14 +40,14 @@ module.exports = {
 			resolve: `escalade-stock`,
 			options: {
 				ids: productIds,
-				siteId,
+				siteId: process.env.GATSBY_ESCA_API_SITE,
 			},
 		},
 		{
 			resolve: `escalade-pricing`,
 			options: {
 				ids: productIds,
-				siteId,
+				siteId: process.env.GATSBY_ESCA_API_SITE,
 			},
 		},
 		`blog`,
@@ -61,7 +57,7 @@ module.exports = {
 		{
 			resolve: `email-templates`,
 			options: {
-				siteUrl,
+				siteUrl: process.env.URL,
 			},
 		},
 		{
@@ -114,7 +110,7 @@ module.exports = {
 		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
-				siteUrl,
+				siteUrl: process.env.URL,
 			},
 		},
 		`cms-no-index`,
