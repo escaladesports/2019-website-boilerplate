@@ -37,7 +37,6 @@ module.exports = {
 		siteUrl,
 	},
 	plugins: [
-		`gatsby-plugin-webpack-size`,
 		{
 			resolve: `emotion`,
 			options: {
@@ -317,7 +316,10 @@ module.exports = {
 				},
 			},
 		},
+
+		// Dev plugins
 		`open-browser`,
+		`gatsby-plugin-webpack-size`,
 		{
 			resolve: `schema-snapshot`,
 			options: {
