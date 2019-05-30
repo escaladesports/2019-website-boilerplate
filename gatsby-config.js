@@ -320,15 +320,15 @@ module.exports = {
 		// Dev plugins
 		`open-browser`,
 		`gatsby-plugin-webpack-size`,
-		{
-			resolve: `schema-snapshot`,
-			options: {
-				include: [
-					`MarkdownRemark`,
-					`MarkdownRemarkFrontmatter`,
-					`MarkdownRemarkFrontmatterVariants`,
-				],
-			},
-		},
+		// {
+		// 	resolve: `schema-snapshot`,
+		// 	options: {
+		// 		include: [
+		// 			`MarkdownRemark`,
+		// 			`MarkdownRemarkFrontmatter`,
+		// 			`MarkdownRemarkFrontmatterVariants`,
+		// 		],
+		// 	},
+		// },
 	],
 }
