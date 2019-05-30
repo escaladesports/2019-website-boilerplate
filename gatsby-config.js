@@ -225,7 +225,7 @@ module.exports = {
 										...frontmatter,
 										url: `${siteUrl}${path}`,
 										guid: `${siteUrl}${path}`,
-										custom_elements: [{ "content:encoded": html }],
+										custom_elements: [{ 'content:encoded': html }],
 									}
 								}
 							)

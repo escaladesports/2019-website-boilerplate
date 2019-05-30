@@ -7,6 +7,14 @@
 	functions = "dist-functions"
 
 [[redirects]]
+	from = "/test"
+	to = "https://postman-echo.com/headers"
+	status = 200
+	force = true
+	[redirect.headers]
+		Test-Key = "TEST"
+
+[[redirects]]
 	from = "/admin"
 	to = "/admin/"
 
