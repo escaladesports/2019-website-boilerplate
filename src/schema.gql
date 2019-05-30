@@ -44,9 +44,9 @@ type MarkdownRemarkFrontmatter {
   ): Date
   tags: [String]
   path: String
+  published: Boolean
   image: String
   imageDesc: String
-  published: Boolean
   id: String
   email: String
   md5: String
@@ -54,9 +54,9 @@ type MarkdownRemarkFrontmatter {
   category: String
   color: String
   price: Int
+  images: [String]
   order: Int
   variants: [MarkdownRemarkFrontmatterVariants]
-  images: [String]
   siteTitle: String
   siteDescription: String
   postsPerPage: Int
@@ -64,6 +64,6 @@ type MarkdownRemarkFrontmatter {
 }
 
 type MarkdownRemarkFrontmatterVariants {
-  color: String
   id: String
+  color: String
 }
