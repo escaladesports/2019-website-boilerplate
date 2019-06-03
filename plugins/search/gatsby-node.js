@@ -1,7 +1,7 @@
-const lunr = require(`lunr`)
-const { outputJson } = require(`fs-extra`)
+import lunr  from 'lunr'
+import { outputJson } from 'fs-extra'
 
-exports.createPages = async ({ graphql }, { query, parse }) => {
+export async function createPages({ graphql }, { query, parse }){
 
 	// Query data to be indexed
 	const res = await graphql(query)
@@ -41,7 +41,7 @@ exports.createPages = async ({ graphql }, { query, parse }) => {
 }
 
 // Dynamic routing
-exports.onCreatePage = async({ page, actions: { createPage } }) => {
+export async function onCreatePage({ page, actions: { createPage } }){
 	if (page.path.match(/^\/search/)) {
 		page.matchPath = `/search/*`
 		createPage(page)

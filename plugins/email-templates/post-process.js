@@ -1,12 +1,13 @@
-const glob = require(`globby`)
-const { readFile, outputFile } = require(`fs-extra`)
-const posthtml = require(`posthtml`)
-const removeTags = require(`posthtml-remove-tags`)
-const doctype = require(`posthtml-doctype`)
-const beautify = require(`posthtml-beautify`)
-const stripComments = require(`strip-html-comments`)
-const removeAttributes = require(`posthtml-remove-attributes`)
-const custom = require(`./posthtml-custom`)
+import glob from 'globby'
+import { readFile, outputFile } from 'fs-extra'
+import posthtml from 'posthtml'
+import removeTags from 'posthtml-remove-tags'
+import doctype from 'posthtml-doctype'
+import beautify from 'posthtml-beautify'
+import stripComments from 'strip-html-comments'
+import removeAttributes from 'posthtml-remove-attributes'
+import custom from './posthtml-custom'
+
 const cwd = process.cwd()
 
 async function emailifyHtml(contents, url){
@@ -40,7 +41,7 @@ async function emailifyHtml(contents, url){
 	await Promise.all(promises)
 }
 
-async function processHtml(path, url) {
+export default async function processHtml(path, url) {
 	let paths = await glob(`${cwd}/public/${path}/**/*.html`)
 	let promises = paths.map(path => {
 		return readFile(path, `utf8`)
@@ -52,5 +53,3 @@ async function processHtml(path, url) {
 	})
 	await emailifyHtml(obj, url)
 }
-
-module.exports = processHtml

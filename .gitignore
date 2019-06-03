@@ -29,6 +29,7 @@ env.js.key
 _optimize
 coverage
 /netlify.toml
+*.pem
 
 # Temporary
 temp
