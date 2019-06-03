@@ -1,4 +1,4 @@
-const { resolve, parse } = require(`path`)
+import { resolve, parse } from 'path'
 
 const markdownPath = resolve(`src/markdown/blog`)
 const blogTemplate = resolve(`src/templates/blog.js`)
@@ -6,7 +6,7 @@ const tagsTemplate = resolve(`src/templates/tags.js`)
 const postTemplate = resolve(`src/templates/post.js`)
 const now = new Date()
 
-exports.createPages = async ({ actions, graphql }) => {
+export async function createPages({ actions, graphql }){
 	const { createPage } = actions
 
 	const res = await graphql(`{
@@ -125,7 +125,7 @@ exports.createPages = async ({ actions, graphql }) => {
 }
 
 // Create URL paths for posts
-exports.onCreateNode = ({ node, actions }) => {
+export function onCreateNode({ node, actions }){
 	const { createNodeField } = actions
 	const { fileAbsolutePath } = node
 	if (fileAbsolutePath && fileAbsolutePath.indexOf(markdownPath) === 0) {

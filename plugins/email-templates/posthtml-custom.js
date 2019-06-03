@@ -1,6 +1,6 @@
-const { join } = require(`path`)
+import { join } from 'path'
 
-module.exports = function(url){
+export default function customPosthtmlPlugin(url){
 	return function custom(tree) {
 		tree.walk(node => {
 			if (typeof node === `object`) {

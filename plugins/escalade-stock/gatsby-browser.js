@@ -1,5 +1,5 @@
-const inventoryState = require(`./state`)
-const fetch = require(`./fetch`)
+import inventoryState from './state'
+import fetch from './fetch'
 
 const pollInterval = 10 * 60 * 1000	// Minutes
 
@@ -14,6 +14,6 @@ async function fetchInventory(options){
 	setTimeout(() => fetchInventory(options), pollInterval)
 }
 
-exports.onInitialClientRender = (_, options) => {
+export function onInitialClientRender(_, options){
 	fetchInventory(options)
 }

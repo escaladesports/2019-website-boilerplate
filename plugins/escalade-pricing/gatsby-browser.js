@@ -1,5 +1,5 @@
-const pricesState = require(`./state`)
-const fetch = require(`./fetch`)
+import pricesState from './state'
+import fetch from './fetch'
 
 const pollInterval = 10 * 60 * 1000	// Minutes
 
@@ -14,6 +14,6 @@ async function fetchPrices(options){
 	setTimeout(() => fetchPrices(options), pollInterval)
 }
 
-exports.onInitialClientRender = (_, options) => {
+export function onInitialClientRender(_, options){
 	fetchPrices(options)
 }

@@ -1,5 +1,5 @@
-const { State } = require(`statable`)
+import { State } from 'statable'
 
 const inventoryState = new State({})
 
-module.exports = inventoryState
+export default inventoryState
