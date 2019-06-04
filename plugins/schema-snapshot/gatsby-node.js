@@ -1,11 +1,11 @@
-const { printType } = require(`graphql`)
-const fs = require(`fs-extra`)
-const path = require(`path`)
+import { printType } from 'graphql'
+import fs from 'fs-extra'
+import path from 'path'
 
 // Path to snapshot relative of schema-snapshot plugin directory
 const schemaFilePath = path.join(process.cwd(), `./src/schema.gql`)
 
-exports.sourceNodes = async ({ actions }) => {
+export async function sourceNodes({ actions }){
 	const { createTypes } = actions
 
 	// Use snapshot to create types if exists
@@ -16,7 +16,7 @@ exports.sourceNodes = async ({ actions }) => {
 	}
 }
 
-exports.onPostBootstrap = async ({ store }, { include }) => {
+export async function onPostBootstrap({ store }, { include }){
 	const { schema } = store.getState()
 
 	// Create snapshot if it doesn't exist

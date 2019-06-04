@@ -3,11 +3,7 @@ const striptags = require(`striptags`)
 const { readFileSync } = require(`fs-extra`)
 const globby = require(`globby`).sync
 const matter = require(`gray-matter`)
-const {
-	siteUrl,
-	siteId,
-	analyticsID,
-} = require(`./site-config`)
+const { siteUrl } = require(`./site-config`)
 
 // Get site info from markdown
 const { siteTitle, siteDescription } = matter(
@@ -37,13 +33,7 @@ module.exports = {
 		siteUrl,
 	},
 	plugins: [
-		{
-			resolve: `emotion`,
-			options: {
-				hoist: true,
-				sourceMap: true,
-			},
-		},
+		`gatsby-plugin-emotion`,
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
@@ -51,14 +41,14 @@ module.exports = {
 			resolve: `escalade-stock`,
 			options: {
 				ids: productIds,
-				siteId,
+				siteId: process.env.GATSBY_ESCA_API_SITE,
 			},
 		},
 		{
 			resolve: `escalade-pricing`,
 			options: {
 				ids: productIds,
-				siteId,
+				siteId: process.env.GATSBY_ESCA_API_SITE,
 			},
 		},
 		`blog`,
@@ -97,17 +87,6 @@ module.exports = {
 			},
 		},
 		{
-			resolve: `gatsby-plugin-zygote`,
-			options: {
-				api: process.env.NODE_ENV === `production` ?
-					`https://yh5fc30fhh.execute-api.us-east-1.amazonaws.com/production/handler` :
-					`https://hzrxrm0s9b.execute-api.us-east-1.amazonaws.com/staging/handler`,
-				properties: {
-					site: siteId,
-				},
-			},
-		},
-		{
 			resolve: `gatsby-transformer-remark`,
 			options: {
 				plugins: [
@@ -138,6 +117,7 @@ module.exports = {
 		`cms-no-index`,
 
 		// Client plugins
+		// `zygote`,
 		`route-delayed-animation`,
 		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-polyfill-io`,
@@ -159,14 +139,14 @@ module.exports = {
 				},
 			},
 		},
-		{
-			resolve: `gatsby-plugin-google-analytics`,
-			options: {
-				trackingId: analyticsID,
-				anonymize: true,
-				respectDNT: true,
-			},
-		},
+		// {
+		// 	resolve: `gatsby-plugin-google-analytics`,
+		// 	options: {
+		// 		trackingId: `UA-2411855-10`,
+		// 		anonymize: true,
+		// 		respectDNT: true,
+		// 	},
+		// },
 		// {
 		// 	resolve: `gatsby-plugin-prefetch-google-fonts`,
 		// 	options: {
@@ -245,7 +225,7 @@ module.exports = {
 										...frontmatter,
 										url: `${siteUrl}${path}`,
 										guid: `${siteUrl}${path}`,
-										custom_elements: [{ "content:encoded": html }],
+										custom_elements: [{ 'content:encoded': html }],
 									}
 								}
 							)

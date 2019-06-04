@@ -1,7 +1,7 @@
-const { resolve } = require(`path`)
-const { readFile, outputFile } = require(`fs-extra`)
+import { resolve } from 'path'
+import { readFile, outputFile } from 'fs-extra'
 
-exports.onPostBuild = async () => {
+export async function onPostBuild(){
 	const path = resolve(`public/admin/index.html`)
 	try{
 		let str = await readFile(path, `utf8`)

@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import { addToCart } from '@escaladesports/zygote-cart'
 import Img from '../components/netlify-image'
 import Layout from '../components/layouts/default'
 import Price from '../components/price'
@@ -41,9 +42,6 @@ export default class ProductTemplate extends React.Component{
 							title,
 							images,
 						},
-						fields: {
-							path,
-						},
 						html,
 						excerpt,
 					},
@@ -66,7 +64,6 @@ export default class ProductTemplate extends React.Component{
 		const thumbnail = hasImages ?
 			`${images[0]}?nf_resize=fit&w=150&h=150` :
 			null
-
 		return(
 			<Layout title={title} description={excerpt}>
 				<h1>{title}</h1>
@@ -98,17 +95,22 @@ export default class ProductTemplate extends React.Component{
 					))}
 				</ul>
 
-				<button
-					data-id={id}
-					data-name={title}
-					data-price={price}
-					data-img={thumbnail}
-					data-url={path}
-					data-desc={`Color: ${color}`}
-					data-open-cart
-				>
-					Add to Cart
-				</button>
+				<Price id={id} price={price}>
+					{price => (
+						<button
+							onClick={() => addToCart({
+								id,
+								name: title,
+								image: thumbnail,
+								description: `Color: ${color}`,
+								price: parseInt(price.toString().replace(`.`, ``)),
+								shippable: true,
+							})}
+						>
+							Add to Cart
+						</button>
+					)}
+				</Price>
 
 				<ul>
 					<li>Color: {color}</li>
@@ -146,9 +148,6 @@ export const query = graphql`
 					color
 					id
 				}
-			}
-			fields{
-				path
 			}
 			html
 			excerpt(pruneLength: 175)
