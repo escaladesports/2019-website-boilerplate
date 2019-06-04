@@ -17,6 +17,9 @@ collections:
           - label: Body
             name: body
             widget: markdown
+          - label: Raw HTML
+            name: html
+            widget: html
           - label: Header Image
             name: headerImage
             widget: image
