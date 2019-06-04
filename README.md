@@ -24,6 +24,11 @@ yarn reset
 rm -rf .git
 netlify unlink
 git init
+```
+
+Create a GitHub repository and copy the remote URL for the next step.
+
+```bash
 git remote add origin git@github.com:REMOTE_GIT_SITE.git
 git add package.json
 git commit -m 'Initial commit'
