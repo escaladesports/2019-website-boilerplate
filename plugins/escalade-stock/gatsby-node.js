@@ -1,6 +1,6 @@
-import fetch from './fetch'
+const fetch = require(`./fetch`)
 
-export async function sourceNodes({ actions, createNodeId, createContentDigest }, options){
+exports.sourceNodes = async function({ actions, createNodeId, createContentDigest }, options){
 	const { createNode } = actions
 	const inventory = await fetch(options)
 

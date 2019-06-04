@@ -1,18 +1,18 @@
-import { resolve, parse } from 'path'
-import createProductPages from './create-product-pages'
-import createCategoryPages from './create-category-pages'
+const { resolve, parse } = require(`path`)
+const createProductPages = require(`./create-product-pages`)
+const createCategoryPages = require(`./create-category-pages`)
 
 const productPath = resolve(`src/markdown/products`)
 const categoryPath = resolve(`src/markdown/categories`)
 
-export async function createPages({ actions, graphql }){
+exports.createPages = async function({ actions, graphql }){
 	const { createPage } = actions
 
 	await createProductPages(createPage, graphql)
 	await createCategoryPages(createPage, graphql)
 }
 
-export function onCreateNode({ node, actions }){
+exports.onCreateNode = function({ node, actions }){
 	const { createNodeField } = actions
 	const { fileAbsolutePath } = node
 	if (fileAbsolutePath) {

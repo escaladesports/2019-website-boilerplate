@@ -1,11 +1,11 @@
-import fetch from 'isomorphic-fetch'
+const fetch = require(`isomorphic-fetch`)
 
 const endpoints = {
 	production: `https://pricing.escsportsapi.com/load`,
 	testing: `https://pricing-test.escsportsapi.com/load`,
 }
 
-export default async function fetchPricing({
+module.exports = async function({
 	ids,
 	siteId,
 	env = `production`,
@@ -20,5 +20,6 @@ export default async function fetchPricing({
 		}),
 	})
 	const { prices } = await res.json()
+	console.log(prices)
 	return prices
 }

@@ -1,11 +1,11 @@
-import fetch from 'isomorphic-fetch'
+const fetch = require(`isomorphic-fetch`)
 
 const endpoints = {
 	production: `https://inventory.escsportsapi.com/load`,
 	testing: `https://inventory-test.escsportsapi.com/load`,
 }
 
-export default async function fetchInventory({
+module.exports = async function({
 	ids,
 	siteId,
 	env = `production`,
