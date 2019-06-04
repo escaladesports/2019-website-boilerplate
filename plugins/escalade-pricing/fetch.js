@@ -20,6 +20,5 @@ module.exports = async function({
 		}),
 	})
 	const { prices } = await res.json()
-	console.log(prices)
 	return prices
 }
