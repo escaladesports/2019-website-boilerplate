@@ -1,6 +1,6 @@
-import postProcess from './post-process'
+const postProcess = require(`./post-process`)
 
-export async function onPostBuild(_, {
+exports.onPostBuild = async function(_, {
 	publicPath = `email-templates`,
 	siteUrl = process.env.URL,
 }){

@@ -1,8 +1,8 @@
-import { resolve } from 'path'
+const { resolve } = require(`path`)
 
 const component = resolve(`src/templates/product.js`)
 
-export default async function createProductPages(createPage, graphql){
+module.exports = async function(createPage, graphql){
 	const result = await graphql(`{
 		allMarkdownRemark(
 			filter: {

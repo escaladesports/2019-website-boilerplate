@@ -1,8 +1,8 @@
-import { resolve } from 'path'
+const { resolve } = require(`path`)
 
 const component = resolve(`src/templates/category.js`)
 
-export default async function createProductPages(createPage, graphql){
+module.exports = async function(createPage, graphql){
 
 	// Query category markdown data
 	const result = await graphql(`{

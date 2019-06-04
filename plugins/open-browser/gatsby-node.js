@@ -1,5 +1,5 @@
-import open from 'open'
+const open = require(`open`)
 
-export function onCreateDevServer(){
+exports.onCreateDevServer = function(){
 	setTimeout(() => open(`http://localhost:8888`), 2000)
 }
