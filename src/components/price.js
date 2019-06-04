@@ -6,12 +6,16 @@ import priceState from '../../plugins/escalade-pricing/state'
 // SSR price and repolls for new price live
 export default class Price extends React.Component{
 	render(){
-		const { id, price } = this.props
+		const { id, price, children } = this.props
 		return (
 			<Subscribe to={priceState}>
-				{(prices) => (
-					formatUSD((prices[id] ? prices[id].price : false) || price, true)
-				)}
+				{(prices) => {
+					const latestPrice = (prices[id] ? prices[id].price : false) || price
+					if(typeof children === `function`){
+						return children(latestPrice)
+					}
+					return formatUSD(latestPrice, true)
+				}}
 			</Subscribe>
 		)
 	}

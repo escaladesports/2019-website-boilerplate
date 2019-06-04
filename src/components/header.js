@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'gatsby-link'
 import { css } from '@emotion/core'
 import Close from '@material-ui/icons/Close'
+import { openCart } from '@escaladesports/zygote-cart'
 import { primaryColor } from '../styles/colors'
 
 export default class Header extends React.Component{
@@ -42,7 +43,10 @@ export default class Header extends React.Component{
 						<li><Link to='/pickleball'>Category</Link></li>
 						<li><Link to='/search'>Search</Link></li>
 						<li><Link to='/contact'>Contact</Link></li>
-						<li><a href='#' className='zygoteIco'>Cart</a></li>
+						<li><a href='#' onClick={e => {
+							e.preventDefault()
+							openCart()
+						}}>Cart</a></li>
 					</ul>
 				</nav>
 				{this.state.open && (
