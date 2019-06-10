@@ -54,7 +54,7 @@ git push origin master
 
 ## Images
 
-All UI related images that belong in the template can be stored in the repository in the `src` directory. Any images that need to be edited through the CMS should be stored in Cloudinary to prevent the repository size from getting out of control.
+All UI related images that belong in the template can be stored in the repository in the `src` directory. Any images that need to be edited through the CMS should be stored in `static/media` which will get checked in via git LFS to prevent the repository size from getting out of control.
 
 ## Schema
 
