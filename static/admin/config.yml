@@ -3,6 +3,7 @@ backend:
   accept_roles:
     - admin
 
+publish_mode: editorial_workflow
 media_folder: static/media
 public_folder: /media
 logo_url: /backend-logo.png
