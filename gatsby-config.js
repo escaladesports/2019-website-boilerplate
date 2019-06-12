@@ -15,7 +15,7 @@ const productMarkdown = globby(`./src/markdown/products/**/*.md`)
 const productIds = []
 productMarkdown.forEach(path => {
 	const contents = readFileSync(path)
-	const { data: { id, variants } } = matter(contents)
+	const { id, variants } = matter(contents).data
 	productIds.push(id)
 	if (Array.isArray(variants)) {
 		variants.forEach(({ id }) => {
