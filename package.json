@@ -95,6 +95,7 @@
     "gatsby-transformer-remark": "^2.3.6",
     "gatsby-transformer-sharp": "^2.1.21",
     "gray-matter": "^4.0.1",
+    "husky": "^2.4.1",
     "identity-obj-proxy": "^3.0.0",
     "isomorphic-fetch": "^2.2.1",
     "jest": "^24.1.0",
