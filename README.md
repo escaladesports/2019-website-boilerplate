@@ -43,7 +43,17 @@ netlify lm:setup
 git add .
 git commit -m 'Project files'
 git push origin master
-````
+```
+
+## Setup for an existing project
+
+```bash
+git clone REMOTE_URL folder-name
+cd folder-name
+netlify lm:setup
+nvm use
+yarn
+```
 
 ## Usage
 
