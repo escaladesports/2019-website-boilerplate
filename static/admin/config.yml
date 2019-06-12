@@ -267,7 +267,7 @@ collections:
     files:
       - label: Site Settings
         name: site
-        file: src/markdown/site.md
+        file: src/markdown/settings/site.md
         fields:
           - label: Title
             name: title
