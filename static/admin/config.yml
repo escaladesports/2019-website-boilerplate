@@ -5,13 +5,13 @@ backend:
 
 media_folder: static/media
 public_folder: /media
-
-editor:
-  preview: false
+logo_url: /backend-logo.png
 
 collections:
   - label: Pages
     name: pages
+    editor:
+      preview: false
     files:
       - label: Home
         name: index
@@ -69,6 +69,8 @@ collections:
     name: products
     folder: src/markdown/products
     create: true
+    editor:
+      preview: false
     fields:
       - label: Name
         name: title
@@ -136,6 +138,8 @@ collections:
     name: categories
     folder: src/markdown/categories
     create: true
+    editor:
+      preview: false
     fields:
       - label: Name
         name: title
@@ -157,6 +161,8 @@ collections:
     name: blog
     folder: src/markdown/blog
     create: true
+    editor:
+      preview: false
     fields:
       - label: Title
         name: title
@@ -197,6 +203,8 @@ collections:
       field: published
       value: true
     create: false
+    editor:
+      preview: false
     fields:
       - label: Date
         name: date
@@ -227,6 +235,8 @@ collections:
       field: published
       value: false
     create: false
+    editor:
+      preview: false
     fields:
       - label: Date
         name: date
@@ -252,6 +262,8 @@ collections:
         default: false
   - label: Settings
     name: settings
+    editor:
+      preview: false
     files:
       - label: Site Settings
         name: site
