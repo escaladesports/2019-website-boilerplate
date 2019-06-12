@@ -25,12 +25,16 @@
     "live": "open-cli https://project-boilerplate.netlify.com/",
     "netlify": "open-cli https://app.netlify.com/sites/project-boilerplate/deploys",
     "netlify-toml": "node utils/netlify-toml",
-    "precommit": "lint-staged",
     "prepublishOnly": "yarn build",
     "reset": "node utils/reset",
     "serve": "gatsby serve --open",
     "test": "jest",
     "travis": "open-cli https://travis-ci.org/escaladesports/project-boilerplate/branches"
+  },
+  "husky": {
+    "hooks": {
+      "precommit": "lint-staged"
+    }
   },
   "lint-staged": {
     "**/*.js": [
