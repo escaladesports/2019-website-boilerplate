@@ -3,17 +3,9 @@ import netlifyIdentityWidget from 'netlify-identity-widget'
 import { injectGlobal } from 'emotion'
 import { CurrencyControl, CurrencyPreview } from './currency'
 import { HTMLControl, HTMLPreview } from './html'
-import logo from '../../../static/backend-logo.png'
 
 injectGlobal`
 	#nc-root > div > section{
-		> span{
-			background: url(${logo}) no-repeat center center !important;
-			background-size: contain !important;
-			> svg{
-				display: none !important;
-			}
-		}
 		> button{
 			color: transparent !important;
 			:after{
@@ -24,6 +16,9 @@ injectGlobal`
 				left: 0;
 				right: 0;
 			}
+		}
+		> span:nth-of-type(2){
+			opacity: 0;
 		}
 	}
 `
