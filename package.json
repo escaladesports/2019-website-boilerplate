@@ -58,7 +58,8 @@
     "@escaladesports/zygote-plugin-esca-api": "^1.1.2",
     "@material-ui/core": "^4.1.0",
     "@material-ui/icons": "^4.1.0",
-    "@octokit/rest": "^15.11.4",
+    "@octokit/rest": "^16.28.1",
+    "@testing-library/react": "^8.0.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^24.1.0",
     "babel-preset-escalade": "^1.0.5",
@@ -129,15 +130,14 @@
     "react-gravatar": "^2.6.3",
     "react-helmet": "^5.2.0",
     "react-html-email": "^3.0.0",
-    "react-testing-library": "^5.0.1",
     "recaptcha-verify": "^0.1.1",
     "showdown": "^1.8.7",
     "statable": "^0.3.2",
     "strip-html-comments": "^1.0.0",
     "striptags": "^3.1.1",
-    "toml": "^2.3.3",
+    "toml": "^3.0.0",
     "ultimate-pagination": "^1.0.0",
     "yaml": "^1.0.0-rc.8",
-    "yup": "^0.26.6"
+    "yup": "^0.27.0"
   }
 }
