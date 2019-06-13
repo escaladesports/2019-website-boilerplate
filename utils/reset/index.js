@@ -6,7 +6,7 @@ const {
 	outputJson,
 	pathExists,
 } = require(`fs-extra`)
-
+const tomlPath = `src/netlify.toml`
 
 function recursiveReset(options = {}, obj) {
 	for (let i in obj) {
@@ -53,11 +53,11 @@ async function rename(options = {}) {
 
 
 async function renameToml(options) {
-	if (!await pathExists(`netlify.toml`)) {
+	if (!await pathExists(tomlPath)) {
 		return console.log(`No netlify.toml file found`)
 	}
 	console.log(`Renaming in Netlify config...`)
-	let config = await readFile(`netlify.toml`)
+	let config = await readFile(tomlPath)
 	config = config.toString()
 	config = config.split(`\n`)
 	for (let i = 0; i < config.length; i++) {
@@ -68,7 +68,7 @@ async function renameToml(options) {
 		}
 	}
 	config = config.join(`\n`)
-	await outputFile(`netlify.toml`, config)
+	await outputFile(tomlPath, config)
 }
 
 rename()
