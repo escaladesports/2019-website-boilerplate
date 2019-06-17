@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import Layout from '../components/layouts/default'
-import 'leaflet/dist/leaflet.css'
+// import 'leaflet/dist/leaflet.css'
 
 export default class MapPage extends React.Component{
 	constructor(props){
@@ -9,19 +9,27 @@ export default class MapPage extends React.Component{
 		this.state = {}
 	}
 	async componentDidMount(){
-		const { Map } = await import(`react-leaflet`)
-		this.setState({ Map })
+		if (!this.state.Map) {
+			const { Map, TileLayer } = await import(`react-leaflet`)
+			this.setState({ Map, TileLayer })
+		}
 	}
 	render(){
-		const { Map } = this.state
+		const { Map, TileLayer } = this.state
 		return(
 			<Layout title='Map'>
 				<h1>Map</h1>
 				{!!Map && (
 					<Map
 						center={[51.505, -0.09]}
-						zoom={13} css={styles.map}
-					/>
+						zoom={1}
+						css={styles.map}
+					>
+						<TileLayer
+							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+							url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+						/>
+					</Map>
 				)}
 			</Layout>
 		)

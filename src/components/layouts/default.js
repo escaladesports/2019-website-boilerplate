@@ -55,6 +55,9 @@ export default class Layout extends React.Component{
 							<meta name='description' content={description || siteDescription} />
 							<meta property='og:title' content={title} />
 							<meta property='og:site_name' content={siteTitle} />
+							<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+								integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+								crossOrigin="" />
 						</Helmet>
 						<div css={styles.layout}>
 							<Header />
@@ -112,10 +115,6 @@ const styles = {
 		}
 		p{
 			line-height: 28px;
-		}
-		img{
-			max-width: 100%;
-			position: relative;
 		}
 		h1, h2, h3{
 			font-family: ${primaryFont};
