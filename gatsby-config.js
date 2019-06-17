@@ -147,21 +147,7 @@ module.exports = {
 		// 		respectDNT: true,
 		// 	},
 		// },
-		// {
-		// 	resolve: `gatsby-plugin-prefetch-google-fonts`,
-		// 	options: {
-		// 		fonts: [
-		// 			{
-		// 				family: `Oswald`,
-		// 				subsets: [`latin`],
-		// 			},
-		// 			{
-		// 				family: `Open Sans`,
-		// 				subsets: [`latin`],
-		// 			},
-		// 		],
-		// 	},
-		// },
+		`fonts`,
 		{
 			resolve: `gatsby-plugin-feed`,
 			options: {
