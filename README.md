@@ -72,6 +72,8 @@ All UI related images that belong in the template can be stored in the repositor
 
 The GraphQL schema is stored in `./src/schema.gql`. This is typically used to make sure the build script doesn't break whenever required fields in the markdown files are emptied out. If you delete the schema file, a snapshot of the current schema will be created the next time you run `yarn build` or `yarn dev`. This can be useful if you don't want to go through the hassle of writing it out yourself.
 
+If you get an error that looks like this: `Type with name "MarkdownRemarkFrontmatter" does not exists`, you just need to add the node specified to the `include` list on the schema plugin in the `gatsby-config.js` file. In this case, you would add `MarkdownRemarkFrontmatter` to the include list.
+
 ## Netlify CMS
 
 Unless you're using the "invite only" option in Netlify Identity, make sure to add the "admin" role in the Git Gateway settings. Then add the "admin" role to any users you want to have access to the CMS.
