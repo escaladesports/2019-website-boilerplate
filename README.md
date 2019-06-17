@@ -51,6 +51,8 @@ git push origin master
 git clone REMOTE_URL folder-name
 cd folder-name
 netlify lm:setup
+git lfs fetch
+git lfs pull
 nvm use
 yarn
 ```
