@@ -136,6 +136,8 @@
     "strip-html-comments": "^1.0.0",
     "striptags": "^3.1.1",
     "toml": "^3.0.0",
+    "typeface-open-sans": "^0.0.54",
+    "typeface-oswald": "^0.0.54",
     "ultimate-pagination": "^1.0.0",
     "yaml": "^1.0.0-rc.8",
     "yup": "^0.27.0"
