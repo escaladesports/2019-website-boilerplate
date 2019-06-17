@@ -147,7 +147,6 @@ module.exports = {
 		// 		respectDNT: true,
 		// 	},
 		// },
-		// `fonts`,
 		{
 			resolve: `gatsby-plugin-feed`,
 			options: {
