@@ -11,10 +11,15 @@ import 'react-leaflet-markercluster/dist/styles.min.css'
 export default class MapPage extends React.Component{
 	constructor(props){
 		super(props)
-		this.state = {}
+		this.state = {
+			visibleLocations: [],
+		}
 		this.updateLocationsList = this.updateLocationsList.bind(this)
 	}
-	async componentDidMount(){
+	async componentDidMount() {
+		this.locations = this.props.data.allMarkdownRemark.edges.map(edge => {
+			return edge.node.frontmatter
+		})
 		if (!this.state.Map) {
 			const L = await import(`leaflet`)
 
@@ -43,30 +48,29 @@ export default class MapPage extends React.Component{
 				Popup,
 				MarkerClusterGroup,
 			})
+
+			this.updateLocationsList()
 		}
 	}
 	updateLocationsList(){
-		console.log(`updateLocationsList`)
+		const visibleLocations = []
+		const mapBounds = this.map.leafletElement.getBounds()
+		this.locations.forEach(l => {
+			if (mapBounds.contains([l.lat, l.lng])){
+				visibleLocations.push(l)
+			}
+		})
+		this.setState({ visibleLocations })
 	}
 	render(){
 		const {
-			state: {
-				Map,
-				TileLayer,
-				Marker,
-				Popup,
-				MarkerClusterGroup,
-			},
-			props: {
-				data: {
-					allMarkdownRemark: { edges },
-				},
-			},
-		} = this
-
-		const locations = edges.map(edge => {
-			return edge.node.frontmatter
-		})
+			Map,
+			TileLayer,
+			Marker,
+			Popup,
+			MarkerClusterGroup,
+			visibleLocations,
+		} = this.state
 
 		return(
 			<Layout title='Map'>
@@ -77,26 +81,35 @@ export default class MapPage extends React.Component{
 						zoom={4}
 						maxZoom={30}
 						css={styles.map}
-						onMoveend={arg => console.log(arg)}
-						ref={this.updateLocationsList}
+						onMoveend={this.updateLocationsList}
+						ref={el => this.map = el}
 					>
 						<TileLayer
 							attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 							url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 						/>
 						<MarkerClusterGroup>
-							{locations.map((l, key) => (
-								<Marker key={`location${key}`} position={[l.lat, l.lng]}>
+							{this.locations.map((l, key) => (
+								<Marker key={`map-loc-${key}`} position={[l.lat, l.lng]}>
 									<Popup>
-										<div><b>{l.title}</b></div>
-										<div>{l.address}</div>
-										<div>{`${l.city}, ${l.state} ${l.zip}`}</div>
+										<b>{l.title}</b><br />
+										{l.address}<br />
+										{`${l.city}, ${l.state} ${l.zip}`}
 									</Popup>
 								</Marker>
 							))}
 						</MarkerClusterGroup>
 					</Map>
 				)}
+				<div css={styles.locationSection}>
+					{visibleLocations.map((l, key) => (
+						<div key={`loc-${key}`} css={styles.location}>
+							<b>{l.title}</b><br />
+							{l.address}<br />
+							{`${l.city}, ${l.state} ${l.zip}`}
+						</div>
+					))}
+				</div>
 			</Layout>
 		)
 	}
@@ -105,6 +118,12 @@ export default class MapPage extends React.Component{
 const styles = {
 	map: css`
 		height: 400px;
+	`,
+	locationSection: css`
+		padding: 20px 0;
+	`,
+	location: css`
+		padding: 20px 0;
 	`,
 }
 
