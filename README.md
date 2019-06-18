@@ -7,6 +7,11 @@
 - [Netlify CLI](https://www.netlify.com/docs/cli/)
 - [Git LFS](https://github.com/git-lfs/git-lfs?utm_source=gitlfs_site&utm_medium=repo_link&utm_campaign=gitlfs)
 - [Netlify Credential Helper](https://github.com/netlify/netlify-credential-helper)
+  - Note: you will also need to add these lines to your `~/.gitconfig` file located in the home directory
+    ```bash
+    [credential]
+      helper = netlify
+    ```
 - Netlify CLI Large Media Plugin
   ```bash
   netlify plugins:install netlify-lm-plugin
