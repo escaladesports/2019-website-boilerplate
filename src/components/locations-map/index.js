@@ -3,6 +3,8 @@ import { css } from '@emotion/core'
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png'
 import iconUrl from 'leaflet/dist/images/marker-icon.png'
 import shadowUrl from 'leaflet/dist/images/marker-shadow.png'
+import List from './locations-list'
+import ZipInput from './zip-input'
 
 import 'leaflet/dist/leaflet.css'
 import 'react-leaflet-markercluster/dist/styles.min.css'
@@ -14,6 +16,7 @@ export default class LocationsMap extends React.Component{
 			visibleLocations: [],
 		}
 		this.updateLocationsList = this.updateLocationsList.bind(this)
+		this.zoomToLocation = this.zoomToLocation.bind(this)
 	}
 	async componentDidMount() {
 		if (!this.state.Map) {
@@ -101,24 +104,13 @@ export default class LocationsMap extends React.Component{
 								))}
 							</MarkerClusterGroup>
 						</Map>
-						<div css={styles.zipContainer}>
-							<input type='text' />
-						</div>
+						<ZipInput />
 					</div>
 				)}
-				<div css={styles.locationSection}>
-					{visibleLocations.map((l, key) => (
-						<div
-							key={`loc-${key}`}
-							css={styles.location}
-							onClick={() => this.zoomToLocation(l.lat, l.lng)}
-						>
-							<b>{l.title}</b><br />
-							{l.address}<br />
-							{`${l.city}, ${l.state} ${l.zip}`}
-						</div>
-					))}
-				</div>
+				<List
+					locations={visibleLocations}
+					zoomToLocation={this.zoomToLocation}
+				/>
 			</>
 		)
 	}
@@ -133,18 +125,5 @@ const styles = {
 	`,
 	mapContainer: css`
 		position: relative;
-	`,
-	zipContainer: css`
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		z-index: 400;
-	`,
-	locationSection: css`
-		padding: 20px 0;
-	`,
-	location: css`
-		padding: 20px 0;
-		cursor: pointer;
 	`,
 }
