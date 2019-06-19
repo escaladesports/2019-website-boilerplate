@@ -47,6 +47,7 @@ export default class MapPage extends React.Component{
 				Marker,
 				Popup,
 				MarkerClusterGroup,
+				L,
 			})
 
 			this.updateLocationsList()
@@ -61,6 +62,11 @@ export default class MapPage extends React.Component{
 			}
 		})
 		this.setState({ visibleLocations })
+	}
+	zoomToLocation(lat, lng){
+		if(this.map){
+			this.map.leafletElement.flyTo([lat, lng], 10)
+		}
 	}
 	render(){
 		const {
@@ -103,7 +109,11 @@ export default class MapPage extends React.Component{
 				)}
 				<div css={styles.locationSection}>
 					{visibleLocations.map((l, key) => (
-						<div key={`loc-${key}`} css={styles.location}>
+						<div
+							key={`loc-${key}`}
+							css={styles.location}
+							onClick={() => this.zoomToLocation(l.lat, l.lng)}
+						>
 							<b>{l.title}</b><br />
 							{l.address}<br />
 							{`${l.city}, ${l.state} ${l.zip}`}
@@ -124,6 +134,7 @@ const styles = {
 	`,
 	location: css`
 		padding: 20px 0;
+		cursor: pointer;
 	`,
 }
 
