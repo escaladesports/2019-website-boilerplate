@@ -113,10 +113,6 @@ const styles = {
 		p{
 			line-height: 28px;
 		}
-		img{
-			max-width: 100%;
-			position: relative;
-		}
 		h1, h2, h3{
 			font-family: ${primaryFont};
 			text-transform: uppercase;
