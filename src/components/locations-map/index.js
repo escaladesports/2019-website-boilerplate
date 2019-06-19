@@ -104,7 +104,7 @@ export default class LocationsMap extends React.Component{
 								))}
 							</MarkerClusterGroup>
 						</Map>
-						<ZipInput />
+						<ZipInput zoomToLocation={this.zoomToLocation} />
 					</div>
 				)}
 				<List
