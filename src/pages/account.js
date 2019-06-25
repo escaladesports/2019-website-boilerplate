@@ -21,7 +21,9 @@ export default class AccountPage extends React.Component {
 							<div>Loading...</div>
 						)}
 						{user && (
-							<div>Hi, {user.name ? user.name : `friend`}!</div>
+							<>
+								<div>Hi, {user.name ? user.name : `friend`}!</div>
+							</>
 						)}
 					</>
 				}</Subscribe>
