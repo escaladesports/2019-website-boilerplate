@@ -14,9 +14,9 @@ export default class AccountPage extends React.Component {
 	render() {
 		return (
 			<Layout title='Your Account'>
+				<h1>Your Account</h1>
 				<Subscribe to={authState}>{
 					({ user }) => <>
-						<h1>Your Account</h1>
 						{!user && (
 							<div>Loading...</div>
 						)}

@@ -20,48 +20,49 @@ const tokens = {
 
 function noop(){}
 
-export const isAuthenticated = () => {
+export function isAuthenticated(){
 	if (!isBrowser) return
 	return global.localStorage.getItem(`isLoggedIn`) === `true`
 }
 
-export const login = () => {
+export function login(){
 	if (!isBrowser) return
 	auth.authorize()
 }
 
-const setSession = (cb = noop, silent = false) => (err, authResult) => {
-	if (err) {
-		console.error(err)
-		navigate(`/`)
-		cb()
-		return
-	}
-	if (authResult && authResult.accessToken && authResult.idToken) {
-		let expiresAt = authResult.expiresIn * 1000 + new Date().getTime()
-		tokens.accessToken = authResult.accessToken
-		tokens.idToken = authResult.idToken
-		tokens.expiresAt = expiresAt
-		authState.setState({ user: authResult.idTokenPayload })
-		global.localStorage.setItem(`isLoggedIn`, true)
-		if (!silent) {
-			navigate(`/account`)
+function setSession(cb = noop, silent = false){
+	return (err, authResult) => {
+		if (err) {
+			console.error(err)
+			cb()
+			return
 		}
-		cb()
+		if (authResult && authResult.accessToken && authResult.idToken) {
+			let expiresAt = authResult.expiresIn * 1000 + new Date().getTime()
+			tokens.accessToken = authResult.accessToken
+			tokens.idToken = authResult.idToken
+			tokens.expiresAt = expiresAt
+			authState.setState({ user: authResult.idTokenPayload })
+			global.localStorage.setItem(`isLoggedIn`, true)
+			if (!silent) {
+				navigate(`/account`)
+			}
+			cb()
+		}
 	}
 }
 
-export const handleAuthentication = () => {
+export function handleAuthentication(){
 	if (!isBrowser) return
 	auth.parseHash(setSession())
 }
 
-export const silentAuth = (callback = noop) => {
+export function silentAuth(callback = noop){
 	if (!isAuthenticated()) return callback()
 	auth.checkSession({}, setSession(callback, true))
 }
 
-export const logout = () => {
+export function logout(){
 	authState.setState({ user: false })
 	global.localStorage.setItem(`isLoggedIn`, false)
 	auth.logout()
