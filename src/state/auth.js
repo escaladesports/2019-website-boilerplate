@@ -1,8 +1,5 @@
 import { State } from 'statable'
 
-const authState = new State({
-	status: `loading`,
-	user: false,
-})
+const authState = new State({ user: false })
 
 export default authState

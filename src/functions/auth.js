@@ -28,7 +28,7 @@ export const login = () => {
 	auth.authorize()
 }
 
-const setSession = (cb = () => { }) => (err, authResult) => {
+const setSession = (cb = () => {}, silent = false) => (err, authResult) => {
 	if (err) {
 		console.error(err)
 		navigate(`/`)
@@ -42,7 +42,9 @@ const setSession = (cb = () => { }) => (err, authResult) => {
 		tokens.expiresAt = expiresAt
 		authState.setState({ user: authResult.idTokenPayload })
 		global.localStorage.setItem(`isLoggedIn`, true)
-		navigate(`/account`)
+		if (!silent) {
+			navigate(`/account`)
+		}
 		cb()
 	}
 }
@@ -54,7 +56,7 @@ export const handleAuthentication = () => {
 
 export const silentAuth = callback => {
 	if (!isAuthenticated()) return callback()
-	auth.checkSession({}, setSession(callback))
+	auth.checkSession({}, setSession(callback, true))
 }
 
 export const logout = () => {
