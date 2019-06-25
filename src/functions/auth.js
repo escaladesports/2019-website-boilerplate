@@ -1,17 +1,16 @@
 import auth0 from 'auth0-js'
 import { navigate } from 'gatsby'
+import authState from '../state/auth'
 
 const isBrowser = typeof window !== `undefined`
 
-const auth = isBrowser
-	? new auth0.WebAuth({
-		domain: process.env.GATSBY_AUTH0_DOMAIN,
-		clientID: process.env.GATSBY_AUTH0_CLIENTID,
-		redirectUri: process.env.GATSBY_AUTH0_CALLBACK,
-		responseType: `token id_token`,
-		scope: `openid profile email`,
-	})
-	: {}
+const auth = isBrowser ? new auth0.WebAuth({
+	domain: process.env.GATSBY_AUTH0_DOMAIN,
+	clientID: process.env.GATSBY_AUTH0_CLIENTID,
+	redirectUri: process.env.GATSBY_AUTH0_CALLBACK,
+	responseType: `token id_token`,
+	scope: `openid profile email`,
+}) : {}
 
 const tokens = {
 	accessToken: false,
@@ -19,36 +18,29 @@ const tokens = {
 	expiresAt: false,
 }
 
-let user = {}
-
 export const isAuthenticated = () => {
 	if (!isBrowser) return
 	return global.localStorage.getItem(`isLoggedIn`) === `true`
 }
 
 export const login = () => {
-	console.log(`login`)
 	if (!isBrowser) return
 	auth.authorize()
 }
 
 const setSession = (cb = () => { }) => (err, authResult) => {
-	console.log(`setSession`)
 	if (err) {
-		console.log(`setSession failed`)
 		console.error(err)
 		navigate(`/`)
 		cb()
 		return
 	}
-
 	if (authResult && authResult.accessToken && authResult.idToken) {
-		console.log(`setSession success`)
 		let expiresAt = authResult.expiresIn * 1000 + new Date().getTime()
 		tokens.accessToken = authResult.accessToken
 		tokens.idToken = authResult.idToken
 		tokens.expiresAt = expiresAt
-		user = authResult.idTokenPayload
+		authState.setState({ user: authResult.idTokenPayload })
 		global.localStorage.setItem(`isLoggedIn`, true)
 		navigate(`/account`)
 		cb()
@@ -60,18 +52,13 @@ export const handleAuthentication = () => {
 	auth.parseHash(setSession())
 }
 
-export const getProfile = () => {
-	console.log(`getProfile`)
-	return user
-}
-
 export const silentAuth = callback => {
-	console.log(`silentAuth`)
 	if (!isAuthenticated()) return callback()
 	auth.checkSession({}, setSession(callback))
 }
 
 export const logout = () => {
+	authState.setState({ user: false })
 	global.localStorage.setItem(`isLoggedIn`, false)
 	auth.logout()
 }

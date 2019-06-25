@@ -1,33 +1,29 @@
 import React from 'react'
+import { Subscribe } from 'statable'
 import Layout from '../components/layouts/default'
-import { login, isAuthenticated, getProfile } from '../functions/auth'
+import { login, isAuthenticated } from '../functions/auth'
+import authState from '../state/auth'
 
 export default class AccountPage extends React.Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			status: `loading`,
-		}
-	}
 	componentDidMount(){
-		if (!isAuthenticated()) {
+		if (!isAuthenticated()){
 			login()
-			return
 		}
-		this.setState({ status: `loggedIn` })
 	}
 	render() {
-		const { status } = this.state
-		const user = getProfile()
 		return (
 			<Layout title='Your Account'>
-				<h1>Your Account</h1>
-				{status === `loading` && (
-					<div>Loading...</div>
-				)}
-				{status === `loggedIn` && (
-					<div>Hi, {user.name ? user.name : `friend`}!</div>
-				)}
+				<Subscribe to={authState}>{
+					({ user }) => <>
+						<h1>Your Account</h1>
+						{!user && (
+							<div>Loading...</div>
+						)}
+						{user && (
+							<div>Hi, {user.name ? user.name : `friend`}!</div>
+						)}
+					</>
+				}</Subscribe>
 			</Layout>
 		)
 	}
