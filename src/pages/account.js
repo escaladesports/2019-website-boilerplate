@@ -6,6 +6,7 @@ import authState from '../state/auth'
 
 export default class AccountPage extends React.Component {
 	componentDidMount(){
+		// Redirect to login
 		if (!isAuthenticated()){
 			login()
 		}
