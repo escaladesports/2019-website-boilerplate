@@ -18,6 +18,8 @@ const tokens = {
 	expiresAt: false,
 }
 
+function noop(){}
+
 export const isAuthenticated = () => {
 	if (!isBrowser) return
 	return global.localStorage.getItem(`isLoggedIn`) === `true`
@@ -28,7 +30,7 @@ export const login = () => {
 	auth.authorize()
 }
 
-const setSession = (cb = () => {}, silent = false) => (err, authResult) => {
+const setSession = (cb = noop, silent = false) => (err, authResult) => {
 	if (err) {
 		console.error(err)
 		navigate(`/`)
@@ -54,7 +56,7 @@ export const handleAuthentication = () => {
 	auth.parseHash(setSession())
 }
 
-export const silentAuth = callback => {
+export const silentAuth = (callback = noop) => {
 	if (!isAuthenticated()) return callback()
 	auth.checkSession({}, setSession(callback, true))
 }

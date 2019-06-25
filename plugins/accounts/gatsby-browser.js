@@ -2,25 +2,11 @@ import React from 'react'
 import { silentAuth } from '../../src/functions/auth'
 
 class SessionCheck extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = { loading: true }
-	}
-
-	handleCheckSession = () => {
-		this.setState({ loading: false })
-	}
-
 	componentDidMount() {
-		silentAuth(this.handleCheckSession)
+		silentAuth()
 	}
-
 	render() {
-		return (
-			this.state.loading === false && (
-				<React.Fragment>{this.props.children}</React.Fragment>
-			)
-		)
+		return this.props.children
 	}
 }
 
