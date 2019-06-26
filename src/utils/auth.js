@@ -68,6 +68,7 @@ export function logout(){
 }
 
 export async function fetchMetadata(accessToken){
+	authState.setState({ loadingMeta: true })
 	try{
 		const req = await fetch(`/.netlify/functions/get-auth0-metadata`, {
 			method: `POST`,
@@ -75,10 +76,34 @@ export async function fetchMetadata(accessToken){
 				authorization: accessToken,
 			},
 		})
-		const metadata = await req.json()
-		authState.setState({ metadata })
+		const { metadata } = await req.json()
+		authState.setState({
+			loadingMeta: false,
+			meta: metadata,
+		})
 	}
 	catch(err){
+		console.error(err)
+	}
+}
+
+export async function setMetadata(meta){
+	authState.setState({ loadingMeta: true })
+	try {
+		const req = await fetch(`/.netlify/functions/set-auth0-metadata`, {
+			method: `POST`,
+			headers: {
+				authorization: authState.state.accessToken,
+			},
+			body: JSON.stringify(meta),
+		})
+		const res = await req.json()
+		authState.setState({
+			loadingMeta: false,
+			meta: res.meta,
+		})
+	}
+	catch (err) {
 		console.error(err)
 	}
 }

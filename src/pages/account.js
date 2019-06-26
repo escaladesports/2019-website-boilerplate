@@ -1,27 +1,16 @@
 import React from 'react'
 import { Subscribe } from 'statable'
-import fetch from 'isomorphic-fetch'
 import Layout from '../components/layouts/default'
-import { login, isAuthenticated } from '../utils/auth'
+import { login, isAuthenticated, setMetadata } from '../utils/auth'
 import authState from '../state/auth'
 
-async function fetchData(user, accessToken){
-	try{
-		const res = await fetch(`/.netlify/functions/get-auth0-metadata`, {
-			method: `POST`,
-			headers: {
-				authorization: accessToken,
-			},
-		})
-		const data = await res.json()
-		console.log(data)
-	}
-	catch(err){
-		console.error(err)
-	}
-}
-
 export default class AccountPage extends React.Component {
+	constructor(props){
+		super(props)
+		this.state = {
+			metaValue: ``,
+		}
+	}
 	componentDidMount(){
 		// Redirect to login
 		if (!isAuthenticated()){
@@ -33,19 +22,45 @@ export default class AccountPage extends React.Component {
 			<Layout title='Your Account'>
 				<h1>Your Account</h1>
 				<Subscribe to={authState}>{
-					({ user, accessToken }) => <>
+					({ user, meta, loadingMeta }) => <>
+
 						{!user && (
 							<div>Loading...</div>
 						)}
 						{user && (
-							<>
-								<div>Hi, {user.name ? user.name : `friend`}!</div>
-								<button onClick={e => {
-									e.preventDefault()
-									fetchData(user, accessToken)
-								}}>Get user info</button>
-							</>
+							<div>Hi, {user.name ? user.name : `friend`}!</div>
 						)}
+
+						<div>
+							<h2>Metadata</h2>
+							{loadingMeta && (
+								<div>Loading...</div>
+							)}
+							{!loadingMeta && <>
+								<div>
+									<label>
+										<span>Zip Code: </span>
+										<input
+											type='text'
+											defaultValue={meta.zipCode}
+											ref={el => this.zipInput = el}
+										/>
+									</label>
+								</div>
+								<div>
+									<button
+										onClick={e => {
+											e.preventDefault()
+											setMetadata({
+												zipCode: this.zipInput.value,
+											})
+										}}
+									>
+										Change
+									</button>
+								</div>
+							</>}
+						</div>
 					</>
 				}</Subscribe>
 			</Layout>
