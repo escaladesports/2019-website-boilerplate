@@ -22,8 +22,6 @@ export async function handler(event) {
 	}
 	// If verified
 	try{
-		const clientBody = JSON.parse(event.body)
-		console.log(`Received from client:`, clientBody)
 		const req = await fetch(`https://${GATSBY_AUTH0_DOMAIN}/api/v2/users/${verified.sub}`, {
 			method: `GET`,
 			headers: {

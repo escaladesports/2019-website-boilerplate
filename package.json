@@ -19,7 +19,7 @@
     "clean:functions": "rm -rf dist-functions",
     "dev": "netlify dev --command \"yarn dev:gatsby\"",
     "dev:gatsby": "yarn netlify-toml && gatsby develop",
-    "dev:functions": "npx --node-arg=--inspect netlify-lambda serve src/lambda --config lambda-webpack-config.js",
+    "dev:functions": "netlify-lambda serve src/lambda --config lambda-webpack-config.js",
     "env": "node src/utils/env",
     "lint": "eslint ./",
     "live": "open-cli https://project-boilerplate.netlify.com/",

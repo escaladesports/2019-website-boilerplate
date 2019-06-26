@@ -12,10 +12,6 @@ async function fetchData(user, accessToken){
 			headers: {
 				authorization: accessToken,
 			},
-			body: JSON.stringify({
-				user,
-				metadata: { addresses: { home: `123 Main Street, Anytown, ST 12345` } },
-			}),
 		})
 		const data = await res.json()
 		console.log(data)
