@@ -30,13 +30,20 @@ export async function handler(event) {
 				'content-type': `application/json`,
 				authorization: `Bearer ${event.headers.authorization}`,
 			},
+			body: JSON.stringify({
+				user_metadata: clientBody,
+			}),
 		})
 		const res = await req.json()
+		console.log(`Response from API:`, res)
+		if(!res.user_metadata){
+			throw new Error(`Unexpected response from API`)
+		}
 		return {
 			statusCode: 200,
 			body: JSON.stringify({
 				success: true,
-				metadata: res.user_metadata,
+				meta: res.user_metadata,
 			}),
 		}
 
