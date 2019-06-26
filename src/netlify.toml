@@ -6,6 +6,8 @@
 	publish = "public"
 	functions = "dist-functions"
 
+# Used to test `netlify dev` headers issue
+# https://github.com/netlify/netlify-dev-plugin/issues/195
 [[redirects]]
 	from = "/test"
 	to = "https://postman-echo.com/headers"
