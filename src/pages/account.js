@@ -1,7 +1,7 @@
 import React from 'react'
 import { Subscribe } from 'statable'
 import Layout from '../components/layouts/default'
-import { login, isAuthenticated } from '../functions/auth'
+import { login, isAuthenticated } from '../utils/auth'
 import authState from '../state/auth'
 
 export default class AccountPage extends React.Component {

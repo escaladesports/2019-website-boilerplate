@@ -21,7 +21,7 @@ export default class CommentForm extends React.Component{
 				{({ user: { email, nickname, name }, loaded }) => {
 					if (!loaded) return <Loading />
 					return <Form
-						action='/.netlify/functions/comment-to-markdown'
+						action='/.netlify/utils/comment-to-markdown'
 						initialValues={{
 							email: email || ``,
 							name: nickname || name || email || ``,
