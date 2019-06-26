@@ -40,7 +40,7 @@ git commit -m 'Initial commit'
 git push origin master
 ```
 
-Setup new Netlify site using your new repo (Note that your first build will likely fail until the rest of these instructions are completed)
+Setup new Netlify site using your new repo. Note that your first build will likely fail until the rest of these instructions are completed. Also make sure to input any environment variables you may need into Netlify or a `.env` file for local development. You can see suggested environment variables in the `.env.example` file.
 
 ```bash
 netlify link
