@@ -1,0 +1,32 @@
+label: Unapproved Comments
+name: unapproved-comments
+folder: src/markdown/comments
+filter:
+  field: published
+  value: false
+create: false
+editor:
+  preview: false
+fields:
+  - label: Date
+    name: date
+    widget: date
+  - label: Name
+    name: title
+    widget: string
+  - label: Email
+    name: email
+    widget: string
+  - label: Body
+    name: body
+    widget: markdown
+  - label: Slug
+    name: slug
+    widget: hidden
+  - label: MD5
+    name: md5
+    widget: hidden
+  - label: Approved
+    name: published
+    widget: boolean
+    default: false

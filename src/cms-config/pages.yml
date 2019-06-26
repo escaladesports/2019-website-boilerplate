@@ -1,0 +1,57 @@
+label: Pages
+name: pages
+editor:
+  preview: false
+files:
+  - label: Home
+    name: index
+    file: src/markdown/index.md
+    fields:
+      - label: Body
+        name: body
+        widget: markdown
+      - label: Raw HTML
+        name: html
+        widget: html
+      - label: Header Image
+        name: headerImage
+        widget: image
+      - label: Header Image Description
+        name: headerImageDesc
+        widget: string
+  - label: Contact
+    name: contact
+    file: src/markdown/contact.md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Body
+        name: body
+        widget: markdown
+  - label: Privacy Policy
+    name: privacy-policy
+    file: src/markdown/privacy-policy.md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Address
+        name: address
+        widget: text
+      - label: Email
+        name: email
+        widget: string
+      - label: Body
+        name: body
+        widget: markdown
+  - label: Page Not Found
+    name: '404'
+    file: src/markdown/404.md
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Body
+        name: body
+        widget: markdown

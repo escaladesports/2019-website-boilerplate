@@ -1,0 +1,39 @@
+label: Blog
+name: blog
+folder: src/markdown/blog
+create: true
+editor:
+  preview: false
+fields:
+  - label: Title
+    name: title
+    widget: string
+  - label: Date
+    name: date
+    widget: date
+  - label: Tags
+    name: tags
+    widget: list
+  - label: Path
+    name: path
+    widget: string
+    pattern:
+      - ^[a-z0-9_-]+$
+      - Must contain only lowercase characters and hyphens
+    hint: The URL to the page. Must contain only lowercase characters and hyphens
+    required: false
+  - label: Image
+    name: image
+    widget: image
+    required: false
+  - label: Image Description
+    name: imageDesc
+    widget: string
+    required: false
+  - label: Body
+    name: body
+    widget: markdown
+  - label: Published
+    name: published
+    widget: boolean
+    default: true
