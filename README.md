@@ -7,6 +7,11 @@
 - [Netlify CLI](https://www.netlify.com/docs/cli/)
 - [Git LFS](https://github.com/git-lfs/git-lfs?utm_source=gitlfs_site&utm_medium=repo_link&utm_campaign=gitlfs)
 - [Netlify Credential Helper](https://github.com/netlify/netlify-credential-helper)
+  - Note: you will also need to add these lines to your `~/.gitconfig` file located in the home directory
+    ```bash
+    [credential]
+      helper = netlify
+    ```
 - Netlify CLI Large Media Plugin
   ```bash
   netlify plugins:install netlify-lm-plugin
@@ -51,6 +56,8 @@ git push origin master
 git clone REMOTE_URL folder-name
 cd folder-name
 netlify lm:setup
+git lfs fetch
+git lfs pull
 nvm use
 yarn
 ```
@@ -69,6 +76,8 @@ All UI related images that belong in the template can be stored in the repositor
 ## Schema
 
 The GraphQL schema is stored in `./src/schema.gql`. This is typically used to make sure the build script doesn't break whenever required fields in the markdown files are emptied out. If you delete the schema file, a snapshot of the current schema will be created the next time you run `yarn build` or `yarn dev`. This can be useful if you don't want to go through the hassle of writing it out yourself.
+
+If you get an error that looks like this: `Type with name "MarkdownRemarkFrontmatter" does not exists`, you just need to add the node specified to the `include` list on the schema plugin in the `gatsby-config.js` file. In this case, you would add `MarkdownRemarkFrontmatter` to the include list.
 
 ## Netlify CMS
 

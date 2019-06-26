@@ -1,3 +1,3 @@
 export const
-	primaryFont = `oswald`,
-	secondaryFont = `open sans`
+	primaryFont = `"Oswald", sans-serif`,
+	secondaryFont = `"Open Sans", sans-serif`

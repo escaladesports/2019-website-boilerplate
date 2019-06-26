@@ -1,30 +1,32 @@
-import { printType } from 'graphql'
-import fs from 'fs-extra'
-import path from 'path'
+const { printType } = require(`graphql`)
+const { exists, readFile, outputFile } = require(`fs-extra`)
+const { join } = require(`path`)
 
 // Path to snapshot relative of schema-snapshot plugin directory
-const schemaFilePath = path.join(process.cwd(), `./src/schema.gql`)
+const schemaFilePath = join(process.cwd(), `./src/schema.gql`)
 
-export async function sourceNodes({ actions }){
+exports.sourceNodes = async function({ actions }){
 	const { createTypes } = actions
 
 	// Use snapshot to create types if exists
-	if (await fs.exists(schemaFilePath)) {
+	if (await exists(schemaFilePath)) {
 		console.log(`\nLoading GraphQL schema...\n`)
-		const typeDefs = (await fs.readFile(schemaFilePath)).toString()
+		const typeDefs = (await readFile(schemaFilePath)).toString()
 		createTypes(typeDefs)
 	}
 }
 
-export async function onPostBootstrap({ store }, { include }){
+exports.onPostBootstrap = async function({ store }, { include }){
 	const { schema } = store.getState()
 
 	// Create snapshot if it doesn't exist
-	if (!await fs.exists(schemaFilePath)) {
+	if (!await exists(schemaFilePath)) {
 		console.log(`\nCreating GraphQL schema...\n`)
 		const typeDefs = include
 			.map(type => printType(schema.getType(type)))
 			.join(`\n\n`)
-		await fs.outputFile(schemaFilePath, typeDefs + `\n`)
+			// Prevents unfound type in markdown HTML excerpts
+			.replace(`, format: ExcerptFormats = PLAIN`, ``)
+		await outputFile(schemaFilePath, typeDefs + `\n`)
 	}
 }
