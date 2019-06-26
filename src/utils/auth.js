@@ -1,5 +1,6 @@
 import auth0 from 'auth0-js'
 import { navigate } from 'gatsby'
+import fetch from 'isomorphic-fetch'
 import authState from '../state/auth'
 
 const isBrowser = typeof window !== `undefined`
@@ -63,4 +64,20 @@ export function logout(){
 	authState.setState({ user: false })
 	global.localStorage.setItem(`isLoggedIn`, false)
 	auth.logout()
+}
+
+export async function fetchMetadata(){
+	try{
+		const req = await fetch(`/.netlify/functions/get-auth0-metadata`, {
+			method: `POST`,
+			headers: {
+				authorization: authState.state.accessToken,
+			},
+		})
+		const metadata = await req.json()
+		authState.setState({ metadata })
+	}
+	catch(err){
+		console.error(err)
+	}
 }
