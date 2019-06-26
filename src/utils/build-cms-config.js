@@ -7,7 +7,7 @@ const { parse, stringify } = require(`yaml`)
 const cwd = process.cwd()
 const configPath = `src/cms-config`
 const indexPath = join(cwd, configPath, `index.yml`)
-const outputPath = join(cwd, `static/admin/index.yml`)
+const outputPath = join(cwd, `static/admin/config.yml`)
 const defaultVars = {
 	BRANCH: `master`,
 }
