@@ -39,6 +39,7 @@ function setSession(cb = noop, redirect = false){
 			if (redirect) {
 				navigate(`/account`)
 			}
+			fetchMetadata(accessToken)
 			cb(authResult)
 		}
 	}
@@ -66,12 +67,12 @@ export function logout(){
 	auth.logout()
 }
 
-export async function fetchMetadata(){
+export async function fetchMetadata(accessToken){
 	try{
 		const req = await fetch(`/.netlify/functions/get-auth0-metadata`, {
 			method: `POST`,
 			headers: {
-				authorization: authState.state.accessToken,
+				authorization: accessToken,
 			},
 		})
 		const metadata = await req.json()
