@@ -1,6 +1,6 @@
 import React from 'react'
 import CurrencyInput from 'react-currency-masked-input'
-import formatUSD from '../../functions/format-usd'
+import formatUSD from '../../utils/format-usd'
 
 export class CurrencyControl extends React.Component{
 	constructor(props){

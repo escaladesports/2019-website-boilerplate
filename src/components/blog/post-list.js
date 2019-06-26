@@ -3,7 +3,7 @@ import Link from 'gatsby-link'
 import { css } from '@emotion/core'
 import TagList from './tag-list'
 import Pagination from '../pagination'
-import formatDate from '../../functions/format-date'
+import formatDate from '../../utils/format-date'
 
 export default class PostList extends React.Component {
 	render() {

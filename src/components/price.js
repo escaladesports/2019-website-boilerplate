@@ -1,6 +1,6 @@
 import React from 'react'
 import { Subscribe } from 'statable'
-import formatUSD from '../functions/format-usd'
+import formatUSD from '../utils/format-usd'
 import priceState from '../../plugins/escalade-pricing/state'
 
 // SSR price and repolls for new price live

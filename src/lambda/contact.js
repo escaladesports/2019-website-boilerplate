@@ -4,8 +4,8 @@ import { renderToString } from 'react-dom/server'
 import posthtml from 'posthtml'
 import { siteUrl } from '../../site-config'
 import EmailTemplate from '../pages/email-templates/contact'
-import verifyRecaptcha from '../functions/verify-recaptcha'
-import sendEmail from '../functions/send-email'
+import verifyRecaptcha from '../utils/verify-recaptcha'
+import sendEmail from '../utils/send-email'
 
 const allowed = [
 	`name`,

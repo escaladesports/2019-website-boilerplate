@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import Gravatar from 'react-gravatar'
-import formatDateTime from '../functions/format-date-time'
+import formatDateTime from '../utils/format-date-time'
 
 const avatarSize = 75
 
