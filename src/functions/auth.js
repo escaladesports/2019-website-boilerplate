@@ -12,8 +12,6 @@ const auth = isBrowser ? new auth0.WebAuth({
 	scope: `openid profile email`,
 }) : {}
 
-console.log(auth)
-
 const tokens = {
 	accessToken: false,
 	idToken: false,
@@ -44,7 +42,9 @@ function setSession(cb = noop, redirect = false){
 			tokens.accessToken = authResult.accessToken
 			tokens.idToken = authResult.idToken
 			tokens.expiresAt = expiresAt
-			authState.setState({ user: authResult.idTokenPayload })
+			const user = authResult.idTokenPayload
+			console.log(user)
+			authState.setState({ user })
 			global.localStorage.setItem(`isLoggedIn`, true)
 			if (redirect) {
 				navigate(`/account`)
@@ -56,12 +56,18 @@ function setSession(cb = noop, redirect = false){
 
 export function handleAuthentication(){
 	if (!isBrowser) return
-	auth.parseHash(setSession(null, true))
+	auth.parseHash(setSession(noop, true))
 }
 
 export function silentAuth(callback = noop){
-	if (!isAuthenticated()) return callback()
-	auth.checkSession({}, setSession(callback))
+	if (!isAuthenticated()) {
+		authState.setState({ loaded: true })
+		return callback()
+	}
+	auth.checkSession({}, setSession(() => {
+		authState.setState({ loaded: true })
+		callback()
+	}))
 }
 
 export function logout(){
