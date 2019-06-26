@@ -3,8 +3,8 @@
 
 [build]
 	command = "yarn build"
-	publish = "public"
-	functions = "dist-functions"
+	publish = "public/"
+	functions = "dist-functions/"
 
 # Used to test `netlify dev` headers issue
 # https://github.com/netlify/netlify-dev-plugin/issues/195
@@ -14,7 +14,7 @@
 	status = 200
 	force = true
 	[redirects.headers]
-		Test-Key = "TEST"
+		Test-Key = "TEST 2"
 
 [[redirects]]
 	from = "/admin"
