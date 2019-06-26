@@ -33,7 +33,7 @@ export default class ContactPage extends React.Component {
 							{({ user: { email, nickname, name }, loaded }) => {
 								if(!loaded) return <Loading />
 								return <Form
-									action='/.netlify/functions/contact'
+									action='/.netlify/utils/contact'
 									// recaptcha={false}
 									initialValues={{
 										email: email || ``,

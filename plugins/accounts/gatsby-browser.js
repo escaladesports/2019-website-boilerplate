@@ -1,5 +1,5 @@
 import React from 'react'
-import { silentAuth } from '../../src/functions/auth'
+import { silentAuth } from '../../src/utils/auth'
 
 class SessionCheck extends React.Component {
 	componentDidMount() {

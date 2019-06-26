@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import Link from 'gatsby-link'
-import { isAuthenticated, logout } from '../functions/auth'
+import { isAuthenticated, logout } from '../utils/auth'
 
 export default class Footer extends React.Component{
 	render(){
