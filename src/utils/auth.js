@@ -32,9 +32,7 @@ function setSession(cb = noop, redirect = false){
 			return
 		}
 		if (authResult && authResult.accessToken && authResult.idToken) {
-			console.log(`authResult`, authResult)
 			const { idToken: accessToken, idTokenPayload: user } = authResult
-			console.log(`authResult`, authResult)
 			authState.setState({ user, accessToken })
 			global.localStorage.setItem(`isLoggedIn`, true)
 			if (redirect) {
