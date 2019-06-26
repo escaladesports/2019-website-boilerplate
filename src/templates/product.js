@@ -45,12 +45,8 @@ export default class ProductTemplate extends React.Component{
 						html,
 						excerpt,
 					},
-					escaladePricing: {
-						price,
-					},
-					escaladeInventory: {
-						stock,
-					},
+					escaladePricing,
+					escaladeInventory,
 				},
 			},
 			state: {
@@ -59,6 +55,8 @@ export default class ProductTemplate extends React.Component{
 			},
 		} = this
 
+		const price = escaladePricing ? escaladePricing.price : null
+		const stock = escaladeInventory ? escaladeInventory.stock : null
 		const hasImages = images && !!images.length
 		const imageRatio = [16, 9]
 		const thumbnail = hasImages ?

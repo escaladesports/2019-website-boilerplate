@@ -1,4 +1,7 @@
 export default function formatUsd(n, dollars = false){
+	if(!n){
+		return null
+	}
 	if(!dollars){
 		n = n / 100
 	}

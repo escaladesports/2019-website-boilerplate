@@ -147,21 +147,6 @@ module.exports = {
 		// 		respectDNT: true,
 		// 	},
 		// },
-		// {
-		// 	resolve: `gatsby-plugin-prefetch-google-fonts`,
-		// 	options: {
-		// 		fonts: [
-		// 			{
-		// 				family: `Oswald`,
-		// 				subsets: [`latin`],
-		// 			},
-		// 			{
-		// 				family: `Open Sans`,
-		// 				subsets: [`latin`],
-		// 			},
-		// 		],
-		// 	},
-		// },
 		{
 			resolve: `gatsby-plugin-feed`,
 			options: {
@@ -300,15 +285,19 @@ module.exports = {
 		// Dev plugins
 		`open-browser`,
 		`gatsby-plugin-webpack-size`,
-		// {
-		// 	resolve: `schema-snapshot`,
-		// 	options: {
-		// 		include: [
-		// 			`MarkdownRemark`,
-		// 			`MarkdownRemarkFrontmatter`,
-		// 			`MarkdownRemarkFrontmatterVariants`,
-		// 		],
-		// 	},
-		// },
+		{
+			resolve: `schema-snapshot`,
+			options: {
+				include: [
+					`MarkdownRemark`,
+					`MarkdownRemarkFrontmatter`,
+					`MarkdownRemarkFrontmatterVariants`,
+					`MarkdownRemarkFields`,
+					`EscaladeInventory`,
+					`EscaladeInventoryLocations`,
+					`EscaladePricing`,
+				],
+			},
+		},
 	],
 }

@@ -5,6 +5,8 @@ import { Helmet } from 'react-helmet'
 import { Cart } from '@escaladesports/zygote-cart'
 import * as escaApi from '@escaladesports/zygote-plugin-esca-api'
 import * as standardPayment from '@escaladesports/zygote-cart/dist/plugins/zygote-plugin-standard-billing'
+import 'typeface-open-sans'
+import 'typeface-oswald'
 import RouteDelayed from '../../../plugins/route-delayed-animation'
 import Header from '../header'
 import Footer from '../footer'
@@ -110,10 +112,6 @@ const styles = {
 		}
 		p{
 			line-height: 28px;
-		}
-		img{
-			max-width: 100%;
-			position: relative;
 		}
 		h1, h2, h3{
 			font-family: ${primaryFont};
