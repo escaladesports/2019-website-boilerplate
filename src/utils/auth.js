@@ -4,6 +4,7 @@ import fetch from 'isomorphic-fetch'
 import authState from '../state/auth'
 
 const isBrowser = typeof window !== `undefined`
+const { localStorage } = global
 
 const auth = isBrowser ? new auth0.WebAuth({
 	domain: process.env.GATSBY_AUTH0_DOMAIN,
@@ -17,15 +18,23 @@ function noop(){}
 
 export function isAuthenticated(){
 	if (!isBrowser) return
-	return global.localStorage.getItem(`isLoggedIn`) === `true`
+	return localStorage.getItem(`isLoggedIn`) === `true`
 }
 
 export function login(){
 	if (!isBrowser) return
+	const { pathname, hash } = document.location
+	localStorage.setItem(`previousLocation`, `${pathname}${hash}`)
 	auth.authorize()
 }
 
-function setSession(cb = noop, redirect = false){
+export function logout() {
+	authState.setState({ user: false })
+	localStorage.setItem(`isLoggedIn`, false)
+	auth.logout()
+}
+
+function setSession(cb = noop){
 	return (err, authResult) => {
 		if (err) {
 			console.error(err)
@@ -35,9 +44,13 @@ function setSession(cb = noop, redirect = false){
 		if (authResult && authResult.accessToken && authResult.idToken) {
 			const { idToken: accessToken, idTokenPayload: user } = authResult
 			authState.setState({ user, accessToken })
-			global.localStorage.setItem(`isLoggedIn`, true)
-			if (redirect) {
-				navigate(`/account`)
+			localStorage.setItem(`isLoggedIn`, true)
+			const previousLocation = localStorage.getItem(`previousLocation`)
+			if (previousLocation) {
+				localStorage.setItem(`previousLocation`, ``)
+				// If you need the hash:
+				// document.location = previousLocation
+				navigate(previousLocation)
 			}
 			fetchMetadata(accessToken)
 			cb(authResult)
@@ -47,7 +60,7 @@ function setSession(cb = noop, redirect = false){
 
 export function handleAuthentication(){
 	if (!isBrowser) return
-	auth.parseHash(setSession(noop, true))
+	auth.parseHash(setSession())
 }
 
 export function silentAuth(callback = noop){
@@ -59,12 +72,6 @@ export function silentAuth(callback = noop){
 		authState.setState({ loadingUser: false })
 		callback()
 	}))
-}
-
-export function logout(){
-	authState.setState({ user: false })
-	global.localStorage.setItem(`isLoggedIn`, false)
-	auth.logout()
 }
 
 export async function fetchMetadata(accessToken){
