@@ -1,4 +1,8 @@
-require(`dotenv`).config({ silent: true })
+require(`dotenv-override`).config({
+	silent: true,
+	override: true,
+})
+console.log(process.env)
 const striptags = require(`striptags`)
 const { readFileSync } = require(`fs-extra`)
 const globby = require(`globby`).sync

@@ -26,7 +26,7 @@ export default class CustomForm extends React.Component {
 					body: JSON.stringify(values),
 				})
 				if(res.status === 200){
-					this.setState({ success: true })
+					this.setState({ success: !!this.props.success })
 					resetForm()
 				}
 				else {
@@ -38,12 +38,12 @@ export default class CustomForm extends React.Component {
 			}
 			else if (onSubmit) {
 				await onSubmit(values)
-				this.setState({ success: true })
+				this.setState({ success: !!this.props.success })
 				resetForm()
 			}
 			else{
 				console.log(`Form data not submitting anywhere:`, values)
-				this.setState({ success: true })
+				this.setState({ success: !!this.props.success })
 				resetForm()
 			}
 		}

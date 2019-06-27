@@ -1,6 +1,13 @@
 import React from 'react'
 import { Subscribe } from 'statable'
+import { object, string } from 'yup'
 import Layout from '../components/layouts/default'
+import Field from '../components/field'
+import Button from '../components/button'
+import Form from '../components/form'
+import Error from '../components/error-message'
+import Success from '../components/success-message'
+import Loading from '../components/loading'
 import { login, isAuthenticated, setMetadata } from '../utils/auth'
 import authState from '../state/auth'
 
@@ -22,43 +29,66 @@ export default class AccountPage extends React.Component {
 			<Layout title='Your Account'>
 				<h1>Your Account</h1>
 				<Subscribe to={authState}>{
-					({ user, meta, loadingMeta }) => <>
+					({ user, meta, loadingUser, loadingMeta }) => <>
 
-						{!user && (
-							<div>Loading...</div>
+						{loadingUser && (
+							<Loading />
 						)}
-						{user && (
-							<div>Hi, {user.name ? user.name : `friend`}!</div>
+						{!loadingUser && (
+							<div>Hi, {meta.name || user.nickname || user.name || `friend`}!</div>
 						)}
 
 						<div>
-							<h2>Metadata</h2>
+							<h2>Info</h2>
 							{loadingMeta && (
-								<div>Loading...</div>
+								<Loading />
 							)}
 							{!loadingMeta && <>
-								<div>
-									<label>
-										<span>Zip Code: </span>
-										<input
-											type='text'
-											defaultValue={meta.zipCode}
-											ref={el => this.zipInput = el}
+								<Form
+									onSubmit={async res => {
+										await setMetadata(res)
+									}}
+									recaptcha={false}
+									initialValues={{
+										email: meta.email || user.email || ``,
+										name: meta.name || user.nickname || user.name || ``,
+									}}
+									validationSchema={object().shape({
+										email: string()
+											.email()
+											.required(`required`),
+										name: string()
+											.required(`required`),
+									})}
+									loading={
+										<Loading />
+									}
+									error={
+										<Error>Server error! Your information was not saved.</Error>
+									}
+									success={
+										<Success>Thank you for your comment! It will be visible once approved.</Success>
+									}
+									form={props => <>
+										<Field
+											label='Email'
+											name='email'
+											type='email'
+											{...props}
 										/>
-									</label>
-								</div>
-								<div>
-									<button
-										onClick={e => {
-											e.preventDefault()
-											setMetadata({
-												zipCode: this.zipInput.value,
-											})
-										}}
-									>
-										Change
-									</button>
-								</div>
+										<Field
+											label='Name'
+											name='name'
+											{...props}
+										/>
+										<Button
+											type='submit'
+											disabled={props.isSubmitting}
+										>
+											Submit
+										</Button>
+									</>}
+								/>
 							</>}
 						</div>
 					</>

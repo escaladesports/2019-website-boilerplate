@@ -30,8 +30,8 @@ export default class ContactPage extends React.Component {
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
 						<Subscribe to={authState}>
-							{({ user: { email, nickname, name }, loaded }) => {
-								if(!loaded) return <Loading />
+							{({ user: { email, nickname, name }, loadingUser }) => {
+								if (loadingUser) return <Loading />
 								return <Form
 									action='/.netlify/utils/contact'
 									// recaptcha={false}

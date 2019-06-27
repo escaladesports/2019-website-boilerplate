@@ -6,9 +6,13 @@ import {
 } from '../../env'
 
 export async function handler(event) {
+	const {
+		body,
+		headers: { authorization },
+	} = event
 	let verified
 	try {
-		verified = await verify(event.headers.authorization, GATSBY_AUTH0_DOMAIN, GATSBY_AUTH0_CLIENTID)
+		verified = await verify(authorization, GATSBY_AUTH0_DOMAIN, GATSBY_AUTH0_CLIENTID)
 		if(!verified){
 			throw new Error(`Invalid token`)
 		}
@@ -22,13 +26,13 @@ export async function handler(event) {
 	}
 	// If verified
 	try{
-		const clientBody = JSON.parse(event.body)
+		const clientBody = JSON.parse(body)
 		console.log(`Received from client:`, clientBody)
 		const req = await fetch(`https://${GATSBY_AUTH0_DOMAIN}/api/v2/users/${verified.sub}`, {
 			method: `PATCH`,
 			headers: {
 				'content-type': `application/json`,
-				authorization: `Bearer ${event.headers.authorization}`,
+				authorization: `Bearer ${authorization}`,
 			},
 			body: JSON.stringify({
 				user_metadata: clientBody,

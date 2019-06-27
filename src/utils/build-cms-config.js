@@ -1,4 +1,7 @@
-require(`dotenv`).config({ silent: true })
+require(`dotenv-override`).config({
+	silent: true,
+	override: true,
+})
 const { readFile, outputFile } = require(`fs-extra`)
 const glob = require(`globby`)
 const { join } = require(`path`)

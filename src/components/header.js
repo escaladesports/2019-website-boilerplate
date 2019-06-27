@@ -3,6 +3,7 @@ import Link from 'gatsby-link'
 import { css } from '@emotion/core'
 import Close from '@material-ui/icons/Close'
 import { openCart } from '@escaladesports/zygote-cart'
+import { isAuthenticated, logout } from '../utils/auth'
 import { primaryColor } from '../styles/colors'
 
 export default class Header extends React.Component{
@@ -18,6 +19,7 @@ export default class Header extends React.Component{
 	}
 	render(){
 		const { open } = this.state
+		const isLoggedIn = isAuthenticated()
 		return (
 			<header css={styles.header}>
 				<button
@@ -43,6 +45,13 @@ export default class Header extends React.Component{
 						<li><Link to='/pickleball'>Category</Link></li>
 						<li><Link to='/search'>Search</Link></li>
 						<li><Link to='/contact'>Contact</Link></li>
+						<li><Link to='/account'>{isLoggedIn ? `Account` : `Login`}</Link></li>
+						{isLoggedIn && (
+							<li><a href='#' onClick={e => {
+								e.preventDefault()
+								logout()
+							}}>Logout</a></li>
+						)}
 						<li><a href='#' onClick={e => {
 							e.preventDefault()
 							openCart()
