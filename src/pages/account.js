@@ -9,7 +9,7 @@ import Error from '../components/error-message'
 import Success from '../components/success-message'
 import Loading from '../components/loading'
 import PasswordChange from '../components/accounts/password-change'
-import { login, isAuthenticated, setMetadata } from '../utils/auth'
+import { login, isAuthenticated, setMetadata, patchUser } from '../utils/auth'
 import authState from '../state/auth'
 
 export default class AccountPage extends React.Component {
@@ -81,6 +81,16 @@ export default class AccountPage extends React.Component {
 									</>}
 								/>
 								<br />
+
+								<Button
+									type='button'
+									onClick={e => {
+										e.preventDefault()
+										patchUser()
+									}}
+								>
+									Patch
+								</Button>
 								<PasswordChange />
 							</>}
 						</div>

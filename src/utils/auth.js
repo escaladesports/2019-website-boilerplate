@@ -9,7 +9,7 @@ const { localStorage } = global
 const auth = isBrowser ? new auth0.WebAuth({
 	domain: process.env.GATSBY_AUTH0_DOMAIN,
 	clientID: process.env.GATSBY_AUTH0_CLIENTID,
-	redirectUri: process.env.GATSBY_AUTH0_CALLBACK,
+	redirectUri: `${document.location.origin}/auth0-callback`,
 	responseType: `token id_token`,
 	scope: `openid profile email`,
 }) : {}
@@ -136,6 +136,23 @@ export async function setMetadata(meta){
 			loadingMeta: false,
 			meta: res.meta,
 		})
+	}
+	catch (err) {
+		console.error(err)
+	}
+}
+
+export async function patchUser(obj) {
+	try {
+		const req = await fetch(`/.netlify/functions/patch-auth0-user`, {
+			method: `POST`,
+			headers: {
+				authorization: authState.state.accessToken,
+			},
+			body: JSON.stringify(obj),
+		})
+		const res = await req.json()
+		console.log(res)
 	}
 	catch (err) {
 		console.error(err)
