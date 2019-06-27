@@ -5,10 +5,10 @@ import {
 	GATSBY_AUTH0_CLIENTID,
 } from '../../env'
 
-export async function handler(event) {
+export async function handler({ headers: { authorization }}) {
 	let verified
 	try {
-		verified = await verify(event.headers.authorization, GATSBY_AUTH0_DOMAIN, GATSBY_AUTH0_CLIENTID)
+		verified = await verify(authorization, GATSBY_AUTH0_DOMAIN, GATSBY_AUTH0_CLIENTID)
 		if(!verified){
 			throw new Error(`Invalid token`)
 		}
@@ -26,7 +26,7 @@ export async function handler(event) {
 			method: `GET`,
 			headers: {
 				'content-type': `application/json`,
-				authorization: `Bearer ${event.headers.authorization}`,
+				authorization: `Bearer ${authorization}`,
 			},
 		})
 		const res = await req.json()

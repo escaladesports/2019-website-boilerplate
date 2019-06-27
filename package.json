@@ -68,7 +68,7 @@
     "babel-preset-gatsby": "^0.1.7",
     "codemirror": "^5.47.0",
     "color": "^3.1.2",
-    "dotenv": "^8.0.0",
+    "dotenv-override": "^5.0.1",
     "emotion": "^10.0.6",
     "eslint": "^5.15.3",
     "eslint-config-escalade-sports": "^1.0.1",

@@ -52,11 +52,11 @@ export function handleAuthentication(){
 
 export function silentAuth(callback = noop){
 	if (!isAuthenticated()) {
-		authState.setState({ loaded: true })
+		authState.setState({ loadingUser: false })
 		return callback()
 	}
 	auth.checkSession({}, setSession(() => {
-		authState.setState({ loaded: true })
+		authState.setState({ loadingUser: false })
 		callback()
 	}))
 }

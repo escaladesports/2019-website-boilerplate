@@ -2,7 +2,7 @@ import { State } from 'statable'
 
 const authState = new State({
 	user: false,
-	loaded: false,
+	loadingUser: true,
 	meta: {},
 	loadingMeta: true,
 })
