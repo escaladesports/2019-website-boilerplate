@@ -14,6 +14,8 @@ const auth = isBrowser ? new auth0.WebAuth({
 	scope: `openid profile email`,
 }) : {}
 
+console.log(auth)
+
 function noop(){}
 
 export function isAuthenticated(){
@@ -34,6 +36,21 @@ export function logout() {
 	auth.logout()
 }
 
+export const changePassword = () => {
+	return new Promise((resolve, reject) => {
+		const options = {
+			connection: `Username-Password-Authentication`,
+			email: authState.state.user.email,
+		}
+		console.log(`options`, options)
+		auth.changePassword(options, (err, res) => {
+			if (err) return reject(err)
+			resolve(res)
+		})
+	})
+}
+
+
 function setSession(cb = noop){
 	return (err, authResult) => {
 		if (err) {
@@ -42,6 +59,7 @@ function setSession(cb = noop){
 			return
 		}
 		if (authResult && authResult.accessToken && authResult.idToken) {
+			console.log(`authResult`, authResult)
 			const { idToken: accessToken, idTokenPayload: user } = authResult
 			authState.setState({ user, accessToken })
 			localStorage.setItem(`isLoggedIn`, true)
