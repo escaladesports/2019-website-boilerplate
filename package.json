@@ -60,6 +60,7 @@
     "@material-ui/icons": "^4.2.0",
     "@octokit/rest": "^16.28.1",
     "@testing-library/react": "^8.0.1",
+    "auth": "^0.0.9",
     "auth0": "^2.17.1",
     "auth0-js": "^9.10.4",
     "auth0-verify": "^2.0.0",
@@ -151,6 +152,7 @@
     "typeface-open-sans": "^0.0.54",
     "typeface-oswald": "^0.0.54",
     "ultimate-pagination": "^1.0.0",
+    "webpack": "^4.35.0",
     "yaml": "^1.0.0-rc.8",
     "yup": "^0.27.0"
   }
