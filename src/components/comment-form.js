@@ -18,13 +18,13 @@ export default class CommentForm extends React.Component{
 	render(){
 		return (
 			<Subscribe to={authState}>
-				{({ user: { email, nickname, name }, loadingUser }) => {
+				{({ user, meta, loadingUser }) => {
 					if (loadingUser) return <Loading />
 					return <Form
 						action='/.netlify/utils/comment-to-markdown'
 						initialValues={{
-							email: email || ``,
-							name: nickname || name || email || ``,
+							email: user.email || ``,
+							name: meta.name || user.nickname || user.name || user.email || ``,
 							comment: ``,
 							slug: this.props.slug,
 						}}

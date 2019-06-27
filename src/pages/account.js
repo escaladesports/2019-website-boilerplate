@@ -51,13 +51,9 @@ export default class AccountPage extends React.Component {
 									}}
 									recaptcha={false}
 									initialValues={{
-										email: meta.email || user.email || ``,
-										name: meta.name || user.nickname || user.name || ``,
+										name: meta.name || ``,
 									}}
 									validationSchema={object().shape({
-										email: string()
-											.email()
-											.required(`required`),
 										name: string()
 											.required(`required`),
 									})}
@@ -72,12 +68,6 @@ export default class AccountPage extends React.Component {
 									}
 									form={props => <>
 										<Field
-											label='Email'
-											name='email'
-											type='email'
-											{...props}
-										/>
-										<Field
 											label='Name'
 											name='name'
 											{...props}
@@ -86,7 +76,7 @@ export default class AccountPage extends React.Component {
 											type='submit'
 											disabled={props.isSubmitting}
 										>
-											Submit
+											Save
 										</Button>
 									</>}
 								/>
