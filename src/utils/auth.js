@@ -14,9 +14,22 @@ const auth = isBrowser ? new auth0.WebAuth({
 	scope: `openid profile email`,
 }) : {}
 
-console.log(auth)
-
 function noop(){}
+
+function saveLocation() {
+	const { pathname, hash } = document.location
+	localStorage.setItem(`previousLocation`, `${pathname}${hash}`)
+}
+
+export function navigateToPreviousLocation() {
+	const previousLocation = localStorage.getItem(`previousLocation`)
+	if (previousLocation) {
+		localStorage.setItem(`previousLocation`, ``)
+		// If you need the hash:
+		// document.location = previousLocation
+		navigate(previousLocation)
+	}
+}
 
 export function isAuthenticated(){
 	if (!isBrowser) return
@@ -25,15 +38,17 @@ export function isAuthenticated(){
 
 export function login(){
 	if (!isBrowser) return
-	const { pathname, hash } = document.location
-	localStorage.setItem(`previousLocation`, `${pathname}${hash}`)
+	saveLocation()
 	auth.authorize()
 }
 
 export function logout() {
 	authState.setState({ user: false })
 	localStorage.setItem(`isLoggedIn`, false)
-	auth.logout()
+	saveLocation()
+	auth.logout({
+		returnTo: `${document.location.origin}/auth0-logout`,
+	})
 }
 
 export const changePassword = () => {
@@ -63,13 +78,7 @@ function setSession(cb = noop){
 			const { idToken: accessToken, idTokenPayload: user } = authResult
 			authState.setState({ user, accessToken })
 			localStorage.setItem(`isLoggedIn`, true)
-			const previousLocation = localStorage.getItem(`previousLocation`)
-			if (previousLocation) {
-				localStorage.setItem(`previousLocation`, ``)
-				// If you need the hash:
-				// document.location = previousLocation
-				navigate(previousLocation)
-			}
+			navigateToPreviousLocation()
 			fetchMetadata(accessToken)
 			cb(authResult)
 		}
