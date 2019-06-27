@@ -8,6 +8,7 @@ import Form from '../components/form'
 import Error from '../components/error-message'
 import Success from '../components/success-message'
 import Loading from '../components/loading'
+import PasswordChange from '../components/accounts/password-change'
 import { login, isAuthenticated, setMetadata } from '../utils/auth'
 import authState from '../state/auth'
 
@@ -89,6 +90,8 @@ export default class AccountPage extends React.Component {
 										</Button>
 									</>}
 								/>
+								<br />
+								<PasswordChange />
 							</>}
 						</div>
 					</>
