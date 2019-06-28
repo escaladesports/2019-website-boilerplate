@@ -9,7 +9,7 @@ export default class Auth0LogoutPage extends React.Component {
 	}
 	render() {
 		return (
-			<Layout title='Logging Out'>
+			<Layout title='Logging Out...'>
 				<Loading />
 			</Layout>
 		)
