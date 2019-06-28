@@ -42,6 +42,8 @@ const auth0 = new ManagementClient({
 	},
 
 })
+const updateUser = promisify(auth0.updateUser)
+const sendEmailVerification = promisify(auth0.sendEmailVerification)
 
 export async function handler(event) {
 	const {
@@ -68,11 +70,19 @@ export async function handler(event) {
 		const reqData = JSON.parse(body)
 		console.log(`Received from client`, reqData)
 		const filteredData = filterObj(reqData)
+		if (filteredData.email){
+			filteredData.email_verified = false
+		}
 
-		const asyncUpdateUser = promisify(auth0.updateUser)
 
-		const res = await asyncUpdateUser({ id: verified.sub }, filteredData)
+		const res = await updateUser({ id: verified.sub }, filteredData)
 		console.log(`Received from server`, res)
+
+		// Resend verification email if email has changed
+		if (filteredData.email_verified === false){
+			await sendEmailVerification({ user_id: verified.sub })
+		}
+
 		return {
 			statusCode: 200,
 			body: JSON.stringify({
