@@ -173,6 +173,7 @@ export async function patchUser(obj) {
 		authState.setState({
 			loadingUser: false,
 			user: res.body,
+			meta: res.body.user_metadata,
 		})
 	}
 	catch (err) {
