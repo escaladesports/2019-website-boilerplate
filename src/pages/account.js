@@ -43,9 +43,13 @@ export default class AccountPage extends React.Component {
 								}}
 								recaptcha={false}
 								initialValues={{
+									email: user.email || ``,
 									name: user.name || ``,
 								}}
 								validationSchema={object().shape({
+									email: string()
+										.email()
+										.required(`required`),
 									name: string()
 										.required(`required`),
 								})}
@@ -56,6 +60,12 @@ export default class AccountPage extends React.Component {
 									<Error>Server error! Your information was not saved.</Error>
 								}
 								form={props => <>
+									<Field
+										label='Email'
+										name='email'
+										type='email'
+										{...props}
+									/>
 									<Field
 										label='Name'
 										name='name'
