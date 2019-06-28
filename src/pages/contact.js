@@ -30,14 +30,14 @@ export default class ContactPage extends React.Component {
 					<div dangerouslySetInnerHTML={{ __html: html }} />
 					<div className='form'>
 						<Subscribe to={authState}>
-							{({ user, meta, loadingUser }) => {
+							{({ user, loadingUser }) => {
 								if (loadingUser) return <Loading />
 								return <Form
 									action='/.netlify/utils/contact'
-									// recaptcha={false}
+									recaptcha={true}
 									initialValues={{
 										email: user.email || ``,
-										name: meta.name || user.nickname || user.name || ``,
+										name: user.name || user.nickname || ``,
 										message: ``,
 									}}
 									validationSchema={object().shape({

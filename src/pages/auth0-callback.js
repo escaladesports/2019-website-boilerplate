@@ -1,5 +1,6 @@
 import React from 'react'
 import Layout from '../components/layouts/default'
+import Loading from '../components/loading'
 import { handleAuthentication } from '../utils/auth'
 
 export default class CallbackPage extends React.Component{
@@ -8,8 +9,8 @@ export default class CallbackPage extends React.Component{
 	}
 	render(){
 		return (
-			<Layout title='Logging In'>
-				<div>Loading...</div>
+			<Layout title='Logging In...'>
+				<Loading />
 			</Layout>
 		)
 	}

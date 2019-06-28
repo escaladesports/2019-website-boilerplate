@@ -9,7 +9,7 @@ const { localStorage } = global
 const auth = isBrowser ? new auth0.WebAuth({
 	domain: process.env.GATSBY_AUTH0_DOMAIN,
 	clientID: process.env.GATSBY_AUTH0_CLIENTID,
-	redirectUri: process.env.GATSBY_AUTH0_CALLBACK,
+	redirectUri: `${document.location.origin}/auth0-callback`,
 	responseType: `token id_token`,
 	scope: `openid profile email`,
 }) : {}
@@ -18,6 +18,9 @@ function noop(){}
 
 function saveLocation() {
 	const { pathname, hash } = document.location
+	if(pathname === `/account` || pathname.indexOf(`/account/`) > -1){
+		return localStorage.setItem(`previousLocation`, `/`)
+	}
 	localStorage.setItem(`previousLocation`, `${pathname}${hash}`)
 }
 
@@ -42,9 +45,19 @@ export function login(){
 	auth.authorize()
 }
 
-export function logout() {
-	authState.setState({ user: false })
+function clearUser() {
+	console.log(`clearUser`)
+	authState.setState({
+		user: false,
+		loadingUser: true,
+		meta: {},
+		loadingMeta: true,
+	})
 	localStorage.setItem(`isLoggedIn`, false)
+}
+
+export function logout() {
+	clearUser()
 	saveLocation()
 	auth.logout({
 		returnTo: `${document.location.origin}/auth0-logout`,
@@ -68,13 +81,16 @@ export const changePassword = () => {
 
 function setSession(cb = noop){
 	return (err, authResult) => {
+		console.log(`setSession`)
 		if (err) {
 			console.error(err)
+			// Reset user state
+			clearUser()
 			cb()
 			return
 		}
+		console.log(`authResult`, authResult)
 		if (authResult && authResult.accessToken && authResult.idToken) {
-			console.log(`authResult`, authResult)
 			const { idToken: accessToken, idTokenPayload: user } = authResult
 			authState.setState({ user, accessToken })
 			localStorage.setItem(`isLoggedIn`, true)
@@ -90,11 +106,13 @@ export function handleAuthentication(){
 	auth.parseHash(setSession())
 }
 
-export function silentAuth(callback = noop){
+export function silentAuth(callback = noop) {
+	console.log(`silentAuth`)
 	if (!isAuthenticated()) {
 		authState.setState({ loadingUser: false })
 		return callback()
 	}
+
 	auth.checkSession({}, setSession(() => {
 		authState.setState({ loadingUser: false })
 		callback()
@@ -135,6 +153,27 @@ export async function setMetadata(meta){
 		authState.setState({
 			loadingMeta: false,
 			meta: res.meta,
+		})
+	}
+	catch (err) {
+		console.error(err)
+	}
+}
+
+export async function patchUser(obj) {
+	try {
+		const req = await fetch(`/.netlify/functions/patch-auth0-user`, {
+			method: `POST`,
+			headers: {
+				authorization: authState.state.accessToken,
+			},
+			body: JSON.stringify(obj),
+		})
+		const res = await req.json()
+		authState.setState({
+			loadingUser: false,
+			user: res.body,
+			meta: res.body.user_metadata,
 		})
 	}
 	catch (err) {
