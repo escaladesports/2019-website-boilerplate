@@ -34,7 +34,7 @@ export default class AccountPage extends React.Component {
 						{loadingUser && (
 							<Loading />
 						)}
-						{!loadingUser && <>
+						{!loadingUser && user && <>
 							<div>Hi, {user.name || `friend`}!</div>
 							<h2>Info</h2>
 							<Form
