@@ -42,9 +42,19 @@ export function login(){
 	auth.authorize()
 }
 
-export function logout() {
-	authState.setState({ user: false })
+function clearUser() {
+	console.log(`clearUser`)
+	authState.setState({
+		user: false,
+		loadingUser: true,
+		meta: {},
+		loadingMeta: true,
+	})
 	localStorage.setItem(`isLoggedIn`, false)
+}
+
+export function logout() {
+	clearUser()
 	saveLocation()
 	auth.logout({
 		returnTo: `${document.location.origin}/auth0-logout`,
@@ -68,13 +78,16 @@ export const changePassword = () => {
 
 function setSession(cb = noop){
 	return (err, authResult) => {
+		console.log(`setSession`)
 		if (err) {
 			console.error(err)
+			// Reset user state
+			clearUser()
 			cb()
 			return
 		}
+		console.log(`authResult`, authResult)
 		if (authResult && authResult.accessToken && authResult.idToken) {
-			console.log(`authResult`, authResult)
 			const { idToken: accessToken, idTokenPayload: user } = authResult
 			authState.setState({ user, accessToken })
 			localStorage.setItem(`isLoggedIn`, true)
@@ -90,11 +103,13 @@ export function handleAuthentication(){
 	auth.parseHash(setSession())
 }
 
-export function silentAuth(callback = noop){
+export function silentAuth(callback = noop) {
+	console.log(`silentAuth`)
 	if (!isAuthenticated()) {
 		authState.setState({ loadingUser: false })
 		return callback()
 	}
+
 	auth.checkSession({}, setSession(() => {
 		authState.setState({ loadingUser: false })
 		callback()
@@ -152,7 +167,10 @@ export async function patchUser(obj) {
 			body: JSON.stringify(obj),
 		})
 		const res = await req.json()
-		console.log(res)
+		authState.setState({
+			loadingUser: false,
+			user: res.body,
+		})
 	}
 	catch (err) {
 		console.error(err)

@@ -1,3 +1,4 @@
+import { promisify } from 'util'
 import verify from 'auth0-verify'
 import { ManagementClient } from 'auth0'
 import {
@@ -5,6 +6,28 @@ import {
 	GATSBY_AUTH0_CLIENTID,
 	AUTH0_CLIENTSECRET,
 } from '../../env'
+
+const allowedProperties = [
+	`email`,
+	`phone_number`,
+	`user_metadata`,
+	`given_name`,
+	`family-name`,
+	`name`,
+	`nickname`,
+	`picture`,
+	`username`,
+]
+
+function filterObj(input){
+	const output = {}
+	allowedProperties.forEach(key => {
+		if(key in input){
+			output[key] = input[key]
+		}
+	})
+	return output
+}
 
 const auth0 = new ManagementClient({
 	grant_type: `client_credentials`,
@@ -43,19 +66,21 @@ export async function handler(event) {
 	try{
 
 		const reqData = JSON.parse(body)
-		console.log(`Received from API`, reqData)
+		console.log(`Received from client`, reqData)
+		const filteredData = filterObj(reqData)
 
-		auth0.getUsers((err, users) => {
-			if(err) throw err
-			console.log(users)
-		})
+		const asyncUpdateUser = promisify(auth0.updateUser)
 
+		const res = await asyncUpdateUser({ id: verified.sub }, filteredData)
+		console.log(`Received from server`, res)
 		return {
 			statusCode: 200,
 			body: JSON.stringify({
 				success: true,
+				body: res,
 			}),
 		}
+
 
 	}
 	catch(err){
