@@ -54,11 +54,17 @@ init()
 	const li = navUl.querySelector(`li:last-of-type`)
 	console.log(li)
 	const buttonClasses = li.querySelector(`a, button`).className
+	const iconClasses = li.querySelector(`span`).className
 
 	const newLi = document.createElement(`li`)
 	navUl.appendChild(newLi)
 	render(
-		<button className={buttonClasses}>Users</button>,
+		<button className={buttonClasses}>
+			<span className={iconClasses}>
+				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5.027 4.045h13.975a3 3 0 0 1 3 3v9.99a3 3 0 0 1-3 3H5.027a3 3 0 0 1-3-3v-9.99a3 3 0 0 1 3-3zm2.874 8.48l-4.114 5.504h16.455l-5.485-6.88-4.073 5.105-2.783-3.73zM9.493 10a1.507 1.507 0 1 0 0-3.014 1.507 1.507 0 0 0 0 3.014z"></path></svg>
+			</span>
+			Users
+		</button>,
 		newLi,
 	)
 }()
