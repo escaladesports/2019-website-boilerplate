@@ -152,6 +152,7 @@
     "typeface-open-sans": "^0.0.54",
     "typeface-oswald": "^0.0.54",
     "ultimate-pagination": "^1.0.0",
+    "wait-for-element": "^1.0.2",
     "webpack": "^4.35.0",
     "yaml": "^1.0.0-rc.8",
     "yup": "^0.27.0"
