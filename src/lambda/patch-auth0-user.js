@@ -70,6 +70,9 @@ export async function handler(event) {
 		const reqData = JSON.parse(body)
 		console.log(`Received from client`, reqData)
 		const filteredData = filterObj(reqData)
+		if(filteredData.email === verified.email){
+			delete filteredData.email
+		}
 		if (filteredData.email){
 			filteredData.email_verified = false
 		}
