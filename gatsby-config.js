@@ -1,7 +1,4 @@
-require(`dotenv-override`).config({
-	silent: true,
-	override: true,
-})
+const { GATSBY_ESCA_API_SITE } = require(`./src/utils/env`)
 const striptags = require(`striptags`)
 const { readFileSync } = require(`fs-extra`)
 const globby = require(`globby`).sync
@@ -44,14 +41,14 @@ module.exports = {
 			resolve: `escalade-stock`,
 			options: {
 				ids: productIds,
-				siteId: process.env.GATSBY_ESCA_API_SITE,
+				siteId: GATSBY_ESCA_API_SITE,
 			},
 		},
 		{
 			resolve: `escalade-pricing`,
 			options: {
 				ids: productIds,
-				siteId: process.env.GATSBY_ESCA_API_SITE,
+				siteId: GATSBY_ESCA_API_SITE,
 			},
 		},
 		`blog`,
