@@ -9,6 +9,7 @@ export async function handler({ body }){
 			},
 		},
 	} = JSON.parse(body)
+	console.log(`Recenved from client:`, body)
 	if(roles.indexOf(`admin`)){
 		console.log(`Already has admin role`)
 		return {
