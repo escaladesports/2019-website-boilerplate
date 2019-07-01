@@ -2,6 +2,7 @@ import { cmsEmailWhitelist } from '../../site-config'
 
 export function handler({ body }, _, callback){
 	const { user } = JSON.parse(body)
+	console.log(user)
 	const { email } = user
 	console.log(`${email} signing up`)
 	const domain = email.split(`@`)[1]
