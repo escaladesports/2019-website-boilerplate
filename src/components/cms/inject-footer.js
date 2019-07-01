@@ -11,7 +11,7 @@ class Footer extends React.Component{
 		this.state = {
 			loading: true,
 			status: `Loading...`,
-			avgTime: 0,
+			avgTime: `\u00A0`,
 		}
 		this.update = this.update.bind(this)
 	}
@@ -26,11 +26,13 @@ class Footer extends React.Component{
 		let avgTotal = 0
 		let latestState
 
-		res.forEach(({ deploy_time, branch, state }) => {
-			if(branch === `master` && state === `ready`){
+		res.forEach(({ deploy_time, context, state }) => {
+			if(context === `production`){
 				if (!latestState) latestState = state
-				avgTime += deploy_time
-				avgTotal++
+				if (state === `ready`) {
+					avgTime += deploy_time
+					avgTotal++
+				}
 			}
 		})
 
@@ -43,11 +45,14 @@ class Footer extends React.Component{
 			if (latestState === `ready`) {
 				status = `up to date`
 			}
+			if(latestState === `building` || latestState === `uploading`){
+				status = `syncing data...`
+			}
 		}
 
 		this.setState({
 			loading: false,
-			avgTime: avgTime ? `${avgTime} seconds` : ``,
+			avgTime: avgTime ? `Average sync time: ${avgTime} minutes` : ``,
 			status,
 		})
 		this.timeout = setTimeout(this.update, 10 * 1000)
@@ -63,10 +68,8 @@ class Footer extends React.Component{
 		const { status, avgTime } = this.state
 		return (
 			<footer css={styles.footer}>
-				<div>Build status: {status}</div>
-				<div>
-					{avgTime ? `${avgTime} minutes` : `\u00A0`}
-				</div>
+				<div>Sync status: {status}</div>
+				<div>{avgTime}</div>
 			</footer>
 		)
 	}
