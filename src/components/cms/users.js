@@ -1,5 +1,5 @@
 import React from 'react'
-import Person from '@material-ui/icons/Person'
+import People from '@material-ui/icons/People'
 import Modal from '../modal'
 
 export default class UsersPane extends React.Component{
@@ -17,7 +17,7 @@ export default class UsersPane extends React.Component{
 					onClick={() => this.setState({ open: true })}
 				>
 					<span className={this.props.iconClasses}>
-						<Person />
+						<People />
 					</span>
 					Users
 				</button>
