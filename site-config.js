@@ -6,7 +6,7 @@ module.exports = {
 	gitHubOwner: `escaladesports`,
 
 	cmsEmailWhitelist: [
-		`kennedyianrose@gmail.com`,
+		// `kennedyianrose@gmail.com`,
 		`escaladesports.com`,
 	],
 }
