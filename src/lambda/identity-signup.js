@@ -1,9 +1,20 @@
 import { cmsEmailWhitelist } from '../../site-config'
 
-export function handler({ body }, _, callback){
-	const { user } = JSON.parse(body)
-	console.log(user)
-	const { email } = user
+export async function handler({ body }){
+	const {
+		user: {
+			email,
+		},
+		app_metadata: {
+			roles,
+		},
+	} = JSON.parse(body)
+	if(roles.indexOf(`admin`)){
+		console.log(`Already has admin role`)
+		return {
+			statusCode: 200,
+		}
+	}
 	console.log(`${email} signing up`)
 	const domain = email.split(`@`)[1]
 	let res = ``
@@ -23,8 +34,8 @@ export function handler({ body }, _, callback){
 	else{
 		console.log(`Blocking`)
 	}
-	callback(null, {
+	return {
 		statusCode,
 		body: res,
-	})
+	}
 }
