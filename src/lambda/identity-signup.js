@@ -4,9 +4,9 @@ export async function handler({ body }){
 	const {
 		user: {
 			email,
-		},
-		app_metadata: {
-			roles,
+			app_metadata: {
+				roles,
+			},
 		},
 	} = JSON.parse(body)
 	if(roles.indexOf(`admin`)){
