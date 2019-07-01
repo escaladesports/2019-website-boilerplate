@@ -6,7 +6,7 @@ import { gitHubRepo, gitHubOwner } from '../../site-config'
 import {
 	SITE_RECAPTCHA_SECRET,
 	GITHUB_API_TOKEN,
-} from '../../env'
+} from '../utils/env'
 const recaptcha = new Recaptcha({
 	secret: SITE_RECAPTCHA_SECRET,
 	verbose: true,
