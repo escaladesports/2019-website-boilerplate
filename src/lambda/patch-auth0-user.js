@@ -5,7 +5,7 @@ import {
 	GATSBY_AUTH0_DOMAIN,
 	GATSBY_AUTH0_CLIENTID,
 	AUTH0_CLIENTSECRET,
-} from '../../env'
+} from '../utils/env'
 
 const allowedProperties = [
 	`email`,
