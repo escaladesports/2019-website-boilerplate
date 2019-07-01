@@ -5,8 +5,8 @@ import waitForElement from 'wait-for-element'
 import fetch from 'isomorphic-fetch'
 import { GATSBY_NETLIFY_SITE_ID } from '../../../.env.js'
 
-class Footer extends React.Component{
-	constructor(props){
+class Footer extends React.Component {
+	constructor(props) {
 		super(props)
 		this.state = {
 			loading: true,
@@ -15,7 +15,7 @@ class Footer extends React.Component{
 		}
 		this.update = this.update.bind(this)
 	}
-	async update(){
+	async update() {
 		console.log(`Updating build status...`)
 		const req = await fetch(`https://api.netlify.com/api/v1/sites/${GATSBY_NETLIFY_SITE_ID}/deploys`)
 		const res = await req.json()
@@ -27,7 +27,7 @@ class Footer extends React.Component{
 		let latestState
 
 		res.forEach(({ deploy_time, context, state }) => {
-			if(context === `production`){
+			if (context === `production`) {
 				if (!latestState) latestState = state
 				if (state === `ready`) {
 					avgTime += deploy_time
@@ -45,7 +45,11 @@ class Footer extends React.Component{
 			if (latestState === `ready`) {
 				status = `up to date`
 			}
-			if(latestState === `building` || latestState === `uploading`){
+			if (
+				latestState === `enqueued` ||
+				latestState === `building` ||
+				latestState === `uploading`
+			) {
 				status = `syncing data...`
 			}
 		}
@@ -57,13 +61,13 @@ class Footer extends React.Component{
 		})
 		this.timeout = setTimeout(this.update, 10 * 1000)
 	}
-	componentDidMount(){
+	componentDidMount() {
 		this.update()
 	}
-	componentWillUnmount(){
+	componentWillUnmount() {
 		global.clearTimeout(this.timeout)
 	}
-	render(){
+	render() {
 		console.log(`render`)
 		const { status, avgTime } = this.state
 		return (
@@ -75,7 +79,7 @@ class Footer extends React.Component{
 	}
 }
 
-export default async function injectFooter(){
+export default async function injectFooter() {
 	await waitForElement(`#nc-root header`, 60 * 60 * 1000)
 	const container = document.createElement(`div`)
 	document.body.appendChild(container)
