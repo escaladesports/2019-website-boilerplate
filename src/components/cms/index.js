@@ -3,8 +3,9 @@ import netlifyIdentityWidget from 'netlify-identity-widget'
 import { injectGlobal } from 'emotion'
 import { CurrencyControl, CurrencyPreview } from './currency'
 import { HTMLControl, HTMLPreview } from './html'
-import injectButton from './inject-button'
-import Users from './users'
+import injectFooter from './inject-footer'
+// import injectButton from './inject-button'
+// import Users from './users'
 
 injectGlobal`
 	#nc-root > div > section{
@@ -47,6 +48,8 @@ CMS.registerWidget(`html`, HTMLControl, HTMLPreview)
 
 init()
 
-!async function injectApp(){
-	await injectButton(Users)
-}()
+injectFooter()
+
+// !async function injectApp(){
+// 	await injectButton(Users)
+// }()
