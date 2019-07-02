@@ -6,6 +6,7 @@ import Field from '../components/field'
 import Button from '../components/button'
 import Form from '../components/form'
 import Error from '../components/error-message'
+import Success from '../components/success-message'
 import Loading from '../components/loading'
 import PasswordChange from '../components/accounts/password-change'
 import { login, isAuthenticated, patchUser } from '../utils/auth'
@@ -42,6 +43,7 @@ export default class AccountPage extends React.Component {
 									await patchUser(res)
 								}}
 								recaptcha={false}
+								persistAfterSuccess={true}
 								initialValues={{
 									email: user.email || ``,
 									name: user.name || ``,
@@ -58,6 +60,9 @@ export default class AccountPage extends React.Component {
 								}
 								error={
 									<Error>Server error! Your information was not saved.</Error>
+								}
+								success={
+									<Success>Your information has been successfully updated.</Success>
 								}
 								form={props => <>
 									<Field
@@ -77,10 +82,10 @@ export default class AccountPage extends React.Component {
 									>
 										Save
 									</Button>
+									<br /><br />
+									<PasswordChange />
 								</>}
 							/>
-							<br />
-							<PasswordChange />
 						</>}
 
 					</>

@@ -141,42 +141,32 @@ export async function fetchMetadata(accessToken){
 
 export async function setMetadata(meta){
 	authState.setState({ loadingMeta: true })
-	try {
-		const req = await fetch(`/.netlify/functions/set-auth0-metadata`, {
-			method: `POST`,
-			headers: {
-				authorization: authState.state.accessToken,
-			},
-			body: JSON.stringify(meta),
-		})
-		const res = await req.json()
-		authState.setState({
-			loadingMeta: false,
-			meta: res.meta,
-		})
-	}
-	catch (err) {
-		console.error(err)
-	}
+	const req = await fetch(`/.netlify/functions/set-auth0-metadata`, {
+		method: `POST`,
+		headers: {
+			authorization: authState.state.accessToken,
+		},
+		body: JSON.stringify(meta),
+	})
+	const res = await req.json()
+	authState.setState({
+		loadingMeta: false,
+		meta: res.meta,
+	})
 }
 
 export async function patchUser(obj) {
-	try {
-		const req = await fetch(`/.netlify/functions/patch-auth0-user`, {
-			method: `POST`,
-			headers: {
-				authorization: authState.state.accessToken,
-			},
-			body: JSON.stringify(obj),
-		})
-		const res = await req.json()
-		authState.setState({
-			loadingUser: false,
-			user: res.body,
-			meta: res.body.user_metadata,
-		})
-	}
-	catch (err) {
-		console.error(err)
-	}
+	const req = await fetch(`/.netlify/functions/patch-auth0-user`, {
+		method: `POST`,
+		headers: {
+			authorization: authState.state.accessToken,
+		},
+		body: JSON.stringify(obj),
+	})
+	const res = await req.json()
+	authState.setState({
+		loadingUser: false,
+		user: res.body,
+		meta: res.body.user_metadata,
+	})
 }
