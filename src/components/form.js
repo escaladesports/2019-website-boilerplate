@@ -37,9 +37,17 @@ export default class CustomForm extends React.Component {
 				}
 			}
 			else if (onSubmit) {
-				await onSubmit(values)
-				this.setState({ success: !!this.props.success })
-				resetForm()
+				try {
+					await onSubmit(values)
+					this.setState({ success: !!this.props.success })
+					resetForm()
+				}
+				catch{
+					this.setState({
+						success: false,
+						error: true,
+					})
+				}
 			}
 			else{
 				console.log(`Form data not submitting anywhere:`, values)
@@ -63,6 +71,7 @@ export default class CustomForm extends React.Component {
 			validationSchema,
 			loading,
 			form,
+			persistAfterSuccess,
 		} = this.props
 		const { error, success } = this.state
 
@@ -88,10 +97,10 @@ export default class CustomForm extends React.Component {
 					} = props
 					return (
 						<Form>
-							{error && this.props.error}
-							{success && this.props.success}
+							{!isSubmitting && error && this.props.error}
+							{!isSubmitting && success && this.props.success}
 							{isSubmitting && loading}
-							{!isSubmitting && !success && form(props)}
+							{!isSubmitting && (!success || persistAfterSuccess) && form(props)}
 
 							{this.props.recaptcha && (
 								<div style={{ display: `none` }}>
