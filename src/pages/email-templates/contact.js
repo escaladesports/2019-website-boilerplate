@@ -10,12 +10,12 @@ const data = grayMatter(md)
 const { title } = data.data
 const template = (new Converter()).makeHtml(data.content)
 
-export default function ContactEmail(){
+export default function ContactEmail(props){
 	return (
 		<Layout title={title}>
 			<Item>
 				<div dangerouslySetInnerHTML={{
-					__html: to_html(template, this.props),
+					__html: to_html(template, props),
 				}} />
 			</Item>
 		</Layout>
