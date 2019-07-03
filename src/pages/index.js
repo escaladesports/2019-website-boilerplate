@@ -17,7 +17,7 @@ export default function HomePage({
 		},
 	},
 }){
-	const [ open, setOpen ] = useState(false)
+	const [open, setOpen] = useState(false)
 
 	return (
 		<Layout>

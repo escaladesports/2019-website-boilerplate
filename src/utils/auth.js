@@ -25,6 +25,7 @@ function saveLocation() {
 }
 
 export function navigateToPreviousLocation() {
+	if (!isBrowser) return
 	const previousLocation = localStorage.getItem(`previousLocation`)
 	if (previousLocation) {
 		localStorage.setItem(`previousLocation`, ``)
@@ -107,7 +108,7 @@ export function handleAuthentication(){
 }
 
 export function silentAuth(callback = noop) {
-	console.log(`silentAuth`)
+	if (!isBrowser) return
 	if (!isAuthenticated()) {
 		authState.setState({ loadingUser: false })
 		return callback()
