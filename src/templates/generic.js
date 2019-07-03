@@ -2,24 +2,22 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layouts/default'
 
-export default class GenericTemplate extends React.Component{
-	render(){
-		const {
-			page: {
-				frontmatter: {
-					title,
-				},
-				html,
-				excerpt,
+export default function GenericTemplate({
+	data: {
+		page: {
+			frontmatter: {
+				title,
 			},
-		} = this.props.data
-
-		return(
-			<Layout title={title} description={excerpt}>
-				<div dangerouslySetInnerHTML={{ __html: html }} />
-			</Layout>
-		)
-	}
+			html,
+			excerpt,
+		},
+	},
+}){
+	return(
+		<Layout title={title} description={excerpt}>
+			<div dangerouslySetInnerHTML={{ __html: html }} />
+		</Layout>
+	)
 }
 
 export const query = graphql`

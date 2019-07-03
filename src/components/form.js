@@ -1,23 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import fetch from 'isomorphic-fetch'
 import { Formik, Form } from 'formik'
 import Recaptcha from 'react-google-invisible-recaptcha'
 
-export default class CustomForm extends React.Component {
-	static defaultProps = {
-		recaptcha: true,
-	}
-	constructor(props) {
-		super(props)
-		this.state = {
-			success: false,
-			error: false,
-		}
-		this.onSubmit = this.onSubmit.bind(this)
-	}
-	async onSubmit(values, { resetForm, setSubmitting }) {
-		this.setState({ error: false })
-		const { action, onSubmit } = this.props
+export default function CustomForm({
+	recaptcha = true,
+	action,
+	onSubmit: onSubmitProp,
+	initialValues,
+	validationSchema,
+	loading,
+	form,
+	persistAfterSuccess,
+	error: errorMsg,
+	success: successMsg,
+}){
+	const [success, setSuccess] = useState(false)
+	const [error, setError] = useState(false)
+	let recaptchaRef
+
+	const onSubmit = async (values, { resetForm, setSubmitting }) => {
+		setError(false)
 
 		try {
 			if (action) {
@@ -25,110 +28,92 @@ export default class CustomForm extends React.Component {
 					method: `post`,
 					body: JSON.stringify(values),
 				})
-				if(res.status === 200){
-					this.setState({ success: !!this.props.success })
+				if (res.status === 200) {
+					setSuccess(!!success)
 					resetForm()
 				}
 				else {
-					this.setState({
-						success: false,
-						error: true,
-					})
+					setSuccess(false)
+					setError(true)
 				}
 			}
-			else if (onSubmit) {
+			else if (onSubmitProp) {
 				try {
-					await onSubmit(values)
-					this.setState({ success: !!this.props.success })
+					await onSubmitProp(values)
+					setSuccess(!!success)
 					resetForm()
 				}
 				catch{
-					this.setState({
-						success: false,
-						error: true,
-					})
+					setSuccess(false)
+					setError(true)
 				}
 			}
-			else{
+			else {
 				console.log(`Form data not submitting anywhere:`, values)
-				this.setState({ success: !!this.props.success })
+				setSuccess(!!success)
 				resetForm()
 			}
 		}
 		catch (err) {
 			console.error(err)
-			this.setState({
-				success: false,
-				error: true,
-			})
+			setSuccess(false)
+			setError(true)
 		}
 
 		setSubmitting(false)
 	}
-	render() {
-		const {
-			initialValues,
-			validationSchema,
-			loading,
-			form,
-			persistAfterSuccess,
-		} = this.props
-		const { error, success } = this.state
 
-		return (
-			<Formik
-				initialValues={initialValues}
-				validationSchema={validationSchema}
-				onSubmit={(values, fns) => {
-					if (this.props.recaptcha && !values.recaptcha) {
-						fns.setSubmitting(false)
-						this.recaptcha.execute()
-					}
-					else {
-						this.onSubmit(values, fns)
-					}
-				}}
-			>
-				{props => {
-					const {
-						isSubmitting,
-						setFieldValue,
-						submitForm,
-					} = props
-					return (
-						<Form>
-							{!isSubmitting && error && this.props.error}
-							{!isSubmitting && success && this.props.success}
-							{isSubmitting && loading}
-							{!isSubmitting && (!success || persistAfterSuccess) && form(props)}
+	return (
+		<Formik
+			initialValues={initialValues}
+			validationSchema={validationSchema}
+			onSubmit={(values, fns) => {
+				if (recaptcha && !values.recaptcha) {
+					fns.setSubmitting(false)
+					recaptchaRef.execute()
+				}
+				else {
+					onSubmit(values, fns)
+				}
+			}}
+		>
+			{props => {
+				const {
+					isSubmitting,
+					setFieldValue,
+					submitForm,
+				} = props
+				return (
+					<Form>
+						{!isSubmitting && error && errorMsg}
+						{!isSubmitting && success && successMsg}
+						{isSubmitting && loading}
+						{!isSubmitting && (!success || persistAfterSuccess) && form(props)}
 
-							{this.props.recaptcha && (
-								<div style={{ display: `none` }}>
-									<Recaptcha
-										ref={el => this.recaptcha = el}
-										sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
-										onResolved={() => {
-											const response = this.recaptcha.getResponse()
-											console.log(`reCAPTCHA response`, response)
-											setFieldValue(`recaptcha`, response)
-											submitForm()
-										}}
-										onError={err => {
-											console.error(err)
-											setFieldValue(`recaptcha`, false)
-										}}
-										onExpired={() => {
-											setFieldValue(`recaptcha`, false)
-										}}
-									/>
-								</div>
-							)}
-						</Form>
-
-
-					)
-				}}
-			</Formik>
-		)
-	}
+						{recaptcha && (
+							<div style={{ display: `none` }}>
+								<Recaptcha
+									ref={el => recaptchaRef = el}
+									sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY}
+									onResolved={() => {
+										const response = recaptchaRef.getResponse()
+										console.log(`reCAPTCHA response`, response)
+										setFieldValue(`recaptcha`, response)
+										submitForm()
+									}}
+									onError={err => {
+										console.error(err)
+										setFieldValue(`recaptcha`, false)
+									}}
+									onExpired={() => {
+										setFieldValue(`recaptcha`, false)
+									}}
+								/>
+							</div>
+						)}
+					</Form>
+				)
+			}}
+		</Formik>
+	)
 }

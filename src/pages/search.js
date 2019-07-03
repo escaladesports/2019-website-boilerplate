@@ -1,30 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'gatsby-link'
 import Layout from '../components/layouts/default'
 import { search } from '../../plugins/search'
 
-export default class SearchPage extends React.Component{
-	constructor(props){
-		super(props)
-		this.id = 0
-		this.state = {
-			loading: false,
-			results: [],
-			term: ``,
-		}
-	}
-	componentDidMount(){
-		// Check URL for search term
-		const path = document.location.pathname.split(`/`)
-		if(path.length === 3){
-			let term = path.pop()
-			term = term.replace(/\+/g, `%20`)
-			term = decodeURIComponent(term)
-			this.search(term)
-		}
-	}
-	async search(term){
-		this.setState({ term })
+export default function SearchPage(){
+	const [loading, setLoading] = useState(false)
+	const [results, setResults] = useState([])
+	const [term, setTerm] = useState(``)
+
+	let id = 0
+
+	async function startSearch(term){
+		setTerm(term)
 
 		// Change URL
 		if (window.history && window.history.replaceState) {
@@ -33,52 +20,56 @@ export default class SearchPage extends React.Component{
 			window.history.replaceState({}, ``, `/search/${path}`)
 		}
 
-		this.id++
-		const curId = this.id
-		this.setState({ loading: true })
+		id++
+		const curId = id
+		setLoading(true)
 		const results = await search(term)
-		if (curId === this.id) {
-			this.setState({
-				loading: false,
-				results,
-			})
+		if (curId === id) {
+			setLoading(false)
+			setResults(results)
 		}
 	}
-	render(){
-		const {
-			loading,
-			results,
-			term,
-		} = this.state
-		return(
-			<Layout title='Search'>
-				<h1>Search</h1>
-				<input
-					type='text'
-					onChange={e => this.search(e.target.value)}
-				/>
-				{loading && (
-					<h3>Searching for "{term}"...</h3>
-				)}
-				{term && !results.length && !loading && (
-					<h3>No results found for "{term}".</h3>
-				)}
-				{!!results.length && <>
-					<h3>Results for "{term}":</h3>
-					<ul>
-						{results.map(({ title, excerpt, path }, index) => (
-							<li key={`searchResult${index}`}>
-								<div>
-									<Link to={path}>{title}</Link>
-								</div>
-								<div>
-									{excerpt} <Link to={path}>Read more</Link>
-								</div>
-							</li>
-						))}
-					</ul>
-				</>}
-			</Layout>
-		)
-	}
+
+	useEffect(() => {
+		// Check URL for search term
+		const path = document.location.pathname.split(`/`)
+		console.log(path)
+		if (path.length === 3) {
+			let term = path.pop()
+			term = term.replace(/\+/g, `%20`)
+			term = decodeURIComponent(term)
+			startSearch(term)
+		}
+	}, [])
+
+	return (
+		<Layout title='Search'>
+			<h1>Search</h1>
+			<input
+				type='text'
+				onChange={e => startSearch(e.target.value)}
+			/>
+			{loading && (
+				<h3>Searching for "{term}"...</h3>
+			)}
+			{term && !results.length && !loading && (
+				<h3>No results found for "{term}".</h3>
+			)}
+			{!!results.length && <>
+				<h3>Results for "{term}":</h3>
+				<ul>
+					{results.map(({ title, excerpt, path }, index) => (
+						<li key={`searchResult${index}`}>
+							<div>
+								<Link to={path}>{title}</Link>
+							</div>
+							<div>
+								{excerpt} <Link to={path}>Read more</Link>
+							</div>
+						</li>
+					))}
+				</ul>
+			</>}
+		</Layout>
+	)
 }

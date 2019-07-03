@@ -2,21 +2,19 @@ import React from 'react'
 import Link from 'gatsby-link'
 import { css } from '@emotion/core'
 
-export default class TagList extends React.Component {
-	render() {
-		return (
-			<ul css={styles.list}>
-				<li>Tags:</li>
-				{this.props.tags && this.props.tags.map((tag, index) => (
-					<li key={`tag${index}`}>
-						<Link to={`/blog/tags/${tag}`}>
-							{tag}
-						</Link>
-					</li>
-				))}
-			</ul>
-		)
-	}
+export default function TagList({ tags }) {
+	return (
+		<ul css={styles.list}>
+			<li>Tags:</li>
+			{tags && tags.map((tag, index) => (
+				<li key={`tag${index}`}>
+					<Link to={`/blog/tags/${tag}`}>
+						{tag}
+					</Link>
+				</li>
+			))}
+		</ul>
+	)
 }
 
 const styles = {

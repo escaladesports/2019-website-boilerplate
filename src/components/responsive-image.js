@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { css } from '@emotion/core'
 import InView from './in-view'
 import Placeholder from './placeholder'
@@ -6,65 +6,61 @@ import Placeholder from './placeholder'
 const resizeEvents = []
 let eventListener = false
 
-export default class ResponsiveImage extends React.Component{
-	constructor(props){
-		super(props)
-		this.state = {
-			w: 0,
-			h: 0,
+export default function ResponsiveImage({
+	ratio,
+	width,
+	height,
+	children,
+}){
+	const [{w, h}, setDims] = useState({ w: 0, h: 0 })
+
+	let container
+
+	function resize() {
+		if (!container) return
+		const {
+			clientWidth,
+			clientHeight,
+		} = container
+		if (clientWidth > w) {
+			setDims({ w: clientWidth, h: clientHeight })
 		}
-		this.resize = this.resize.bind(this)
 	}
-	componentDidMount(){
-		if(!eventListener){
+
+	useEffect(() => {
+		if (!eventListener) {
 			eventListener = true
 			window.addEventListener(`resize`, () => {
-				for(let i = resizeEvents.length; i--;){
+				for (let i = resizeEvents.length; i--;) {
 					resizeEvents[i]()
 				}
 			})
 		}
-		resizeEvents.push(this.resize)
-		setTimeout(this.resize, 1)
-	}
-	componentWillUnmount(){
-		resizeEvents.splice(resizeEvents.indexOf(this.resize), 1)
-	}
-	resize() {
-		const {
-			clientWidth: w,
-			clientHeight: h,
-		} = this.container
-		if (w > this.state.w) {
-			this.setState({ w, h })
+		resizeEvents.push(resize)
+		setTimeout(resize, 1)
+
+		return () => {
+			resizeEvents.splice(resizeEvents.indexOf(resize), 1)
 		}
-	}
-	render(){
-		const {
-			ratio,
-			width,
-			height,
-			children,
-		} = this.props
-		const { w, h } = this.state
-		return (
-			<InView once>
-				{inView => {
-					return (
-						<div
-							style={{ width }}
-							css={styles.container}
-							ref={el => this.container = el}
-						>
-							<Placeholder ratio={ratio || [width, height]}>
-								{!!w && inView && children(w, h)}
-							</Placeholder>
-						</div>
-					)
-				}}
-			</InView>
-		)
-	}
+	}, [])
+
+	return (
+		<InView once>
+			{inView => {
+				return (
+					<div
+						style={{ width }}
+						css={styles.container}
+						ref={el => container = el}
+					>
+						<Placeholder ratio={ratio || [width, height]}>
+							{!!w && inView && children(w, h)}
+						</Placeholder>
+					</div>
+				)
+			}}
+		</InView>
+	)
 }
 
 const styles = {

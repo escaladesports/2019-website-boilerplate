@@ -1,65 +1,60 @@
 /*eslint no-unused-vars: ["error", { "varsIgnorePattern": "once" }]*/
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-export default class InView extends React.Component{
-	static defaultProps = {
-		offset: `0px`,
-	}
-	constructor(props){
-		super(props)
-		this.state = {
-			inView: false,
-		}
-		this.onChange = this.onChange.bind(this)
-	}
-	onChange([{ isIntersecting, boundingClientRect }]){
+export default function InView({
+	offset = `0px`,
+	tag,
+	children,
+	once,
+	...props
+}){
+	const [inView, setInView] = useState(false)
+
+	let observer
+	let el
+
+	function onChange([{ isIntersecting, boundingClientRect }]) {
 		const { y } = boundingClientRect
-		if(y > 0){
-			if(isIntersecting){
-				if (this.props.once) {
-					this.unobserve()
+		if (y > 0) {
+			if (isIntersecting) {
+				if (once) {
+					unobserve()
 				}
-				this.setState({ inView: true })
+				setInView(true)
 			}
 			else {
-				this.setState({ inView: false })
+				setInView(false)
 			}
 		}
 	}
-	unobserve() {
-		if (global.IntersectionObserver) {
-			this.observer.unobserve(this.el)
+
+	function unobserve() {
+		if (global.IntersectionObserver && el) {
+			console.log(`unobserve`)
+			observer.unobserve(el)
 		}
 	}
-	componentDidMount(){
+
+	useEffect(() => {
 		if (global.IntersectionObserver) {
-			this.observer = new global.IntersectionObserver(this.onChange, {
-				rootMargin: this.props.offset,
+			observer = new global.IntersectionObserver(onChange, {
+				rootMargin: offset,
 			})
-			this.observer.observe(this.el)
+			observer.observe(el)
 		}
-		else{
-			this.setState({ inView: true })
+		else {
+			setInView(true)
 		}
-	}
-	componentWillUnmount() {
-		this.unobserve()
-	}
-	render() {
-		const {
-			tag,
-			children,
-			once,
-			...props
-		} = this.props
-		const { inView } = this.state
-		return React.createElement(
-			tag || `div`,
-			{
-				ref: el => this.el = el,
-				...props,
-			},
-			children(inView),
-		)
-	}
+
+		return unobserve
+	}, [])
+
+	return React.createElement(
+		tag || `div`,
+		{
+			ref: div => el = div,
+			...props,
+		},
+		children(inView),
+	)
 }

@@ -2,14 +2,12 @@ import React from 'react'
 import { css, keyframes } from '@emotion/core'
 import { primaryColor } from '../styles/colors'
 
-export default class RouteDelayedAnimation extends React.Component {
-	render() {
-		return (
-			<div css={styles.outer}>
-				<div css={styles.inner} />
-			</div>
-		)
-	}
+export default function RouteDelayedAnimation(){
+	return (
+		<div css={styles.outer}>
+			<div css={styles.inner} />
+		</div>
+	)
 }
 
 const animation = keyframes({

@@ -10,16 +10,14 @@ const data = grayMatter(md)
 const { title } = data.data
 const template = (new Converter()).makeHtml(data.content)
 
-export default class ContactEmail extends React.Component {
-	render() {
-		return (
-			<Layout title={title}>
-				<Item>
-					<div dangerouslySetInnerHTML={{
-						__html: to_html(template, this.props),
-					}} />
-				</Item>
-			</Layout>
-		)
-	}
+export default function ContactEmail(){
+	return (
+		<Layout title={title}>
+			<Item>
+				<div dangerouslySetInnerHTML={{
+					__html: to_html(template, this.props),
+				}} />
+			</Item>
+		</Layout>
+	)
 }

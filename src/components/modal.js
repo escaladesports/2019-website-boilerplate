@@ -2,29 +2,28 @@ import React from 'react'
 import { css } from '@emotion/core'
 import { white } from '../styles/colors'
 
-export default class Modal extends React.Component{
-	render(){
-		return (
-			<div
-				css={styles.bg}
-				style={{ display: this.props.open ? `block` : `none` }}
-				onClick={this.props.onClose}
-			>
-				<div css={styles.dialog} onClick={stopPropagation}>
-					<div className='close' css={styles.close} onClick={this.props.onClose}>
-						×
-					</div>
-					<div css={styles.content}>
-						{this.props.children}
-					</div>
+export default function Modal(props) {
+	return (
+		<div
+			css={styles.bg}
+			style={{ display: props.open ? `block` : `none` }}
+			onClick={props.onClose}
+		>
+			<div css={styles.dialog} onClick={stopPropagation}>
+				<div className='close' css={styles.close} onClick={props.onClose}>
+					×
 				</div>
-				{this.props.open && (
-					<style dangerouslySetInnerHTML={{__html: `body{overflow:hidden}`}} />
-				)}
+				<div css={styles.content}>
+					{props.children}
+				</div>
 			</div>
-		)
-	}
+			{props.open && (
+				<style dangerouslySetInnerHTML={{ __html: `body{overflow:hidden}` }} />
+			)}
+		</div>
+	)
 }
+
 
 function stopPropagation(e){
 	e.stopPropagation()

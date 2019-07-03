@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import Img from '../components/netlify-image'
 import Button from '../components/button'
@@ -6,61 +6,55 @@ import Layout from '../components/layouts/default'
 import Modal from '../components/modal'
 import Carousel from '../components/carousel'
 
-export default class HomePage extends React.Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			open: false,
-		}
-	}
-	render() {
-		const {
-			page: {
-				html,
-				frontmatter: {
-					headerImage,
-					headerImageDesc,
-				},
+export default function HomePage({
+	data: {
+		page: {
+			html,
+			frontmatter: {
+				headerImage,
+				headerImageDesc,
 			},
-		} = this.props.data
+		},
+	},
+}){
+	const [ open, setOpen ] = useState(false)
 
-		return (
-			<Layout>
-				<div dangerouslySetInnerHTML={{ __html: html }} />
+	return (
+		<Layout>
+			<div dangerouslySetInnerHTML={{ __html: html }} />
 
-				<Carousel ratio={[1000, 400]}>
-					<img src='https://placehold.it/1000x400/ccc/999/&text=slide1' alt='Slide 1' />
-					<img src='https://placehold.it/1000x400/ccc/999/&text=slide2' alt='Slide 2' />
-					<img src='https://placehold.it/1000x400/ccc/999/&text=slide3' alt='Slide 3' />
-				</Carousel>
+			<Carousel ratio={[1000, 400]}>
+				<img src='https://placehold.it/1000x400/ccc/999/&text=slide1' alt='Slide 1' />
+				<img src='https://placehold.it/1000x400/ccc/999/&text=slide2' alt='Slide 2' />
+				<img src='https://placehold.it/1000x400/ccc/999/&text=slide3' alt='Slide 3' />
+			</Carousel>
 
-				<br />
+			<br />
 
-				<Img
-					src={headerImage}
-					width={404}
-					height={405}
-					alt={headerImageDesc}
-				/>
+			<Img
+				src={headerImage}
+				width={404}
+				height={405}
+				alt={headerImageDesc}
+			/>
 
-				<br />
+			<br />
 
-				<Button
-					onClick={() => this.setState({ open: true })}
-				>
-					Open Modal
-				</Button>
+			<Button
+				onClick={() => setOpen(true)}
+			>
+				Open Modal
+			</Button>
 
 
-				<Modal
-					open={this.state.open}
-					onClose={() => this.setState({ open: false })}
-				>
-					<div>Modal content</div>
-				</Modal>
-			</Layout>
-		)
-	}
+			<Modal
+				open={open}
+				onClose={() => setOpen(false)}
+			>
+				<div>Modal content</div>
+			</Modal>
+		</Layout>
+	)
 }
 
 export const query = graphql`

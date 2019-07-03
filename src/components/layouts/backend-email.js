@@ -3,20 +3,17 @@ import { css } from '@emotion/core'
 import linkMixin from '../styles/mixins/link'
 import EmailTemplate from '../components/layouts/email'
 
-export default class BackendEmail extends React.Component {
-	render() {
-		let { title, children } = this.props
-		return (
-			<EmailTemplate title={title}>
-				<div css={styles.wrapper}>
-					<p css={styles.img}>
-						<img src='/backend-logo.png' />
-					</p>
-					{children}
-				</div>
-			</EmailTemplate>
-		)
-	}
+export default function BackendEmail({ title, children }){
+	return (
+		<EmailTemplate title={title}>
+			<div css={styles.wrapper}>
+				<p css={styles.img}>
+					<img src='/backend-logo.png' />
+				</p>
+				{children}
+			</div>
+		</EmailTemplate>
+	)
 }
 
 const styles = {

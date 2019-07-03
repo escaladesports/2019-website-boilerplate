@@ -5,51 +5,46 @@ import TagList from './tag-list'
 import Pagination from '../pagination'
 import formatDate from '../../utils/format-date'
 
-export default class PostList extends React.Component {
-	render() {
-		const {
-			page,
-			totalPages,
-			posts,
-			linkPrefix,
-		} = this.props
-		return (
-			<>
-				<ul css={styles.list}>
-					{posts.map(({ excerpt, fields, frontmatter }, index) => {
-						const { title, tags, date } = frontmatter
-						const { path } = fields
-						return (
-							<li key={`blog${index}`}>
-								<h2>
-									<Link to={path}>
-										{title}
-									</Link>
-								</h2>
-								<time dateTime={date}>{formatDate(date)}</time>
-								<TagList tags={tags} />
-								<p>{excerpt}</p>
-								<div>
-									<Link to={path}>
-										Read More
-									</Link>
-								</div>
-							</li>
-						)
-					})}
-				</ul>
-				{totalPages > 1 &&
-					<div css={styles.pagination}>
-						<Pagination
-							page={page}
-							totalPages={totalPages}
-							linkPrefix={linkPrefix}
-						/>
-					</div>
-				}
-			</>
-		)
-	}
+export default function PostList({
+	page,
+	totalPages,
+	posts,
+	linkPrefix,
+}) {
+	return <>
+		<ul css={styles.list}>
+			{posts.map(({ excerpt, fields, frontmatter }, index) => {
+				const { title, tags, date } = frontmatter
+				const { path } = fields
+				return (
+					<li key={`blog${index}`}>
+						<h2>
+							<Link to={path}>
+								{title}
+							</Link>
+						</h2>
+						<time dateTime={date}>{formatDate(date)}</time>
+						<TagList tags={tags} />
+						<p>{excerpt}</p>
+						<div>
+							<Link to={path}>
+								Read More
+							</Link>
+						</div>
+					</li>
+				)
+			})}
+		</ul>
+		{totalPages > 1 &&
+			<div css={styles.pagination}>
+				<Pagination
+					page={page}
+					totalPages={totalPages}
+					linkPrefix={linkPrefix}
+				/>
+			</div>
+		}
+	</>
 }
 
 const styles = {
