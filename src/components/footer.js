@@ -2,18 +2,17 @@ import React from 'react'
 import { css } from '@emotion/core'
 import Link from 'gatsby-link'
 
-export default class Footer extends React.Component{
-	render(){
-		return (
-			<footer css={styles.footerStyles}>
-				<ul>
-					<li><Link to='/privacy-policy'>Privacy Policy</Link></li>
-					<li><a href='/email-templates/cms-invitation'>Email Template</a></li>
-					<li><a href='/admin/'>CMS</a></li>
-				</ul>
-			</footer>
-		)
-	}
+
+export default function Footer(){
+	return (
+		<footer css={styles.footerStyles}>
+			<ul>
+				<li><Link to='/privacy-policy'>Privacy Policy</Link></li>
+				<li><a href='/email-templates/cms-invitation'>Email Template</a></li>
+				<li><a href='/admin/'>CMS</a></li>
+			</ul>
+		</footer>
+	)
 }
 
 const styles = {

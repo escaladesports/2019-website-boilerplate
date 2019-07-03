@@ -22,84 +22,79 @@ import {
 import linkMixin from '../../styles/mixins/link'
 import '../../styles/global.css'
 
-export default class Layout extends React.Component{
-	render(){
-		const {
-			title,
-			description,
-		} = this.props
-		return(
-			<StaticQuery
-				query={graphql`
-					query DefaultTemplateQuery{
-						site{
-							siteMetadata{
-								siteTitle: title
-								siteDescription: description
-							}
+export default function Layout({
+	title,
+	description,
+	children,
+}) {
+	return (
+		<StaticQuery
+			query={graphql`
+				query DefaultTemplateQuery{
+					site{
+						siteMetadata{
+							siteTitle: title
+							siteDescription: description
 						}
 					}
-				`}
-				render={({
-					site: {
-						siteMetadata: {
-							siteTitle,
-							siteDescription,
-						},
+				}
+			`}
+			render={({
+				site: {
+					siteMetadata: {
+						siteTitle,
+						siteDescription,
 					},
-				}) => (
-					<>
-						<Helmet>
-							<html lang='en' />
-							<title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
-							<meta name='description' content={description || siteDescription} />
-							<meta property='og:title' content={title} />
-							<meta property='og:site_name' content={siteTitle} />
-						</Helmet>
-						<div css={styles.layout}>
-							<Header />
-							<div css={styles.content}>
-								<main>{this.props.children}</main>
-							</div>
-							<Footer />
+				},
+			}) => <>
+					<Helmet>
+						<html lang='en' />
+						<title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
+						<meta name='description' content={description || siteDescription} />
+						<meta property='og:title' content={title} />
+						<meta property='og:site_name' content={siteTitle} />
+					</Helmet>
+					<div css={styles.layout}>
+						<Header />
+						<div css={styles.content}>
+							<main>{children}</main>
 						</div>
-						<RouteDelayed>
-							<RouteDelayedAnimation />
-						</RouteDelayed>
-						<Cart
-							styles={{
-								zIndex: 9999,
-								borderColor: `#28cefc`,
-								primaryColor: `#28cefc`,
-								overlayColor: `rgba(40,206,252,0.7)`,
-							}}
-							header={<h1>Project Boilerplate</h1>}
-							infoWebhook='/api/inventory/load'
-							splitName={true}
-							plugins={[
-								standardPayment,
-								escaApi,
-							]}
-							totalModifications={[
-								{
-									id: `shipping`,
-									description: `Shipping`,
-									displayValue: `-`,
-								},
-								{
-									id: `tax`,
-									description: `Tax`,
-									displayValue: `-`,
-								},
-							]}
-						/>
-					</>
-				)}
-			/>
-		)
-	}
+						<Footer />
+					</div>
+					<RouteDelayed>
+						<RouteDelayedAnimation />
+					</RouteDelayed>
+					<Cart
+						styles={{
+							zIndex: 9999,
+							borderColor: `#28cefc`,
+							primaryColor: `#28cefc`,
+							overlayColor: `rgba(40,206,252,0.7)`,
+						}}
+						header={<h1>Project Boilerplate</h1>}
+						infoWebhook='/api/inventory/load'
+						splitName={true}
+						plugins={[
+							standardPayment,
+							escaApi,
+						]}
+						totalModifications={[
+							{
+								id: `shipping`,
+								description: `Shipping`,
+								displayValue: `-`,
+							},
+							{
+								id: `tax`,
+								description: `Tax`,
+								displayValue: `-`,
+							},
+						]}
+					/>
+				</>}
+		/>
+	)
 }
-
 
 const styles = {
 	layout: css`

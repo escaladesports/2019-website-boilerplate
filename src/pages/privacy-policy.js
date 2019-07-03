@@ -2,31 +2,30 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layouts/default'
 
-export default class PrivacyPolicyPage extends React.Component{
-	render(){
-		const {
-			page: {
-				frontmatter: {
-					title,
-					address,
-					email,
-				},
-				html,
-				excerpt,
+export default function PrivacyPolicyPage({
+	data: {
+		page: {
+			frontmatter: {
+				title,
+				address,
+				email,
 			},
-		} = this.props.data
-		const addressHTML = address.replace(/\n/g, `<br />`)
-		const emailHTML = `<a href='mailto:${email}'>${email}</a>`
-		const processedHTML = html
-			.replace(/{{address}}/g, addressHTML)
-			.replace(/{{email}}/g, emailHTML)
+			html,
+			excerpt,
+		},
+	},
+}){
+	const addressHTML = address.replace(/\n/g, `<br />`)
+	const emailHTML = `<a href='mailto:${email}'>${email}</a>`
+	const processedHTML = html
+		.replace(/{{address}}/g, addressHTML)
+		.replace(/{{email}}/g, emailHTML)
 
-		return(
-			<Layout title={title} description={excerpt}>
-				<div dangerouslySetInnerHTML={{ __html: processedHTML }} />
-			</Layout>
-		)
-	}
+	return(
+		<Layout title={title} description={excerpt}>
+			<div dangerouslySetInnerHTML={{ __html: processedHTML }} />
+		</Layout>
+	)
 }
 
 export const query = graphql`

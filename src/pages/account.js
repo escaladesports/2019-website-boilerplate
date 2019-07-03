@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Subscribe } from 'statable'
 import { object, string } from 'yup'
 import Layout from '../components/layouts/default'
@@ -12,85 +12,78 @@ import PasswordChange from '../components/accounts/password-change'
 import { login, isAuthenticated, patchUser } from '../utils/auth'
 import authState from '../state/auth'
 
-export default class AccountPage extends React.Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			metaValue: ``,
-		}
-	}
-	componentDidMount(){
+export default function AccountPage(){
+	useState(() => {
 		// Redirect to login
-		if (!isAuthenticated()){
+		if (!isAuthenticated()) {
 			login()
 		}
-	}
-	render() {
-		return (
-			<Layout title='Your Account'>
-				<h1>Your Account</h1>
-				<Subscribe to={authState}>{
-					({ user, loadingUser }) => <>
+	}, [])
 
-						{loadingUser && (
-							<Loading />
-						)}
-						{!loadingUser && user && <>
-							<div>Hi, {user.name || `friend`}!</div>
-							<h2>Info</h2>
-							<Form
-								onSubmit={async res => {
-									await patchUser(res)
-								}}
-								recaptcha={false}
-								persistAfterSuccess={true}
-								initialValues={{
-									email: user.email || ``,
-									name: user.name || ``,
-								}}
-								validationSchema={object().shape({
-									email: string()
-										.email()
-										.required(`required`),
-									name: string()
-										.required(`required`),
-								})}
-								loading={
-									<Loading />
-								}
-								error={
-									<Error>Server error! Your information was not saved.</Error>
-								}
-								success={
-									<Success>Your information has been successfully updated.</Success>
-								}
-								form={props => <>
-									<Field
-										label='Email'
-										name='email'
-										type='email'
-										{...props}
-									/>
-									<Field
-										label='Name'
-										name='name'
-										{...props}
-									/>
-									<Button
-										type='submit'
-										disabled={props.isSubmitting}
-									>
-										Save
-									</Button>
-									<br /><br />
-									<PasswordChange />
-								</>}
-							/>
-						</>}
+	return (
+		<Layout title='Your Account'>
+			<h1>Your Account</h1>
+			<Subscribe to={authState}>{
+				({ user, loadingUser }) => <>
 
-					</>
-				}</Subscribe>
-			</Layout>
-		)
-	}
+					{loadingUser && (
+						<Loading />
+					)}
+					{!loadingUser && user && <>
+						<div>Hi, {user.name || `friend`}!</div>
+						<h2>Info</h2>
+						<Form
+							onSubmit={async res => {
+								await patchUser(res)
+							}}
+							recaptcha={false}
+							persistAfterSuccess={true}
+							initialValues={{
+								email: user.email || ``,
+								name: user.name || ``,
+							}}
+							validationSchema={object().shape({
+								email: string()
+									.email()
+									.required(`required`),
+								name: string()
+									.required(`required`),
+							})}
+							loading={
+								<Loading />
+							}
+							error={
+								<Error>Server error! Your information was not saved.</Error>
+							}
+							success={
+								<Success>Your information has been successfully updated.</Success>
+							}
+							form={props => <>
+								<Field
+									label='Email'
+									name='email'
+									type='email'
+									{...props}
+								/>
+								<Field
+									label='Name'
+									name='name'
+									{...props}
+								/>
+								<Button
+									type='submit'
+									disabled={props.isSubmitting}
+								>
+									Save
+								</Button>
+								<br /><br />
+								<PasswordChange />
+							</>}
+						/>
+					</>}
+
+				</>
+			}</Subscribe>
+		</Layout>
+	)
 }

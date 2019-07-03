@@ -1,52 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { css } from '@emotion/core'
 import { changePassword } from '../../utils/auth'
 
-export default class PasswordChange extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			passwordChangeLoading: false,
-			passwordChange: false,
-		}
-	}
-	async resetPasswordButton(){
-		this.setState({ passwordChangeLoading: true })
+export default function PasswordChange(){
+	const [success, setSuccess] = useState(false)
+	const [loading, setLoading] = useState(false)
+
+	async function resetPasswordButton(){
+		setLoading(true)
 		await changePassword()
-		this.setState({
-			passwordChange: true,
-			passwordChangeLoading: false,
-		})
+		setSuccess(true)
+		setLoading(false)
 	}
-	render() {
-		const { passwordChange, passwordChangeLoading } = this.state
-		return (
-			<div css={styles.container}>
-				{passwordChangeLoading && (
-					<div>Sending email...</div>
-				)}
-				{!passwordChangeLoading && !passwordChange && (
+
+	return (
+		<div css={styles.container}>
+			{loading && (
+				<div>Sending email...</div>
+			)}
+			{!loading && !success && (
+				<a href='#' onClick={e => {
+					e.preventDefault()
+					resetPasswordButton()
+				}}>
+					Change password
+				</a>
+			)}
+			{!loading && success && <>
+				<div>We've just sent you an email to reset your password.</div>
+				<div>
 					<a href='#' onClick={e => {
 						e.preventDefault()
-						this.resetPasswordButton()
+						resetPasswordButton()
 					}}>
-						Change password
+						Resend email
 					</a>
-				)}
-				{!passwordChangeLoading && passwordChange && <>
-					<div>We've just sent you an email to reset your password.</div>
-					<div>
-						<a href='#' onClick={e => {
-							e.preventDefault()
-							this.resetPasswordButton()
-						}}>
-							Resend email
-						</a>
-					</div>
-				</>}
-			</div>
-		)
-	}
+				</div>
+			</>}
+		</div>
+	)
 }
 
 const styles = {

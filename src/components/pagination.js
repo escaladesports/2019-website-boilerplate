@@ -3,62 +3,58 @@ import { css } from '@emotion/core'
 import Link from 'gatsby-link'
 import { getPaginationModel } from 'ultimate-pagination'
 
-export default class Footer extends React.Component{
-	static defaultProps = {
-		numberfirst: false,
-	}
-	getLink(n){
-		const { numberFirst, linkPrefix } = this.props
-		if (!numberFirst && n === 1){
+export default function Footer({
+	numberFirst = false,
+	linkPrefix,
+	page,
+	totalPages,
+}){
+
+	function getLink(n){
+		if (!numberFirst && n === 1) {
 			return linkPrefix
 		}
 		return `${linkPrefix}/${n}`
 	}
-	render() {
-		const {
-			page,
-			totalPages,
-		} = this.props
-		const paginationModel = getPaginationModel({
-			currentPage: page,
-			totalPages,
-			boundaryPagesRange: 2,
-			siblingPagesRange: 2,
-			hidePreviousAndNextPageLinks: true,
-			hideFirstAndLastPageLinks: true,
-		})
-		const previous = page > 1 ? page - 1 : false
-		const next = page < totalPages ? page + 1 : false
 
-		return (
-			<ul css={styles.list}>
-				<li css={styles.previous}>
-					{previous && (
-						<Link to={this.getLink(previous)}>Previous</Link>
+	const paginationModel = getPaginationModel({
+		currentPage: page,
+		totalPages,
+		boundaryPagesRange: 2,
+		siblingPagesRange: 2,
+		hidePreviousAndNextPageLinks: true,
+		hideFirstAndLastPageLinks: true,
+	})
+	const previous = page > 1 ? page - 1 : false
+	const next = page < totalPages ? page + 1 : false
+
+	return (
+		<ul css={styles.list}>
+			<li css={styles.previous}>
+				{previous && (
+					<Link to={getLink(previous)}>Previous</Link>
+				)}
+			</li>
+			<li css={styles.summary}>
+				Page {page} of {totalPages}
+			</li>
+			{paginationModel.map(({ type, isActive, value }, key) => (
+				<li key={`page${key}`} css={styles.link}>
+					{type === `PAGE` && isActive && value}
+					{type !== `PAGE` && `...`}
+					{type === `PAGE` && !isActive && (
+						<Link to={getLink(value)}>{value}</Link>
 					)}
 				</li>
-				<li css={styles.summary}>
-					Page {page} of {totalPages}
-				</li>
-				{paginationModel.map(({ type, isActive, value }, key) => (
-					<li key={`page${key}`} css={styles.link}>
-						{type === `PAGE` && isActive && value}
-						{type !== `PAGE` && `...`}
-						{type === `PAGE` && !isActive && (
-							<Link to={this.getLink(value)}>{value}</Link>
-						)}
-					</li>
-				))}
-				<li css={styles.next}>
-					{next && (
-						<Link to={this.getLink(next)}>Next</Link>
-					)}
-				</li>
-			</ul>
-		)
-	}
+			))}
+			<li css={styles.next}>
+				{next && (
+					<Link to={getLink(next)}>Next</Link>
+				)}
+			</li>
+		</ul>
+	)
 }
-
 
 const breakpoint = 600
 const styles = {

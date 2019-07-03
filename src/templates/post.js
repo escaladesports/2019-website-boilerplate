@@ -11,99 +11,97 @@ import Comments from '../components/comments'
 import { siteUrl } from '../../site-config'
 import formatDate from '../utils/format-date'
 
-export default class PostTemplate extends React.Component{
-	render(){
-
-		const {
-			pageContext: {
-				id,
-				nextId,
-				previousId,
-				slug,
+export default function PostTemplate({
+	pageContext: {
+		id,
+		nextId,
+		previousId,
+		slug,
+	},
+	data: {
+		post: {
+			frontmatter: {
+				title,
+				tags,
+				date,
+				image,
+				imageDesc,
 			},
-			data: {
-				post: {
-					frontmatter: {
-						title,
-						tags,
-						date,
-						image,
-						imageDesc,
-					},
-					html,
-					excerpt,
-				},
-				comments: commentsList,
-			},
-		} = this.props
+			html,
+			excerpt,
+		},
+		comments: commentsList,
+		next,
+		previous,
+	},
+}){
 
-		let comments = []
-		if(commentsList){
-			comments = commentsList.edges.map(({ node: {
-				html,
-				frontmatter: {
-					md5,
-					name,
-					date,
-				},
-			} }) => ({
-				html,
+	let comments = []
+	if(commentsList){
+		comments = commentsList.edges.map(({ node: {
+			html,
+			frontmatter: {
 				md5,
 				name,
 				date,
-			}))
-		}
-
-		const next = (id === nextId) ? false : this.props.data.next
-		const previous = (id === previousId) ? false : this.props.data.previous
-
-		return(
-			<Layout title={title} description={excerpt}>
-				{!!image && (
-					<Helmet>
-						<meta
-							property='og:image'
-							content={`${siteUrl}${image}?nf_resize=fit&w=900`}
-						/>
-					</Helmet>
-				)}
-				<h1>{title}</h1>
-				<time dateTime={date}>{formatDate(date)}</time>
-				<TagList tags={tags} />
-				{!!image && (
-					<Img
-						src={image}
-						ratio={[900, 600]}
-						alt={imageDesc}
-					/>
-				)}
-				<div dangerouslySetInnerHTML={{ __html: html }} />
-				<div>
-					{next && (
-						<div css={styles.next}>
-							<Link to={next.fields.path}>
-								Next Post: {next.frontmatter.title}
-							</Link>
-						</div>
-					)}
-					{previous && (
-						<div>
-							<Link to={previous.fields.path}>
-								Previous Post: {previous.frontmatter.title}
-							</Link>
-						</div>
-					)}
-				</div>
-				<div css={styles.comments}>
-					<Comments comments={comments} />
-				</div>
-				<div css={styles.commentForm}>
-					<h3>Leave a comment:</h3>
-					<CommentForm slug={slug} />
-				</div>
-			</Layout>
-		)
+			},
+		} }) => ({
+			html,
+			md5,
+			name,
+			date,
+		}))
 	}
+
+	const nextPost = (id === nextId) ? false : next
+	const previousPost = (id === previousId) ? false : previous
+
+	return(
+		<Layout title={title} description={excerpt}>
+			{!!image && (
+				<Helmet>
+					<meta
+						property='og:image'
+						content={`${siteUrl}${image}?nf_resize=fit&w=900`}
+					/>
+				</Helmet>
+			)}
+			<h1>{title}</h1>
+			<time dateTime={date}>{formatDate(date)}</time>
+			<TagList tags={tags} />
+			{!!image && (
+				<Img
+					src={image}
+					ratio={[900, 600]}
+					alt={imageDesc}
+				/>
+			)}
+			<div dangerouslySetInnerHTML={{ __html: html }} />
+			<div>
+				{nextPost && (
+					<div css={styles.next}>
+						<Link to={nextPost.fields.path}>
+							Next Post: {nextPost.frontmatter.title}
+						</Link>
+					</div>
+				)}
+				{previousPost && (
+					<div>
+						<Link to={previousPost.fields.path}>
+							Previous Post: {previousPost.frontmatter.title}
+						</Link>
+					</div>
+				)}
+			</div>
+			<div css={styles.comments}>
+				<Comments comments={comments} />
+			</div>
+			<div css={styles.commentForm}>
+				<h3>Leave a comment:</h3>
+				<CommentForm slug={slug} />
+			</div>
+		</Layout>
+	)
 }
 
 const styles = {

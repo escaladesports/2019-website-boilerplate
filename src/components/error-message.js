@@ -2,14 +2,12 @@ import React from 'react'
 import { css } from '@emotion/core'
 import { errorColor, lightErrorColor } from '../styles/colors'
 
-export default class ErrorMessage extends React.Component{
-	render(){
-		return (
-			<div css={styles.box}>
-				{this.props.children}
-			</div>
-		)
-	}
+export default function ErrorMessage({ children }){
+	return (
+		<div css={styles.box}>
+			{children}
+		</div>
+	)
 }
 
 const styles = {

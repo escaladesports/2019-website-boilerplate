@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { css } from '@emotion/core'
 import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png'
 import iconUrl from 'leaflet/dist/images/marker-icon.png'
@@ -9,111 +9,115 @@ import ZipInput from './zip-input'
 import 'leaflet/dist/leaflet.css'
 import 'react-leaflet-markercluster/dist/styles.min.css'
 
-export default class LocationsMap extends React.Component{
-	constructor(props){
-		super(props)
-		this.state = {
-			visibleLocations: [],
-		}
-		this.updateLocationsList = this.updateLocationsList.bind(this)
-		this.zoomToLocation = this.zoomToLocation.bind(this)
-	}
-	async componentDidMount() {
-		if (!this.state.Map) {
-			const L = await import(`leaflet`)
+export default function LocationsMap({ locations }){
+	const [visibleLocations, setVisibleLocations] = useState([])
+	const [leaflet, setLeaflet] = useState({})
+	const map = useRef(null)
 
-			// Point icons to images in module
-			delete L.Icon.Default.prototype._getIconUrl
-			L.Icon.Default.mergeOptions({
-				iconRetinaUrl,
-				iconUrl,
-				shadowUrl,
+	const {
+		Map,
+		TileLayer,
+		Marker,
+		Popup,
+		MarkerClusterGroup,
+	} = leaflet
+
+	function updateLocationsList(){
+		if (map.current) {
+			const visibleLocations = []
+			const mapBounds = map.current.leafletElement.getBounds()
+			locations.forEach(l => {
+				if (mapBounds.contains([l.lat, l.lng])) {
+					visibleLocations.push(l)
+				}
 			})
-			const {
-				Map,
-				TileLayer,
-				Marker,
-				Popup,
-			} = await import(`react-leaflet`)
-
-			const {
-				default: MarkerClusterGroup,
-			} = await import(`react-leaflet-markercluster`)
-
-			this.setState({
-				Map,
-				TileLayer,
-				Marker,
-				Popup,
-				MarkerClusterGroup,
-			})
-
-			this.updateLocationsList()
+			setVisibleLocations(visibleLocations)
 		}
 	}
-	updateLocationsList(){
-		const visibleLocations = []
-		const mapBounds = this.map.leafletElement.getBounds()
-		this.props.locations.forEach(l => {
-			if (mapBounds.contains([l.lat, l.lng])){
-				visibleLocations.push(l)
+	function zoomToLocation(lat, lng){
+		if (map.current) {
+			map.current.leafletElement.flyTo([lat, lng], 10)
+		}
+	}
+
+	useEffect(() => {
+		// Dynamically import leaflet due to window in src
+		!async function init() {
+			if (!leaflet.Map) {
+				const L = await import(`leaflet`)
+
+				// Point icons to images in module
+				delete L.Icon.Default.prototype._getIconUrl
+				L.Icon.Default.mergeOptions({
+					iconRetinaUrl,
+					iconUrl,
+					shadowUrl,
+				})
+				const {
+					Map,
+					TileLayer,
+					Marker,
+					Popup,
+				} = await import(`react-leaflet`)
+
+				const {
+					default: MarkerClusterGroup,
+				} = await import(`react-leaflet-markercluster`)
+
+				setLeaflet({
+					Map,
+					TileLayer,
+					Marker,
+					Popup,
+					MarkerClusterGroup,
+				})
 			}
-		})
-		this.setState({ visibleLocations })
-	}
-	zoomToLocation(lat, lng){
-		if(this.map){
-			this.map.leafletElement.flyTo([lat, lng], 10)
-		}
-	}
-	render(){
-		const {
-			Map,
-			TileLayer,
-			Marker,
-			Popup,
-			MarkerClusterGroup,
-			visibleLocations,
-		} = this.state
+		}()
 
-		return(
-			<>
-				{!!Map && (
-					<div css={styles.mapContainer}>
-						<Map
-							center={[37.993217, -95]}
-							zoom={4}
-							maxZoom={30}
-							css={styles.map}
-							onMoveend={this.updateLocationsList}
-							ref={el => this.map = el}
-						>
-							<TileLayer
-								attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-								url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-							/>
-							<MarkerClusterGroup>
-								{this.props.locations.map((l, key) => (
-									<Marker key={`map-loc-${key}`} position={[l.lat, l.lng]}>
-										<Popup>
-											<b>{l.title}</b><br />
-											{l.address}<br />
-											{`${l.city}, ${l.state} ${l.zip}`}
-										</Popup>
-									</Marker>
-								))}
-							</MarkerClusterGroup>
-						</Map>
-						<ZipInput zoomToLocation={this.zoomToLocation} />
-					</div>
-				)}
-				<List
-					locations={visibleLocations}
-					zoomToLocation={this.zoomToLocation}
-				/>
-			</>
-		)
-	}
+		// Wait for map ref to be available and update
+		const interval = setInterval(() => {
+			if(!map.current) return
+			clearInterval(interval)
+			updateLocationsList()
+		}, 10)
+
+	}, [])
+
+	return <>
+		{!!Map && (
+			<div css={styles.mapContainer}>
+				<Map
+					center={[37.993217, -95]}
+					zoom={4}
+					maxZoom={30}
+					css={styles.map}
+					onMoveend={updateLocationsList}
+					ref={map}
+				>
+					<TileLayer
+						attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+						url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+					/>
+					<MarkerClusterGroup>
+						{locations.map((l, key) => (
+							<Marker key={`map-loc-${key}`} position={[l.lat, l.lng]}>
+								<Popup>
+									<b>{l.title}</b><br />
+									{l.address}<br />
+									{`${l.city}, ${l.state} ${l.zip}`}
+								</Popup>
+							</Marker>
+						))}
+					</MarkerClusterGroup>
+				</Map>
+				<ZipInput zoomToLocation={zoomToLocation} />
+			</div>
+		)}
+		<List
+			locations={visibleLocations}
+			zoomToLocation={zoomToLocation}
+		/>
+	</>
 }
 
 const styles = {

@@ -1,21 +1,17 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { render } from 'react-dom'
 import { css } from '@emotion/core'
 import waitForElement from 'wait-for-element'
 import fetch from 'isomorphic-fetch'
 import { GATSBY_NETLIFY_SITE_ID } from '../../../.env.js'
 
-class Footer extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			loading: true,
-			status: `Loading...`,
-			avgTime: `\u00A0`,
-		}
-		this.update = this.update.bind(this)
-	}
-	async update() {
+function Footer() {
+	const [status, setStatus] = useState(`Loading...`)
+	const [avgTime, setAvgTime] = useState(`\u00A0`)
+
+	let timeout
+
+	async function update() {
 		console.log(`Updating build status...`)
 		const req = await fetch(`https://api.netlify.com/api/v1/sites/${GATSBY_NETLIFY_SITE_ID}/deploys`)
 		const res = await req.json()
@@ -45,38 +41,36 @@ class Footer extends React.Component {
 			if (latestState === `ready`) {
 				status = `up to date`
 			}
-			if (
+			else if (
 				latestState === `enqueued` ||
 				latestState === `building` ||
 				latestState === `uploading`
 			) {
 				status = `syncing data...`
 			}
+			else{
+				status = latestState
+			}
 		}
 
-		this.setState({
-			loading: false,
-			avgTime: avgTime ? `Average sync time: ${avgTime} minutes` : ``,
-			status,
-		})
-		this.timeout = setTimeout(this.update, 10 * 1000)
+		setAvgTime(avgTime ? `Average sync time: ${avgTime} minutes` : ``)
+		setStatus(status)
+		timeout = setTimeout(update, 10 * 1000)
 	}
-	componentDidMount() {
-		this.update()
-	}
-	componentWillUnmount() {
-		global.clearTimeout(this.timeout)
-	}
-	render() {
-		console.log(`render`)
-		const { status, avgTime } = this.state
-		return (
-			<footer css={styles.footer}>
-				<div>Sync status: {status}</div>
-				<div>{avgTime}</div>
-			</footer>
-		)
-	}
+
+	useEffect(() => {
+		update()
+		return () => {
+			global.clearTimeout(timeout)
+		}
+	}, [])
+
+	return (
+		<footer css={styles.footer}>
+			<div>Sync status: {status}</div>
+			<div>{avgTime}</div>
+		</footer>
+	)
 }
 
 export default async function injectFooter() {

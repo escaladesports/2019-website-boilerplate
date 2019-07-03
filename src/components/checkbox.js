@@ -4,69 +4,49 @@ import { Field, ErrorMessage } from 'formik'
 import Check from '@material-ui/icons/Check'
 import { primaryColor } from '../styles/colors'
 
-export default class Checkbox extends React.Component {
-	static defaultProps = {
-		type: `text`,
-	}
-	constructor(props) {
-		super(props)
-		this.state = {
-			isFocused: false,
-		}
-		this.onFocus = this.onFocus.bind(this)
-		this.onBlur = this.onBlur.bind(this)
-	}
-	onFocus() {
-		this.setState({ isFocused: true })
-	}
-	onBlur(e) {
-		const { handleBlur } = this.props
-		this.setState({ isFocused: false })
-		if (handleBlur) {
-			handleBlur(e)
-		}
-	}
-	render() {
-		const {
-			errors,
-			touched,
-			name,
-			label,
-			component,
-		} = this.props
-		const isTouched = touched[name]
-		const isErrored = errors[name] && isTouched
-
-		return (
-			<label css={[
-				isErrored && styles.error,
-				styles.inputBlock,
-			]}>
-				<div css={styles.inputContainer}>
-					<Field
-						name={name}
-						type='checkbox'
-						component={component}
-						onFocus={this.onFocus}
-						onBlur={this.onBlur}
-						innerRef={el => this.input = el}
-						css={styles.input}
-					/>
-					<div css={styles.checkbox} className='box'>
-						<Check css={styles.check} className='check' />
-					</div>
-					<div css={styles.label}>
-						{label || name}
-					</div>
-				</div>
-				<ErrorMessage
+export default function Checkbox({
+	errors,
+	touched,
+	name,
+	label,
+	component,
+	handleBlur,
+}){
+	const isTouched = touched[name]
+	const isErrored = errors[name] && isTouched
+	return (
+		<label css={[
+			isErrored && styles.error,
+			styles.inputBlock,
+		]}>
+			<div css={styles.inputContainer}>
+				<Field
 					name={name}
-					component='div'
-					css={styles.errorMsg}
+					type='checkbox'
+					component={component}
+					onBlur={e => {
+						if (handleBlur) {
+							handleBlur(e)
+						}
+					}}
+					innerRef={el => this.input = el}
+					css={styles.input}
 				/>
-			</label>
-		)
-	}
+				<div css={styles.checkbox} className='box'>
+					<Check css={styles.check} className='check' />
+				</div>
+				<div css={styles.label}>
+					{label || name}
+				</div>
+			</div>
+			<ErrorMessage
+				name={name}
+				component='div'
+				css={styles.errorMsg}
+			/>
+		</label>
+	)
+
 }
 
 const size = 20

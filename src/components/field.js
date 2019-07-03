@@ -1,91 +1,77 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { css } from '@emotion/core'
 import { Field, ErrorMessage } from 'formik'
 import { primaryColor } from '../styles/colors'
 
-export default class CustomField extends React.Component{
-	static defaultProps = {
-		type: `text`,
-	}
-	constructor(props){
-		super(props)
-		this.state = {
-			isFocused: false,
-		}
-		this.onFocus = this.onFocus.bind(this)
-		this.onBlur = this.onBlur.bind(this)
-	}
-	onFocus(){
-		this.setState({ isFocused: true })
-	}
-	onBlur(e){
-		const { handleBlur } = this.props
-		this.setState({ isFocused: false })
-		if (handleBlur){
-			handleBlur(e)
-		}
-	}
-	render(){
-		const {
-			errors,
-			touched,
-			type,
-			name,
-			label,
-			component,
-			values,
-		} = this.props
-		const isTouched = touched[name]
-		const isErrored = errors[name] && isTouched
-		const { isFocused } = this.state
-		let value = ``
-		if(values){
-			value = values[name]
-		}
-		let height = `auto`
-		if(component === `textarea` && this.input && values[name] !== ``){
-			height = this.input.scrollHeight
-		}
-		return (
-			<label css={[
-				isErrored && styles.error,
-				styles.inputBlock,
-			]}>
-				<div css={[
-					styles.label,
-					(value || isFocused) && styles.movedLabel,
-				]}>
-					{label || name}
-				</div>
-				<div css={[
-					styles.inputContainer,
-					!isErrored && isFocused && styles.focusedInputContainer,
-					isErrored && styles.erroredInputContainer,
-				]}>
-					<Field
-						name={name}
-						type={type}
-						component={component}
-						onFocus={this.onFocus}
-						onBlur={this.onBlur}
-						rows={component === `textarea` ? 1 : null}
-						innerRef={el => this.input = el}
-						style={{ height }}
-						css={[
-							styles.input,
-							isErrored && styles.erroredInput,
-						]}
-					/>
+export default function CustomField({
+	type = `text`,
+	handleBlur,
+	errors,
+	touched,
+	name,
+	label,
+	component,
+	values,
+}){
+	const [isFocused, setIsFocused] = useState(false)
 
-				</div>
-				<ErrorMessage
-					name={name}
-					component='div'
-					css={styles.errorMsg}
-				/>
-			</label>
-		)
+	const isTouched = touched[name]
+	const isErrored = errors[name] && isTouched
+	let input
+	let value = ``
+	if (values) {
+		value = values[name]
 	}
+	let height = `auto`
+	if (component === `textarea` && input && values[name] !== ``) {
+		height = input.scrollHeight
+	}
+	return (
+		<label css={[
+			isErrored && styles.error,
+			styles.inputBlock,
+		]}>
+			<div css={[
+				styles.label,
+				(value || isFocused) && styles.movedLabel,
+			]}>
+				{label || name}
+			</div>
+			<div css={[
+				styles.inputContainer,
+				!isErrored && isFocused && styles.focusedInputContainer,
+				isErrored && styles.erroredInputContainer,
+			]}>
+				<Field
+					name={name}
+					type={type}
+					component={component}
+					onFocus={() => setIsFocused(true)}
+					onBlur={e => {
+						setIsFocused(false)
+						if (handleBlur) {
+							handleBlur(e)
+						}
+					}}
+					rows={component === `textarea` ? 1 : null}
+					innerRef={el => input = el}
+					style={{ height }}
+					css={[
+						styles.input,
+						isErrored && styles.erroredInput,
+					]}
+				/>
+
+			</div>
+			<ErrorMessage
+				name={name}
+				component='div'
+				css={styles.errorMsg}
+			/>
+		</label>
+	)
+
+
 }
 
 const styles = {

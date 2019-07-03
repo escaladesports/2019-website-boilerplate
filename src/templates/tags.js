@@ -3,33 +3,30 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layouts/default'
 import PostList from '../components/blog/post-list'
 
-export default class TagsTemplate extends React.Component{
-	render(){
-		const {
-			pageContext: {
-				tag,
-				page,
-				totalPages,
-			},
-			data: {
-				posts,
-			},
-		} = this.props
-		const postsList = posts.edges.map(edge => edge.node)
-		const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
+export default function TagsTemplate({
+	pageContext: {
+		tag,
+		page,
+		totalPages,
+	},
+	data: {
+		posts,
+	},
+}) {
+	const postsList = posts.edges.map(edge => edge.node)
+	const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
 
-		return(
-			<Layout title={`Posts Tagged with ${tag}`} description={description}>
-				<h2>Tag: {tag}</h2>
-				<PostList
-					posts={postsList}
-					page={page}
-					totalPages={totalPages}
-					linkPrefix={`/blog/tags/${tag}`}
-				/>
-			</Layout>
-		)
-	}
+	return (
+		<Layout title={`Posts Tagged with ${tag}`} description={description}>
+			<h2>Tag: {tag}</h2>
+			<PostList
+				posts={postsList}
+				page={page}
+				totalPages={totalPages}
+				linkPrefix={`/blog/tags/${tag}`}
+			/>
+		</Layout>
+	)
 }
 
 export const query = graphql`

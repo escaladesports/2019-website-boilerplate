@@ -2,14 +2,12 @@ import React from 'react'
 import { css } from '@emotion/core'
 import { successColor, lightSuccessColor } from '../styles/colors'
 
-export default class SuccessMessage extends React.Component{
-	render(){
-		return (
-			<div css={styles.box}>
-				{this.props.children}
-			</div>
-		)
-	}
+export default function SuccessMessage({ children }){
+	return (
+		<div css={styles.box}>
+			{children}
+		</div>
+	)
 }
 
 const styles = {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { css } from '@emotion/core'
 import Carousel from '@brainhubeu/react-carousel'
 import Right from '@material-ui/icons/ChevronRight'
@@ -6,104 +6,86 @@ import Left from '@material-ui/icons/ChevronLeft'
 import '@brainhubeu/react-carousel/lib/style.css'
 import Placeholder from './placeholder'
 
-export default class CarouselComp extends React.Component {
-	static defaultProps = {
-		ratio: [1000, 400],
+export default function CarouselComp({ children, ratio = [1000, 400]}){
+	const [onSlide, setOnSlide] = useState(0)
+
+	const nextSlide = () => {
+		setOnSlide(onSlide + 1)
 	}
-	constructor(props){
-		super(props)
-		this.state = {
-			onSlide: 0,
-		}
-		this.nextSlide = this.nextSlide.bind(this)
-		this.previousSlide = this.previousSlide.bind(this)
+	const previousSlide = () => {
+		setOnSlide(onSlide - 1)
 	}
-	nextSlide(){
-		let onSlide = this.state.onSlide + 1
-		this.setState({ onSlide })
+	const goToSlide = n => {
+		const slideTotal = getSlides().length
+		const moduloItem = calculateButtonValue() % slideTotal
+		setOnSlide(onSlide - (moduloItem - n))
 	}
-	previousSlide() {
-		let onSlide = this.state.onSlide - 1
-		this.setState({ onSlide })
-	}
-	goToSlide(n){
-		const slideTotal = this.getSlides().length
-		const moduloItem = this.calculateButtonValue() % slideTotal
-		const onSlide = this.state.onSlide - (moduloItem - n)
-		this.setState({ onSlide })
-	}
-	calculateButtonValue(){
-		const slideTotal = this.getSlides().length
-		const { onSlide } = this.state
+	const calculateButtonValue = () => {
+		const slideTotal = getSlides().length
 		return onSlide >= 0
 			? onSlide
 			: onSlide + slideTotal * Math.ceil(Math.abs(onSlide / slideTotal))
 	}
-	getSlides(){
-		const { children } = this.props
+	const getSlides = () => {
 		return Array.isArray(children) ? children : [children]
 	}
-	render() {
-		const { ratio } = this.props
-		const slides = this.getSlides()
-		const slideTotal = slides.length
-		return (
-			<Placeholder ratio={ratio}>
-				<Carousel
-					infinite
-					value={this.state.onSlide}
-					onChange={onSlide => this.setState({ onSlide })}
-					slides={slides}
-					ref={el => this.carousel = el}
-				/>
-				{slideTotal > 1 && <>
-					<button
-						onClick={this.previousSlide}
-						css={[styles.button, styles.left]}
-					>
-						<span>left</span>
-						<Left css={styles.icon} />
-					</button>
-					<button
-						onClick={this.nextSlide}
-						css={[styles.button, styles.right]}
-					>
-						<span>right</span>
-						<Right css={styles.icon} />
-					</button>
-					<div css={styles.bottomControls}>
-						{(() => {
-							const buttons = []
-							let onSlide = this.calculateButtonValue()
-							while (onSlide > slideTotal - 1) {
-								onSlide -= slideTotal
-							}
-							for (let i = 0; i < slideTotal; i++) {
-								buttons.push(
-									<button
-										type='button'
-										css={[
-											styles.button,
-											styles.bottomButton,
-											onSlide === i &&
-											styles.bottomButtonActive,
-										]}
-										onClick={() => this.goToSlide(i)}
-										key={`slideControl${i}`}
-									>
-										<span>Slide {i}</span>
-									</button>
-								)
-							}
-							return buttons
-						})()}
-					</div>
-				</>}
-			</Placeholder>
-		)
-	}
-}
 
+	const slides = getSlides()
+	const slideTotal = slides.length
+	return (
+		<Placeholder ratio={ratio}>
+			<Carousel
+				infinite
+				value={onSlide}
+				onChange={onSlide => setOnSlide(onSlide)}
+				slides={slides}
+			/>
+			{slideTotal > 1 && <>
+				<button
+					onClick={previousSlide}
+					css={[styles.button, styles.left]}
+				>
+					<span>left</span>
+					<Left css={styles.icon} />
+				</button>
+				<button
+					onClick={nextSlide}
+					css={[styles.button, styles.right]}
+				>
+					<span>right</span>
+					<Right css={styles.icon} />
+				</button>
+				<div css={styles.bottomControls}>
+					{(() => {
+						const buttons = []
+						let onSlide = calculateButtonValue()
+						while (onSlide > slideTotal - 1) {
+							onSlide -= slideTotal
+						}
+						for (let i = 0; i < slideTotal; i++) {
+							buttons.push(
+								<button
+									type='button'
+									css={[
+										styles.button,
+										styles.bottomButton,
+										onSlide === i &&
+										styles.bottomButtonActive,
+									]}
+									onClick={() => goToSlide(i)}
+									key={`slideControl${i}`}
+								>
+									<span>Slide {i}</span>
+								</button>
+							)
+						}
+						return buttons
+					})()}
+				</div>
+			</>}
+		</Placeholder>
+	)
+}
 
 const circleSize = 14
 const arrowSize = 40
