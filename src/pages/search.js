@@ -33,7 +33,6 @@ export default function SearchPage(){
 	useEffect(() => {
 		// Check URL for search term
 		const path = document.location.pathname.split(`/`)
-		console.log(path)
 		if (path.length === 3) {
 			let term = path.pop()
 			term = term.replace(/\+/g, `%20`)

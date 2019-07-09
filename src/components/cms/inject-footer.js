@@ -3,11 +3,15 @@ import { render } from 'react-dom'
 import { css } from '@emotion/core'
 import waitForElement from 'wait-for-element'
 import fetch from 'isomorphic-fetch'
-import { GATSBY_NETLIFY_SITE_ID } from '../../../.env.js'
+import {
+	GATSBY_NETLIFY_SITE_ID,
+	GATSBY_BUILD_WEBHOOK,
+} from '../../../.env.js'
 
 function Footer() {
 	const [status, setStatus] = useState(`Loading...`)
-	const [avgTime, setAvgTime] = useState(`\u00A0`)
+	const [avgTime, setAvgTime] = useState(`...`)
+	const [forceLoad, setForceLoad] = useState(false)
 
 	let timeout
 
@@ -53,9 +57,22 @@ function Footer() {
 			}
 		}
 
-		setAvgTime(avgTime ? `Average sync time: ${avgTime} minutes` : ``)
+		setAvgTime(avgTime)
 		setStatus(status)
 		timeout = setTimeout(update, 10 * 1000)
+	}
+
+	async function forceSync(e){
+		e.preventDefault()
+		setForceLoad(true)
+		try{
+			await fetch(GATSBY_BUILD_WEBHOOK, { method: `POST` })
+			await update()
+		}
+		catch(err){
+			console.error(err)
+		}
+		setForceLoad(false)
 	}
 
 	useEffect(() => {
@@ -68,7 +85,17 @@ function Footer() {
 	return (
 		<footer css={styles.footer}>
 			<div>Sync status: {status}</div>
-			<div>{avgTime}</div>
+			<div>Average sync time: {avgTime} minutes</div>
+			{GATSBY_BUILD_WEBHOOK && (
+				<div>
+					{!forceLoad && (
+						<a href='#' onClick={forceSync}>Force Sync</a>
+					)}
+					{forceLoad && (
+						<span>Forcing sync...</span>
+					)}
+				</div>
+			)}
 		</footer>
 	)
 }
@@ -95,5 +122,27 @@ const styles = {
 		padding: 10px;
 		font-size: .8em;
 		text-align: center;
+		> div{
+			display: inline-block;
+			:after{
+				display: inline-block;
+				content: "|";
+				margin: 0 12px;
+			}
+			:last-of-type{
+				:after{
+					display: none;
+				}
+			}
+		}
+		a{
+			color: #fff;
+			font-weight: normal;
+			font-size: 1em;
+			text-decoration: underline;
+			:hover{
+				text-decoration: none;
+			}
+		}
 	`,
 }

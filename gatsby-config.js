@@ -253,9 +253,8 @@ module.exports = {
 						}
 					}
 				}`,
-				parse: data => {
-					data = data.allMarkdownRemark.edges
-					data = data.filter(({ node }) => {
+				parse: ({ allMarkdownRemark: { edges }}) => {
+					const data = edges.filter(({ node }) => {
 						if (node && node.fields && node.fields.path) {
 							return true
 						}
