@@ -8,28 +8,29 @@
     "url": "https://github.com/escaladesports/project-boilerplate.git"
   },
   "scripts": {
-    "build": "run-s clean patch build:lambda build:gatsby",
+    "build": "run-s clean patch env build:lambda build:gatsby",
     "build:lambda": "netlify-lambda build src/lambda --config lambda-webpack-config.js",
     "build:gatsby": "NODE_ENV=production gatsby build",
     "clean": "run-p clean:gatsby clean:functions",
     "clean:gatsby": "gatsby clean",
     "clean:functions": "rm -rf dist-functions",
     "dev": "netlify dev --command \"yarn dev:gatsby\"",
-    "dev:gatsby": "yarn patch && gatsby develop",
+    "dev:gatsby": "run-s patch env && gatsby develop",
     "dev:functions": "netlify-lambda serve src/lambda --config lambda-webpack-config.js",
-    "env": "node src/utils/netlify-to-local-env",
+    "env": "run-s env:dotenv env:js",
+    "env:dotenv": "node src/utils/netlify-to-local-env",
+    "env:js": "node src/utils/env-to-js",
     "lint": "eslint ./",
-    "live": "open-cli https://project-boilerplate.netlify.com/",
-    "netlify": "open-cli https://app.netlify.com/sites/project-boilerplate/deploys",
+    "live": "open-cli https://usweight.com-2019.netlify.com/",
+    "netlify": "open-cli https://app.netlify.com/sites/usweight.com-2019/deploys",
     "patch": "run-p patch:cms-config patch:env patch:netlify-toml",
     "patch:cms-config": "node src/utils/build-cms-config",
-    "patch:env": "node src/utils/env-to-js",
     "patch:netlify-toml": "node src/utils/netlify-toml",
     "prepublishOnly": "yarn build",
     "reset": "node src/utils/reset",
     "serve": "gatsby serve --open",
     "test": "jest",
-    "travis": "open-cli https://travis-ci.org/escaladesports/project-boilerplate/branches"
+    "travis": "open-cli https://travis-ci.org/escaladesports/usweight.com-2019/branches"
   },
   "husky": {
     "hooks": {
