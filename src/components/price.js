@@ -1,19 +1,43 @@
 import React from 'react'
-import { Subscribe } from 'statable'
-import formatUSD from '../utils/format-usd'
-import priceState from '../../plugins/escalade-pricing/state'
+import { StaticQuery, graphql } from 'gatsby'
+import { useGlobal } from 'reactn'
 
 // SSR price and repolls for new price live
-export default function Price({ id, price, children }){
+export default function Price({ id, children }){
+	const [prices] = useGlobal(`prices`)
+	let latestPrice
+	if(prices && prices[id]){
+		latestPrice = prices[id].price
+	}
 	return (
-		<Subscribe to={priceState}>
-			{(prices) => {
-				const latestPrice = (prices[id] ? prices[id].price : false) || price
-				if(typeof children === `function`){
+		<StaticQuery
+			query={graphql`
+				query PriceComponent{
+					allEscaladePricing{
+						edges{
+							node{
+								productId
+								price
+							}
+						}
+					}
+				}
+			`}
+			render={({ allEscaladePricing: { edges }}) => {
+				if (!latestPrice) {
+					const upperId = id.toUpperCase()
+					for (let i = edges.length; i--;) {
+						const { node } = edges[i]
+						if (node.productId === upperId) {
+							latestPrice = node.price
+						}
+					}
+				}
+				if (typeof children === `function`) {
 					return children(latestPrice)
 				}
-				return formatUSD(latestPrice, true)
+				return latestPrice
 			}}
-		</Subscribe>
+		/>
 	)
 }

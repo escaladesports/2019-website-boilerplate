@@ -124,8 +124,6 @@ module.exports = {
 		`cms-no-index`,
 
 		// Client plugins
-		// `zygote`,
-		`route-delayed-animation`,
 		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-polyfill-io`,
 		{

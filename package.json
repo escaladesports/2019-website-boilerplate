@@ -149,7 +149,6 @@
     "reactn": "^2.1.4",
     "recaptcha-verify": "^0.1.1",
     "showdown": "^1.8.7",
-    "statable": "^0.3.2",
     "strip-html-comments": "^1.0.0",
     "striptags": "^3.1.1",
     "toml": "^3.0.0",

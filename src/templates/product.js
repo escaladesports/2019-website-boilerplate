@@ -20,16 +20,12 @@ export default function ProductTemplate({
 			html,
 			excerpt,
 		},
-		escaladePricing,
-		escaladeInventory,
 	},
 }){
 	const defaultProduct = { id, color }
 	const [selectedProduct, setSelectedProduct] = useState(defaultProduct)
 	const allVariants = [defaultProduct, ...variants]
 
-	const price = escaladePricing ? escaladePricing.price : null
-	const stock = escaladeInventory ? escaladeInventory.stock : null
 	const hasImages = images && !!images.length
 	const imageRatio = [16, 9]
 	const thumbnail = hasImages ?
@@ -66,7 +62,7 @@ export default function ProductTemplate({
 				))}
 			</ul>
 
-			<Price id={selectedProduct.id} price={price}>
+			<Price id={selectedProduct.id}>
 				{price => (
 					<button
 						onClick={() => addToCart({
@@ -86,9 +82,9 @@ export default function ProductTemplate({
 			<ul>
 				<li>Color: {selectedProduct.color}</li>
 				<li>ID: {selectedProduct.id}</li>
-				<li>Price: $<Price id={selectedProduct.id} price={price} /></li>
+				<li>Price: $<Price id={selectedProduct.id} /></li>
 				<li>
-					<Stock stock={stock} id={selectedProduct.id}>
+					<Stock id={selectedProduct.id}>
 						{stock => <>
 							{!!stock && `In stock`}
 							{!stock && `Out of stock`}
@@ -110,7 +106,6 @@ export const query = graphql`
 		){
 			frontmatter{
 				title
-				price
 				color
 				id
 				images
@@ -121,17 +116,6 @@ export const query = graphql`
 			}
 			html
 			excerpt(pruneLength: 175)
-		}
-
-		escaladePricing(
-			productId: { eq: $id }
-		){
-			price
-		}
-		escaladeInventory(
-			productId: { eq: $id }
-		){
-			stock
 		}
 	}
 `
