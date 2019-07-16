@@ -1,10 +1,26 @@
 import React, { useState } from 'react'
+import { setGlobal, useGlobal } from 'reactn'
 import { graphql } from 'gatsby'
 import Img from '../components/netlify-image'
 import Button from '../components/button'
 import Layout from '../components/layouts/default'
 import Modal from '../components/modal'
 import Carousel from '../components/carousel'
+
+setGlobal({
+	auth: {
+		id: 5,
+		msg: `testing`,
+	},
+})
+
+setTimeout(() => {
+	setGlobal({
+		auth: {
+			id: 7,
+		},
+	})
+}, 2000)
 
 export default function HomePage({
 	data: {
@@ -18,6 +34,8 @@ export default function HomePage({
 	},
 }){
 	const [open, setOpen] = useState(false)
+	const [msg] = useGlobal(`auth`)
+	console.log(msg)
 
 	return (
 		<Layout>
