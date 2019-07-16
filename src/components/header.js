@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { Subscribe } from 'statable'
+import { useGlobal } from 'reactn'
 import Link from 'gatsby-link'
 import { css } from '@emotion/core'
 import Close from '@material-ui/icons/Close'
 import { openCart } from '@escaladesports/zygote-cart'
 import { logout, login } from '../utils/auth'
 import { primaryColor } from '../styles/colors'
-import authState from '../state/auth'
 
 export default function Header(){
 	const [open, setOpen] = useState(false)
+	const [user] = useGlobal(`user`)
 
 	const toggle = () => {
 		setOpen(!open)
@@ -40,24 +40,19 @@ export default function Header(){
 					<li><Link to='/pickleball'>Category</Link></li>
 					<li><Link to='/search'>Search</Link></li>
 					<li><Link to='/contact'>Contact</Link></li>
-
-					<Subscribe to={authState}>{
-						({ user }) => <>
-							{!user && (
-								<li><a href='#' onClick={e => {
-									e.preventDefault()
-									login()
-								}}>Login</a></li>
-							)}
-							{user && <>
-								<li><Link to='/account'>Account</Link></li>
-								<li><a href='#' onClick={e => {
-									e.preventDefault()
-									logout()
-								}}>Logout</a></li>
-							</>}
-						</>
-					}</Subscribe>
+					{!user && (
+						<li><a href='#' onClick={e => {
+							e.preventDefault()
+							login()
+						}}>Login</a></li>
+					)}
+					{user && <>
+						<li><Link to='/account'>Account</Link></li>
+						<li><a href='#' onClick={e => {
+							e.preventDefault()
+							logout()
+						}}>Logout</a></li>
+					</>}
 					<li><a href='#' onClick={e => {
 						e.preventDefault()
 						openCart()

@@ -1,10 +1,17 @@
+import { setGlobal, getGlobal } from 'reactn'
 import auth0 from 'auth0-js'
 import { navigate } from 'gatsby'
 import fetch from 'isomorphic-fetch'
-import authState from '../state/auth'
 
 const isBrowser = typeof window !== `undefined`
 const { localStorage } = global
+
+setGlobal({
+	user: false,
+	loadingUser: true,
+	meta: {},
+	loadingMeta: true,
+})
 
 const auth = isBrowser ? new auth0.WebAuth({
 	domain: process.env.GATSBY_AUTH0_DOMAIN,
@@ -48,7 +55,7 @@ export function login(){
 
 function clearUser() {
 	console.log(`clearUser`)
-	authState.setState({
+	setGlobal({
 		user: false,
 		loadingUser: true,
 		meta: {},
@@ -69,7 +76,7 @@ export const changePassword = () => {
 	return new Promise((resolve, reject) => {
 		const options = {
 			connection: `Username-Password-Authentication`,
-			email: authState.state.user.email,
+			email: getGlobal().user.email,
 		}
 		console.log(`options`, options)
 		auth.changePassword(options, (err, res) => {
@@ -93,7 +100,7 @@ function setSession(cb = noop){
 		console.log(`authResult`, authResult)
 		if (authResult && authResult.accessToken && authResult.idToken) {
 			const { idToken: accessToken, idTokenPayload: user } = authResult
-			authState.setState({ user, accessToken })
+			setGlobal({ user, accessToken })
 			localStorage.setItem(`isLoggedIn`, true)
 			navigateToPreviousLocation()
 			fetchMetadata(accessToken)
@@ -110,18 +117,18 @@ export function handleAuthentication(){
 export function silentAuth(callback = noop) {
 	if (!isBrowser) return
 	if (!isAuthenticated()) {
-		authState.setState({ loadingUser: false })
+		setGlobal({ loadingUser: false })
 		return callback()
 	}
 
 	auth.checkSession({}, setSession(() => {
-		authState.setState({ loadingUser: false })
+		setGlobal({ loadingUser: false })
 		callback()
 	}))
 }
 
 export async function fetchMetadata(accessToken){
-	authState.setState({ loadingMeta: true })
+	setGlobal({ loadingMeta: true })
 	try{
 		const req = await fetch(`/.netlify/functions/get-auth0-metadata`, {
 			method: `POST`,
@@ -130,7 +137,7 @@ export async function fetchMetadata(accessToken){
 			},
 		})
 		const { metadata } = await req.json()
-		authState.setState({
+		setGlobal({
 			loadingMeta: false,
 			meta: metadata,
 		})
@@ -141,16 +148,16 @@ export async function fetchMetadata(accessToken){
 }
 
 export async function setMetadata(meta){
-	authState.setState({ loadingMeta: true })
+	setGlobal({ loadingMeta: true })
 	const req = await fetch(`/.netlify/functions/set-auth0-metadata`, {
 		method: `POST`,
 		headers: {
-			authorization: authState.state.accessToken,
+			authorization: getGlobal().accessToken,
 		},
 		body: JSON.stringify(meta),
 	})
 	const res = await req.json()
-	authState.setState({
+	setGlobal({
 		loadingMeta: false,
 		meta: res.meta,
 	})
@@ -160,12 +167,12 @@ export async function patchUser(obj) {
 	const req = await fetch(`/.netlify/functions/patch-auth0-user`, {
 		method: `POST`,
 		headers: {
-			authorization: authState.state.accessToken,
+			authorization: getGlobal().accessToken,
 		},
 		body: JSON.stringify(obj),
 	})
 	const res = await req.json()
-	authState.setState({
+	setGlobal({
 		loadingUser: false,
 		user: res.body,
 		meta: res.body.user_metadata,
