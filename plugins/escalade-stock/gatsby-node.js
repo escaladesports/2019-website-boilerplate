@@ -5,11 +5,12 @@ exports.sourceNodes = async function({ actions, createNodeId, createContentDiges
 	const inventory = await fetch(options)
 
 	for (let id in inventory){
-		const nodeContent = Object.assign({}, inventory[id], {
+		const nodeContent = {
+			...inventory[id],
 			productId: id,
 			lowerId: id.toLowerCase(),
 			upperId: id.toUpperCase(),
-		})
+		}
 		const nodeMeta = {
 			id: createNodeId(`escalade-inventory-${id}`),
 			parent: null,

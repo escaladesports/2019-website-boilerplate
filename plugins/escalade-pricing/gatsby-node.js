@@ -1,6 +1,10 @@
 const fetch = require(`./fetch`)
 
-exports.sourceNodes = async function({ actions, createNodeId, createContentDigest }, options){
+exports.sourceNodes = async function({
+	actions,
+	createNodeId,
+	createContentDigest,
+}, options){
 	const { createNode } = actions
 
 	const prices = await fetch(options)
@@ -10,11 +14,12 @@ exports.sourceNodes = async function({ actions, createNodeId, createContentDiges
 		if(isNaN(prices[id].price)){
 			prices[id].price = 0
 		}
-		const nodeContent = Object.assign({}, prices[id], {
+		const nodeContent = {
+			...prices[id],
 			productId: id,
 			lowerId: id.toLowerCase(),
 			upperId: id.toUpperCase(),
-		})
+		}
 		const nodeMeta = {
 			id: createNodeId(`escalade-pricing-${id}`),
 			parent: null,

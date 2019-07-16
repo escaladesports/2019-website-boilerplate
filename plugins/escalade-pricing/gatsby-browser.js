@@ -1,4 +1,4 @@
-import pricesState from './state'
+import { setGlobal } from 'reactn'
 import fetch from './fetch'
 
 const pollInterval = 10 * 60 * 1000	// Minutes
@@ -6,7 +6,7 @@ const pollInterval = 10 * 60 * 1000	// Minutes
 async function fetchPrices(options){
 	try {
 		const prices = await fetch(options)
-		pricesState.setState(prices)
+		setGlobal({ prices })
 	}
 	catch(err){
 		console.error(err)

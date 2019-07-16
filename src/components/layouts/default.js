@@ -5,12 +5,8 @@ import { Helmet } from 'react-helmet'
 import { Cart } from '@escaladesports/zygote-cart'
 import * as escaApi from '@escaladesports/zygote-plugin-esca-api'
 import * as standardPayment from '@escaladesports/zygote-cart/dist/plugins/zygote-plugin-standard-billing'
-import 'typeface-open-sans'
-import 'typeface-oswald'
-import RouteDelayed from '../../../plugins/route-delayed-animation'
 import Header from '../header'
 import Footer from '../footer'
-import RouteDelayedAnimation from '../route-delayed-animation'
 import {
 	white,
 	primaryColor,
@@ -21,6 +17,8 @@ import {
 } from '../../styles/fonts'
 import linkMixin from '../../styles/mixins/link'
 import '../../styles/global.css'
+import 'typeface-open-sans'
+import 'typeface-oswald'
 
 export default function Layout({
 	title,
@@ -61,9 +59,6 @@ export default function Layout({
 						</div>
 						<Footer />
 					</div>
-					<RouteDelayed>
-						<RouteDelayedAnimation />
-					</RouteDelayed>
 					<Cart
 						styles={{
 							zIndex: 9999,
