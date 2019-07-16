@@ -21,8 +21,8 @@
     "env:dotenv": "node src/utils/netlify-to-local-env",
     "env:js": "node src/utils/env-to-js",
     "lint": "eslint ./",
-    "live": "open-cli https://usweight.com-2019.netlify.com/",
-    "netlify": "open-cli https://app.netlify.com/sites/usweight.com-2019/deploys",
+    "live": "open-cli https://project-boilerplate.netlify.com/",
+    "netlify": "open-cli https://app.netlify.com/sites/project-boilerplate/deploys",
     "patch": "run-p patch:cms-config patch:netlify-toml",
     "patch:cms-config": "node src/utils/build-cms-config",
     "patch:netlify-toml": "node src/utils/netlify-toml",
@@ -30,7 +30,7 @@
     "reset": "node src/utils/reset",
     "serve": "gatsby serve --open",
     "test": "jest",
-    "travis": "open-cli https://travis-ci.org/escaladesports/usweight.com-2019/branches"
+    "travis": "open-cli https://travis-ci.org/escaladesports/project-boilerplate/branches"
   },
   "husky": {
     "hooks": {
