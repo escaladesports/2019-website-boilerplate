@@ -1,5 +1,5 @@
 import React from 'react'
-import { StaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import { Helmet } from 'react-helmet'
 import { Cart } from '@escaladesports/zygote-cart'
@@ -25,70 +25,67 @@ export default function Layout({
 	description,
 	children,
 }) {
-	return (
-		<StaticQuery
-			query={graphql`
-				query DefaultTemplateQuery{
-					site{
-						siteMetadata{
-							siteTitle: title
-							siteDescription: description
-						}
-					}
+	const {
+		site: {
+			siteMetadata: {
+				siteTitle,
+				siteDescription,
+			},
+		},
+	} = useStaticQuery(graphql`
+		query DefaultTemplateQuery{
+			site{
+				siteMetadata{
+					siteTitle: title
+					siteDescription: description
 				}
-			`}
-			render={({
-				site: {
-					siteMetadata: {
-						siteTitle,
-						siteDescription,
-					},
+			}
+		}
+	`)
+
+	return <>
+		<Helmet>
+			<html lang='en' />
+			<title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
+			<meta name='description' content={description || siteDescription} />
+			<meta property='og:title' content={title} />
+			<meta property='og:site_name' content={siteTitle} />
+		</Helmet>
+		<div css={styles.layout}>
+			<Header />
+			<div css={styles.content}>
+				<main>{children}</main>
+			</div>
+			<Footer />
+		</div>
+		<Cart
+			styles={{
+				zIndex: 9999,
+				borderColor: `#28cefc`,
+				primaryColor: `#28cefc`,
+				overlayColor: `rgba(40,206,252,0.7)`,
+			}}
+			header={<h1>Project Boilerplate</h1>}
+			infoWebhook='/api/inventory/load'
+			splitName={true}
+			plugins={[
+				standardPayment,
+				escaApi,
+			]}
+			totalModifications={[
+				{
+					id: `shipping`,
+					description: `Shipping`,
+					displayValue: `-`,
 				},
-			}) => <>
-					<Helmet>
-						<html lang='en' />
-						<title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
-						<meta name='description' content={description || siteDescription} />
-						<meta property='og:title' content={title} />
-						<meta property='og:site_name' content={siteTitle} />
-					</Helmet>
-					<div css={styles.layout}>
-						<Header />
-						<div css={styles.content}>
-							<main>{children}</main>
-						</div>
-						<Footer />
-					</div>
-					<Cart
-						styles={{
-							zIndex: 9999,
-							borderColor: `#28cefc`,
-							primaryColor: `#28cefc`,
-							overlayColor: `rgba(40,206,252,0.7)`,
-						}}
-						header={<h1>Project Boilerplate</h1>}
-						infoWebhook='/api/inventory/load'
-						splitName={true}
-						plugins={[
-							standardPayment,
-							escaApi,
-						]}
-						totalModifications={[
-							{
-								id: `shipping`,
-								description: `Shipping`,
-								displayValue: `-`,
-							},
-							{
-								id: `tax`,
-								description: `Tax`,
-								displayValue: `-`,
-							},
-						]}
-					/>
-				</>}
+				{
+					id: `tax`,
+					description: `Tax`,
+					displayValue: `-`,
+				},
+			]}
 		/>
-	)
+	</>
 }
 
 const styles = {
