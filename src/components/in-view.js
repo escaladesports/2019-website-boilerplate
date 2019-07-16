@@ -30,7 +30,6 @@ export default function InView({
 
 	function unobserve() {
 		if (global.IntersectionObserver && el) {
-			console.log(`unobserve`)
 			observer.unobserve(el)
 		}
 	}
