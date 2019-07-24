@@ -9,14 +9,12 @@ const { parse: parseUrl } = require(`url`)
 const { siteUrl } = require(`./site-config`)
 
 // Get site info from markdown
-const { siteTitle, siteDescription } = parseFrontmatter(
-	readFileSync(`./src/markdown/settings/site.md`)
-).data
+const siteConfig = readFileSync(`./src/markdown/settings/site.md`)
+const { siteTitle, siteDescription } = parseFrontmatter(siteConfig).data
 
 // Get redirects from config
-const { redirects } = parseToml(
-	readFileSync(`./netlify.toml`)
-)
+const netlifyConfig = readFileSync(`./netlify.toml`)
+const { redirects } = parseToml(netlifyConfig)
 
 // Get product IDs from markdown
 const productMarkdown = globby(`./src/markdown/products/**/*.md`)
@@ -295,7 +293,6 @@ module.exports = {
 		},
 
 		// Dev plugins
-		// `open-browser`,
 		`gatsby-plugin-webpack-size`,
 		{
 			resolve: `schema-snapshot`,
@@ -313,6 +310,18 @@ module.exports = {
 		},
 	],
 	developMiddleware: app => {
+
+		// Proxy lambda endpoints
+		app.use(
+			`/.netlify/functions/`,
+			proxy({
+				target: `http://localhost:9000`,
+				pathRewrite: {
+					'/.netlify/functions': ``,
+				},
+			})
+		)
+
 		if(redirects && redirects.length){
 			redirects.forEach(({
 				from,
