@@ -20,6 +20,7 @@ export default function CustomForm({
 	let recaptchaRef
 
 	const onSubmit = async (values, { resetForm, setSubmitting }) => {
+		console.log(`onSubmit`)
 		setError(false)
 
 		try {

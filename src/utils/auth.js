@@ -115,12 +115,15 @@ export function handleAuthentication(){
 }
 
 export function silentAuth(callback = noop) {
+	console.log(`silentAuth`)
 	if (!isBrowser) return
 	if (!isAuthenticated()) {
+		console.log(`Is not logged in`)
 		setGlobal({ loadingUser: false })
 		return callback()
 	}
 
+	console.log(`Checking existing session`)
 	auth.checkSession({}, setSession(() => {
 		setGlobal({ loadingUser: false })
 		callback()
