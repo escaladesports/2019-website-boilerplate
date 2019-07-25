@@ -2,20 +2,26 @@ const { GATSBY_ESCA_API_SITE } = require(`./src/utils/env`)
 const striptags = require(`striptags`)
 const { readFileSync } = require(`fs-extra`)
 const globby = require(`globby`).sync
-const matter = require(`gray-matter`)
+const parseFrontmatter = require(`gray-matter`)
+const proxy = require(`http-proxy-middleware`)
+const { parse: parseToml } = require(`toml`)
+const { parse: parseUrl } = require(`url`)
 const { siteUrl } = require(`./site-config`)
 
 // Get site info from markdown
-const { siteTitle, siteDescription } = matter(
-	readFileSync(`./src/markdown/settings/site.md`)
-).data
+const siteConfig = readFileSync(`./src/markdown/settings/site.md`)
+const { siteTitle, siteDescription } = parseFrontmatter(siteConfig).data
+
+// Get redirects from config
+const netlifyConfig = readFileSync(`./netlify.toml`)
+const { redirects } = parseToml(netlifyConfig)
 
 // Get product IDs from markdown
 const productMarkdown = globby(`./src/markdown/products/**/*.md`)
 const productIds = []
 productMarkdown.forEach(path => {
 	const contents = readFileSync(path)
-	const { id, variants } = matter(contents).data
+	const { id, variants } = parseFrontmatter(contents).data
 	productIds.push(id)
 	if (Array.isArray(variants)) {
 		variants.forEach(({ id }) => {
@@ -287,7 +293,6 @@ module.exports = {
 		},
 
 		// Dev plugins
-		`open-browser`,
 		`gatsby-plugin-webpack-size`,
 		{
 			resolve: `schema-snapshot`,
@@ -304,4 +309,45 @@ module.exports = {
 			},
 		},
 	],
+	developMiddleware: app => {
+
+		// Proxy lambda endpoints
+		app.use(
+			`/.netlify/functions/`,
+			proxy({
+				target: `http://localhost:9000`,
+				pathRewrite: {
+					'/.netlify/functions': ``,
+				},
+			})
+		)
+
+		if(redirects && redirects.length){
+			redirects.forEach(({
+				from,
+				to,
+				status,
+				headers,
+			}) => {
+				// Proxy external links
+				if (from && to.indexOf(`http`) === 0 && status === 200) {
+					const { protocol, host } = parseUrl(to)
+					const target = `${protocol}//${host}`
+					app.use(
+						from,
+						proxy({
+							target,
+							changeOrigin: true,
+							headers,
+							pathRewrite: (path => {
+								const externalPath = to.replace(target, ``)
+								const newPath = path.replace(from, externalPath)
+								return newPath
+							}),
+						})
+					)
+				}
+			})
+		}
+	},
 }

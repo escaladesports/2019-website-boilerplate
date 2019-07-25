@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import { addToCart } from '@escaladesports/zygote-cart'
 import Img from '../components/netlify-image'
 import Layout from '../components/layouts/default'
-import Price from '../components/price'
+import usePrices from '../components/use-prices'
 import Stock from '../components/stock'
 import Carousel from '../components/photo-carousel'
 
@@ -25,6 +25,9 @@ export default function ProductTemplate({
 	const defaultProduct = { id, color }
 	const [selectedProduct, setSelectedProduct] = useState(defaultProduct)
 	const allVariants = [defaultProduct, ...variants]
+	const [prices] = usePrices()
+	const { price } = prices[id]
+	console.log(`price`, price)
 
 	const hasImages = images && !!images.length
 	const imageRatio = [16, 9]
@@ -62,27 +65,27 @@ export default function ProductTemplate({
 				))}
 			</ul>
 
-			<Price id={selectedProduct.id}>
-				{price => (
-					<button
-						onClick={() => addToCart({
-							id: selectedProduct.id,
-							name: title,
-							image: thumbnail,
-							description: `Color: ${selectedProduct.color}`,
-							price: parseInt(price.toString().replace(`.`, ``)),
-							shippable: true,
-						})}
-					>
-						Add to Cart
-					</button>
-				)}
-			</Price>
+			{!!price && (
+				<button
+					onClick={() => addToCart({
+						id: selectedProduct.id,
+						name: title,
+						image: thumbnail,
+						description: `Color: ${selectedProduct.color}`,
+						price: parseInt(price.toString().replace(`.`, ``)),
+						shippable: true,
+					})}
+				>
+					Add to Cart
+				</button>
+			)}
 
 			<ul>
 				<li>Color: {selectedProduct.color}</li>
 				<li>ID: {selectedProduct.id}</li>
-				<li>Price: $<Price id={selectedProduct.id} /></li>
+				{!!price && (
+					<li>Price: ${price}</li>
+				)}
 				<li>
 					<Stock id={selectedProduct.id}>
 						{stock => <>

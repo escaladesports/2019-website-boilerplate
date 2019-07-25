@@ -24,6 +24,8 @@ export default function ContactPage({
 }){
 	const [user] = useGlobal(`user`)
 	const [loadingUser] = useGlobal(`loadingUser`)
+	console.log(`user`, user)
+	console.log(`loadingUser`, loadingUser)
 	return(
 		<Layout title={title} description={excerpt}>
 			<div>
