@@ -31,7 +31,10 @@ exports.sourceNodes = async function({
 				contentDigest: createContentDigest(nodeContent),
 			},
 		}
-		const node = Object.assign({}, nodeContent, nodeMeta)
+		const node = {
+			...nodeContent,
+			...nodeMeta,
+		}
 		createNode(node)
 	}
 
