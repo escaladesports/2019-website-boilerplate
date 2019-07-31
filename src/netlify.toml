@@ -6,6 +6,10 @@
 	publish = "public/"
 	functions = "dist-functions/"
 
+[build.environment]
+	NODE_OPTIONS = "--max_old_space_size=4096"
+	YARN_FLAGS = "--no-ignore-optional"
+
 # Used to test `netlify dev` headers issue
 # https://github.com/netlify/netlify-dev-plugin/issues/195
 [[redirects]]
