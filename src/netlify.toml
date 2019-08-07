@@ -1,6 +1,3 @@
-[Settings]
-	ID = "project-boilerplate"
-
 [build]
 	command = "yarn build"
 	publish = "public/"
