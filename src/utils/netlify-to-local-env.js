@@ -1,8 +1,7 @@
 /* eslint-disable no-empty */
 const { join } = require(`path`)
 const fetch = require(`isomorphic-fetch`)
-const { readFile, outputFile } = require(`fs-extra`)
-const { parse } = require(`toml`)
+const { readJson, readFile, outputFile } = require(`fs-extra`)
 const homedir = require(`os`).homedir()
 
 const cwd = process.cwd()
@@ -33,9 +32,10 @@ async function fetchToken(){
 async function fetchId(){
 	let id
 	try{
-		let data = await readFile(`${cwd}/netlify.toml`, `utf8`)
-		data = parse(data)
-		id = data.Settings.ID
+		const { siteId } = await readJson(`${cwd}/.netlify/state.json`)
+		if (siteId){
+			id = siteId
+		}
 	}
 	catch(err){
 		console.error(`Can't find site ID in netlify.toml`)
