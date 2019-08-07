@@ -38,7 +38,7 @@ async function fetchId(){
 		}
 	}
 	catch(err){
-		console.error(`Can't find site ID in netlify.toml`)
+		console.error(`Can't find site ID`)
 	}
 	return id
 }
