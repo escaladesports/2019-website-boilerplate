@@ -1,19 +1,31 @@
+/* eslint-disable no-empty */
+const { join } = require(`path`)
 const fetch = require(`isomorphic-fetch`)
 const { readFile, outputFile } = require(`fs-extra`)
 const { parse } = require(`toml`)
 const homedir = require(`os`).homedir()
 
 const cwd = process.cwd()
+const keyPaths = [
+	join(homedir, `.config/netlify`),
+	join(homedir, `.netlify/config`),
+]
 
 async function fetchToken(){
-	const keyPath = `${homedir}/.config/netlify`
 	let key
-	try{
-		key = await readFile(keyPath, `utf8`)
-		key = JSON.parse(key).access_token
+
+	for(let path of keyPaths){
+		try{
+			let contents = await readFile(path, `utf8`)
+			contents = JSON.parse(contents).access_token
+			if(contents){
+				key = contents
+			}
+		}
+		catch(err){}
 	}
-	catch(err){
-		console.error(`Can't find key in "${keyPath}"\nPlease install and login with "netlifyctl" CLI`)
+	if(!key){
+		console.error(`Can't find key\nPlease install and login with Netlify CLI`)
 	}
 	return key
 }
