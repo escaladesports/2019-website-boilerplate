@@ -31,7 +31,6 @@
     "reset": "node src/utils/reset",
     "serve": "gatsby serve --open",
     "start": "yarn run dev",
-    "test": "jest",
     "travis": "open-cli https://travis-ci.org/escaladesports/project-boilerplate/branches"
   },
   "husky": {
