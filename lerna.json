@@ -1,0 +1,7 @@
+{
+  "packages": [
+    "site"
+  ],
+  "version": "independent",
+  "npmClient": "yarn"
+}
