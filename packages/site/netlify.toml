@@ -28,9 +28,9 @@
 	force = true # COMMENT: ensure that we always redirect
 	[redirects.headers]
 		Content-Type = "application/json"
-		ESC-API-Key = ""
-		X-API-Key = ""
-		ESC-API-Context = ""
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/coupon/calculate"
@@ -39,9 +39,9 @@
 	force = true
 	[redirects.headers]
 		Content-Type = "application/json"
-		ESC-API-Key = ""
-		X-API-Key = ""
-		ESC-API-Context = ""
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/products/shipping"
@@ -50,9 +50,9 @@
 	force = true
 	[redirects.headers]
 		Content-Type = "application/json"
-		ESC-API-Key = ""
-		X-API-Key = ""
-		ESC-API-Context = ""
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/shipping/load"
@@ -61,9 +61,9 @@
 	force = true
 	[redirects.headers]
 		Content-Type = "application/json"
-		ESC-API-Key = ""
-		X-API-Key = ""
-		ESC-API-Context = ""
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/orders/store"
@@ -72,9 +72,9 @@
 	force = true
 	[redirects.headers]
 		Content-Type = "application/json"
-		ESC-API-Key = ""
-		X-API-Key = ""
-		ESC-API-Context = ""
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/pay/paypal"
@@ -83,7 +83,7 @@
 	force = true
 	[redirects.headers]
 		Content-Type = "application/json"
-		X-API-Key = ""
+		X-API-Key = "env.X_API_KEY"
 
 [[redirects]]
 	from = "/api/pay/anet"
@@ -92,7 +92,7 @@
 	force = true
 	[redirects.headers]
 		Content-Type = "application/json"
-		X-API-Key = ""
+		X-API-Key = "env.X_API_KEY"
 
 [[redirects]]
 	from = "/api/taxes/calculate"
@@ -101,6 +101,6 @@
 	force = true
 	[redirects.headers]
 		Content-Type = "application/json"
-		ESC-API-Key = ""
-		X-API-Key = ""
-		ESC-API-Context = ""
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"

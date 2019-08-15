@@ -1,13 +1,13 @@
-require(`dotenv-override`).config({
-	silent: true,
-	override: true,
-})
+require(`../../../utils/env`)
+const { join } = require(`path`)
 const { readFile, outputFile } = require(`fs-extra`)
 
 const cwd = process.cwd()
+const src = join(cwd, `netlify.toml`)
+const dest = join(cwd, `../../netlify.toml`)
 
 async function go(){
-	const buffer = await readFile(`${cwd}/src/netlify.toml`)
+	const buffer = await readFile(src)
 	let contents = buffer.toString()
 	const matches = contents.match(/env\.(.*)/g)
 	matches.forEach(match => {
@@ -16,7 +16,7 @@ async function go(){
 		const value = process.env[key] || ``
 		contents = contents.replace(`env.${key}`, value)
 	})
-	await outputFile(`${cwd}/netlify.toml`, contents)
+	await outputFile(dest, contents)
 }
 
 try {
