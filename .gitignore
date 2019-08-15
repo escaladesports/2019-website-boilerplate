@@ -7,7 +7,7 @@ logs
 npm-debug.log*
 
 # Dependency directories
-node_modules/
+node_modules
 
 # Development/Environment
 .env
@@ -28,8 +28,9 @@ env.js.key
 .serverless
 _optimize
 coverage
-/netlify.toml
-/static/admin/config.yml
+netlify.toml
+/site/netlify.toml
+/site/static/admin/config.yml
 *.pem
 
 # Temporary
