@@ -5,9 +5,22 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap --use-workspaces",
+    "build": "lerna run build --stream --no-sort --concurrency 999",
     "clean": "lerna run clean --stream --no-sort --concurrency 999",
     "dev": "lerna run dev --stream --no-sort --concurrency 999",
-    "build": "lerna run build --stream --no-sort --concurrency 999"
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "workspaces": [
     "packages/*"
@@ -16,6 +29,8 @@
     "lerna": "^3.16.4"
   },
   "dependencies": {
-    "dotenv-override": "^5.0.1"
+    "dotenv-override": "^5.0.1",
+    "eslint": "^6.1.0",
+    "husky": "^3.0.3"
   }
 }

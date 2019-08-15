@@ -1,5 +1,5 @@
 {
-	"extends": "escalade-sports",
+	"extends": "boilerplate",
 	"env": {
     	"jest": true
 	},

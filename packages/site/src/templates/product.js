@@ -27,7 +27,6 @@ export default function ProductTemplate({
 	const allVariants = [defaultProduct, ...variants]
 	const [prices] = usePrices()
 	const { price } = prices[id]
-	console.log(`price`, price)
 
 	const hasImages = images && !!images.length
 	const imageRatio = [16, 9]
