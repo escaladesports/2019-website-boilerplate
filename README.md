@@ -1,6 +1,6 @@
 # Escalade Sports Project Boilerplate
 
-A project boilerplate for creating and working with serverless applications.
+An opinionated project boilerplate for creating and working with [modern full stack serverless applications](https://jamstack.org/).
 
 ## Required
 
@@ -36,6 +36,13 @@ yarn bootstrap
 Add environment variables to a `./.env` file in the root of your project.
 
 ## What's included
+
+- [Gatsby](https://www.gatsbyjs.org/docs/) is used for building a static application from React components
+- [Netlify](https://www.netlify.com/docs/) configs are included for easy deployment
+- [Netlify CMS](https://www.netlifycms.org/docs/intro/) is included in the `site` package
+- [ESLint](https://eslint.org/docs/user-guide/) is used under the hood for JS linting
+- [Babel](https://babeljs.io/docs/en/) is used under the hood for JS transpiling
+- [Lerna](https://lerna.js.org/) is used for package management
 
 ### Project Structure
 
