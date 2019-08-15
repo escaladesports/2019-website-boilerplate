@@ -5,8 +5,9 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap --use-workspaces",
+    "clean": "lerna run clean --stream --no-sort --concurrency 999",
     "dev": "lerna run dev --stream --no-sort --concurrency 999",
-    "build": "lerna run build"
+    "build": "lerna run build --stream --no-sort --concurrency 999"
   },
   "workspaces": [
     "packages/*"
