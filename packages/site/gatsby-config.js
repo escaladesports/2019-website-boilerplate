@@ -1,4 +1,4 @@
-const { GATSBY_ESCA_API_SITE } = require(`./src/utils/env`)
+const { GATSBY_ESCA_API_SITE } = require(`../utils/env`)
 const striptags = require(`striptags`)
 const { readFileSync } = require(`fs-extra`)
 const globby = require(`globby`).sync
@@ -6,7 +6,7 @@ const parseFrontmatter = require(`gray-matter`)
 const proxy = require(`http-proxy-middleware`)
 const { parse: parseToml } = require(`toml`)
 const { parse: parseUrl } = require(`url`)
-const { siteUrl } = require(`./site-config`)
+const { siteUrl } = require(`../../site-config`)
 
 // Get site info from markdown
 const siteConfig = readFileSync(`./src/markdown/settings/site.md`)

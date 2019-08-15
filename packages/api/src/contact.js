@@ -1,4 +1,4 @@
-import { siteUrl } from '../../site-config'
+import { siteUrl } from '../../../site-config'
 import verifyRecaptcha from '../utils/verify-recaptcha'
 import sendEmail from '../utils/send-email'
 

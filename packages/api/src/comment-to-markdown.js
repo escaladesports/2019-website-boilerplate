@@ -2,7 +2,7 @@ import Octokit from '@octokit/rest'
 import { stringify } from 'yaml'
 import md5 from 'md5'
 import Recaptcha from 'recaptcha-verify'
-import { gitHubRepo, gitHubOwner } from '../../site-config'
+import { gitHubRepo, gitHubOwner } from '../../../site-config'
 import {
 	SITE_RECAPTCHA_SECRET,
 	GITHUB_API_TOKEN,

@@ -8,7 +8,7 @@ import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
 import CommentForm from '../components/comment-form'
 import Comments from '../components/comments'
-import { siteUrl } from '../../site-config'
+import { siteUrl } from '../../../../site-config'
 import formatDate from '../utils/format-date'
 
 export default function PostTemplate({
