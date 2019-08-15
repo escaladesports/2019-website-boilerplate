@@ -10,7 +10,6 @@
 		"@octokit/rest": "^16.28.7",
 		"auth0": "^2.19.0",
 		"auth0-verify": "^2.0.0",
-		"dotenv-override": "^5.0.1",
 		"isomorphic-fetch": "^2.2.1",
 		"mailgun-js": "^0.22.0",
 		"md5": "^2.2.1",
