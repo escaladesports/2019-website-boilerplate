@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch'
 import {
 	GATSBY_AUTH0_DOMAIN,
 	GATSBY_AUTH0_CLIENTID,
-} from '../../utils/env'
+} from 'utils/env'
 
 export async function handler({ headers: { authorization }}) {
 	let verified

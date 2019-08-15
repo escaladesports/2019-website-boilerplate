@@ -2,7 +2,7 @@ import Mailgun from 'mailgun-js'
 import {
 	MAILGUN_API_KEY,
 	MAILGUN_DOMAIN,
-} from '../../utils/env'
+} from 'utils/env'
 const mailgun = Mailgun({
 	apiKey: MAILGUN_API_KEY,
 	domain: MAILGUN_DOMAIN,
