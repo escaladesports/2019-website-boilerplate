@@ -20,7 +20,7 @@ rm -rf .git
 git init
 ```
 
-Add environment variables to a `./.env` file in the root of your project. There's an example file of
+Add environment variables to a `./.env` file in the root of your project.
 
 It's also recommended to change any settings you might need in the `./site-config.js` file.
 
