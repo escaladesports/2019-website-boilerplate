@@ -4,8 +4,9 @@ An opinionated project boilerplate for creating and working with [modern full st
 
 ## Required
 
-- [yarn](https://yarnpkg.com/)
+- [Yarn](https://yarnpkg.com/)
 - [nvm](https://github.com/creationix/nvm)
+- [Lerna](https://lerna.js.org/)
 
 ## Setup for a new project
 
