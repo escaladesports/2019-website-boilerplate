@@ -14,7 +14,6 @@ An opinionated project boilerplate for creating and working with [modern full st
 git clone git@github.com:escaladesports/gatsby-boilerplate.git your-website
 cd your-website
 nvm use
-yarn
 yarn bootstrap
 rm -rf .git
 git init
@@ -30,7 +29,6 @@ It's also recommended to change any settings you might need in the `./site-confi
 git clone REMOTE_URL folder-name
 cd folder-name
 nvm use
-yarn
 yarn bootstrap
 ```
 
