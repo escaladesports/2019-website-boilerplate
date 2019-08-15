@@ -8030,16 +8030,6 @@ escodegen@1.x.x, escodegen@^1.8.0, escodegen@^1.9.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-escalade-sports@^1.0.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-escalade-sports/-/eslint-config-escalade-sports-1.1.1.tgz#faf095c047e4e7ddbc4c1713c9f68594fccffb2e"
-  integrity sha512-IccFd0R7xpXb8f9817rEfNbA6u41usFnMjTTq6F+PuQxFp8xraXBQE5AUpRpmv71NkVPlC4xk6glpDJlT0RyAw==
-  dependencies:
-    babel-eslint "^10.0.2"
-    eslint-plugin-jest "^22.10.0"
-    eslint-plugin-jsx-a11y "^6.1.1"
-    eslint-plugin-react "^7.10.0"
-
 eslint-config-react-app@^3.0.0:
   version "3.0.8"
   resolved "https://registry.yarnpkg.com/eslint-config-react-app/-/eslint-config-react-app-3.0.8.tgz#6f606828ba30bafee7d744c41cd07a3fea8f3035"
@@ -8221,7 +8211,7 @@ eslint@^5.6.0:
     table "^5.2.3"
     text-table "^0.2.0"
 
-eslint@^6.0.1:
+eslint@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.1.0.tgz#06438a4a278b1d84fb107d24eaaa35471986e646"
   integrity sha512-QhrbdRD7ofuV09IuE2ySWBz0FyXCq0rriLTZXZqaWSI79CVtHVRdkFuFTViiqzZhkCgfOh9USpriuGN2gIpZDQ==
@@ -11074,7 +11064,7 @@ humanize-ms@^1.2.1:
   dependencies:
     ms "^2.0.0"
 
-husky@^3.0.0:
+husky@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/husky/-/husky-3.0.3.tgz#6f3fb99f60ef72cdf34e5d78445c2f798c441b1d"
   integrity sha512-DBBMPSiBYEMx7EVUTRE/ymXJa/lOL+WplcsV/lZu+/HHGt0gzD+5BIz9EJnCrWyUa7hkMuBh7/9OZ04qDkM+Nw==
@@ -14954,10 +14944,10 @@ netlify-identity-widget@^1.4.11, netlify-identity-widget@^1.4.14:
   resolved "https://registry.yarnpkg.com/netlify-identity-widget/-/netlify-identity-widget-1.5.5.tgz#e9ba8d7676263507106060236cf55c2992f425e4"
   integrity sha512-gCILbXMVn83TiRaiPCWk93ynyyYgxn8N/KoO+WOfyGZaNgq7gMMPtn7vo6VDe/ZczgyCn9DRlm3artNoj78/MQ==
 
-netlify-lambda@^1.0.2, netlify-lambda@^1.5.1:
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/netlify-lambda/-/netlify-lambda-1.5.1.tgz#723f83494bd3f2fd1681d0a9c5db3df571c70074"
-  integrity sha512-i8Sd47KKUtlNziEZlwJjoE5p9gQMt8PM+NS/bimMe9lFiOoZWliSUAk2yIGsQqLCT1uxFIFFmMM99M5LuKfdJw==
+netlify-lambda@^1.5.1:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/netlify-lambda/-/netlify-lambda-1.6.0.tgz#22ccd2fcae97ff72f6a79cde4f3305daca2531ff"
+  integrity sha512-MiNdmmigdsEQrB0PZFoZDXlu8FMJwlZ9WovHSoxmYCbNOlxb6bap/4jvL99nZvKX/vnbuPh7dyR1NE5PPdSz9w==
   dependencies:
     "@babel/core" "^7.0.0"
     "@babel/plugin-proposal-class-properties" "^7.0.0"

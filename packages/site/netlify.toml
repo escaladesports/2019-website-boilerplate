@@ -1,7 +1,7 @@
 [build]
 	command = "yarn build"
-	publish = "public/"
-	functions = "dist-functions/"
+	publish = "packages/site/public/"
+	functions = "packages/api/dist/"
 
 [build.environment]
 	NODE_OPTIONS = "--max_old_space_size=4096"

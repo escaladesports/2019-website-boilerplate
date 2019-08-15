@@ -310,7 +310,6 @@ module.exports = {
 		},
 	],
 	developMiddleware: app => {
-
 		// Proxy lambda endpoints
 		app.use(
 			`/.netlify/functions/`,

@@ -1,6 +1,6 @@
 const cmsEmailWhitelist = [
 	`escaladesports.com`,
-	`victorytailgate.com`
+	`victorytailgate.com`,
 ]
 
 export async function handler({ body }){

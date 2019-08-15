@@ -27,10 +27,8 @@ async function fetchPrices(ids) {
 			if (res[id].price) {
 				res[id].price = `1` + res[id].price
 				prices[id] = res[id]
-				console.log(`prices[id]`, prices[id])
 			}
 		}
-		console.log(`prices from api`, prices)
 		setGlobal({ prices })
 	}
 	catch (err) {
@@ -63,7 +61,6 @@ export default function usePrice(){
 
 	// Set initial state from static data
 	if (!prices) {
-		console.log(`graphqlPrices`, graphqlPrices)
 		setPrices(graphqlPrices)
 	}
 
