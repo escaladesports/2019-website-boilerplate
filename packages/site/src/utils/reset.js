@@ -6,7 +6,7 @@ const {
 	outputJson,
 	pathExists,
 } = require(`fs-extra`)
-const tomlPath = `src/netlify.toml`
+const tomlPath = `netlify.toml`
 
 function recursiveReset(options = {}, obj) {
 	for (let i in obj) {

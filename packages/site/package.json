@@ -24,8 +24,7 @@
     "prepublishOnly": "yarn build",
     "reset": "node src/utils/reset",
     "serve": "gatsby serve --open",
-    "start": "yarn run dev",
-    "travis": "open-cli https://travis-ci.org/escaladesports/project-boilerplate/branches"
+    "start": "yarn run dev"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
