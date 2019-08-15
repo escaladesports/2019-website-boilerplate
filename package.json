@@ -9,7 +9,8 @@
     "clean": "lerna run clean --stream --no-sort --concurrency 999",
     "dev": "lerna run dev --stream --no-sort --concurrency 999",
     "lint": "eslint ./",
-    "lint:fix": "eslint ./ --fix"
+    "lint:fix": "eslint ./ --fix",
+    "netlify": "open-cli https://app.netlify.com/sites/project-boilerplate/deploys"
   },
   "husky": {
     "hooks": {
@@ -26,10 +27,10 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^3.16.4"
-  },
-  "dependencies": {
     "eslint": "^6.1.0",
-    "husky": "^3.0.3"
-  }
+    "husky": "^3.0.3",
+    "lerna": "^3.16.4",
+    "open-cli": "^5.0.0"
+  },
+  "dependencies": {}
 }
