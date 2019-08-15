@@ -40,7 +40,6 @@
     "gatsby-link": "^2.0.0-rc.2",
     "gatsby-plugin-canonical-urls": "^2.0.0-rc.1",
     "gatsby-plugin-emotion": "^4.0.1",
-    "gatsby-plugin-esca-css": "^1.0.3",
     "gatsby-plugin-favicon": "^3.1.4",
     "gatsby-plugin-feed": "^2.3.2",
     "gatsby-plugin-google-analytics": "^2.1.1",

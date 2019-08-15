@@ -17,7 +17,6 @@
 		"yaml": "^1.6.0"
 	},
 	"devDependencies": {
-		"babel-preset-escalade": "^1.0.5",
 		"netlify-lambda": "^1.5.1",
 		"webpack": "^4.39.2"
 	}
