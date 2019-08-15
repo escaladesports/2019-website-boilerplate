@@ -1,8 +1,8 @@
 import Mailgun from 'mailgun-js'
-const {
+import {
 	MAILGUN_API_KEY,
 	MAILGUN_DOMAIN,
-} = process.env
+} from '../../utils/env'
 const mailgun = Mailgun({
 	apiKey: MAILGUN_API_KEY,
 	domain: MAILGUN_DOMAIN,
