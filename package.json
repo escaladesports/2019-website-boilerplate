@@ -1,12 +1,15 @@
 {
   "name": "project-boilerplate",
+  "author": "Kennedy Rose <krose@escaladesports.com>",
+  "license": "MIT",
   "private": true,
   "scripts": {
-    "bootstrap": "lerna bootstrap --use-workspaces"
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "dev": "lerna run dev --stream --no-sort --concurrency 999",
+    "build": "lerna run build"
   },
   "workspaces": [
-    "/api",
-    "/site"
+    "packages/*"
   ],
   "devDependencies": {
     "lerna": "^3.16.4"
