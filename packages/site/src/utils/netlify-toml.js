@@ -1,4 +1,4 @@
-require(`../../../utils/env`)
+require(`utils/env`)
 const { join } = require(`path`)
 const { readFile, outputFile } = require(`fs-extra`)
 

@@ -1,4 +1,4 @@
-const { GATSBY_ESCA_API_SITE } = require(`../utils/env`)
+const { GATSBY_ESCA_API_SITE } = require(`utils/env`)
 const striptags = require(`striptags`)
 const { readFileSync } = require(`fs-extra`)
 const globby = require(`globby`).sync
