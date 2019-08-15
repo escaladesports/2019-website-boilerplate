@@ -2,7 +2,7 @@
 
 An opinionated project boilerplate for creating and working with [modern full stack serverless applications](https://jamstack.org/).
 
-## Required
+## Requirements
 
 - [Yarn](https://yarnpkg.com/)
 - [nvm](https://github.com/creationix/nvm)
