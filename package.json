@@ -5,9 +5,13 @@
     "bootstrap": "lerna bootstrap --use-workspaces"
   },
   "workspaces": [
-    "site"
+    "/api",
+    "/site"
   ],
   "devDependencies": {
     "lerna": "^3.16.4"
+  },
+  "dependencies": {
+    "dotenv-override": "^5.0.1"
   }
 }

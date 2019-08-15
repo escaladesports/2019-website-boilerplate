@@ -1,7 +1,9 @@
 {
   "packages": [
-    "site"
+    "/api",
+    "/site"
   ],
   "version": "independent",
-  "npmClient": "yarn"
+  "npmClient": "yarn",
+  "useWorkspaces": true
 }
