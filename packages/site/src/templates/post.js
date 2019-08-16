@@ -1,15 +1,17 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import BlockContent from '@sanity/block-content-to-react'
 import { css } from '@emotion/core'
 import Link from 'gatsby-link'
 import { Helmet } from 'react-helmet'
-import Img from '../components/netlify-image'
+import Img from 'gatsby-image'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
 import CommentForm from '../components/comment-form'
 import Comments from '../components/comments'
-import { siteUrl } from '../../../../site-config'
 import formatDate from '../utils/format-date'
+import sanityToExcerpt from '../utils/sanity-to-excerpt'
+import serializers from '../utils/sanity-serializers'
 
 export default function PostTemplate({
 	pageContext: {
@@ -19,16 +21,19 @@ export default function PostTemplate({
 		slug,
 	},
 	data: {
-		post: {
-			frontmatter: {
-				title,
-				tags,
-				date,
-				image,
-				imageDesc,
+		sanityPost: {
+			_rawBody: {
+				en: body,
 			},
-			html,
-			excerpt,
+			title,
+			tags,
+			date,
+			image: {
+				asset: {
+					fluid: image,
+				},
+				caption,
+			},
 		},
 		comments: commentsList,
 		next,
@@ -57,12 +62,12 @@ export default function PostTemplate({
 	const previousPost = (id === previousId) ? false : previous
 
 	return(
-		<Layout title={title} description={excerpt}>
+		<Layout title={title} description={sanityToExcerpt(body)}>
 			{!!image && (
 				<Helmet>
 					<meta
 						property='og:image'
-						content={`${siteUrl}${image}?nf_resize=fit&w=900`}
+						content={image.src}
 					/>
 				</Helmet>
 			)}
@@ -70,25 +75,21 @@ export default function PostTemplate({
 			<time dateTime={date}>{formatDate(date)}</time>
 			<TagList tags={tags} />
 			{!!image && (
-				<Img
-					src={image}
-					ratio={[900, 600]}
-					alt={imageDesc}
-				/>
+				<Img fluid={image} alt={caption} />
 			)}
-			<div dangerouslySetInnerHTML={{ __html: html }} />
+			<BlockContent blocks={body} serializers={serializers} />
 			<div>
 				{nextPost && (
 					<div css={styles.next}>
-						<Link to={nextPost.fields.path}>
-							Next Post: {nextPost.frontmatter.title}
+						<Link to={nextPost.slug.current}>
+							Next Post: {nextPost.title}
 						</Link>
 					</div>
 				)}
 				{previousPost && (
 					<div>
-						<Link to={previousPost.fields.path}>
-							Previous Post: {previousPost.frontmatter.title}
+						<Link to={previousPost.slug.current}>
+							Previous Post: {previousPost.title}
 						</Link>
 					</div>
 				)}
@@ -120,7 +121,22 @@ const styles = {
 
 export const query = graphql`
 	query PostTemplate($id: String!, $previousId: String!, $nextId: String!, $slug: String!) {
-
+		sanityPost(
+			id: { eq: $id }
+		){
+			_rawBody
+			title
+			tags
+			image{
+				asset{
+					fluid(maxWidth: 900) {
+						...GatsbySanityImageFluid
+					}
+				}
+				caption
+			}
+			date
+		}
 		post: markdownRemark(
 			id: { eq: $id }
 		){

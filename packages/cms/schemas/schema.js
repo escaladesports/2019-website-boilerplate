@@ -9,6 +9,7 @@ import category from './category'
 import product from './product'
 import productVariant from './productVariant'
 import post from './post'
+import captionedImage from './captioned-image'
 
 import localeString from './locale/String'
 import localeText from './locale/Text'
@@ -33,5 +34,6 @@ export default createSchema({
 		localeBlockContent,
 		localeString,
 		productVariant,
+		captionedImage,
 	]),
 })

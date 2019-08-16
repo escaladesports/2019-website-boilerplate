@@ -29,6 +29,11 @@ export default {
 			of: [{type: `string`}],
 		},
 		{
+			name: `image`,
+			title: `Image`,
+			type: `captionedImage`,
+		},
+		{
 			name: `body`,
 			title: `Body`,
 			type: `localeBlockContent`,
