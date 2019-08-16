@@ -6,20 +6,23 @@
     "url": "https://github.com/escaladesports/project-boilerplate.git"
   },
   "scripts": {
-    "build": "run-s clean patch build:gatsby",
+    "build": "run-s clean fetch-ids patch build:gatsby",
     "build:gatsby": "NODE_ENV=production gatsby build --verbose",
     "clean": "gatsby clean",
     "dev": "run-s patch dev:gatsby",
     "dev:gatsby": "NODE_TLS_REJECT_UNAUTHORIZED=0 gatsby develop --https --open",
     "develop": "yarn run dev",
-    "patch": "run-p patch:cms-config patch:netlify-toml",
-    "patch:cms-config": "node src/utils/build-cms-config",
-    "patch:netlify-toml": "node src/utils/netlify-toml",
+    "fetch-ids": "node src/utils/sanity-to-product-json",
+    "patch": "node src/utils/netlify-toml",
     "serve": "gatsby serve --open",
     "start": "yarn run dev"
   },
   "dependencies": {
-    "@babel/runtime": "^7.0.0"
+    "@babel/runtime": "^7.0.0",
+    "@sanity/block-content-to-html": "^1.3.8",
+    "@sanity/block-content-to-react": "^2.0.6",
+    "@sanity/client": "^0.142.0",
+    "gatsby-source-sanity": "^5.0.2"
   },
   "main": "dist/index.js",
   "devDependencies": {

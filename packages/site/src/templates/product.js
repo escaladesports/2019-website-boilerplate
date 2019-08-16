@@ -1,48 +1,74 @@
 import React, { useState } from 'react'
 import { graphql } from 'gatsby'
+import BlockContent from '@sanity/block-content-to-react'
 import { addToCart } from '@escaladesports/zygote-cart'
-import Img from '../components/netlify-image'
+import Img from 'gatsby-image'
 import Layout from '../components/layouts/default'
 import usePrices from '../components/use-prices'
 import Stock from '../components/stock'
 import Carousel from '../components/photo-carousel'
+import sanityToExcerpt from '../utils/sanity-to-excerpt'
+
+const serializers = {
+	types: {
+		block(props) {
+			switch (props.node.style) {
+			case `h1`:
+				return <h1>{props.children}</h1>
+
+			case `h2`:
+				return <h2>{props.children}</h2>
+
+			case `h3`:
+				return <h3>{props.children}</h3>
+
+			case `h4`:
+				return <h4>{props.children}</h4>
+
+			case `blockquote`:
+				return <blockquote>{props.children}</blockquote>
+
+			default:
+				return <p>{props.children}</p>
+			}
+		},
+	},
+}
 
 export default function ProductTemplate({
 	data: {
-		markdownRemark: {
-			frontmatter: {
-				id,
-				color,
-				title,
-				images,
-				variants,
+		sanityProduct: {
+			title,
+			_rawBody: {
+				en: body,
 			},
-			html,
-			excerpt,
+			defaultProductVariant,
+			variants,
 		},
 	},
-}){
-	const defaultProduct = { id, color }
-	const [selectedProduct, setSelectedProduct] = useState(defaultProduct)
-	const allVariants = [defaultProduct, ...variants]
+}) {
+	console.log(`ProductTemplate`)
+	const excerpt = sanityToExcerpt(body)
+	const { id } = defaultProductVariant
+	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)
+	const allVariants = [defaultProductVariant, ...variants]
 	const [prices] = usePrices()
-	const { price } = prices[id]
+	console.log(`prices`, prices)
+	const price = prices[id] ? prices[id].price : false
 
-	const hasImages = images && !!images.length
+	const { images = [] } = selectedProduct
 	const imageRatio = [16, 9]
-	const thumbnail = hasImages ?
-		`${images[0]}?nf_resize=fit&w=150&h=150` :
-		null
+	// Change later
+	const thumbnail = images.length ? images[0].asset.thumbnail.src : false
 	return (
 		<Layout title={title} description={excerpt}>
 			<h1>{title}</h1>
 
-			{hasImages && (
-				<Carousel ratio={imageRatio} slides={images.map((url, index) => (
+			{!!images.length && (
+				<Carousel ratio={imageRatio} slides={images.map(({ asset: { fluid }}, index) => (
 					<Img
-						ratio={imageRatio}
 						key={`img${index}`}
-						src={url}
+						fluid={fluid}
 						alt={`${title} ${index + 1}`}
 					/>
 				))} />
@@ -94,30 +120,48 @@ export default function ProductTemplate({
 					</Stock>
 				</li>
 			</ul>
-			<div dangerouslySetInnerHTML={{ __html: html }} />
+			<BlockContent blocks={body} serializers={serializers} />
 		</Layout>
 	)
 }
 
 export const query = graphql`
 	query ProductTemplate($id: String!) {
-		markdownRemark(
-			frontmatter: {
-				id: { eq: $id }
-			}
+		sanityProduct(
+			id: { eq: $id }
 		){
-			frontmatter{
-				title
-				color
-				id
-				images
-				variants{
-					color
-					id
+			title
+			_rawBody
+			categories{
+				slug{
+					current
 				}
 			}
-			html
-			excerpt(pruneLength: 175)
+			defaultProductVariant{
+				id: sku
+				color
+				images{
+					asset {
+						fluid(maxWidth: 700) {
+							...GatsbySanityImageFluid
+						}
+						thumbnail: fluid(maxWidth: 150){
+							src
+						}
+					}
+				}
+			}
+			variants{
+				id: sku
+				color
+				images{
+					asset {
+						fluid(maxWidth: 700) {
+							...GatsbySanityImageFluid
+						}
+					}
+				}
+			}
 		}
 	}
 `

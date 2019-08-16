@@ -5,7 +5,7 @@ import Layout from '../components/layouts/default'
 
 export default function ProductCategoryTemplate({
 	data: {
-		productMarkdown,
+		allSanityProduct,
 		categoryMarkdown: {
 			frontmatter: {
 				title,
@@ -16,29 +16,15 @@ export default function ProductCategoryTemplate({
 	},
 }){
 	// Collect markdown data
-	const products = productMarkdown.edges.map(({
-		node: {
-			frontmatter: {
-				id,
-				title,
-			},
-			fields: {
-				path,
-			},
-		},
-	}) => ({
-		id,
-		title,
-		path,
-	}))
+	const products = allSanityProduct.edges.map(({ node }) => node)
 
 	return(
 		<Layout title={title} description={excerpt}>
 			<h1>{title}</h1>
 			<div dangerouslySetInnerHTML={{__html: html}} />
-			{products.map(({ title, path }, index) => (
+			{products.map(({ title, slug }, index) => (
 				<div key={`product${index}`}>
-					<Link to={path}>
+					<Link to={`/${slug.current}`}>
 						<h2>{title}</h2>
 					</Link>
 				</div>
@@ -49,24 +35,22 @@ export default function ProductCategoryTemplate({
 
 export const query = graphql`
 	query ProductCategoryTemplate($category: String!) {
-		productMarkdown: allMarkdownRemark(
+		allSanityProduct(
 			filter: {
-				frontmatter: {
-					category: { eq: $category }
-					published: { eq: true }
+				categories: {
+					elemMatch: {
+						slug: {
+							current: { eq: $category }
+						}
+					}
 				}
 			}
-			sort: { order: DESC, fields: [frontmatter___order] }
 		){
 			edges{
 				node{
-					frontmatter{
-						id
-						title
-						date,
-					}
-					fields{
-						path
+					title
+					slug{
+						current
 					}
 				}
 			}

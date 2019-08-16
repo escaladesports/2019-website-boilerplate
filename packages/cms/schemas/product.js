@@ -14,7 +14,6 @@ export default {
 			type: `slug`,
 			options: {
 				source: `title`,
-				maxLength: 96,
 			},
 		},
 		{
@@ -34,35 +33,12 @@ export default {
 			],
 		},
 		{
-			title: `Tags`,
-			name: `tags`,
-			type: `array`,
-			of: [
-				{
-					type: `string`,
-				},
-			],
-			options: {
-				layout: `tags`,
-			},
-		},
-		{
-			name: `vendor`,
-			title: `Vendor`,
-			type: `reference`,
-			to: {type: `vendor`},
-		},
-		{
-			name: `blurb`,
-			title: `Blurb`,
-			type: `localeString`,
-		},
-		{
 			name: `categories`,
 			title: `Categories`,
 			type: `array`,
 			of: [
 				{
+					name: `category`,
 					type: `reference`,
 					to: {type: `category`},
 				},
@@ -73,12 +49,17 @@ export default {
 			title: `Body`,
 			type: `localeBlockContent`,
 		},
+		{
+			title: `Order`,
+			name: `order`,
+			type: `number`,
+		},
 	],
 
 	preview: {
 		select: {
 			title: `title`,
-			manufactor: `manufactor.title`,
+			subtitle: `defaultProductVariant.sku`,
 			media: `defaultProductVariant.images[0]`,
 		},
 	},

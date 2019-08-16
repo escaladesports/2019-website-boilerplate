@@ -4,6 +4,16 @@ const component = resolve(`src/templates/product.js`)
 
 module.exports = async function(createPage, graphql){
 	const result = await graphql(`{
+		allSanityProduct{
+			edges{
+				node{
+					id
+					slug {
+						current
+					}
+				}
+			}
+		}
 		allMarkdownRemark(
 			filter: {
 				fileAbsolutePath: {
@@ -34,12 +44,12 @@ module.exports = async function(createPage, graphql){
 	}
 
 	// Get product data
-	result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+	result.data.allSanityProduct.edges.forEach(({ node }) => {
 		createPage({
-			path: node.fields.path,
+			path: node.slug.current,
 			component,
 			context: {
-				id: node.frontmatter.id,
+				id: node.id,
 			},
 		})
 	})

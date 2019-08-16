@@ -4,29 +4,14 @@ export default {
 	type: `object`,
 	fields: [
 		{
-			title: `Title`,
-			name: `title`,
+			title: `Color`,
+			name: `color`,
 			type: `string`,
-		},
-		{
-			title: `Weight in grams`,
-			name: `grams`,
-			type: `number`,
-		},
-		{
-			title: `Price`,
-			name: `price`,
-			type: `number`,
 		},
 		{
 			title: `SKU`,
 			name: `sku`,
 			type: `string`,
-		},
-		{
-			title: `Taxable`,
-			name: `taxable`,
-			type: `boolean`,
 		},
 		{
 			name: `images`,
@@ -40,11 +25,6 @@ export default {
 					},
 				},
 			],
-		},
-		{
-			title: `Bar code`,
-			name: `barcode`,
-			type: `barcode`,
 		},
 	],
 }

@@ -1,4 +1,5 @@
 const { resolve, parse } = require(`path`)
+
 const createProductPages = require(`./create-product-pages`)
 const createCategoryPages = require(`./create-category-pages`)
 

@@ -1,12 +1,14 @@
-const { GATSBY_ESCA_API_SITE } = require(`utils/env`)
+const { GATSBY_ESCA_API_SITE, SANITY_TOKEN } = require(`utils/env`)
 const striptags = require(`striptags`)
-const { readFileSync } = require(`fs-extra`)
-const globby = require(`globby`).sync
+const { readJsonSync, readFileSync } = require(`fs-extra`)
 const parseFrontmatter = require(`gray-matter`)
 const proxy = require(`http-proxy-middleware`)
 const { parse: parseToml } = require(`toml`)
 const { parse: parseUrl } = require(`url`)
+const { join: joinPath } = require(`path`)
 const { siteUrl } = require(`../../site-config`)
+
+const cwd = process.cwd()
 
 // Get site info from markdown
 const siteConfig = readFileSync(`./src/markdown/settings/site.md`)
@@ -17,20 +19,7 @@ const netlifyConfig = readFileSync(`./netlify.toml`)
 const { redirects } = parseToml(netlifyConfig)
 
 // Get product IDs from markdown
-const productMarkdown = globby(`./src/markdown/products/**/*.md`)
-const productIds = []
-productMarkdown.forEach(path => {
-	const contents = readFileSync(path)
-	const { id, variants } = parseFrontmatter(contents).data
-	productIds.push(id)
-	if (Array.isArray(variants)) {
-		variants.forEach(({ id }) => {
-			if (id) {
-				productIds.push(id)
-			}
-		})
-	}
-})
+const productIds = readJsonSync(joinPath(cwd, `.cache/product-ids.json`))
 
 module.exports = {
 	siteMetadata: {
@@ -90,6 +79,14 @@ module.exports = {
 			options: {
 				path: `${__dirname}/static`,
 				name: `images`,
+			},
+		},
+		{
+			resolve: `gatsby-source-sanity`,
+			options: {
+				projectId: `lfxwk0kx`,
+				dataset: `production`,
+				token: SANITY_TOKEN,
 			},
 		},
 		{
@@ -321,6 +318,7 @@ module.exports = {
 			})
 		)
 
+		// Create redirects from netlify.toml
 		if(redirects && redirects.length){
 			redirects.forEach(({
 				from,

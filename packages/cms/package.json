@@ -7,9 +7,10 @@
   "author": "Kennedy Rose <kennedyianrose@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
+    "build": "sanity build",
     "dev": "sanity start",
     "test": "sanity check",
-    "deploy": "sanity deploy"
+    "deploy": "sanity graphql deploy && sanity deploy"
   },
   "keywords": [
     "sanity"
