@@ -1,7 +1,8 @@
-export default function sanityToExcerpt(blocks, limit = 20) {
+import excerpt from './excerpt'
+
+export default function sanityToExcerpt(blocks, limit) {
 	const str = sanityToString(blocks)
-	const arr = str.split(/\s+/g).splice(0, limit)
-	return arr.join(` `)
+	return excerpt(str, limit)
 }
 function sanityToString(blocks, str = []) {
 	if (blocks.text) {

@@ -2,26 +2,23 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Link from 'gatsby-link'
 import Layout from '../components/layouts/default'
+import excerpt from '../utils/sanity-to-excerpt'
 
 export default function ProductCategoryTemplate({
 	data: {
 		allSanityProduct,
-		categoryMarkdown: {
-			frontmatter: {
-				title,
-			},
-			html,
-			excerpt,
+		sanityCategory: {
+			title,
+			description,
 		},
 	},
 }){
-	// Collect markdown data
 	const products = allSanityProduct.edges.map(({ node }) => node)
 
 	return(
-		<Layout title={title} description={excerpt}>
+		<Layout title={title} description={excerpt(description)}>
 			<h1>{title}</h1>
-			<div dangerouslySetInnerHTML={{__html: html}} />
+			<div dangerouslySetInnerHTML={{__html: description}} />
 			{products.map(({ title, slug }, index) => (
 				<div key={`product${index}`}>
 					<Link to={`/${slug.current}`}>
@@ -55,17 +52,14 @@ export const query = graphql`
 				}
 			}
 		}
-
-		categoryMarkdown: markdownRemark(
-			frontmatter: {
-				id: { eq: $category }
+		sanityCategory(slug: {
+			current: { eq: $category }
+		}){
+			title
+			description
+			slug{
+				current
 			}
-		){
-			frontmatter{
-				title
-			}
-			html
-			excerpt(pruneLength: 175)
 		}
 	}
 `
