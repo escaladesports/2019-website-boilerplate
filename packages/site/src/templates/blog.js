@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layouts/default'
 import PostList from '../components/blog/post-list'
+import sanityToExcerpt from '../utils/sanity-to-excerpt'
 
 export default function BlogPage({
 	pageContext: {
@@ -9,11 +10,11 @@ export default function BlogPage({
 		totalPages,
 	},
 	data: {
-		allMarkdownRemark,
+		allSanityPost,
 	},
 }){
-	const posts = allMarkdownRemark.edges.map(edges => edges.node)
-	const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
+	const posts = allSanityPost.edges.map(edges => edges.node)
+	const description = posts.length ? `${sanityToExcerpt(posts[0]._rawBody.en)}...` : null
 
 	return (
 		<Layout title='Blog' description={description}>
@@ -29,29 +30,19 @@ export default function BlogPage({
 
 export const query = graphql`
 	query BlogPage($skip: Int!, $limit: Int!) {
-		allMarkdownRemark(
-			filter: {
-				fileAbsolutePath: {
-					regex: "/src/markdown/blog/"
-				}
-				fields: {
-					published: { eq: true }
-				}
-			}
+		allSanityPost(
 			skip: $skip,
 			limit: $limit,
-			sort: { order: DESC, fields: [frontmatter___date] }
+			sort: { order: DESC, fields: [date] }
 		){
 			edges{
 				node{
-					excerpt(pruneLength: 250)
-					frontmatter{
-						title
-						tags,
-						date,
-					}
-					fields{
-						path
+					title
+					tags
+					date
+					_rawBody
+					slug{
+						current
 					}
 				}
 			}

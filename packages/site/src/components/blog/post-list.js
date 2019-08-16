@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 import TagList from './tag-list'
 import Pagination from '../pagination'
 import formatDate from '../../utils/format-date'
+import sanityToExcerpt from '../../utils/sanity-to-excerpt'
 
 export default function PostList({
 	page,
@@ -13,21 +14,29 @@ export default function PostList({
 }) {
 	return <>
 		<ul css={styles.list}>
-			{posts.map(({ excerpt, fields, frontmatter }, index) => {
-				const { title, tags, date } = frontmatter
-				const { path } = fields
+			{posts.map(({
+				title,
+				tags,
+				date,
+				_rawBody: {
+					en: body,
+				},
+				slug: {
+					current,
+				},
+			}, index) => {
 				return (
 					<li key={`blog${index}`}>
 						<h2>
-							<Link to={path}>
+							<Link to={current}>
 								{title}
 							</Link>
 						</h2>
 						<time dateTime={date}>{formatDate(date)}</time>
 						<TagList tags={tags} />
-						<p>{excerpt}</p>
+						<p>{sanityToExcerpt(body)}...</p>
 						<div>
-							<Link to={path}>
+							<Link to={current}>
 								Read More
 							</Link>
 						</div>
