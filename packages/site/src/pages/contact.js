@@ -16,11 +16,11 @@ export default function ContactPage({
 		page: {
 			frontmatter: {
 				title,
-			},
+			} = {},
 			html,
 			excerpt,
-		},
-	},
+		} = {},
+	} = {},
 }){
 	const [user] = useGlobal(`user`)
 	const [loadingUser] = useGlobal(`loadingUser`)

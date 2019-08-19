@@ -7,11 +7,11 @@ export default function GenericTemplate({
 		page: {
 			frontmatter: {
 				title,
-			},
+			} = {},
 			html,
 			excerpt,
-		},
-	},
+		} = {},
+	} = {},
 }){
 	return(
 		<Layout title={title} description={excerpt}>

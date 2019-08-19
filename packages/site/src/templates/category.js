@@ -10,10 +10,10 @@ export default function ProductCategoryTemplate({
 		sanityCategory: {
 			title,
 			description,
-		},
-	},
+		} = {},
+	} = {},
 }){
-	const products = allSanityProduct.edges.map(({ node }) => node)
+	const products = allSanityProduct?.edges.map(({ node }) => node) || []
 
 	return(
 		<Layout title={title} description={excerpt(description)}>

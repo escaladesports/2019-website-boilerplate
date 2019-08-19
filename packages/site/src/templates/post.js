@@ -19,44 +19,40 @@ export default function PostTemplate({
 		nextId,
 		previousId,
 		slug,
-	},
+	} = {},
 	data: {
 		sanityPost: {
 			_rawBody: {
-				en: body,
-			},
+				en: body = {},
+			} = {},
 			title,
 			tags,
 			date,
 			image: {
 				asset: {
 					fluid: image,
-				},
+				} = {},
 				caption,
-			},
+			} = {},
 		},
-		comments: commentsList,
+		comments: commentsList = [],
 		next,
 		previous,
-	},
+	} = {},
 }){
-
-	let comments = []
-	if(commentsList){
-		comments = commentsList.edges.map(({ node: {
-			html,
-			frontmatter: {
-				md5,
-				name,
-				date,
-			},
-		} }) => ({
-			html,
+	let comments = commentsList.edges.map(({ node: {
+		html,
+		frontmatter: {
 			md5,
 			name,
 			date,
-		}))
-	}
+		},
+	} }) => ({
+		html,
+		md5,
+		name,
+		date,
+	}))
 
 	const nextPost = (id === nextId) ? false : next
 	const previousPost = (id === previousId) ? false : previous

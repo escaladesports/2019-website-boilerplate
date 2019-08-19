@@ -20,10 +20,10 @@ export default function PostList({
 				date,
 				_rawBody: {
 					en: body,
-				},
+				} = {},
 				slug: {
 					current,
-				},
+				} = {},
 			}, index) => {
 				return (
 					<li key={`blog${index}`}>

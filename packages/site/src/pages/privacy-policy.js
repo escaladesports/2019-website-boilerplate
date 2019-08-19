@@ -9,11 +9,11 @@ export default function PrivacyPolicyPage({
 				title,
 				address,
 				email,
-			},
+			} = {},
 			html,
 			excerpt,
-		},
-	},
+		} = {},
+	} = {},
 }){
 	const addressHTML = address.replace(/\n/g, `<br />`)
 	const emailHTML = `<a href='mailto:${email}'>${email}</a>`

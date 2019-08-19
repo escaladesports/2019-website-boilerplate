@@ -14,9 +14,9 @@ export default function HomePage({
 			frontmatter: {
 				headerImage,
 				headerImageDesc,
-			},
-		},
-	},
+			} = {},
+		} = {},
+	} = {},
 }){
 	const [open, setOpen] = useState(false)
 

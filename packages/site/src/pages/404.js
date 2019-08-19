@@ -7,11 +7,11 @@ export default function NotFoundPage({
 		page: {
 			frontmatter: {
 				title,
-			},
+			} = {},
 			html,
 			excerpt,
-		},
-	},
+		} = {},
+	} = {},
 }){
 	return (
 		<Layout title={title} description={excerpt}>

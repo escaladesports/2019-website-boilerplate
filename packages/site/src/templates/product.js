@@ -12,17 +12,14 @@ import serializers from '../utils/sanity-serializers'
 
 export default function ProductTemplate({
 	data: {
-		sanityProduct: {
-			title,
-			_rawBody: {
-				en: body,
-			},
-			defaultProductVariant,
-			variants,
-		},
-	},
+		title,
+		defaultProductVariant = {},
+		variants = [],
+		_rawBody: {
+			en: body = {},
+		} = {},
+	} = {},
 }) {
-	console.log(`ProductTemplate`)
 	const excerpt = sanityToExcerpt(body)
 	const { id } = defaultProductVariant
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)

@@ -8,12 +8,12 @@ export default function TagsTemplate({
 		tag,
 		page,
 		totalPages,
-	},
+	} = {},
 	data: {
-		posts,
-	},
+		posts = [],
+	} = {},
 }) {
-	const postsList = posts.edges.map(edge => edge.node)
+	const postsList = posts?.edges.map(edge => edge.node) || []
 	const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
 
 	return (
