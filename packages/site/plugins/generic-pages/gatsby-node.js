@@ -18,7 +18,6 @@ exports.createPages = async function({ actions, graphql }){
 				node {
 					id
 					frontmatter {
-						path
 						title
 					}
 					fields{

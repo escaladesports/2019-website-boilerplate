@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Layout from '../components/layouts/default'
 import PostList from '../components/blog/post-list'
+import sanityToExcerpt from '../utils/sanity-to-excerpt'
 
 export default function TagsTemplate({
 	pageContext: {
@@ -10,11 +11,11 @@ export default function TagsTemplate({
 		totalPages,
 	} = {},
 	data: {
-		posts = [],
+		allSanityPost = [],
 	} = {},
 }) {
-	const postsList = posts.edges.map(edge => edge.node) || []
-	const description = posts.length ? `${posts[0].excerpt.substr(0, 150)}...` : null
+	const postsList = allSanityPost.edges.map(edge => edge.node) || []
+	const description = allSanityPost.length ? `${sanityToExcerpt(allSanityPost[0]._rawBody.en)}...` : null
 
 	return (
 		<Layout title={`Posts Tagged with ${tag}`} description={description}>
@@ -31,29 +32,23 @@ export default function TagsTemplate({
 
 export const query = graphql`
 	query TagsTemplate($tag: String!, $skip: Int!, $limit: Int!) {
-		posts: allMarkdownRemark(
+
+		allSanityPost(
 			filter: {
-				frontmatter: {
-					tags: { in: [$tag] }
-				}
-				fields: {
-					published: { eq: true }
-				}
+				tags: { in: [$tag] }
 			}
 			skip: $skip,
 			limit: $limit,
-			sort: { order: DESC, fields: [frontmatter___date] }
+			sort: { order: DESC, fields: [date] }
 		){
 			edges{
 				node{
-					excerpt(pruneLength: 175)
-					frontmatter{
-						title
-						tags
-						date,
-					}
-					fields{
-						path
+					_rawBody
+					title
+					tags
+					date
+					slug{
+						current
 					}
 				}
 			}

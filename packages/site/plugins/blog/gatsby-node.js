@@ -1,5 +1,6 @@
 const { resolve } = require(`path`)
 
+const postsPerPage = 2
 const blogTemplate = resolve(`src/templates/blog.js`)
 const tagsTemplate = resolve(`src/templates/tags.js`)
 const postTemplate = resolve(`src/templates/post.js`)
@@ -19,22 +20,12 @@ exports.createPages = async function({ actions, graphql }){
 				}
 			}
 		}
-
-		config: markdownRemark(
-			fileAbsolutePath: { regex: "/src/markdown/settings/site.md/" }
-		){
-			frontmatter{
-				postsPerPage
-			}
-		}
 	}`)
 
 	if (res.errors) {
 		console.error(res.errors)
 		process.exit(1)
 	}
-
-	const { postsPerPage } = res.data.config.frontmatter
 
 	const allTags = {}
 	const posts = res.data.allSanityPost.edges.map(({

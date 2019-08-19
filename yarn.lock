@@ -2451,14 +2451,12 @@
 "@sanity/block-content-to-html@^1.3.8":
   version "1.3.8"
   resolved "https://registry.yarnpkg.com/@sanity/block-content-to-html/-/block-content-to-html-1.3.8.tgz#eff8e3dafe82f4a7e10ed914f7fa646c3e59ec2d"
-  integrity sha512-eXXilwPQCFe2uHMK5DItzZWg2CgaCfbo2hpcY1BbJEDPNhPjRlkaNBxM65U9M6yxreNnFffTNWHORVX3vZmIeQ==
   dependencies:
     "@sanity/block-content-to-hyperscript" "^2.0.5"
 
 "@sanity/block-content-to-hyperscript@^2.0.5", "@sanity/block-content-to-hyperscript@^2.0.7":
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/@sanity/block-content-to-hyperscript/-/block-content-to-hyperscript-2.0.8.tgz#1993b418c28903ff39406ffcabf17c7e276fada3"
-  integrity sha512-rh1tSxMDHbcCK/7YyHxoK8NLhalNsbc+eYS+OM/4tE0RGq0TIYJqsM0Ifv+8h0ok5zf5vshFcoBf2YNRskdBIg==
   dependencies:
     "@sanity/generate-help-url" "^0.140.0"
     "@sanity/image-url" "^0.140.12"
@@ -2468,7 +2466,6 @@
 "@sanity/block-content-to-react@^2.0.6":
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/@sanity/block-content-to-react/-/block-content-to-react-2.0.6.tgz#be8b090e3c24d7bc66dc6a140dd5ee6ebd70713d"
-  integrity sha512-fLZKU+tZbJVzoKNOeWgRGQjIv9yoiYXOYq+1XhWyUlC167P2e663wCQe8fYhSzoM8Yn6FlsbC7UUtQANtLMNIA==
   dependencies:
     "@sanity/block-content-to-hyperscript" "^2.0.7"
     prop-types "^15.6.2"
@@ -2494,12 +2491,10 @@
 "@sanity/cli@^0.142.0":
   version "0.142.0"
   resolved "https://registry.yarnpkg.com/@sanity/cli/-/cli-0.142.0.tgz#7a502a22a3f03fecd70c293e1b0c6dfff47f396f"
-  integrity sha512-Zq+kjy4JAW99EQqi5Ti3GHuCSXamU4Mm1HdRqEVE4C4+15fhSElNNsIZd8+R6KDR4ck7wtKMvHct6LA6DdNG/w==
 
 "@sanity/client@0.142.0", "@sanity/client@^0.142.0":
   version "0.142.0"
   resolved "https://registry.yarnpkg.com/@sanity/client/-/client-0.142.0.tgz#361ed95f204b38a16c41bc1b495b5670063c058f"
-  integrity sha512-mn63id+fDDOsQh0L642UClGzsIVZvZ7++acbY8Q/gFXO6nWFylcikE15fSoGmsH83z99LV0kfAOziNJJ8WsYAw==
   dependencies:
     "@sanity/eventsource" "0.142.0"
     "@sanity/generate-help-url" "0.142.0"
@@ -2512,7 +2507,6 @@
 "@sanity/client@^0.140.11":
   version "0.140.36"
   resolved "https://registry.yarnpkg.com/@sanity/client/-/client-0.140.36.tgz#7f12016b4731f7bb39701e581fb1cec4bc3d6270"
-  integrity sha512-uMJn0De1ulivlwJhyArqC8prH0pDMwd7Wnm4Xly749dH4Op1xrgsSgJna/G4nTGxWTL2Iva9iqqOaN3wCLK3ww==
   dependencies:
     "@sanity/eventsource" "0.140.0"
     "@sanity/generate-help-url" "0.140.0"
@@ -2620,6 +2614,13 @@
     postcss-value-parser "^3.3.0"
     source-list-map "^2.0.0"
 
+"@sanity/dashboard@^0.142.1":
+  version "0.142.1"
+  resolved "https://registry.npmjs.org/@sanity/dashboard/-/dashboard-0.142.1.tgz#34a9f49c2b4b1e780e5d6627beb5a6e8fe812b7e"
+  dependencies:
+    lodash "^4.17.4"
+    react-icons "^2.2.7"
+
 "@sanity/data-aspects@0.142.0":
   version "0.142.0"
   resolved "https://registry.npmjs.org/@sanity/data-aspects/-/data-aspects-0.142.0.tgz#4b5335f3457f7ada4bda43d4ab0f0a104a5ec728"
@@ -2696,7 +2697,6 @@
 "@sanity/eventsource@0.140.0":
   version "0.140.0"
   resolved "https://registry.yarnpkg.com/@sanity/eventsource/-/eventsource-0.140.0.tgz#79aa5ea3e7c2339ac1b8667269371e46d9583084"
-  integrity sha512-ZyeDo3kl2peeCw8V4po/iY9pCjszKnRxgdPPs8E6NwIw6/VJaFWuvjIyzOvoiJv+Gp7qTR1P+OiJK/SYcGiJYg==
   dependencies:
     eventsource "^1.0.6"
     eventsource-polyfill "^0.9.6"
@@ -2766,7 +2766,6 @@
 "@sanity/generate-help-url@0.140.0", "@sanity/generate-help-url@^0.140.0":
   version "0.140.0"
   resolved "https://registry.yarnpkg.com/@sanity/generate-help-url/-/generate-help-url-0.140.0.tgz#f60ab75be5fdc346b9f0d1c2a0858aa3c2870109"
-  integrity sha512-H/G/WA9S22TXcXST52CIiTsHx3S2hH0gvK7LnI5w76vfKS0obnDPh8jrPg4xeNRYGPuV9MHYRlyERGpRGoo4Qw==
 
 "@sanity/generate-help-url@0.142.0":
   version "0.142.0"
@@ -2817,7 +2816,6 @@
 "@sanity/mutator@^0.140.0":
   version "0.140.30"
   resolved "https://registry.yarnpkg.com/@sanity/mutator/-/mutator-0.140.30.tgz#04fea5333faa4ad23ac7538549e48ad7960f14e5"
-  integrity sha512-QEaiefXQRl00Gme9ibyAnTPYwTyxblI3vsv3hnEE/+pWRs4UQfTTvOCZCptT7kBeghRyA5qeZfzqyT8i/JLW1g==
   dependencies:
     debug "^3.1.0"
     diff-match-patch "^1.0.0"
@@ -2826,7 +2824,6 @@
 "@sanity/observable@0.140.0":
   version "0.140.0"
   resolved "https://registry.yarnpkg.com/@sanity/observable/-/observable-0.140.0.tgz#6c7f51932d7fa446154bb127b24d64f4c9bd46c4"
-  integrity sha512-RsMcnHFxA2Y2Tf4QfjfeKj6JvRezvuiLl82PxQlcUkgT9z7ATWEm6KikE+XNovKU8I7K+XQtU4WqfgHS7/7xgA==
   dependencies:
     object-assign "^4.1.1"
     rxjs "^6.1.0"
@@ -3220,7 +3217,6 @@
 "@types/url-parse@^1.4.3":
   version "1.4.3"
   resolved "https://registry.yarnpkg.com/@types/url-parse/-/url-parse-1.4.3.tgz#fba49d90f834951cb000a674efee3d6f20968329"
-  integrity sha512-4kHAkbV/OfW2kb5BLVUuUMoumB3CP8rHqlw48aHvFy5tf9ER0AfOonBlX29l/DD68G70DmyhRlSYfQPSYpC5Vw==
 
 "@types/vfile-message@*":
   version "1.0.1"
@@ -3539,6 +3535,12 @@ abab@^2.0.0:
 abbrev@1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
+
+abort-controller@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/abort-controller/-/abort-controller-2.0.3.tgz#b174827a732efadff81227ed4b8d1cc569baf20a"
+  dependencies:
+    event-target-shim "^5.0.0"
 
 accepts@^1.3.5, accepts@~1.3.4, accepts@~1.3.5, accepts@~1.3.7:
   version "1.3.7"
@@ -4239,7 +4241,6 @@ babel-preset-fbjs@^3.1.2:
 babel-preset-gatsby@^0.2.8:
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/babel-preset-gatsby/-/babel-preset-gatsby-0.2.8.tgz#976adb62bcf73f1a53374deb3a3a37b8880d5745"
-  integrity sha512-Cks3TRbx0CvjwW25noYZwideKp/gH8RJypuwd8gJ/Y1JDXrE7Vnjkvct6QH61XLcX7QIkRoissvOt1QqNWyaIg==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.0.0"
     "@babel/plugin-syntax-dynamic-import" "^7.0.0"
@@ -4569,7 +4570,6 @@ browser-process-hrtime@^0.1.2:
 browser-split@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/browser-split/-/browser-split-0.0.0.tgz#41419caef769755929dd518967d3eec0a6262771"
-  integrity sha1-QUGcrvdpdVkp3VGJZ9PuwKYmJ3E=
 
 browserify-aes@^1.0.0, browserify-aes@^1.0.4:
   version "1.2.0"
@@ -5119,7 +5119,6 @@ circular-at@^1.0.3:
 class-list@~0.1.0, class-list@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/class-list/-/class-list-0.1.1.tgz#9b9745192c4179b5da0a0d7633658e3c70d796cb"
-  integrity sha1-m5dFGSxBebXaCg12M2WOPHDXlss=
   dependencies:
     indexof "0.0.1"
 
@@ -7339,6 +7338,10 @@ event-source-polyfill@^1.0.5:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/event-source-polyfill/-/event-source-polyfill-1.0.8.tgz#a0d40fad813bf2ed2ccf3b7839f9d625768fc310"
 
+event-target-shim@^5.0.0:
+  version "5.0.1"
+  resolved "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz#5d4d3ebdf9583d63a5333ce2deb7480ab2b05789"
+
 eventemitter3@^3.0.0, eventemitter3@^3.1.0:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-3.1.2.tgz#2d3d48f9c346698fce83a85d7d664e98535df6e7"
@@ -8459,7 +8462,6 @@ gatsby-source-filesystem@^2.1.2:
 gatsby-source-sanity@^5.0.2:
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/gatsby-source-sanity/-/gatsby-source-sanity-5.0.2.tgz#961f3f3b3fe5cadb3dc5ab2f256d5598d1799628"
-  integrity sha512-8+7ePq6r9DgyXbN3jp/Mtu0NGCIVES3X1AgX8XUZM7fE7GEf9nG46NvMdwfwbvSTrooecA9pEX36znX92aQYvw==
   dependencies:
     "@sanity/client" "^0.140.11"
     "@sanity/image-url" "^0.140.9"
@@ -9555,7 +9557,6 @@ html-dom-parser@0.1.3:
 html-element@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/html-element/-/html-element-2.3.0.tgz#0e5c1d979223b0febfbcacdeb56c75d1e9297de9"
-  integrity sha512-axsAv89JAxk/zSSOn+jK5dJ1eAUVSkienyIcruAe/kD5skC/E/HxjFfCfNYv8+A9m7BXR9kfL4ZD1ZobUfUWzQ==
   dependencies:
     class-list "~0.1.1"
 
@@ -9720,7 +9721,6 @@ husky@^3.0.3:
 hyperscript@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/hyperscript/-/hyperscript-2.0.2.tgz#3839cba45554bdfe27bb81c2142d1684f8135af5"
-  integrity sha1-ODnLpFVUvf4nu4HCFC0WhPgTWvU=
   dependencies:
     browser-split "0.0.0"
     class-list "~0.1.0"
@@ -16473,6 +16473,13 @@ sanitize-html@^1.18.2:
     srcset "^1.0.0"
     xtend "^4.0.1"
 
+sanity-plugin-dashboard-widget-netlify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/sanity-plugin-dashboard-widget-netlify/-/sanity-plugin-dashboard-widget-netlify-1.0.1.tgz#e510e40e05b9bcfdf11a4a2affed590e191bb93b"
+  dependencies:
+    abort-controller "^2.0.3"
+    react-props-stream "^1.0.0"
+
 sax@>=0.6.0, sax@^1.2.4, sax@~1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -17277,7 +17284,6 @@ split2@^2.0.0, split2@^2.1.1:
 split2@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/split2/-/split2-3.1.1.tgz#c51f18f3e06a8c4469aaab487687d8d956160bb6"
-  integrity sha512-emNzr1s7ruq4N+1993yht631/JH+jaj0NYBosuKmLcq+JkGQ9MmTw1RB1fGaTCzUuseRIClrlSLHRNYGwWQ58Q==
   dependencies:
     readable-stream "^3.0.0"
 

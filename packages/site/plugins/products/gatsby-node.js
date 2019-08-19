@@ -8,7 +8,6 @@ const categoryPath = resolve(`src/markdown/categories`)
 
 exports.createPages = async function({ actions, graphql }){
 	const { createPage } = actions
-
 	await createProductPages(createPage, graphql)
 	await createCategoryPages(createPage, graphql)
 }

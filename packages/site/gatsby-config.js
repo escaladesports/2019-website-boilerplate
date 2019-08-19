@@ -1,30 +1,21 @@
 const { GATSBY_ESCA_API_SITE, SANITY_TOKEN } = require(`utils/env`)
 const striptags = require(`striptags`)
-const { readJsonSync, readFileSync } = require(`fs-extra`)
-const parseFrontmatter = require(`gray-matter`)
+const { readFileSync } = require(`fs-extra`)
 const proxy = require(`http-proxy-middleware`)
 const { parse: parseToml } = require(`toml`)
 const { parse: parseUrl } = require(`url`)
-const { join: joinPath } = require(`path`)
 const { siteUrl } = require(`../../site-config`)
-
-const cwd = process.cwd()
-
-// Get site info from markdown
-const siteConfig = readFileSync(`./src/markdown/settings/site.md`)
-const { siteTitle, siteDescription } = parseFrontmatter(siteConfig).data
+const productIds = require(`./.cache/product-ids.json`)
+const { title, description } = require(`./.cache/site-settings.json`)
 
 // Get redirects from config
 const netlifyConfig = readFileSync(`./netlify.toml`)
 const { redirects } = parseToml(netlifyConfig)
 
-// Get product IDs from markdown
-const productIds = readJsonSync(joinPath(cwd, `.cache/product-ids.json`))
-
 module.exports = {
 	siteMetadata: {
-		title: siteTitle,
-		description: siteDescription,
+		title,
+		description,
 		siteUrl,
 	},
 	plugins: [
@@ -282,20 +273,20 @@ module.exports = {
 
 		// Dev plugins
 		`gatsby-plugin-webpack-size`,
-		{
-			resolve: `schema-snapshot`,
-			options: {
-				include: [
-					`MarkdownRemark`,
-					`MarkdownRemarkFrontmatter`,
-					`MarkdownRemarkFrontmatterVariants`,
-					`MarkdownRemarkFields`,
-					`EscaladeInventory`,
-					`EscaladeInventoryLocations`,
-					`EscaladePricing`,
-				],
-			},
-		},
+		// {
+		// 	resolve: `schema-snapshot`,
+		// 	options: {
+		// 		include: [
+		// 			`MarkdownRemark`,
+		// 			`MarkdownRemarkFrontmatter`,
+		// 			`MarkdownRemarkFrontmatterVariants`,
+		// 			`MarkdownRemarkFields`,
+		// 			`EscaladeInventory`,
+		// 			`EscaladeInventoryLocations`,
+		// 			`EscaladePricing`,
+		// 		],
+		// 	},
+		// },
 	],
 	developMiddleware: app => {
 		// Proxy lambda endpoints

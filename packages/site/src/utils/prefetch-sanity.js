@@ -11,11 +11,25 @@ const client = sanityClient({
 	token: SANITY_TOKEN,
 	useCdn: false,
 })
+const productIdsPath = join(cwd, `.cache/product-ids.json`)
+const siteSettingsPath = join(cwd, `.cache/site-settings.json`)
 
-!async function sanityToProductJson(){
+async function createProductJson(){
 	const data = await client.fetch(`*[_type == "product"] {defaultProductVariant}`)
 	const productIds = data.map(({ defaultProductVariant: { sku } }) => sku)
-	const path = join(cwd, `.cache/product-ids.json`)
-	console.log(`Outputting product IDs to `, path)
-	await outputJson(path, productIds)
-}()
+	await outputJson(productIdsPath, productIds)
+}
+
+async function createSiteSettings() {
+	const [data] = await client.fetch(`*[_type == "siteSettings"] {title, description, keywords}`)
+	await outputJson(siteSettingsPath, data)
+}
+
+try {
+	createProductJson()
+	createSiteSettings()
+}
+catch(err){
+	console.error(err)
+	process.exit(1)
+}
