@@ -12,11 +12,13 @@ import serializers from '../utils/sanity-serializers'
 
 export default function ProductTemplate({
 	data: {
-		title,
-		defaultProductVariant = {},
-		variants = [],
-		_rawBody: {
-			en: body = {},
+		sanityProduct: {
+			title,
+			defaultProductVariant = {},
+			variants = [],
+			_rawBody: {
+				en: body = {},
+			} = {},
 		} = {},
 	} = {},
 }) {
@@ -25,7 +27,6 @@ export default function ProductTemplate({
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)
 	const allVariants = [defaultProductVariant, ...variants]
 	const [prices] = usePrices()
-	console.log(`prices`, prices)
 	const price = prices[id] ? prices[id].price : false
 
 	const { images = [] } = selectedProduct

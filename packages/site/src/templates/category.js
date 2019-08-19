@@ -13,7 +13,7 @@ export default function ProductCategoryTemplate({
 		} = {},
 	} = {},
 }){
-	const products = allSanityProduct?.edges.map(({ node }) => node) || []
+	const products = allSanityProduct.edges.map(({ node }) => node) || []
 
 	return(
 		<Layout title={title} description={excerpt(description)}>

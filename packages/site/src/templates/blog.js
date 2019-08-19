@@ -13,7 +13,7 @@ export default function BlogPage({
 		allSanityPost,
 	} = {},
 }){
-	const posts = allSanityPost?.edges.map(edges => edges.node) || []
+	const posts = allSanityPost.edges.map(edges => edges.node) || []
 	const description = posts.length ? `${sanityToExcerpt(posts[0]._rawBody.en)}...` : null
 
 	return (

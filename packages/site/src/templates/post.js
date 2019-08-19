@@ -28,18 +28,18 @@ export default function PostTemplate({
 			title,
 			tags,
 			date,
-			image: {
-				asset: {
-					fluid: image,
-				} = {},
-				caption,
-			} = {},
+			image,
 		},
 		comments: commentsList = [],
 		next,
 		previous,
 	} = {},
 }){
+
+	const mainImage = image?.asset?.fluid
+	const caption = image?.caption
+	const imageSrc = mainImage?.src
+
 	let comments = commentsList.edges.map(({ node: {
 		html,
 		frontmatter: {
@@ -63,15 +63,15 @@ export default function PostTemplate({
 				<Helmet>
 					<meta
 						property='og:image'
-						content={image.src}
+						content={imageSrc}
 					/>
 				</Helmet>
 			)}
 			<h1>{title}</h1>
 			<time dateTime={date}>{formatDate(date)}</time>
 			<TagList tags={tags} />
-			{!!image && (
-				<Img fluid={image} alt={caption} />
+			{!!mainImage && (
+				<Img fluid={mainImage} alt={caption} />
 			)}
 			<BlockContent blocks={body} serializers={serializers} />
 			<div>
@@ -133,28 +133,22 @@ export const query = graphql`
 			}
 			date
 		}
-		post: markdownRemark(
-			id: { eq: $id }
+
+		previous: sanityPost(
+			id: { eq: $previousId }
 		){
-			html
-			excerpt(pruneLength: 175)
-			frontmatter{
-				title
-				tags
-				image
-				imageDesc
-				date
+			title
+			slug{
+				current
 			}
 		}
 
-		previous: markdownRemark(
-			id: { eq: $previousId }
+		next: sanityPost(
+			id: { eq: $nextId }
 		){
-			frontmatter{
-				title
-			}
-			fields{
-				path
+			title
+			slug{
+				current
 			}
 		}
 
@@ -177,17 +171,6 @@ export const query = graphql`
 						date
 					}
 				}
-			}
-		}
-
-		next: markdownRemark(
-			id: { eq: $nextId }
-		){
-			frontmatter{
-				title
-			}
-			fields{
-				path
 			}
 		}
 	}

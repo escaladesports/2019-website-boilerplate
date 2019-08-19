@@ -14,28 +14,6 @@ module.exports = async function(createPage, graphql){
 				}
 			}
 		}
-		allMarkdownRemark(
-			filter: {
-				fileAbsolutePath: {
-					regex: "/src/markdown/products/"
-				}
-				frontmatter: {
-					published: { eq: true }
-				}
-			}
-		){
-			edges {
-				node {
-					frontmatter{
-						id
-						category
-					}
-					fields{
-						path
-					}
-				}
-			}
-		}
 	}`)
 
 	if (result.errors) {
