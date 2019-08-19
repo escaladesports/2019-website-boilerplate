@@ -1,7 +1,12 @@
+import { FaPen } from 'react-icons/fa'
+
+console.log(FaPen)
+
 export default {
 	name: `post`,
 	title: `Post`,
 	type: `document`,
+	icon: FaPen,
 	fields: [
 		{
 			name: `title`,

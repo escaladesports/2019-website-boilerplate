@@ -10,6 +10,7 @@ import product from './product'
 import productVariant from './productVariant'
 import post from './post'
 import captionedImage from './captioned-image'
+import siteSettings from './site-settings'
 
 import localeString from './locale/String'
 import localeText from './locale/Text'
@@ -27,6 +28,8 @@ export default createSchema({
 		product,
 		category,
 		post,
+		siteSettings,
+
 		// When added to this list, object types can be used as
 		// { type: 'typename' } in other document schemas
 		blockContent,
