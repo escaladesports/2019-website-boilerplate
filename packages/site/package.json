@@ -91,7 +91,6 @@
     "react-leaflet": "^2.4.0",
     "react-leaflet-markercluster": "^2.0.0-rc3",
     "reactn": "^2.1.4",
-    "showdown": "^1.8.7",
     "strip-html-comments": "^1.0.0",
     "striptags": "^3.1.1",
     "toml": "^3.0.0",

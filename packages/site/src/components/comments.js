@@ -12,11 +12,14 @@ export default function Comments({ comments }) {
 		{hasComments && (
 			<div css={styles.commentsList}>
 				{comments.map(({
-					html,
-					name,
-					md5,
-					date,
+					node: {
+						body,
+						name,
+						md5,
+						date,
+					},
 				}, index) => {
+					const formattedBody = `<p>${body.split(/\n/).join(`</p><p>`)}</p>`
 					return (
 						<div css={styles.columns} key={`comment${index}`}>
 							<div>
@@ -32,7 +35,7 @@ export default function Comments({ comments }) {
 								<time dateTime={date} css={styles.time}>
 									{formatDateTime(date)}
 								</time>
-								<div dangerouslySetInnerHTML={{ __html: html }} />
+								<div dangerouslySetInnerHTML={{__html: formattedBody}} />
 							</div>
 						</div>
 					)

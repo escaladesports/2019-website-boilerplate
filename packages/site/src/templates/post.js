@@ -27,8 +27,10 @@ export default function PostTemplate({
 			tags,
 			date,
 			image,
-		},
-		comments: commentsList = [],
+		} = {},
+		allSanityComment: {
+			edges: comments = [],
+		} = {},
 		next,
 		previous,
 	} = {},
@@ -37,20 +39,6 @@ export default function PostTemplate({
 	const mainImage = image?.asset?.fluid
 	const caption = image?.caption
 	const imageSrc = mainImage?.src
-
-	let comments = commentsList.edges.map(({ node: {
-		html,
-		frontmatter: {
-			md5,
-			name,
-			date,
-		},
-	} }) => ({
-		html,
-		md5,
-		name,
-		date,
-	}))
 
 	const nextPost = (id === nextId) ? false : next
 	const previousPost = (id === previousId) ? false : previous
@@ -114,7 +102,7 @@ const styles = {
 }
 
 export const query = graphql`
-	query PostTemplate($id: String!, $previousId: String!, $nextId: String!, $slug: String!) {
+	query PostTemplate($id: String!, $previousId: String!, $nextId: String!) {
 		sanityPost(
 			id: { eq: $id }
 		){
@@ -150,24 +138,21 @@ export const query = graphql`
 			}
 		}
 
-		comments: allMarkdownRemark(
+		allSanityComment(
 			filter: {
-				fileAbsolutePath: { regex: "/src/markdown/comments/" },
-				frontmatter: {
-					slug: { eq: $slug },
-					published: { eq: true }
-				}
+				published: { eq: true },
+				page: {
+					id: { eq: $id }
+				},
 			},
-			sort: { order: ASC, fields: [frontmatter___date] }
+			sort: { order: ASC, fields: [date] }
 		){
 			edges{
 				node{
-					html
-					frontmatter{
-						md5
-						name: title
-						date
-					}
+					body
+					md5
+					name
+					date
 				}
 			}
 		}
