@@ -18,9 +18,7 @@ export default function PostList({
 				title,
 				tags,
 				date,
-				_rawBody: {
-					en: body,
-				} = {},
+				_rawBody,
 				slug: {
 					current,
 				} = {},
@@ -34,7 +32,7 @@ export default function PostList({
 						</h2>
 						<time dateTime={date}>{formatDate(date)}</time>
 						<TagList tags={tags} />
-						<p>{sanityToExcerpt(body, 40)}...</p>
+						<p>{sanityToExcerpt(_rawBody, 40)}...</p>
 						<div>
 							<Link to={current}>
 								Read More

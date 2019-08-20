@@ -9,15 +9,13 @@ export default function GenericTemplate({
 	data: {
 		sanityPage: {
 			title,
-			_rawBody: {
-				en: body,
-			} = {},
+			_rawBody,
 		} = {},
 	} = {},
 }){
 	return(
-		<Layout title={title} description={sanityToExcerpt(body, 15)}>
-			<BlockContent blocks={body} serializers={serializers} />
+		<Layout title={title} description={sanityToExcerpt(_rawBody, 15)}>
+			<BlockContent blocks={_rawBody} serializers={serializers} />
 		</Layout>
 	)
 }

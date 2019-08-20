@@ -41,7 +41,8 @@ export const query = graphql`
 						}
 					}
 				}
-			}
+			},
+			sort: { order: ASC, fields: [order] }
 		){
 			edges{
 				node{

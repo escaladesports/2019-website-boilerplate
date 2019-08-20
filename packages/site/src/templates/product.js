@@ -16,13 +16,11 @@ export default function ProductTemplate({
 			title,
 			defaultProductVariant = {},
 			variants = [],
-			_rawBody: {
-				en: body = {},
-			} = {},
+			_rawBody,
 		} = {},
 	} = {},
 }) {
-	const excerpt = sanityToExcerpt(body, 15)
+	const excerpt = sanityToExcerpt(_rawBody, 15)
 	const { id } = defaultProductVariant
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)
 	const allVariants = [defaultProductVariant, ...variants]
@@ -93,7 +91,7 @@ export default function ProductTemplate({
 					</Stock>
 				</li>
 			</ul>
-			<BlockContent blocks={body} serializers={serializers} />
+			<BlockContent blocks={_rawBody} serializers={serializers} />
 		</Layout>
 	)
 }

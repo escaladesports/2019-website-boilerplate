@@ -22,9 +22,7 @@ export default function PostTemplate({
 	} = {},
 	data: {
 		sanityPost: {
-			_rawBody: {
-				en: body = {},
-			} = {},
+			_rawBody,
 			title,
 			tags,
 			date,
@@ -58,7 +56,7 @@ export default function PostTemplate({
 	const previousPost = (id === previousId) ? false : previous
 
 	return(
-		<Layout title={title} description={sanityToExcerpt(body, 15)}>
+		<Layout title={title} description={sanityToExcerpt(_rawBody, 15)}>
 			{!!image && (
 				<Helmet>
 					<meta
@@ -73,7 +71,7 @@ export default function PostTemplate({
 			{!!mainImage && (
 				<Img fluid={mainImage} alt={caption} />
 			)}
-			<BlockContent blocks={body} serializers={serializers} />
+			<BlockContent blocks={_rawBody} serializers={serializers} />
 			<div>
 				{nextPost && (
 					<div css={styles.next}>
