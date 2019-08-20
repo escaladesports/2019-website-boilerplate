@@ -9,6 +9,7 @@ import product from './product'
 import post from './post'
 import page from './page'
 import comment from './comment'
+import location from './location'
 import siteSettings from './site-settings'
 
 import blockContent from './block-content'
@@ -29,6 +30,7 @@ export default createSchema({
 		page,
 		post,
 		comment,
+		location,
 		siteSettings,
 
 		// When added to this list, object types can be used as
