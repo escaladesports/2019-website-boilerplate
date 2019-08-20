@@ -15,23 +15,12 @@ node_modules
 !.env.example
 dist
 dist-*
-.next
-json
 public
 .cache
-envdotjs-key
-env.key
-env.js.key
-.env.js
-.env.key
-.env.js.key
 .serverless
 _optimize
-coverage
 netlify.toml
-/site/netlify.toml
-/site/static/admin/config.yml
-*.pem
+/gatsby/netlify.toml
 
 # Temporary
 temp
