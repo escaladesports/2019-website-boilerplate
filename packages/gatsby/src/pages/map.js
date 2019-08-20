@@ -4,9 +4,27 @@ import Layout from '../components/layouts/default'
 import Map from '../components/locations-map'
 
 export default function MapPage(props) {
-	const locations = props.data?.allMarkdownRemark?.edges.map(edge => {
-		return edge?.node?.frontmatter
-	}) || []
+	const locations = props.data ?.allSanityLocation?.edges.map(({
+		node: {
+			location: {
+				lat,
+				lng,
+			},
+			name,
+			address,
+			city,
+			state,
+			zip,
+		},
+	}) => ({
+		lat,
+		lng,
+		title: name,
+		address,
+		city,
+		state,
+		zip,
+	})) || []
 	return (
 		<Layout title='Map'>
 			<h1>Map</h1>
@@ -17,24 +35,18 @@ export default function MapPage(props) {
 
 export const query = graphql`
 	query MapQuery {
-		allMarkdownRemark(
-			filter: {
-				fileAbsolutePath: {
-					regex: "/src/markdown/locations/"
-				}
-			}
-		){
+		allSanityLocation{
 			edges{
 				node{
-					frontmatter{
-						title
-						address
-						city
-						state
-						zip
+					name
+					location{
 						lat
 						lng
 					}
+					address
+					city
+					state
+					zip
 				}
 			}
 		}
