@@ -34,7 +34,7 @@ export default function PostList({
 						</h2>
 						<time dateTime={date}>{formatDate(date)}</time>
 						<TagList tags={tags} />
-						<p>{sanityToExcerpt(body)}...</p>
+						<p>{sanityToExcerpt(body, 40)}...</p>
 						<div>
 							<Link to={current}>
 								Read More

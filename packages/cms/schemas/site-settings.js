@@ -27,5 +27,15 @@ export default {
 				layout: `tags`,
 			},
 		},
+		{
+			name: `address`,
+			title: `Address`,
+			type: `text`,
+		},
+		{
+			name: `email`,
+			title: `Contact Email`,
+			type: `string`,
+		},
 	],
 }

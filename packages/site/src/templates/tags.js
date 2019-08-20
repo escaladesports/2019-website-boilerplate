@@ -15,7 +15,7 @@ export default function TagsTemplate({
 	} = {},
 }) {
 	const postsList = allSanityPost.edges.map(edge => edge.node) || []
-	const description = allSanityPost.length ? `${sanityToExcerpt(allSanityPost[0]._rawBody.en)}...` : null
+	const description = allSanityPost.length ? `${sanityToExcerpt(allSanityPost[0]._rawBody.en, 15)}...` : null
 
 	return (
 		<Layout title={`Posts Tagged with ${tag}`} description={description}>
@@ -32,7 +32,6 @@ export default function TagsTemplate({
 
 export const query = graphql`
 	query TagsTemplate($tag: String!, $skip: Int!, $limit: Int!) {
-
 		allSanityPost(
 			filter: {
 				tags: { in: [$tag] }

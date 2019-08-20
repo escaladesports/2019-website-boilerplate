@@ -58,7 +58,7 @@ export default function PostTemplate({
 	const previousPost = (id === previousId) ? false : previous
 
 	return(
-		<Layout title={title} description={sanityToExcerpt(body)}>
+		<Layout title={title} description={sanityToExcerpt(body, 15)}>
 			{!!image && (
 				<Helmet>
 					<meta

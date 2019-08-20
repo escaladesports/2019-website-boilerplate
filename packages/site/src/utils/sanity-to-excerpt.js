@@ -1,10 +1,13 @@
-import excerpt from './excerpt'
+const excerpt = require(`./excerpt`)
 
-export default function sanityToExcerpt(blocks, limit) {
+module.exports = (blocks, limit) => {
 	const str = sanityToString(blocks)
+	if(!limit) return str
 	return excerpt(str, limit)
 }
+
 function sanityToString(blocks, str = []) {
+	if(!blocks) return ``
 	if (blocks.text) {
 		str.push(blocks.text)
 	}

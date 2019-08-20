@@ -1,27 +1,35 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import BlockContent from '@sanity/block-content-to-react'
 import Layout from '../components/layouts/default'
+import sanityToExcerpt from '../utils/sanity-to-excerpt'
+import serializers from '../utils/sanity-serializers'
 
 export default function GenericTemplate({
 	data: {
-		page: {
-			frontmatter: {
-				title,
+		sanityPage: {
+			title,
+			_rawBody: {
+				en: body,
 			} = {},
-			html,
-			excerpt,
 		} = {},
 	} = {},
 }){
 	return(
-		<Layout title={title} description={excerpt}>
-			<div dangerouslySetInnerHTML={{ __html: html }} />
+		<Layout title={title} description={sanityToExcerpt(body, 15)}>
+			<BlockContent blocks={body} serializers={serializers} />
 		</Layout>
 	)
 }
 
 export const query = graphql`
 	query GenericTemplate($id: String!) {
+		sanityPage(
+			id: { eq: $id }
+		){
+			_rawBody
+			title
+		}
 		page: markdownRemark(
 			id: { eq: $id }
 		){

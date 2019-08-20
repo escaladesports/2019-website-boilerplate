@@ -1,21 +1,15 @@
-import { FaPen } from 'react-icons/fa'
+import { FaFile } from 'react-icons/fa'
 
 export default {
-	name: `post`,
-	title: `Post`,
+	name: `page`,
+	title: `Page`,
 	type: `document`,
-	icon: FaPen,
+	icon: FaFile,
 	fields: [
 		{
 			name: `title`,
 			title: `Title`,
 			type: `string`,
-		},
-		{
-			name: `date`,
-			title: `Date`,
-			type: `datetime`,
-			calendarTodayLabel: `Today`,
 		},
 		{
 			name: `slug`,
@@ -24,17 +18,6 @@ export default {
 			options: {
 				source: `title`,
 			},
-		},
-		{
-			name: `tags`,
-			title: `Tags`,
-			type: `array`,
-			of: [{type: `string`}],
-		},
-		{
-			name: `image`,
-			title: `Image`,
-			type: `captionedImage`,
 		},
 		{
 			name: `body`,

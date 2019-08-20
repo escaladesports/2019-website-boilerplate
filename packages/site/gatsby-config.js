@@ -1,9 +1,9 @@
 const { GATSBY_ESCA_API_SITE, SANITY_TOKEN } = require(`utils/env`)
-const striptags = require(`striptags`)
 const { readFileSync } = require(`fs-extra`)
 const proxy = require(`http-proxy-middleware`)
 const { parse: parseToml } = require(`toml`)
 const { parse: parseUrl } = require(`url`)
+const sanityToExcerpt = require(`./src/utils/sanity-to-excerpt`)
 const { siteUrl } = require(`../../site-config`)
 const productIds = require(`./.cache/product-ids.json`)
 const { title, description } = require(`./.cache/site-settings.json`)
@@ -214,55 +214,39 @@ module.exports = {
 			resolve: `search`,
 			options: {
 				query: `{
-					allMarkdownRemark(
-						filter: {
-							frontmatter: {
-								published: { eq: true }
-							}
-						}
-					) {
+					allSanityPost{
 						edges {
 							node {
 								id
-								html
-								excerpt
-								frontmatter {
-									title
-								}
-								fields{
-									path
+								_rawBody
+								title
+								slug{
+									current
 								}
 							}
 						}
 					}
 				}`,
-				parse: ({ allMarkdownRemark: { edges }}) => {
-					const data = edges.filter(({ node }) => {
-						if (node && node.fields && node.fields.path) {
-							return true
-						}
-						return false
-					})
-					return data.map(
+				parse: ({ allSanityPost: { edges }}) => {
+					return edges.map(
 						({
 							node: {
 								id,
-								html,
-								excerpt,
-								frontmatter: { title },
-								fields: { path },
+								_rawBody: { en },
+								title,
+								slug: { current },
 							},
 						}) => {
 							return {
 								id,
 								index: {
-									body: striptags(html),
+									body: sanityToExcerpt(en),
 									title,
 								},
 								store: {
 									title,
-									excerpt,
-									path,
+									excerpt: sanityToExcerpt(en, 15),
+									path: current,
 								},
 							}
 						}

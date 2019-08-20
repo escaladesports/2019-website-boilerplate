@@ -50,7 +50,7 @@ export default {
 		{
 			name: `body`,
 			title: `Body`,
-			type: `localeBlockContent`,
+			type: `blockContent`,
 		},
 		{
 			title: `Order`,

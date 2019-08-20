@@ -8,13 +8,11 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "sanity build",
+    "deploy": "sanity graphql deploy && sanity deploy",
     "dev": "sanity start",
     "test": "sanity check",
-    "deploy": "sanity graphql deploy && sanity deploy"
+    "open" : "open-cli https://project-boilerplate.sanity.studio/"
   },
-  "keywords": [
-    "sanity"
-  ],
   "dependencies": {
     "@sanity/base": "^0.142.0",
     "@sanity/components": "^0.142.0",

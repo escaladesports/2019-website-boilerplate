@@ -9,12 +9,9 @@ import category from './category'
 import product from './product'
 import productVariant from './productVariant'
 import post from './post'
+import page from './page'
 import captionedImage from './captioned-image'
 import siteSettings from './site-settings'
-
-import localeString from './locale/String'
-import localeText from './locale/Text'
-import localeBlockContent from './locale/BlockContent'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -27,15 +24,13 @@ export default createSchema({
 		// in the studio.
 		product,
 		category,
+		page,
 		post,
 		siteSettings,
 
 		// When added to this list, object types can be used as
 		// { type: 'typename' } in other document schemas
 		blockContent,
-		localeText,
-		localeBlockContent,
-		localeString,
 		productVariant,
 		captionedImage,
 	]),

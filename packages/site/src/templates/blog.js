@@ -14,7 +14,7 @@ export default function BlogPage({
 	} = {},
 }){
 	const posts = allSanityPost.edges.map(edges => edges.node) || []
-	const description = posts.length ? `${sanityToExcerpt(posts[0]._rawBody.en)}...` : null
+	const description = posts.length ? `${sanityToExcerpt(posts[0]._rawBody.en, 15)}...` : null
 
 	return (
 		<Layout title='Blog' description={description}>

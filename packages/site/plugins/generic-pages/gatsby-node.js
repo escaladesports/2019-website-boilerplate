@@ -1,27 +1,17 @@
-const { resolve, parse } = require(`path`)
+const { resolve } = require(`path`)
 
-const markdownPath = resolve(`src/markdown/pages`)
 const postTemplate = resolve(`src/templates/generic.js`)
 
 exports.createPages = async function({ actions, graphql }){
 	const { createPage } = actions
 
 	const res = await graphql(`{
-		allMarkdownRemark(
-			filter: {
-				fileAbsolutePath: {
-					regex: "/src/markdown/pages/"
-				}
-			}
-		) {
-			edges {
-				node {
+		allSanityPage{
+			edges{
+				node{
 					id
-					frontmatter {
-						title
-					}
-					fields{
-						path
+					slug{
+						current
 					}
 				}
 			}
@@ -33,32 +23,18 @@ exports.createPages = async function({ actions, graphql }){
 		process.exit(1)
 	}
 
-	const pages = res.data.allMarkdownRemark.edges.map(edge => edge.node)
-
-	pages.forEach(({ id, fields }) => {
-		const { path } = fields
-
+	res.data.allSanityPage.edges.forEach(({
+		node: {
+			id,
+			slug,
+		},
+	}) => {
 		createPage({
-			path,
+			path: slug.current,
 			component: postTemplate,
 			context: {
 				id,
 			},
 		})
-
 	})
-}
-
-// Create URL paths for posts
-exports.onCreateNode = function({ node, actions }){
-	const { createNodeField } = actions
-	const { fileAbsolutePath } = node
-	if (fileAbsolutePath && fileAbsolutePath.indexOf(markdownPath) === 0) {
-		let path = node.frontmatter.path || parse(fileAbsolutePath).name
-		createNodeField({
-			node,
-			name: `path`,
-			value: `/${path}`,
-		})
-	}
 }

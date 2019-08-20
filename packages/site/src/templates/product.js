@@ -22,7 +22,7 @@ export default function ProductTemplate({
 		} = {},
 	} = {},
 }) {
-	const excerpt = sanityToExcerpt(body)
+	const excerpt = sanityToExcerpt(body, 15)
 	const { id } = defaultProductVariant
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)
 	const allVariants = [defaultProductVariant, ...variants]
