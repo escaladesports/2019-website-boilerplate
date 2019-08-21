@@ -81,27 +81,6 @@ module.exports = {
 			},
 		},
 		{
-			resolve: `gatsby-source-filesystem`,
-			options: {
-				path: `${__dirname}/src/markdown`,
-				name: `pages`,
-			},
-		},
-		{
-			resolve: `gatsby-transformer-remark`,
-			options: {
-				plugins: [
-					`gatsby-remark-copy-linked-files`,
-					{
-						resolve: `gatsby-remark-external-links`,
-						options: {
-							target: `_blank`,
-						},
-					},
-				],
-			},
-		},
-		{
 			resolve: `gatsby-plugin-canonical-urls`,
 			options: {
 				siteUrl,

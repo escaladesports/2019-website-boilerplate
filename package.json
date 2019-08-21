@@ -12,6 +12,7 @@
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
     "netlify": "open-cli https://app.netlify.com/sites/project-boilerplate/deploys",
+    "open": "lerna run open --stream --no-sort --concurrency 999",
     "patch": "lerna run patch --stream --no-sort --concurrency 999",
     "serve": "lerna run serve --stream --no-sort --concurrency 999"
   },

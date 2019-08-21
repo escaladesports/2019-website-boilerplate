@@ -1,43 +1,24 @@
 import React, { useState } from 'react'
-import { graphql } from 'gatsby'
-import Img from '../components/netlify-image'
+// import { graphql } from 'gatsby'
 import Button from '../components/button'
 import Layout from '../components/layouts/default'
 import Modal from '../components/modal'
 import Carousel from '../components/carousel'
 
 
-export default function HomePage({
-	data: {
-		page: {
-			html,
-			frontmatter: {
-				headerImage,
-				headerImageDesc,
-			} = {},
-		} = {},
-	} = {},
-}){
+export default function HomePage(){
 	const [open, setOpen] = useState(false)
 
 	return (
 		<Layout>
-			<div dangerouslySetInnerHTML={{ __html: html }} />
+			<h1>Home Page</h1>
+			<p>This is the homepage</p>
 
 			<Carousel ratio={[1000, 400]}>
 				<img src='https://placehold.it/1000x400/ccc/999/&text=slide1' alt='Slide 1' />
 				<img src='https://placehold.it/1000x400/ccc/999/&text=slide2' alt='Slide 2' />
 				<img src='https://placehold.it/1000x400/ccc/999/&text=slide3' alt='Slide 3' />
 			</Carousel>
-
-			<br />
-
-			<Img
-				src={headerImage}
-				width={404}
-				height={405}
-				alt={headerImageDesc}
-			/>
 
 			<br />
 
@@ -57,17 +38,3 @@ export default function HomePage({
 		</Layout>
 	)
 }
-
-export const query = graphql`
-	query HomePage {
-		page: markdownRemark(fileAbsolutePath: {
-			regex: "/src/markdown/index.md/"
-		}){
-			html
-			frontmatter{
-				headerImage
-				headerImageDesc
-			}
-		}
-	}
-`

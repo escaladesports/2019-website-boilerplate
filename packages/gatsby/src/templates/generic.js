@@ -27,14 +27,5 @@ export const query = graphql`
 			_rawBody
 			title
 		}
-		page: markdownRemark(
-			id: { eq: $id }
-		){
-			html
-			excerpt(pruneLength: 175)
-			frontmatter{
-				title
-			}
-		}
 	}
 `
