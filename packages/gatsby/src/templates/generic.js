@@ -1,9 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import BlockContent from '@sanity/block-content-to-react'
 import Layout from '../components/layouts/default'
 import sanityToExcerpt from '../utils/sanity-to-excerpt'
-import serializers from '../utils/sanity-serializers'
+import SanityBlock from '../components/sanity-block'
 
 export default function GenericTemplate({
 	data: {
@@ -15,7 +14,7 @@ export default function GenericTemplate({
 }){
 	return(
 		<Layout title={title} description={sanityToExcerpt(_rawBody, 15)}>
-			<BlockContent blocks={_rawBody} serializers={serializers} />
+			<SanityBlock body={_rawBody} />
 		</Layout>
 	)
 }

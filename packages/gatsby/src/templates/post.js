@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import BlockContent from '@sanity/block-content-to-react'
 import { css } from '@emotion/core'
 import Link from 'gatsby-link'
 import { Helmet } from 'react-helmet'
@@ -11,7 +10,7 @@ import CommentForm from '../components/comment-form'
 import Comments from '../components/comments'
 import formatDate from '../utils/format-date'
 import sanityToExcerpt from '../utils/sanity-to-excerpt'
-import serializers from '../utils/sanity-serializers'
+import SanityBlock from '../components/sanity-block'
 
 export default function PostTemplate({
 	pageContext: {
@@ -59,7 +58,7 @@ export default function PostTemplate({
 			{!!mainImage && (
 				<Img fluid={mainImage} alt={caption} />
 			)}
-			<BlockContent blocks={_rawBody} serializers={serializers} />
+			<SanityBlock body={_rawBody} />
 			<div>
 				{nextPost && (
 					<div css={styles.next}>
