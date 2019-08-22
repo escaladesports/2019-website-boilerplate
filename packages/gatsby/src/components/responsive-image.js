@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { css } from '@emotion/core'
 import InView from './in-view'
 import Placeholder from './placeholder'
@@ -13,15 +13,14 @@ export default function ResponsiveImage({
 	children,
 }){
 	const [{w, h}, setDims] = useState({ w: 0, h: 0 })
-
-	let container
+	const containerEl = useRef(null)
 
 	function resize() {
-		if (!container) return
+		if (!containerEl) return
 		const {
 			clientWidth,
 			clientHeight,
-		} = container
+		} = containerEl.current
 		if (clientWidth > w) {
 			setDims({ w: clientWidth, h: clientHeight })
 		}
@@ -51,7 +50,7 @@ export default function ResponsiveImage({
 					<div
 						style={{ width }}
 						css={styles.container}
-						ref={el => container = el}
+						ref={containerEl}
 					>
 						<Placeholder ratio={ratio || [width, height]}>
 							{!!w && inView && children(w, h)}

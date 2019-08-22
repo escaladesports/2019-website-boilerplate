@@ -8,7 +8,23 @@ export default {
 			title: `Caption`,
 			type: `string`,
 			options: {
-				isHighlighted: true, // <-- make this field easily accessible
+				isHighlighted: true,
+			},
+		},
+		{
+			name: `width`,
+			title: `Width`,
+			type: `number`,
+			options: {
+				isHighlighted: true,
+			},
+		},
+		{
+			name: `height`,
+			title: `Height`,
+			type: `number`,
+			options: {
+				isHighlighted: true,
 			},
 		},
 	],

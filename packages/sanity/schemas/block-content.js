@@ -59,7 +59,7 @@ export default {
 			options: { hotspot: true },
 		},
 		{
-			type: `form`,
+			type: `widget`,
 		},
 	],
 }

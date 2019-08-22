@@ -1,15 +1,16 @@
 export default {
-	name: `form`,
-	title: `Form`,
+	name: `widget`,
+	title: `Widget`,
 	type: `object`,
 	fields: [
 		{
-			name: `formType`,
+			name: `widgetType`,
 			type: `string`,
-			title: `Form type`,
+			title: `Widget Type`,
 			options: {
 				list: [
 					`Contact Form`,
+					`Homepage Carousel`,
 				],
 			},
 		},

@@ -15,7 +15,7 @@ import siteSettings from './site-settings'
 import blockContent from './block-content'
 import productVariant from './product-variant'
 import captionedImage from './captioned-image'
-import form from './form'
+import widget from './widget'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -39,6 +39,6 @@ export default createSchema({
 		blockContent,
 		productVariant,
 		captionedImage,
-		form,
+		widget,
 	]),
 })

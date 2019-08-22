@@ -1,6 +1,8 @@
 import React from 'react'
 import BlockContent from '@sanity/block-content-to-react'
 import ContactForm from './contact-form'
+import HomepageCarousel from './homepage-carousel'
+import SanityImg from './sanity-image'
 
 const serializers = {
 	types: {
@@ -25,18 +27,23 @@ const serializers = {
 					return <p>{props.children}</p>
 			}
 		},
-		form(props){
-			switch(props.node.formType){
+		widget(props){
+			switch (props.node.widgetType){
 				case `Contact Form`:
 					return <ContactForm />
+				case `Homepage Carousel`:
+					return <HomepageCarousel />
 			}
+		},
+		captionedImage({ node }){
+			return <SanityImg src={node} />
 		},
 	},
 }
 
 
-export default function SanityBlock({ body }){
+export default function SanityBlock({ body, ...props }){
 	return (
-		<BlockContent blocks={body} serializers={serializers} />
+		<BlockContent blocks={body} serializers={serializers} {...props} />
 	)
 }
