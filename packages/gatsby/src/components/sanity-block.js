@@ -27,7 +27,7 @@ const serializers = {
 		},
 		form(props){
 			switch(props.node.formType){
-			case `[contact-form]`:
+			case `Contact Form`:
 				return <ContactForm />
 			}
 		},

@@ -9,10 +9,7 @@ export default {
 			title: `Form type`,
 			options: {
 				list: [
-					{
-						title: `Contact form`,
-						value: `[contact-form]`,
-					},
+					`Contact Form`,
 				],
 			},
 		},
