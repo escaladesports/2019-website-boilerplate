@@ -1,7 +1,8 @@
 {
   "root": true,
   "project": {
-    "name": "Project Boilerplate"
+    "name": "Project Boilerplate",
+    "basePath": "/admin"
   },
   "api": {
     "projectId": "lfxwk0kx",
