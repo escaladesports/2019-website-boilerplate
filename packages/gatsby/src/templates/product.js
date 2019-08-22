@@ -19,6 +19,7 @@ export default function ProductTemplate({
 		} = {},
 	} = {},
 }) {
+	console.log(`_rawBody`, _rawBody)
 	const excerpt = sanityToExcerpt(_rawBody, 15)
 	const { id } = defaultProductVariant
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)

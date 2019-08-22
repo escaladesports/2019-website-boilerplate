@@ -1,4 +1,6 @@
 import { FaTags } from 'react-icons/fa'
+import slugify from '../utils/slugify'
+import isUnique from '../utils/is-unique'
 
 export default {
 	name: `product`,
@@ -13,10 +15,12 @@ export default {
 		},
 		{
 			name: `slug`,
-			title: `Slug`,
+			title: `URL Path`,
 			type: `slug`,
 			options: {
-				source: `title`,
+				source: ({ title }) => `product/${title}`,
+				isUnique,
+				slugify,
 			},
 		},
 		{
