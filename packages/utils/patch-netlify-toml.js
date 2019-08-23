@@ -1,9 +1,9 @@
-require(`utils/env`)
+require(`./env`)
 const { join } = require(`path`)
 const { readFile, outputFile } = require(`fs-extra`)
 
 const cwd = process.cwd()
-const src = join(cwd, `netlify.toml`)
+const src = join(cwd, `../config/netlify.toml`)
 const dest = join(cwd, `../../netlify.toml`)
 
 async function go(){

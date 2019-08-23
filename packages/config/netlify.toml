@@ -3,24 +3,6 @@
 	publish = "packages/gatsby/public/"
 	functions = "packages/netlify-functions/dist/"
 
-[build.environment]
-	NODE_OPTIONS = "--max_old_space_size=4096"
-	YARN_FLAGS = "--no-ignore-optional"
-
-# Used to test `netlify dev` headers issue
-# https://github.com/netlify/netlify-dev-plugin/issues/195
-[[redirects]]
-	from = "/test"
-	to = "https://postman-echo.com/headers"
-	status = 200
-	force = true
-	[redirects.headers]
-		Test-Key = "TEST 2"
-
-[[redirects]]
-	from = "/admin"
-	to = "/admin/"
-
 [[redirects]]
 	from = "/api/inventory/load"
 	to = "https://inventory.escsportsapi.com/load"

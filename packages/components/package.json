@@ -20,5 +20,9 @@
     "react-leaflet-markercluster": "^1.1.8",
     "ultimate-pagination": "^1.0.0",
     "yup": "^0.27.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "reactn": "*"
   }
 }

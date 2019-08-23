@@ -6,14 +6,11 @@
     "url": "https://github.com/escaladesports/project-boilerplate.git"
   },
   "scripts": {
-    "build": "run-s clean prefetch patch build:gatsby",
-    "build:gatsby": "NODE_ENV=production gatsby build --verbose",
+    "prebuild": "yarn run clean",
+    "build": "NODE_ENV=production gatsby build --verbose",
     "clean": "gatsby clean",
-    "dev": "run-s prefetch patch dev:gatsby",
-    "dev:gatsby": "NODE_TLS_REJECT_UNAUTHORIZED=0 gatsby develop --https --open",
+    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 gatsby develop --https --open",
     "develop": "yarn run dev",
-    "prefetch": "node src/utils/prefetch-sanity",
-    "patch": "node src/utils/netlify-toml",
     "serve": "gatsby serve --open",
     "start": "yarn run dev"
   },

@@ -6,7 +6,6 @@ const indexPath = join(cwd, `dist/index.html`)
 
 async function patch(){
 	const contents = await readFile(indexPath, `utf8`)
-	console.log(contents)
 	// Can't do this in a plugin since Sanity doesn't add them until after this is rendered
 	const newContents = contents.replace(`Connecting to Sanity.io`, `Connecting to CMS`)
 	await outputFile(indexPath, newContents)
