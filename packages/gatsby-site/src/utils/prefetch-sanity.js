@@ -2,7 +2,7 @@ const { join } = require(`path`)
 const sanityClient = require(`@sanity/client`)
 const { outputJson } = require(`fs-extra`)
 const { SANITY_TOKEN } = require(`utils/env`)
-const { api: { projectId, dataset } } = require(`sanity/sanity.json`)
+const { api: { projectId, dataset } } = require(`sanity-cms/sanity.json`)
 
 const cwd = process.cwd()
 const client = sanityClient({

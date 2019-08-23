@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import imageUrlBuilder from '@sanity/image-url'
-import { api } from 'sanity/sanity.json'
+import { api } from 'sanity-cms/sanity.json'
 import Responsive from './responsive-image'
 
 const builder = imageUrlBuilder(api)

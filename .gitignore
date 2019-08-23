@@ -19,8 +19,7 @@ public
 .cache
 .serverless
 _optimize
-netlify.toml
-/gatsby/netlify.toml
+./netlify.toml
 
 # Temporary
 temp
