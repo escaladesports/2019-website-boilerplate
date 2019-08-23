@@ -1,6 +1,6 @@
 import React from 'react'
 import InView from './in-view'
-import Placeholder from './placeholder'
+import Placeholder from 'components/placeholder'
 
 export default function LazyLoad({ children, ...props }) {
 	return (

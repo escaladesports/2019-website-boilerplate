@@ -4,7 +4,7 @@ import Carousel from '@brainhubeu/react-carousel'
 import Right from '@material-ui/icons/ChevronRight'
 import Left from '@material-ui/icons/ChevronLeft'
 import '@brainhubeu/react-carousel/lib/style.css'
-import Placeholder from './placeholder'
+import Placeholder from 'components/placeholder'
 
 export default function CarouselComp({
 	ratio = [1000, 400],

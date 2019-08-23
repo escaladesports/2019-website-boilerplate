@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { css } from '@emotion/core'
 import InView from './in-view'
-import Placeholder from './placeholder'
+import Placeholder from 'components/placeholder'
 
 const resizeEvents = []
 let eventListener = false
