@@ -4,13 +4,13 @@ import { css } from '@emotion/core'
 import Link from 'gatsby-link'
 import { Helmet } from 'react-helmet'
 import Img from 'gatsby-image'
+import moment from 'moment'
 import Layout from '../components/layouts/default'
 import TagList from '../components/blog/tag-list'
-import CommentForm from '../components/comment-form'
-import Comments from '../components/comments'
-import formatDate from '../utils/format-date'
+import CommentForm from 'components/comment-form'
+import Comments from 'components/comments'
 import sanityToExcerpt from '../utils/sanity-to-excerpt'
-import SanityBlock from '../components/sanity-block'
+import SanityBlock from 'components/sanity-block'
 
 export default function PostTemplate({
 	pageContext: {
@@ -53,7 +53,7 @@ export default function PostTemplate({
 				</Helmet>
 			)}
 			<h1>{title}</h1>
-			<time dateTime={date}>{formatDate(date)}</time>
+			<time dateTime={date}>{moment(date).format(`MMMM Do YYYY`)}</time>
 			<TagList tags={tags} />
 			{!!mainImage && (
 				<Img fluid={mainImage} alt={caption} />

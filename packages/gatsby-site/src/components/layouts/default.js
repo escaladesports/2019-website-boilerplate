@@ -6,15 +6,15 @@ import { Cart } from '@escaladesports/zygote-cart'
 import * as escaApi from '@escaladesports/zygote-plugin-esca-api'
 import * as standardPayment from '@escaladesports/zygote-cart/dist/plugins/zygote-plugin-standard-billing'
 import Header from '../header'
-import Footer from '../footer'
+import Footer from 'components/footer'
 import {
 	white,
 	primaryColor,
-} from '../../styles/colors'
+} from 'config/colors'
 import {
 	primaryFont,
 	secondaryFont,
-} from '../../styles/fonts'
+} from 'config/fonts'
 import linkMixin from '../../styles/mixins/link'
 import '../../styles/global.css'
 import 'typeface-open-sans'

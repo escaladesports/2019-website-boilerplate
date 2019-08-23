@@ -7,7 +7,7 @@ import usePrices from '../components/use-prices'
 import Stock from '../components/stock'
 import Carousel from '../components/photo-carousel'
 import sanityToExcerpt from '../utils/sanity-to-excerpt'
-import SanityBlock from '../components/sanity-block'
+import SanityBlock from 'components/sanity-block'
 
 export default function ProductTemplate({
 	data: {

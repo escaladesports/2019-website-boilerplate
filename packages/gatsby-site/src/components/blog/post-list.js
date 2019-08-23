@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import { css } from '@emotion/core'
+import moment from 'moment'
 import TagList from './tag-list'
-import Pagination from '../pagination'
-import formatDate from '../../utils/format-date'
+import Pagination from 'components/pagination'
 import sanityToExcerpt from '../../utils/sanity-to-excerpt'
 
 export default function PostList({
@@ -30,7 +30,7 @@ export default function PostList({
 								{title}
 							</Link>
 						</h2>
-						<time dateTime={date}>{formatDate(date)}</time>
+						<time dateTime={date}>{moment(date).format(`MMMM Do YYYY`)}</time>
 						<TagList tags={tags} />
 						<p>{sanityToExcerpt(_rawBody, 40)}...</p>
 						<div>
