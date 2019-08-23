@@ -48,12 +48,14 @@ Add environment variables to a `./.env` file in the root of your project.
 
 This boilerplate is set up as a [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) with [Lerna](https://github.com/lerna/lerna). By default, the following packages are included:
 
+- `components`: A library of React components
+- `config`: All config files are stored here
 - `gatsby-site`: The UI of the application built with [Gatsby](https://www.gatsbyjs.org/)
 - `netlify-functions`: [Serverless functions](https://www.netlify.com/docs/functions/) for any logic that needs to be server side
 - `sanity-cms`: A CMS set up for deployment to [Sanity](https://www.sanity.io/docs/)
 - `babel-preset-boilerplate`: The [Babel](https://babeljs.io/) preset that's used for the site and APIs
 - `eslint-config-boilerplate`: The [ESLint](https://eslint.org/) config that's used for the entire project
-- `utils`: An assortment of random utility functions that need to be shared between other packages
+- `utils`: An assortment of random utility functions that are shared between other packages
 
 ## Usage
 
