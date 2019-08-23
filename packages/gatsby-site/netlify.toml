@@ -1,0 +1,106 @@
+[build]
+	command = "yarn build"
+	publish = "packages/gatsby/public/"
+	functions = "packages/netlify-functions/dist/"
+
+[build.environment]
+	NODE_OPTIONS = "--max_old_space_size=4096"
+	YARN_FLAGS = "--no-ignore-optional"
+
+# Used to test `netlify dev` headers issue
+# https://github.com/netlify/netlify-dev-plugin/issues/195
+[[redirects]]
+	from = "/test"
+	to = "https://postman-echo.com/headers"
+	status = 200
+	force = true
+	[redirects.headers]
+		Test-Key = "TEST 2"
+
+[[redirects]]
+	from = "/admin"
+	to = "/admin/"
+
+[[redirects]]
+	from = "/api/inventory/load"
+	to = "https://inventory.escsportsapi.com/load"
+	status = 200
+	force = true # COMMENT: ensure that we always redirect
+	[redirects.headers]
+		Content-Type = "application/json"
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
+
+[[redirects]]
+	from = "/api/coupon/calculate"
+	to = "https://coupon.escsportsapi.com/calculate"
+	status = 200
+	force = true
+	[redirects.headers]
+		Content-Type = "application/json"
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
+
+[[redirects]]
+	from = "/api/products/shipping"
+	to = "https://products.escsportsapi.com/shipping"
+	status = 200
+	force = true
+	[redirects.headers]
+		Content-Type = "application/json"
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
+
+[[redirects]]
+	from = "/api/shipping/load"
+	to = "https://shipping.escsportsapi.com/load"
+	status = 200
+	force = true
+	[redirects.headers]
+		Content-Type = "application/json"
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
+
+[[redirects]]
+	from = "/api/orders/store"
+	to = "https://orders.escsportsapi.com/store"
+	status = 200
+	force = true
+	[redirects.headers]
+		Content-Type = "application/json"
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
+
+[[redirects]]
+	from = "/api/pay/paypal"
+	to = "https://pay.escsportsapi.com/paypal/verify"
+	status = 200
+	force = true
+	[redirects.headers]
+		Content-Type = "application/json"
+		X-API-Key = "env.X_API_KEY"
+
+[[redirects]]
+	from = "/api/pay/anet"
+	to = "https://pay.escsportsapi.com/pay/anet"
+	status = 200
+	force = true
+	[redirects.headers]
+		Content-Type = "application/json"
+		X-API-Key = "env.X_API_KEY"
+
+[[redirects]]
+	from = "/api/taxes/calculate"
+	to = "https://taxes.escsportsapi.com/calculate"
+	status = 200
+	force = true
+	[redirects.headers]
+		Content-Type = "application/json"
+		ESC-API-Key = "env.ESCA_API_KEY"
+		X-API-Key = "env.X_API_KEY"
+		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"

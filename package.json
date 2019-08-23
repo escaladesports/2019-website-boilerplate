@@ -7,12 +7,14 @@
     "bootstrap": "lerna bootstrap --use-workspaces",
     "build": "lerna run build --stream --no-sort --concurrency 999",
     "clean": "lerna run clean --stream --no-sort --concurrency 999",
-    "dev": "lerna run dev --stream --no-sort --concurrency 999",
+    "deploy": "lerna run deploy --stream --no-sort --concurrency 999",
+    "dev": "lerna run dev --parallel --concurrency 999",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
     "netlify": "open-cli https://app.netlify.com/sites/project-boilerplate/deploys",
+    "open": "lerna run open --stream --no-sort --concurrency 999",
     "patch": "lerna run patch --stream --no-sort --concurrency 999",
-    "serve": "lerna run serve --strea --no-sort --concurrency 999"
+    "serve": "lerna run serve --stream --no-sort --concurrency 999"
   },
   "husky": {
     "hooks": {
