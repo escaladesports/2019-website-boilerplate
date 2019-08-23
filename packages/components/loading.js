@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import { primaryColor } from '../styles/colors'
+import { primaryColor } from 'config/colors'
 
 export default function LoadingAnimation(){
 	return (

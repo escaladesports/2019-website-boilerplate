@@ -1,6 +1,6 @@
 import React from 'react'
 import { css } from '@emotion/core'
-import { errorColor, lightErrorColor } from '../styles/colors'
+import { errorColor, lightErrorColor } from 'config/colors'
 
 export default function ErrorMessage({ children }){
 	return (

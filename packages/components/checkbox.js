@@ -2,7 +2,7 @@ import React from 'react'
 import { css } from '@emotion/core'
 import { Field, ErrorMessage } from 'formik'
 import Check from '@material-ui/icons/Check'
-import { primaryColor } from '../styles/colors'
+import { primaryColor } from 'config/colors'
 
 export default function Checkbox({
 	errors,

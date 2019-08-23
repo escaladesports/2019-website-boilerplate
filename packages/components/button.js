@@ -1,5 +1,5 @@
 import React from 'react'
-import buttonStyles from '../styles/mixins/button'
+import buttonStyles from './mixins/button'
 
 export default function Button({ children, ...props }) {
 	return (

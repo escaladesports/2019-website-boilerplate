@@ -1,7 +1,6 @@
 import React from 'react'
 import { css } from '@emotion/core'
-import Link from 'gatsby-link'
-
+import { Link } from 'gatsby'
 
 export default function Footer(){
 	return (

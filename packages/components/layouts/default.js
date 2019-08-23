@@ -1,5 +1,4 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import { css } from '@emotion/core'
 import { Helmet } from 'react-helmet'
 import { Cart } from '@escaladesports/zygote-cart'
@@ -10,13 +9,17 @@ import Footer from '../footer'
 import {
 	white,
 	primaryColor,
-} from '../../styles/colors'
+} from 'config/colors'
 import {
 	primaryFont,
 	secondaryFont,
-} from '../../styles/fonts'
-import linkMixin from '../../styles/mixins/link'
-import '../../styles/global.css'
+} from 'config/fonts'
+import linkMixin from '../mixins/link'
+import {
+	title as siteTitle,
+	description as siteDescription,
+} from 'gatsby-site/.cache/site-settings.json'
+import './global.css'
 import 'typeface-open-sans'
 import 'typeface-oswald'
 
@@ -25,24 +28,6 @@ export default function Layout({
 	description,
 	children,
 }) {
-	const {
-		site: {
-			siteMetadata: {
-				siteTitle,
-				siteDescription,
-			},
-		},
-	} = useStaticQuery(graphql`
-		query DefaultTemplateQuery{
-			site{
-				siteMetadata{
-					siteTitle: title
-					siteDescription: description
-				}
-			}
-		}
-	`)
-
 	return <>
 		<Helmet>
 			<html lang='en' />

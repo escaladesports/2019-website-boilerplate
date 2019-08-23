@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { graphql } from 'gatsby'
 import { addToCart } from '@escaladesports/zygote-cart'
 import Img from 'gatsby-image'
-import Layout from '../components/layouts/default'
-import usePrices from '../components/use-prices'
-import Stock from '../components/stock'
-import Carousel from '../components/photo-carousel'
-import sanityToExcerpt from '../utils/sanity-to-excerpt'
-import SanityBlock from '../components/sanity-block'
+import Layout from 'components/layouts/default'
+import usePrices from 'components/use-prices'
+import Stock from 'components/stock'
+import Carousel from 'components/photo-carousel'
+import sanityToExcerpt from 'utils/sanity-to-excerpt'
+import SanityBlock from 'components/sanity-block'
 
 export default function ProductTemplate({
 	data: {

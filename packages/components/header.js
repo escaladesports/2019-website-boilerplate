@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useGlobal } from 'reactn'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 import Close from '@material-ui/icons/Close'
 import { openCart } from '@escaladesports/zygote-cart'
-import { logout, login } from '../utils/auth'
-import { primaryColor } from '../styles/colors'
+import { logout, login } from 'utils/auth'
+import { primaryColor } from 'config/colors'
 
 export default function Header(){
 	const [open, setOpen] = useState(false)

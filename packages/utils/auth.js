@@ -72,13 +72,12 @@ export function logout() {
 	})
 }
 
-export const changePassword = () => {
+export function changePassword(){
 	return new Promise((resolve, reject) => {
 		const options = {
 			connection: `Username-Password-Authentication`,
 			email: getGlobal().user.email,
 		}
-		console.log(`options`, options)
 		auth.changePassword(options, (err, res) => {
 			if (err) return reject(err)
 			resolve(res)

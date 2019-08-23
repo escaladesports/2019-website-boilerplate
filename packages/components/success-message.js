@@ -1,6 +1,6 @@
 import React from 'react'
 import { css } from '@emotion/core'
-import { successColor, lightSuccessColor } from '../styles/colors'
+import { successColor, lightSuccessColor } from 'config/colors'
 
 export default function SuccessMessage({ children }){
 	return (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { css } from '@emotion/core'
 import { Field, ErrorMessage } from 'formik'
-import { primaryColor } from '../styles/colors'
+import { primaryColor } from 'config/colors'
 
 export default function CustomField({
 	type = `text`,

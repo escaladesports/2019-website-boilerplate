@@ -1,6 +1,6 @@
 import React from 'react'
 import { css } from '@emotion/core'
-import { white } from '../styles/colors'
+import { white } from 'config/colors'
 
 export default function Modal(props) {
 	return (

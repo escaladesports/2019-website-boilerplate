@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import Gravatar from 'react-gravatar'
-import formatDateTime from '../utils/format-date-time'
+import moment from 'moment'
 
 const avatarSize = 75
 
@@ -33,7 +33,7 @@ export default function Comments({ comments }) {
 							<div>
 								<h4 css={styles.name}>{name}</h4>
 								<time dateTime={date} css={styles.time}>
-									{formatDateTime(date)}
+									{moment(date).format(`MMMM Do YYYY, h:mma`)}
 								</time>
 								<div dangerouslySetInnerHTML={{__html: formattedBody}} />
 							</div>

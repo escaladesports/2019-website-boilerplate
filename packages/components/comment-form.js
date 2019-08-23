@@ -3,12 +3,12 @@ import { useGlobal } from 'reactn'
 import { css } from '@emotion/core'
 import { object, string } from 'yup'
 import Gravatar from 'react-gravatar'
-import Field from '../components/field'
-import Button from '../components/button'
-import Form from '../components/form'
-import Error from '../components/error-message'
-import Success from '../components/success-message'
-import Loading from '../components/loading'
+import Field from './field'
+import Button from './button'
+import Form from './form'
+import Error from './error-message'
+import Success from './success-message'
+import Loading from './loading'
 
 const avatarSize = 100
 
