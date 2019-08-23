@@ -1,8 +1,8 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../components/layouts/default'
-import PostList from '../components/blog/post-list'
-import sanityToExcerpt from '../utils/sanity-to-excerpt'
+import Layout from 'components/layouts/default'
+import PostList from 'components/blog/post-list'
+import sanityToExcerpt from 'utils/sanity-to-excerpt'
 
 export default function TagsTemplate({
 	pageContext: {

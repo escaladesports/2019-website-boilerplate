@@ -1,7 +1,7 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import linkMixin from '../styles/mixins/link'
-import EmailTemplate from '../components/layouts/email'
+import EmailTemplate from 'components/layouts/email'
 
 export default function BackendEmail({ title, children }) {
 	return (

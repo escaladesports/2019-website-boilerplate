@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Layout from '../components/layouts/default'
-import Map from '../components/locations-map'
+import Layout from 'components/layouts/default'
+import Map from 'components/locations-map'
 
 export default function MapPage(props) {
 	const locations = props.data ?.allSanityLocation?.edges.map(({

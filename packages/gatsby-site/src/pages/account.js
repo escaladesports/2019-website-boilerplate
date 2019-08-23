@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useGlobal } from 'reactn'
 import { object, string } from 'yup'
-import Layout from '../components/layouts/default'
+import Layout from 'components/layouts/default'
 import Field from 'components/field'
 import Button from 'components/button'
 import Form from 'components/form'
