@@ -21,7 +21,7 @@ git init
 
 Add environment variables to a `./.env` file in the root of your project.
 
-It's also recommended to change any settings you might need in the `./site-config.js` file.
+It's also recommended to go through and change any settings you might need in the `packages/config` files.
 
 ## Setup for an existing project
 
