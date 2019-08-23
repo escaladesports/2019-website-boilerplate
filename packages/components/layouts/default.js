@@ -18,7 +18,7 @@ import linkMixin from '../mixins/link'
 import {
 	title as siteTitle,
 	description as siteDescription,
-} from 'gatsby-site/.cache/site-settings.json'
+} from 'utils/.cache/site-settings.json'
 import './global.css'
 import 'typeface-open-sans'
 import 'typeface-oswald'

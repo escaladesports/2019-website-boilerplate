@@ -1,3 +1,4 @@
-export const
-	primaryFont = `"Oswald", sans-serif`,
-	secondaryFont = `"Open Sans", sans-serif`
+module.exports = {
+	primaryFont: `"Oswald", sans-serif`,
+	secondaryFont: `"Open Sans", sans-serif`,
+}

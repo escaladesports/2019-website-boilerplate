@@ -4,12 +4,12 @@ const proxy = require(`http-proxy-middleware`)
 const { parse: parseToml } = require(`toml`)
 const { parse: parseUrl } = require(`url`)
 const sanityToExcerpt = require(`utils/sanity-to-excerpt`)
-const { siteUrl } = require(`../../site-config`)
-const productIds = require(`./.cache/product-ids.json`)
-const { title, description } = require(`./.cache/site-settings.json`)
+const { siteUrl } = require(`config`)
+const productIds = require(`utils/.cache/product-ids.json`)
+const { title, description } = require(`utils/.cache/site-settings.json`)
 
 // Get redirects from config
-const netlifyConfig = readFileSync(`./netlify.toml`)
+const netlifyConfig = readFileSync(`../../netlify.toml`)
 const { redirects } = parseToml(netlifyConfig)
 
 module.exports = {

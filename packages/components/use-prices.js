@@ -10,7 +10,7 @@ const endpoints = {
 	testing: `https://pricing-test.escsportsapi.com/load`,
 }
 
-async function fetchPrices(ids) {
+async function fetchPrices(ids){
 	console.log(`fetchPrices`, ids)
 	try {
 		const res = await fetch(endpoints.production, {
