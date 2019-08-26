@@ -22,6 +22,7 @@
     "gatsby": "*",
     "leaflet": "*",
     "react": "*",
+    "react-dom": "*",
     "react-helmet": "*",
     "react-leaflet-markercluster": "*",
     "reactn": "*"

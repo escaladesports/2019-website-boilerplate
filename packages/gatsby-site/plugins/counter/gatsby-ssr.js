@@ -1,10 +1,10 @@
 import React from 'react'
-import { WithPrices } from 'components/use-prices'
+import { WithCounter } from '../../src/state/counter'
 
 export function wrapRootElement({ element }) {
 	return (
-		<WithPrices>
+		<WithCounter>
 			{element}
-		</WithPrices>
+		</WithCounter>
 	)
 }

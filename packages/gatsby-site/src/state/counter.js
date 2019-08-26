@@ -16,6 +16,8 @@ export function WithCounter({ children }) {
 }
 
 export function useCounter(){
-	console.log(`useCounter`)
-	return useContext(Context)
+	console.log(`USECOUNTER`)
+	const context = useContext(Context)
+	console.log(`CONTEXT`, context)
+	return context
 }

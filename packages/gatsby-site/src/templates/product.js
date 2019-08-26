@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import { addToCart } from '@escaladesports/zygote-cart'
 import Img from 'gatsby-image'
 import Layout from 'components/layouts/default'
-import { usePrices } from '../components/use-prices'
+// import { usePrices } from 'components/use-prices'
 import Stock from '../components/stock'
 import Carousel from 'components/photo-carousel'
 import sanityToExcerpt from 'utils/sanity-to-excerpt'
@@ -19,14 +19,12 @@ export default function ProductTemplate({
 		} = {},
 	} = {},
 }) {
-	console.log(`ProductTemplate`)
-	console.log(`About to usePrices`)
-	const [prices] = usePrices()
+	// const [prices] = usePrices()
+	const prices = {}
 	const excerpt = sanityToExcerpt(_rawBody, 15)
 	const { id } = defaultProductVariant
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)
 	const allVariants = [defaultProductVariant, ...variants]
-	console.log(`Result from usePrices`, prices)
 	const price = prices[id] ? prices[id].price : false
 
 	const { images = [] } = selectedProduct

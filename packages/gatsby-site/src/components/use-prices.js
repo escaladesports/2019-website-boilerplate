@@ -1,6 +1,5 @@
-import { useEffect } from 'react'
+import React, { useReducer, createContext, useContext, useEffect } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { useGlobal, setGlobal } from 'reactn'
 import fetch from 'isomorphic-fetch'
 
 const pollInterval = 1 * 60 * 1000	// Minutes
@@ -10,8 +9,7 @@ const endpoints = {
 	testing: `https://pricing-test.escsportsapi.com/load`,
 }
 
-async function fetchPrices(ids) {
-	console.log(`fetchPrices`, ids)
+async function fetchPrices(ids, setPrices) {
 	try {
 		const res = await fetch(endpoints.production, {
 			headers: {
@@ -23,24 +21,31 @@ async function fetchPrices(ids) {
 			}),
 		})
 		const { prices } = await res.json()
-		for (let id in res) {
-			if (res[id].price) {
-				res[id].price = `1` + res[id].price
-				prices[id] = res[id]
-			}
-		}
-		setGlobal({ prices })
+		setPrices(prices)
 	}
 	catch (err) {
 		console.error(err)
 	}
-	setTimeout(() => fetchPrices(ids), pollInterval)
+	setTimeout(() => fetchPrices(ids, setPrices), pollInterval)
 }
 
-// SSR price and repolls for new price live
-export function usePrices() {
-	const [prices, setPrices] = useGlobal(`prices`)
 
+const dispatch = (_, state) => state
+
+const Context = createContext()
+
+// SSR price and repolls for new price live
+export function WithPrices({ children }) {
+	const [prices, setPrices] = useReducer(dispatch, {})
+	return (
+		<Context.Provider value={[prices, setPrices]}>
+			{children}
+		</Context.Provider>
+	)
+
+}
+
+export function usePrices() {
 	// Query static data
 	const { allEscaladePricing: { edges } } = useStaticQuery(query)
 	const graphqlPrices = {}
@@ -50,27 +55,18 @@ export function usePrices() {
 		graphqlPrices[node.productId] = node
 	})
 
+	const [prices, setPrices] = useContext(Context)
+
 	// Poll live data
 	useEffect(() => {
 		if (typeof window !== `undefined` && !polling) {
 			polling = true
-			fetchPrices(ids)
+			fetchPrices(ids, setPrices)
 		}
 	}, [])
 
 
-	// Set initial state from static data
-	if (!prices) {
-		setPrices(graphqlPrices)
-	}
-
 	return [prices || graphqlPrices, setPrices]
-
-}
-
-export function WithPrices({ children }) {
-	console.log(`WithPrices`)
-	return children
 }
 
 const query = graphql`
