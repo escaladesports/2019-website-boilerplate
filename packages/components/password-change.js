@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { css } from '@emotion/core'
-import changePassword from 'utils/auth'
+import { changePassword } from 'utils/auth'
 
 export default function PasswordChange(){
 	const [success, setSuccess] = useState(false)

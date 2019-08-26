@@ -37,6 +37,7 @@ module.exports = {
 				siteId: GATSBY_ESCA_API_SITE,
 			},
 		},
+		`counter`,
 		`blog`,
 		`generic-pages`,
 		`products`,

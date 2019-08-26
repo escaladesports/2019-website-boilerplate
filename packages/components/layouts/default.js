@@ -28,49 +28,52 @@ export default function Layout({
 	description,
 	children,
 }) {
-	return <>
-		<Helmet>
-			<html lang='en' />
-			<title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
-			<meta name='description' content={description || siteDescription} />
-			<meta property='og:title' content={title} />
-			<meta property='og:site_name' content={siteTitle} />
-		</Helmet>
-		<div css={styles.layout}>
-			<Header />
-			<div css={styles.content}>
-				<main>{children}</main>
+	console.log(`Default layout render`)
+	return (
+		<>
+			<Helmet>
+				<html lang='en' />
+				<title>{title ? `${title} | ${siteTitle}` : siteTitle}</title>
+				<meta name='description' content={description || siteDescription} />
+				<meta property='og:title' content={title} />
+				<meta property='og:site_name' content={siteTitle} />
+			</Helmet>
+			<div css={styles.layout}>
+				<Header />
+				<div css={styles.content}>
+					<main>{children}</main>
+				</div>
+				<Footer />
 			</div>
-			<Footer />
-		</div>
-		<Cart
-			styles={{
-				zIndex: 9999,
-				borderColor: `#28cefc`,
-				primaryColor: `#28cefc`,
-				overlayColor: `rgba(40,206,252,0.7)`,
-			}}
-			header={<h1>Project Boilerplate</h1>}
-			infoWebhook='/api/inventory/load'
-			splitName={true}
-			plugins={[
-				standardPayment,
-				escaApi,
-			]}
-			totalModifications={[
-				{
-					id: `shipping`,
-					description: `Shipping`,
-					displayValue: `-`,
-				},
-				{
-					id: `tax`,
-					description: `Tax`,
-					displayValue: `-`,
-				},
-			]}
-		/>
-	</>
+			<Cart
+				styles={{
+					zIndex: 9999,
+					borderColor: `#28cefc`,
+					primaryColor: `#28cefc`,
+					overlayColor: `rgba(40,206,252,0.7)`,
+				}}
+				header={<h1>Project Boilerplate</h1>}
+				infoWebhook='/api/inventory/load'
+				splitName={true}
+				plugins={[
+					standardPayment,
+					escaApi,
+				]}
+				totalModifications={[
+					{
+						id: `shipping`,
+						description: `Shipping`,
+						displayValue: `-`,
+					},
+					{
+						id: `tax`,
+						description: `Tax`,
+						displayValue: `-`,
+					},
+				]}
+			/>
+		</>
+	)
 }
 
 const styles = {

@@ -10,7 +10,7 @@ const endpoints = {
 	testing: `https://pricing-test.escsportsapi.com/load`,
 }
 
-async function fetchPrices(ids){
+async function fetchPrices(ids) {
 	console.log(`fetchPrices`, ids)
 	try {
 		const res = await fetch(endpoints.production, {
@@ -38,7 +38,7 @@ async function fetchPrices(ids){
 }
 
 // SSR price and repolls for new price live
-export default function usePrice(){
+export function usePrices() {
 	const [prices, setPrices] = useGlobal(`prices`)
 
 	// Query static data
@@ -52,7 +52,7 @@ export default function usePrice(){
 
 	// Poll live data
 	useEffect(() => {
-		if(typeof window !== `undefined` && !polling){
+		if (typeof window !== `undefined` && !polling) {
 			polling = true
 			fetchPrices(ids)
 		}
@@ -66,6 +66,11 @@ export default function usePrice(){
 
 	return [prices || graphqlPrices, setPrices]
 
+}
+
+export function WithPrices({ children }) {
+	console.log(`WithPrices`)
+	return children
 }
 
 const query = graphql`
