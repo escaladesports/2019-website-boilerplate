@@ -1,7 +1,19 @@
 [build]
 	command = "yarn build"
-	publish = "packages/gatsby/public/"
+	publish = "public/"
 	functions = "packages/netlify-functions/dist/"
+
+[[redirects]]
+	from = "/admin/*"
+	to = "/admin/index.html"
+	status = 200
+	force = true
+
+[[redirects]]
+	from = "/admin"
+	to = "/admin/index.html"
+	status = 200
+	force = true
 
 [[redirects]]
 	from = "/api/inventory/load"

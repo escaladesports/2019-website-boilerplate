@@ -132,28 +132,17 @@ module.exports = {
 				feeds: [
 					{
 						query: `{
-							allMarkdownRemark(
+							allSanityPost(
 								limit: 1000,
-								sort: { order: DESC, fields: [frontmatter___date]},
-								filter: {
-									fileAbsolutePath: {
-										regex: "/src/markdown/blog/"
-									}
-									frontmatter: {
-										published: { eq: true }
-									}
-								}
+								sort: { order: DESC, fields: [date]}
 							){
 								edges{
 									node{
-										excerpt
-										html
-										fields{
-											path
-										}
-										frontmatter{
-											title
-											date
+										_rawBody
+										title
+										date
+										slug{
+											current
 										}
 									}
 								}
@@ -164,22 +153,22 @@ module.exports = {
 								site: {
 									siteMetadata: { siteUrl },
 								},
-								allMarkdownRemark: { edges },
+								allSanityPost: { edges },
 							},
 						}) => {
 							return edges.map(
 								({
 									node: {
-										html,
-										frontmatter,
-										fields: { path },
+										_rawBody,
+										slug,
+										...props
 									},
 								}) => {
 									return {
-										...frontmatter,
-										url: `${siteUrl}${path}`,
-										guid: `${siteUrl}${path}`,
-										custom_elements: [{ 'content:encoded': html }],
+										...props,
+										url: `${siteUrl}/${slug}`,
+										guid: `${siteUrl}/${slug}`,
+										custom_elements: [{ 'content:encoded': `${sanityToExcerpt(_rawBody, 15)}...` }],
 									}
 								}
 							)
@@ -211,7 +200,7 @@ module.exports = {
 						({
 							node: {
 								id,
-								_rawBody: { en },
+								_rawBody,
 								title,
 								slug: { current },
 							},
@@ -219,12 +208,12 @@ module.exports = {
 							return {
 								id,
 								index: {
-									body: sanityToExcerpt(en),
+									body: sanityToExcerpt(_rawBody),
 									title,
 								},
 								store: {
 									title,
-									excerpt: sanityToExcerpt(en, 15),
+									excerpt: sanityToExcerpt(_rawBody, 15),
 									path: current,
 								},
 							}

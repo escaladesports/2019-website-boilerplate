@@ -6,7 +6,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --use-workspaces",
     "build": "lerna run build --stream --no-sort --concurrency 999",
-    "clean": "lerna run clean --stream --no-sort --concurrency 999",
+    "postbuild": "cp -r ./packages/gatsby-site/public ./public && cp -r ./packages/sanity-cms/dist ./public/admin",
+    "clean": "rm -rf public && lerna run clean --stream --no-sort --concurrency 999",
     "deploy": "lerna run deploy --stream --no-sort --concurrency 999",
     "dev": "lerna run dev --parallel --concurrency 999",
     "lint": "eslint ./",
