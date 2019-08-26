@@ -4,16 +4,19 @@
 	functions = "packages/netlify-functions/dist/"
 
 [[redirects]]
+	from = "/admin/static/*"
+	to = "/admin/static/:splat"
+	status = 200
+
+[[redirects]]
 	from = "/admin/*"
 	to = "/admin/index.html"
 	status = 200
-	force = true
 
 [[redirects]]
 	from = "/admin"
 	to = "/admin/index.html"
 	status = 200
-	force = true
 
 [[redirects]]
 	from = "/api/inventory/load"
