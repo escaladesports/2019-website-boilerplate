@@ -1,18 +1,19 @@
 import React from 'react'
+// import React, { useContext } from 'react'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
-import { useCounter } from 'gatsby-site/src/state/counter'
+// import { Context } from 'gatsby-site/src/state/counter'
 
 export default function Footer(){
-	const [count, setCounter] = useCounter()
+	// const [count, setCounter] = useContext(Context)
 	return (
 		<footer css={styles.footerStyles}>
 			<ul>
-				<li><button onClick={() => {
+				{/* <li><button onClick={() => {
 					const newState = count + 1
 					console.log(`newState`, newState)
 					setCounter(newState)
-				}}>inc</button></li>
+				}}>Increment</button></li> */}
 				<li><Link to='/privacy-policy'>Privacy Policy</Link></li>
 				<li><a href='/email-templates/cms-invitation'>Email Template</a></li>
 				<li><a href='/admin/'>CMS</a></li>

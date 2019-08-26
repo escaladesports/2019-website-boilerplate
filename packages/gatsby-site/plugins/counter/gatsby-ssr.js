@@ -1,7 +1,10 @@
-import React from 'react'
-import { WithCounter } from '../../src/state/counter'
+const React = require(`react`)
+const { WithCounter } = require(`../../src/state/counter`)
 
-export function wrapRootElement({ element }) {
+console.log(`GATSBY SSR`)
+
+exports.wrapRootElement = ({ element }) => {
+	console.log(`GATSBY SSR WRAPROOTELEMENT`)
 	return (
 		<WithCounter>
 			{element}

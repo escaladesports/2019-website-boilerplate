@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useGlobal } from 'reactn'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
@@ -6,12 +6,12 @@ import Close from '@material-ui/icons/Close'
 import { openCart } from '@escaladesports/zygote-cart'
 import { logout, login } from 'utils/auth'
 import { primaryColor } from 'config/colors'
-import { useCounter } from 'gatsby-site/src/state/counter'
+import { Context } from 'gatsby-site/src/state/counter'
 
 export default function Header(){
 	const [open, setOpen] = useState(false)
 	const [user] = useGlobal(`user`)
-	const [count] = useCounter()
+	const [count] = useContext(Context)
 
 	const toggle = () => {
 		setOpen(!open)

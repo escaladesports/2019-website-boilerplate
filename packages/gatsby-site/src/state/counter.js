@@ -3,7 +3,7 @@ import React, { useReducer, createContext, useContext } from 'react'
 const initialState = 0
 const dispatch = (_, state) => state
 
-const Context = createContext()
+export const Context = createContext()
 
 export function WithCounter({ children }) {
 	console.log(`WithCounter`)
