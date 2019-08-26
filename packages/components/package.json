@@ -11,18 +11,19 @@
     "color": "^3.1.2",
     "formik": "^1.5.8",
     "isomorphic-fetch": "^2.2.1",
-    "leaflet": "^1.5.1",
     "moment": "^2.24.0",
     "react-google-invisible-recaptcha": "^0.2.11",
     "react-gravatar": "^2.6.3",
     "react-helmet": "^5.2.1",
     "react-html-email": "^3.0.0",
-    "react-leaflet-markercluster": "^1.1.8",
     "ultimate-pagination": "^1.0.0",
     "yup": "^0.27.0"
   },
   "peerDependencies": {
+    "gatsby": "*",
+    "leaflet": "*",
     "react": "*",
+    "react-leaflet-markercluster": "*",
     "reactn": "*"
   }
 }
