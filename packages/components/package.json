@@ -20,6 +20,7 @@
     "yup": "^0.27.0"
   },
   "peerDependencies": {
+    "gatsby": "*",
     "leaflet": "*",
     "react": "*",
     "react-leaflet-markercluster": "*",
