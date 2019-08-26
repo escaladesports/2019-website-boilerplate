@@ -19,7 +19,7 @@ module.exports = {
 		siteUrl,
 	},
 	plugins: [
-		// `gatsby-plugin-emotion`,
+		`gatsby-plugin-emotion`,
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
