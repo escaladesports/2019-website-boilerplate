@@ -1,13 +1,20 @@
 import React from 'react'
 import { WithCounter } from '../../src/state/counter'
 
-console.log(`GATSBY SSR`)
+console.log(`\n\n\nGATSBY SSR\n\n\n`)
 
-export function wrapRootElement({ element }) {
+export const wrapRootElement = ({ element }) => {
 	console.log(`GATSBY SSR WRAPROOTELEMENT`)
 	return (
 		<WithCounter>
 			{element}
 		</WithCounter>
 	)
+}
+
+export const onRenderBody = ({ setPreBodyComponents }) => {
+	console.log(`\n\n\nONRENDERBODY\n\n\n`)
+	setPreBodyComponents([
+		<div key='test'>TEST</div>,
+	])
 }

@@ -13,6 +13,8 @@ module.exports = async function({
 	const res = await fetch(endpoints[env] || endpoints.production, {
 		headers: {
 			'ESC-API-Context': siteId,
+			'ESC-API-Key': process.env.ESCA_API_KEY,
+			'X-API-Key': process.env.X_API_KEY,
 		},
 		method: `POST`,
 		body: JSON.stringify({
