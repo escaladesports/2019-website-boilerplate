@@ -6,7 +6,6 @@ const dispatch = (_, state) => state
 export const Context = createContext()
 
 export function WithCounter({ children }) {
-	console.log(`WithCounter`)
 	const [store, setState] = useReducer(dispatch, initialState)
 	return (
 		<Context.Provider value={[store, setState]}>
@@ -16,8 +15,5 @@ export function WithCounter({ children }) {
 }
 
 export function useCounter(){
-	console.log(`USECOUNTER`)
-	const context = useContext(Context)
-	console.log(`CONTEXT`, context)
-	return context
+	return useContext(Context)
 }

@@ -42,7 +42,6 @@ export function WithPrices({ children }) {
 			{children}
 		</Context.Provider>
 	)
-
 }
 
 export function usePrices() {

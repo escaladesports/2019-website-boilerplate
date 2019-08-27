@@ -28,7 +28,6 @@ export default function Layout({
 	description,
 	children,
 }) {
-	console.log(`Default layout render`)
 	return (
 		<>
 			<Helmet>

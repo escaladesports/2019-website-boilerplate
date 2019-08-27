@@ -1,0 +1,9 @@
+{
+	"presets": [
+		"babel-preset-gatsby",
+		["boilerplate", {
+			"modules": "auto",
+			"targets": "> 0.25%, not dead"
+		}]
+	]
+}
