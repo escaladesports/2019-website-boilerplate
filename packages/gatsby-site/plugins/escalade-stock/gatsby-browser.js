@@ -1,5 +1,5 @@
 import { setGlobal } from 'reactn'
-import fetch from './fetch'
+import fetch from './browser-fetch'
 
 const pollInterval = 10 * 60 * 1000	// Minutes
 

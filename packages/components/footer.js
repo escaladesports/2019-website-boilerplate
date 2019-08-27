@@ -1,11 +1,18 @@
 import React from 'react'
 import { css } from '@emotion/core'
 import { Link } from 'gatsby'
+import { useCounter } from 'gatsby-site/src/state/counter'
 
 export default function Footer(){
+	const [count, setCounter] = useCounter()
 	return (
 		<footer css={styles.footerStyles}>
 			<ul>
+				<li><button onClick={() => {
+					const newState = count + 1
+					console.log(`newState`, newState)
+					setCounter(newState)
+				}}>Increment</button></li>
 				<li><Link to='/privacy-policy'>Privacy Policy</Link></li>
 				<li><a href='/email-templates/cms-invitation'>Email Template</a></li>
 				<li><a href='/admin/'>CMS</a></li>

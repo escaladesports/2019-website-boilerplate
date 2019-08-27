@@ -62,14 +62,14 @@ export default function PostTemplate({
 			<div>
 				{nextPost && (
 					<div css={styles.next}>
-						<Link to={nextPost.slug.current}>
+						<Link to={`/${nextPost.slug.current}`}>
 							Next Post: {nextPost.title}
 						</Link>
 					</div>
 				)}
 				{previousPost && (
 					<div>
-						<Link to={previousPost.slug.current}>
+						<Link to={`/${previousPost.slug.current}`}>
 							Previous Post: {previousPost.title}
 						</Link>
 					</div>

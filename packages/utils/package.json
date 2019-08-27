@@ -5,8 +5,10 @@
   "scripts": {
     "build": "echo 'No build script'",
     "clean": "rm -rf .cache",
+    "dev": "echo 'No dev script'",
     "patch": "node patch-netlify-toml",
     "prebuild": "run-p patch prefetch",
+    "predev": "yarn run prebuild",
     "prefetch": "node prefetch-sanity"
   },
   "dependencies": {

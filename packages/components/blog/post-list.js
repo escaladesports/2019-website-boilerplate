@@ -26,15 +26,17 @@ export default function PostList({
 				return (
 					<li key={`blog${index}`}>
 						<h2>
-							<Link to={current}>
+							<Link to={`/${current}`}>
 								{title}
 							</Link>
 						</h2>
-						<time dateTime={date}>{moment(date).format(`MMMM Do YYYY`)}</time>
+						<time dateTime={date}>
+							{moment(date).format(`MMMM Do YYYY`)}
+						</time>
 						<TagList tags={tags} />
 						<p>{sanityToExcerpt(_rawBody, 40)}...</p>
 						<div>
-							<Link to={current}>
+							<Link to={`/${current}`}>
 								Read More
 							</Link>
 						</div>

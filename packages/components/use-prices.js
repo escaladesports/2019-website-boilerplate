@@ -5,18 +5,19 @@ import fetch from 'isomorphic-fetch'
 const pollInterval = 1 * 60 * 1000	// Minutes
 let polling = false
 const endpoints = {
-	production: `https://m570gzyn6h.execute-api.us-east-1.amazonaws.com/production/`,
-	testing: `https://7el25d5l16.execute-api.us-east-1.amazonaws.com/dev/`,
+	production: `https://pricing.escsportsapi.com/load`,
+	testing: `https://pricing-test.escsportsapi.com/load`,
 }
 
 async function fetchPrices(ids, setPrices) {
 	try {
 		const res = await fetch(endpoints.production, {
+			headers: {
+				'ESC-API-Context': process.env.GATSBY_ESCA_API_SITE,
+			},
 			method: `POST`,
 			body: JSON.stringify({
 				skus: ids,
-				site: process.env.GATSBY_ESCA_API_SITE,
-				url: `https://pricing.escsportsapi.com/load`,
 			}),
 		})
 		const { prices } = await res.json()
@@ -41,7 +42,6 @@ export function WithPrices({ children }) {
 			{children}
 		</Context.Provider>
 	)
-
 }
 
 export function usePrices() {
@@ -62,8 +62,7 @@ export function usePrices() {
 			polling = true
 			fetchPrices(ids, setPrices)
 		}
-	}, [])
-
+	})
 
 	return [prices || graphqlPrices, setPrices]
 }
