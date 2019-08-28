@@ -47,15 +47,15 @@ export function WithPrices({ children }) {
 export function usePrices() {
 	const { allEscaladePricing } = useStaticQuery(query)
 
-	const [graphqlPrices, ids] = useMemo(() => {
+	const [cachedPrices, ids] = useMemo(() => {
 		// Query static data
-		const graphqlPrices = {}
+		const cachedPrices = {}
 		const ids = []
 		allEscaladePricing.edges.forEach(({ node }) => {
 			ids.push(node.productId)
-			graphqlPrices[node.productId] = node
+			cachedPrices[node.productId] = node
 		})
-		return [graphqlPrices, ids]
+		return [cachedPrices, ids]
 	})
 
 	const [prices, setPrices] = useContext(Context)
@@ -68,7 +68,7 @@ export function usePrices() {
 		}
 	}, [])
 
-	return [Object.keys(prices).length ? prices : graphqlPrices, setPrices]
+	return [Object.keys(prices).length ? prices : cachedPrices, setPrices]
 }
 
 const query = graphql`

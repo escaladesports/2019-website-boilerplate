@@ -17,6 +17,9 @@ export default function ProductTemplate({
 			variants = [],
 			_rawBody,
 		} = {},
+		escaladePricing: {
+			price: cachedPrice,
+		} = {},
 	} = {},
 }) {
 	const [prices] = usePrices()
@@ -24,7 +27,8 @@ export default function ProductTemplate({
 	const { id } = defaultProductVariant
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)
 	const allVariants = [defaultProductVariant, ...variants]
-	const price = prices[id] ? prices[id].price : false
+	const livePrice = prices[id] ? prices[id].price : false
+	const price = livePrice || cachedPrice
 
 	const { images = [] } = selectedProduct
 	const imageRatio = [16, 9]
@@ -99,7 +103,7 @@ export default function ProductTemplate({
 }
 
 export const query = graphql`
-	query ProductTemplate($id: String!) {
+	query ProductTemplate($id: String!, $sku: String!) {
 		sanityProduct(
 			id: { eq: $id }
 		){
@@ -135,6 +139,13 @@ export const query = graphql`
 					}
 				}
 			}
+		}
+
+		escaladePricing(
+			productId: { eq: $sku }
+		){
+				productId
+				price
 		}
 	}
 `

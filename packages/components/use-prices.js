@@ -45,9 +45,10 @@ export function WithPrices({ children }) {
 }
 
 export function usePrices() {
+	const { allEscaladePricing } = useStaticQuery(query)
+
 	// Query static data
 	const [graphqlPrices, ids] = useMemo(() => {
-		const { allEscaladePricing } = useStaticQuery(query)
 		const graphqlPrices = {}
 		const ids = []
 		allEscaladePricing.edges.forEach(({ node }) => {
