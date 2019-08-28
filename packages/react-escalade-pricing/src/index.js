@@ -36,5 +36,5 @@ export function usePrices(id, ids) {
 		}
 	})
 
-	return [id ? prices[id] : prices, setPrices]
+	return [id ? prices[id]?.price : prices, setPrices]
 }
