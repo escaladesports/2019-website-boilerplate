@@ -18,7 +18,7 @@ export function WithPrices({ children }) {
 
 }
 
-export function usePrices(id, ids) {
+export function usePrices(id, ids, endpoint) {
 
 	// If fetching all pricing
 	if(!ids && typeof id === `object`){
@@ -32,7 +32,7 @@ export function usePrices(id, ids) {
 	useEffect(() => {
 		if (typeof window !== `undefined` && !polling && ids) {
 			polling = true
-			fetchPrices(ids, setPrices)
+			fetchPrices(ids, setPrices, endpoint)
 		}
 	})
 
