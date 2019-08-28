@@ -1,4 +1,4 @@
-import React, { useReducer, createContext, useContext, useEffect } from 'react'
+import React, { useReducer, createContext, useContext, useEffect, useMemo } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import fetch from 'isomorphic-fetch'
 
@@ -45,13 +45,17 @@ export function WithPrices({ children }) {
 }
 
 export function usePrices() {
-	// Query static data
-	const { allEscaladePricing: { edges } } = useStaticQuery(query)
-	const graphqlPrices = {}
-	const ids = []
-	edges.forEach(({ node }) => {
-		ids.push(node.productId)
-		graphqlPrices[node.productId] = node
+	const { allEscaladePricing } = useStaticQuery(query)
+
+	const [cachedPrices, ids] = useMemo(() => {
+		// Query static data
+		const cachedPrices = {}
+		const ids = []
+		allEscaladePricing.edges.forEach(({ node }) => {
+			ids.push(node.productId)
+			cachedPrices[node.productId] = node
+		})
+		return [cachedPrices, ids]
 	})
 
 	const [prices, setPrices] = useContext(Context)
@@ -64,8 +68,7 @@ export function usePrices() {
 		}
 	}, [])
 
-
-	return [prices || graphqlPrices, setPrices]
+	return [Object.keys(prices).length ? prices : cachedPrices, setPrices]
 }
 
 const query = graphql`

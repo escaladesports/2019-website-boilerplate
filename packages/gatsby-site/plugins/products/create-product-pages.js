@@ -11,6 +11,9 @@ module.exports = async function(createPage, graphql){
 					slug {
 						current
 					}
+					defaultProductVariant{
+						sku
+					}
 				}
 			}
 		}
@@ -28,6 +31,7 @@ module.exports = async function(createPage, graphql){
 			component,
 			context: {
 				id: node.id,
+				sku: node.defaultProductVariant.sku,
 			},
 		})
 	})

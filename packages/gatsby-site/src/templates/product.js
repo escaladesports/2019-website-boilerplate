@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import { addToCart } from '@escaladesports/zygote-cart'
 import Img from 'gatsby-image'
 import Layout from 'components/layouts/default'
-// import { usePrices } from 'components/use-prices'
+import { usePrices } from 'components/use-prices'
 import Stock from '../components/stock'
 import Carousel from 'components/photo-carousel'
 import sanityToExcerpt from 'utils/sanity-to-excerpt'
@@ -17,15 +17,18 @@ export default function ProductTemplate({
 			variants = [],
 			_rawBody,
 		} = {},
+		escaladePricing: {
+			price: cachedPrice,
+		} = {},
 	} = {},
 }) {
-	// const [prices] = usePrices()
-	const prices = {}
+	const [prices] = usePrices()
 	const excerpt = sanityToExcerpt(_rawBody, 15)
 	const { id } = defaultProductVariant
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)
 	const allVariants = [defaultProductVariant, ...variants]
-	const price = prices[id] ? prices[id].price : false
+	const livePrice = prices[id] ? prices[id].price : false
+	const price = livePrice || cachedPrice
 
 	const { images = [] } = selectedProduct
 	const imageRatio = [16, 9]
@@ -36,13 +39,16 @@ export default function ProductTemplate({
 			<h1>{title}</h1>
 
 			{!!images.length && (
-				<Carousel ratio={imageRatio} slides={images.map(({ asset: { fluid }}, index) => (
-					<Img
-						key={`img${index}`}
-						fluid={fluid}
-						alt={`${title} ${index + 1}`}
-					/>
-				))} />
+				<Carousel
+					ratio={imageRatio}
+					slides={images.map(({ asset: { fluid }}, index) => (
+						<Img
+							key={`img${index}`}
+							fluid={fluid}
+							alt={`${title} ${index + 1}`}
+						/>
+					))}
+				/>
 			)}
 
 			<ul>
@@ -97,7 +103,7 @@ export default function ProductTemplate({
 }
 
 export const query = graphql`
-	query ProductTemplate($id: String!) {
+	query ProductTemplate($id: String!, $sku: String!) {
 		sanityProduct(
 			id: { eq: $id }
 		){
@@ -133,6 +139,13 @@ export const query = graphql`
 					}
 				}
 			}
+		}
+
+		escaladePricing(
+			productId: { eq: $sku }
+		){
+				productId
+				price
 		}
 	}
 `
