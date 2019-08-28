@@ -3,7 +3,7 @@ import { graphql } from 'gatsby'
 import { addToCart } from '@escaladesports/zygote-cart'
 import Img from 'gatsby-image'
 import Layout from 'components/layouts/default'
-// import { usePrices } from 'components/use-prices'
+import { usePrices } from 'components/use-prices'
 import Stock from '../components/stock'
 import Carousel from 'components/photo-carousel'
 import sanityToExcerpt from 'utils/sanity-to-excerpt'
@@ -19,8 +19,7 @@ export default function ProductTemplate({
 		} = {},
 	} = {},
 }) {
-	// const [prices] = usePrices()
-	const prices = {}
+	const [prices] = usePrices()
 	const excerpt = sanityToExcerpt(_rawBody, 15)
 	const { id } = defaultProductVariant
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)
@@ -36,13 +35,16 @@ export default function ProductTemplate({
 			<h1>{title}</h1>
 
 			{!!images.length && (
-				<Carousel ratio={imageRatio} slides={images.map(({ asset: { fluid }}, index) => (
-					<Img
-						key={`img${index}`}
-						fluid={fluid}
-						alt={`${title} ${index + 1}`}
-					/>
-				))} />
+				<Carousel
+					ratio={imageRatio}
+					slides={images.map(({ asset: { fluid }}, index) => (
+						<Img
+							key={`img${index}`}
+							fluid={fluid}
+							alt={`${title} ${index + 1}`}
+						/>
+					))}
+				/>
 			)}
 
 			<ul>
