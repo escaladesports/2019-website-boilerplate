@@ -3,11 +3,12 @@ import { graphql } from 'gatsby'
 import { addToCart } from '@escaladesports/zygote-cart'
 import Img from 'gatsby-image'
 import Layout from 'components/layouts/default'
-import { usePrices } from 'components/use-prices'
+import { usePrices } from 'react-escalade-pricing'
 import Stock from '../components/stock'
 import Carousel from 'components/photo-carousel'
 import sanityToExcerpt from 'utils/sanity-to-excerpt'
 import SanityBlock from 'components/sanity-block'
+import productIds from 'utils/.cache/product-ids.json'
 
 export default function ProductTemplate({
 	data: {
@@ -22,13 +23,13 @@ export default function ProductTemplate({
 		} = {},
 	} = {},
 }) {
-	const [prices] = usePrices()
 	const excerpt = sanityToExcerpt(_rawBody, 15)
 	const { id } = defaultProductVariant
+	const [livePrice] = usePrices(id, productIds)
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)
 	const allVariants = [defaultProductVariant, ...variants]
-	const livePrice = prices[id] ? prices[id].price : false
 	const price = livePrice || cachedPrice
+	console.log(`price`, price)
 
 	const { images = [] } = selectedProduct
 	const imageRatio = [16, 9]
