@@ -1,5 +1,5 @@
 {
-  "name": "@escaladesports/react-escalade-pricing",
+  "name": "@escaladesports/react-escalade-inventory",
   "version": "0.0.0",
   "main": "dist/index.js",
   "scripts": {

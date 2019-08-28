@@ -3,11 +3,12 @@ import { graphql } from 'gatsby'
 import { addToCart } from '@escaladesports/zygote-cart'
 import Img from 'gatsby-image'
 import Layout from 'components/layouts/default'
-import { usePrices } from 'components/use-prices'
-import Stock from '../components/stock'
+import { usePrices } from '@escaladesports/react-escalade-pricing'
+import { useInventory } from '@escaladesports/react-escalade-inventory'
 import Carousel from 'components/photo-carousel'
 import sanityToExcerpt from 'utils/sanity-to-excerpt'
 import SanityBlock from 'components/sanity-block'
+import productIds from 'utils/.cache/product-ids.json'
 
 export default function ProductTemplate({
 	data: {
@@ -20,15 +21,19 @@ export default function ProductTemplate({
 		escaladePricing: {
 			price: cachedPrice,
 		} = {},
+		escaladeInventory: {
+			stock: cachedInventory,
+		} = {},
 	} = {},
 }) {
-	const [prices] = usePrices()
 	const excerpt = sanityToExcerpt(_rawBody, 15)
 	const { id } = defaultProductVariant
+	const [livePrice] = usePrices(id, productIds)
+	const [liveInventory] = useInventory(id, productIds)
 	const [selectedProduct, setSelectedProduct] = useState(defaultProductVariant)
 	const allVariants = [defaultProductVariant, ...variants]
-	const livePrice = prices[id] ? prices[id].price : false
 	const price = livePrice || cachedPrice
+	const inventory = liveInventory || cachedInventory
 
 	const { images = [] } = selectedProduct
 	const imageRatio = [16, 9]
@@ -89,12 +94,8 @@ export default function ProductTemplate({
 					<li>Price: ${price}</li>
 				)}
 				<li>
-					<Stock id={selectedProduct.id}>
-						{stock => <>
-							{!!stock && `In stock`}
-							{!stock && `Out of stock`}
-						</>}
-					</Stock>
+					{!!inventory && `In stock`}
+					{!inventory && `Out of stock`}
 				</li>
 			</ul>
 			<SanityBlock body={_rawBody} />
@@ -144,8 +145,13 @@ export const query = graphql`
 		escaladePricing(
 			productId: { eq: $sku }
 		){
-				productId
 				price
+		}
+
+		escaladeInventory(
+			productId: { eq: $sku }
+		){
+			stock
 		}
 	}
 `

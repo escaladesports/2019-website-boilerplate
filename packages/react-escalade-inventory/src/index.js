@@ -1,5 +1,5 @@
 import React, { useReducer, createContext, useContext, useEffect } from 'react'
-import fetchPrices from './fetch'
+import fetchInventory from './fetch'
 
 let polling = false
 
@@ -8,33 +8,33 @@ const dispatch = (_, state) => state
 const Context = createContext()
 
 // SSR price and repolls for new price live
-export function WithPrices({ children }) {
-	const [prices, setPrices] = useReducer(dispatch, {})
+export function WithInventory({ children }) {
+	const [inventory, setInventory] = useReducer(dispatch, {})
 	return (
-		<Context.Provider value={[prices, setPrices]}>
+		<Context.Provider value={[inventory, setInventory]}>
 			{children}
 		</Context.Provider>
 	)
 
 }
 
-export function usePrices(id, ids, endpoint) {
+export function useInventory(id, ids) {
 
-	// If fetching all pricing
+	// If fetching all inventory
 	if(!ids && typeof id === `object`){
 		ids = id
 		id = null
 	}
 
-	const [prices, setPrices] = useContext(Context)
+	const [inventory, setInventory] = useContext(Context)
 
 	// Poll live data
 	useEffect(() => {
 		if (typeof window !== `undefined` && !polling && ids) {
 			polling = true
-			fetchPrices(ids, setPrices, endpoint)
+			fetchInventory(ids, setInventory)
 		}
 	})
 
-	return [id ? prices[id]?.price : prices, setPrices]
+	return [id ? inventory[id] ?.inventory : inventory, setInventory]
 }

@@ -1,0 +1,13 @@
+{
+	"presets": [
+		[
+			"boilerplate",
+			{
+				"modules": "auto",
+				"targets": {
+					"node": "8.10"
+				}
+			}
+		]
+	]
+}
