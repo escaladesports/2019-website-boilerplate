@@ -24,7 +24,7 @@ module.exports = {
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
 		{
-			resolve: `escalade-stock`,
+			resolve: `escalade-inventory`,
 			options: {
 				ids: productIds,
 				siteId: GATSBY_ESCA_API_SITE,

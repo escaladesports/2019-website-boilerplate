@@ -1,5 +1,5 @@
 import React from 'react'
-import { WithPrices } from 'react-escalade-pricing'
+import { WithPrices } from '@escaladesports/react-escalade-pricing'
 
 export function wrapRootElement({ element }) {
 	return (
