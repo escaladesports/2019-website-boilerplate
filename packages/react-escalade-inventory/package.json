@@ -1,0 +1,26 @@
+{
+  "name": "@escaladesports/react-escalade-inventory",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "echo 'No build script'",
+    "build:babel": "babel src --out-dir dist",
+    "clean": "rm -rf dist",
+    "dev": "babel src --out-dir dist --watch",
+    "prebuild": "run-s clean build:babel",
+    "predev": "run-s clean build:babel",
+    "prepublishOnly": "yarn run build"
+  },
+  "peerDependencies": {
+    "react": "*"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.5.5",
+    "isomorphic-fetch": "^2.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "npm-run-all": "^4.1.5"
+  }
+}
