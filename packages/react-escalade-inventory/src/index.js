@@ -18,7 +18,7 @@ export function WithInventory({ children }) {
 
 }
 
-export function useInventory(id, ids) {
+export function useInventory(id, ids, endpoint) {
 
 	// If fetching all inventory
 	if(!ids && typeof id === `object`){
@@ -32,7 +32,7 @@ export function useInventory(id, ids) {
 	useEffect(() => {
 		if (typeof window !== `undefined` && !polling && ids) {
 			polling = true
-			fetchInventory(ids, setInventory)
+			fetchInventory(ids, setInventory, endpoint)
 		}
 	})
 
