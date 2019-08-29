@@ -23,7 +23,7 @@ console.log(prices) // "9.99"
 console.log(prices)
 // {
 //  kz123: {prices: "9.99", formatted: "$9.99"}
-//	kz124: {prices: "1.99", formatted: "$1.99"}
+//	 kz124: {prices: "1.99", formatted: "$1.99"}
 // }
 ```
 
