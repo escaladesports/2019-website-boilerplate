@@ -15,6 +15,7 @@ export default async function fetchPrices(ids, setPrices, endpoint) {
 			}),
 		})
 		const { prices } = await res.json()
+		console.log(prices)
 		setPrices(prices)
 	}
 	catch (err) {
