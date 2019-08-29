@@ -22,8 +22,8 @@ console.log(prices) // "9.99"
 // multiple ids
 console.log(prices)
 // {
-//  kz123: {prices: "9.99", formatted: "$9.99"}
-//  kz124: {prices: "1.99", formatted: "$1.99"}
+//   kz123: {prices: "9.99", formatted: "$9.99"}
+//   kz124: {prices: "1.99", formatted: "$1.99"}
 // }
 ```
 
@@ -31,12 +31,12 @@ console.log(prices)
 
 ```jsx
 <button
- onClick={() => setPrices({
-  ...prices,
-  kz123: { prices: "8.99", formatted: "$8.99" }
- })}
+  onClick={() => setPrices({
+    ...prices,
+    kz123: { prices: "8.99", formatted: "$8.99" }
+  })}
 >
- Change Prices
+  Change Prices
 </button>
 ```
 
