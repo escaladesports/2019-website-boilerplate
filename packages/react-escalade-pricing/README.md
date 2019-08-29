@@ -31,12 +31,12 @@ console.log(prices)
 
 ```jsx
 <button
- onClick={() => setPrices({
-  ...prices,
-  kz123: { prices: "8.99", formatted: "$8.99" }
- })}
+  onClick={() => setPrices({
+    ...prices,
+    kz123: { prices: "8.99", formatted: "$8.99" }
+  })}
 >
- Change Prices
+  Change Prices
 </button>
 ```
 
