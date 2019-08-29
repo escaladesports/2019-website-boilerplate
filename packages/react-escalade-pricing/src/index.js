@@ -3,23 +3,22 @@ import fetchPrices from './fetch'
 
 let polling = false
 
-const dispatch = (_, state) => state
+const reducer = (_, action) => action
 
 const Context = createContext()
 
 // SSR price and repolls for new price live
 export function WithPrices({ children }) {
-	const [prices, setPrices] = useReducer(dispatch, {})
+	const [prices, setPrices] = useReducer(reducer, {})
+
 	return (
 		<Context.Provider value={[prices, setPrices]}>
 			{children}
 		</Context.Provider>
 	)
-
 }
 
-export function usePrices(id, ids) {
-
+export function usePrices(id, ids, endpoint) {
 	// If fetching all pricing
 	if(!ids && typeof id === `object`){
 		ids = id
@@ -32,7 +31,7 @@ export function usePrices(id, ids) {
 	useEffect(() => {
 		if (typeof window !== `undefined` && !polling && ids) {
 			polling = true
-			fetchPrices(ids, setPrices)
+			fetchPrices(ids, setPrices, endpoint)
 		}
 	})
 

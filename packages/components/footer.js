@@ -3,6 +3,8 @@ import { css } from '@emotion/core'
 import { Link } from 'gatsby'
 import { useCounter } from 'gatsby-site/src/state/counter'
 
+
+
 export default function Footer(){
 	const [count, setCounter] = useCounter()
 	return (

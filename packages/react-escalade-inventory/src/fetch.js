@@ -17,7 +17,7 @@ export default async function fetchInventory(ids, setInventory) {
 			}),
 		})
 		const data = await res.json()
-		console.log(`data`, data)
+		// console.log(`data`, data)
 		const { inventory } = data
 		setInventory(inventory)
 	}
