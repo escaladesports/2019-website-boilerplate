@@ -30,6 +30,7 @@ module.exports = {
 		graphql: true,
 		window: true,
 		document: true,
+		localStorage: true,
 	},
 	rules: {
 		indent: [

@@ -1,6 +1,6 @@
 {
 	"presets": [
-		"babel-preset-gatsby",
+		"gatsby",
 		["escalade", {
 			"modules": "auto",
 			"targets": "> 0.25%, not dead"

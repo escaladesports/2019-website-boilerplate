@@ -22,7 +22,8 @@
     "@sanity/client": "^0.142.0",
     "babel-preset-gatsby": "^0.2.8",
     "gatsby": "^2.13.80",
-    "gatsby-source-sanity": "^5.0.2"
+    "gatsby-source-sanity": "^5.0.2",
+    "isomorphic-fetch": "^2.2.1"
   },
   "main": "dist/index.js",
   "devDependencies": {
@@ -88,7 +89,6 @@
     "react-html-email": "^3.0.0",
     "react-leaflet": "^2.4.0",
     "react-leaflet-markercluster": "^2.0.0-rc3",
-    "reactn": "^2.1.4",
     "strip-html-comments": "^1.0.0",
     "striptags": "^3.1.1",
     "toml": "^3.0.0",

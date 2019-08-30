@@ -1,7 +1,7 @@
 import React from 'react'
-import { useGlobal } from 'reactn'
 import { css } from '@emotion/core'
 import { object, string } from 'yup'
+import { useAuth } from 'utils/auth'
 import Field from './field'
 import Button from './button'
 import Form from './form'
@@ -10,8 +10,7 @@ import Success from './success-message'
 import Loading from './loading'
 
 export default function ContactForm(){
-	const [user] = useGlobal(`user`)
-	const [loadingUser] = useGlobal(`loadingUser`)
+	const { user, loadingUser } = useAuth()
 	return (
 		<div className='form'>
 			{loadingUser && <Loading />}

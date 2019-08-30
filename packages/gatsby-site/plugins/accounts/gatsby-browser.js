@@ -1,15 +1,18 @@
-import React from 'react'
-import { silentAuth } from 'utils/auth'
+import React, { useEffect } from 'react'
+import { WithAuth, useAuth } from 'utils/auth'
 
-class SessionCheck extends React.Component {
-	componentDidMount() {
-		silentAuth()
-	}
-	render() {
-		return this.props.children
-	}
+function SessionCheck({ children }){
+	const { silentAuth } = useAuth()
+	useEffect(silentAuth, [])
+	return children
 }
 
 export const wrapRootElement = ({ element }) => {
-	return <SessionCheck>{element}</SessionCheck>
+	return (
+		<WithAuth>
+			<SessionCheck>
+				{element}
+			</SessionCheck>
+		</WithAuth>
+	)
 }

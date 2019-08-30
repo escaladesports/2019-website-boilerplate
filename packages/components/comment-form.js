@@ -1,8 +1,8 @@
 import React from 'react'
-import { useGlobal } from 'reactn'
 import { css } from '@emotion/core'
 import { object, string } from 'yup'
 import Gravatar from 'react-gravatar'
+import { useAuth } from 'utils/auth'
 import Field from './field'
 import Button from './button'
 import Form from './form'
@@ -13,8 +13,7 @@ import Loading from './loading'
 const avatarSize = 100
 
 export default function CommentForm({ slug }){
-	const [user] = useGlobal(`user`)
-	const [loadingUser] = useGlobal(`loadingUser`)
+	const { user, loadingUser } = useAuth()
 
 	if (loadingUser) return <Loading />
 	return <Form

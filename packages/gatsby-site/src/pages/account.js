@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useGlobal } from 'reactn'
 import { object, string } from 'yup'
 import Layout from 'components/layouts/default'
 import Field from 'components/field'
@@ -9,14 +8,18 @@ import Error from 'components/error-message'
 import Success from 'components/success-message'
 import Loading from 'components/loading'
 import PasswordChange from 'components/password-change'
-import { login, isAuthenticated, patchUser } from 'utils/auth'
+import { useAuth } from 'utils/auth'
 
 export default function AccountPage(){
-	const [user] = useGlobal(`user`)
-	const [loadingUser] = useGlobal(`loadingUser`)
+	const {
+		user,
+		loadingUser,
+		login,
+		isAuthenticated,
+		patchUser,
+	} = useAuth()
 
 	useEffect(() => {
-		// Redirect to login
 		if (!isAuthenticated()) {
 			login()
 		}
