@@ -4,7 +4,7 @@
 ## Import `useInventory` custom hook into your component
 
 ```jsx
-import { useInventory } from '@escaladesports/react-escalade-inventory'
+import { useInventory } from 'react-escalade-inventory'
 ```
 
 ## Usage

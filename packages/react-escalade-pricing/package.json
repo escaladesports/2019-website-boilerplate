@@ -1,7 +1,12 @@
 {
-  "name": "@escaladesports/react-escalade-pricing",
+  "name": "react-escalade-pricing",
   "version": "0.0.0",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/escaladesports/escalade.git",
+    "directory": "packages/react-escalade-pricing"
+  },
   "scripts": {
     "build": "echo 'No build script'",
     "build:babel": "babel src --out-dir dist",

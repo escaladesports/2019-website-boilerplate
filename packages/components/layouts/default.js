@@ -51,7 +51,7 @@ export default function Layout({
 					primaryColor: `#28cefc`,
 					overlayColor: `rgba(40,206,252,0.7)`,
 				}}
-				header={<h1>Project Boilerplate</h1>}
+				header={<h1>Gatsby Boilerplate</h1>}
 				infoWebhook='/api/inventory/load'
 				splitName={true}
 				plugins={[

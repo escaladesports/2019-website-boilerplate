@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/escaladesports/project-boilerplate.git"
+    "url": "https://github.com/escaladesports/escalade.git",
+    "directory": "packages/gatsby-site"
   },
   "scripts": {
     "prebuild": "yarn run clean",

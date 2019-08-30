@@ -1,6 +1,6 @@
 {
 	"presets": [
-		["boilerplate", {
+		["escalade", {
 			"modules": "auto",
 			"targets": {
 				"node": "8.10"

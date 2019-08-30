@@ -4,7 +4,7 @@
 ## Import `usePrices` custom hook into your component
 
 ```jsx
-import { usePrices } from '@escaladesports/react-escalade-pricing'
+import { usePrices } from 'react-escalade-pricing'
 ```
 
 ## Usage

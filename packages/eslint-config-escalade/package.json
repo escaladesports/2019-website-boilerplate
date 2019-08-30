@@ -1,7 +1,12 @@
 {
-  "name": "eslint-config-boilerplate",
+  "name": "eslint-config-escalade",
   "version": "0.0.0",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/escaladesports/escalade.git",
+    "directory": "packages/eslint-config-escalade"
+  },
   "peerDependencies": {
     "eslint": ">= 3"
   },

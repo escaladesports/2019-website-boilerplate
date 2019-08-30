@@ -1,7 +1,7 @@
 module.exports = {
-	siteUrl: process.env.URL || `https://project-boilerplate.netlify.com`,
+	siteUrl: process.env.URL || `https://escalade.netlify.com`,
 
 	// For comments Lamda function
-	gitHubRepo: `project-boilerplate`,
+	gitHubRepo: `escalade`,
 	gitHubOwner: `escaladesports`,
 }

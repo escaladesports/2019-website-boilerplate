@@ -1,5 +1,5 @@
 {
-  "name": "project-boilerplate",
+  "name": "escalade",
   "author": "Kennedy Rose <krose@escaladesports.com>",
   "license": "MIT",
   "private": true,
@@ -12,7 +12,7 @@
     "dev": "lerna run dev --parallel --concurrency 999",
     "lint": "eslint ./",
     "lint:fix": "eslint ./ --fix",
-    "netlify": "open-cli https://app.netlify.com/sites/project-boilerplate/deploys",
+    "netlify": "open-cli https://app.netlify.com/sites/escalade/deploys",
     "open": "lerna run open --stream --no-sort --concurrency 999",
     "patch": "lerna run patch --stream --no-sort --concurrency 999",
     "serve": "lerna run serve --stream --no-sort --concurrency 999"
