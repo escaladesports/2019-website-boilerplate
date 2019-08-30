@@ -15,6 +15,8 @@ const avatarSize = 100
 export default function CommentForm({ slug }){
 	const { user, loadingUser } = useAuth()
 
+	console.log(`user`, user)
+
 	if (loadingUser) return <Loading />
 	return <Form
 		action='/.netlify/utils/comment-to-markdown'

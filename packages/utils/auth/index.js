@@ -33,6 +33,7 @@ export function WithAuth({ children }) {
 
 	return (
 		<Context.Provider value={{
+			...state,
 			navigateToPrevious,
 			login,
 			logout: logout.bind(null, setState),
