@@ -10,7 +10,6 @@ import { Context } from 'gatsby-site/src/state/counter'
 export default function Header(){
 	const [open, setOpen] = useState(false)
 	const auth = useAuth()
-	console.log(`auth`, auth)
 	const [count] = useContext(Context)
 	const { user, login, logout } = auth
 
