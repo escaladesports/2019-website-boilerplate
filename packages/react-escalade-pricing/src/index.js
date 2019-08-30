@@ -10,7 +10,6 @@ const Context = createContext()
 // SSR price and repolls for new price live
 export function WithPrices({ children }) {
 	const [prices, setPrices] = useReducer(reducer, {})
-
 	return (
 		<Context.Provider value={[prices, setPrices]}>
 			{children}

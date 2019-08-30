@@ -2,27 +2,24 @@ import fetch from 'isomorphic-fetch'
 
 const pollInterval = 1 * 60 * 1000	// Minutes
 const endpoints = {
-	production: `https://m570gzyn6h.execute-api.us-east-1.amazonaws.com/production/`,
-	testing: `https://7el25d5l16.execute-api.us-east-1.amazonaws.com/dev/`,
+	production: `/api/inventory/load`,
+	testing: `/test/api/inventory/load`,
 }
 
-export default async function fetchInventory(ids, setInventory) {
+export default async function fetchInventory(ids, setInventory, endpoint) {
 	try {
-		const res = await fetch(endpoints.production, {
+		const res = await fetch(endpoint || endpoints.production, {
 			method: `POST`,
 			body: JSON.stringify({
 				skus: ids,
-				site: process.env.GATSBY_ESCA_API_SITE,
-				url: `https://inventory.escsportsapi.com/load`,
 			}),
 		})
-		const data = await res.json()
-		// console.log(`data`, data)
-		const { inventory } = data
+		const { inventory } = await res.json()
+		console.log(inventory)
 		setInventory(inventory)
 	}
 	catch (err) {
 		console.error(err)
 	}
-	setTimeout(() => fetchInventory(ids, setInventory), pollInterval)
+	setTimeout(() => fetchInventory(ids, setInventory, endpoint), pollInterval)
 }

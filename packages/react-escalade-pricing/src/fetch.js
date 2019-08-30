@@ -15,11 +15,10 @@ export default async function fetchPrices(ids, setPrices, endpoint) {
 			}),
 		})
 		const { prices } = await res.json()
-		console.log(prices)
 		setPrices(prices)
 	}
 	catch (err) {
 		console.error(err)
 	}
-	setTimeout(() => fetchPrices(ids, setPrices), pollInterval)
+	setTimeout(() => fetchPrices(ids, setPrices, endpoint), pollInterval)
 }

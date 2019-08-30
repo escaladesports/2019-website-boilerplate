@@ -40,5 +40,13 @@ console.log(prices)
 </button>
 ```
 
+## Optional Endpoint
+If you would like to override the default endpoint, you may do so by passing
+a third parameter as a string
+
+```js
+const [ prices, setPrices ] = usePrices(id, productIds, `https://my-custom-pricing-api.com`)
+```
+
 
 
