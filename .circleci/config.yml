@@ -19,7 +19,7 @@ jobs:
           - ~/.cache
       - run:
           name: Build
-          command: echo "GATSBY_ESCA_API_SITE" && echo $GATSBY_ESCA_API_SITE
+          command: yarn run build
 
 workflows:
   version: 2
