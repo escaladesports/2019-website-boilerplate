@@ -22,13 +22,13 @@ async function fetchMetadata(setState, accessToken) {
 	}
 }
 
-export default function setSession(setState, cb = () => {}) {
+export default function setSession(setState, cb = () => { }) {
 	return (err, authResult) => {
 		console.log(`setSession`)
 		if (err) {
 			console.error(err)
 			// Reset user state
-			clearUser()
+			clearUser(setState)
 			cb()
 			return
 		}

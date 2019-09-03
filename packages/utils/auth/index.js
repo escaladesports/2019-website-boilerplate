@@ -1,8 +1,8 @@
 import React, { useReducer, createContext, useContext } from 'react'
 import navigateToPrevious from './navigate-to-previous'
-import isAuthenticated from './is-authenticated'
 import login from './login'
 import logout from './logout'
+import clearUser from './clear-user'
 import changePassword from './change-password'
 import handleAuthentication from './handle-authentication'
 import silentAuth from './silent-auth'
@@ -21,7 +21,7 @@ const dispatch = (oldState, newState) => ({
 	...newState,
 })
 
-const Context = createContext()
+export const Context = createContext()
 
 export function WithAuth({ children }) {
 	const [state, setState] = useReducer(dispatch, initialState)
@@ -31,15 +31,16 @@ export function WithAuth({ children }) {
 			email,
 		} = {},
 	} = state || {}
+
 	return (
 		<Context.Provider value={{
 			...state,
 			navigateToPrevious,
-			isAuthenticated,
 			login,
 			logout: logout.bind(null, setState),
+			clearUser: clearUser.bind(null, setState),
 			changePassword: changePassword.bind(null, email),
-			handleAuthentication: handleAuthentication.bind(null, setState),
+			handleAuthentication,
 			silentAuth: silentAuth.bind(null, setState),
 			setMetadata: setMetadata.bind(null, setState, accessToken),
 			patchUser: patchUser.bind(null, setState, accessToken),
