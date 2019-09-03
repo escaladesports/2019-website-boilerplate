@@ -243,15 +243,17 @@ module.exports = {
 	],
 	developMiddleware: app => {
 		// Proxy lambda endpoints
-		app.use(
-			`/.netlify/functions/`,
-			proxy({
-				target: `http://localhost:9000`,
-				pathRewrite: {
-					'/.netlify/functions': ``,
-				},
-			})
-		)
+		app.use(`/.netlify/functions/`, proxy({
+			target: `http://localhost:9000`,
+			pathRewrite: {
+				'/.netlify/functions': ``,
+			},
+		}))
+
+		// CMS
+		app.use(`/admin`, proxy({
+			target: `http://localhost:3333`,
+		}))
 
 		// Create redirects from netlify.toml
 		if(redirects && redirects.length){
