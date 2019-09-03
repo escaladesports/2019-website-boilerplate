@@ -12,6 +12,7 @@ async function go(){
 	console.log(`NETLIFY.TOML CONTENTS`, contents)
 	const matches = contents.match(/env\.(.*)/g)
 	matches.forEach(match => {
+		console.log(`MATCH`, match)
 		const parts = match.replace(`env.`, ``).split(/[\W]+/)
 		const key = parts[0]
 		const value = process.env[key] || ``
