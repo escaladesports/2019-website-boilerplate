@@ -12,8 +12,8 @@
     "build:babel": "npx babel src --out-dir dist",
     "clean": "rm -rf dist",
     "dev": "npx babel src --out-dir dist --watch",
-    "prebuild": "run-s clean build:babel",
-    "predev": "run-s clean build:babel",
+    "prebuild": "npx run-s clean build:babel",
+    "predev": "npx run-s clean build:babel",
     "prepublishOnly": "yarn run build"
   },
   "peerDependencies": {
