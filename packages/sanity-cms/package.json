@@ -7,12 +7,12 @@
   "author": "Kennedy Rose <kennedyianrose@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "sanity build",
+    "build": "npx sanity build",
     "postbuild": "node utils/post-build",
-    "deploy": "sanity graphql deploy --no-playground && sanity deploy",
-    "dev": "sanity start",
-    "test": "sanity check",
-    "open": "open-cli https://project-boilerplate.sanity.studio/"
+    "deploy": "npx sanity graphql deploy --no-playground && sanity deploy",
+    "dev": "npx sanity start",
+    "test": "npx sanity check",
+    "open": "npx open-cli https://project-boilerplate.sanity.studio/"
   },
   "dependencies": {
     "@sanity/base": "^0.142.0",

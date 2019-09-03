@@ -15,6 +15,7 @@ const initialState = {
 	meta: {},
 	loadingMeta: true,
 }
+
 const dispatch = (oldState, newState) => ({
 	...oldState,
 	...newState,

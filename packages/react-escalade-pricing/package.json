@@ -9,11 +9,11 @@
   },
   "scripts": {
     "build": "echo 'No build script'",
-    "build:babel": "babel src --out-dir dist",
+    "build:babel": "npx babel src --out-dir dist",
     "clean": "rm -rf dist",
-    "dev": "babel src --out-dir dist --watch",
-    "prebuild": "run-s clean build:babel",
-    "predev": "run-s clean build:babel",
+    "dev": "npx babel src --out-dir dist --watch",
+    "prebuild": "npx run-s clean build:babel",
+    "predev": "npx run-s clean build:babel",
     "prepublishOnly": "yarn run build"
   },
   "peerDependencies": {
