@@ -9,6 +9,7 @@ const dest = join(cwd, `../../netlify.toml`)
 async function go(){
 	const buffer = await readFile(src)
 	let contents = buffer.toString()
+	console.log(`NETLIFY.TOML CONTENTS`, contents)
 	const matches = contents.match(/env\.(.*)/g)
 	matches.forEach(match => {
 		const parts = match.replace(`env.`, ``).split(/[\W]+/)
