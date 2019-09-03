@@ -18,4 +18,4 @@
             name: Save Yarn Package Cache
             key: yarn-packages-v1-{{ checksum "yarn.lock" }}
             paths:
-              - ~/.cache/yarn
+              - ~/.cache
