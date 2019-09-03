@@ -3,7 +3,8 @@
     build:
       docker:
         - image: circleci/node:12.6
-      steps: # a collection of executable commands
+      steps:
+        - checkout
         - restore_cache:
             name: Restore Yarn Package Cache
             keys:
