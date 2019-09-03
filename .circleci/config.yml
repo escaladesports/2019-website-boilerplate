@@ -1,4 +1,10 @@
 version: 2.1
+
+# general:
+#   branches:
+#     only:
+#       - master
+
 jobs:
   build:
     docker:
@@ -16,10 +22,13 @@ jobs:
           name: Save Yarn Package Cache
           key: yarn-packages-v1-{{ checksum "yarn.lock" }}
           paths:
-          - ~/.cache
+            - ~/.cache
       - run:
-          name: Build
+          name: Build packages
           command: yarn run build
+      # - run:
+      #     name: Deploy packages
+      #     command: yarn run deploy
 
 workflows:
   version: 2
