@@ -5,5 +5,4 @@
         - image: circleci/node:12.6
       steps:
         - checkout
-        - run: yarn global add lerna
         - run: yarn run build
