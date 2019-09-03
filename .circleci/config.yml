@@ -1,8 +1,9 @@
-  version: 2.1
+  version: 2
   jobs:
     build:
       docker:
         - image: circleci/node:12.6
+      context: Escalade
       steps:
         - checkout
         - restore_cache:
