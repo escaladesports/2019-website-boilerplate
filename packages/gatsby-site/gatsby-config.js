@@ -9,6 +9,7 @@ const productIds = require(`utils/.cache/product-ids.json`)
 const { title, description } = require(`utils/.cache/site-settings.json`)
 
 // Get redirects from config
+// TODO: Change this to read and parse src Netlify config
 const netlifyConfig = readFileSync(`../../netlify.toml`)
 const { redirects } = parseToml(netlifyConfig)
 

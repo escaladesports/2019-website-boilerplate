@@ -1,12 +1,14 @@
 require(`./env`)
 const { join } = require(`path`)
 const { readFile, outputFile } = require(`fs-extra`)
+const { argv } = require(`yargs`)
 
 const cwd = process.cwd()
-const src = join(cwd, `../config/netlify.toml`)
-const dest = join(cwd, `../../netlify.toml`)
 
-async function go(){
+async function patchNetlifyConfig(src = `/`, dest) {
+	console.log(`patchNetlifyConfig`)
+	src = join(cwd, src, `netlify.toml`)
+	console.log(src, dest)
 	const buffer = await readFile(src)
 	let contents = buffer.toString()
 	const matches = contents.match(/env\.(.*)/g)
@@ -16,13 +18,16 @@ async function go(){
 		const value = process.env[key] || ``
 		contents = contents.replace(`env.${key}`, value)
 	})
-	await outputFile(dest, contents)
+	if (dest) {
+		dest = join(cwd, dest, `netlify.toml`)
+		await outputFile(dest, contents)
+	}
+	return contents
 }
 
-try {
-	go()
+const { src, dest } = argv
+if(src && dest){
+	patchNetlifyConfig(src, dest, false)
 }
-catch(err){
-	console.error(err)
-	process.exit(1)
-}
+
+module.exports = patchNetlifyConfig
