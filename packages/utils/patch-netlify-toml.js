@@ -16,6 +16,7 @@ async function go(){
 		const parts = match.replace(`env.`, ``).split(/[\W]+/)
 		const key = parts[0]
 		const value = process.env[key] || ``
+		console.log(`Replacing env.${key} with ${value}`)
 		contents = contents.replace(`env.${key}`, value)
 	})
 	await outputFile(dest, contents)
