@@ -12,11 +12,11 @@
         - run:
             name: Install Dependencies
             command: yarn install --frozen-lockfile
-        - run:
-            name: Build
-            command: yarn run build
         - save_cache:
             name: Save Yarn Package Cache
             key: yarn-packages-v1-{{ checksum "yarn.lock" }}
             paths:
               - ~/.cache
+        - run:
+            name: Build
+            command: yarn run build
