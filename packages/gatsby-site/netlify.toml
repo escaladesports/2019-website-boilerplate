@@ -18,15 +18,17 @@
 	to = "/admin/index.html"
 	status = 200
 
-[[redirects]]
-	from = "/postman-echo"
-	to = "https://postman-echo.com/post"
-	status = 200
-	[[redirects.headers]]
-		Content-Type = "application/json"
-		ESC-API-Key = "env.ESCA_API_KEY"
-		X-API-Key = "env.X_API_KEY"
-		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
+# Displays headers for sanity checking
+# [[redirects]]
+# 	from = "/headers"
+# 	to = "https://postman-echo.com/headers"
+# 	status = 200
+# 	force = true
+# 	[redirects.headers]
+# 		Content-Type = "application/json"
+# 		ESC-API-Key = "env.ESCA_API_KEY"
+# 		X-API-Key = "env.X_API_KEY"
+# 		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
 
 [[redirects]]
 	from = "/api/pricing/load"
@@ -54,7 +56,7 @@
 	from = "/api/inventory/load"
 	to = "https://inventory.escsportsapi.com/load"
 	status = 200
-	force = true # COMMENT: ensure that we always redirect
+	force = true
 	[redirects.headers]
 		Content-Type = "application/json"
 		ESC-API-Key = "env.ESCA_API_KEY"

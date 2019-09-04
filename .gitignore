@@ -20,7 +20,6 @@ public
 .serverless
 _optimize
 /netlify.toml
-!packages/config/netlify.toml
 
 # Temporary
 temp

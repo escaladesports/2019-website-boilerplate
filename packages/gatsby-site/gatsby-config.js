@@ -1,17 +1,11 @@
 const { GATSBY_ESCA_API_SITE, SANITY_TOKEN } = require(`utils/env`)
-const { readFileSync } = require(`fs-extra`)
 const proxy = require(`http-proxy-middleware`)
-const { parse: parseToml } = require(`toml`)
 const { parse: parseUrl } = require(`url`)
 const sanityToExcerpt = require(`utils/sanity-to-excerpt`)
 const { siteUrl } = require(`config`)
 const productIds = require(`utils/.cache/product-ids.json`)
+const { redirects } = require(`utils/read-netlify-config`)()
 const { title, description } = require(`utils/.cache/site-settings.json`)
-
-// Get redirects from config
-// TODO: Change this to read and parse src Netlify config
-const netlifyConfig = readFileSync(`../../netlify.toml`)
-const { redirects } = parseToml(netlifyConfig)
 
 module.exports = {
 	siteMetadata: {
@@ -266,6 +260,12 @@ module.exports = {
 			}) => {
 				// Proxy external links
 				if (from && to.indexOf(`http`) === 0 && status === 200) {
+					const fixedHeaders = {}
+					for(let i in headers){
+						if (headers[i]) {
+							fixedHeaders[i] = headers[i]
+						}
+					}
 					const { protocol, host } = parseUrl(to)
 					const target = `${protocol}//${host}`
 					app.use(
