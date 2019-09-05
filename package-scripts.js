@@ -4,19 +4,25 @@ module.exports = {
 	scripts: {
 		build: {
 			// Builds all packages
-			default: series(
+			default: `npx nps build.all`,
+			all: series(
 				`build.preweb`,
 				`build.web`,
 			),
-			modules: lerna(`build`, `react-*`),
 			preweb: lerna(`build`, [`react-*`, `utils`]),
-			utils: lerna(`build`, `utils`),
 			web: lerna(`build`, `gatsby-site`),
+		},
+		dev: {
+			default: series(
+				`build.preweb`,
+				`dev.all`,
+			),
+			all: lerna(`dev`),
 		},
 	},
 }
 
-function lerna(script, scopes) {
+function lerna(script, scopes = []) {
 	if (typeof scopes === `string`) scopes = [scopes]
 	scopes = scopes.map(scope => ` --scope "${scope}"`).join(``)
 	return `npx lerna run ${script}${scopes} --stream --concurrency 999`
