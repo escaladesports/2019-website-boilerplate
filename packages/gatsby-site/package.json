@@ -7,9 +7,12 @@
     "directory": "packages/gatsby-site"
   },
   "scripts": {
-    "prebuild": "yarn run clean",
     "build": "NODE_ENV=production npx gatsby build --verbose",
+    "postbuild": "node ../utils/patch-netlify-toml --src ./ --dest ../../public",
     "clean": "npx gatsby clean",
+    "deploy": "yarn run deploy:test",
+    "deploy:prod": "npx netlify deploy --dir=public --functions=../netlify-functions/dist --prod",
+    "deploy:test": "npx netlify deploy --dir=public --functions=../netlify-functions/dist",
     "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 npx gatsby develop --https --open",
     "develop": "yarn run dev",
     "serve": "npx gatsby serve --open",
@@ -27,6 +30,11 @@
   },
   "main": "dist/index.js",
   "devDependencies": {
+    "components": "*",
+    "react-escalade-inventory": "*",
+    "react-escalade-pricing": "*",
+    "utils": "*",
+    "config": "*",
     "@brainhubeu/react-carousel": "^1.10.17",
     "@emotion/core": "^10.0.16",
     "@escaladesports/zygote-cart": "^3.0.20",
@@ -70,6 +78,7 @@
     "lunr": "^2.3.3",
     "moment": "^2.22.2",
     "mustache": "^3.0.0",
+    "netlify-cli": "^2.13.1",
     "netlify-cms": "2.9.7",
     "netlify-identity-widget": "^1.4.14",
     "npm-run-all": "^4.1.5",

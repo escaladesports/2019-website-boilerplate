@@ -8,12 +8,10 @@
     "directory": "packages/react-escalade-inventory"
   },
   "scripts": {
-    "build": "echo 'No build script'",
-    "build:babel": "npx babel src --out-dir dist",
+    "build": "npx babel src --out-dir dist",
     "clean": "rm -rf dist",
     "dev": "npx babel src --out-dir dist --watch",
-    "prebuild": "npx run-s clean build:babel",
-    "predev": "npx run-s clean build:babel",
+    "predev": "npx run-s clean build",
     "prepublishOnly": "yarn run build"
   },
   "peerDependencies": {
