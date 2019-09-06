@@ -13,6 +13,7 @@ module.exports = {
 			web: lerna(`build`, `gatsby-site`),
 		},
 		dev: {
+			// Spins up dev servers in all packages
 			default: series(
 				`build.preweb`,
 				`dev.all`,

@@ -5,20 +5,19 @@
   "private": true,
   "scripts": {
     "bootstrap": "npx lerna bootstrap --use-workspaces",
-    "build": "npx nps build",
+    "build": "npx lerna run build --stream",
     "circle": "npx open-cli https://circleci.com/gh/escaladesports",
-    "postbuild": "cp -r ./packages/gatsby-site/public ./public && cp -r ./packages/sanity-cms/dist ./public/admin",
     "clean": "rm -rf public && npx lerna run clean --stream --no-sort --concurrency 999",
     "deploy": "npx lerna run deploy --stream --no-sort --concurrency 999",
-    "dev": "npx nps dev",
-    "develop": "npx nps dev",
+    "dev": "gulp",
+    "develop": "yarn run dev",
     "lint": "npx eslint ./",
     "lint:fix": "npx eslint ./ --fix",
     "netlify": "npx open-cli https://app.netlify.com/sites/escalade/deploys",
     "open": "npx lerna run open",
     "patch": "npx lerna run patch",
     "serve": "npx lerna run serve",
-    "start": "npx nps dev"
+    "start": "yarn run dev"
   },
   "husky": {
     "hooks": {
@@ -35,7 +34,11 @@
     "packages/*"
   ],
   "devDependencies": {
+    "child-process-promise": "^2.2.1",
     "eslint": "^6.1.0",
+    "gulp": "^4.0.2",
+    "gulp-cli": "^2.2.0",
+    "gulp-run-command": "^0.0.9",
     "husky": "^3.0.3",
     "lint-staged": "^9.2.1",
     "nps": "^5.9.8",
