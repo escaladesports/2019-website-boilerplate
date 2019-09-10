@@ -1,8 +1,3 @@
-[build]
-	command = "yarn build"
-	publish = "public/"
-	functions = "packages/netlify-functions/dist/"
-
 [[redirects]]
 	from = "/admin/static/*"
 	to = "/admin/static/:splat"

@@ -26,9 +26,9 @@ jobs:
       - run:
           name: Build packages
           command: yarn run build
-      # - run:
-      #     name: Deploy packages
-      #     command: yarn run deploy
+      - run:
+          name: Deploy packages
+          command: yarn run deploy:production
 
 workflows:
   version: 2
