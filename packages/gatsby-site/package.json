@@ -9,8 +9,8 @@
   "scripts": {
     "build": "NODE_ENV=production npx gatsby build --verbose",
     "clean": "npx gatsby clean",
-    "deploy": "yarn run deploy:staging",
-    "deploy:production": "yarn run netlify-config && npx netlify deploy --dir=public --functions=../netlify-functions/dist --prod",
+    "predeploy": "yarn run netlify-config",
+    "deploy": "npx netlify deploy --dir=packages/gatsby-site/public --functions=packages/netlify-functions/dist --prod",
     "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 npx gatsby develop --https --open",
     "develop": "yarn run dev",
     "link": "npx netlify link",
