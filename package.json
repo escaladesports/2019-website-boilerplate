@@ -8,7 +8,7 @@
     "build": "npx lerna run build --stream",
     "circle": "npx open-cli https://circleci.com/gh/escaladesports",
     "clean": "rm -rf public && npx lerna run clean --stream --no-sort --concurrency 999",
-    "deploy": "npx lerna run deploy --stream --no-sort --concurrency 999",
+    "deploy": "npx lerna run deploy:production --stream --no-sort --concurrency 999",
     "dev": "gulp",
     "develop": "yarn run dev",
     "lint": "npx eslint ./",
