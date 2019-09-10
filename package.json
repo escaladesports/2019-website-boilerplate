@@ -11,7 +11,7 @@
     "deploy": "npx lerna run deploy --stream --no-sort --concurrency 999",
     "deploy:production": "npx lerna run deploy:production --stream --no-sort --concurrency 999",
     "deploy:staging": "npx lerna run deploy:staging --stream --no-sort --concurrency 999",
-    "dev": "gulp",
+    "dev": "npx lerna run dev --stream --no-sort --concurrency 999",
     "develop": "yarn run dev",
     "lint": "npx eslint ./",
     "lint:fix": "npx eslint ./ --fix",

@@ -1,4 +1,4 @@
-const { GATSBY_ESCA_API_SITE, SANITY_TOKEN } = require(`utils/env`)
+const { GATSBY_ESCA_API_SITE, SANITY_AUTH_TOKEN } = require(`utils/env`)
 const proxy = require(`http-proxy-middleware`)
 const { parse: parseUrl } = require(`url`)
 const sanityToExcerpt = require(`utils/sanity-to-excerpt`)
@@ -73,7 +73,7 @@ module.exports = {
 			options: {
 				projectId: `lfxwk0kx`,
 				dataset: `production`,
-				token: SANITY_TOKEN,
+				token: SANITY_AUTH_TOKEN,
 			},
 		},
 		{

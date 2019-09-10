@@ -1,14 +1,14 @@
 const { join } = require(`path`)
 const sanityClient = require(`@sanity/client`)
 const { outputJson } = require(`fs-extra`)
-const { SANITY_TOKEN } = require(`utils/env`)
+const { SANITY_AUTH_TOKEN } = require(`utils/env`)
 const { api: { projectId, dataset } } = require(`sanity-cms/sanity.json`)
 
 const cwd = process.cwd()
 const client = sanityClient({
 	projectId,
 	dataset,
-	token: SANITY_TOKEN,
+	token: SANITY_AUTH_TOKEN,
 	useCdn: false,
 })
 const productIdsPath = join(cwd, `.cache/product-ids.json`)
