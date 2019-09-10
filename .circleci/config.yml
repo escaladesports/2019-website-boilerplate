@@ -24,10 +24,10 @@ jobs:
           paths:
             - ~/.cache
       - run:
-          name: Build packages
+          name: Build Applications
           command: yarn run build
       - run:
-          name: Deploy packages
+          name: Deploy Applications
           command: yarn run deploy:production
 
 workflows:

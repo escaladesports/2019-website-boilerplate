@@ -24,6 +24,3 @@ _optimize
 # Temporary
 temp
 temp-*
-
-# Local Netlify folder
-.netlify
