@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "NODE_ENV=production npx gatsby build --verbose",
-    "postbuild": "node ../utils/patch-netlify-toml --src ./ --dest ../../public",
+    "postbuild": "node ../utils/patch-netlify-toml --src ./ --dest ./public",
     "clean": "npx gatsby clean",
     "deploy": "yarn run deploy:test",
     "deploy:prod": "npx netlify deploy --dir=public --functions=../netlify-functions/dist --prod",
