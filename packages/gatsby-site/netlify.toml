@@ -1,3 +1,5 @@
+# CMS
+
 [[redirects]]
 	from = "/admin/static/*"
 	to = "/admin/static/:splat"
@@ -24,6 +26,9 @@
 # 		ESC-API-Key = "env.ESCA_API_KEY"
 # 		X-API-Key = "env.X_API_KEY"
 # 		ESC-API-Context = "env.GATSBY_ESCA_API_SITE"
+
+
+# Escalade APIs
 
 [[redirects]]
 	from = "/api/pricing/load"
