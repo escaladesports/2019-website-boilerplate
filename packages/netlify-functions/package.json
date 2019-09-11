@@ -7,7 +7,7 @@
 		"dev": "npx netlify-lambda serve src --config webpack-config.js"
 	},
 	"dependencies": {
-		"@octokit/rest": "^16.28.7",
+		"@octokit/rest": "^16.28.9",
 		"auth0": "^2.19.0",
 		"auth0-verify": "^2.0.0",
 		"isomorphic-fetch": "^2.2.1",
