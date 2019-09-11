@@ -4,7 +4,7 @@ const { parse: parseUrl } = require(`url`)
 const sanityToExcerpt = require(`utils/sanity-to-excerpt`)
 const { siteUrl } = require(`config`)
 const productIds = require(`utils/.cache/product-ids.json`)
-const { redirects } = require(`utils/read-netlify-config`)()
+const { redirects } = require(`./netlify-config`)
 const { title, description } = require(`utils/.cache/site-settings.json`)
 
 module.exports = {
