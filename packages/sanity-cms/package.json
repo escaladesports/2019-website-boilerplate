@@ -15,13 +15,13 @@
     "open": "npx open-cli https://project-boilerplate.sanity.studio/"
   },
   "dependencies": {
-    "@sanity/base": "^0.142.0",
-    "@sanity/components": "^0.142.0",
-    "@sanity/core": "^0.142.0",
-    "@sanity/dashboard": "^0.142.1",
-    "@sanity/default-layout": "^0.142.0",
-    "@sanity/default-login": "^0.142.0",
-    "@sanity/desk-tool": "^0.142.0",
+    "@sanity/base": "^0.142.2",
+    "@sanity/components": "^0.142.4",
+    "@sanity/core": "^0.142.4",
+    "@sanity/dashboard": "^0.142.2",
+    "@sanity/default-layout": "^0.142.4",
+    "@sanity/default-login": "^0.142.3",
+    "@sanity/desk-tool": "^0.142.4",
     "moment": "^2.24.0",
     "prop-types": "^15.6",
     "react": "^16.2",
@@ -31,7 +31,7 @@
     "slugify": "^1.3.4"
   },
   "devDependencies": {
-    "@sanity/cli": "^0.142.0",
+    "@sanity/cli": "^0.142.2",
     "fs-extra": "^8.1.0"
   }
 }

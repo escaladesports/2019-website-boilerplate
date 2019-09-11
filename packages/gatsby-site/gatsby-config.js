@@ -246,9 +246,10 @@ module.exports = {
 		}))
 
 		// CMS
-		app.use(`/admin`, proxy({
-			target: `http://localhost:3333`,
-		}))
+		// Uses redirect rather than proxy since Sanity has issues with pseudo HTTPS locally
+		app.use(`/admin`, (req, res) => {
+			res.redirect(`http://localhost:3333`)
+		})
 
 		// Create redirects from netlify.toml
 		if(redirects && redirects.length){
