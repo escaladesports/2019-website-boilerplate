@@ -37,6 +37,14 @@ jobs:
       - run:
           name: Test
           command: yarn run test
+  deploy:
+    docker:
+      - image: circleci/node:12.6
+    steps:
+      - checkout
+      - run:
+          name: Deploy
+          command: yarn run deploy
 
 workflows:
   version: 2
