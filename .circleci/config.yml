@@ -1,9 +1,9 @@
 version: 2.1
 
-# general:
-#   branches:
-#     only:
-#       - master
+general:
+  branches:
+    only:
+      - master
 
 jobs:
   build:
@@ -29,10 +29,29 @@ jobs:
       - run:
           name: Deploy Applications
           command: yarn run deploy:production
+  test:
+    docker:
+      - image: circleci/node:12.6
+    steps:
+      - checkout
+      - run:
+          name: Test
+          command: yarn run test
 
 workflows:
   version: 2
-  build:
+  build_test_deploy:
     jobs:
       - build:
           context: Escalade
+      - test:
+          context: Escalade
+          requires:
+            - build
+      - deploy:
+          # filters:
+          #   branches:
+          #     only: master
+          context: Escalade
+          requires:
+            - test
