@@ -1,14 +1,13 @@
 version: 2.1
 
-general:
-  branches:
-    only:
-      - master
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:12.6
 
 jobs:
   build:
-    docker:
-      - image: circleci/node:12.6
+    <<: *defaults
     steps:
       - checkout
       - restore_cache:
@@ -26,17 +25,18 @@ jobs:
       - run:
           name: Build Applications
           command: yarn run build
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
   test:
-    docker:
-      - image: circleci/node:12.6
+    <<: *defaults
     steps:
       - checkout
       - run:
           name: Test
           command: yarn run test
   deploy:
-    docker:
-      - image: circleci/node:12.6
+    <<: *defaults
     steps:
       - checkout
       - run:
