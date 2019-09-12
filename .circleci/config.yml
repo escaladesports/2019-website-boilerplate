@@ -31,14 +31,16 @@ jobs:
   test:
     <<: *defaults
     steps:
-      - checkout
+      - attach_workspace:
+          at: ~/repo
       - run:
           name: Test
           command: yarn run test
   deploy:
     <<: *defaults
     steps:
-      - checkout
+      - attach_workspace:
+          at: ~/repo
       - run:
           name: Deploy Applications
           command: yarn run deploy:production
