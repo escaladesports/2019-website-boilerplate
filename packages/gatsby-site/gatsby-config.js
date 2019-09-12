@@ -263,25 +263,22 @@ module.exports = {
 				if (from && to.indexOf(`http`) === 0 && status === 200) {
 					const fixedHeaders = {}
 					for(let i in headers){
-						if (headers[i]) {
+						if(headers[i]){
 							fixedHeaders[i] = headers[i]
 						}
 					}
 					const { protocol, host } = parseUrl(to)
 					const target = `${protocol}//${host}`
-					app.use(
-						from,
-						proxy({
-							target,
-							changeOrigin: true,
-							headers,
-							pathRewrite: (path => {
-								const externalPath = to.replace(target, ``)
-								const newPath = path.replace(from, externalPath)
-								return newPath
-							}),
-						})
-					)
+					app.use(from, proxy({
+						target,
+						changeOrigin: true,
+						headers,
+						pathRewrite: (path => {
+							const externalPath = to.replace(target, ``)
+							const newPath = path.replace(from, externalPath)
+							return newPath
+						}),
+					}))
 				}
 			})
 		}

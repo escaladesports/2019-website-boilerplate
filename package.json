@@ -19,7 +19,8 @@
     "open": "npx lerna run open",
     "patch": "npx lerna run patch",
     "serve": "npx lerna run serve",
-    "start": "yarn run dev"
+    "start": "yarn run dev",
+    "test": "jest"
   },
   "husky": {
     "hooks": {
@@ -36,12 +37,15 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@testing-library/jest-dom": "^4.1.0",
+    "@testing-library/react": "^9.1.4",
     "child-process-promise": "^2.2.1",
     "eslint": "^6.1.0",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.2.0",
     "gulp-run-command": "^0.0.9",
     "husky": "^3.0.3",
+    "jest": "^24.9.0",
     "lint-staged": "^9.2.1",
     "nps": "^5.9.8",
     "nps-utils": "^1.7.0",

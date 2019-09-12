@@ -15,7 +15,6 @@ export default async function fetchInventory(ids, setInventory, endpoint) {
 			}),
 		})
 		const { inventory } = await res.json()
-		console.log(inventory)
 		setInventory(inventory)
 	}
 	catch (err) {
