@@ -36,14 +36,22 @@ jobs:
       - run:
           name: Test
           command: yarn run test
-  deploy:
+  deploy-production:
     <<: *defaults
     steps:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Deploy Applications
+          name: Deploy Applications to Production
           command: yarn run deploy:production
+  deploy-staging:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Deploy Applications to Staging
+          command: yarn run deploy:staging
 
 workflows:
   version: 2
@@ -55,10 +63,17 @@ workflows:
           context: Escalade
           requires:
             - build
-      - deploy:
-          # filters:
-          #   branches:
-          #     only: master
+      - deploy-production:
+          filters:
+            branches:
+              only: master
+          context: Escalade
+          requires:
+            - test
+      - deploy-staging:
+          filters:
+            branches:
+              ignore: master
           context: Escalade
           requires:
             - test
