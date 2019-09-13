@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from 'gatsby-site/src/img/logo.svg'
+import logo from '@examplewebsite.com/gatsby/src/img/logo.svg'
 import styles from './logo.css'
 
 export default function Logo(){

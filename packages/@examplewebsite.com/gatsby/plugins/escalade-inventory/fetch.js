@@ -10,17 +10,19 @@ module.exports = async function({
 	siteId,
 	env = `production`,
 }){
+	const headers = {
+		'ESC-API-Context': siteId,
+		'ESC-API-Key': process.env.ESCA_API_KEY,
+		'X-API-Key': process.env.X_API_KEY,
+	}
 	const res = await fetch(endpoints[env] || endpoints.production, {
-		headers: {
-			'ESC-API-Context': siteId,
-			'ESC-API-Key': process.env.ESCA_API_KEY,
-			'X-API-Key': process.env.X_API_KEY,
-		},
+		headers,
 		method: `POST`,
 		body: JSON.stringify({
 			skus: ids,
 		}),
 	})
-	const { inventory } = await res.json()
+	const text = await res.text()
+	const { inventory } = JSON.parse(text)
 	return inventory
 }

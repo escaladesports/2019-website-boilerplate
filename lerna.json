@@ -1,6 +1,7 @@
 {
   "packages": [
-    "packages/*"
+    "packages/*",
+    "packages/@examplewebsite.com/*"
   ],
   "version": "independent",
   "npmClient": "yarn",

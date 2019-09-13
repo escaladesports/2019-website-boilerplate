@@ -1,15 +1,10 @@
 {
-  "name": "gatsby-site",
+  "name": "@examplewebsite.com/gatsby",
   "version": "0.0.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/escaladesports/escalade.git",
-    "directory": "packages/gatsby-site"
-  },
   "scripts": {
     "build": "NODE_ENV=production npx gatsby build --verbose",
     "clean": "npx gatsby clean",
-    "cms": "cp -a ../sanity-cms/dist public/admin",
+    "cms": "cp -a ../sanity/dist public/admin",
     "deploy": "yarn run deploy:staging",
     "deploy:production": "yarn run prepare-deploy && npx netlify deploy --dir=public --functions=../netlify-functions/dist --prod",
     "deploy:staging": "yarn run prepare-deploy && npx netlify deploy --dir=public --functions=../netlify-functions/dist",

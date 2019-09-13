@@ -1,32 +1,22 @@
 const fetch = require(`./fetch`)
 
-exports.sourceNodes = async function({
-	actions,
-	createNodeId,
-	createContentDigest,
-}, options){
+exports.sourceNodes = async function({ actions, createNodeId, createContentDigest }, options){
 	const { createNode } = actions
+	const inventory = await fetch(options)
 
-	const prices = await fetch(options)
-
-	for (let id in prices){
-		prices[id].price = Number(prices[id].price)
-		if(isNaN(prices[id].price)){
-			prices[id].price = 0
-		}
+	for (let id in inventory){
 		const nodeContent = {
-			...prices[id],
+			...inventory[id],
 			productId: id,
 			lowerId: id.toLowerCase(),
 			upperId: id.toUpperCase(),
 		}
 		const nodeMeta = {
-			id: createNodeId(`escalade-pricing-${id}`),
+			id: createNodeId(`escalade-inventory-${id}`),
 			parent: null,
 			children: [],
 			internal: {
-				type: `EscaladePricing`,
-				mediatype: `text/html`,
+				type: `EscaladeInventory`,
 				content: JSON.stringify(nodeContent),
 				contentDigest: createContentDigest(nodeContent),
 			},
@@ -37,5 +27,4 @@ exports.sourceNodes = async function({
 		}
 		createNode(node)
 	}
-
 }

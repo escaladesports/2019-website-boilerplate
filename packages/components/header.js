@@ -1,16 +1,14 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import { css } from '@emotion/core'
 import Close from '@material-ui/icons/Close'
 import { openCart } from '@escaladesports/zygote-cart'
 import { useAuth } from 'utils/auth'
 import { primaryColor } from 'config/colors'
-import { Context } from 'gatsby-site/src/state/counter'
 
 export default function Header(){
 	const [open, setOpen] = useState(false)
 	const auth = useAuth()
-	const [count] = useContext(Context)
 	const { user, login, logout } = auth
 
 	const toggle = () => {
@@ -35,7 +33,6 @@ export default function Header(){
 			>
 				<Close css={styles.close} />
 				<ul onClick={e => e.stopPropagation()}>
-					<li>{count}</li>
 					<li><Link to='/'>Home</Link></li>
 					<li><Link to='/blog'>Blog</Link></li>
 					<li><Link to='/about'>About</Link></li>
