@@ -1,6 +1,4 @@
-# Escalade Sports Project Boilerplate
-
-An opinionated project boilerplate for creating and working with [modern full stack serverless applications](https://jamstack.org/).
+# Escalade Sports Monorepo
 
 ## Requirements
 
@@ -38,11 +36,12 @@ Add environment variables to a `./.env` file in the root of your project.
 
 - [Gatsby](https://www.gatsbyjs.org/docs/) is used for building a static application from React components
 - [Netlify](https://www.netlify.com/docs/) configs are included for easy deployment
-- [Netlify CMS](https://www.netlifycms.org/docs/intro/) is included in the `site` package
+- [Sanity](https://www.sanity.io/docs/content-studio) is included and setup to deploy with `gatsby-site`
 - [Yarn Workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) is used for dependency management
 - [Lerna](https://lerna.js.org/) is used for package management
 - [ESLint](https://eslint.org/docs/user-guide/) is used under the hood for JS linting
 - [Babel](https://babeljs.io/docs/en/) is used under the hood for JS transpiling
+- [Jest](https://jestjs.io/docs/en/getting-started) is sometimes used for testing
 
 ### Project Structure
 
@@ -61,8 +60,9 @@ This boilerplate is set up as a [monorepo](https://github.com/babel/babel/blob/m
 
 - `yarn bootstrap`: Installs and symlinks all package dependencies
 - `yarn dev`: Starts up live development server on your local machine
-- `yarn build`: Builds site for production
+- `yarn build`: Builds application for production
+- `yarn deploy`: Deploys application to staging
 
 ## Netlify Config, Redirects, and Headers
 
-The Netify config file is located in `packages/site/netlify.toml` and is transpiled to the root directory on `yarn dev` and `yarn build`. This allows you to use environment variables in the source config (example: `env.API_KEY`) that will be injected into the root config. Since these changes are one way, you should never edit the config that's in the root.
+The Netify config file is located in `packages/gatsby-site/netlify.js` and is transpiled to the `public` directory on `yarn build`. This allows you to use environment variables and complex logic in the source config that will be injected into the public config.
