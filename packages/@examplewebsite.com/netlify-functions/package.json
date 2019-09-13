@@ -1,5 +1,5 @@
 {
-	"name": "netlify-functions",
+	"name": "@examplewebsite.com/netlify-functions",
 	"version": "0.0.0",
 	"scripts": {
 		"build": "npx netlify-lambda build src --config webpack-config.js",

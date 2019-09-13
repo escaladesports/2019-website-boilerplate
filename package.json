@@ -34,7 +34,8 @@
     ]
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/@examplewebsite.com/*"
   ],
   "devDependencies": {
     "@testing-library/jest-dom": "^4.1.0",

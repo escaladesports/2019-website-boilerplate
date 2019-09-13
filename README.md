@@ -36,7 +36,7 @@ Add environment variables to a `./.env` file in the root of your project.
 
 - [Gatsby](https://www.gatsbyjs.org/docs/) is used for building a static application from React components
 - [Netlify](https://www.netlify.com/docs/) configs are included for easy deployment
-- [Sanity](https://www.sanity.io/docs/content-studio) is included and setup to deploy with `gatsby-site`
+- [Sanity](https://www.sanity.io/docs/content-studio) is included and setup to deploy with `gatsby`
 - [Yarn Workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) is used for dependency management
 - [Lerna](https://lerna.js.org/) is used for package management
 - [ESLint](https://eslint.org/docs/user-guide/) is used under the hood for JS linting
@@ -47,11 +47,11 @@ Add environment variables to a `./.env` file in the root of your project.
 
 This boilerplate is set up as a [monorepo](https://github.com/babel/babel/blob/master/doc/design/monorepo.md) with [Lerna](https://github.com/lerna/lerna). By default, the following packages are included:
 
+- `@examplesite.com/gatsby`: The UI of the application built with [Gatsby](https://www.gatsbyjs.org/)
+- `@examplesite.com/netlify-functions`: [Serverless functions](https://www.netlify.com/docs/functions/) for any logic that needs to be server side
+- `@examplesite.com/sanity`: A CMS set up for deployment to [Sanity](https://www.sanity.io/docs/)
 - `components`: A library of React components
 - `config`: All config files are stored here
-- `gatsby-site`: The UI of the application built with [Gatsby](https://www.gatsbyjs.org/)
-- `netlify-functions`: [Serverless functions](https://www.netlify.com/docs/functions/) for any logic that needs to be server side
-- `sanity-cms`: A CMS set up for deployment to [Sanity](https://www.sanity.io/docs/)
 - `babel-preset-boilerplate`: The [Babel](https://babeljs.io/) preset that's used for the site and APIs
 - `eslint-config-boilerplate`: The [ESLint](https://eslint.org/) config that's used for the entire project
 - `utils`: An assortment of random utility functions that are shared between other packages
@@ -65,4 +65,4 @@ This boilerplate is set up as a [monorepo](https://github.com/babel/babel/blob/m
 
 ## Netlify Config, Redirects, and Headers
 
-The Netify config file is located in `packages/gatsby-site/netlify.js` and is transpiled to the `public` directory on `yarn build`. This allows you to use environment variables and complex logic in the source config that will be injected into the public config.
+The Netify config file is located in `packages/@examplesite.com/gatsby/netlify.js` and is transpiled to the `public` directory on `yarn build`. This allows you to use environment variables and complex logic in the source config that will be injected into the public config.

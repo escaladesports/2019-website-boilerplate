@@ -1,5 +1,5 @@
 const { join } = require(`path`)
-const path = join(process.cwd(), `../../.env`)
+const path = join(__dirname, `../../.env`)
 require(`dotenv-override`).config({
 	path,
 	silent: true,
