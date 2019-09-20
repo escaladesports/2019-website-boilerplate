@@ -36,6 +36,14 @@ module.exports = {
 		`generic-pages`,
 		`products`,
 		`accounts`,
+		// {
+		// 	resolve: `gatsby-plugin-browser-dependencies`,
+		// 	option: {
+		// 		dependencies: [
+		// 			`auth-js`,
+		// 		],
+		// 	},
+		// },
 		{
 			resolve: `email-templates`,
 			options: {

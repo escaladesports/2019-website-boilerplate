@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "npx run-p patch prefetch",
+    "build": "npm run prefetch",
     "clean": "rm -rf .cache",
+    "dev": "npm run prefetch",
     "patch": "node patch-netlify-toml",
     "prefetch": "node prefetch-sanity"
   },

@@ -40,7 +40,7 @@ export function WithAuth({ children }) {
 			logout: logout.bind(null, setState),
 			clearUser: clearUser.bind(null, setState),
 			changePassword: changePassword.bind(null, email),
-			handleAuthentication,
+			handleAuthentication: handleAuthentication.bind(null, setState),
 			silentAuth: silentAuth.bind(null, setState),
 			setMetadata: setMetadata.bind(null, setState, accessToken),
 			patchUser: patchUser.bind(null, setState, accessToken),

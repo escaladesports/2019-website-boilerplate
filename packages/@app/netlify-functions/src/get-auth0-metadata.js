@@ -6,6 +6,7 @@ import {
 } from 'utils/env'
 
 export async function handler({ headers: { authorization }}) {
+	console.log(`GATSBY_AUTH0_DOMAIN`, GATSBY_AUTH0_DOMAIN)
 	let verified
 	try {
 		verified = await verify(authorization, GATSBY_AUTH0_DOMAIN, GATSBY_AUTH0_CLIENTID)

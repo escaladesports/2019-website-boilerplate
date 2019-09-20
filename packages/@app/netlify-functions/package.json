@@ -1,10 +1,10 @@
 {
-	"name": "@examplewebsite.com/netlify-functions",
+	"name": "@app/netlify-functions",
 	"version": "0.0.0",
 	"scripts": {
-		"build": "npx netlify-lambda build src --config webpack-config.js",
+		"build": "npx dotenv -e ../../../.env npx netlify-lambda build src --config webpack-config.js",
 		"clean": "rm -rf dist",
-		"dev": "npx netlify-lambda serve src --config webpack-config.js"
+		"dev": "npx dotenv -e ../../../.env npx netlify-lambda serve src --config webpack-config.js"
 	},
 	"dependencies": {
 		"@octokit/rest": "^16.28.9",
@@ -17,6 +17,7 @@
 		"yaml": "^1.6.0"
 	},
 	"devDependencies": {
+		"dotenv-cli": "^2.0.1",
 		"netlify-lambda": "^1.5.1",
 		"webpack": "^4.39.2"
 	}

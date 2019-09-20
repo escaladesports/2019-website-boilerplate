@@ -1,5 +1,5 @@
 {
-  "name": "@examplewebsite.com/gatsby",
+  "name": "@app/gatsby",
   "version": "0.0.0",
   "scripts": {
     "build": "NODE_ENV=production npx gatsby build --verbose",
@@ -58,6 +58,7 @@
     "gatsby-plugin-sharp": "^2.2.2",
     "gatsby-plugin-sitemap": "^2.2.1",
     "gatsby-plugin-webpack-size": "^1.0.0",
+    "gatsby-plugin-browser-dependencies": "*",
     "gatsby-remark-copy-linked-files": "^2.0.0-rc.1",
     "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-images": "^3.0.16",
