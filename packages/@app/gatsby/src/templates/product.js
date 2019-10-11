@@ -141,17 +141,5 @@ export const query = graphql`
 				}
 			}
 		}
-
-		escaladePricing(
-			productId: { eq: $sku }
-		){
-				price
-		}
-
-		escaladeInventory(
-			productId: { eq: $sku }
-		){
-			stock
-		}
 	}
 `
