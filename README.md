@@ -17,7 +17,7 @@ rm -rf .git
 git init
 ```
 
-Add environment variables to a `./.env` file in the root of your project.
+Add environment variables to a `./.env` file in the root of your project. A sample is provided in `.env.example`
 
 It's also recommended to go through and change any settings you might need in the `packages/config` files.
 
