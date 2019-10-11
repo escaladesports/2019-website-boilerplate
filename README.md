@@ -36,7 +36,7 @@ Add environment variables to a `./.env` file in the root of your project.
 
 - [Gatsby](https://www.gatsbyjs.org/docs/) is used for building a static application from React components
 - [Netlify](https://www.netlify.com/docs/) configs are included for easy deployment
-- [Sanity](https://www.sanity.io/docs/content-studio) is included and setup to deploy with `gatsby`
+- [Sanity](https://www.sanity.io/content-studio) is included and setup to deploy with `gatsby`
 - [Yarn Workspaces](https://yarnpkg.com/lang/en/docs/workspaces/) is used for dependency management
 - [Lerna](https://lerna.js.org/) is used for package management
 - [ESLint](https://eslint.org/docs/user-guide/) is used under the hood for JS linting
