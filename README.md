@@ -30,7 +30,7 @@ nvm use
 yarn bootstrap
 ```
 
-Add environment variables to a `./.env` file in the root of your project.
+Add environment variables to a `./.env` file in the root of your project. A sample is provided in `.env.example`
 
 ## What's included
 
