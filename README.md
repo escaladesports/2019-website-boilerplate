@@ -16,8 +16,13 @@ yarn bootstrap
 rm -rf .git
 git init
 ```
+Configuration quick setup
+```
+echo '{}' > packages/utils/.cache/site-settings.json
+cp .env.example .env
+```
 
-Add environment variables to a `./.env` file in the root of your project. A sample is provided in `.env.example`
+Add or update environment variables to a `./.env` file in the root of your project. 
 
 It's also recommended to go through and change any settings you might need in the `packages/config` files.
 
@@ -30,7 +35,7 @@ nvm use
 yarn bootstrap
 ```
 
-Add environment variables to a `./.env` file in the root of your project. A sample is provided in `.env.example`
+Add or update environment variables to a `./.env` file in the root of your project. A sample is provided in `.env.example`
 
 ## What's included
 
