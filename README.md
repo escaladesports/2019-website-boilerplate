@@ -9,7 +9,7 @@
 ## Setup for a new project
 
 ```bash
-git clone git@github.com:escaladesports/gatsby-boilerplate.git your-website
+git clone git@github.com:escaladesports/escalade.git your-website
 cd your-website
 nvm use
 yarn bootstrap
