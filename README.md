@@ -35,16 +35,33 @@ Add or update environment variables to a `./.env` file in the root of your proje
 
 It's also recommended to go through and change any settings you might need in the `packages/config` files.
 
+
+
 ## Setup for an existing project
 
 ```bash
 git clone REMOTE_URL folder-name
 cd folder-name
 nvm use
+```
+### Sanity.io setup
+```
+cd packages/\@app/sanity/
+../../../node_modules/\@sanity/cli/bin/sanity login
+../../../node_modules/\@sanity/cli/bin/sanity init
+```
+Add or update environment variables to a `./.env` file in the root of your project. A sample is provided in `.env.example`
+
+## Start Project
+```
 yarn bootstrap
+yarn dev
 ```
 
-Add or update environment variables to a `./.env` file in the root of your project. A sample is provided in `.env.example`
+* Site will be at https://localhost:8000/
+* CMS will be at  http://localhost:3333/admin
+* GraphQL playground will be at https://\<Sanity-ProjectID\>.api.sanity.io/v1/graphql/\<Sanity-Dataset\>/default
+
 
 ## What's included
 
