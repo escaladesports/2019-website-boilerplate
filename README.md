@@ -16,11 +16,19 @@ yarn bootstrap
 rm -rf .git
 git init
 ```
-Configuration quick setup
+### Configuration quick setup
 ```
 echo '{}' > packages/utils/.cache/site-settings.json
 cp .env.example .env
 ```
+### Sanity.io setup
+```
+cd packages/\@app/sanity/
+../../../node_modules/\@sanity/cli/bin/sanity login
+../../../node_modules/\@sanity/cli/bin/sanity init
+../../../node_modules/\@sanity/cli/bin/sanity invite user@email
+```
+
 
 Add or update environment variables to a `./.env` file in the root of your project. 
 
