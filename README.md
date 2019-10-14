@@ -27,6 +27,7 @@ cd packages/\@app/sanity/
 ../../../node_modules/\@sanity/cli/bin/sanity login
 ../../../node_modules/\@sanity/cli/bin/sanity init
 ../../../node_modules/\@sanity/cli/bin/sanity invite user@email
+../../../node_modules/\@sanity/cli/bin/sanity graphql deploy
 ```
 
 
