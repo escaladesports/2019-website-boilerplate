@@ -25,7 +25,7 @@ cd packages/\@app/sanity/
 ../../../node_modules/\@sanity/cli/bin/sanity invite user@email
 ../../../node_modules/\@sanity/cli/bin/sanity graphql deploy
 ```
-Move back to project root with `../../../`
+Move back to project root with `cd ../../../`
 
 Add or update environment variables to a `./.env` file in the root of your project. 
 
@@ -44,6 +44,8 @@ cd packages/\@app/sanity/
 ../../../node_modules/\@sanity/cli/bin/sanity login
 ../../../node_modules/\@sanity/cli/bin/sanity init
 ```
+Move back to project root with `cd ../../../`
+
 Add or update environment variables to a `./.env` file in the root of your project. A sample is provided in `.env.example`
 
 ### Configuration setup for both
