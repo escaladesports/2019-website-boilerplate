@@ -46,13 +46,12 @@ cd packages/\@app/sanity/
 ```
 Move back to project root with `cd ../../../`
 
-Add or update environment variables to a `./.env` file in the root of your project. A sample is provided in `.env.example`
 
 ### Configuration setup for both
 ```
-echo '{}' > packages/utils/.cache/site-settings.json
 cp .env.example .env
 ```
+Add or update environment variables to a `./.env` file in the root of your project. A sample is provided in `.env.example`
 
 ## Start Project
 ```
