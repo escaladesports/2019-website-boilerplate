@@ -21,7 +21,8 @@ async function createProductJson(){
 }
 
 async function createSiteSettings() {
-	const [data] = await client.fetch(`*[_type == "siteSettings"] {title, description, keywords}`)
+	const data = await client.fetch(`*[_type == "siteSettings"] {title}`)
+	console.log(`dale`, typeof data, data)
 	await outputJson(siteSettingsPath, data)
 }
 
