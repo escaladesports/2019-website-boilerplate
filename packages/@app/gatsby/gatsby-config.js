@@ -1,4 +1,4 @@
-const { GATSBY_ESCA_API_SITE, SANITY_READ_TOKEN } = require(`utils/env`)
+const { GATSBY_ESCA_API_SITE, SANITY_READ_TOKEN, SANITY_OVERLAY, SANITY_WATCHMODE } = require(`utils/env`)
 const proxy = require(`http-proxy-middleware`)
 const { parse: parseUrl } = require(`url`)
 const sanityToExcerpt = require(`utils/sanity-to-excerpt`)
@@ -78,9 +78,11 @@ module.exports = {
 		{
 			resolve: `gatsby-source-sanity`,
 			options: {
-				projectId: `lfxwk0kx`,
-				dataset: `production`,
+				projectId: `xagm8sct`,
+				dataset: `dev`,
 				token: SANITY_READ_TOKEN,
+				overlayDrafts: SANITY_OVERLAY,
+				watchMode: SANITY_WATCHMODE,
 			},
 		},
 		{

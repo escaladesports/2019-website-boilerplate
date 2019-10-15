@@ -1,12 +1,12 @@
 {
   "root": true,
+  "api": {
+    "projectId": "xagm8sct",
+    "dataset": "dev"
+  },
   "project": {
     "name": "Project Boilerplate",
     "basePath": "/admin"
-  },
-  "api": {
-    "projectId": "lfxwk0kx",
-    "dataset": "production"
   },
   "plugins": [
     "@sanity/base",
