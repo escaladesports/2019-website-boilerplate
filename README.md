@@ -38,13 +38,6 @@ git clone REMOTE_URL folder-name
 cd folder-name
 nvm use
 ```
-### Sanity.io setup
-```
-cd packages/\@app/sanity/
-../../../node_modules/\@sanity/cli/bin/sanity login
-../../../node_modules/\@sanity/cli/bin/sanity init
-```
-Move back to project root with `cd ../../../`
 
 
 ### Configuration setup for both
