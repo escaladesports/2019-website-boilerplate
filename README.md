@@ -22,10 +22,15 @@ git init
 cd packages/\@app/sanity/
 ../../../node_modules/\@sanity/cli/bin/sanity login
 ../../../node_modules/\@sanity/cli/bin/sanity init
-../../../node_modules/\@sanity/cli/bin/sanity invite user@email
+../../../node_modules/\@sanity/cli/bin/sanity users invite user@email
 ../../../node_modules/\@sanity/cli/bin/sanity graphql deploy
 ```
 Move back to project root with `cd ../../../`
+
+Copy the first part(project id) of the GraphQL url generated:
+```https://<ProjectId>.api.sanity.io/v1/graphql/vic-dev/default```
+
+On `packages/@app/gatsby/gatsby-config.js` on `resolve: 'gatsby-source-sanity'` replace `projectId` with the project id generated.
 
 Add or update environment variables to a `./.env` file in the root of your project. 
 
