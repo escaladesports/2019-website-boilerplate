@@ -55,6 +55,7 @@ Add or update environment variables to a `./.env` file in the root of your proje
 
 ## Start Project
 ```
+nvm use
 yarn bootstrap
 yarn dev
 ```
