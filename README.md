@@ -32,6 +32,8 @@ Copy the first part(project id) of the GraphQL url generated:
 
 On `packages/@app/gatsby/gatsby-config.js` on `resolve: 'gatsby-source-sanity'` replace `projectId` with the project id generated.
 
+You can generate new tokens from `https://manage.sanity.io/projects/<ProjectId>/settings/api`.
+
 Add or update environment variables to a `./.env` file in the root of your project. 
 
 It's also recommended to go through and change any settings you might need in the `packages/config` files.
