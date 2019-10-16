@@ -30,7 +30,9 @@ Move back to project root with `cd ../../../`
 Copy the first part(project id) of the GraphQL url generated:
 ```https://<ProjectId>.api.sanity.io/v1/graphql/vic-dev/default```
 
-On `packages/@app/gatsby/gatsby-config.js` on `resolve: 'gatsby-source-sanity'` replace `projectId` with the project id generated.
+On `packages/@app/gatsby/gatsby-config.js` on `resolve: 'gatsby-source-sanity'`:
+- Replace `projectId` with the project id generated.
+- Replace `dataset` with the dataset name chosen during setup(you can view your dataset name at `https://manage.sanity.io/projects/<ProjectId>/datasets`).
 
 You can generate new tokens from `https://manage.sanity.io/projects/<ProjectId>/settings/api`.
 
