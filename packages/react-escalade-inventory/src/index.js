@@ -36,5 +36,5 @@ export function useInventory(id, ids, endpoint) {
 		}
 	})
 
-	return [id ? inventory[id] ?.inventory : inventory, setInventory]
+	return [id ? inventory[id]?.stock : inventory, setInventory]
 }

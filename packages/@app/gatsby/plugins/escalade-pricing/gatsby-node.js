@@ -10,10 +10,6 @@ exports.sourceNodes = async function({
 	const prices = await fetch(options)
 
 	for (let id in prices){
-		prices[id].price = Number(prices[id].price)
-		if(isNaN(prices[id].price)){
-			prices[id].price = 0
-		}
 		const nodeContent = {
 			...prices[id],
 			productId: id,
@@ -36,5 +32,4 @@ exports.sourceNodes = async function({
 		}
 		createNode(node)
 	}
-
 }
