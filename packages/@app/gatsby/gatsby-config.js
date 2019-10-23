@@ -1,4 +1,12 @@
-const { GATSBY_ESCA_API_SITE, SANITY_READ_TOKEN, SANITY_OVERLAY, SANITY_WATCHMODE } = require(`utils/env`)
+const {
+	GATSBY_ESCA_API_SITE,
+	SANITY_READ_TOKEN,
+	SANITY_OVERLAY,
+	SANITY_WATCHMODE,
+	CLOUDINARY_API_KEY,
+	CLOUDINARY_API_SECRET,
+	CLOUDINARY_NAME,
+} = require(`utils/env`)
 const proxy = require(`http-proxy-middleware`)
 const { parse: parseUrl } = require(`url`)
 const sanityToExcerpt = require(`utils/sanity-to-excerpt`)
@@ -18,6 +26,17 @@ module.exports = {
 		`gatsby-plugin-sharp`,
 		`gatsby-transformer-sharp`,
 		`gatsby-plugin-remove-trailing-slashes`,
+		{
+			resolve: `cloudinary`,
+			options: {
+				apiKey: CLOUDINARY_API_KEY,
+				apiSecret: CLOUDINARY_API_SECRET,
+				cloudName: CLOUDINARY_NAME,
+				queryParams: {
+					max_results: 1000,
+				},
+			},
+		},
 		{
 			resolve: `escalade-inventory`,
 			options: {
