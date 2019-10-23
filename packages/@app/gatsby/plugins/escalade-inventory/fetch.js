@@ -10,13 +10,16 @@ module.exports = async function({
 	siteId,
 	env = `production`,
 }){
-	const headers = {
-		'ESC-API-Context': siteId,
-		'ESC-API-Key': process.env.ESCA_API_KEY,
-		'X-API-Key': process.env.X_API_KEY,
-	}
-	const res = await fetch(endpoints[env] || endpoints.production, {
-		headers,
+	const isTesting = process.env.STAGE === `test`
+	const xApiKey = isTesting
+		? process.env.X_API_KEY_TEST
+		: process.env.X_API_KEY
+	const url = endpoints[isTesting ? `testing` : env] || endpoints.production
+	const res = await fetch(url, {
+		headers: {
+			'ESC-API-Context': siteId,
+			'X-API-Key': xApiKey,
+		},
 		method: `POST`,
 		body: JSON.stringify({
 			skus: ids,
@@ -24,5 +27,12 @@ module.exports = async function({
 	})
 	const text = await res.text()
 	const { inventory } = JSON.parse(text)
+	if(!inventory) return {}
+	for(let i = ids.length; i--;){
+		const id = ids[i]
+		if(!inventory[id.toUpperCase()]){
+			inventory[id.toUpperCase()] = { stock: 0 }
+		}
+	}
 	return inventory
 }
