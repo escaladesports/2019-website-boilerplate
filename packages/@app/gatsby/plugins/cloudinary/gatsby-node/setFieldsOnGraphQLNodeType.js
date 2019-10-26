@@ -1,40 +1,30 @@
 const {
 	fixedNodeType,
+	// fluidNodeType,
+	// resizeNodeType,
 } = require(`../gql/types`)
+const getTracedSVG = require(`../utils/getTracedSVG`)
 
-module.exports = ({ type }) => {
+module.exports = ({ type, store }) => {
 	if(type.name.match(/cloudinary/i)){
-		const getTracedSVG = async args => {
-			const { traceSVG } = require(`gatsby-plugin-sharp`)
-
-			const { image, options } = args
-			const {
-				file: { contentType },
-			} = image
-
-			if (contentType.indexOf(`image/`) !== 0) {
-				return null
-			}
-
-			// const absolutePath = await cacheImage(store, image, options)
-			// const extension = path.extname(absolutePath)
-
-			return traceSVG({
-				file: {
-					internal: image.internal,
-					name: image.file.fileName,
-					// extension,
-					// absolutePath,
-				},
-				args: { toFormat: `` },
-				fileArgs: options,
-			})
-		}
-
-		const fixedNode = fixedNodeType({name: `CloudinaryFixed`, getTracedSVG })
+		const fixedNode = fixedNodeType({
+			name: `CloudinaryFixed`,
+			getTracedSVG,
+			store,
+		})
+		// const fluidNode = fluidNodeType({
+		// 	name: `CloudinaryFluid`,
+		// 	getTracedSVG: getTracedSVG(store),
+		// })
+		// const resizeNode = resizeNodeType({
+		// 	name: `CloudinaryResize`,
+		// 	getTracedSVG: getTracedSVG(store),
+		// })
 
 		return {
 			fixed: fixedNode,
+			// fluid: fluidNode,
+			// resize: resizeNode,
 		}
 	}
 

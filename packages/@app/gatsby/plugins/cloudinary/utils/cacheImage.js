@@ -1,14 +1,19 @@
+// NEEDS TO BE RE WRITTEN FOR CLOUDINARY
+
 const crypto = require(`crypto`)
-const { resolve, parse } = require(`path`)
+const { resolve } = require(`path`)
 
 const axios = require(`axios`)
 const { pathExists, createWriteStream } = require(`fs-extra`)
 
 module.exports = async function cacheImage(store, image, options) {
 	const program = store.getState().program
-	const CACHE_DIR = resolve(`${program.directory}/.cache/contentful/assets/`)
+	const CACHE_DIR = resolve(`${program.directory}/.cache/cloudinary/assets/`)
 	const {
-		file: { url, fileName, details },
+		url,
+		publicId, height: actualHeight,
+		width: actualWidth,
+		format,
 	} = image
 	const {
 		width,
@@ -22,7 +27,7 @@ module.exports = async function cacheImage(store, image, options) {
 	const userWidth = maxWidth || width
 	const userHeight = maxHeight || height
 
-	const aspectRatio = details.image.height / details.image.width
+	const aspectRatio = actualHeight / actualWidth
 	const resultingWidth = Math.round(userWidth || 800)
 	const resultingHeight = Math.round(userHeight || resultingWidth * aspectRatio)
 
@@ -42,7 +47,8 @@ module.exports = async function cacheImage(store, image, options) {
 		.update(JSON.stringify([url, ...params]))
 		.digest(`hex`)
 
-	const { name, ext } = parse(fileName)
+	const name = publicId
+	const ext = format
 	const absolutePath = resolve(CACHE_DIR, `${name}-${optionsHash}${ext}`)
 
 	const alreadyExists = await pathExists(absolutePath)
