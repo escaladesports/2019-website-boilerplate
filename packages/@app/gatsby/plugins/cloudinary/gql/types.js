@@ -27,8 +27,14 @@ const fixedNodeType = ({ name, getTracedSVG, store }) => {
 			fields: {
 				base64: {
 					type: GraphQLString,
-					resolve(imageProps) {
-						return getBase64Image(imageProps)
+					resolve: async (imageProps) => {
+						let results
+						try {
+							results = await getBase64Image(imageProps)
+						} catch(e) {
+							results = null
+						}
+						return results
 					},
 				},
 				tracedSVG: {

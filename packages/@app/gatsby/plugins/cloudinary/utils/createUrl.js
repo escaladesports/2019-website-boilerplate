@@ -1,7 +1,14 @@
 module.exports = (image, options = {}, inSecure) => {
-	let path = image[inSecure ? `url` : `secureUrl`].split(`/`)
-	const name = path.pop()
-	path = path.join(`/`)
+	const {
+		cloudName,
+		resourceType,
+		type,
+		version,
+		publicId,
+		format,
+	} = image
+	const protocol = inSecure ? `url` : `secureUrl`
+	const baseUrl = image[protocol].slice(0, image[protocol].indexOf(cloudName))
 	const args = {
 		w: options.width,
 		h: options.height,
@@ -19,8 +26,7 @@ module.exports = (image, options = {}, inSecure) => {
 		if(!args[key]) continue
 		transformations.push(`${key}_${args[key]}`)
 	}
-	const url = `${path}/${transformations.join(`,`)}/${name}`
+	const url = `${baseUrl}${cloudName}/${resourceType}/${type}/${transformations.join(`,`)}/v${version}/${publicId}.${format}`
 
-	console.log(`CREATE URL: `, url)
 	return url
 }

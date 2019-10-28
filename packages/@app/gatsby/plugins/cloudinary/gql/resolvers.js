@@ -8,8 +8,6 @@ const {
 } = require(`../static/constants`)
 
 const resolveFixed = (image, options) => {
-	console.log(`IMAGE: `, image)
-	console.log(`Options: `, options)
 	if (!isImage(image)) return null
 
 	const { baseUrl, width, aspectRatio } = getBasicImageProps(image, options)
@@ -66,16 +64,16 @@ const resolveFixed = (image, options) => {
 			let resolution
 			switch (i) {
 				case 0:
-					resolution = `1x`
+					resolution = 1
 					break
 				case 1:
-					resolution = `1.5x`
+					resolution = 1.5
 					break
 				case 2:
-					resolution = `2x`
+					resolution = 2
 					break
 				case 3:
-					resolution = `3x`
+					resolution = 3
 					break
 				default:
 			}

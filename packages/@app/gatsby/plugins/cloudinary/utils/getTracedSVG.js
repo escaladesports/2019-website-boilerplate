@@ -5,7 +5,6 @@ module.exports = async (args, store) => {
 	const { traceSVG } = require(`gatsby-plugin-sharp`)
 
 	const { image, options } = args
-	console.log(`IMAGE & OPTIONS`,image, options)
 	const {
 		resourceType,
 	} = image

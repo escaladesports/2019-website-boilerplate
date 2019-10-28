@@ -4,7 +4,7 @@ const crypto = require(`crypto`)
 const { resolve } = require(`path`)
 
 const axios = require(`axios`)
-const { pathExists, createWriteStream } = require(`fs-extra`)
+const { pathExists, createWriteStream, ensureDir } = require(`fs-extra`)
 const createUrl = require(`./createUrl`)
 
 module.exports = async function cacheImage(store, image, options) {
@@ -45,29 +45,33 @@ module.exports = async function cacheImage(store, image, options) {
 		params.background = background
 	}
 
-	const optionsHash = crypto
-		.createHash(`md5`)
-		.update(JSON.stringify([url, ...params]))
-		.digest(`hex`)
-
 	const name = publicId
 	const ext = format
-	const absolutePath = resolve(CACHE_DIR, `${name}-${optionsHash}${ext}`)
 
+	const optionsHash = crypto
+		.createHash(`md5`)
+		.update(JSON.stringify({ url, ...params }))
+		.digest(`hex`)
+	const nameHash = crypto
+		.createHash(`md5`)
+		.update(JSON.stringify(name))
+		.digest(`hex`)
+
+	const absolutePath = resolve(CACHE_DIR, `${nameHash}-${optionsHash}.${ext}`)
 	const alreadyExists = await pathExists(absolutePath)
 
 	if (!alreadyExists) {
+		await ensureDir(CACHE_DIR)
 		const previewUrl = createUrl(image, params, true)
-
-		const response = await axios({
+		const { data } = await axios({
 			method: `get`,
 			url: previewUrl,
 			responseType: `stream`,
 		})
-
 		await new Promise((resolve, reject) => {
+
 			const file = createWriteStream(absolutePath)
-			response.data.pipe(file)
+			data.pipe(file)
 			file.on(`finish`, resolve)
 			file.on(`error`, reject)
 		})
