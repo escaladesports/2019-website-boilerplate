@@ -5,13 +5,15 @@ const { resolve } = require(`path`)
 
 const axios = require(`axios`)
 const { pathExists, createWriteStream } = require(`fs-extra`)
+const createUrl = require(`./createUrl`)
 
 module.exports = async function cacheImage(store, image, options) {
 	const program = store.getState().program
 	const CACHE_DIR = resolve(`${program.directory}/.cache/cloudinary/assets/`)
 	const {
 		url,
-		publicId, height: actualHeight,
+		publicId,
+		height: actualHeight,
 		width: actualWidth,
 		format,
 	} = image
@@ -20,8 +22,8 @@ module.exports = async function cacheImage(store, image, options) {
 		height,
 		maxWidth,
 		maxHeight,
-		resizingBehavior,
-		cropFocus,
+		crop,
+		gravity,
 		background,
 	} = options
 	const userWidth = maxWidth || width
@@ -31,15 +33,16 @@ module.exports = async function cacheImage(store, image, options) {
 	const resultingWidth = Math.round(userWidth || 800)
 	const resultingHeight = Math.round(userHeight || resultingWidth * aspectRatio)
 
-	const params = [`w=${resultingWidth}`, `h=${resultingHeight}`]
-	if (resizingBehavior) {
-		params.push(`fit=${resizingBehavior}`)
+	const params = { width: resultingWidth, height: resultingHeight}
+
+	if (crop) {
+		params.crop = crop
 	}
-	if (cropFocus) {
-		params.push(`crop=${cropFocus}`)
+	if (gravity) {
+		params.gravity = gravity
 	}
 	if (background) {
-		params.push(`bg=${background}`)
+		params.background = background
 	}
 
 	const optionsHash = crypto
@@ -54,7 +57,7 @@ module.exports = async function cacheImage(store, image, options) {
 	const alreadyExists = await pathExists(absolutePath)
 
 	if (!alreadyExists) {
-		const previewUrl = `http:${url}?${params.join(`&`)}`
+		const previewUrl = createUrl(image, params, true)
 
 		const response = await axios({
 			method: `get`,

@@ -58,7 +58,7 @@ const ImageCropType = new GraphQLEnumType({
 		},
 		CROP: {
 			value: `crop`,
-			description: `	Used to extract a given width & height out of the original image. The original proportions are retained and so is the size of the graphics.`,
+			description: `Used to extract a given width & height out of the original image. The original proportions are retained and so is the size of the graphics.`,
 		},
 		THUMB: {
 			value: `thumb`,

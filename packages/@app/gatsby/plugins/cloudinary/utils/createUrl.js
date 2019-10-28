@@ -1,5 +1,5 @@
-module.exports = (image, options = {}) => {
-	let path = image.secureUrl.split(`/`)
+module.exports = (image, options = {}, inSecure) => {
+	let path = image[inSecure ? `url` : `secureUrl`].split(`/`)
 	const name = path.pop()
 	path = path.join(`/`)
 	const args = {
