@@ -1,7 +1,6 @@
-// NEEDS TO BE RE WRITTEN FOR CLOUDINARY
-
 const crypto = require(`crypto`)
 const { resolve } = require(`path`)
+const colors = require(`colors/safe`)
 
 const axios = require(`axios`)
 const { pathExists, createWriteStream, ensureDir } = require(`fs-extra`)
@@ -62,20 +61,34 @@ module.exports = async function cacheImage(store, image, options) {
 
 	if (!alreadyExists) {
 		await ensureDir(CACHE_DIR)
-		const previewUrl = createUrl(image, params, true)
-		const { data } = await axios({
-			method: `get`,
-			url: previewUrl,
-			responseType: `stream`,
-		})
-		await new Promise((resolve, reject) => {
+		const previewUrl = createUrl(image, params)
 
-			const file = createWriteStream(absolutePath)
-			data.pipe(file)
-			file.on(`finish`, resolve)
-			file.on(`error`, reject)
-		})
+		try {
+			const response = await axios({
+				method: `get`,
+				url: previewUrl,
+				responseType: `stream`,
+			})
+			await new Promise((resolve, reject) => {
+				const file = createWriteStream(absolutePath)
+				response.data.pipe(file)
+				file.on(`finish`, resolve)
+				file.on(`error`, reject)
+			})
+
+			return absolutePath
+		} catch(err){
+			const {
+				response: {
+					headers,
+				},
+			} = err
+			const cloudinaryError = headers[`x-cld-error`]
+			console.log(colors.yellow(`[Error With Cloudinary]: `), cloudinaryError)
+			return null
+		}
+
 	}
 
-	return absolutePath
+
 }
