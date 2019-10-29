@@ -18,14 +18,16 @@ module.exports = async (args, store) => {
 	const absolutePath = await cacheImage(store, image, options)
 	if(!absolutePath) return null
 	const extension = path.extname(absolutePath)
+	const nameHash = crypto
+		.createHash(`md5`)
+		.update(JSON.stringify(image.publicId))
+		.digest(`hex`)
+
 
 	const tracedArgs = {
 		file: {
 			internal: image.internal,
-			name: crypto // do this because publicId can have name like "one/two/three" and can mess with path
-				.createHash(`md5`)
-				.update(JSON.stringify(image.publicId))
-				.digest(`hex`),
+			name: nameHash, // do this because publicId can have name like "one/two/three" and can mess with path
 			extension,
 			absolutePath,
 		},

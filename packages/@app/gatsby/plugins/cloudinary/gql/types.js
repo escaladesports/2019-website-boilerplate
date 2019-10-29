@@ -1,11 +1,8 @@
-const _ = require(`lodash`)
-
 const {
 	GraphQLString,
 	GraphQLObjectType,
 	GraphQLFloat,
 	GraphQLInt,
-	GraphQLBoolean,
 } = require(`gatsby/graphql`)
 const {
 	ImageFormatType,
@@ -16,9 +13,7 @@ const getBase64Image = require(`../utils/getBase64Image`)
 const {
 	resolveFixed,
 	resolveFluid,
-	resolveResize,
 } = require(`../gql/resolvers`)
-
 
 const fixedNodeType = ({ name, getTracedSVG, store }) => {
 	return {
@@ -49,7 +44,7 @@ const fixedNodeType = ({ name, getTracedSVG, store }) => {
 				srcWebp: {
 					type: GraphQLString,
 					resolve({ image, options }) {
-						if (image.format === `webp` || options.format === `webp`) {
+						if (image.format === `webp` || options.format === `webp` || image.format === `svg`) {
 							return null
 						}
 
@@ -63,7 +58,7 @@ const fixedNodeType = ({ name, getTracedSVG, store }) => {
 				srcSetWebp: {
 					type: GraphQLString,
 					resolve({ image, options }) {
-						if (image.format === `webp` || options.format === `webp`) {
+						if (image.format === `webp` || options.format === `webp` || image.format === `svg`) {
 							return null
 						}
 
@@ -113,20 +108,26 @@ const fixedNodeType = ({ name, getTracedSVG, store }) => {
 	}
 }
 
-const fluidNodeType = ({ name, getTracedSVG }) => {
+const fluidNodeType = ({ name, getTracedSVG, store }) => {
 	return {
 		type: new GraphQLObjectType({
 			name: name,
 			fields: {
 				base64: {
 					type: GraphQLString,
-					resolve(imageProps) {
-						return getBase64Image(imageProps)
+					resolve: async (imageProps) => {
+						let results
+						try {
+							results = await getBase64Image(imageProps)
+						} catch(e) {
+							results = null
+						}
+						return results
 					},
 				},
 				tracedSVG: {
 					type: GraphQLString,
-					resolve: getTracedSVG,
+					resolve: (imageProps) => getTracedSVG(imageProps, store),
 				},
 				aspectRatio: { type: GraphQLFloat },
 				src: { type: GraphQLString },
@@ -134,35 +135,29 @@ const fluidNodeType = ({ name, getTracedSVG }) => {
 				srcWebp: {
 					type: GraphQLString,
 					resolve({ image, options }) {
-						if (
-							_.get(image, `file.contentType`) === `image/webp` ||
-              options.toFormat === `webp`
-						) {
+						if (image.format === `webp` || options.format === `webp` || image.format === `svg`) {
 							return null
 						}
 
 						const fluid = resolveFluid(image, {
 							...options,
-							toFormat: `webp`,
+							format: `webp`,
 						})
-						return _.get(fluid, `src`)
+						return fluid.src
 					},
 				},
 				srcSetWebp: {
 					type: GraphQLString,
 					resolve({ image, options }) {
-						if (
-							_.get(image, `file.contentType`) === `image/webp` ||
-              options.toFormat === `webp`
-						) {
+						if (image.format === `webp` || options.format === `webp` || image.format === `svg`) {
 							return null
 						}
 
 						const fluid = resolveFluid(image, {
 							...options,
-							toFormat: `webp`,
+							format: `webp`,
 						})
-						return _.get(fluid, `srcSet`)
+						return fluid.srcSet
 					},
 				},
 				sizes: { type: GraphQLString },
@@ -196,77 +191,19 @@ const fluidNodeType = ({ name, getTracedSVG }) => {
 				type: GraphQLString,
 			},
 		},
-		resolve: (image, options, context) =>
-			Promise.resolve(resolveFluid(image, options)).then(node => {
-				return {
-					...node,
-					image,
-					options,
-					context,
-				}
-			}),
-	}
-}
-
-const resizeNodeType = ({ name, getTracedSVG }) => {
-	return {
-		type: new GraphQLObjectType({
-			name: name,
-			fields: {
-				base64: {
-					type: GraphQLString,
-					resolve(imageProps) {
-						return getBase64Image(imageProps)
-					},
-				},
-				tracedSVG: {
-					type: GraphQLString,
-					resolve: getTracedSVG,
-				},
-				src: { type: GraphQLString },
-				width: { type: GraphQLInt },
-				height: { type: GraphQLInt },
-				aspectRatio: { type: GraphQLFloat },
-			},
-		}),
-		args: {
-			width: {
-				type: GraphQLInt,
-			},
-			height: {
-				type: GraphQLInt,
-			},
-			crop: {
-				type: ImageCropType,
-			},
-			format: {
-				type: ImageFormatType,
-			},
-			gravity: {
-				type: ImageGravityType,
-			},
-			background: {
-				type: GraphQLString,
-				defaultValue: null,
-			},
-			quality: {
-				type: GraphQLInt,
-				defaultValue: 50,
-			},
-			jpegProgressive: {
-				type: GraphQLBoolean,
-				defaultValue: true,
-			},
-		},
-		resolve(image, options) {
-			return resolveResize(image, options)
+		resolve: (image, options, context) => {
+			const node = resolveFluid(image, options)
+			return {
+				...node,
+				image,
+				options,
+				context,
+			}
 		},
 	}
 }
-
 
 module.exports = {
 	fixedNodeType,
 	fluidNodeType,
-	resizeNodeType,
 }

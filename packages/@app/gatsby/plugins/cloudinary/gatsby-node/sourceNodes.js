@@ -2,6 +2,7 @@ const cloudinary = require(`cloudinary`)
 const camelcase = require(`camelcase`)
 
 const cloudApi = require(`../utils/cloudApi`)
+const logger = require(`../utils/logger`)
 
 module.exports = async ({
 	actions,
@@ -53,6 +54,7 @@ module.exports = async ({
 			}
 			createNode(node)
 		}
+		logger(`Nodes Created`, `info`)
 	} catch(e){
 		console.log(`Cloudinary Error: `, e)
 	}

@@ -1,10 +1,10 @@
 const crypto = require(`crypto`)
 const { resolve } = require(`path`)
-const colors = require(`colors/safe`)
 
 const axios = require(`axios`)
 const { pathExists, createWriteStream, ensureDir } = require(`fs-extra`)
 const createUrl = require(`./createUrl`)
+const logger = require(`./logger`)
 
 module.exports = async function cacheImage(store, image, options) {
 	const program = store.getState().program
@@ -84,7 +84,7 @@ module.exports = async function cacheImage(store, image, options) {
 				},
 			} = err
 			const cloudinaryError = headers[`x-cld-error`]
-			console.log(colors.yellow(`[Error With Cloudinary]: `), cloudinaryError)
+			logger(cloudinaryError, `warning`)
 			return null
 		}
 

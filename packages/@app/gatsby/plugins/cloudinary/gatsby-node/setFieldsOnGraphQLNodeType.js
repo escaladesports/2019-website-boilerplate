@@ -1,9 +1,9 @@
 const {
 	fixedNodeType,
-	// fluidNodeType,
-	// resizeNodeType,
+	fluidNodeType,
 } = require(`../gql/types`)
 const getTracedSVG = require(`../utils/getTracedSVG`)
+const logger = require(`../utils/logger`)
 
 module.exports = ({ type, store }) => {
 	if(type.name.match(/cloudinary/i)){
@@ -12,19 +12,15 @@ module.exports = ({ type, store }) => {
 			getTracedSVG,
 			store,
 		})
-		// const fluidNode = fluidNodeType({
-		// 	name: `CloudinaryFluid`,
-		// 	getTracedSVG: getTracedSVG(store),
-		// })
-		// const resizeNode = resizeNodeType({
-		// 	name: `CloudinaryResize`,
-		// 	getTracedSVG: getTracedSVG(store),
-		// })
-
+		const fluidNode = fluidNodeType({
+			name: `CloudinaryFluid`,
+			getTracedSVG,
+			store,
+		})
+		logger(`NodeTypes Created`, `info`)
 		return {
 			fixed: fixedNode,
-			// fluid: fluidNode,
-			// resize: resizeNode,
+			fluid: fluidNode,
 		}
 	}
 

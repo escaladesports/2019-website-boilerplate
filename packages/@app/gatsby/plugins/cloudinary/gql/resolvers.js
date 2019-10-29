@@ -4,7 +4,7 @@ const isImage = require(`../utils/isImage`)
 const getBasicImageProps = require(`../utils/getBasicImageProps`)
 const createUrl = require(`../utils/createUrl`)
 const {
-	CONTENTFUL_IMAGE_MAX_SIZE,
+	CLOUDINARY_IMAGE_MAX_SIZE,
 } = require(`../static/constants`)
 
 const resolveFixed = (image, options) => {
@@ -49,8 +49,8 @@ const resolveFixed = (image, options) => {
 	const filteredSizes = fixedSizes.filter(size => {
 		const calculatedHeight = Math.round(size / desiredAspectRatio)
 		return (
-			size <= CONTENTFUL_IMAGE_MAX_SIZE &&
-      calculatedHeight <= CONTENTFUL_IMAGE_MAX_SIZE &&
+			size <= CLOUDINARY_IMAGE_MAX_SIZE &&
+      calculatedHeight <= CLOUDINARY_IMAGE_MAX_SIZE &&
       size <= width
 		)
 	})
@@ -151,12 +151,12 @@ const resolveFluid = (image, options) => {
 	fluidSizes.push(options.maxWidth * 3)
 	fluidSizes = fluidSizes.map(Math.round)
 
-	// Filter out sizes larger than the image's maxWidth and the contentful image's max size.
+	// Filter out sizes larger than the image's maxWidth and the CLOUDINARY image's max size.
 	const filteredSizes = fluidSizes.filter(size => {
 		const calculatedHeight = Math.round(size / desiredAspectRatio)
 		return (
-			size <= CONTENTFUL_IMAGE_MAX_SIZE &&
-      calculatedHeight <= CONTENTFUL_IMAGE_MAX_SIZE &&
+			size <= CLOUDINARY_IMAGE_MAX_SIZE &&
+      calculatedHeight <= CLOUDINARY_IMAGE_MAX_SIZE &&
       size <= width
 		)
 	})
@@ -165,8 +165,8 @@ const resolveFluid = (image, options) => {
 	// is available for small images.
 	if (
 		!filteredSizes.includes(parseInt(width)) &&
-    parseInt(width) < CONTENTFUL_IMAGE_MAX_SIZE &&
-    Math.round(width / desiredAspectRatio) < CONTENTFUL_IMAGE_MAX_SIZE
+    parseInt(width) < CLOUDINARY_IMAGE_MAX_SIZE &&
+    Math.round(width / desiredAspectRatio) < CLOUDINARY_IMAGE_MAX_SIZE
 	) {
 		filteredSizes.push(width)
 	}
@@ -178,18 +178,18 @@ const resolveFluid = (image, options) => {
 	const srcSet = sortedSizes
 		.map(width => {
 			const h = Math.round(width / desiredAspectRatio)
-			return `${createUrl(image.file.url, {
+			return createUrl(image, {
 				...options,
 				width,
 				height: h,
-			})} ${Math.round(width)}w`
+			})
 		})
 		.join(`,\n`)
 
 	return {
 		aspectRatio: desiredAspectRatio,
 		baseUrl,
-		src: createUrl(baseUrl, {
+		src: createUrl(image, {
 			...options,
 			width: options.maxWidth,
 			height: options.maxHeight,
@@ -199,46 +199,7 @@ const resolveFluid = (image, options) => {
 	}
 }
 
-const resolveResize = (image, options) => {
-	if (!isImage(image)) return null
-
-	const { baseUrl, aspectRatio } = getBasicImageProps(image, options)
-
-	// If no dimension is given, set a default width
-	if (options.width === undefined && options.height === undefined) {
-		options.width = 400
-	}
-
-	// If the user selected a height and width (so cropping) and fit option
-	// is not set, we'll set our defaults
-	if (options.width !== undefined && options.height !== undefined) {
-		if (!options.crop) {
-			options.crop = `fill`
-		}
-	}
-
-	let pickedHeight = options.height,
-		pickedWidth = options.width
-
-	if (pickedWidth === undefined) {
-		pickedWidth = pickedHeight * aspectRatio
-	}
-
-	if (pickedHeight === undefined) {
-		pickedHeight = pickedWidth / aspectRatio
-	}
-
-	return {
-		src: createUrl(image.file.url, options),
-		width: Math.round(pickedWidth),
-		height: Math.round(pickedHeight),
-		aspectRatio,
-		baseUrl,
-	}
-}
-
 module.exports = {
 	resolveFixed,
 	resolveFluid,
-	resolveResize,
 }
