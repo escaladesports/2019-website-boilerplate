@@ -27,8 +27,8 @@ const resolveFixed = (image, options) => {
 	// If the user selected a height and width (so cropping) and fit option
 	// is not set, we'll set our defaults
 	if (options.width !== undefined && options.height !== undefined) {
-		if (!options.resizingBehavior) {
-			options.resizingBehavior = `fill`
+		if (!options.crop) {
+			options.crop = `fill`
 		}
 	}
 
@@ -212,8 +212,8 @@ const resolveResize = (image, options) => {
 	// If the user selected a height and width (so cropping) and fit option
 	// is not set, we'll set our defaults
 	if (options.width !== undefined && options.height !== undefined) {
-		if (!options.resizingBehavior) {
-			options.resizingBehavior = `fill`
+		if (!options.crop) {
+			options.crop = `fill`
 		}
 	}
 
