@@ -67,7 +67,7 @@
     "gatsby-remark-external-links": "^0.0.4",
     "gatsby-remark-images": "^3.0.16",
     "gatsby-source-filesystem": "^2.1.2",
-    "gatsby-transformer-remark": "^2.4.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^2.2.1",
     "globby": "^10.0.0",
     "gray-matter": "^4.0.1",
